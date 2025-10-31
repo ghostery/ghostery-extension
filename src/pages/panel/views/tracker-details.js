@@ -21,29 +21,18 @@ import { openTabWithUrl } from '/utils/tabs.js';
 
 import ProtectionStatus from './protection-status.js';
 
+import { showAlert } from '../components/alert.js';
+
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
 }
 
-function showCopyNotification(host) {
-  const wrapper = document.createDocumentFragment();
-
-  Array.from(
-    host.querySelectorAll('#panel-company-alerts panel-alert'),
-  ).forEach((el) => el.parentNode.removeChild(el));
-
-  html`
-    <panel-alert
-      type="success"
-      slide
-      autoclose="2"
-      onclose="${(_, e) => e.target.remove()}"
-    >
+function showCopyNotification() {
+  showAlert(html`
+    <panel-alert type="success" autoclose="2">
       Copied to clipboard
     </panel-alert>
-  `(wrapper);
-
-  host.querySelector('#panel-company-alerts').appendChild(wrapper);
+  `);
 }
 
 export default {
@@ -99,7 +88,7 @@ export default {
         !managedConfig.disableUserControl &&
         html`
           <div
-            layout="grid:1|max gap:0.5 padding:1.5 margin:-2 ::background:secondary"
+            layout="grid:1|max gap:0.5 padding:1.5 margin:-1.5:-1.5:-2 ::background:secondary"
           >
             ${paused
               ? html`
@@ -146,7 +135,7 @@ export default {
               </ui-button>
             `}
           </div>
-          <ui-line layout="margin:0:-2"></ui-line>
+          <ui-line layout="margin:0:-1.5"></ui-line>
         `}
         ${(store.ready(tracker.organization) || wtmUrl) &&
         html`

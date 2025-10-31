@@ -40,7 +40,7 @@ export default {
   pauseType: 1,
   render: ({ hostname, pauseType }) => html`
     <template layout>
-      <settings-dialog>
+      <settings-dialog closable>
         <form
           action="${router.backUrl()}"
           onsubmit="${add}"

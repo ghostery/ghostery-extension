@@ -14,16 +14,18 @@ import { parse } from 'tldts-experimental';
 
 import * as labels from '/ui/labels.js';
 
+import Config from '/store/config.js';
 import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
+import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
-import Config from '/store/config.js';
+import WebsiteClearCookies from './website-clear-cookies.js';
 
 function removeDomain(tracker) {
   return ({ options, domain }) =>
@@ -64,7 +66,10 @@ async function clearElementPickerSelectors(host) {
 }
 
 export default {
-  [router.connect]: { stack: () => [TrackerDetails] },
+  [router.connect]: {
+    stack: () => [TrackerDetails, WebsiteClearCookies],
+    replace: true,
+  },
   domain: '',
   topLevelDomain: ({ domain }) => parse(domain).domain,
   options: store(Options),
@@ -91,6 +96,7 @@ export default {
     (store.ready(elementPickerSelectors) &&
       elementPickerSelectors.hostnames[domain]?.join('\n')) ||
     '',
+  clearedCookies: false,
   render: ({
     domain,
     topLevelDomain,
@@ -98,6 +104,7 @@ export default {
     issueUrl,
     trackers,
     selectors,
+    clearedCookies,
   }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
@@ -297,13 +304,13 @@ export default {
           </settings-table>
         </div>
         <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
-          <div layout="column gap:0.5">
-            <ui-text type="label-l">Blocked elements on this site</ui-text>
-            <ui-text>
+          <settings-option static icon="hide-element">
+            Blocked elements on this site
+            <span slot="description">
               Displays all content blocks manually hidden on this site. You can
               remove them individually or clear the entire list.
-            </ui-text>
-          </div>
+            </span>
+          </settings-option>
           <ui-input>
             <textarea
               name="selectors"
@@ -324,6 +331,30 @@ export default {
             </ui-button>
           </div>
         </form>
+
+        ${(__PLATFORM__ === 'firefox' || !isWebkit()) &&
+        html`
+          <div layout="row gap:5">
+            <settings-option static icon="cookie">
+              Clear Cookies
+              <span slot="description">
+                Remove all cookies stored by this site to protect your privacy
+                and reset your browsing data.
+              </span>
+              ${clearedCookies &&
+              html`
+                <ui-text slot="footer" type="body-s" color="success-primary">
+                  Cookies successfully cleared
+                </ui-text>
+              `}
+            </settings-option>
+            <ui-button disabled="${clearedCookies}">
+              <a href="${router.url(WebsiteClearCookies, { domain })}">
+                Clear Cookies
+              </a>
+            </ui-button>
+          </div>
+        `}
         ${hasWTMStats(topLevelDomain) &&
         html`
           <div layout="margin:3:0">

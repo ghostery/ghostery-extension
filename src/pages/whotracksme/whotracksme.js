@@ -182,7 +182,7 @@ export default {
             <div
               layout="column gap:2"
               layout@768px="grid:2:2"
-              layout@1024px:print="grid:4:1"
+              layout@1024px:print="grid:5:1"
               layout@print="padding:0:1px"
             >
               <ui-card layout="column gap padding:2.5">
@@ -239,6 +239,21 @@ export default {
                 </div>
                 <ui-text type="label-l" color="secondary">
                   Consent managed
+                </ui-text>
+              </ui-card>
+              <ui-card layout="column gap padding:2.5">
+                <div layout="row items:center gap">
+                  <ui-icon
+                    name="cookie"
+                    color="warning-secondary"
+                    layout="size:6"
+                  ></ui-icon>
+                  <ui-text type="display-2xl">
+                    ${mergedStats.cookiesRemoved}
+                  </ui-text>
+                </div>
+                <ui-text type="label-l" color="secondary">
+                  Deleted cookies
                 </ui-text>
               </ui-card>
             </div>

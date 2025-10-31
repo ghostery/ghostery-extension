@@ -83,6 +83,7 @@ const DailyStats = {
   day: '',
   trackersBlocked: 0,
   trackersModified: 0,
+  cookiesRemoved: 0,
   pages: 0,
   patterns: [String],
   [store.connect]: {
@@ -113,6 +114,7 @@ export const MergedStats = {
   pages: 0,
   trackersBlocked: 0,
   trackersModified: 0,
+  cookiesRemoved: 0,
   trackers: [String],
   groupedTrackers: [Tracker],
   categories: [String],
@@ -131,6 +133,7 @@ export const MergedStats = {
           acc.pages += stats.pages;
           acc.trackersBlocked += stats.trackersBlocked;
           acc.trackersModified += stats.trackersModified;
+          acc.cookiesRemoved += stats.cookiesRemoved || 0;
 
           return acc;
         },
@@ -139,6 +142,7 @@ export const MergedStats = {
           trackers: [],
           trackersBlocked: 0,
           trackersModified: 0,
+          cookiesRemoved: 0,
           categories: [],
         },
       );

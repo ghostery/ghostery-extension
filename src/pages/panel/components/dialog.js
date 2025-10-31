@@ -38,6 +38,7 @@ export default {
       return () => clearTimeout(timeout);
     },
   },
+  header: { value: false, reflect: true },
   render: () => html`
     <template layout="block relative layer:400">
       <div id="backdrop" layout="fixed inset:0" onclick="${close}"></div>
@@ -55,7 +56,10 @@ export default {
           layout="grid:24px|1|24px items:center padding:1.5:2 gap"
         >
           <div layout="block:center column items:center area:2/3">
-            <slot name="header"></slot>
+            <slot
+              name="header"
+              onslotchange="${html.set('header', true)}"
+            ></slot>
           </div>
           <ui-action>
             <a
@@ -69,7 +73,7 @@ export default {
             </a>
           </ui-action>
         </section>
-        <section id="content" layout="column overflow:y:auto gap:2 padding:2">
+        <section id="content" layout="column overflow:y:auto gap:2 padding:1.5">
           <slot></slot>
         </section>
       </div>
@@ -96,6 +100,10 @@ export default {
 
     :host([open]) #backdrop {
       opacity: 1;
+    }
+
+    :host(:not([header])) #header {
+      display: none;
     }
 
     #header {

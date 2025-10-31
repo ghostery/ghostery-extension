@@ -9,10 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { dispatch, html } from 'hybrids';
+import { html } from 'hybrids';
 
 function close(host) {
-  dispatch(host, 'close');
+  host.remove();
 }
 
 const slide = {
@@ -31,7 +31,7 @@ export default {
   type: { value: '', reflect: true },
   icon: 'info-filled',
   autoclose: {
-    value: 0,
+    value: 5,
     connect(host, key) {
       const delay = host[key];
       if (delay) {
@@ -41,7 +41,8 @@ export default {
     },
   },
   slide: {
-    value: false,
+    value: true,
+    reflect: true,
     connect: (host, key) => {
       const value = host[key];
       if (value) {
@@ -116,3 +117,28 @@ export default {
     }
   `,
 };
+
+export function clearAlert() {
+  const container = document.body.querySelector('#alert-container');
+  if (!container) return;
+
+  // remove existing alerts
+  Array.from(container.children).forEach((child) => child.remove());
+}
+
+export async function showAlert(renderFn) {
+  const wrapper = document.createDocumentFragment();
+
+  const container = document.body.querySelector('#alert-container');
+  if (!container) return;
+
+  clearAlert();
+
+  // wait a tick to ensure DOM updates
+  await Promise.resolve();
+
+  // render new alert
+  html`<template layout>${renderFn}</template>`(wrapper);
+
+  container.appendChild(wrapper);
+}

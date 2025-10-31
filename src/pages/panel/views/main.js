@@ -11,6 +11,7 @@
 
 import { html, store, router, msg } from 'hybrids';
 
+import { isWebkit } from '/utils/browser-info.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
@@ -22,6 +23,9 @@ import Resources from '/store/resources.js';
 import Notification from '../store/notification.js';
 import sleep from '../assets/sleep.svg';
 
+import { clearAlert, showAlert } from '../components/alert.js';
+
+import ClearCookies from './clear-cookies.js';
 import Menu from './menu.js';
 import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
@@ -29,7 +33,6 @@ import ReportCategory from './report-category.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
-import { isWebkit } from '/utils/browser-info.js';
 import PauseAssistant from './pause-assistant.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
@@ -47,7 +50,7 @@ function reloadTab(host, event) {
   event.stopPropagation();
 
   reloadTimeout = setTimeout(async () => {
-    host.alert = '';
+    clearAlert();
 
     const tab = await getCurrentTab();
     if (tab) chrome.tabs.reload(tab.id);
@@ -57,8 +60,6 @@ function reloadTab(host, event) {
 }
 
 async function togglePause(host, event) {
-  host.alert = '';
-
   const { paused, pauseType } = event.target;
   const { options, stats } = host;
 
@@ -80,21 +81,41 @@ async function togglePause(host, event) {
     });
   }
 
-  host.alert = paused
-    ? msg`Ghostery has been resumed on this site.`
-    : msg`Ghostery is paused on this site.`;
+  showAlert(html`
+    <panel-alert type="danger">
+      ${paused
+        ? msg`Ghostery has been resumed on this site.`
+        : msg`Ghostery is paused on this site.`}
+      <ui-text type="body-s" layout="block" underline>
+        <a
+          href="#"
+          onclick="${reloadTab}"
+          layout="row inline gap:0.5 items:center ::color:inherit"
+          >Reload to see changes</a
+        >.
+      </ui-text>
+    </panel-alert>
+  `);
 }
 
 async function revokeGlobalPause(host) {
-  const { options } = host;
-
-  host.alert = '';
-
-  await store.set(options, {
+  await store.set(host.options, {
     paused: { [GLOBAL_PAUSE_ID]: null },
   });
 
-  host.alert = msg`Ghostery has been resumed.`;
+  showAlert(html`
+    <panel-alert type="danger">
+      Ghostery has been resumed.
+      <ui-text type="body-s" layout="block" underline>
+        <a
+          href="#"
+          onclick="${reloadTab}"
+          layout="row inline gap:0.5 items:center ::color:inherit"
+          >Reload to see changes</a
+        >.
+      </ui-text>
+    </panel-alert>
+  `);
 }
 
 function setStatsType(host, event) {
@@ -128,6 +149,7 @@ async function openElementPicker() {
 export default {
   [router.connect]: {
     stack: [
+      ClearCookies,
       Menu,
       ReportCategory,
       ReportForm,
@@ -144,7 +166,6 @@ export default {
   managedConfig: store(ManagedConfig),
   elementPickerSelectors: store(ElementPickerSelectors),
   resources: store(Resources),
-  alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
@@ -163,7 +184,6 @@ export default {
     stats,
     notification,
     managedConfig,
-    alert,
     paused,
     globalPause,
     contentBlocksSelectors,
@@ -218,18 +238,31 @@ export default {
                   ></ui-icon>
                 </a>
               </panel-actions-button>
-              ${!isWebkit() &&
-              html`<panel-actions-button>
-                <button onclick="${openLogger}">
-                  <panel-actions-icon name="open-book"></panel-actions-icon>
-                  View details logs
-                  <ui-icon
-                    name="chevron-right"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
-                </button>
-              </panel-actions-button>`}
+              ${(__PLATFORM__ === 'firefox' || !isWebkit()) &&
+              html`
+                <panel-actions-button>
+                  <a href="${router.url(ClearCookies)}">
+                    <panel-actions-icon name="cookie"></panel-actions-icon>
+                    Clear cookies
+                    <ui-icon
+                      name="chevron-right"
+                      color="tertiary"
+                      layout="size:2"
+                    ></ui-icon>
+                  </a>
+                </panel-actions-button>
+                <panel-actions-button>
+                  <button onclick="${openLogger}">
+                    <panel-actions-icon name="open-book"></panel-actions-icon>
+                    View details logs
+                    <ui-icon
+                      name="chevron-right"
+                      color="tertiary"
+                      layout="size:2"
+                    ></ui-icon>
+                  </button>
+                </panel-actions-button>
+              `}
               <panel-actions-button>
                 <a
                   onclick="${openTabWithUrl}"
@@ -250,30 +283,6 @@ export default {
             </panel-actions>
           `}
         `}
-        <section
-          id="panel-alerts"
-          layout="fixed inset:1 top:0.5 bottom:auto layer:200"
-        >
-          ${alert &&
-          html`
-            <panel-alert
-              type="danger"
-              slide
-              autoclose="6"
-              onclose="${html.set('alert', '')}"
-            >
-              ${alert}
-              <ui-text type="body-s" layout="block" underline>
-                <a
-                  href="#"
-                  onclick="${reloadTab}"
-                  layout="row inline gap:0.5 items:center ::color:inherit"
-                  >Reload to see changes</a
-                >.
-              </ui-text>
-            </panel-alert>
-          `}
-        </section>
         ${options.terms
           ? store.ready(stats) &&
             !managedConfig.disableUserControl &&
