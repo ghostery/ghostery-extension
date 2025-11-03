@@ -26,7 +26,7 @@ import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 
-import { setExtensionBaseUrl } from './utils.js';
+import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
@@ -50,7 +50,7 @@ export const argv = process.argv.slice(2).reduce(
     }
     return acc;
   },
-  { target: ['firefox', 'chrome'], debug: false, clean: false },
+  { target: ['firefox', 'chrome'], debug: false, clean: false, flags: '' },
 );
 
 function execSyncNode(command) {
@@ -189,6 +189,8 @@ export const config = {
         await $('>>>#devMode').click();
         await browser.pause(2000);
       }
+
+      await setConfigFlags(argv.flags.split(','));
     } catch (e) {
       console.error('Error while setting up test environment', e);
 

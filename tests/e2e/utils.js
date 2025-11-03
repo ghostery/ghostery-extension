@@ -28,23 +28,37 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
-export async function waitForIdleBackgroundTasks() {
+async function sendMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
     throw new Error(
       'Background idle state must be checked from the extension context',
     );
   }
 
-  // Wait for the 'idleOptionsObservers' response
   const result = await browser.execute(
     browser.isChromium
-      ? () => chrome.runtime.sendMessage({ action: 'idleOptionsObservers' })
-      : () => browser.runtime.sendMessage({ action: 'idleOptionsObservers' }),
+      ? (msg) => chrome.runtime.sendMessage(msg)
+      : (msg) => browser.runtime.sendMessage(msg),
+    msg,
   );
 
   if (result !== 'done') {
     throw new Error(`Background tasks did not respond with "done": ${result}`);
   }
+
+  if (result !== 'done') {
+    throw new Error(
+      `The background task did not respond with "done": ${result}`,
+    );
+  }
+}
+
+export async function waitForIdleBackgroundTasks() {
+  await sendMessage({ action: 'e2e:idleOptionsObservers' }).catch(() => {
+    // Up to v10.5.17, the extension does not support this message format
+    // TODO: Remove this catch block when the minimum tested version is v10.5.18 (e2e-update)
+    return browser.pause(2000);
+  });
 }
 
 export async function reloadExtension() {
@@ -54,15 +68,8 @@ export async function reloadExtension() {
     getExtensionPageURL('panel'),
   );
 
-  const result = await browser.execute(
-    browser.isChromium
-      ? () => chrome.runtime.sendMessage({ action: 'reloadExtension' })
-      : () => browser.runtime.sendMessage({ action: 'reloadExtension' }),
-  );
-
-  if (result !== 'done') {
-    throw new Error(`Background tasks did not respond with "done": ${result}`);
-  }
+  console.log('Reloading extension...');
+  await sendMessage({ action: 'e2e:reloadExtension' });
 
   if (browser.isFirefox) {
     await browser.switchWindow('about:blank');
@@ -84,6 +91,7 @@ export async function reloadExtension() {
   );
 
   await waitForIdleBackgroundTasks();
+  console.log('Extension reloaded...');
 
   await browser.url('about:blank');
 }
@@ -135,4 +143,23 @@ export async function openPanel() {
   await browser.execute(() => {
     Object.defineProperty(window, 'close', { value: function () {} });
   });
+}
+
+export async function setConfigFlags(flags, force = false) {
+  if (!force && (!flags || flags.length === 0)) return;
+
+  await browser.url(getExtensionPageURL('panel'));
+
+  try {
+    console.log('Setting config flags:', flags);
+
+    await sendMessage({ action: 'e2e:setConfigFlags', flags });
+
+    // Reload the extension to apply the new config flags
+    await reloadExtension();
+  } catch {
+    console.warn(
+      'Current extension version does not support setting config flags',
+    );
+  }
 }

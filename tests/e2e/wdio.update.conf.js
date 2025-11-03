@@ -26,6 +26,7 @@ import {
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
+  setConfigFlags,
   waitForIdleBackgroundTasks,
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
@@ -118,10 +119,7 @@ export const config = {
     await wdio.config.before(capabilities, specs, browser);
 
     try {
-      const url = await browser.getUrl();
-
       await enableExtension();
-      await browser.url(url);
 
       // Reload extension with the source
       switch (capabilities.browserName) {
@@ -158,14 +156,18 @@ export const config = {
         }
       }
 
-      await browser.url(url);
       await browser.pause(5000);
 
       await browser.url(getExtensionPageURL('settings'));
       await expect(getExtensionElement('page:settings')).toBeDisplayed();
       await waitForIdleBackgroundTasks();
 
-      console.log('Extension reloaded...');
+      console.log('Extension updated...');
+
+      // TODO: Remove this once the production version supports setting config flags
+      // For now we need to set flags again, as the production build uses remote config
+      // Expected version: v10.5.18
+      await setConfigFlags(wdio.argv.flags.split(','), true);
     } catch (e) {
       console.error('Error while updating extension', e);
 

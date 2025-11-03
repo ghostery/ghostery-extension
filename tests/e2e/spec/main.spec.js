@@ -74,7 +74,6 @@ describe('Main Features', function () {
 
     it('blocks dynamic ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', true);
-
       await browser.url(PAGE_URL);
 
       await browser.execute(function (selector) {
@@ -115,11 +114,9 @@ describe('Main Features', function () {
 
     it('blocks tracker requests on the page', async function () {
       await setPrivacyToggle('anti-tracking', true);
-
       await browser.url(PAGE_URL);
 
       await openPanel();
-
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -182,21 +179,25 @@ describe('Main Features', function () {
 
   describe('Website Pause', function () {
     it("pauses the website's privacy settings", async function () {
+      // Ensure ad-blocking is enabled
       await browser.url(PAGE_URL);
+      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
 
+      // Pause the website
       await openPanel();
       await getExtensionElement('button:pause').click();
-
       await waitForIdleBackgroundTasks();
 
+      // Reload and check ads are displayed
       await browser.url(PAGE_URL);
       await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
 
+      // Resume the website
       await openPanel();
       await getExtensionElement('button:resume').click();
-
       await waitForIdleBackgroundTasks();
 
+      // Reload and check ads are blocked again
       await browser.url(PAGE_URL);
       await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
     });
