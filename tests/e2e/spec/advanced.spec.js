@@ -13,7 +13,7 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
-  switchToPanel,
+  openPanel,
 } from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
@@ -62,13 +62,12 @@ describe('Advanced Features', function () {
       await browser.url(PAGE_URL);
       await expect($('#custom-filter')).toBeDisplayed();
 
-      await switchToPanel(async () => {
-        await getExtensionElement('button:detailed-view').click();
+      await openPanel();
+      await getExtensionElement('button:detailed-view').click();
 
-        await expect(
-          getExtensionElement('icon:tracker:facebook_connect:blocked'),
-        ).toBeDisplayed();
-      });
+      await expect(
+        getExtensionElement('icon:tracker:facebook_connect:blocked'),
+      ).toBeDisplayed();
     });
 
     it('adds custom network filter', async function () {
@@ -76,16 +75,15 @@ describe('Advanced Features', function () {
 
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
-        await getExtensionElement('button:detailed-view').click();
+      await openPanel();
+      await getExtensionElement('button:detailed-view').click();
 
-        await expect(
-          getExtensionElement(`icon:tracker:facebook_connect:blocked`),
-        ).not.toBeDisplayed();
-        await expect(
-          getExtensionElement(`icon:tracker:facebook_connect:modified`),
-        ).not.toBeDisplayed();
-      });
+      await expect(
+        getExtensionElement(`icon:tracker:facebook_connect:blocked`),
+      ).not.toBeDisplayed();
+      await expect(
+        getExtensionElement(`icon:tracker:facebook_connect:modified`),
+      ).not.toBeDisplayed();
     });
 
     it('adds supported custom regex filter', async function () {
@@ -93,13 +91,12 @@ describe('Advanced Features', function () {
 
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
-        await getExtensionElement('button:detailed-view').click();
+      await openPanel();
+      await getExtensionElement('button:detailed-view').click();
 
-        await expect(
-          getExtensionElement(`icon:tracker:www.example.com:blocked`),
-        ).toBeDisplayed();
-      });
+      await expect(
+        getExtensionElement(`icon:tracker:www.example.com:blocked`),
+      ).toBeDisplayed();
     });
 
     if (browser.isChromium) {

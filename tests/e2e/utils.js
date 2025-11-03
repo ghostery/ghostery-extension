@@ -126,11 +126,8 @@ export async function setWhoTracksMeToggle(name, value) {
   await setToggle(name, value);
 }
 
-export async function switchToPanel(fn) {
-  const currentUrl = await browser.getUrl();
-  const panelUrl = getExtensionPageURL('panel');
-
-  await browser.url(panelUrl);
+export async function openPanel() {
+  await browser.url(getExtensionPageURL('panel'));
 
   // The panel has a bugfix for closing the panel when links are clicked.
   // Source: /pages/panel/index.js - L52
@@ -138,17 +135,4 @@ export async function switchToPanel(fn) {
   await browser.execute(() => {
     Object.defineProperty(window, 'close', { value: function () {} });
   });
-
-  let error = null;
-  let result = null;
-  try {
-    result = await fn();
-  } catch (e) {
-    error = e;
-  }
-
-  await browser.url(currentUrl);
-
-  if (error) throw error;
-  return result;
 }

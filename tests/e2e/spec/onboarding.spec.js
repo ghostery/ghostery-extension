@@ -14,7 +14,7 @@ import {
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
-  switchToPanel,
+  openPanel,
 } from '../utils.js';
 
 describe('Onboarding', function () {
@@ -23,9 +23,8 @@ describe('Onboarding', function () {
     await getExtensionElement('button:skip').click();
     await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
-    await switchToPanel(async function () {
-      await expect(getExtensionElement('button:enable')).toBeDisplayed();
-    });
+    await openPanel();
+    await expect(getExtensionElement('button:enable')).toBeDisplayed();
 
     await browser.url('about:blank');
   });

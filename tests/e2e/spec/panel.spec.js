@@ -9,28 +9,24 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect, $ } from '@wdio/globals';
-import {
-  enableExtension,
-  getExtensionElement,
-  switchToPanel,
-} from '../utils.js';
+import { enableExtension, getExtensionElement, openPanel } from '../utils.js';
 
 describe('Panel', function () {
   before(enableExtension);
 
   it('opens licenses page', async function () {
-    await switchToPanel(async () => {
-      await getExtensionElement('button:menu').click();
-      const url =
-        await getExtensionElement('button:licenses').getProperty('href');
+    await openPanel();
 
-      const currentUrl = await browser.getUrl();
-      await browser.url(url);
+    await getExtensionElement('button:menu').click();
+    const url =
+      await getExtensionElement('button:licenses').getProperty('href');
 
-      const bodyText = await $('body').getText();
-      await expect(bodyText.includes('MIT')).toBe(true);
+    const currentUrl = await browser.getUrl();
+    await browser.url(url);
 
-      await browser.url(currentUrl);
-    });
+    const bodyText = await $('body').getText();
+    await expect(bodyText.includes('MIT')).toBe(true);
+
+    await browser.url(currentUrl);
   });
 });

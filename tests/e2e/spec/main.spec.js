@@ -14,11 +14,13 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
-  switchToPanel,
+  openPanel,
   waitForIdleBackgroundTasks,
 } from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
+
+const ADBLOCKING_SELECTOR = '[data-ad-name]';
 
 describe('Main Features', function () {
   before(enableExtension);
@@ -55,20 +57,19 @@ describe('Main Features', function () {
   });
 
   describe('Ad-Blocking', function () {
-    const SELECTOR = 'ad-slot';
     const DYNAMIC_SELECTOR = '#ghostery-test-page-element-1';
 
     it('does not block ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', false);
       await browser.url(PAGE_URL);
-      await expect($(SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
     });
 
     it('blocks ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', true);
 
       await browser.url(PAGE_URL);
-      await expect($(SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
     });
 
     it('blocks dynamic ads on a page', async function () {
@@ -99,18 +100,17 @@ describe('Main Features', function () {
       await setPrivacyToggle('anti-tracking', false);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await getExtensionElement('button:detailed-view').click();
+      await openPanel();
+      await getExtensionElement('button:detailed-view').click();
 
-        for (const trackerId of TRACKER_IDS) {
-          await expect(
-            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-          ).not.toBeDisplayed();
-          await expect(
-            getExtensionElement(`icon:tracker:${trackerId}:modified`),
-          ).not.toBeDisplayed();
-        }
-      });
+      for (const trackerId of TRACKER_IDS) {
+        await expect(
+          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+        ).not.toBeDisplayed();
+        await expect(
+          getExtensionElement(`icon:tracker:${trackerId}:modified`),
+        ).not.toBeDisplayed();
+      }
     });
 
     it('blocks tracker requests on the page', async function () {
@@ -118,15 +118,15 @@ describe('Main Features', function () {
 
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await getExtensionElement('button:detailed-view').click();
+      await openPanel();
 
-        for (const trackerId of TRACKER_IDS) {
-          await expect(
-            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-          ).toBeDisplayed();
-        }
-      });
+      await getExtensionElement('button:detailed-view').click();
+
+      for (const trackerId of TRACKER_IDS) {
+        await expect(
+          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+        ).toBeDisplayed();
+      }
     });
   });
 
@@ -163,48 +163,42 @@ describe('Main Features', function () {
   });
 
   describe('Global Pause', function () {
-    const SELECTOR = 'ad-slot';
-
     it('blocks trackers when is disabled', async function () {
       await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
 
-      await expect($(SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
     });
 
     it("doesn't block trackers when is enabled", async function () {
       await setPrivacyToggle('global-pause', true);
       await browser.url(PAGE_URL);
 
-      await expect($(SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
 
       await setPrivacyToggle('global-pause', false);
     });
   });
 
   describe('Website Pause', function () {
-    const SELECTOR = 'ad-slot';
-
     it("pauses the website's privacy settings", async function () {
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        const pauseButton = await getExtensionElement('button:pause');
-        await pauseButton.click();
-      });
+      await openPanel();
+      await getExtensionElement('button:pause').click();
+
+      await waitForIdleBackgroundTasks();
 
       await browser.url(PAGE_URL);
+      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
 
-      await expect($(SELECTOR)).toBeDisplayed();
+      await openPanel();
+      await getExtensionElement('button:resume').click();
 
-      await switchToPanel(async function () {
-        const pauseButton = await getExtensionElement('button:pause');
-        await pauseButton.click();
-      });
+      await waitForIdleBackgroundTasks();
 
       await browser.url(PAGE_URL);
-
-      await expect($(SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
     });
   });
 });
