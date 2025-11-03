@@ -53,7 +53,7 @@ export default {
           <ui-button>
             <a href="${router.backUrl()}">Cancel</a>
           </ui-button>
-          <ui-button type="danger">
+          <ui-button type="danger" data-qa="button:confirm-clear-cookies">
             <a onclick="${clearCookies}" href="${router.backUrl()}">
               Clear cookies
             </a>

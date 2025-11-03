@@ -349,7 +349,10 @@ export default {
               `}
             </settings-option>
             <ui-button disabled="${clearedCookies}">
-              <a href="${router.url(WebsiteClearCookies, { domain })}">
+              <a
+                href="${router.url(WebsiteClearCookies, { domain })}"
+                data-qa="button:clear-cookies"
+              >
                 Clear Cookies
               </a>
             </ui-button>

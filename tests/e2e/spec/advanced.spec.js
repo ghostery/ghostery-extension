@@ -150,4 +150,49 @@ describe('Advanced Features', function () {
       });
     }
   });
+
+  describe('Clear Cookies', () => {
+    beforeEach(async () => {
+      await browser.setCookies({
+        name: 'test-cookie',
+        value: 'test-value',
+        domain: PAGE_DOMAIN,
+      });
+    });
+
+    afterEach(async () => {
+      await browser.deleteCookies({ domain: PAGE_DOMAIN });
+    });
+
+    it('clears cookies when action is triggered in the panel', async () => {
+      await browser.url(PAGE_URL);
+      await openPanel();
+
+      await getExtensionElement('button:actions').click();
+      await getExtensionElement('button:clear-cookies').click();
+
+      await getExtensionElement('button:confirm-clear-cookies').click();
+
+      const cookies = await browser.getCookies({ domain: PAGE_DOMAIN });
+      expect(cookies.length).toBe(0);
+    });
+
+    it('clears cookies when action is triggered from website settings page', async () => {
+      await browser.url(PAGE_URL);
+      await openPanel();
+
+      await getExtensionElement('button:actions').click();
+
+      const href = await getExtensionElement(
+        'button:website-settings',
+      ).getAttribute('href');
+      await browser.url(href);
+
+      await getExtensionElement('button:clear-cookies').click();
+      await getExtensionElement('button:confirm-clear-cookies').click();
+
+      const cookies = await browser.getCookies({ domain: PAGE_DOMAIN });
+      expect(cookies.length).toBe(0);
+    });
+  });
 });
