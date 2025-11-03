@@ -175,6 +175,12 @@
   "clear": {
     "message": "クリア"
   },
+  "clear_cookies": {
+    "message": "クッキーを消去"
+  },
+  "clear_cookies_": {
+    "message": "クッキーを消去しますか？"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
   },
@@ -209,6 +215,9 @@
   },
   "cookie_banner_visible": {
     "message": "クッキーバナーが表示されています"
+  },
+  "cookies_successfully_cleared": {
+    "message": "クッキーが正常にクリアされました"
   },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
@@ -247,8 +256,8 @@
   "default": {
     "message": "初期設定"
   },
-  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "トラッカーと広告に関連するウェブサイトの主要な指標を強調した詳細な分析レポート。"
+  "deleted_cookies": {
+    "message": "削除されたクッキー"
   },
   "detailed_view": {
     "message": "詳細ビュー"
@@ -270,9 +279,6 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "新機能、重要な改善点、コミュニティの貢献によるアップグレードを一箇所で発見しましょう。"
-  },
-  "discover_more_insights_on_the_ghostery_blog_": {
-    "message": "ゴースタリーブログでさらに多くの洞察を発見してください。"
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "このサイトで手動で非表示にしたすべてのコンテンツブロックを表示します。それらを個別に削除するか、リスト全体をクリアすることができます。"
@@ -369,6 +375,12 @@
   },
   "facts": {
     "message": "事実"
+  },
+  "failed_to_clear_cookies": {
+    "message": "クッキーの削除に失敗しました"
+  },
+  "failed_to_clear_cookies__@_0_": {
+    "message": "クッキーの削除に失敗しました: $${0}"
   },
   "feedback_sharing": {
     "message": "フィードバック共有"
@@ -508,6 +520,9 @@
   },
   "learn_how": {
     "message": "どのように学ぶ"
+  },
+  "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
+    "message": "ゴースタリーが自動的に一時停止され、破損を防ぐ方法を学びましょう。"
   },
   "learn_more": {
     "message": "詳細はこちら"
@@ -691,6 +706,9 @@
   "reload_to_see_changes": {
     "message": "変更を確認するには、リロードしてください。"
   },
+  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
+    "message": "このサイトに保存されているすべてのクッキーを削除してプライバシーを保護し、閲覧データをリセットします。"
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"
   },
@@ -823,6 +841,9 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "このサイトは1時間停止します"
   },
+  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
+    "message": "サインアウトされ、設定や保存された設定がリセットされる可能性があります。サインインし直すか、再度クッキーを受け入れるまで、一部のページが正常に動作しない場合があります。"
+  },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "サイトのプライバシー保護を調整するには:"
   },
@@ -919,6 +940,9 @@
     "message": "ユーティリティ",
     "description": "Tracker category name"
   },
+  "view_a_detailed_report_showing_which_adblocker_functionality_may_have_caused_the_issue_": {
+    "message": "詳細なレポートを表示して、どの広告ブロッカーの機能が問題を引き起こした可能性があるかを確認してください。"
+  },
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
   },
@@ -984,6 +1008,9 @@
   },
   "yesterday": {
     "message": "昨日"
+  },
+  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
+    "message": "$${0}によって保存されたすべてのクッキーを削除しようとしています。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
