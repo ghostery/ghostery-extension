@@ -14,7 +14,7 @@ import { browser, expect } from '@wdio/globals';
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 import {
   enableExtension,
-  switchToPanel,
+  openPanel,
   getExtensionElement,
   getExtensionPageURL,
   reloadExtension,
@@ -53,46 +53,40 @@ describe('Managed Configuration', function () {
 
     await browser.url(PAGE_URL);
 
-    await switchToPanel(async function () {
-      const pauseButton = await getExtensionElement('button:pause');
-      await expect(pauseButton).toBeDisplayed();
+    await openPanel();
 
-      const resumeButton = await getExtensionElement('button:resume');
-      await expect(resumeButton).not.toBeDisplayed();
+    const pauseButton = await getExtensionElement('button:pause');
+    await expect(pauseButton).toBeDisplayed();
 
-      await getExtensionElement('button:detailed-view').click();
+    await expect(getExtensionElement('button:resume')).not.toBeDisplayed();
 
-      for (const trackerId of TRACKER_IDS) {
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-        ).not.toBeDisplayed();
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:modified`),
-        ).not.toBeDisplayed();
-      }
-    });
+    await getExtensionElement('button:detailed-view').click();
+
+    for (const trackerId of TRACKER_IDS) {
+      await expect(
+        getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+      ).not.toBeDisplayed();
+      await expect(
+        getExtensionElement(`icon:tracker:${trackerId}:modified`),
+      ).not.toBeDisplayed();
+    }
 
     await setManagedOptions({ trustedDomains: [] });
 
     await browser.url(PAGE_URL);
 
-    await switchToPanel(async function () {
-      const resumeButton = await getExtensionElement('button:pause-type');
-      await expect(resumeButton).toBeDisplayed();
-    });
+    await openPanel();
+
+    await expect(getExtensionElement('button:pause-type')).toBeDisplayed();
   });
 
   it('hides menu in panel when `disableUserControl` is enabled', async function () {
-    await switchToPanel(async () => {
-      const menuButton = await getExtensionElement('button:menu');
-      await expect(menuButton).toBeDisplayed();
-    });
+    await openPanel();
+    await expect(getExtensionElement('button:menu')).toBeDisplayed();
 
     await setManagedOptions({ disableUserControl: true });
 
-    await switchToPanel(async () => {
-      const menuButton = await getExtensionElement('button:menu');
-      await expect(menuButton).not.toBeDisplayed();
-    });
+    await openPanel();
+    await expect(getExtensionElement('button:menu')).not.toBeDisplayed();
   });
 });
