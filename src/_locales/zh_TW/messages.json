@@ -175,6 +175,12 @@
   "clear": {
     "message": "清除"
   },
+  "clear_cookies": {
+    "message": "清除 Cookie"
+  },
+  "clear_cookies_": {
+    "message": "清除 Cookie？"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "點擊搜尋欄位旁邊的拼圖圖示，將 Ghostery 釘選至工具列。"
   },
@@ -209,6 +215,9 @@
   },
   "cookie_banner_visible": {
     "message": "Cookie 橫幅可見"
+  },
+  "cookies_successfully_cleared": {
+    "message": "Cookies 已成功清除"
   },
   "copied_to_clipboard": {
     "message": "複製到剪貼簿"
@@ -247,8 +256,8 @@
   "default": {
     "message": "預設"
   },
-  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "詳細分析報告，突出與網站相關的追蹤器和廣告的關鍵指標。"
+  "deleted_cookies": {
+    "message": "刪除的 Cookie"
   },
   "detailed_view": {
     "message": "詳細圖示"
@@ -270,9 +279,6 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "发现全新的功能、关键的改进和由社区贡献推动的升级——一切尽在此处。"
-  },
-  "discover_more_insights_on_the_ghostery_blog_": {
-    "message": "探索更多見解，請參閱Ghostery部落格。"
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "顯示在此網站上手動隱藏的所有內容區塊。您可以單獨移除它們或清除整個列表。"
@@ -369,6 +375,12 @@
   },
   "facts": {
     "message": "事實"
+  },
+  "failed_to_clear_cookies": {
+    "message": "無法清除 Cookie"
+  },
+  "failed_to_clear_cookies__@_0_": {
+    "message": "清除 cookies 失敗：$${0}"
   },
   "feedback_sharing": {
     "message": "意見分享"
@@ -508,6 +520,9 @@
   },
   "learn_how": {
     "message": "學習如何"
+  },
+  "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
+    "message": "了解 Ghostery 如何自動暫停以避免故障。"
   },
   "learn_more": {
     "message": "瞭解更多"
@@ -691,6 +706,9 @@
   "reload_to_see_changes": {
     "message": "重新載入以觀看變化。"
   },
+  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
+    "message": "移除此網站儲存的所有 Cookie 以保護您的隱私並重設您的瀏覽資料。"
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "將瀏覽器工具列中的 Ghostery 圖示換成追蹤器齒輪。"
   },
@@ -823,6 +841,9 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "此網站將暫停一小時"
   },
+  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
+    "message": "這將使您登出，並可能重置偏好設定或已儲存的設定。有些頁面可能在您重新登入或再次接受 cookies 之前無法正常運作。"
+  },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "要調整隱私保護，請信任一個網站："
   },
@@ -919,6 +940,9 @@
     "message": "工具",
     "description": "Tracker category name"
   },
+  "view_a_detailed_report_showing_which_adblocker_functionality_may_have_caused_the_issue_": {
+    "message": "查看詳細報告，了解哪些廣告攔截器功能可能導致了問題。"
+  },
   "view_activity_details": {
     "message": "查看活動詳情"
   },
@@ -984,6 +1008,9 @@
   },
   "yesterday": {
     "message": "昨天"
+  },
+  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
+    "message": "您即將刪除由 $${0} 儲存的所有 Cookie。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"

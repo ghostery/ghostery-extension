@@ -175,6 +175,12 @@
   "clear": {
     "message": "Wyczyść"
   },
+  "clear_cookies": {
+    "message": "Wyczyść pliki cookie"
+  },
+  "clear_cookies_": {
+    "message": "Wyczyścić pliki cookie?"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Kliknij ikonę puzzla obok pola wyszukiwania i przypnij Ghostery do paska narzędzi."
   },
@@ -209,6 +215,9 @@
   },
   "cookie_banner_visible": {
     "message": "Baner z ciasteczkami widoczny"
+  },
+  "cookies_successfully_cleared": {
+    "message": "Pliki cookie zostały pomyślnie usunięte"
   },
   "copied_to_clipboard": {
     "message": "Skopiowano do schowka"
@@ -247,8 +256,8 @@
   "default": {
     "message": "Domyślny"
   },
-  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "Szczegółowy raport analityczny podkreślający kluczowe metryki dotyczące trackerów i reklam związanych z witryną."
+  "deleted_cookies": {
+    "message": "Usunięte pliki cookie"
   },
   "detailed_view": {
     "message": "Widok szczegółowy"
@@ -270,9 +279,6 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Odkryj nowe funkcje, kluczowe usprawnienia i ulepszenia napędzane wkładem społeczności - wszystko w jednym miejscu."
-  },
-  "discover_more_insights_on_the_ghostery_blog_": {
-    "message": "Odkryj więcej informacji na blogu Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Wyświetla wszystkie bloki treści ręcznie ukryte na tej stronie. Możesz je usuwać pojedynczo lub wyczyścić całą listę."
@@ -369,6 +375,12 @@
   },
   "facts": {
     "message": "Fakty"
+  },
+  "failed_to_clear_cookies": {
+    "message": "Nie udało się usunąć plików cookie"
+  },
+  "failed_to_clear_cookies__@_0_": {
+    "message": "Nie udało się usunąć plików cookie: $${0}"
   },
   "feedback_sharing": {
     "message": "Udostępnianie informacji"
@@ -508,6 +520,9 @@
   },
   "learn_how": {
     "message": "Dowiedz się jak"
+  },
+  "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
+    "message": "Dowiedz się, jak Ghostery jest automatycznie wstrzymywane, aby uniknąć problemów."
   },
   "learn_more": {
     "message": "Dowiedz się więcej"
@@ -691,6 +706,9 @@
   "reload_to_see_changes": {
     "message": "Przeładuj, aby zobaczyć zmiany"
   },
+  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
+    "message": "Usuń wszystkie pliki cookie przechowywane przez tę stronę, aby chronić swoją prywatność i zresetować dane przeglądania."
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Zastępuje ikonę Ghostery w pasku narzędzi przeglądarki ikoną koła."
   },
@@ -823,6 +841,9 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "Ta witryna będzie wstrzymana na 1 godzinę"
   },
+  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
+    "message": "Spowoduje to wylogowanie i może zresetować preferencje lub zapisane ustawienia. Niektóre strony mogą nie działać, dopóki ponownie się nie zalogujesz lub nie zaakceptujesz plików cookie."
+  },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Aby dostosować ochronę prywatności, zaufaj stronie:"
   },
@@ -919,6 +940,9 @@
     "message": "Narzędzia",
     "description": "Tracker category name"
   },
+  "view_a_detailed_report_showing_which_adblocker_functionality_may_have_caused_the_issue_": {
+    "message": "Zobacz szczegółowy raport pokazujący, która funkcjonalność blokera reklam mogła spowodować problem."
+  },
   "view_activity_details": {
     "message": "Zobacz szczegóły aktywności"
   },
@@ -984,6 +1008,9 @@
   },
   "yesterday": {
     "message": "Wczoraj"
+  },
+  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
+    "message": "Zaraz usuniesz wszystkie pliki cookie przechowywane przez $${0}."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Wykresy kołowe z trackerami nie będą wyświetlane obok wyników wyszukiwania."

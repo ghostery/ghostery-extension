@@ -175,6 +175,12 @@
   "clear": {
     "message": "Xóa"
   },
+  "clear_cookies": {
+    "message": "Xóa cookie"
+  },
+  "clear_cookies_": {
+    "message": "Xóa cookie?"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Nhấp vào biểu tượng câu đố bên cạnh thanh tìm kiếm và ghim Ghostery vào thanh công cụ của bạn."
   },
@@ -209,6 +215,9 @@
   },
   "cookie_banner_visible": {
     "message": "Biểu ngữ cookie hiển thị"
+  },
+  "cookies_successfully_cleared": {
+    "message": "Cookies đã được xóa thành công"
   },
   "copied_to_clipboard": {
     "message": "Đã sao chép vào bảng nhớ tạm"
@@ -247,8 +256,8 @@
   "default": {
     "message": "Mặc định"
   },
-  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "Báo cáo phân tích chi tiết nêu bật các chỉ số chính về trình theo dõi và quảng cáo liên quan đến trang web."
+  "deleted_cookies": {
+    "message": "Đã xóa cookie"
   },
   "detailed_view": {
     "message": "Xem chi tiết"
@@ -270,9 +279,6 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Khám phá các tính năng mới, cải tiến quan trọng và nâng cấp được thúc đẩy bởi sự đóng góp của cộng đồng - tất cả đều có ở một nơi."
-  },
-  "discover_more_insights_on_the_ghostery_blog_": {
-    "message": "Khám phá thêm những thông tin chi tiết trên blog Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Hiển thị tất cả các khối nội dung đã được ẩn thủ công trên trang web này. Bạn có thể xóa từng khối riêng lẻ hoặc xóa toàn bộ danh sách."
@@ -370,6 +376,12 @@
   "facts": {
     "message": "Sự thật"
   },
+  "failed_to_clear_cookies": {
+    "message": "Không thể xóa cookie"
+  },
+  "failed_to_clear_cookies__@_0_": {
+    "message": "Không thể xóa cookie: $${0}"
+  },
   "feedback_sharing": {
     "message": "Chia sẻ Phản hồi"
   },
@@ -465,7 +477,7 @@
     "description": "Tracker category name"
   },
   "how_browsing_assistant_works": {
-    "message": "Cách hoạt động của trợ lý duyệt web"
+    "message": "Cách Trợ lý Duyệt web hoạt động như thế nào"
   },
   "ignore": {
     "message": "Không chấp nhận"
@@ -508,6 +520,9 @@
   },
   "learn_how": {
     "message": "Học ngay"
+  },
+  "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
+    "message": "Tìm hiểu cách Ghostery tự động tạm dừng để tránh sự cố."
   },
   "learn_more": {
     "message": "Tìm hiểu thêm"
@@ -691,6 +706,9 @@
   "reload_to_see_changes": {
     "message": "Tải lại để xem các thay đổi"
   },
+  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
+    "message": "Xóa tất cả cookie được lưu trữ bởi trang web này để bảo vệ quyền riêng tư của bạn và đặt lại dữ liệu duyệt web của bạn."
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Thay thế biểu tượng Ghostery trên thanh công cụ của trình duyệt bằng bánh xe theo dõi."
   },
@@ -823,6 +841,9 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "This site will be paused for 1 hour"
   },
+  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
+    "message": "Điều này sẽ đăng xuất bạn và có thể đặt lại các tùy chọn hoặc cài đặt đã lưu. Một số trang có thể không hoạt động cho đến khi bạn đăng nhập lại hoặc chấp nhận cookie."
+  },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "To adjust privacy protection trust a site:"
   },
@@ -919,6 +940,9 @@
     "message": "Utilities",
     "description": "Tracker category name"
   },
+  "view_a_detailed_report_showing_which_adblocker_functionality_may_have_caused_the_issue_": {
+    "message": "Xem báo cáo chi tiết cho biết chức năng chặn quảng cáo nào có thể đã gây ra sự cố."
+  },
   "view_activity_details": {
     "message": "View activity details"
   },
@@ -984,6 +1008,9 @@
   },
   "yesterday": {
     "message": "Hôm qua"
+  },
+  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
+    "message": "Bạn sắp xóa tất cả cookie được lưu trữ bởi $${0}."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."

@@ -175,6 +175,12 @@
   "clear": {
     "message": "Limpar"
   },
+  "clear_cookies": {
+    "message": "Limpar cookies"
+  },
+  "clear_cookies_": {
+    "message": "Limpe os cookies?"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Clique no ícone do quebra-cabeça ao lado da barra de pesquisa e fixe o Ghostery na sua barra de ferramentas."
   },
@@ -209,6 +215,9 @@
   },
   "cookie_banner_visible": {
     "message": "Banner de cookies visível"
+  },
+  "cookies_successfully_cleared": {
+    "message": "Cookies limpos com sucesso"
   },
   "copied_to_clipboard": {
     "message": "Copiado para a área de transferência"
@@ -247,8 +256,8 @@
   "default": {
     "message": "Padrão"
   },
-  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "Relatório de análise detalhada destacando métricas-chave sobre rastreadores e anúncios associados ao site."
+  "deleted_cookies": {
+    "message": "Cookies excluídos"
   },
   "detailed_view": {
     "message": "Visão detalhada"
@@ -270,9 +279,6 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Descubra novos recursos, melhorias importantes e atualizações impulsionadas por contribuições da comunidade - tudo em um só lugar."
-  },
-  "discover_more_insights_on_the_ghostery_blog_": {
-    "message": "Descubra mais insights no blog do Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Exibe todos os blocos de conteúdo ocultados manualmente neste site. Você pode removê-los individualmente ou limpar a lista inteira."
@@ -370,6 +376,12 @@
   "facts": {
     "message": "Fatos"
   },
+  "failed_to_clear_cookies": {
+    "message": "Falha ao limpar cookies"
+  },
+  "failed_to_clear_cookies__@_0_": {
+    "message": "Falha ao limpar cookies: $${0}"
+  },
   "feedback_sharing": {
     "message": "Compartilhamento de Feedback"
   },
@@ -465,7 +477,7 @@
     "description": "Tracker category name"
   },
   "how_browsing_assistant_works": {
-    "message": "Como o assistente de navegação funciona"
+    "message": "Como o Assistente de Navegação funciona"
   },
   "ignore": {
     "message": "Ignorar"
@@ -508,6 +520,9 @@
   },
   "learn_how": {
     "message": "Saiba como"
+  },
+  "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
+    "message": "Saiba como o Ghostery é pausado automaticamente para evitar falhas."
   },
   "learn_more": {
     "message": "Saiba mais"
@@ -691,6 +706,9 @@
   "reload_to_see_changes": {
     "message": "Clique para ver as mudanças"
   },
+  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
+    "message": "Remova todos os cookies armazenados por este site para proteger sua privacidade e redefinir seus dados de navegação."
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Substitui o ícone do Ghostery na barra de ferramentas do navegador pela roda do rastreador."
   },
@@ -823,6 +841,9 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "Este site será pausado por 1 hora"
   },
+  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
+    "message": "Isso fará com que você saia e pode redefinir preferências ou configurações salvas. Algumas páginas podem não funcionar até que você faça login ou aceite cookies novamente."
+  },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Para ajustar a proteção de privacidade, confie em um site:"
   },
@@ -919,6 +940,9 @@
     "message": "Utilitários",
     "description": "Tracker category name"
   },
+  "view_a_detailed_report_showing_which_adblocker_functionality_may_have_caused_the_issue_": {
+    "message": "Visualize um relatório detalhado mostrando qual funcionalidade do bloqueador de anúncios pode ter causado o problema."
+  },
   "view_activity_details": {
     "message": "Ver detalhes da atividade"
   },
@@ -984,6 +1008,9 @@
   },
   "yesterday": {
     "message": "Ontem"
+  },
+  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
+    "message": "Você está prestes a remover todos os cookies armazenados por $${0}."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Você não verá mais rodas de rastreadores ao lado dos resultados de pesquisa."
