@@ -12,7 +12,9 @@
 import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
-import { dismissAction, ACTION_PAUSE_ASSISTANT } from '/store/config.js';
+import { dismissAction } from '/store/config.js';
+
+import { ACTION_PAUSE_ASSISTANT } from '/utils/config-types.js';
 import { setupNotificationPage } from '/utils/notifications.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL } from '/utils/urls.js';
 

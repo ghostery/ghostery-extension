@@ -12,8 +12,10 @@
 import { store } from 'hybrids';
 
 import { ENGINES, getPausedDetails } from '/store/options.js';
-import Config, { FLAG_DYNAMIC_DNR_FIXES } from '/store/config.js';
+import Config from '/store/config.js';
 import Resources from '/store/resources.js';
+
+import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';

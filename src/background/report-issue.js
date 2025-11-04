@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
+import Config from '/store/config.js';
 import Options, { REPORT_OPTIONS } from '/store/options.js';
 import Resources from '/store/resources.js';
 
@@ -20,7 +21,6 @@ import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 import { isOptionEqual } from '/utils/options-observer.js';
 
 import { tabStats } from './stats.js';
-import Config from '/store/config.js';
 
 async function getMetadata(tab) {
   let result = '\n------\n';

@@ -27,6 +27,12 @@ import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 
 import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
+import {
+  FLAG_PAUSE_ASSISTANT,
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  FLAG_EXTENDED_SELECTORS,
+  FLAG_DYNAMIC_DNR_FIXES,
+} from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
@@ -54,7 +60,12 @@ export const argv = process.argv.slice(2).reduce(
     target: ['firefox', 'chrome'],
     clean: false,
     debug: false,
-    flags: [],
+    flags: [
+      FLAG_PAUSE_ASSISTANT,
+      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+      FLAG_EXTENDED_SELECTORS,
+      FLAG_DYNAMIC_DNR_FIXES,
+    ],
   },
 );
 

@@ -62,7 +62,6 @@ export async function reloadExtension() {
     getExtensionPageURL('panel'),
   );
 
-  console.log('Reloading extension...');
   await sendMessage({ action: 'e2e:reloadExtension' });
 
   if (browser.isFirefox) {
@@ -85,7 +84,6 @@ export async function reloadExtension() {
   );
 
   await waitForIdleBackgroundTasks();
-  console.log('Extension reloaded...');
 
   await browser.url('about:blank');
 }

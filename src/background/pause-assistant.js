@@ -12,12 +12,13 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
-import Config, {
-  ACTION_PAUSE_ASSISTANT,
-  FLAG_PAUSE_ASSISTANT,
-} from '/store/config.js';
+import Config from '/store/config.js';
 import Options from '/store/options.js';
 
+import {
+  ACTION_PAUSE_ASSISTANT,
+  FLAG_PAUSE_ASSISTANT,
+} from '/utils/config-types.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 import { openNotification } from './notifications.js';

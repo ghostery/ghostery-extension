@@ -17,14 +17,14 @@ import {
 import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
 
+import { resolveFlag } from '/store/config.js';
+import Options, { ENGINES, getPausedDetails } from '/store/options.js';
+
 import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
-  resolveFlag,
-} from '/store/config.js';
-import Options, { ENGINES, getPausedDetails } from '/store/options.js';
-
+} from '/utils/config-types.js';
 import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
