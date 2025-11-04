@@ -167,7 +167,7 @@ export const config = {
       // TODO: Remove this once the production version supports setting config flags
       // For now we need to set flags again, as the production build uses remote config
       // Expected version: v10.5.18
-      await setConfigFlags(wdio.argv.flags.split(','), true);
+      await setConfigFlags(wdio.argv.flags, true);
     } catch (e) {
       console.error('Error while updating extension', e);
 

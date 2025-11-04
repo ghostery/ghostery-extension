@@ -45,12 +45,6 @@ async function sendMessage(msg) {
   if (result !== 'done') {
     throw new Error(`Background tasks did not respond with "done": ${result}`);
   }
-
-  if (result !== 'done') {
-    throw new Error(
-      `The background task did not respond with "done": ${result}`,
-    );
-  }
 }
 
 export async function waitForIdleBackgroundTasks() {
@@ -146,7 +140,7 @@ export async function openPanel() {
 }
 
 export async function setConfigFlags(flags, force = false) {
-  if (!force && (!flags || flags.length === 0)) return;
+  if (!force && !flags.length) return;
 
   await browser.url(getExtensionPageURL('panel'));
 

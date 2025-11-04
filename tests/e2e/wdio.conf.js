@@ -43,14 +43,19 @@ export const argv = process.argv.slice(2).reduce(
     if (arg.startsWith('--')) {
       if (arg.includes('=')) {
         const [key, value] = arg.slice(2).split('=');
-        acc[key] = value;
+        acc[key] = value.split(',').filter((v) => v);
       } else {
         acc[arg.slice(2)] = true;
       }
     }
     return acc;
   },
-  { target: ['firefox', 'chrome'], debug: false, clean: false, flags: '' },
+  {
+    target: ['firefox', 'chrome'],
+    clean: false,
+    debug: false,
+    flags: [],
+  },
 );
 
 function execSyncNode(command) {
@@ -190,7 +195,7 @@ export const config = {
         await browser.pause(2000);
       }
 
-      await setConfigFlags(argv.flags.split(','));
+      await setConfigFlags(argv.flags);
     } catch (e) {
       console.error('Error while setting up test environment', e);
 
