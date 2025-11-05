@@ -26,7 +26,13 @@ import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 
-import { setExtensionBaseUrl } from './utils.js';
+import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
+import {
+  FLAG_PAUSE_ASSISTANT,
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  FLAG_EXTENDED_SELECTORS,
+  FLAG_DYNAMIC_DNR_FIXES,
+} from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
@@ -43,14 +49,24 @@ export const argv = process.argv.slice(2).reduce(
     if (arg.startsWith('--')) {
       if (arg.includes('=')) {
         const [key, value] = arg.slice(2).split('=');
-        acc[key] = value;
+        acc[key] = value.split(',').filter((v) => v);
       } else {
         acc[arg.slice(2)] = true;
       }
     }
     return acc;
   },
-  { target: ['firefox', 'chrome'], debug: false, clean: false },
+  {
+    target: ['firefox', 'chrome'],
+    clean: false,
+    debug: false,
+    flags: [
+      FLAG_PAUSE_ASSISTANT,
+      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+      FLAG_EXTENDED_SELECTORS,
+      FLAG_DYNAMIC_DNR_FIXES,
+    ],
+  },
 );
 
 function execSyncNode(command) {
@@ -189,6 +205,8 @@ export const config = {
         await $('>>>#devMode').click();
         await browser.pause(2000);
       }
+
+      await setConfigFlags(argv.flags);
     } catch (e) {
       console.error('Error while setting up test environment', e);
 

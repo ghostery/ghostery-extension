@@ -16,6 +16,7 @@ import Config from '/store/config.js';
 import { isWebkit } from '/utils/browser-info.js';
 import { CDN_URL } from '/utils/urls.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { debugMode } from '/utils/debug.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
 
@@ -107,6 +108,9 @@ export default async function syncConfig() {
 }
 
 OptionsObserver.addListener(function config(options, lastOptions) {
+  // Disable syncing in debug mode
+  if (debugMode) return;
+
   if (
     // Background startup with terms already set
     (!lastOptions && options.terms) ||

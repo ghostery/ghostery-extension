@@ -12,7 +12,10 @@
 import { html, store, dispatch } from 'hybrids';
 
 import Options from '/store/options.js';
-import Config, {
+import Config from '/store/config.js';
+import Resources from '/store/resources.js';
+
+import {
   ACTION_DISABLE_AUTOCONSENT,
   ACTION_DISABLE_ANTITRACKING_MODIFICATION,
   ACTION_PAUSE_ASSISTANT,
@@ -21,8 +24,7 @@ import Config, {
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
   FLAG_DYNAMIC_DNR_FIXES,
-} from '/store/config.js';
-import Resources from '/store/resources.js';
+} from '/utils/config-types.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 

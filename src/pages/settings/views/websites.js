@@ -11,12 +11,11 @@
 
 import { html, msg, store, router } from 'hybrids';
 
-import Config, {
-  ACTION_PAUSE_ASSISTANT,
-  dismissAction,
-} from '/store/config.js';
+import Config, { dismissAction } from '/store/config.js';
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
+
+import { ACTION_PAUSE_ASSISTANT } from '/utils/config-types.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
