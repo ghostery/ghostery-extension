@@ -241,7 +241,10 @@ export default {
               ${(__PLATFORM__ === 'firefox' || !isWebkit()) &&
               html`
                 <panel-actions-button>
-                  <a href="${router.url(ClearCookies)}">
+                  <a
+                    href="${router.url(ClearCookies)}"
+                    data-qa="button:clear-cookies"
+                  >
                     <panel-actions-icon name="cookie"></panel-actions-icon>
                     Clear cookies
                     <ui-icon
@@ -270,6 +273,7 @@ export default {
                     '/pages/settings/index.html#@settings-website-details?domain=' +
                       stats.hostname,
                   )}"
+                  data-qa="button:website-settings"
                 >
                   <panel-actions-icon name="settings"></panel-actions-icon>
                   Open website settings
