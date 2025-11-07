@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
     inputs:
       flags:
@@ -60,3 +61,21 @@ jobs:
 
       - name: Test - Firefox
         run: npm run wdio:update -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+  e2e-package:
+    needs: [e2e, e2e-update]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'package')
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test - Chrome
+        run: npm run wdio -- --target=chrome
+
+      - name: Test - Firefox
+        run: npm run wdio -- --target=firefox
