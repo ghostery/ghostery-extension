@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
 import Config from '/store/config.js';
+import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
 import {
@@ -24,6 +25,9 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import { openNotification } from './notifications.js';
 
 async function updatePausedDomains(config, lastConfig) {
+  const managedConfig = await store.resolve(ManagedConfig);
+  if (managedConfig.disableUserControl) return;
+
   const options = await store.resolve(Options);
 
   let paused = {};
@@ -83,6 +87,9 @@ OptionsObserver.addListener('pauseAssistant', async (value, lastValue) => {
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (details.frameId === 0) {
     if (!(await store.resolve(Options)).pauseAssistant) return;
+
+    const managedConfig = await store.resolve(ManagedConfig);
+    if (managedConfig.disableUserControl) return;
 
     const config = await store.resolve(Config);
     if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;

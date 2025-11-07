@@ -213,6 +213,16 @@ async function manage(options) {
 
     // Clear out the paused state, to overwrite with the current managed state
     options.paused = {};
+  } else {
+    // The user has control, so we need to remove only managed paused domains
+    // as they are overwritten by `trustedDomains` option below
+    if (options.paused) {
+      for (const domain of Object.keys(options.paused)) {
+        if (options.paused[domain].managed === true) {
+          delete options.paused[domain];
+        }
+      }
+    }
   }
 
   if (managed.disableUserAccount === true) {
@@ -223,16 +233,8 @@ async function manage(options) {
     options.wtmSerpReport = false;
   }
 
-  // Clean previous managed paused domains
-  if (options.paused) {
-    for (const domain of Object.keys(options.paused)) {
-      if (options.paused[domain].managed === true) {
-        delete options.paused[domain];
-      }
-    }
-  }
-
-  // Apply trusted domains if they are configured (they are empty or contain real domains)
+  // Apply trusted domains if they are configured
+  // (`trustedDomains` is empty or contain real domains)
   if (managed.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID) {
     options.paused ||= {};
     managed.trustedDomains.forEach((domain) => {
