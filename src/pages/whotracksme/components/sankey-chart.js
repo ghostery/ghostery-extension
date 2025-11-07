@@ -64,7 +64,8 @@ export default {
           if (!data.nodes.find((node) => node.id === tracker.organization.id)) {
             data.nodes.push({
               id: tracker.organization.id,
-              title: tracker.organization.name,
+              title: () =>
+                store.resolve(tracker.organization).then((org) => org.name),
               color: 'var(--background-tertiary)',
             });
           }
@@ -103,7 +104,7 @@ export default {
 
       return () => matchMedia.removeEventListener('change', invalidate);
     },
-    observe(host, data) {
+    async observe(host, data) {
       // pending state
       if (data === undefined) return;
 
@@ -114,6 +115,11 @@ export default {
         ),
         360,
       );
+
+      // Resolve data.nodes lazy organization titles
+      for (const node of data.nodes) {
+        if (typeof node.title === 'function') node.title = await node.title();
+      }
 
       host.chart.render(data);
     },
