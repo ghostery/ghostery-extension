@@ -25,10 +25,25 @@ export async function exportToFile() {
   const customFilters = await store.resolve(CustomFilters);
   const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
 
+  const cleanedOptions = Object.fromEntries(
+    SYNC_OPTIONS.map((key) => [key, options[key]]),
+  );
+
+  // Remove managed, assist and temporary paused domains
+  cleanedOptions.paused = Object.entries(cleanedOptions.paused).reduce(
+    (acc, [domain, details]) => {
+      if (!details.managed && !details.assist && !details.revokeAt) {
+        acc[domain] = { revokeAt: 0 };
+      }
+      return acc;
+    },
+    {},
+  );
+
   const data = {
     timestamp: Date.now(),
     version: DATA_VERSION,
-    options: Object.fromEntries(SYNC_OPTIONS.map((key) => [key, options[key]])),
+    options: cleanedOptions,
   };
 
   if (customFilters.text) {
@@ -121,17 +136,26 @@ export function importFromFile(event) {
           hostnames: data.blockedElements,
         });
 
-        // Clean up paused domains and exceptions
-        await store.set(Options, { paused: null, exceptions: null });
+        // Clean up user's paused domains and exceptions
+        const options = await store.resolve(Options);
+        await store.set(Options, {
+          paused: Object.fromEntries(
+            Object.entries(options.paused).filter(
+              ([, details]) =>
+                !details.managed && !details.assist && !details.revokeAt,
+            ),
+          ),
+          exceptions: null,
+        });
 
-        const options = Object.fromEntries(
+        const cleanedOptions = Object.fromEntries(
           SYNC_OPTIONS.map((key) => [key, data.options[key]]).filter(
             ([, value]) => value !== undefined,
           ),
         );
 
         // Overwrite options
-        await store.set(Options, options);
+        await store.set(Options, cleanedOptions);
 
         resolve(
           msg`The backup from ${new Date(data.timestamp).toLocaleString()} imported successfully.`,
