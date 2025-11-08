@@ -33,7 +33,7 @@ export async function exportToFile() {
   cleanedOptions.paused = Object.entries(cleanedOptions.paused).reduce(
     (acc, [domain, details]) => {
       if (!details.managed && !details.assist && !details.revokeAt) {
-        acc[domain] = details;
+        acc[domain] = { revokeAt: 0 };
       }
       return acc;
     },
@@ -136,19 +136,14 @@ export function importFromFile(event) {
           hostnames: data.blockedElements,
         });
 
-        // Clean up paused domains and exceptions
+        // Clean up user's paused domains and exceptions
         const options = await store.resolve(Options);
         await store.set(Options, {
-          paused: Object.entries(options.paused).reduce(
-            (acc, [domain, details]) => {
-              // Remove user's paused domains
-              if (!details.managed && !details.assist && !details.revokeAt) {
-                acc[domain] = null;
-              }
-
-              return acc;
-            },
-            {},
+          paused: Object.fromEntries(
+            Object.entries(options.paused).filter(
+              ([, details]) =>
+                !details.managed && !details.assist && !details.revokeAt,
+            ),
           ),
           exceptions: null,
         });
