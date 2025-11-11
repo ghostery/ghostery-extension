@@ -16,7 +16,8 @@
     "tabs",
     "activeTab",
     "webRequest",
-    "offscreen"
+    "offscreen",
+    "sidePanel"
   ],
   "host_permissions": ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
   "icons": {
@@ -30,6 +31,9 @@
     },
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
+  },
+  "side_panel": {
+    "default_path": "pages/panel/index.html"
   },
   "options_ui": {
     "page": "pages/settings/index.html",
