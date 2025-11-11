@@ -230,18 +230,6 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-function resolveInjectionTarget(details) {
-  const target = { tabId: details.tabId };
-
-  if (details.documentId) {
-    target.documentIds = [details.documentId];
-  } else {
-    target.frameIds = [details.frameId];
-  }
-
-  return target;
-}
-
 const scriptletGlobals = {
   // Request a real extension resource to obtain a dynamic ID to the resource.
   // Redirect resources are defined with `use_dynamic_url` restriction.
@@ -252,7 +240,7 @@ const scriptletGlobals = {
     .slice(0, -6),
 };
 
-function injectScriptlets(filters, hostname, details) {
+function injectScriptlets(filters, tabId, frameId, hostname) {
   let contentScript = '';
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -293,7 +281,10 @@ function injectScriptlets(filters, hostname, details) {
         world:
           chrome.scripting.ExecutionWorld?.MAIN ??
           (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-        target: resolveInjectionTarget(details),
+        target: {
+          tabId,
+          frameIds: [frameId],
+        },
         func,
         args,
       },
@@ -316,17 +307,25 @@ function injectScriptlets(filters, hostname, details) {
   }
 }
 
-function injectStyles(styles, details) {
+function injectStyles(styles, tabId, frameId) {
+  const target = { tabId };
+
+  if (frameId !== undefined) {
+    target.frameIds = [frameId];
+  } else {
+    target.allFrames = true;
+  }
+
   chrome.scripting
     .insertCSS({
       css: styles,
       origin: 'USER',
-      target: resolveInjectionTarget(details),
+      target,
     })
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
-const EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
+let EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
 
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
@@ -362,8 +361,6 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
 
-  // Domain specific cosmetic filters (scriptlets and styles)
-  // Execution: bootstrap, DOM mutations
   {
     const { matches } = engine.matchCosmeticFilters({
       domain,
@@ -400,7 +397,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptFilters, hostname, details);
+      injectScriptlets(scriptFilters, tabId, frameId, hostname);
     }
 
     if (scriptletsOnly) {
@@ -417,7 +414,7 @@ async function injectCosmetics(details, config) {
     });
 
     if (styles) {
-      injectStyles(styles, details);
+      injectStyles(styles, tabId, frameId);
     }
 
     if (EXTENDED_SELECTORS.enabled && extended && extended.length > 0) {
@@ -429,13 +426,13 @@ async function injectCosmetics(details, config) {
     }
   }
 
-  // Global cosmetic filters (styles only)
-  // Execution: bootstrap
-  if (isBootstrap) {
+  if (frameId === 0 && isBootstrap) {
     const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
+
+      // This needs to be done only once per tab
       getBaseRules: true,
       getInjectionRules: false,
       getExtendedRules: false,
@@ -443,7 +440,7 @@ async function injectCosmetics(details, config) {
       getRulesFromHostname: false,
     });
 
-    injectStyles(styles, details);
+    injectStyles(styles, tabId);
   }
 }
 
