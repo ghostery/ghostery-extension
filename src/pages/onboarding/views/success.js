@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import { getBrowser, getOS } from '/utils/browser-info.js';
+import { getBrowser, isMobile } from '/utils/browser-info.js';
 
 import protection from '../illustrations/protection.js';
 
@@ -28,7 +28,7 @@ if (__PLATFORM__ !== 'firefox') {
   if (name === 'chrome' || name === 'brave' || name === 'yandex') {
     screenshotURL = pinExtensionChrome;
     type = 'chrome';
-  } else if (name === 'edge' && getOS() !== 'android') {
+  } else if (name === 'edge' && !isMobile()) {
     screenshotURL = pinExtensionEdge;
     type = 'edge';
   } else if (name === 'opera') {
