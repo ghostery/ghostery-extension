@@ -20,13 +20,12 @@
  */
 
 import path from 'node:path';
-import url from 'node:url';
 import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
-import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 
 import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
+import { setupTestPage } from './page/server.js';
 import {
   FLAG_PAUSE_ASSISTANT,
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
@@ -75,20 +74,6 @@ function execSyncNode(command) {
   execSync(command, {
     stdio: 'inherit',
     env: { ...process.env, NODE_ENV: '' },
-  });
-}
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-export function setupTestPage() {
-  const file = readFileSync(path.join(__dirname, 'page.html'), 'utf8');
-  const server = createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(file);
-  });
-
-  // starts a simple http server locally on port 6789
-  server.listen(PAGE_PORT, '127.0.0.1', () => {
-    console.log(`Testing page server listening on ${PAGE_URL}\n`);
   });
 }
 
@@ -169,7 +154,7 @@ export const config = {
         }
       }
 
-      setupTestPage();
+      setupTestPage(PAGE_PORT);
     } catch (e) {
       console.error('Error while preparing test environment', e);
       process.exit(1);

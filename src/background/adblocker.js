@@ -281,10 +281,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
         world:
           chrome.scripting.ExecutionWorld?.MAIN ??
           (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-        target: {
-          tabId,
-          frameIds: [frameId],
-        },
+        target: { tabId, frameIds: [frameId] },
         func,
         args,
       },
@@ -308,19 +305,11 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 }
 
 function injectStyles(styles, tabId, frameId) {
-  const target = { tabId };
-
-  if (frameId !== undefined) {
-    target.frameIds = [frameId];
-  } else {
-    target.allFrames = true;
-  }
-
   chrome.scripting
     .insertCSS({
       css: styles,
       origin: 'USER',
-      target,
+      target: { tabId, frameIds: [frameId] },
     })
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
@@ -426,13 +415,11 @@ async function injectCosmetics(details, config) {
     }
   }
 
-  if (frameId === 0 && isBootstrap) {
+  if (isBootstrap) {
     const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
-
-      // This needs to be done only once per tab
       getBaseRules: true,
       getInjectionRules: false,
       getExtendedRules: false,
@@ -440,7 +427,7 @@ async function injectCosmetics(details, config) {
       getRulesFromHostname: false,
     });
 
-    injectStyles(styles, tabId);
+    injectStyles(styles, tabId, frameId);
   }
 }
 
@@ -500,8 +487,11 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (!INJECT_COSMETICS_ON_RESPONSE_STARTED.enabled) return;
+
       if (details.tabId === -1) return;
       if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
+
+      if (!details.documentId) return;
 
       injectCosmetics(details, { bootstrap: true });
     },

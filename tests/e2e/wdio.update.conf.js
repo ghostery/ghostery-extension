@@ -31,6 +31,8 @@ import {
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
+import { setupTestPage } from './page/server.js';
+
 /*
  * This configuration file is used to update the extension in the browser
  * before running the tests. It uses the original configuration file as a base,
@@ -109,7 +111,7 @@ export const config = {
         }
       }
 
-      wdio.setupTestPage();
+      setupTestPage(wdio.PAGE_PORT);
     } catch (e) {
       console.error('Error while preparing test environment', e);
       process.exit(1);
