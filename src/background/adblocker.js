@@ -448,6 +448,27 @@ async function injectCosmetics(details, config) {
  * Cosmetic filtering
  */
 
+// Inject cosmetics on navigation committed (All platforms supported)
+chrome.webNavigation.onCommitted.addListener(
+  (details) => injectCosmetics(details, { bootstrap: true }),
+  { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+);
+
+// Listen for requests from content scripts to inject
+// dynamic cosmetics (All platforms supported)
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (msg.action === 'injectCosmetics' && sender.tab) {
+    // Generate details object for the sender argument
+    const details = {
+      url: sender.url,
+      tabId: sender.tab.id,
+      frameId: sender.frameId,
+    };
+
+    injectCosmetics(details, msg);
+  }
+});
+
 if (__PLATFORM__ === 'firefox') {
   FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.then((enabled) => {
     if (!enabled) contentScripts.unregisterAll();
@@ -471,13 +492,6 @@ if (__PLATFORM__ === 'firefox') {
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
-
-  chrome.webNavigation.onCommitted.addListener(
-    (details) => {
-      injectCosmetics(details, { bootstrap: true });
-    },
-    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-  );
 } else {
   let INJECT_COSMETICS_ON_RESPONSE_STARTED = resolveFlag(
     FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
@@ -493,31 +507,7 @@ if (__PLATFORM__ === 'firefox') {
     },
     { urls: ['http://*/*', 'https://*/*'] },
   );
-
-  chrome.webNavigation.onCommitted.addListener(
-    (details) => {
-      if (INJECT_COSMETICS_ON_RESPONSE_STARTED.enabled) return;
-      injectCosmetics(details, { bootstrap: true });
-    },
-    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-  );
 }
-
-// Listen for requests from content scripts to inject
-// dynamic cosmetics (All platforms supported)
-
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === 'injectCosmetics' && sender.tab) {
-    // Generate details object for the sender argument
-    const details = {
-      url: sender.url,
-      tabId: sender.tab.id,
-      frameId: sender.frameId,
-    };
-
-    injectCosmetics(details, msg);
-  }
-});
 
 /*
  * Network requests blocking - Firefox only
