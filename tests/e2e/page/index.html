@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E2E Test Page</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Test Page</h1>
+
+    <!-- Ad-Blocking CSS container -->
+
+    <h2>Main frame</h2>
+    <section>
+      Global Ad Selector: ad-slot
+      <ad-slot style="background: red"></ad-slot>
+    </section>
+
+    <section>
+      URL-based Selector: [data-ad-name]
+      <div data-ad-name="test" style="background: violet"></div>
+    </section>
+
+    <h2>Static Iframe</h2>
+    <iframe id="iframe-static" src="/iframe.html"></iframe>
+
+    <h2>Dynamic Iframe</h2>
+    <script defer>
+      const script = document.currentScript;
+
+      setTimeout(function () {
+        const iframe = document.createElement('iframe');
+        iframe.id = 'iframe-dynamic';
+        iframe.src = '/iframe.html';
+        document.body.insertBefore(iframe, script);
+      }, 1000);
+    </script>
+
+    <h2>Local Iframe</h2>
+    <script>
+      const iframe = document.createElement('iframe');
+      iframe.id = 'iframe-local';
+
+      iframe.addEventListener(
+        'load',
+        function () {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+
+          fetch('/iframe.html')
+            .then((response) => response.text())
+            .then((html) => {
+              doc.open();
+              doc.write(html);
+              doc.close();
+            });
+        },
+        { once: true },
+      );
+
+      iframe.src = 'about:blank';
+      document.body.insertBefore(iframe, document.currentScript);
+    </script>
+
+    <!-- Anti-tracking tracking requests -->
+    <script src="https://connect.facebook.net/en_US/fbevents.js"></script>
+    <script src="https://s.pinimg.com/ct/core.js"></script>
+
+    <!-- Custom Filters -->
+    <h2>Custom filters</h2>
+
+    <script src="https://www.example.com/track.js"></script>
+    <section>
+      ID-based selector: #custom-filter
+      <div id="custom-filter" style="background: blue"></div>
+    </section>
+
+    <h2>Dynamic Scriptlet Injection</h2>
+
+    <!-- Scriptlets with web accessible resources -->
+    <script defer>
+      void (async function () {
+        const script = document.currentScript;
+        const res = await fetch('ads.js');
+        const div = document.createElement('div');
+
+        div.id = 'war';
+        div.textContent = await res.text();
+        document.body.insertBefore(div, script);
+      })();
+    </script>
+  </body>
+</html>

@@ -13,6 +13,10 @@ import { DOMMonitor } from '@ghostery/adblocker-content';
 
 import { delayedUpdateExtended } from './extended-selectors.js';
 
+// Initial injection
+chrome.runtime.sendMessage({ action: 'injectCosmetics', bootstrap: true });
+
+// Monitor DOM changes
 document.addEventListener(
   'DOMContentLoaded',
   () => {

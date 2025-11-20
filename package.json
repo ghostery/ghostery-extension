@@ -14,6 +14,7 @@
     "test": "npm run wdio && npm run wdio:update",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
+    "wdio:page": "node tests/e2e/page/server.js",
     "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
     "locales": "npm run locales:setup && npm run locales.src",

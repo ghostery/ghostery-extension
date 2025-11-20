@@ -20,7 +20,8 @@ import {
 
 import { PAGE_URL } from '../wdio.conf.js';
 
-const ADBLOCKING_SELECTOR = '[data-ad-name]';
+const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
+const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
 
 describe('Main Features', function () {
   before(enableExtension);
@@ -57,19 +58,87 @@ describe('Main Features', function () {
   });
 
   describe('Ad-Blocking', function () {
+    async function expectAdsBlocked() {
+      const adSlot = await $(ADBLOCKING_GLOBAL_SELECTOR);
+      const dataAd = await $(ADBLOCKING_URL_SELECTOR);
+
+      await expect(adSlot).toExist();
+      await expect(dataAd).toExist();
+
+      await expect(adSlot).not.toBeDisplayed();
+      await expect(dataAd).not.toBeDisplayed();
+    }
+
     const DYNAMIC_SELECTOR = '#ghostery-test-page-element-1';
 
     it('does not block ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', false);
       await browser.url(PAGE_URL);
-      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
+
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+      await browser.switchFrame($('#iframe-static'));
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+      // wait for dynamic and local iframes to load
+      await browser.pause(1000);
+
+      await browser.switchFrame(null);
+      await browser.switchFrame($('#iframe-dynamic'));
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+      await browser.switchFrame(null);
+      await browser.switchFrame($('#iframe-local'));
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
     });
 
-    it('blocks ads on a page', async function () {
-      await setPrivacyToggle('ad-blocking', true);
+    describe('block ads on different frames', function () {
+      before(async function () {
+        await setPrivacyToggle('ad-blocking', true);
+      });
 
-      await browser.url(PAGE_URL);
-      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
+      it('main frame of the page', async function () {
+        await browser.url(PAGE_URL);
+
+        await expectAdsBlocked();
+      });
+
+      it('subframe of the page', async function () {
+        await browser.url(PAGE_URL);
+
+        const iframe = await $('#iframe-static');
+        await browser.switchFrame(iframe);
+
+        await expectAdsBlocked();
+      });
+
+      it('dynamic subframe of the page', async function () {
+        await browser.url(PAGE_URL);
+
+        // Wait for iframe to load
+        await browser.pause(1000);
+
+        const dynamicIframe = await $('#iframe-dynamic');
+        await browser.switchFrame(dynamicIframe);
+
+        await expectAdsBlocked();
+      });
+
+      it('local subframe of the page', async function () {
+        await browser.url(PAGE_URL);
+
+        // Wait for iframe to load
+        await browser.pause(1000);
+
+        const localIframe = await $('#iframe-local');
+        await browser.switchFrame(localIframe);
+
+        await expectAdsBlocked();
+      });
     });
 
     it('blocks dynamic ads on a page', async function () {
@@ -164,14 +233,14 @@ describe('Main Features', function () {
       await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
 
-      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
     });
 
     it("doesn't block trackers when is enabled", async function () {
       await setPrivacyToggle('global-pause', true);
       await browser.url(PAGE_URL);
 
-      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
 
       await setPrivacyToggle('global-pause', false);
     });
@@ -181,7 +250,7 @@ describe('Main Features', function () {
     it("pauses the website's privacy settings", async function () {
       // Ensure ad-blocking is enabled
       await browser.url(PAGE_URL);
-      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
 
       // Pause the website
       await openPanel();
@@ -190,7 +259,7 @@ describe('Main Features', function () {
 
       // Reload and check ads are displayed
       await browser.url(PAGE_URL);
-      await expect($(ADBLOCKING_SELECTOR)).toBeDisplayed();
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
 
       // Resume the website
       await openPanel();
@@ -199,7 +268,7 @@ describe('Main Features', function () {
 
       // Reload and check ads are blocked again
       await browser.url(PAGE_URL);
-      await expect($(ADBLOCKING_SELECTOR)).not.toBeDisplayed();
+      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
     });
   });
 });
