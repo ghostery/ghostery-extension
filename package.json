@@ -39,7 +39,7 @@
     "prettier": "^3.6.2",
     "sinon-chrome": "^3.0.1",
     "vite": "^7.2.2",
-    "web-ext": "^9.1.0"
+    "web-ext": "^9.2.0"
   },
   "dependencies": {
     "@duckduckgo/autoconsent": "^14.36.0",
