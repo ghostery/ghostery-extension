@@ -58,7 +58,7 @@
     "hybrids": "^9.1.20",
     "idb": "^8.0.2",
     "plotly.js-basic-dist": "^3.3.0",
-    "tldts-experimental": "^7.0.17"
+    "tldts-experimental": "^7.0.18"
   },
   "dataDependencies": {
     "redirect-resources": "3a40e5a2172d254109abecce398c41eebde2ed50bb01be2e4e5d5054fe48d007",
