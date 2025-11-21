@@ -38,7 +38,7 @@
     "license-report": "^6.8.1",
     "prettier": "^3.6.2",
     "sinon-chrome": "^3.0.1",
-    "vite": "^7.2.2",
+    "vite": "^7.2.4",
     "web-ext": "^9.2.0"
   },
   "dependencies": {
