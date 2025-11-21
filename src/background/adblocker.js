@@ -446,8 +446,13 @@ chrome.webNavigation.onCommitted.addListener(
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
     // Generate details object for the sender argument
+
+    // Resolve url for the frame/subframe
+    // Local frames (about:blank, data:, etc.) do not have a proper URL
+    const url = !sender.url.startsWith('http') ? sender.origin : sender.url;
+
     const details = {
-      url: sender.url,
+      url,
       tabId: sender.tab.id,
       frameId: sender.frameId,
     };
