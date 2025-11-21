@@ -15,6 +15,7 @@ import Options from '/store/options.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { captureException } from '/utils/errors.js';
 
 import Metrics, { processUrlQuery } from './metrics.js';
 
@@ -46,7 +47,12 @@ async function detectUTMs() {
 }
 
 async function saveStorage(storage) {
-  await chrome.storage.local.set({ metrics: storage });
+  try {
+    await chrome.storage.local.set({ metrics: storage });
+  } catch (e) {
+    captureException(e);
+    throw e;
+  }
 }
 
 let runner;
