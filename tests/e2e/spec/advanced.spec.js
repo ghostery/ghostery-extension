@@ -50,11 +50,11 @@ async function setCustomFilters(filters, callback) {
 describe('Advanced Features', function () {
   before(enableExtension);
 
-  after(async () => {
-    await setPrivacyToggle('custom-filters', false);
-  });
-
   describe('Custom Filters', function () {
+    after(async () => {
+      await setPrivacyToggle('custom-filters', false);
+    });
+
     it('disables custom filters', async function () {
       await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
       await setPrivacyToggle('custom-filters', false);
@@ -116,6 +116,20 @@ describe('Advanced Features', function () {
       await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
 
       await browser.url(PAGE_URL);
+      await expect($('#custom-filter')).not.toBeDisplayed();
+
+      await browser.switchFrame($('#iframe-static'));
+      await expect($('#custom-filter')).not.toBeDisplayed();
+
+      // wait for dynamic and local iframes to load
+      await browser.pause(1000);
+
+      await browser.switchFrame(null);
+      await browser.switchFrame($('#iframe-dynamic'));
+      await expect($('#custom-filter')).not.toBeDisplayed();
+
+      await browser.switchFrame(null);
+      await browser.switchFrame($('#iframe-local'));
       await expect($('#custom-filter')).not.toBeDisplayed();
     });
 
