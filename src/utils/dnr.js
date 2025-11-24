@@ -13,9 +13,11 @@ export const PAUSED_ID_RANGE = { start: 1, end: 1_000_000 };
 export const CUSTOM_FILTERS_ID_RANGE = { start: 1_000_000, end: 2_000_000 };
 export const EXCEPTIONS_ID_RANGE = { start: 2_000_000, end: 3_000_000 };
 export const FIXES_ID_RANGE = { start: 3_000_000, end: 4_000_000 };
+export const REDIRECT_PROTECTION_ID_RANGE = { start: 4_000_000, end: 5_000_000 };
 
 export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
+export const REDIRECT_PROTECTION_EXCEPTION_PRIORITY = 200;
 
 export async function getDynamicRulesIds(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules())

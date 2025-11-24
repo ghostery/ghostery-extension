@@ -87,6 +87,13 @@ execSync(
   { stdio: silent ? '' : 'inherit' },
 );
 
+// Build redirect protection rules from downloaded DNR rulesets (MV3 only)
+if (argv.target !== 'firefox') {
+  execSync('node scripts/build-redirect-protection-rules.js', {
+    stdio: silent ? '' : 'inherit',
+  });
+}
+
 execSync(
   'node scripts/download-redirect-resources.js' +
     (argv.staging ? ' --staging' : ''),

@@ -64,6 +64,12 @@ const Options = {
   // SERP protection
   serpTrackingPrevention: true,
 
+  // Redirect protection
+  redirectProtection: {
+    enabled: true,
+    disabled: [String], // List of hostnames where redirect protection is disabled
+  },
+
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,

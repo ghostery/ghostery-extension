@@ -34,6 +34,11 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
+import {
+  handleRedirectProtection,
+  allowRedirectUrl,
+  disableRedirectProtectionForHostname,
+} from './adblocker/redirect-protection.js';
 
 let options = Options;
 
@@ -459,6 +464,15 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
     injectCosmetics(details, msg);
   }
+
+  // Handle redirect protection messages (Firefox only)
+  if (__PLATFORM__ === 'firefox') {
+    if (msg.action === 'allowRedirect' && msg.url) {
+      allowRedirectUrl(msg.url);
+    } else if (msg.action === 'disableRedirectProtection' && msg.hostname) {
+      disableRedirectProtectionForHostname(msg.hostname, Options);
+    }
+  }
 });
 
 if (__PLATFORM__ === 'firefox') {
@@ -536,7 +550,7 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (details.type === 'main_frame' || isExtensionRequest(details)) return;
+      if (isExtensionRequest(details)) return;
 
       if (setup.pending) {
         console.error('[adblocker] not ready for network requests blocking');
@@ -545,6 +559,26 @@ if (__PLATFORM__ === 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
+      // Handle redirect protection for main_frame requests
+      if (details.type === 'main_frame') {
+        const redirectProtectionResult = handleRedirectProtection(
+          details,
+          request,
+          options,
+          isTrusted,
+          () => engines.get(engines.MAIN_ENGINE),
+          updateTabStats,
+        );
+
+        if (redirectProtectionResult) {
+          return redirectProtectionResult;
+        }
+
+        // If not handled by redirect protection, allow the request
+        return;
+      }
+
+      // Handle other request types normally
       let result = undefined;
       if (request.sourceHostname && !isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);

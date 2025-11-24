@@ -16,7 +16,12 @@ import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
 import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
-import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
+import {
+  FIXES_ID_RANGE,
+  REDIRECT_PROTECTION_ID_RANGE,
+  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+  getDynamicRulesIds,
+} from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
@@ -40,6 +45,15 @@ if (__PLATFORM__ !== 'firefox') {
           .map((id) => `lang-${id}`)
           .filter((id) => DNR_RESOURCES.includes(id)),
       );
+    }
+
+    // Add redirect protection if enabled and any blocking is active
+    if (
+      ids.length &&
+      options.redirectProtection?.enabled &&
+      DNR_RESOURCES.includes('redirect-protection')
+    ) {
+      ids.push('redirect-protection');
     }
 
     return ids;
@@ -165,6 +179,74 @@ if (__PLATFORM__ !== 'firefox') {
       }
     } else if (ids.length) {
       ids.push('fixes');
+    }
+
+    // Manage redirect protection exception rules (dynamic)
+    if (
+      ids.includes('redirect-protection') &&
+      options.redirectProtection?.enabled
+    ) {
+      const disabledDomains = options.redirectProtection.disabled || [];
+      const lastDisabledDomains = lastOptions?.redirectProtection?.disabled || [];
+
+      // Update exception rules if disabled domains changed
+      if (
+        !lastOptions ||
+        JSON.stringify(disabledDomains.sort()) !==
+          JSON.stringify(lastDisabledDomains.sort())
+      ) {
+        try {
+          console.info('[dnr] Updating redirect protection exception rules...');
+
+          // Remove old exception rules
+          const removeRuleIds = await getDynamicRulesIds(
+            REDIRECT_PROTECTION_ID_RANGE,
+          );
+
+          // Create new exception rules (chunk domains into groups of 1000)
+          const addRules = [];
+          if (disabledDomains.length > 0) {
+            let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
+            for (let i = 0; i < disabledDomains.length; i += 1000) {
+              const chunk = disabledDomains.slice(i, i + 1000);
+              addRules.push({
+                id: ruleId++,
+                priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+                action: { type: 'allow' },
+                condition: {
+                  requestDomains: chunk,
+                  resourceTypes: ['main_frame'],
+                },
+              });
+            }
+          }
+
+          await chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds,
+            addRules,
+          });
+
+          console.info(
+            `[dnr] Updated redirect protection exceptions: ${disabledDomains.length} domains in ${addRules.length} rules`,
+          );
+        } catch (e) {
+          console.error(
+            '[dnr] Error while updating redirect protection exceptions:',
+            e,
+          );
+        }
+      }
+    } else {
+      // Remove all redirect protection exception rules if redirect protection is disabled
+      const removeRuleIds = await getDynamicRulesIds(
+        REDIRECT_PROTECTION_ID_RANGE,
+      );
+      if (removeRuleIds.length) {
+        await chrome.declarativeNetRequest.updateDynamicRules({
+          removeRuleIds,
+        });
+        console.info('[dnr] Removed redirect protection exception rules');
+      }
     }
 
     const enableRulesetIds = [];

@@ -61,10 +61,20 @@ for (const [name, target] of Object.entries(RULESETS)) {
         );
       }
 
-      return res.text();
+      return res.json();
     });
 
-    writeFileSync(outputPath, dnr);
+    // Filter out the max priority rule that prevents main_frame blocking
+    // This rule has priority 1073741823 (max DNR priority) and allows all main_frame requests
+    const MAX_PRIORITY = 1073741823;
+    const filteredRules = dnr.filter((rule) => rule.priority !== MAX_PRIORITY);
+
+    const removedCount = dnr.length - filteredRules.length;
+    if (removedCount > 0) {
+      process.stdout.write(` (removed ${removedCount} max priority rule(s))`);
+    }
+
+    writeFileSync(outputPath, JSON.stringify(filteredRules, null, 2));
     process.stdout.write(' done\n');
   }
 }
