@@ -12,7 +12,7 @@
 import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
-function goBack(host) {
+function goBack() {
   if (window.history.length > 1) {
     window.history.back();
   } else {
@@ -24,7 +24,7 @@ function goBack(host) {
   }
 }
 
-async function continueAnyway(host) {
+async function allow(host) {
   if (!host.targetUrl) return;
 
   await chrome.runtime.sendMessage({
@@ -35,7 +35,7 @@ async function continueAnyway(host) {
   location.replace(host.targetUrl);
 }
 
-async function trustSite(host) {
+async function alwaysAllow(host) {
   if (!host.hostname) return;
 
   await chrome.runtime.sendMessage({
@@ -54,7 +54,6 @@ const App = {
       const encodedUrl = params.get('url');
 
       if (encodedUrl) {
-        // MV2: URL passed as base64-encoded query parameter
         try {
           const url = atob(encodedUrl);
           host.targetUrl = url;
@@ -64,10 +63,8 @@ const App = {
       } else if (__PLATFORM__ !== 'firefox') {
         try {
           const tab = await chrome.tabs.getCurrent();
-          console.info('[redirect-protection] Current tab ID:', tab?.id);
 
           if (tab && tab.id) {
-            // Retry up to 5 times with 50ms delay to handle race condition
             for (let i = 0; i < 5; i++) {
               const result = await chrome.storage.session.get(
                 `redirectUrl_${tab.id}`,
@@ -76,17 +73,11 @@ const App = {
 
               if (url) {
                 host.targetUrl = url;
-                console.info('[redirect-protection] Loaded URL:', url);
                 return;
               }
 
               await new Promise((resolve) => setTimeout(resolve, 50));
             }
-
-            console.warn(
-              '[redirect-protection] No URL found in session storage for tab',
-              tab.id,
-            );
           }
         } catch (e) {
           console.error('[redirect-protection] Failed to get URL:', e);
@@ -104,95 +95,133 @@ const App = {
   },
   render: ({ targetUrl, hostname }) => html`
     <template layout="block overflow">
-      <div
-        layout="column center gap:4"
-        style="min-height: 100vh; padding: 2rem; background: var(--ui-color-layout);"
-      >
-        <div
-          layout="column gap:2"
-          style="max-width: 600px; background: var(--ui-color-white); border-radius: 16px; padding: 3rem; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);"
-        >
-          <div layout="column center gap:2">
-            <ui-icon
-              name="shield"
-              color="danger"
-              layout="size:4"
-            ></ui-icon>
-            <ui-text type="headline-l" layout="block:center">
-              Redirect Protection
-            </ui-text>
-          </div>
+      <style>
+        .background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 100%);
+          z-index: -1;
+        }
 
-          <ui-text type="body-l" layout="block:center" color="gray-600">
-            Ghostery blocked a redirect through a known tracking domain.
+        .ellipse {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(99, 102, 241, 0.1);
+          filter: blur(60px);
+        }
+
+        .ellipse-1 {
+          width: 335px;
+          height: 287px;
+          top: -50px;
+          left: 192px;
+        }
+
+        .ellipse-2 {
+          width: 450px;
+          height: 352px;
+          top: 252px;
+          left: 728px;
+        }
+
+        .header {
+          color: #1a1a1a;
+        }
+
+        .modal {
+          background: white;
+          border-radius: 16px;
+          padding: 40px;
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+          max-width: 720px;
+          width: 100%;
+        }
+
+        .link {
+          color: #0ea5e9;
+          text-decoration: none;
+          word-break: break-all;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .background {
+            background: #1a1a1a;
+          }
+
+          .ellipse {
+            display: none;
+          }
+
+          .header {
+            color: white;
+          }
+
+          .modal {
+            background: #2a2a2a;
+          }
+        }
+      </style>
+
+      <div class="background">
+        <div class="ellipse ellipse-1"></div>
+        <div class="ellipse ellipse-2"></div>
+      </div>
+
+      <div
+        layout="column items:center"
+        style="min-height: 100vh; padding: 2rem 2rem 0;"
+      >
+        <div class="header" layout="margin:2:0">
+          <ui-icon name="logo-with-slogan" layout="height:3"></ui-icon>
+        </div>
+
+        <div class="modal" layout="column gap:2">
+          <ui-text type="headline-l" layout="block:center">
+            Tracking Redirect Alert
           </ui-text>
 
           ${targetUrl
             ? html`
-                <div
-                  layout="column gap"
-                  style="background: var(--ui-color-gray-100); border-radius: 8px; padding: 1rem; margin: 1rem 0;"
-                >
-                  <ui-text type="label-s" color="gray-600">
-                    Destination:
-                  </ui-text>
-                  <ui-text
-                    type="body-s"
-                    style="word-break: break-all; font-family: monospace;"
-                  >
-                    ${targetUrl}
-                  </ui-text>
+                <ui-text type="body-m" layout="block:center">
+                  This page was prevented from loading because it's a known
+                  tracking domain:
+                </ui-text>
+
+                <div layout="block:center margin:1:0">
+                  <a class="link" href="${targetUrl}">${hostname}</a>
+                </div>
+
+                <ui-text type="body-m" layout="block:center">
+                  To visit this page anyway, you need to allow it.
+                </ui-text>
+
+                <div layout="column items:center margin:top:2">
+                  <div layout="column gap:1">
+                    <ui-button type="primary" onclick="${allow}">
+                      <button layout="width:::100%">Allow</button>
+                    </ui-button>
+
+                    <div layout="row gap:1">
+                      <ui-button onclick="${goBack}">
+                        <button style="min-width: 80px;">Back</button>
+                      </ui-button>
+                      <ui-button onclick="${alwaysAllow}">
+                        <button layout="grow">
+                          Always allow from this domain
+                        </button>
+                      </ui-button>
+                    </div>
+                  </div>
                 </div>
               `
             : html`
-                <div
-                  layout="column gap"
-                  style="background: var(--ui-color-gray-100); border-radius: 8px; padding: 1rem; margin: 1rem 0;"
-                >
-                  <ui-text type="body-s" color="gray-600">
-                    Loading destination URL...
-                  </ui-text>
-                </div>
+                <ui-text type="body-m" layout="block:center">
+                  Loading...
+                </ui-text>
               `}
-
-          <ui-text type="body-m" color="gray-700">
-            Tracking redirects can expose your browsing activity to third
-            parties. You can go back to safety or continue to the destination.
-          </ui-text>
-
-          <div layout="column gap:1.5" style="margin-top: 1rem;">
-            <ui-button type="success" onclick="${goBack}">
-              <button layout="width:::100%">
-                <ui-icon name="chevron-left"></ui-icon>
-                Go Back
-              </button>
-            </ui-button>
-
-            <ui-button onclick="${continueAnyway}">
-              <button layout="width:::100%">Continue Anyway</button>
-            </ui-button>
-
-            ${hostname
-              ? html`
-                  <ui-button type="transparent" onclick="${trustSite}">
-                    <button layout="width:::100%">
-                      <ui-text type="label-s" color="gray-600">
-                        Trust ${hostname}
-                      </ui-text>
-                    </button>
-                  </ui-button>
-                `
-              : ''}
-          </div>
-
-          <ui-text
-            type="body-xs"
-            color="gray-500"
-            layout="block:center"
-            style="margin-top: 1.5rem;"
-          >
-            You can manage redirect protection settings in Ghostery options.
-          </ui-text>
         </div>
       </div>
     </template>
