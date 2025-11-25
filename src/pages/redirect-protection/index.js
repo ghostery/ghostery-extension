@@ -11,6 +11,7 @@
 
 import { mount, html } from 'hybrids';
 import '/ui/index.js';
+import { themeToggle } from '/ui/theme.js';
 
 function goBack() {
   if (window.history.length > 1) {
@@ -127,40 +128,56 @@ const App = {
           left: 728px;
         }
 
+        .container {
+          min-height: 100vh;
+          padding: 2rem 1.5rem 0;
+        }
+
         .header {
-          color: #1a1a1a;
+          color: var(--color-brand-secondary);
         }
 
         .modal {
-          background: white;
+          background: var(--background-primary);
+          color: var(--color-primary);
           border-radius: 16px;
-          padding: 40px;
-          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-          max-width: 720px;
+          padding: 32px 16px;
+          box-shadow: 0 4px 24px var(--shadow-panel);
+          max-width: 375px;
           width: 100%;
         }
 
         .link {
-          color: #0ea5e9;
+          color: var(--color-brand-secondary);
           text-decoration: none;
           word-break: break-all;
         }
 
+        @media (min-width: 768px) {
+          .container {
+            padding: 2rem 2rem 0;
+          }
+
+          .modal {
+            padding: 40px 24px;
+            max-width: 600px;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .modal {
+            padding: 40px;
+            max-width: 720px;
+          }
+        }
+
         @media (prefers-color-scheme: dark) {
           .background {
-            background: #1a1a1a;
+            background: var(--background-secondary);
           }
 
           .ellipse {
             display: none;
-          }
-
-          .header {
-            color: white;
-          }
-
-          .modal {
-            background: #2a2a2a;
           }
         }
       </style>
@@ -170,10 +187,7 @@ const App = {
         <div class="ellipse ellipse-2"></div>
       </div>
 
-      <div
-        layout="column items:center"
-        style="min-height: 100vh; padding: 2rem 2rem 0;"
-      >
+      <div class="container" layout="column items:center">
         <div class="header" layout="margin:2:0">
           <ui-icon name="logo-with-slogan" layout="height:3"></ui-icon>
         </div>
@@ -225,7 +239,7 @@ const App = {
         </div>
       </div>
     </template>
-  `,
+  `.use(themeToggle),
 };
 
 mount(document.body, App);
