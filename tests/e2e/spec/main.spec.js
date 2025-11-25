@@ -16,12 +16,12 @@ import {
   setPrivacyToggle,
   openPanel,
   waitForIdleBackgroundTasks,
+  expectAdsBlocked,
+  ADBLOCKING_GLOBAL_SELECTOR,
+  ADBLOCKING_URL_SELECTOR,
 } from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
-
-const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
-const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
 
 describe('Main Features', function () {
   before(enableExtension);
@@ -58,17 +58,6 @@ describe('Main Features', function () {
   });
 
   describe('Ad-Blocking', function () {
-    async function expectAdsBlocked() {
-      const adSlot = await $(ADBLOCKING_GLOBAL_SELECTOR);
-      const dataAd = await $(ADBLOCKING_URL_SELECTOR);
-
-      await expect(adSlot).toExist();
-      await expect(dataAd).toExist();
-
-      await expect(adSlot).not.toBeDisplayed();
-      await expect(dataAd).not.toBeDisplayed();
-    }
-
     const DYNAMIC_SELECTOR = '#ghostery-test-page-element-1';
 
     it('does not block ads on a page', async function () {
@@ -94,22 +83,22 @@ describe('Main Features', function () {
       await browser.switchFrame($('#iframe-local'));
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+      await browser.switchFrame(null);
     });
 
     describe('block ads on different frames', function () {
       before(async function () {
         await setPrivacyToggle('ad-blocking', true);
-      });
-
-      it('main frame of the page', async function () {
         await browser.url(PAGE_URL);
-
-        await expectAdsBlocked();
       });
+      afterEach(async function () {
+        await browser.switchFrame(null);
+      });
+
+      it('main frame of the page', expectAdsBlocked);
 
       it('subframe of the page', async function () {
-        await browser.url(PAGE_URL);
-
         const iframe = await $('#iframe-static');
         await browser.switchFrame(iframe);
 
@@ -117,8 +106,6 @@ describe('Main Features', function () {
       });
 
       it('dynamic subframe of the page', async function () {
-        await browser.url(PAGE_URL);
-
         // Wait for iframe to load
         await browser.pause(1000);
 
@@ -129,8 +116,6 @@ describe('Main Features', function () {
       });
 
       it('local subframe of the page', async function () {
-        await browser.url(PAGE_URL);
-
         // Wait for iframe to load
         await browser.pause(1000);
 

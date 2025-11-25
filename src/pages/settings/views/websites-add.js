@@ -11,7 +11,10 @@
 
 import { html, router, store, msg } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, {
+  FILTERING_MODE_GHOSTERY,
+  FILTERING_MODE_ZAP,
+} from '/store/options.js';
 import Hostname from '../store/hostname.js';
 
 async function add({ options, hostname, pauseType }, event) {
@@ -20,15 +23,24 @@ async function add({ options, hostname, pauseType }, event) {
   router.resolve(
     event,
     store.submit(hostname).then(({ value }) => {
-      if (options.paused[value]) return;
+      switch (options.filteringMode) {
+        case FILTERING_MODE_GHOSTERY:
+          if (options.paused[value]) return;
 
-      return store.set(options, {
-        paused: {
-          [value]: {
-            revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
-          },
-        },
-      });
+          return store.set(options, {
+            paused: {
+              [value]: {
+                revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
+              },
+            },
+          });
+        case FILTERING_MODE_ZAP:
+          return store.set(options, {
+            zapped: {
+              [value]: true,
+            },
+          });
+      }
     }),
   );
 }
@@ -38,7 +50,7 @@ export default {
   options: store(Options),
   hostname: store(Hostname, { draft: true }),
   pauseType: 1,
-  render: ({ hostname, pauseType }) => html`
+  render: ({ options, hostname, pauseType }) => html`
     <template layout>
       <settings-dialog closable>
         <form
@@ -50,7 +62,14 @@ export default {
             Add website
           </ui-text>
           <div layout="column gap items:start">
-            <ui-text>To adjust privacy protection trust a site:</ui-text>
+            ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+            html`
+              <ui-text>To adjust privacy protection trust a site:</ui-text>
+            `}
+            ${options.filteringMode === FILTERING_MODE_ZAP &&
+            html`
+              <ui-text>To adjust privacy protection enable on a site:</ui-text>
+            `}
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>
@@ -64,22 +83,25 @@ export default {
               />
             </ui-input>
           </div>
-          <div layout="column gap:0.5">
-            <ui-text type="label-m">Select time frame</ui-text>
-            <ui-input>
-              <select
-                type="text"
-                placeholder="${msg`Enter website URL`}"
-                value="${pauseType}"
-                oninput="${html.set('pauseType')}"
-                tabindex="2"
-              >
-                <option value="1">1 hour</option>
-                <option value="24">1 day</option>
-                <option value="0">Always</option>
-              </select>
-            </ui-input>
-          </div>
+          ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+          html`
+            <div layout="column gap:0.5">
+              <ui-text type="label-m">Select time frame</ui-text>
+              <ui-input>
+                <select
+                  type="text"
+                  placeholder="${msg`Enter website URL`}"
+                  value="${pauseType}"
+                  oninput="${html.set('pauseType')}"
+                  tabindex="2"
+                >
+                  <option value="1">1 hour</option>
+                  <option value="24">1 day</option>
+                  <option value="0">Always</option>
+                </select>
+              </ui-input>
+            </div>
+          `}
           <div layout="grid:1|1 gap margin:top:2">
             <ui-button>
               <a href="${router.backUrl()}" tabindex="2">Cancel</a>

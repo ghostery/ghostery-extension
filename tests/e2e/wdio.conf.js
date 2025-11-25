@@ -95,13 +95,7 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: [
-    [
-      // Must be the first to enable the extension
-      'spec/onboarding.spec.js',
-      'spec/index.spec.js',
-    ],
-  ],
+  specs: ['spec/index.spec.js'],
   reporters: [['spec', { showPreface: false }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {

@@ -11,6 +11,9 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
+export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
+export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
+
 let BASE_URL = '';
 export function setExtensionBaseUrl(url) {
   BASE_URL = url;
@@ -46,11 +49,7 @@ async function sendMessage(msg) {
 }
 
 export async function waitForIdleBackgroundTasks() {
-  await sendMessage({ action: 'e2e:idleOptionsObservers' }).catch(() => {
-    // Up to v10.5.17, the extension does not support this message format
-    // TODO: Remove this catch block when the minimum tested version is v10.5.18 (e2e-update)
-    return browser.pause(2000);
-  });
+  await sendMessage({ action: 'e2e:idleOptionsObservers' });
 }
 
 export async function reloadExtension() {
@@ -91,6 +90,14 @@ export async function enableExtension() {
 
   if (!(await getExtensionElement('view:success').isDisplayed())) {
     await getExtensionElement('button:enable').click();
+
+    // TODO: clear condition after relesing filtering modes
+    // Then the production build will have new step in onboarding
+    const continueButton = await getExtensionElement('button:continue');
+    if (await continueButton.isDisplayed()) {
+      await continueButton.click();
+    }
+
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
     await waitForIdleBackgroundTasks();
@@ -149,4 +156,15 @@ export async function setConfigFlags(flags) {
       'Current extension version does not support setting config flags',
     );
   }
+}
+
+export async function expectAdsBlocked() {
+  const adSlot = await $(ADBLOCKING_GLOBAL_SELECTOR);
+  const dataAd = await $(ADBLOCKING_URL_SELECTOR);
+
+  await expect(adSlot).toExist();
+  await expect(dataAd).toExist();
+
+  await expect(adSlot).not.toBeDisplayed();
+  await expect(dataAd).not.toBeDisplayed();
 }
