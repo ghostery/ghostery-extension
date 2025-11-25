@@ -39,18 +39,50 @@ function parseUrlFilterDomain(urlFilter) {
 // Test cases
 const tests = [
   // Valid domains
-  { input: '||example.com^', expected: 'example.com', description: 'Basic domain' },
-  { input: '||sub.example.com^', expected: 'sub.example.com', description: 'Subdomain' },
-  { input: '||googie-anaiytics.com^', expected: 'googie-anaiytics.com', description: 'Domain with hyphen' },
+  {
+    input: '||example.com^',
+    expected: 'example.com',
+    description: 'Basic domain',
+  },
+  {
+    input: '||sub.example.com^',
+    expected: 'sub.example.com',
+    description: 'Subdomain',
+  },
+  {
+    input: '||googie-anaiytics.com^',
+    expected: 'googie-anaiytics.com',
+    description: 'Domain with hyphen',
+  },
   { input: '||lnkr.us^', expected: 'lnkr.us', description: 'Short TLD' },
-  { input: '||0x01n2ptpuz3.com^', expected: '0x01n2ptpuz3.com', description: 'Domain with numbers/hex' },
-  { input: '||test.co.uk^', expected: 'test.co.uk', description: 'Multi-part TLD' },
-  { input: '||EXAMPLE.COM^', expected: 'example.com', description: 'Uppercase (should be lowercased)' },
+  {
+    input: '||0x01n2ptpuz3.com^',
+    expected: '0x01n2ptpuz3.com',
+    description: 'Domain with numbers/hex',
+  },
+  {
+    input: '||test.co.uk^',
+    expected: 'test.co.uk',
+    description: 'Multi-part TLD',
+  },
+  {
+    input: '||EXAMPLE.COM^',
+    expected: 'example.com',
+    description: 'Uppercase (should be lowercased)',
+  },
 
   // Invalid patterns (should be rejected)
-  { input: '/?usid=*&utid=', expected: null, description: 'Path pattern without domain' },
+  {
+    input: '/?usid=*&utid=',
+    expected: null,
+    description: 'Path pattern without domain',
+  },
   { input: '/page/bouncy.php?', expected: null, description: 'Path pattern' },
-  { input: '||*example.com^', expected: null, description: 'Domain with wildcard' },
+  {
+    input: '||*example.com^',
+    expected: null,
+    description: 'Domain with wildcard',
+  },
   { input: '||example^', expected: null, description: 'No TLD' },
   { input: 'example.com', expected: null, description: 'Missing || and ^' },
   { input: '||example.com', expected: null, description: 'Missing ^' },
@@ -85,7 +117,9 @@ tests.forEach((test, index) => {
 });
 
 console.log('='.repeat(80));
-console.log(`\nResults: ${passed} passed, ${failed} failed out of ${tests.length} tests\n`);
+console.log(
+  `\nResults: ${passed} passed, ${failed} failed out of ${tests.length} tests\n`,
+);
 
 if (failed > 0) {
   process.exit(1);

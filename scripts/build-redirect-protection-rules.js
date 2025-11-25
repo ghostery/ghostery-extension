@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { parse as parseDomain } from 'tldts-experimental';
 import { RESOURCES_PATH } from './utils/urls.js';
 
@@ -55,7 +55,9 @@ function extractMainFrameBlockingDomains(dnrRules) {
 
     // Extract from requestDomains
     if (rule.condition.requestDomains) {
-      rule.condition.requestDomains.forEach((d) => domains.add(d.toLowerCase()));
+      rule.condition.requestDomains.forEach((d) =>
+        domains.add(d.toLowerCase()),
+      );
     }
 
     // Extract from urlFilter
@@ -120,16 +122,20 @@ async function main() {
   // Only use ads and tracking rulesets as the base for redirect protection
   const TARGET_RULESETS = ['dnr-ads.json', 'dnr-tracking.json'];
   const files = TARGET_RULESETS.filter((f) =>
-    existsSync(`${RESOURCES_PATH}/${f}`)
+    existsSync(`${RESOURCES_PATH}/${f}`),
   );
 
   if (files.length === 0) {
-    console.error('Error: Required DNR ruleset files not found (dnr-ads.json, dnr-tracking.json).');
+    console.error(
+      'Error: Required DNR ruleset files not found (dnr-ads.json, dnr-tracking.json).',
+    );
     console.error('Please run "npm run download-dnr-rulesets" first.');
     process.exit(1);
   }
 
-  console.log(`Using ${files.length} DNR ruleset files for redirect protection:`);
+  console.log(
+    `Using ${files.length} DNR ruleset files for redirect protection:`,
+  );
   files.forEach((f) => console.log(`  - ${f}`));
   console.log('');
 
@@ -151,13 +157,13 @@ async function main() {
     const mainFrameRules = rules.filter(
       (r) =>
         r.action.type === 'block' &&
-        r.condition.resourceTypes?.includes('main_frame')
+        r.condition.resourceTypes?.includes('main_frame'),
     );
     totalMainFrameRules += mainFrameRules.length;
     totalValidDomains += domains.length;
 
     console.log(
-      `Processed ${file}: ${rules.length} total rules, ${mainFrameRules.length} main_frame rules, ${domains.length} valid domains extracted`
+      `Processed ${file}: ${rules.length} total rules, ${mainFrameRules.length} main_frame rules, ${domains.length} valid domains extracted`,
     );
 
     domains.forEach((d) => allDomains.add(d));

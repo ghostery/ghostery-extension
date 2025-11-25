@@ -65,7 +65,10 @@ export function handleRedirectProtection(
   }
 
   // Check if redirect protection should apply
-  if (!shouldProtectRedirect(options, hostname) || isTrusted(request, details.type)) {
+  if (
+    !shouldProtectRedirect(options, hostname) ||
+    isTrusted(request, details.type)
+  ) {
     return undefined;
   }
 

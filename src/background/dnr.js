@@ -187,7 +187,8 @@ if (__PLATFORM__ !== 'firefox') {
       options.redirectProtection?.enabled
     ) {
       const disabledDomains = options.redirectProtection.disabled || [];
-      const lastDisabledDomains = lastOptions?.redirectProtection?.disabled || [];
+      const lastDisabledDomains =
+        lastOptions?.redirectProtection?.disabled || [];
 
       // Update exception rules if disabled domains changed
       if (
