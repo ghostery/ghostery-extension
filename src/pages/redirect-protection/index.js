@@ -98,35 +98,42 @@ const App = {
     html`
       <template layout="block overflow">
         <style>
-          .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f0f0ff 0%, #e8e8ff 100%);
-            z-index: -1;
-          }
-
-          .ellipse {
+          #bg {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(99, 102, 241, 0.1);
-            filter: blur(60px);
+            top: -250px;
+            left: 50%;
+            width: 1648px;
+            height: 1525px;
+            z-index: -1;
+            transform: translateX(-50%);
           }
 
-          .ellipse-1 {
-            width: 335px;
-            height: 287px;
-            top: -50px;
-            left: 192px;
+          #c-1 {
+            position: absolute;
+            left: 300px;
+            top: 100px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(
+              circle,
+              #a1e4ff 0%,
+              rgba(255, 255, 255, 0.1) 70%
+            );
+            opacity: 0.4;
           }
 
-          .ellipse-2 {
-            width: 450px;
-            height: 352px;
-            top: 252px;
-            left: 728px;
+          #c-2 {
+            position: absolute;
+            left: 420px;
+            top: 320px;
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(
+              circle,
+              #3751d5 0%,
+              rgba(255, 255, 255, 0.1) 65%
+            );
+            opacity: 0.3;
           }
 
           .container {
@@ -173,19 +180,15 @@ const App = {
           }
 
           @media (prefers-color-scheme: dark) {
-            .background {
-              background: var(--background-secondary);
-            }
-
-            .ellipse {
+            #bg {
               display: none;
             }
           }
         </style>
 
-        <div class="background">
-          <div class="ellipse ellipse-1"></div>
-          <div class="ellipse ellipse-2"></div>
+        <div id="bg">
+          <div id="c-1"></div>
+          <div id="c-2"></div>
         </div>
 
         <div class="container" layout="column items:center">
