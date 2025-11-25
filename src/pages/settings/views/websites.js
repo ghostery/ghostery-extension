@@ -12,7 +12,11 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Config, { dismissAction } from '/store/config.js';
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, {
+  FILTERING_MODE_GHOSTERY,
+  FILTERING_MODE_ZAP,
+  GLOBAL_PAUSE_ID,
+} from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import { ACTION_PAUSE_ASSISTANT } from '/utils/config-types.js';
@@ -42,7 +46,14 @@ function revokeCallback(item) {
     if (item.assist) dismissAction(item.id, ACTION_PAUSE_ASSISTANT);
 
     store.set(ElementPickerSelectors, { hostnames: { [item.id]: null } });
-    store.set(options, { paused: { [item.id]: null }, exceptions });
+
+    if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+      store.set(options, { paused: { [item.id]: null }, exceptions });
+    }
+
+    if (options.filteringMode === FILTERING_MODE_ZAP) {
+      store.set(options, { zapped: { [item.id]: null }, exceptions });
+    }
   };
 }
 
@@ -57,21 +68,32 @@ export default {
 
     query = query.toLowerCase().trim();
 
-    const websites = Object.entries(options.paused)
-      .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
-      .filter(
-        ([id, { assist }]) =>
-          // Only show assisted domains if the action is enabled
-          !assist || (assist && config.hasAction(id, ACTION_PAUSE_ASSISTANT)),
-      )
-      .map(([id, { revokeAt, assist, managed }]) => ({
+    let websites;
+    if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+      websites = Object.entries(options.paused)
+        .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
+        .filter(
+          ([id, { assist }]) =>
+            // Only show assisted domains if the action is enabled
+            !assist || (assist && config.hasAction(id, ACTION_PAUSE_ASSISTANT)),
+        )
+        .map(([id, { revokeAt, assist, managed }]) => ({
+          id,
+          revokeAt,
+          assist,
+          managed,
+          exceptions: new Set(),
+          counter: 0,
+        }));
+    }
+
+    if (options.filteringMode === FILTERING_MODE_ZAP) {
+      websites = Object.keys(options.zapped).map((id) => ({
         id,
-        revokeAt,
-        assist,
-        managed,
         exceptions: new Set(),
         counter: 0,
       }));
+    }
 
     // Add custom content blocks
     Object.entries(elementPickerSelectors.hostnames).forEach(
@@ -79,7 +101,7 @@ export default {
         const website = websites.find((e) => e.id === domain);
         if (website) {
           website.counter += list.length;
-        } else {
+        } else if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
           websites.push({
             id: domain,
             exceptions: new Set(),
@@ -95,7 +117,7 @@ export default {
         if (website) {
           website.exceptions.add(id);
           website.counter += 1;
-        } else {
+        } else if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
           websites.push({
             id: domain,
             exceptions: new Set([id]),
@@ -170,7 +192,10 @@ export default {
                   </div>
                   ${websites.map(
                     (item) => html`
-                      <ui-action layout="block">
+                      <ui-action
+                        layout="block"
+                        data-qa="component:website:${item.id}"
+                      >
                         <a
                           href="${router.url(WebsiteDetails, {
                             domain: item.id,

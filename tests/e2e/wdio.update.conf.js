@@ -26,7 +26,6 @@ import {
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
-  setConfigFlags,
   waitForIdleBackgroundTasks,
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
@@ -165,11 +164,6 @@ export const config = {
       await waitForIdleBackgroundTasks();
 
       console.log('Extension updated...');
-
-      // TODO: Remove this once the production version supports setting config flags
-      // For now we need to set flags again, as the production build uses remote config
-      // Expected version: v10.5.18
-      await setConfigFlags(wdio.argv.flags, true);
     } catch (e) {
       console.error('Error while updating extension', e);
 

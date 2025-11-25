@@ -40,7 +40,7 @@ export default {
   },
   header: { value: false, reflect: true },
   render: () => html`
-    <template layout="block relative layer:400">
+    <template layout="block fixed inset layer:400">
       <div id="backdrop" layout="fixed inset:0" onclick="${close}"></div>
       <div
         id="dialog"

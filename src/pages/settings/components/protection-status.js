@@ -17,7 +17,7 @@ export default {
   render: ({ revokeAt, assist }) => html`
     <template layout="row items:center gap">
       ${revokeAt === undefined &&
-      html`<settings-badge uppercase>Active</settings-badge>`}
+      html`<settings-badge type="brand" uppercase>Active</settings-badge>`}
       ${revokeAt !== undefined &&
       !assist &&
       html`

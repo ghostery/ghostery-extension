@@ -30,7 +30,7 @@ export default {
           <ui-icon name="logo-with-slogan"></ui-icon>
         </header>
         <div layout="grow row content:center margin:0:1:4">
-          <div layout="column grow width:::375px">
+          <div layout="column items:center grow">
             <slot></slot>
           </div>
         </div>
