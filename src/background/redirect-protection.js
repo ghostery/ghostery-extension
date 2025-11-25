@@ -27,7 +27,12 @@ if (__PLATFORM__ !== 'firefox') {
         details.url &&
         !details.url.includes('redirect-protection')
       ) {
-        console.info('[redirect-protection] Storing URL for tab', details.tabId, ':', details.url);
+        console.info(
+          '[redirect-protection] Storing URL for tab',
+          details.tabId,
+          ':',
+          details.url,
+        );
         chrome.storage.session
           .set({
             [`redirectUrl_${details.tabId}`]: details.url,
@@ -43,9 +48,7 @@ if (__PLATFORM__ !== 'firefox') {
   );
 
   chrome.tabs.onRemoved.addListener((tabId) => {
-    chrome.storage.session
-      .remove(`redirectUrl_${tabId}`)
-      .catch(() => {});
+    chrome.storage.session.remove(`redirectUrl_${tabId}`).catch(() => {});
   });
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -54,7 +57,9 @@ if (__PLATFORM__ !== 'firefox') {
         chrome.storage.session
           .get(`redirectUrl_${sender.tab.id}`)
           .then((result) => {
-            sendResponse({ url: result[`redirectUrl_${sender.tab.id}`] || null });
+            sendResponse({
+              url: result[`redirectUrl_${sender.tab.id}`] || null,
+            });
           })
           .catch(() => {
             sendResponse({ url: null });
@@ -67,7 +72,10 @@ if (__PLATFORM__ !== 'firefox') {
           .remove(`redirectUrl_${sender.tab.id}`)
           .catch(() => {});
       }
-    } else if (message.action === 'disableRedirectProtection' && message.hostname) {
+    } else if (
+      message.action === 'disableRedirectProtection' &&
+      message.hostname
+    ) {
       store.resolve(Options).then((options) => {
         const disabled = options.redirectProtection?.disabled || [];
         if (!disabled.includes(message.hostname)) {

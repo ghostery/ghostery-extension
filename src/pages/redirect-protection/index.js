@@ -12,48 +12,6 @@
 import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
-async function loadUrl(host) {
-  const params = new URLSearchParams(window.location.search);
-  const encodedUrl = params.get('url');
-
-  if (encodedUrl) {
-    // MV2: URL passed as base64-encoded query parameter
-    try {
-      const url = atob(encodedUrl);
-      host.targetUrl = url;
-      host.hostname = new URL(url).hostname;
-    } catch (e) {
-      console.error('[redirect-protection] Failed to decode URL:', e);
-    }
-  } else if (__PLATFORM__ !== 'firefox') {
-    try {
-      const tab = await chrome.tabs.getCurrent();
-      console.info('[redirect-protection] Current tab ID:', tab?.id);
-
-      if (tab && tab.id) {
-        // Retry up to 5 times with 50ms delay to handle race condition
-        for (let i = 0; i < 5; i++) {
-          const result = await chrome.storage.session.get(`redirectUrl_${tab.id}`);
-          const url = result[`redirectUrl_${tab.id}`];
-
-          if (url) {
-            host.targetUrl = url;
-            host.hostname = new URL(url).hostname;
-            console.info('[redirect-protection] Loaded URL:', url);
-            return;
-          }
-
-          await new Promise(resolve => setTimeout(resolve, 50));
-        }
-
-        console.warn('[redirect-protection] No URL found in session storage for tab', tab.id);
-      }
-    } catch (e) {
-      console.error('[redirect-protection] Failed to get URL:', e);
-    }
-  }
-}
-
 function goBack(host) {
   if (window.history.length > 1) {
     window.history.back();
@@ -89,11 +47,61 @@ async function trustSite(host) {
 }
 
 const App = {
-  targetUrl: '',
-  hostname: '',
+  targetUrl: {
+    value: '',
+    connect: async (host) => {
+      const params = new URLSearchParams(window.location.search);
+      const encodedUrl = params.get('url');
 
-  connect: loadUrl,
+      if (encodedUrl) {
+        // MV2: URL passed as base64-encoded query parameter
+        try {
+          const url = atob(encodedUrl);
+          host.targetUrl = url;
+        } catch (e) {
+          console.error('[redirect-protection] Failed to decode URL:', e);
+        }
+      } else if (__PLATFORM__ !== 'firefox') {
+        try {
+          const tab = await chrome.tabs.getCurrent();
+          console.info('[redirect-protection] Current tab ID:', tab?.id);
 
+          if (tab && tab.id) {
+            // Retry up to 5 times with 50ms delay to handle race condition
+            for (let i = 0; i < 5; i++) {
+              const result = await chrome.storage.session.get(
+                `redirectUrl_${tab.id}`,
+              );
+              const url = result[`redirectUrl_${tab.id}`];
+
+              if (url) {
+                host.targetUrl = url;
+                console.info('[redirect-protection] Loaded URL:', url);
+                return;
+              }
+
+              await new Promise((resolve) => setTimeout(resolve, 50));
+            }
+
+            console.warn(
+              '[redirect-protection] No URL found in session storage for tab',
+              tab.id,
+            );
+          }
+        } catch (e) {
+          console.error('[redirect-protection] Failed to get URL:', e);
+        }
+      }
+    },
+  },
+  hostname: ({ targetUrl }) => {
+    if (!targetUrl) return '';
+    try {
+      return new URL(targetUrl).hostname;
+    } catch (e) {
+      return '';
+    }
+  },
   render: ({ targetUrl, hostname }) => html`
     <template layout="block overflow">
       <div
@@ -106,7 +114,7 @@ const App = {
         >
           <div layout="column center gap:2">
             <ui-icon
-              name="shield-alert"
+              name="shield"
               color="danger"
               layout="size:4"
             ></ui-icon>
@@ -155,7 +163,7 @@ const App = {
           <div layout="column gap:1.5" style="margin-top: 1rem;">
             <ui-button type="success" onclick="${goBack}">
               <button layout="width:::100%">
-                <ui-icon name="arrow-left"></ui-icon>
+                <ui-icon name="chevron-left"></ui-icon>
                 Go Back
               </button>
             </ui-button>
