@@ -12,9 +12,7 @@
 import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
-// Fetch URL on component initialization
 async function loadUrl(host) {
-  // Get target URL from either query param (MV2) or session storage (MV3)
   const params = new URLSearchParams(window.location.search);
   const encodedUrl = params.get('url');
 
@@ -28,7 +26,6 @@ async function loadUrl(host) {
       console.error('[redirect-protection] Failed to decode URL:', e);
     }
   } else if (__PLATFORM__ !== 'firefox') {
-    // MV3: Get URL from session storage directly with retry logic
     try {
       const tab = await chrome.tabs.getCurrent();
       console.info('[redirect-protection] Current tab ID:', tab?.id);
@@ -46,7 +43,6 @@ async function loadUrl(host) {
             return;
           }
 
-          // Wait 50ms before retrying
           await new Promise(resolve => setTimeout(resolve, 50));
         }
 
@@ -59,7 +55,6 @@ async function loadUrl(host) {
 }
 
 function goBack(host) {
-  // Try to go back in history, or close the tab if no history
   if (window.history.length > 1) {
     window.history.back();
   } else {
@@ -74,26 +69,22 @@ function goBack(host) {
 async function continueAnyway(host) {
   if (!host.targetUrl) return;
 
-  // Notify background to allow this URL temporarily
   await chrome.runtime.sendMessage({
     action: 'allowRedirect',
     url: host.targetUrl,
   });
 
-  // Navigate to the target URL
   location.replace(host.targetUrl);
 }
 
 async function trustSite(host) {
   if (!host.hostname) return;
 
-  // Add this domain to the disabled list for redirect protection
   await chrome.runtime.sendMessage({
     action: 'disableRedirectProtection',
     hostname: host.hostname,
   });
 
-  // Navigate to the target URL
   location.replace(host.targetUrl);
 }
 
@@ -101,7 +92,6 @@ const App = {
   targetUrl: '',
   hostname: '',
 
-  // Load URL when component connects
   connect: loadUrl,
 
   render: ({ targetUrl, hostname }) => html`
