@@ -19,6 +19,10 @@ import {
   createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
 
+function getRedirectUrlStorageKey(tabId) {
+  return `redirectUrl_${tabId}`;
+}
+
 async function updateOptionsWithDisabledHostname(hostname) {
   const options = await store.resolve(Options);
   const disabled = options.redirectProtection?.disabled || [];
@@ -156,7 +160,7 @@ if (__PLATFORM__ !== 'firefox') {
       ) {
         chrome.storage.session
           .set({
-            [`redirectUrl_${details.tabId}`]: details.url,
+            [getRedirectUrlStorageKey(details.tabId)]: details.url,
           })
           .catch((err) => {
             console.error('[redirect-protection] Failed to store URL:', err);
@@ -169,7 +173,9 @@ if (__PLATFORM__ !== 'firefox') {
   );
 
   chrome.tabs.onRemoved.addListener((tabId) => {
-    chrome.storage.session.remove(`redirectUrl_${tabId}`).catch(() => {});
+    chrome.storage.session
+      .remove(getRedirectUrlStorageKey(tabId))
+      .catch(() => {});
 
     chrome.declarativeNetRequest
       .updateSessionRules({
@@ -181,11 +187,12 @@ if (__PLATFORM__ !== 'firefox') {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'getRedirectUrl') {
       if (sender.tab && sender.tab.id) {
+        const storageKey = getRedirectUrlStorageKey(sender.tab.id);
         chrome.storage.session
-          .get(`redirectUrl_${sender.tab.id}`)
+          .get(storageKey)
           .then((result) => {
             sendResponse({
-              url: result[`redirectUrl_${sender.tab.id}`] || null,
+              url: result[storageKey] || null,
             });
           })
           .catch(() => {
@@ -230,7 +237,7 @@ if (__PLATFORM__ !== 'firefox') {
             removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
           });
 
-          await chrome.storage.session.remove(`redirectUrl_${tabId}`);
+          await chrome.storage.session.remove(getRedirectUrlStorageKey(tabId));
 
           sendResponse({ success: true });
         } catch (error) {
