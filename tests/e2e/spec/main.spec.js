@@ -116,9 +116,6 @@ describe('Main Features', function () {
       });
 
       it('local subframe of the page', async function () {
-        // Wait for iframe to load
-        await browser.pause(1000);
-
         const localIframe = await $('#iframe-local');
         await browser.switchFrame(localIframe);
 

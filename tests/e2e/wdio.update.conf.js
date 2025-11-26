@@ -23,9 +23,9 @@ import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
 import {
-  enableExtension,
   getExtensionElement,
   getExtensionPageURL,
+  setConfigFlags,
   waitForIdleBackgroundTasks,
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
@@ -120,7 +120,9 @@ export const config = {
     await wdio.config.before(capabilities, specs, browser);
 
     try {
-      await enableExtension();
+      // Enable the extension
+      await browser.url(getExtensionPageURL('onboarding'));
+      await getExtensionElement('button:enable').click();
 
       // Reload extension with the source
       switch (capabilities.browserName) {
@@ -162,6 +164,8 @@ export const config = {
       await browser.url(getExtensionPageURL('settings'));
       await expect(getExtensionElement('page:settings')).toBeDisplayed();
       await waitForIdleBackgroundTasks();
+
+      await setConfigFlags(wdio.argv.flags);
 
       console.log('Extension updated...');
     } catch (e) {

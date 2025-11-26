@@ -76,7 +76,7 @@ async function updatePausedDomains(config, lastConfig) {
     store.set(Options, { paused });
     console.log(
       '[pause-assistant] Updating domains:',
-      keys.map((k) => `${k}${paused[k] ? '(add)' : '(remove)'}`).join(', '),
+      keys.map((k) => `${k} ${paused[k] ? '(add)' : '(remove)'}`).join(', '),
     );
   }
 }

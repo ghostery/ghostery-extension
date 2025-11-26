@@ -11,10 +11,12 @@
 
 import { html, msg, router, store } from 'hybrids';
 
+import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
+import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
 
 import AddonHealth from './addon-health.js';
 import WebTrackers from './web-trackers.js';
@@ -41,9 +43,14 @@ export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
   },
+  config: store(Config),
   managedConfig: store(ManagedConfig),
   feedback: true,
-  render: ({ managedConfig, feedback }) => html`
+  filteringMode: ({ config, managedConfig }) =>
+    store.ready(config, managedConfig) &&
+    config.hasFlag(FLAG_FILTERING_MODE) &&
+    !managedConfig.disableFilteringMode,
+  render: ({ feedback, filteringMode }) => html`
     <template layout="column gap:2 width:::375px">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
@@ -109,10 +116,7 @@ export default {
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
             <a
-              href="${store.ready(managedConfig) &&
-              router.url(
-                managedConfig.disableFilteringMode ? Success : FilteringMode,
-              )}"
+              href="${router.url(filteringMode ? FilteringMode : Success)}"
               onclick="${acceptTerms}"
             >
               Enable Ghostery

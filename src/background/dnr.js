@@ -130,7 +130,7 @@ if (__PLATFORM__ !== 'firefox') {
                 '[dnr] Updated dynamic fixes rules:',
                 list.dnr.checksum,
               );
-              await store.set(resources, {
+              await store.set(Resources, {
                 checksums: { [DNR_FIXES_KEY]: list.dnr.checksum },
               });
             }
@@ -143,7 +143,7 @@ if (__PLATFORM__ !== 'firefox') {
               console.warn('[dnr] Falling back to static fixes rules');
               ids.push('fixes');
 
-              await store.set(resources, {
+              await store.set(Resources, {
                 checksums: { [DNR_FIXES_KEY]: 'filesystem' },
               });
             }

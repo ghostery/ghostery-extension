@@ -14,12 +14,14 @@ import { html, msg, store } from 'hybrids';
 import modeGhosteryScreenshotUrl from '/ui/assets/mode-ghostery.svg';
 import modeZapScreenshotUrl from '/ui/assets/mode-zap.svg';
 
+import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options, {
   FILTERING_MODE_GHOSTERY,
   FILTERING_MODE_ZAP,
 } from '/store/options.js';
 
+import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 import * as backup from '../utils/backup.js';
@@ -41,9 +43,10 @@ async function importSettings(host, event) {
 
 export default {
   options: store(Options),
+  config: store(Config),
   managedConfig: store(ManagedConfig),
   importStatus: undefined,
-  render: ({ options, managedConfig, importStatus }) => html`
+  render: ({ options, config, managedConfig, importStatus }) => html`
     <template layout="contents">
       <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
@@ -51,7 +54,8 @@ export default {
             <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
           <div layout="column gap:4">
-            ${!managedConfig.disableFilteringMode &&
+            ${config.hasFlag(FLAG_FILTERING_MODE) &&
+            !managedConfig.disableFilteringMode &&
             html`
               <settings-card
                 type="content"

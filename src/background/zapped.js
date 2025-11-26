@@ -9,15 +9,35 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FILTERING_MODE_ZAP } from '/store/options.js';
+import { store } from 'hybrids';
 
-import * as OptionsObserver from '/utils/options-observer.js';
+import Config from '/store/config.js';
+import Options, {
+  FILTERING_MODE_GHOSTERY,
+  FILTERING_MODE_ZAP,
+} from '/store/options.js';
+
+import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
 import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,
   PAUSED_RULE_PRIORITY,
   ALL_RESOURCE_TYPES,
 } from '/utils/dnr.js';
+import * as OptionsObserver from '/utils/options-observer.js';
+
+// Clear filtering mode and zapped data if the flag is removed
+store.observe(Config, (_, config, lastConfig) => {
+  if (
+    lastConfig?.hasFlag(FLAG_FILTERING_MODE) &&
+    !config.hasFlag(FLAG_FILTERING_MODE)
+  ) {
+    store.set(Options, {
+      filteringMode: FILTERING_MODE_GHOSTERY,
+      zapped: null,
+    });
+  }
+});
 
 if (__PLATFORM__ !== 'firefox') {
   OptionsObserver.addListener(async function zapped(options, lastOptions) {

@@ -11,6 +11,9 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
+import { argv } from './wdio.conf.js';
+import { FLAG_FILTERING_MODE } from '../../src/utils/config-types.js';
+
 export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
 export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
 
@@ -93,11 +96,9 @@ export async function enableExtension() {
   if (!(await getExtensionElement('view:success').isDisplayed())) {
     await getExtensionElement('button:enable').click();
 
-    // TODO: clear condition after relesing filtering modes
-    // Then the production build will have new step in onboarding
-    const continueButton = await getExtensionElement('button:continue');
-    if (await continueButton.isDisplayed()) {
-      await continueButton.click();
+    if (argv.flags.includes(FLAG_FILTERING_MODE)) {
+      await expect(getExtensionElement('view:filtering-mode')).toBeDisplayed();
+      await getExtensionElement('button:continue').click();
     }
 
     await expect(getExtensionElement('view:success')).toBeDisplayed();
@@ -144,14 +145,11 @@ export async function openPanel() {
   });
 }
 
-export async function setConfigFlags(flags, force = false) {
-  if (!force && !flags.length) return;
-
-  await browser.url(getExtensionPageURL('panel'));
-
+export async function setConfigFlags(flags) {
   try {
     console.log('Setting config flags:', flags);
 
+    await browser.url(getExtensionPageURL('panel'));
     await sendMessage({ action: 'e2e:setConfigFlags', flags });
 
     // Reload the extension to apply the new config flags

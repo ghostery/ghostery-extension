@@ -32,6 +32,7 @@ export default {
         layout="contents gap:2"
         layout@390px="gap:3"
         layout@768px="column"
+        data-qa="view:filtering-mode"
       >
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="display-m" mobile-type="display-xs">
