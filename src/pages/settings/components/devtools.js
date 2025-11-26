@@ -24,6 +24,7 @@ import {
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
   FLAG_DYNAMIC_DNR_FIXES,
+  FLAG_FILTERING_MODE,
 } from '/utils/config-types.js';
 
 import { longDateFormatter } from '/ui/labels.js';
@@ -96,6 +97,7 @@ async function testConfigFlag(host) {
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
       FLAG_EXTENDED_SELECTORS,
       FLAG_DYNAMIC_DNR_FIXES,
+      FLAG_FILTERING_MODE,
     ].join(', '),
   );
 

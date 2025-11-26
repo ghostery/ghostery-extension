@@ -12,7 +12,7 @@
 import './onboarding.spec.js';
 
 import './main.spec.js';
-import './zap.spec.js';
+import './zapped.spec.js';
 import './advanced.spec.js';
 
 import './whotracksme.spec.js';
