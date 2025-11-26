@@ -17,6 +17,7 @@
  */
 
 import Options from '/store/options.js';
+import { store } from 'hybrids';
 
 // Store URLs that are temporarily allowed after user confirmation
 const allowedRedirectUrls = new Set();
@@ -107,7 +108,6 @@ export function allowRedirectUrl(url) {
  * Add a hostname to the redirect protection disabled list
  */
 export async function disableRedirectProtectionForHostname(hostname, Options) {
-  const { store } = await import('hybrids');
   const options = await store.resolve(Options);
 
   const disabled = options.redirectProtection?.disabled || [];

@@ -16,8 +16,9 @@ import { RESOURCES_PATH } from './utils/urls.js';
 /**
  * Parse domain from DNR urlFilter pattern
  * Only extracts valid domain patterns like "||example.com^"
+ * Rejects path-based patterns like "||example.com/path^"
  */
-function parseUrlFilterDomain(urlFilter) {
+export function parseUrlFilterDomain(urlFilter) {
   if (!urlFilter) return null;
 
   // Only process domain patterns (start with || and end with ^)
@@ -27,6 +28,12 @@ function parseUrlFilterDomain(urlFilter) {
 
   // Extract domain between || and ^
   let domain = urlFilter.substring(2, urlFilter.length - 1);
+
+  // Reject path-based patterns - we only want pure domain blocks
+  // Path patterns like "||vercel.app/path^" should not be extracted
+  if (domain.includes('/')) {
+    return null;
+  }
 
   // Validate it's a valid domain using tldts
   const parsed = parseDomain(domain);
@@ -42,7 +49,7 @@ function parseUrlFilterDomain(urlFilter) {
 /**
  * Extract domains that block main_frame from DNR rules
  */
-function extractMainFrameBlockingDomains(dnrRules) {
+export function extractMainFrameBlockingDomains(dnrRules) {
   const domains = new Set();
 
   for (const rule of dnrRules) {
@@ -53,14 +60,9 @@ function extractMainFrameBlockingDomains(dnrRules) {
     const resourceTypes = rule.condition.resourceTypes || [];
     if (!resourceTypes.includes('main_frame')) continue;
 
-    // Extract from requestDomains
-    if (rule.condition.requestDomains) {
-      rule.condition.requestDomains.forEach((d) =>
-        domains.add(d.toLowerCase()),
-      );
-    }
-
-    // Extract from urlFilter
+    // Extract from urlFilter (the target URL being blocked)
+    // Note: requestDomains represents the initiator, not the target,
+    // so we should NOT extract from it for redirect protection
     if (rule.condition.urlFilter) {
       const domain = parseUrlFilterDomain(rule.condition.urlFilter);
       if (domain) {
