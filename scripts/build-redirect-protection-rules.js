@@ -10,47 +10,21 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { parse as parseDomain } from 'tldts-experimental';
 import { RESOURCES_PATH } from './utils/urls.js';
 
-/**
- * Parse domain from DNR urlFilter pattern
- * Only extracts valid domain patterns like "||example.com^"
- * Rejects path-based patterns like "||example.com/path^"
- */
-export function parseUrlFilterDomain(urlFilter) {
-  if (!urlFilter) return null;
-
-  // Only process domain patterns (start with || and end with ^)
-  if (!urlFilter.startsWith('||') || !urlFilter.endsWith('^')) {
-    return null;
-  }
-
-  // Extract domain between || and ^
-  let domain = urlFilter.substring(2, urlFilter.length - 1);
-
-  // Reject path-based patterns - we only want pure domain blocks
-  // Path patterns like "||vercel.app/path^" should not be extracted
-  if (domain.includes('/')) {
-    return null;
-  }
-
-  // Validate it's a valid domain using tldts
-  const parsed = parseDomain(domain);
-
-  // Must have a valid domain and TLD
-  if (parsed.domain && parsed.publicSuffix) {
-    return parsed.hostname?.toLowerCase() || parsed.domain.toLowerCase();
-  }
-
-  return null;
-}
+// Import the shared utility for applying redirect protection
+// This is the same logic used in custom-filters.js and dnr.js
+import { applyRedirectProtection } from '../src/utils/dnr.js';
 
 /**
- * Extract domains that block main_frame from DNR rules
+ * Extract DNR rule conditions for main_frame blocking rules
+ * Returns array of conditions that can be used for redirect rules
+ *
+ * NOTE: This function is kept for testing purposes, but in production
+ * we use applyRedirectProtection from src/utils/dnr.js
  */
-export function extractMainFrameBlockingDomains(dnrRules) {
-  const domains = new Set();
+export function extractMainFrameBlockingConditions(dnrRules) {
+  const conditions = [];
 
   for (const rule of dnrRules) {
     // Only process blocking rules
@@ -60,56 +34,16 @@ export function extractMainFrameBlockingDomains(dnrRules) {
     const resourceTypes = rule.condition.resourceTypes || [];
     if (!resourceTypes.includes('main_frame')) continue;
 
-    // Extract from urlFilter (the target URL being blocked)
-    // Note: requestDomains represents the initiator, not the target,
-    // so we should NOT extract from it for redirect protection
-    if (rule.condition.urlFilter) {
-      const domain = parseUrlFilterDomain(rule.condition.urlFilter);
-      if (domain) {
-        domains.add(domain);
-      }
-    }
+    // Copy the entire condition, but filter resourceTypes to only main_frame
+    const condition = {
+      ...rule.condition,
+      resourceTypes: ['main_frame'],
+    };
+
+    conditions.push(condition);
   }
 
-  return Array.from(domains).sort();
-}
-
-/**
- * Chunk an array of domains into groups of specified size
- */
-function chunkDomains(domains, chunkSize = 1000) {
-  const chunks = [];
-  for (let i = 0; i < domains.length; i += chunkSize) {
-    chunks.push(domains.slice(i, i + chunkSize));
-  }
-  return chunks;
-}
-
-/**
- * Generate redirect DNR rules from domain chunks
- */
-function generateRedirectRules(domainChunks, startId = 1) {
-  const rules = [];
-  let id = startId;
-
-  for (const chunk of domainChunks) {
-    rules.push({
-      id: id++,
-      priority: 100, // Lower than exception rules (which will be priority 200)
-      action: {
-        type: 'redirect',
-        redirect: {
-          extensionPath: '/pages/redirect-protection/index.html',
-        },
-      },
-      condition: {
-        requestDomains: chunk,
-        resourceTypes: ['main_frame'],
-      },
-    });
-  }
-
-  return rules;
+  return conditions;
 }
 
 async function main() {
@@ -141,50 +75,45 @@ async function main() {
   files.forEach((f) => console.log(`  - ${f}`));
   console.log('');
 
-  const allDomains = new Set();
+  const allBlockingRules = [];
   let totalRulesProcessed = 0;
-  let totalMainFrameRules = 0;
-  let totalValidDomains = 0;
+  let totalBlockingRules = 0;
 
-  // Process each ruleset file
+  // Process each ruleset file - extract only blocking rules
   for (const file of files) {
     const filePath = `${RESOURCES_PATH}/${file}`;
     const content = readFileSync(filePath, 'utf-8');
     const rules = JSON.parse(content);
 
-    const domains = extractMainFrameBlockingDomains(rules);
     totalRulesProcessed += rules.length;
 
-    // Count main_frame blocking rules for stats
-    const mainFrameRules = rules.filter(
-      (r) =>
-        r.action.type === 'block' &&
-        r.condition.resourceTypes?.includes('main_frame'),
-    );
-    totalMainFrameRules += mainFrameRules.length;
-    totalValidDomains += domains.length;
+    // Filter to only blocking rules
+    const blockingRules = rules.filter((rule) => rule.action?.type === 'block');
+    totalBlockingRules += blockingRules.length;
 
     console.log(
-      `Processed ${file}: ${rules.length} total rules, ${mainFrameRules.length} main_frame rules, ${domains.length} valid domains extracted`,
+      `Processed ${file}: ${rules.length} total rules, ${blockingRules.length} blocking rules`,
     );
 
-    domains.forEach((d) => allDomains.add(d));
+    allBlockingRules.push(...blockingRules);
   }
 
   console.log(`\nSummary:`);
   console.log(`  Total rules processed: ${totalRulesProcessed}`);
-  console.log(`  Total main_frame blocking rules: ${totalMainFrameRules}`);
-  console.log(`  Total valid domains extracted: ${totalValidDomains}`);
-  console.log(`  Total unique domains: ${allDomains.size}`);
+  console.log(`  Total blocking rules: ${totalBlockingRules}`);
 
-  // Chunk domains for DNR rules (max 1000 domains per rule)
-  const domainArray = Array.from(allDomains).sort();
-  const domainChunks = chunkDomains(domainArray);
+  // Apply redirect protection to blocking rules
+  // This converts main_frame blocking rules to redirect rules
+  const redirectRulesWithoutIds = applyRedirectProtection(allBlockingRules, {
+    enabled: true,
+    priority: 100,
+  }).filter((rule) => rule.action.type === 'redirect');
 
-  console.log(`Domain chunks created: ${domainChunks.length}`);
-
-  // Generate redirect rules
-  const redirectRules = generateRedirectRules(domainChunks);
+  // Add IDs to redirect rules
+  const redirectRules = redirectRulesWithoutIds.map((rule, index) => ({
+    ...rule,
+    id: index + 1,
+  }));
 
   console.log(`\nGenerated ${redirectRules.length} redirect rules`);
 
@@ -195,10 +124,6 @@ async function main() {
   const fileSize = (readFileSync(outputPath).length / 1024).toFixed(2);
   console.log(`\nSaved redirect protection rules to ${outputPath}`);
   console.log(`File size: ${fileSize} KB`);
-
-  // Show some sample domains
-  console.log(`\nSample domains (first 10):`);
-  domainArray.slice(0, 10).forEach((d) => console.log(`  - ${d}`));
 
   console.log('\n✅ Redirect protection rules built successfully!');
 }

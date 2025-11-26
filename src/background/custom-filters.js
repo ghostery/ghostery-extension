@@ -25,7 +25,11 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker.js';
-import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
+import {
+  CUSTOM_FILTERS_ID_RANGE,
+  getDynamicRulesIds,
+  applyRedirectProtection,
+} from '/utils/dnr.js';
 
 class TrustedScriptletError extends Error {}
 
@@ -178,7 +182,14 @@ export async function updateCustomFilters(input, options) {
       result.errors.push(...errors);
     }
 
-    result.dnrRules = await updateDNRRules(rules);
+    // Apply redirect protection to DNR rules
+    const allOptions = await store.resolve(Options);
+    const rulesWithRedirects = applyRedirectProtection(rules, {
+      enabled: allOptions.redirectProtection?.enabled,
+      priority: 100,
+    });
+
+    result.dnrRules = await updateDNRRules(rulesWithRedirects);
   }
 
   return result;

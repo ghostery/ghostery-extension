@@ -10,94 +10,13 @@
  */
 
 // Import the actual functions we're testing from the build script
-import {
-  parseUrlFilterDomain,
-  extractMainFrameBlockingDomains,
-} from '../../scripts/build-redirect-protection-rules.js';
+import { extractMainFrameBlockingConditions } from '../../scripts/build-redirect-protection-rules.js';
 
-// Test cases for parseUrlFilterDomain
-const parseTests = [
-  // Valid domains
-  {
-    input: '||example.com^',
-    expected: 'example.com',
-    description: 'Basic domain',
-  },
-  {
-    input: '||sub.example.com^',
-    expected: 'sub.example.com',
-    description: 'Subdomain',
-  },
-  {
-    input: '||googie-anaiytics.com^',
-    expected: 'googie-anaiytics.com',
-    description: 'Domain with hyphen',
-  },
-  { input: '||lnkr.us^', expected: 'lnkr.us', description: 'Short TLD' },
-  {
-    input: '||0x01n2ptpuz3.com^',
-    expected: '0x01n2ptpuz3.com',
-    description: 'Domain with numbers/hex',
-  },
-  {
-    input: '||test.co.uk^',
-    expected: 'test.co.uk',
-    description: 'Multi-part TLD',
-  },
-  {
-    input: '||EXAMPLE.COM^',
-    expected: 'example.com',
-    description: 'Uppercase (should be lowercased)',
-  },
-
-  // Invalid patterns (should be rejected)
-  {
-    input: '/?usid=*&utid=',
-    expected: null,
-    description: 'Path pattern without domain',
-  },
-  { input: '/page/bouncy.php?', expected: null, description: 'Path pattern' },
-  {
-    input: '||*example.com^',
-    expected: null,
-    description: 'Domain with wildcard',
-  },
-  { input: '||example^', expected: null, description: 'No TLD' },
-  { input: 'example.com', expected: null, description: 'Missing || and ^' },
-  { input: '||example.com', expected: null, description: 'Missing ^' },
-  { input: 'example.com^', expected: null, description: 'Missing ||' },
-  { input: '*://example.com/*', expected: null, description: 'URL pattern' },
-  { input: null, expected: null, description: 'Null input' },
-  { input: '', expected: null, description: 'Empty string' },
-  { input: '||localhost^', expected: null, description: 'localhost (no TLD)' },
-
-  // Path-based patterns (should be rejected)
-  {
-    input: '||vercel.app/americaplata.com.html^',
-    expected: null,
-    description: 'Path pattern (vercel.app/path)',
-  },
-  {
-    input: '||example.com/ads/^',
-    expected: null,
-    description: 'Path pattern (example.com/ads/)',
-  },
-  {
-    input: '||vercel.app/js/esc.js^',
-    expected: null,
-    description: 'Path pattern with file (vercel.app/js/file.js)',
-  },
-  {
-    input: '||domain.com/path/to/resource^',
-    expected: null,
-    description: 'Multi-level path pattern',
-  },
-];
-
-// Test cases for extractMainFrameBlockingDomains
+// Test cases for extractMainFrameBlockingConditions
 const extractionTests = [
   {
-    description: 'Should extract domain from urlFilter with main_frame',
+    description:
+      'Should extract condition with urlFilter for main_frame blocking',
     rules: [
       {
         action: { type: 'block' },
@@ -107,36 +26,92 @@ const extractionTests = [
         },
       },
     ],
-    expected: ['tracker.com'],
+    expected: [
+      {
+        urlFilter: '||tracker.com^',
+        resourceTypes: ['main_frame'],
+      },
+    ],
   },
   {
-    description:
-      'Should NOT extract from requestDomains (initiator, not target)',
+    description: 'Should preserve requestDomains in condition',
     rules: [
       {
         action: { type: 'block' },
         condition: {
-          requestDomains: ['surge.sh'],
+          urlFilter: '.com/c/*?s1=',
+          requestDomains: ['com'],
           resourceTypes: ['main_frame'],
         },
       },
     ],
-    expected: [],
+    expected: [
+      {
+        urlFilter: '.com/c/*?s1=',
+        requestDomains: ['com'],
+        resourceTypes: ['main_frame'],
+      },
+    ],
   },
   {
-    description:
-      'Should extract from urlFilter but ignore requestDomains in same rule',
+    description: 'Should extract path-based patterns',
+    rules: [
+      {
+        action: { type: 'block' },
+        condition: {
+          urlFilter: '||vercel.app/americaplata.com.html^',
+          resourceTypes: ['main_frame'],
+        },
+      },
+    ],
+    expected: [
+      {
+        urlFilter: '||vercel.app/americaplata.com.html^',
+        resourceTypes: ['main_frame'],
+      },
+    ],
+  },
+  {
+    description: 'Should preserve regexFilter patterns',
+    rules: [
+      {
+        action: { type: 'block' },
+        condition: {
+          regexFilter:
+            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+          requestDomains: ['com'],
+          resourceTypes: ['main_frame'],
+          isUrlFilterCaseSensitive: true,
+        },
+      },
+    ],
+    expected: [
+      {
+        regexFilter:
+          '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+        requestDomains: ['com'],
+        resourceTypes: ['main_frame'],
+        isUrlFilterCaseSensitive: true,
+      },
+    ],
+  },
+  {
+    description: 'Should filter resourceTypes to only main_frame',
     rules: [
       {
         action: { type: 'block' },
         condition: {
           urlFilter: '||tracker.com^',
-          requestDomains: ['surge.sh'],
-          resourceTypes: ['main_frame'],
+          resourceTypes: ['main_frame', 'script', 'image', 'stylesheet'],
         },
       },
     ],
-    expected: ['tracker.com'],
+    expected: [
+      {
+        urlFilter: '||tracker.com^',
+        resourceTypes: ['main_frame'],
+      },
+    ],
   },
   {
     description: 'Should not extract from rules without main_frame',
@@ -165,131 +140,70 @@ const extractionTests = [
     expected: [],
   },
   {
-    description: 'Should extract multiple domains and sort them',
+    description: 'Should extract multiple conditions',
     rules: [
       {
         action: { type: 'block' },
         condition: {
-          urlFilter: '||zzz.com^',
+          urlFilter: '||tracker1.com^',
           resourceTypes: ['main_frame'],
         },
       },
       {
         action: { type: 'block' },
         condition: {
-          urlFilter: '||aaa.com^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||mmm.com^',
+          urlFilter: '||tracker2.com^',
           resourceTypes: ['main_frame'],
         },
       },
     ],
-    expected: ['aaa.com', 'mmm.com', 'zzz.com'],
+    expected: [
+      {
+        urlFilter: '||tracker1.com^',
+        resourceTypes: ['main_frame'],
+      },
+      {
+        urlFilter: '||tracker2.com^',
+        resourceTypes: ['main_frame'],
+      },
+    ],
   },
   {
-    description: 'Should deduplicate domains',
+    description: 'Should preserve excludedRequestDomains',
     rules: [
       {
         action: { type: 'block' },
         condition: {
-          urlFilter: '||tracker.com^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||tracker.com^',
-          resourceTypes: ['main_frame', 'script'],
-        },
-      },
-    ],
-    expected: ['tracker.com'],
-  },
-  {
-    description: 'Should handle rules with main_frame among other types',
-    rules: [
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||tracker.com^',
-          resourceTypes: ['main_frame', 'script', 'image', 'stylesheet'],
-        },
-      },
-    ],
-    expected: ['tracker.com'],
-  },
-  {
-    description: 'Should skip invalid urlFilter patterns',
-    rules: [
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '/path/to/tracker',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||valid-tracker.com^',
+          regexFilter:
+            '^https:\\/\\/pancake(?:dro|swa)pclick\\d+\\.vercel\\.app\\/',
+          requestDomains: ['vercel.app'],
+          excludedRequestDomains: ['pancakeswap.finance'],
           resourceTypes: ['main_frame'],
         },
       },
     ],
-    expected: ['valid-tracker.com'],
-  },
-  {
-    description: 'Should skip path-based patterns and extract only domain patterns',
-    rules: [
+    expected: [
       {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||vercel.app/americaplata.com.html^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||vercel.app/js/esc.js^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||specific-malware.vercel.app^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||tracker.com^',
-          resourceTypes: ['main_frame'],
-        },
+        regexFilter:
+          '^https:\\/\\/pancake(?:dro|swa)pclick\\d+\\.vercel\\.app\\/',
+        requestDomains: ['vercel.app'],
+        excludedRequestDomains: ['pancakeswap.finance'],
+        resourceTypes: ['main_frame'],
       },
     ],
-    expected: ['specific-malware.vercel.app', 'tracker.com'],
   },
 ];
 
-// Run parseUrlFilterDomain tests
-console.log('Running Redirect Protection Domain Parsing Tests\n');
+// Run condition extraction tests
+console.log('Running Redirect Protection Condition Extraction Tests\n');
 console.log('='.repeat(80));
 
 let passed = 0;
 let failed = 0;
 
-parseTests.forEach((test, index) => {
-  const result = parseUrlFilterDomain(test.input);
-  const success = result === test.expected;
+extractionTests.forEach((test, index) => {
+  const result = extractMainFrameBlockingConditions(test.rules);
+  const success = JSON.stringify(result) === JSON.stringify(test.expected);
 
   if (success) {
     passed++;
@@ -297,55 +211,17 @@ parseTests.forEach((test, index) => {
   } else {
     failed++;
     console.log(`❌ Test ${index + 1}: ${test.description}`);
-    console.log(`   Input:    ${JSON.stringify(test.input)}`);
-    console.log(`   Expected: ${JSON.stringify(test.expected)}`);
-    console.log(`   Got:      ${JSON.stringify(result)}`);
+    console.log(`   Expected: ${JSON.stringify(test.expected, null, 2)}`);
+    console.log(`   Got:      ${JSON.stringify(result, null, 2)}`);
   }
 });
 
 console.log('='.repeat(80));
 console.log(
-  `\nResults: ${passed} passed, ${failed} failed out of ${parseTests.length} tests\n`,
+  `\nResults: ${passed} passed, ${failed} failed out of ${extractionTests.length} tests\n`,
 );
 
-// Run extractMainFrameBlockingDomains tests
-console.log('\nRunning Domain Extraction Tests\n');
-console.log('='.repeat(80));
-
-let extractionPassed = 0;
-let extractionFailed = 0;
-
-extractionTests.forEach((test, index) => {
-  const result = extractMainFrameBlockingDomains(test.rules);
-  const success = JSON.stringify(result) === JSON.stringify(test.expected);
-
-  if (success) {
-    extractionPassed++;
-    console.log(`✅ Test ${index + 1}: ${test.description}`);
-  } else {
-    extractionFailed++;
-    console.log(`❌ Test ${index + 1}: ${test.description}`);
-    console.log(`   Expected: ${JSON.stringify(test.expected)}`);
-    console.log(`   Got:      ${JSON.stringify(result)}`);
-  }
-});
-
-console.log('='.repeat(80));
-console.log(
-  `\nResults: ${extractionPassed} passed, ${extractionFailed} failed out of ${extractionTests.length} tests\n`,
-);
-
-// Overall results
-const totalPassed = passed + extractionPassed;
-const totalFailed = failed + extractionFailed;
-const totalTests = parseTests.length + extractionTests.length;
-
-console.log('='.repeat(80));
-console.log(
-  `\nOverall: ${totalPassed} passed, ${totalFailed} failed out of ${totalTests} tests\n`,
-);
-
-if (totalFailed > 0) {
+if (failed > 0) {
   process.exit(1);
 }
 

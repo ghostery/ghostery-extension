@@ -32,3 +32,68 @@ export async function getDynamicRulesIds(type) {
     .filter((rule) => rule.id >= type.start && rule.id < type.end)
     .map((rule) => rule.id);
 }
+
+/**
+ * Apply redirect protection to DNR rules
+ * Converts blocking rules that target main_frame to redirect rules
+ *
+ * @param {Array} rules - Array of DNR rules
+ * @param {Object} options - Options
+ * @param {boolean} options.enabled - Whether redirect protection is enabled
+ * @param {number} options.priority - Priority for redirect rules (default: 100)
+ * @returns {Array} Array with redirect rules added and original rules modified
+ */
+export function applyRedirectProtection(
+  rules,
+  { enabled = false, priority = 100 } = {},
+) {
+  if (!enabled || !rules || !rules.length) {
+    return rules;
+  }
+
+  const redirectRules = [];
+  const modifiedRules = [];
+
+  for (const rule of rules) {
+    // Only process blocking rules that include main_frame
+    if (
+      rule.action?.type === 'block' &&
+      rule.condition?.resourceTypes?.includes('main_frame')
+    ) {
+      // Create a redirect rule with the same condition but only main_frame
+      redirectRules.push({
+        ...rule,
+        priority: priority,
+        action: {
+          type: 'redirect',
+          redirect: {
+            extensionPath: '/pages/redirect-protection/index.html',
+          },
+        },
+        condition: {
+          ...rule.condition,
+          resourceTypes: ['main_frame'],
+        },
+      });
+
+      // If the original rule had other resource types, keep the block rule for those
+      const otherTypes = rule.condition.resourceTypes.filter(
+        (type) => type !== 'main_frame',
+      );
+      if (otherTypes.length > 0) {
+        modifiedRules.push({
+          ...rule,
+          condition: {
+            ...rule.condition,
+            resourceTypes: otherTypes,
+          },
+        });
+      }
+    } else {
+      // Keep non-blocking rules and rules that don't target main_frame
+      modifiedRules.push(rule);
+    }
+  }
+
+  return [...modifiedRules, ...redirectRules];
+}

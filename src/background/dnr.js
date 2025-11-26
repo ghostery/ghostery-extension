@@ -21,6 +21,7 @@ import {
   REDIRECT_PROTECTION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
   getDynamicRulesIds,
+  applyRedirectProtection,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
@@ -146,9 +147,16 @@ if (__PLATFORM__ !== 'firefox') {
                 }
               }
 
+              // Apply redirect protection to dynamic fixes
+              const rulesArray = Array.from(rules);
+              const rulesWithRedirects = applyRedirectProtection(rulesArray, {
+                enabled: options.redirectProtection?.enabled,
+                priority: 100,
+              });
+
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: Array.from(rules).map((rule, index) => ({
+                addRules: rulesWithRedirects.map((rule, index) => ({
                   ...rule,
                   id: FIXES_ID_RANGE.start + index,
                 })),
@@ -216,14 +224,16 @@ if (__PLATFORM__ !== 'firefox') {
           const addRules = [];
           if (disabledDomains.length > 0) {
             let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
-            for (let i = 0; i < disabledDomains.length; i += 1000) {
-              const chunk = disabledDomains.slice(i, i + 1000);
+            // Create allow rules for each disabled hostname
+            // Each hostname gets its own rule with urlFilter ||hostname^
+            // This matches all URLs on that hostname
+            for (const hostname of disabledDomains) {
               addRules.push({
                 id: ruleId++,
                 priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
                 action: { type: 'allow' },
                 condition: {
-                  requestDomains: chunk,
+                  urlFilter: `||${hostname}^`,
                   resourceTypes: ['main_frame'],
                 },
               });

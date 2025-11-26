@@ -92,7 +92,9 @@ if (__PLATFORM__ !== 'firefox') {
       (async () => {
         try {
           const urlObj = new URL(url);
-          const domain = urlObj.hostname;
+          // Create a URL pattern that matches this specific URL
+          // Use || prefix and ^ suffix to match the domain-anchored pattern
+          const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
 
           await chrome.declarativeNetRequest.updateSessionRules({
             addRules: [
@@ -101,7 +103,7 @@ if (__PLATFORM__ !== 'firefox') {
                 priority: REDIRECT_PROTECTION_SESSION_PRIORITY,
                 action: { type: 'allow' },
                 condition: {
-                  requestDomains: [domain],
+                  urlFilter: urlPattern,
                   resourceTypes: ['main_frame'],
                   tabIds: [tabId],
                 },
@@ -156,16 +158,18 @@ if (__PLATFORM__ !== 'firefox') {
             REDIRECT_PROTECTION_ID_RANGE,
           );
 
+          // Create allow rules for each disabled hostname
+          // Each hostname gets its own rule with urlFilter ||hostname^
+          // This matches all URLs on that hostname
           const addRules = [];
           let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
-          for (let i = 0; i < newDisabled.length; i += 1000) {
-            const chunk = newDisabled.slice(i, i + 1000);
+          for (const hostname of newDisabled) {
             addRules.push({
               id: ruleId++,
               priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
               action: { type: 'allow' },
               condition: {
-                requestDomains: chunk,
+                urlFilter: `||${hostname}^`,
                 resourceTypes: ['main_frame'],
               },
             });

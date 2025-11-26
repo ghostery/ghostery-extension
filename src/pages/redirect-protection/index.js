@@ -106,7 +106,17 @@ const App = {
       return '';
     }
   },
-  render: ({ targetUrl, hostname }) =>
+  displayUrl: ({ targetUrl }) => {
+    if (!targetUrl) return '';
+    try {
+      const url = new URL(targetUrl);
+      // Return URL without scheme (e.g., "example.com/path" instead of "https://example.com/path")
+      return url.host + url.pathname + url.search + url.hash;
+    } catch {
+      return '';
+    }
+  },
+  render: ({ targetUrl, displayUrl }) =>
     html`
       <template layout="block overflow">
         <style>
@@ -217,11 +227,11 @@ const App = {
               ? html`
                   <ui-text type="body-m" layout="block:center">
                     This page was prevented from loading because it's a known
-                    tracking domain:
+                    tracking URL:
                   </ui-text>
 
                   <div layout="block:center margin:1:0">
-                    <a class="link" href="${targetUrl}">${hostname}</a>
+                    <a class="link" href="${targetUrl}">${displayUrl}</a>
                   </div>
 
                   <ui-text type="body-m" layout="block:center">
