@@ -19,9 +19,9 @@ import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
 import {
   FIXES_ID_RANGE,
   REDIRECT_PROTECTION_ID_RANGE,
-  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
   getDynamicRulesIds,
   applyRedirectProtection,
+  createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
@@ -221,24 +221,10 @@ if (__PLATFORM__ !== 'firefox') {
             REDIRECT_PROTECTION_ID_RANGE,
           );
 
-          const addRules = [];
-          if (disabledDomains.length > 0) {
-            let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
-            // Create allow rules for each disabled hostname
-            // Each hostname gets its own rule with urlFilter ||hostname^
-            // This matches all URLs on that hostname
-            for (const hostname of disabledDomains) {
-              addRules.push({
-                id: ruleId++,
-                priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
-                action: { type: 'allow' },
-                condition: {
-                  urlFilter: `||${hostname}^`,
-                  resourceTypes: ['main_frame'],
-                },
-              });
-            }
-          }
+          const addRules = createRedirectProtectionExceptionRules(
+            disabledDomains,
+            REDIRECT_PROTECTION_ID_RANGE.start,
+          );
 
           await chrome.declarativeNetRequest.updateDynamicRules({
             removeRuleIds,

@@ -9,22 +9,142 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/**
- * Redirect Protection for Chrome/Safari (MV3)
- *
- * Stores URLs before DNR redirects them, allowing the redirect protection
- * page to know what the original destination was.
- */
-
 import { store } from 'hybrids';
 import Options from '/store/options.js';
 import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
   REDIRECT_PROTECTION_SESSION_PRIORITY,
   REDIRECT_PROTECTION_ID_RANGE,
-  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
   getDynamicRulesIds,
+  createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
+
+async function updateOptionsWithDisabledHostname(hostname) {
+  const options = await store.resolve(Options);
+  const disabled = options.redirectProtection?.disabled || [];
+
+  if (!disabled.includes(hostname)) {
+    await store.set(Options, {
+      redirectProtection: {
+        ...options.redirectProtection,
+        disabled: [...disabled, hostname],
+      },
+    });
+  }
+
+  return disabled.includes(hostname) ? disabled : [...disabled, hostname];
+}
+
+const allowedRedirectUrls = new Set();
+
+function shouldProtectRedirect(options, hostname) {
+  if (!options.redirectProtection?.enabled) {
+    return false;
+  }
+
+  const disabledDomains = options.redirectProtection.disabled || [];
+  return !disabledDomains.some((domain) => hostname.endsWith(domain));
+}
+
+export function handleRedirectProtection(
+  details,
+  request,
+  options,
+  isTrusted,
+  getEngine,
+  updateTabStats,
+) {
+  if (details.type !== 'main_frame') {
+    return undefined;
+  }
+
+  const hostname = request.hostname;
+
+  if (allowedRedirectUrls.has(details.url)) {
+    allowedRedirectUrls.delete(details.url);
+    return undefined;
+  }
+
+  if (
+    !shouldProtectRedirect(options, hostname) ||
+    isTrusted(request, details.type)
+  ) {
+    return undefined;
+  }
+
+  const engine = getEngine();
+  const { redirect, match } = engine.match(request);
+
+  if (match === true || redirect !== undefined) {
+    request.blocked = true;
+    updateTabStats(details.tabId, [request]);
+
+    const encodedUrl = btoa(details.url);
+    const protectionUrl =
+      chrome.runtime.getURL('pages/redirect-protection/index.html') +
+      '?url=' +
+      encodedUrl;
+
+    return { redirectUrl: protectionUrl };
+  }
+
+  return undefined;
+}
+
+export function allowRedirectUrl(url) {
+  allowedRedirectUrls.add(url);
+}
+
+export async function disableRedirectProtectionForHostname(hostname, Options) {
+  await updateOptionsWithDisabledHostname(hostname);
+}
+
+if (__PLATFORM__ === 'firefox') {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'allowRedirect') {
+      if (!message.url) {
+        sendResponse({ success: false, error: 'Missing URL' });
+        return false;
+      }
+
+      try {
+        allowRedirectUrl(message.url);
+        sendResponse({ success: true });
+      } catch (error) {
+        console.error('[redirect-protection] Error allowing redirect:', error);
+        sendResponse({ success: false, error: error.message });
+      }
+
+      return false;
+    }
+
+    if (message.action === 'disableRedirectProtection') {
+      if (!message.hostname) {
+        sendResponse({ success: false, error: 'Missing hostname' });
+        return false;
+      }
+
+      disableRedirectProtectionForHostname(message.hostname, Options)
+        .then(() => {
+          sendResponse({ success: true });
+        })
+        .catch((error) => {
+          console.error(
+            '[redirect-protection] Error disabling protection:',
+            error,
+          );
+          sendResponse({
+            success: false,
+            error: error.message || String(error),
+          });
+        });
+
+      return true;
+    }
+
+    return false;
+  });
+}
 
 if (__PLATFORM__ !== 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
@@ -92,8 +212,6 @@ if (__PLATFORM__ !== 'firefox') {
       (async () => {
         try {
           const urlObj = new URL(url);
-          // Create a URL pattern that matches this specific URL
-          // Use || prefix and ^ suffix to match the domain-anchored pattern
           const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
 
           await chrome.declarativeNetRequest.updateSessionRules({
@@ -138,42 +256,18 @@ if (__PLATFORM__ !== 'firefox') {
 
       (async () => {
         try {
-          const options = await store.resolve(Options);
-          const disabled = options.redirectProtection?.disabled || [];
-
-          if (disabled.includes(message.hostname)) {
-            sendResponse({ success: true });
-            return;
-          }
-
-          const newDisabled = [...disabled, message.hostname];
-          await store.set(Options, {
-            redirectProtection: {
-              ...options.redirectProtection,
-              disabled: newDisabled,
-            },
-          });
+          const newDisabled = await updateOptionsWithDisabledHostname(
+            message.hostname,
+          );
 
           const removeRuleIds = await getDynamicRulesIds(
             REDIRECT_PROTECTION_ID_RANGE,
           );
 
-          // Create allow rules for each disabled hostname
-          // Each hostname gets its own rule with urlFilter ||hostname^
-          // This matches all URLs on that hostname
-          const addRules = [];
-          let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
-          for (const hostname of newDisabled) {
-            addRules.push({
-              id: ruleId++,
-              priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
-              action: { type: 'allow' },
-              condition: {
-                urlFilter: `||${hostname}^`,
-                resourceTypes: ['main_frame'],
-              },
-            });
-          }
+          const addRules = createRedirectProtectionExceptionRules(
+            newDisabled,
+            REDIRECT_PROTECTION_ID_RANGE.start,
+          );
 
           await chrome.declarativeNetRequest.updateDynamicRules({
             removeRuleIds,

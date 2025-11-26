@@ -38,7 +38,7 @@ import {
   handleRedirectProtection,
   allowRedirectUrl,
   disableRedirectProtectionForHostname,
-} from './adblocker/redirect-protection.js';
+} from './redirect-protection.js';
 
 let options = Options;
 

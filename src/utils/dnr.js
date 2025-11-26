@@ -33,6 +33,18 @@ export async function getDynamicRulesIds(type) {
     .map((rule) => rule.id);
 }
 
+export function createRedirectProtectionExceptionRules(disabledDomains, startId) {
+  return disabledDomains.map((hostname, index) => ({
+    id: startId + index,
+    priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+    action: { type: 'allow' },
+    condition: {
+      urlFilter: `||${hostname}^`,
+      resourceTypes: ['main_frame'],
+    },
+  }));
+}
+
 /**
  * Apply redirect protection to DNR rules
  * Converts blocking rules that target main_frame to redirect rules

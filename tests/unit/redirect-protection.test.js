@@ -9,16 +9,70 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Import the actual functions we're testing from the build script
-import { extractMainFrameBlockingConditions } from '../../scripts/build-redirect-protection-rules.js';
+import { applyRedirectProtection } from '../../src/utils/dnr.js';
 
-// Test cases for extractMainFrameBlockingConditions
-const extractionTests = [
+const tests = [
+  {
+    description: 'Should convert main_frame blocking rule to redirect rule',
+    rules: [
+      {
+        id: 1,
+        action: { type: 'block' },
+        condition: {
+          urlFilter: '||tracker.com^',
+          resourceTypes: ['main_frame'],
+        },
+      },
+    ],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 1,
+    validate: (result) => {
+      const redirect = result.find((r) => r.action.type === 'redirect');
+      return (
+        redirect &&
+        redirect.priority === 100 &&
+        redirect.action.redirect.extensionPath ===
+          '/pages/redirect-protection/index.html' &&
+        redirect.condition.resourceTypes.length === 1 &&
+        redirect.condition.resourceTypes[0] === 'main_frame' &&
+        redirect.condition.urlFilter === '||tracker.com^'
+      );
+    },
+  },
   {
     description:
-      'Should extract condition with urlFilter for main_frame blocking',
+      'Should split rule with multiple resource types including main_frame',
     rules: [
       {
+        id: 1,
+        action: { type: 'block' },
+        condition: {
+          urlFilter: '||tracker.com^',
+          resourceTypes: ['main_frame', 'script', 'image'],
+        },
+      },
+    ],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 1,
+    validate: (result) => {
+      const redirect = result.find((r) => r.action.type === 'redirect');
+      const block = result.find((r) => r.action.type === 'block');
+      return (
+        redirect &&
+        redirect.condition.resourceTypes.length === 1 &&
+        redirect.condition.resourceTypes[0] === 'main_frame' &&
+        block &&
+        block.condition.resourceTypes.length === 2 &&
+        block.condition.resourceTypes.includes('script') &&
+        block.condition.resourceTypes.includes('image')
+      );
+    },
+  },
+  {
+    description: 'Should not convert rules when disabled',
+    rules: [
+      {
+        id: 1,
         action: { type: 'block' },
         condition: {
           urlFilter: '||tracker.com^',
@@ -26,97 +80,21 @@ const extractionTests = [
         },
       },
     ],
-    expected: [
-      {
-        urlFilter: '||tracker.com^',
-        resourceTypes: ['main_frame'],
-      },
-    ],
+    options: { enabled: false, priority: 100 },
+    expectedRedirectCount: 0,
+    validate: (result) => {
+      return (
+        result.length === 1 &&
+        result[0].action.type === 'block' &&
+        result[0].condition.resourceTypes.includes('main_frame')
+      );
+    },
   },
   {
-    description: 'Should preserve requestDomains in condition',
+    description: 'Should preserve non-main_frame blocking rules unchanged',
     rules: [
       {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '.com/c/*?s1=',
-          requestDomains: ['com'],
-          resourceTypes: ['main_frame'],
-        },
-      },
-    ],
-    expected: [
-      {
-        urlFilter: '.com/c/*?s1=',
-        requestDomains: ['com'],
-        resourceTypes: ['main_frame'],
-      },
-    ],
-  },
-  {
-    description: 'Should extract path-based patterns',
-    rules: [
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||vercel.app/americaplata.com.html^',
-          resourceTypes: ['main_frame'],
-        },
-      },
-    ],
-    expected: [
-      {
-        urlFilter: '||vercel.app/americaplata.com.html^',
-        resourceTypes: ['main_frame'],
-      },
-    ],
-  },
-  {
-    description: 'Should preserve regexFilter patterns',
-    rules: [
-      {
-        action: { type: 'block' },
-        condition: {
-          regexFilter:
-            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
-          requestDomains: ['com'],
-          resourceTypes: ['main_frame'],
-          isUrlFilterCaseSensitive: true,
-        },
-      },
-    ],
-    expected: [
-      {
-        regexFilter:
-          '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
-        requestDomains: ['com'],
-        resourceTypes: ['main_frame'],
-        isUrlFilterCaseSensitive: true,
-      },
-    ],
-  },
-  {
-    description: 'Should filter resourceTypes to only main_frame',
-    rules: [
-      {
-        action: { type: 'block' },
-        condition: {
-          urlFilter: '||tracker.com^',
-          resourceTypes: ['main_frame', 'script', 'image', 'stylesheet'],
-        },
-      },
-    ],
-    expected: [
-      {
-        urlFilter: '||tracker.com^',
-        resourceTypes: ['main_frame'],
-      },
-    ],
-  },
-  {
-    description: 'Should not extract from rules without main_frame',
-    rules: [
-      {
+        id: 1,
         action: { type: 'block' },
         condition: {
           urlFilter: '||tracker.com^',
@@ -124,25 +102,51 @@ const extractionTests = [
         },
       },
     ],
-    expected: [],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 0,
+    validate: (result) => {
+      return (
+        result.length === 1 &&
+        result[0].action.type === 'block' &&
+        result[0].condition.resourceTypes.length === 2
+      );
+    },
   },
   {
-    description: 'Should not extract from non-blocking rules',
+    description: 'Should preserve all condition properties in redirect rules',
     rules: [
       {
-        action: { type: 'allow' },
+        id: 1,
+        action: { type: 'block' },
         condition: {
-          urlFilter: '||tracker.com^',
+          regexFilter:
+            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+          requestDomains: ['com'],
+          excludedRequestDomains: ['trusted.com'],
           resourceTypes: ['main_frame'],
+          isUrlFilterCaseSensitive: true,
         },
       },
     ],
-    expected: [],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 1,
+    validate: (result) => {
+      const redirect = result.find((r) => r.action.type === 'redirect');
+      return (
+        redirect &&
+        redirect.condition.regexFilter ===
+          '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b' &&
+        redirect.condition.requestDomains[0] === 'com' &&
+        redirect.condition.excludedRequestDomains[0] === 'trusted.com' &&
+        redirect.condition.isUrlFilterCaseSensitive === true
+      );
+    },
   },
   {
-    description: 'Should extract multiple conditions',
+    description: 'Should handle multiple blocking rules',
     rules: [
       {
+        id: 1,
         action: { type: 'block' },
         condition: {
           urlFilter: '||tracker1.com^',
@@ -150,6 +154,7 @@ const extractionTests = [
         },
       },
       {
+        id: 2,
         action: { type: 'block' },
         condition: {
           urlFilter: '||tracker2.com^',
@@ -157,53 +162,55 @@ const extractionTests = [
         },
       },
     ],
-    expected: [
-      {
-        urlFilter: '||tracker1.com^',
-        resourceTypes: ['main_frame'],
-      },
-      {
-        urlFilter: '||tracker2.com^',
-        resourceTypes: ['main_frame'],
-      },
-    ],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 2,
+    validate: (result) => {
+      const redirects = result.filter((r) => r.action.type === 'redirect');
+      return (
+        redirects.length === 2 &&
+        redirects.every((r) => r.priority === 100) &&
+        redirects.some((r) => r.condition.urlFilter === '||tracker1.com^') &&
+        redirects.some((r) => r.condition.urlFilter === '||tracker2.com^')
+      );
+    },
   },
   {
-    description: 'Should preserve excludedRequestDomains',
+    description: 'Should preserve non-blocking rules unchanged',
     rules: [
       {
-        action: { type: 'block' },
+        id: 1,
+        action: { type: 'allow' },
         condition: {
-          regexFilter:
-            '^https:\\/\\/pancake(?:dro|swa)pclick\\d+\\.vercel\\.app\\/',
-          requestDomains: ['vercel.app'],
-          excludedRequestDomains: ['pancakeswap.finance'],
+          urlFilter: '||trusted.com^',
           resourceTypes: ['main_frame'],
         },
       },
     ],
-    expected: [
-      {
-        regexFilter:
-          '^https:\\/\\/pancake(?:dro|swa)pclick\\d+\\.vercel\\.app\\/',
-        requestDomains: ['vercel.app'],
-        excludedRequestDomains: ['pancakeswap.finance'],
-        resourceTypes: ['main_frame'],
-      },
-    ],
+    options: { enabled: true, priority: 100 },
+    expectedRedirectCount: 0,
+    validate: (result) => {
+      return (
+        result.length === 1 &&
+        result[0].action.type === 'allow' &&
+        result[0].condition.resourceTypes.includes('main_frame')
+      );
+    },
   },
 ];
 
-// Run condition extraction tests
-console.log('Running Redirect Protection Condition Extraction Tests\n');
+console.log('Running Redirect Protection Tests\n');
 console.log('='.repeat(80));
 
 let passed = 0;
 let failed = 0;
 
-extractionTests.forEach((test, index) => {
-  const result = extractMainFrameBlockingConditions(test.rules);
-  const success = JSON.stringify(result) === JSON.stringify(test.expected);
+tests.forEach((test, index) => {
+  const result = applyRedirectProtection(test.rules, test.options);
+  const redirectCount = result.filter((r) => r.action.type === 'redirect')
+    .length;
+  const countMatches = redirectCount === test.expectedRedirectCount;
+  const validationPassed = test.validate(result);
+  const success = countMatches && validationPassed;
 
   if (success) {
     passed++;
@@ -211,14 +218,21 @@ extractionTests.forEach((test, index) => {
   } else {
     failed++;
     console.log(`❌ Test ${index + 1}: ${test.description}`);
-    console.log(`   Expected: ${JSON.stringify(test.expected, null, 2)}`);
-    console.log(`   Got:      ${JSON.stringify(result, null, 2)}`);
+    if (!countMatches) {
+      console.log(
+        `   Expected ${test.expectedRedirectCount} redirect rules, got ${redirectCount}`,
+      );
+    }
+    if (!validationPassed) {
+      console.log(`   Validation failed`);
+      console.log(`   Result: ${JSON.stringify(result, null, 2)}`);
+    }
   }
 });
 
 console.log('='.repeat(80));
 console.log(
-  `\nResults: ${passed} passed, ${failed} failed out of ${extractionTests.length} tests\n`,
+  `\nResults: ${passed} passed, ${failed} failed out of ${tests.length} tests\n`,
 );
 
 if (failed > 0) {
