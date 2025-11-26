@@ -18,6 +18,13 @@
 
 import { store } from 'hybrids';
 import Options from '/store/options.js';
+import {
+  REDIRECT_PROTECTION_SESSION_ID_RANGE,
+  REDIRECT_PROTECTION_SESSION_PRIORITY,
+  REDIRECT_PROTECTION_ID_RANGE,
+  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+  getDynamicRulesIds,
+} from '/utils/dnr.js';
 
 if (__PLATFORM__ !== 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
@@ -27,12 +34,6 @@ if (__PLATFORM__ !== 'firefox') {
         details.url &&
         !details.url.includes('redirect-protection')
       ) {
-        console.info(
-          '[redirect-protection] Storing URL for tab',
-          details.tabId,
-          ':',
-          details.url,
-        );
         chrome.storage.session
           .set({
             [`redirectUrl_${details.tabId}`]: details.url,
@@ -49,6 +50,12 @@ if (__PLATFORM__ !== 'firefox') {
 
   chrome.tabs.onRemoved.addListener((tabId) => {
     chrome.storage.session.remove(`redirectUrl_${tabId}`).catch(() => {});
+
+    chrome.declarativeNetRequest
+      .updateSessionRules({
+        removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
+      })
+      .catch(() => {});
   });
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -64,31 +71,127 @@ if (__PLATFORM__ !== 'firefox') {
           .catch(() => {
             sendResponse({ url: null });
           });
-        return true; // Keep channel open for async response
+        return true;
       }
-    } else if (message.action === 'allowRedirect') {
-      if (sender.tab && sender.tab.id) {
-        chrome.storage.session
-          .remove(`redirectUrl_${sender.tab.id}`)
-          .catch(() => {});
+      sendResponse({ url: null });
+      return false;
+    }
+
+    if (message.action === 'allowRedirect') {
+      if (!sender.tab || !sender.tab.id || !message.url) {
+        console.error(
+          '[redirect-protection] Missing tab or URL in allowRedirect',
+        );
+        sendResponse({ success: false, error: 'Missing tab or URL' });
+        return false;
       }
-    } else if (
-      message.action === 'disableRedirectProtection' &&
-      message.hostname
-    ) {
-      store.resolve(Options).then((options) => {
-        const disabled = options.redirectProtection?.disabled || [];
-        if (!disabled.includes(message.hostname)) {
-          store.set(Options, {
+
+      const tabId = sender.tab.id;
+      const url = message.url;
+
+      (async () => {
+        try {
+          const urlObj = new URL(url);
+          const domain = urlObj.hostname;
+
+          await chrome.declarativeNetRequest.updateSessionRules({
+            addRules: [
+              {
+                id: REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId,
+                priority: REDIRECT_PROTECTION_SESSION_PRIORITY,
+                action: { type: 'allow' },
+                condition: {
+                  requestDomains: [domain],
+                  resourceTypes: ['main_frame'],
+                  tabIds: [tabId],
+                },
+              },
+            ],
+            removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
+          });
+
+          await chrome.storage.session.remove(`redirectUrl_${tabId}`);
+
+          sendResponse({ success: true });
+        } catch (error) {
+          console.error(
+            '[redirect-protection] Error creating session rule:',
+            error,
+          );
+          sendResponse({ success: false, error: error.message });
+        }
+      })();
+
+      return true;
+    }
+
+    if (message.action === 'disableRedirectProtection') {
+      if (!message.hostname) {
+        console.error(
+          '[redirect-protection] Missing hostname in disableRedirectProtection',
+        );
+        sendResponse({ success: false, error: 'Missing hostname' });
+        return false;
+      }
+
+      (async () => {
+        try {
+          const options = await store.resolve(Options);
+          const disabled = options.redirectProtection?.disabled || [];
+
+          if (disabled.includes(message.hostname)) {
+            sendResponse({ success: true });
+            return;
+          }
+
+          const newDisabled = [...disabled, message.hostname];
+          await store.set(Options, {
             redirectProtection: {
               ...options.redirectProtection,
-              disabled: [...disabled, message.hostname],
+              disabled: newDisabled,
             },
           });
-        }
-      });
-    }
-  });
 
-  console.info('[redirect-protection] MV3 service initialized');
+          const removeRuleIds = await getDynamicRulesIds(
+            REDIRECT_PROTECTION_ID_RANGE,
+          );
+
+          const addRules = [];
+          let ruleId = REDIRECT_PROTECTION_ID_RANGE.start;
+          for (let i = 0; i < newDisabled.length; i += 1000) {
+            const chunk = newDisabled.slice(i, i + 1000);
+            addRules.push({
+              id: ruleId++,
+              priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+              action: { type: 'allow' },
+              condition: {
+                requestDomains: chunk,
+                resourceTypes: ['main_frame'],
+              },
+            });
+          }
+
+          await chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds,
+            addRules,
+          });
+
+          sendResponse({ success: true });
+        } catch (error) {
+          console.error(
+            '[redirect-protection] Error disabling protection:',
+            error,
+          );
+          sendResponse({
+            success: false,
+            error: error.message || String(error),
+          });
+        }
+      })();
+
+      return true;
+    }
+
+    return false;
+  });
 }

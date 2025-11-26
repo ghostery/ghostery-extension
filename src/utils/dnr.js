@@ -17,10 +17,15 @@ export const REDIRECT_PROTECTION_ID_RANGE = {
   start: 4_000_000,
   end: 5_000_000,
 };
+export const REDIRECT_PROTECTION_SESSION_ID_RANGE = {
+  start: 5_000_000,
+  end: 6_000_000,
+};
 
 export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const REDIRECT_PROTECTION_EXCEPTION_PRIORITY = 200;
+export const REDIRECT_PROTECTION_SESSION_PRIORITY = 300;
 
 export async function getDynamicRulesIds(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules())

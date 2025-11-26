@@ -28,23 +28,35 @@ function goBack() {
 async function allow(host) {
   if (!host.targetUrl) return;
 
-  await chrome.runtime.sendMessage({
-    action: 'allowRedirect',
-    url: host.targetUrl,
-  });
+  try {
+    const response = await chrome.runtime.sendMessage({
+      action: 'allowRedirect',
+      url: host.targetUrl,
+    });
 
-  location.replace(host.targetUrl);
+    if (response?.success) {
+      location.replace(host.targetUrl);
+    }
+  } catch (error) {
+    console.error('[redirect-protection] Failed to allow redirect:', error);
+  }
 }
 
 async function alwaysAllow(host) {
   if (!host.hostname) return;
 
-  await chrome.runtime.sendMessage({
-    action: 'disableRedirectProtection',
-    hostname: host.hostname,
-  });
+  try {
+    const response = await chrome.runtime.sendMessage({
+      action: 'disableRedirectProtection',
+      hostname: host.hostname,
+    });
 
-  location.replace(host.targetUrl);
+    if (response?.success) {
+      location.replace(host.targetUrl);
+    }
+  } catch (error) {
+    console.error('[redirect-protection] Failed to disable protection:', error);
+  }
 }
 
 const App = {

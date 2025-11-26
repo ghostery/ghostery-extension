@@ -16,6 +16,8 @@
  * redirect protection page, allowing users to decide whether to proceed.
  */
 
+import Options from '/store/options.js';
+
 // Store URLs that are temporarily allowed after user confirmation
 const allowedRedirectUrls = new Set();
 
@@ -118,3 +120,48 @@ export async function disableRedirectProtectionForHostname(hostname, Options) {
     });
   }
 }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'allowRedirect') {
+    if (!message.url) {
+      sendResponse({ success: false, error: 'Missing URL' });
+      return false;
+    }
+
+    try {
+      allowRedirectUrl(message.url);
+      sendResponse({ success: true });
+    } catch (error) {
+      console.error('[redirect-protection] Error allowing redirect:', error);
+      sendResponse({ success: false, error: error.message });
+    }
+
+    return false;
+  }
+
+  if (message.action === 'disableRedirectProtection') {
+    if (!message.hostname) {
+      sendResponse({ success: false, error: 'Missing hostname' });
+      return false;
+    }
+
+    disableRedirectProtectionForHostname(message.hostname, Options)
+      .then(() => {
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        console.error(
+          '[redirect-protection] Error disabling protection:',
+          error,
+        );
+        sendResponse({
+          success: false,
+          error: error.message || String(error),
+        });
+      });
+
+    return true;
+  }
+
+  return false;
+});
