@@ -22,6 +22,7 @@ import {
   getDynamicRulesIds,
   applyRedirectProtection,
   createRedirectProtectionExceptionRules,
+  filterMaxPriorityRules,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
@@ -109,7 +110,6 @@ if (__PLATFORM__ !== 'firefox') {
             );
 
             if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
-              const MAX_PRIORITY = 1073741823;
               const fetchedRules = await fetch(list.dnr.url).then((res) =>
                 res.ok
                   ? res.json()
@@ -118,17 +118,16 @@ if (__PLATFORM__ !== 'firefox') {
                     ),
               );
 
-              // Filter out max priority rules that would bypass redirect protection
-              const rules = new Set(
-                fetchedRules.filter((rule) => rule.priority !== MAX_PRIORITY),
-              );
-
-              const removedMaxPriorityCount = fetchedRules.length - rules.size;
+              const filteredRules = filterMaxPriorityRules(fetchedRules);
+              const removedMaxPriorityCount =
+                fetchedRules.length - filteredRules.length;
               if (removedMaxPriorityCount > 0) {
                 console.info(
                   `[dnr] Filtered out ${removedMaxPriorityCount} max priority rule(s) from dnr-fixes`,
                 );
               }
+
+              const rules = new Set(filteredRules);
 
               for (const rule of rules) {
                 if (rule.condition.regexFilter) {

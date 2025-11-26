@@ -27,6 +27,12 @@ export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const REDIRECT_PROTECTION_EXCEPTION_PRIORITY = 200;
 export const REDIRECT_PROTECTION_SESSION_PRIORITY = 300;
 
+const MAX_DNR_PRIORITY = 1073741823;
+
+export function filterMaxPriorityRules(rules) {
+  return rules.filter((rule) => rule.priority !== MAX_DNR_PRIORITY);
+}
+
 export async function getDynamicRulesIds(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules())
     .filter((rule) => rule.id >= type.start && rule.id < type.end)

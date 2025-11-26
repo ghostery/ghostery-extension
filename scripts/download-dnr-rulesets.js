@@ -13,6 +13,7 @@ import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
+import { filterMaxPriorityRules } from '../src/utils/dnr.js';
 
 if (!existsSync(RESOURCES_PATH)) {
   mkdirSync(RESOURCES_PATH, { recursive: true });
@@ -64,10 +65,7 @@ for (const [name, target] of Object.entries(RULESETS)) {
       return res.json();
     });
 
-    // Filter out the max priority rule that prevents main_frame blocking
-    // This rule has priority 1073741823 (max DNR priority) and allows all main_frame requests
-    const MAX_PRIORITY = 1073741823;
-    const filteredRules = dnr.filter((rule) => rule.priority !== MAX_PRIORITY);
+    const filteredRules = filterMaxPriorityRules(dnr);
 
     const removedCount = dnr.length - filteredRules.length;
     if (removedCount > 0) {
