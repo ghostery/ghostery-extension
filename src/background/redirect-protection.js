@@ -95,7 +95,7 @@ export function allowRedirectUrl(url) {
   allowedRedirectUrls.add(url);
 }
 
-export async function disableRedirectProtectionForHostname(hostname, Options) {
+export async function disableRedirectProtectionForHostname(hostname) {
   await updateOptionsWithDisabledHostname(hostname);
 }
 

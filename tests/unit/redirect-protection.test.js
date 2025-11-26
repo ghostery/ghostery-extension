@@ -206,8 +206,9 @@ let failed = 0;
 
 tests.forEach((test, index) => {
   const result = applyRedirectProtection(test.rules, test.options);
-  const redirectCount = result.filter((r) => r.action.type === 'redirect')
-    .length;
+  const redirectCount = result.filter(
+    (r) => r.action.type === 'redirect',
+  ).length;
   const countMatches = redirectCount === test.expectedRedirectCount;
   const validationPassed = test.validate(result);
   const success = countMatches && validationPassed;

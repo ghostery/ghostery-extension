@@ -75,22 +75,12 @@ const App = {
         }
       } else if (__PLATFORM__ !== 'firefox') {
         try {
-          const tab = await chrome.tabs.getCurrent();
+          const response = await chrome.runtime.sendMessage({
+            action: 'getRedirectUrl',
+          });
 
-          if (tab && tab.id) {
-            for (let i = 0; i < 5; i++) {
-              const result = await chrome.storage.session.get(
-                `redirectUrl_${tab.id}`,
-              );
-              const url = result[`redirectUrl_${tab.id}`];
-
-              if (url) {
-                host.targetUrl = url;
-                return;
-              }
-
-              await new Promise((resolve) => setTimeout(resolve, 50));
-            }
+          if (response?.url) {
+            host.targetUrl = response.url;
           }
         } catch (e) {
           console.error('[redirect-protection] Failed to get URL:', e);

@@ -66,18 +66,14 @@ if (__PLATFORM__ !== 'firefox') {
   OptionsObserver.addListener(async function dnr(options, lastOptions) {
     const ids = getIds(options);
 
-    // Check if redirect protection disabled list changed
-    const redirectProtectionChanged =
-      lastOptions &&
+    const hasChanges =
+      !lastOptions ||
+      lastOptions.filtersUpdatedAt !== options.filtersUpdatedAt ||
+      String(ids) !== String(getIds(lastOptions)) ||
       JSON.stringify(options.redirectProtection?.disabled || []) !==
         JSON.stringify(lastOptions.redirectProtection?.disabled || []);
 
-    if (
-      lastOptions &&
-      lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
-      String(ids) === String(getIds(lastOptions)) &&
-      !redirectProtectionChanged
-    ) {
+    if (!hasChanges) {
       return;
     }
 
@@ -202,7 +198,6 @@ if (__PLATFORM__ !== 'firefox') {
       ids.push('fixes');
     }
 
-    // Manage redirect protection exception rules (dynamic)
     if (
       ids.includes('redirect-protection') &&
       options.redirectProtection?.enabled
@@ -211,11 +206,12 @@ if (__PLATFORM__ !== 'firefox') {
       const lastDisabledDomains =
         lastOptions?.redirectProtection?.disabled || [];
 
-      if (
+      const disabledDomainsChanged =
         !lastOptions ||
         JSON.stringify(disabledDomains.sort()) !==
-          JSON.stringify(lastDisabledDomains.sort())
-      ) {
+          JSON.stringify(lastDisabledDomains.sort());
+
+      if (disabledDomainsChanged) {
         try {
           const removeRuleIds = await getDynamicRulesIds(
             REDIRECT_PROTECTION_ID_RANGE,

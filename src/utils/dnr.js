@@ -33,7 +33,10 @@ export async function getDynamicRulesIds(type) {
     .map((rule) => rule.id);
 }
 
-export function createRedirectProtectionExceptionRules(disabledDomains, startId) {
+export function createRedirectProtectionExceptionRules(
+  disabledDomains,
+  startId,
+) {
   return disabledDomains.map((hostname, index) => ({
     id: startId + index,
     priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
