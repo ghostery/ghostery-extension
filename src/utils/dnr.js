@@ -66,7 +66,7 @@ export function createRedirectProtectionExceptionRules(
  */
 export function applyRedirectProtection(
   rules,
-  { enabled = false, priority = 100 } = {},
+  { enabled = false, priority = REDIRECT_PROTECTION_EXCEPTION_PRIORITY } = {},
 ) {
   if (!enabled || !rules || !rules.length) {
     return rules;
