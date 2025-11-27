@@ -9,12 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { describe, it } from 'node:test';
+import assert from 'node:assert';
 import { applyRedirectProtection } from '../../src/utils/dnr.js';
 
-const tests = [
-  {
-    description: 'Should convert main_frame blocking rule to redirect rule',
-    rules: [
+describe('applyRedirectProtection', () => {
+  it('should convert main_frame blocking rule to redirect rule', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
@@ -23,26 +24,21 @@ const tests = [
           resourceTypes: ['main_frame'],
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 1,
-    validate: (result) => {
-      const redirect = result.find((r) => r.action.type === 'redirect');
-      return (
-        redirect &&
-        redirect.priority === 100 &&
-        redirect.action.redirect.extensionPath ===
-          '/pages/redirect-protection/index.html' &&
-        redirect.condition.resourceTypes.length === 1 &&
-        redirect.condition.resourceTypes[0] === 'main_frame' &&
-        redirect.condition.urlFilter === '||tracker.com^'
-      );
-    },
-  },
-  {
-    description:
-      'Should split rule with multiple resource types including main_frame',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const redirect = result.find((r) => r.action.type === 'redirect');
+
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.ok(redirect);
+    assert.strictEqual(redirect.priority, 100);
+    assert.strictEqual(redirect.action.redirect.extensionPath, '/pages/redirect-protection/index.html');
+    assert.strictEqual(redirect.condition.resourceTypes.length, 1);
+    assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
+    assert.strictEqual(redirect.condition.urlFilter, '||tracker.com^');
+  });
+
+  it('should split rule with multiple resource types including main_frame', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
@@ -51,26 +47,23 @@ const tests = [
           resourceTypes: ['main_frame', 'script', 'image'],
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 1,
-    validate: (result) => {
-      const redirect = result.find((r) => r.action.type === 'redirect');
-      const block = result.find((r) => r.action.type === 'block');
-      return (
-        redirect &&
-        redirect.condition.resourceTypes.length === 1 &&
-        redirect.condition.resourceTypes[0] === 'main_frame' &&
-        block &&
-        block.condition.resourceTypes.length === 2 &&
-        block.condition.resourceTypes.includes('script') &&
-        block.condition.resourceTypes.includes('image')
-      );
-    },
-  },
-  {
-    description: 'Should not convert rules when disabled',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const redirect = result.find((r) => r.action.type === 'redirect');
+    const block = result.find((r) => r.action.type === 'block');
+
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.ok(redirect);
+    assert.strictEqual(redirect.condition.resourceTypes.length, 1);
+    assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
+    assert.ok(block);
+    assert.strictEqual(block.condition.resourceTypes.length, 2);
+    assert.ok(block.condition.resourceTypes.includes('script'));
+    assert.ok(block.condition.resourceTypes.includes('image'));
+  });
+
+  it('should not convert rules when disabled', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
@@ -79,20 +72,17 @@ const tests = [
           resourceTypes: ['main_frame'],
         },
       },
-    ],
-    options: { enabled: false, priority: 100 },
-    expectedRedirectCount: 0,
-    validate: (result) => {
-      return (
-        result.length === 1 &&
-        result[0].action.type === 'block' &&
-        result[0].condition.resourceTypes.includes('main_frame')
-      );
-    },
-  },
-  {
-    description: 'Should preserve non-main_frame blocking rules unchanged',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: false, priority: 100 });
+
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(result.length, 1);
+    assert.strictEqual(result[0].action.type, 'block');
+    assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
+  });
+
+  it('should preserve non-main_frame blocking rules unchanged', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
@@ -101,50 +91,42 @@ const tests = [
           resourceTypes: ['script', 'image'],
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 0,
-    validate: (result) => {
-      return (
-        result.length === 1 &&
-        result[0].action.type === 'block' &&
-        result[0].condition.resourceTypes.length === 2
-      );
-    },
-  },
-  {
-    description: 'Should preserve all condition properties in redirect rules',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(result.length, 1);
+    assert.strictEqual(result[0].action.type, 'block');
+    assert.strictEqual(result[0].condition.resourceTypes.length, 2);
+  });
+
+  it('should preserve all condition properties in redirect rules', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
         condition: {
-          regexFilter:
-            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+          regexFilter: '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
           requestDomains: ['com'],
           excludedRequestDomains: ['trusted.com'],
           resourceTypes: ['main_frame'],
           isUrlFilterCaseSensitive: true,
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 1,
-    validate: (result) => {
-      const redirect = result.find((r) => r.action.type === 'redirect');
-      return (
-        redirect &&
-        redirect.condition.regexFilter ===
-          '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b' &&
-        redirect.condition.requestDomains[0] === 'com' &&
-        redirect.condition.excludedRequestDomains[0] === 'trusted.com' &&
-        redirect.condition.isUrlFilterCaseSensitive === true
-      );
-    },
-  },
-  {
-    description: 'Should handle multiple blocking rules',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const redirect = result.find((r) => r.action.type === 'redirect');
+
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.ok(redirect);
+    assert.strictEqual(redirect.condition.regexFilter, '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b');
+    assert.strictEqual(redirect.condition.requestDomains[0], 'com');
+    assert.strictEqual(redirect.condition.excludedRequestDomains[0], 'trusted.com');
+    assert.strictEqual(redirect.condition.isUrlFilterCaseSensitive, true);
+  });
+
+  it('should handle multiple blocking rules', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'block' },
@@ -161,22 +143,18 @@ const tests = [
           resourceTypes: ['main_frame'],
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 2,
-    validate: (result) => {
-      const redirects = result.filter((r) => r.action.type === 'redirect');
-      return (
-        redirects.length === 2 &&
-        redirects.every((r) => r.priority === 100) &&
-        redirects.some((r) => r.condition.urlFilter === '||tracker1.com^') &&
-        redirects.some((r) => r.condition.urlFilter === '||tracker2.com^')
-      );
-    },
-  },
-  {
-    description: 'Should preserve non-blocking rules unchanged',
-    rules: [
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const redirects = result.filter((r) => r.action.type === 'redirect');
+
+    assert.strictEqual(redirects.length, 2);
+    assert.ok(redirects.every((r) => r.priority === 100));
+    assert.ok(redirects.some((r) => r.condition.urlFilter === '||tracker1.com^'));
+    assert.ok(redirects.some((r) => r.condition.urlFilter === '||tracker2.com^'));
+  });
+
+  it('should preserve non-blocking rules unchanged', () => {
+    const rules = [
       {
         id: 1,
         action: { type: 'allow' },
@@ -185,59 +163,12 @@ const tests = [
           resourceTypes: ['main_frame'],
         },
       },
-    ],
-    options: { enabled: true, priority: 100 },
-    expectedRedirectCount: 0,
-    validate: (result) => {
-      return (
-        result.length === 1 &&
-        result[0].action.type === 'allow' &&
-        result[0].condition.resourceTypes.includes('main_frame')
-      );
-    },
-  },
-];
+    ];
+    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
 
-console.log('Running Redirect Protection Tests\n');
-console.log('='.repeat(80));
-
-let passed = 0;
-let failed = 0;
-
-tests.forEach((test, index) => {
-  const result = applyRedirectProtection(test.rules, test.options);
-  const redirectCount = result.filter(
-    (r) => r.action.type === 'redirect',
-  ).length;
-  const countMatches = redirectCount === test.expectedRedirectCount;
-  const validationPassed = test.validate(result);
-  const success = countMatches && validationPassed;
-
-  if (success) {
-    passed++;
-    console.log(`✅ Test ${index + 1}: ${test.description}`);
-  } else {
-    failed++;
-    console.log(`❌ Test ${index + 1}: ${test.description}`);
-    if (!countMatches) {
-      console.log(
-        `   Expected ${test.expectedRedirectCount} redirect rules, got ${redirectCount}`,
-      );
-    }
-    if (!validationPassed) {
-      console.log(`   Validation failed`);
-      console.log(`   Result: ${JSON.stringify(result, null, 2)}`);
-    }
-  }
+    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(result.length, 1);
+    assert.strictEqual(result[0].action.type, 'allow');
+    assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
+  });
 });
-
-console.log('='.repeat(80));
-console.log(
-  `\nResults: ${passed} passed, ${failed} failed out of ${tests.length} tests\n`,
-);
-
-if (failed > 0) {
-  process.exit(1);
-}
-
-console.log('✅ All tests passed!');

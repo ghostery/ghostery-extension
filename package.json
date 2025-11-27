@@ -12,7 +12,7 @@
     "lint:src": "eslint",
     "lint:build": "npm run build firefox -- --silent && addons-linter dist",
     "test": "npm run test:unit && npm run wdio && npm run wdio:update",
-    "test:unit": "node tests/unit/redirect-protection.test.js",
+    "test:unit": "node --test",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
     "wdio:page": "node tests/e2e/page/server.js",
