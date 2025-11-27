@@ -18,10 +18,8 @@ import Resources from '/store/resources.js';
 import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
 import {
   FIXES_ID_RANGE,
-  REDIRECT_PROTECTION_ID_RANGE,
   getDynamicRulesIds,
   applyRedirectProtection,
-  createRedirectProtectionExceptionRules,
   filterMaxPriorityRules,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -67,14 +65,12 @@ if (__PLATFORM__ !== 'firefox') {
   OptionsObserver.addListener(async function dnr(options, lastOptions) {
     const ids = getIds(options);
 
-    const hasChanges =
-      !lastOptions ||
-      lastOptions.filtersUpdatedAt !== options.filtersUpdatedAt ||
-      String(ids) !== String(getIds(lastOptions)) ||
-      JSON.stringify(options.redirectProtection.disabled || []) !==
-        JSON.stringify(lastOptions.redirectProtection.disabled || []);
-
-    if (!hasChanges) {
+    if (
+      lastOptions &&
+      lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
+      String(ids) === String(getIds(lastOptions))
+    ) {
+      // No changes in options triggering an update, skip updating rules
       return;
     }
 
@@ -83,6 +79,7 @@ if (__PLATFORM__ !== 'firefox') {
 
     const config = await store.resolve(Config);
 
+    // Add latest fixes rules
     if (config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
       const DNR_FIXES_KEY = 'dnr-fixes';
       const resources = await store.resolve(Resources);
@@ -110,24 +107,19 @@ if (__PLATFORM__ !== 'firefox') {
             );
 
             if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
-              const fetchedRules = await fetch(list.dnr.url).then((res) =>
-                res.ok
-                  ? res.json()
-                  : Promise.reject(
-                      new Error(`Failed to fetch DNR rules: ${res.statusText}`),
-                    ),
+              const rules = new Set(
+                filterMaxPriorityRules(
+                  await fetch(list.dnr.url).then((res) =>
+                    res.ok
+                      ? res.json()
+                      : Promise.reject(
+                          new Error(
+                            `Failed to fetch DNR rules: ${res.statusText}`,
+                          ),
+                        ),
+                  ),
+                ),
               );
-
-              const filteredRules = filterMaxPriorityRules(fetchedRules);
-              const removedMaxPriorityCount =
-                fetchedRules.length - filteredRules.length;
-              if (removedMaxPriorityCount > 0) {
-                console.info(
-                  `[dnr] Filtered out ${removedMaxPriorityCount} max priority rule(s) from dnr-fixes`,
-                );
-              }
-
-              const rules = new Set(filteredRules);
 
               for (const rule of rules) {
                 if (rule.condition.regexFilter) {
@@ -142,16 +134,11 @@ if (__PLATFORM__ !== 'firefox') {
                 }
               }
 
-              // Apply redirect protection to dynamic fixes
-              const rulesArray = Array.from(rules);
-              const rulesWithRedirects = applyRedirectProtection(rulesArray, {
-                enabled: options.redirectProtection.enabled,
-                priority: 100,
-              });
-
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: rulesWithRedirects.map((rule, index) => ({
+                addRules: applyRedirectProtection(Array.from(rules), {
+                  enabled: options.redirectProtection.enabled,
+                }).map((rule, index) => ({
                   ...rule,
                   id: FIXES_ID_RANGE.start + index,
                 })),
@@ -181,6 +168,7 @@ if (__PLATFORM__ !== 'firefox') {
           }
         }
       } else if (resources.checksums[DNR_FIXES_KEY]) {
+        // Remove all dynamic fixes rules
         const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
         if (removeRuleIds.length) {
           await chrome.declarativeNetRequest.updateDynamicRules({
@@ -195,52 +183,6 @@ if (__PLATFORM__ !== 'firefox') {
       }
     } else if (ids.length) {
       ids.push('fixes');
-    }
-
-    if (
-      ids.includes('redirect-protection') &&
-      options.redirectProtection.enabled
-    ) {
-      const disabledDomains = options.redirectProtection.disabled || [];
-      const lastDisabledDomains =
-        lastOptions?.redirectProtection.disabled || [];
-
-      const disabledDomainsChanged =
-        !lastOptions ||
-        JSON.stringify(disabledDomains.sort()) !==
-          JSON.stringify(lastDisabledDomains.sort());
-
-      if (disabledDomainsChanged) {
-        try {
-          const removeRuleIds = await getDynamicRulesIds(
-            REDIRECT_PROTECTION_ID_RANGE,
-          );
-
-          const addRules = createRedirectProtectionExceptionRules(
-            disabledDomains,
-            REDIRECT_PROTECTION_ID_RANGE.start,
-          );
-
-          await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds,
-            addRules,
-          });
-        } catch (e) {
-          console.error(
-            '[dnr] Error while updating redirect protection exceptions:',
-            e,
-          );
-        }
-      }
-    } else {
-      const removeRuleIds = await getDynamicRulesIds(
-        REDIRECT_PROTECTION_ID_RANGE,
-      );
-      if (removeRuleIds.length) {
-        await chrome.declarativeNetRequest.updateDynamicRules({
-          removeRuleIds,
-        });
-      }
     }
 
     const enableRulesetIds = [];

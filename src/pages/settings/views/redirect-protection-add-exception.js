@@ -20,17 +20,12 @@ async function add({ options, hostname }, event) {
   router.resolve(
     event,
     store.submit(hostname).then(({ value }) => {
-      const disabled = options.redirectProtection.disabled || [];
-
-      if (disabled.includes(value)) {
+      if (options.redirectProtection.disabled[value]) {
         return;
       }
 
       return store.set(options, {
-        redirectProtection: {
-          ...options.redirectProtection,
-          disabled: [...disabled, value].sort(),
-        },
+        redirectProtection: { disabled: { [value]: true } },
       });
     }),
   );

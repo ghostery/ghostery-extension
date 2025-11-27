@@ -16,13 +16,9 @@ import RedirectProtectionAddException from './redirect-protection-add-exception.
 
 function removeException(hostname) {
   return ({ options }) => {
+    const { [hostname]: _, ...newDisabled } = options.redirectProtection.disabled;
     store.set(options, {
-      redirectProtection: {
-        ...options.redirectProtection,
-        disabled: options.redirectProtection.disabled.filter(
-          (h) => h !== hostname,
-        ),
-      },
+      redirectProtection: { disabled: newDisabled },
     });
   };
 }
@@ -89,7 +85,7 @@ export default {
                   </a>
                 </ui-button>
               </div>
-              ${options.redirectProtection.disabled.length
+              ${Object.keys(options.redirectProtection.disabled).length
                 ? html`
                     <div layout="column gap:0.5">
                       <div
@@ -98,10 +94,11 @@ export default {
                       >
                         <ui-text type="label-s" color="secondary">
                           Website
-                          (${options.redirectProtection.disabled.length})
+                          (${Object.keys(options.redirectProtection.disabled)
+                            .length})
                         </ui-text>
                       </div>
-                      ${options.redirectProtection.disabled.map(
+                      ${Object.keys(options.redirectProtection.disabled).map(
                         (hostname) => html`
                           <div
                             layout="grid:1|max content:center padding:1 gap"

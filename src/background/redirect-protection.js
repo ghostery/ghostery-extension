@@ -9,8 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
-import Options from '/store/options.js';
 import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
@@ -18,25 +16,10 @@ import {
   getDynamicRulesIds,
   createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 function getRedirectUrlStorageKey(tabId) {
   return `redirectUrl_${tabId}`;
-}
-
-async function updateOptionsWithDisabledHostname(hostname) {
-  const options = await store.resolve(Options);
-  const disabled = options.redirectProtection.disabled || [];
-
-  if (!disabled.includes(hostname)) {
-    await store.set(Options, {
-      redirectProtection: {
-        ...options.redirectProtection,
-        disabled: [...disabled, hostname],
-      },
-    });
-  }
-
-  return disabled.includes(hostname) ? disabled : [...disabled, hostname];
 }
 
 const allowedRedirectUrls = new Set();
@@ -52,7 +35,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
   }
 
   if (
-    options.redirectProtection.disabled.some((domain) =>
+    Object.keys(options.redirectProtection.disabled).some((domain) =>
       hostname.endsWith(domain),
     )
   ) {
@@ -83,30 +66,6 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       return false;
-    }
-
-    if (message.action === 'disableRedirectProtection') {
-      if (!message.hostname) {
-        sendResponse({ success: false, error: 'Missing hostname' });
-        return false;
-      }
-
-      updateOptionsWithDisabledHostname(message.hostname, Options)
-        .then(() => {
-          sendResponse({ success: true });
-        })
-        .catch((error) => {
-          console.error(
-            '[redirect-protection] Error disabling protection:',
-            error,
-          );
-          sendResponse({
-            success: false,
-            error: error.message || String(error),
-          });
-        });
-
-      return true;
     }
 
     return false;
@@ -213,51 +172,57 @@ if (__PLATFORM__ === 'firefox') {
       return true;
     }
 
-    if (message.action === 'disableRedirectProtection') {
-      if (!message.hostname) {
-        console.error(
-          '[redirect-protection] Missing hostname in disableRedirectProtection',
-        );
-        sendResponse({ success: false, error: 'Missing hostname' });
-        return false;
-      }
-
-      (async () => {
-        try {
-          const newDisabled = await updateOptionsWithDisabledHostname(
-            message.hostname,
-          );
-
-          const removeRuleIds = await getDynamicRulesIds(
-            REDIRECT_PROTECTION_ID_RANGE,
-          );
-
-          const addRules = createRedirectProtectionExceptionRules(
-            newDisabled,
-            REDIRECT_PROTECTION_ID_RANGE.start,
-          );
-
-          await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds,
-            addRules,
-          });
-
-          sendResponse({ success: true });
-        } catch (error) {
-          console.error(
-            '[redirect-protection] Error disabling protection:',
-            error,
-          );
-          sendResponse({
-            success: false,
-            error: error.message || String(error),
-          });
-        }
-      })();
-
-      return true;
-    }
-
     return false;
   });
+
+  OptionsObserver.addListener(
+    async function redirectProtectionExceptions(options, lastOptions) {
+      if (options.redirectProtection.enabled) {
+        const disabledDomains = Object.keys(
+          options.redirectProtection.disabled,
+        );
+        const lastDisabledDomains = lastOptions
+          ? Object.keys(lastOptions.redirectProtection.disabled)
+          : [];
+
+        const hasChanges =
+          !lastOptions ||
+          !lastOptions.redirectProtection.enabled ||
+          JSON.stringify(disabledDomains.sort()) !==
+            JSON.stringify(lastDisabledDomains.sort());
+
+        if (hasChanges) {
+          try {
+            const removeRuleIds = await getDynamicRulesIds(
+              REDIRECT_PROTECTION_ID_RANGE,
+            );
+
+            const addRules = createRedirectProtectionExceptionRules(
+              disabledDomains,
+              REDIRECT_PROTECTION_ID_RANGE.start,
+            );
+
+            await chrome.declarativeNetRequest.updateDynamicRules({
+              removeRuleIds,
+              addRules,
+            });
+          } catch (e) {
+            console.error(
+              '[redirect-protection] Error updating exception rules:',
+              e,
+            );
+          }
+        }
+      } else if (lastOptions?.redirectProtection.enabled) {
+        const removeRuleIds = await getDynamicRulesIds(
+          REDIRECT_PROTECTION_ID_RANGE,
+        );
+        if (removeRuleIds.length) {
+          await chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds,
+          });
+        }
+      }
+    },
+  );
 }

@@ -9,9 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import '/ui/index.js';
 import { themeToggle } from '/ui/theme.js';
+import Options from '/store/options.js';
 
 function goBack() {
   if (window.history.length > 1) {
@@ -46,14 +47,10 @@ async function alwaysAllow(host) {
   if (!host.hostname) return;
 
   try {
-    const response = await chrome.runtime.sendMessage({
-      action: 'disableRedirectProtection',
-      hostname: host.hostname,
+    await store.set(Options, {
+      redirectProtection: { disabled: { [host.hostname]: true } },
     });
-
-    if (response?.success) {
-      location.replace(host.targetUrl);
-    }
+    location.replace(host.targetUrl);
   } catch (error) {
     console.error('[redirect-protection] Failed to disable protection:', error);
   }
