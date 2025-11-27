@@ -65,10 +65,10 @@ const Options = {
   serpTrackingPrevention: true,
 
   // Redirect protection
-  redirectProtection: {
+  redirectProtection: store.record({
     enabled: true,
-    disabled: [String], // List of hostnames where redirect protection is disabled
-  },
+    disabled: [String],
+  }),
 
   // WhoTracks.Me
   wtmSerpReport: true,
