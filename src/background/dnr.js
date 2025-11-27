@@ -52,7 +52,7 @@ if (__PLATFORM__ !== 'firefox') {
     // Add redirect protection if enabled and any blocking is active
     if (
       ids.length &&
-      options.redirectProtection?.enabled &&
+      options.redirectProtection.enabled &&
       DNR_RESOURCES.includes('redirect-protection')
     ) {
       ids.push('redirect-protection');
@@ -71,8 +71,8 @@ if (__PLATFORM__ !== 'firefox') {
       !lastOptions ||
       lastOptions.filtersUpdatedAt !== options.filtersUpdatedAt ||
       String(ids) !== String(getIds(lastOptions)) ||
-      JSON.stringify(options.redirectProtection?.disabled || []) !==
-        JSON.stringify(lastOptions.redirectProtection?.disabled || []);
+      JSON.stringify(options.redirectProtection.disabled || []) !==
+        JSON.stringify(lastOptions.redirectProtection.disabled || []);
 
     if (!hasChanges) {
       return;
@@ -145,7 +145,7 @@ if (__PLATFORM__ !== 'firefox') {
               // Apply redirect protection to dynamic fixes
               const rulesArray = Array.from(rules);
               const rulesWithRedirects = applyRedirectProtection(rulesArray, {
-                enabled: options.redirectProtection?.enabled,
+                enabled: options.redirectProtection.enabled,
                 priority: 100,
               });
 
@@ -199,11 +199,11 @@ if (__PLATFORM__ !== 'firefox') {
 
     if (
       ids.includes('redirect-protection') &&
-      options.redirectProtection?.enabled
+      options.redirectProtection.enabled
     ) {
       const disabledDomains = options.redirectProtection.disabled || [];
       const lastDisabledDomains =
-        lastOptions?.redirectProtection?.disabled || [];
+        lastOptions?.redirectProtection.disabled || [];
 
       const disabledDomainsChanged =
         !lastOptions ||

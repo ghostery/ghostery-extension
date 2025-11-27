@@ -16,11 +16,12 @@ import RedirectProtectionAddException from './redirect-protection-add-exception.
 
 function removeException(hostname) {
   return ({ options }) => {
-    const disabled = options.redirectProtection?.disabled || [];
     store.set(options, {
       redirectProtection: {
         ...options.redirectProtection,
-        disabled: disabled.filter((h) => h !== hostname),
+        disabled: options.redirectProtection.disabled.filter(
+          (h) => h !== hostname,
+        ),
       },
     });
   };
@@ -34,119 +35,116 @@ export default {
   render: ({ options }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
-        ${store.ready(options) &&
-        html`
-          <section layout="column gap:4">
-            <div layout="column gap" layout@992px="margin:bottom">
-              <settings-link
-                href="${router.backUrl()}"
-                data-qa="button:back"
-                layout="self:start"
-              >
-                <ui-icon name="chevron-left" color="primary"></ui-icon>
-                <ui-text type="headline-s" layout="row gap items:center">
-                  Back
-                </ui-text>
-              </settings-link>
-              <ui-text type="headline-m">Redirect Tracking Protection</ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Ghostery blocks redirects to known tracking domains and shows a
-                warning page instead. You can choose to proceed or go back. Add
-                exceptions below for domains you trust.
+        <section layout="column gap:4">
+          <div layout="column gap" layout@992px="margin:bottom">
+            <settings-link
+              href="${router.backUrl()}"
+              data-qa="button:back"
+              layout="self:start"
+            >
+              <ui-icon name="chevron-left" color="primary"></ui-icon>
+              <ui-text type="headline-s" layout="row gap items:center">
+                Back
               </ui-text>
-            </div>
-            <settings-card type="content">
-              <ui-toggle
-                value="${options.redirectProtection.enabled}"
-                onchange="${html.set(options, 'redirectProtection.enabled')}"
-                data-qa="toggle:redirect-protection"
-              >
-                <div layout="column grow gap:0.5">
-                  <div layout="row gap items:center">
-                    <ui-icon
-                      name="globe"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <ui-text type="headline-xs">
-                      Enable Redirect Tracking Protection
-                    </ui-text>
-                  </div>
+            </settings-link>
+            <ui-text type="headline-m">Redirect Tracking Protection</ui-text>
+            <ui-text type="body-l" mobile-type="body-m" color="secondary">
+              Ghostery blocks redirects to known tracking domains and shows a
+              warning page instead. You can choose to proceed or go back. Add
+              exceptions below for domains you trust.
+            </ui-text>
+          </div>
+          <settings-card type="content">
+            <ui-toggle
+              value="${options.redirectProtection.enabled}"
+              onchange="${html.set(options, 'redirectProtection.enabled')}"
+              data-qa="toggle:redirect-protection"
+            >
+              <div layout="column grow gap:0.5">
+                <div layout="row gap items:center">
+                  <ui-icon
+                    name="globe"
+                    color="quaternary"
+                    layout="size:3"
+                  ></ui-icon>
+                  <ui-text type="headline-xs">
+                    Enable Redirect Tracking Protection
+                  </ui-text>
                 </div>
-              </ui-toggle>
-            </settings-card>
-            ${options.redirectProtection.enabled &&
-            html`
-              <div layout="column gap:2">
-                <div layout="row content:space-between items:center">
-                  <ui-text type="label-m">Redirect exceptions</ui-text>
-                  <ui-button
-                    type="primary"
-                    size="s"
-                    data-qa="button:redirect-protection:add"
-                  >
-                    <a href="${router.url(RedirectProtectionAddException)}">
-                      Add
-                    </a>
-                  </ui-button>
-                </div>
-                ${options.redirectProtection.disabled?.length
-                  ? html`
-                      <div layout="column gap:0.5">
-                        <div
-                          layout="grid:1|max padding:1 gap"
-                          style="background: var(--background-secondary); border-radius: 8px;"
-                        >
-                          <ui-text type="label-s" color="secondary">
-                            Website
-                            (${options.redirectProtection.disabled.length})
-                          </ui-text>
-                        </div>
-                        ${options.redirectProtection.disabled.map(
-                          (hostname) => html`
-                            <div
-                              layout="grid:1|max content:center padding:1 gap"
-                              style="border-bottom: 1px solid var(--color-divider-primary);"
-                              data-qa="item:redirect-protection:exception:${hostname}"
-                            >
-                              <ui-text type="body-s">${hostname}</ui-text>
-                              <ui-action>
-                                <button
-                                  onclick="${removeException(hostname)}"
-                                  data-qa="button:redirect-protection:remove:${hostname}"
-                                >
-                                  <ui-icon
-                                    name="trash"
-                                    color="danger-secondary"
-                                    layout="size:2.5"
-                                  ></ui-icon>
-                                </button>
-                              </ui-action>
-                            </div>
-                          `,
-                        )}
-                      </div>
-                    `
-                  : html`
+              </div>
+            </ui-toggle>
+          </settings-card>
+          ${options.redirectProtection.enabled &&
+          html`
+            <div layout="column gap:2">
+              <div layout="row content:space-between items:center">
+                <ui-text type="label-m">Redirect exceptions</ui-text>
+                <ui-button
+                  type="primary"
+                  size="s"
+                  data-qa="button:redirect-protection:add"
+                >
+                  <a href="${router.url(RedirectProtectionAddException)}">
+                    Add
+                  </a>
+                </ui-button>
+              </div>
+              ${options.redirectProtection.disabled.length
+                ? html`
+                    <div layout="column gap:0.5">
                       <div
-                        layout="column center gap:2 padding:4"
+                        layout="grid:1|max padding:1 gap"
                         style="background: var(--background-secondary); border-radius: 8px;"
-                        data-qa="component:redirect-protection:empty-state"
                       >
-                        <ui-icon
-                          name="shield"
-                          color="quaternary"
-                          layout="size:4"
-                        ></ui-icon>
-                        <ui-text type="body-s" color="secondary">
-                          No exceptions added yet
+                        <ui-text type="label-s" color="secondary">
+                          Website
+                          (${options.redirectProtection.disabled.length})
                         </ui-text>
                       </div>
-                    `}
-              </div>
-            `}
-          </section>
-        `}
+                      ${options.redirectProtection.disabled.map(
+                        (hostname) => html`
+                          <div
+                            layout="grid:1|max content:center padding:1 gap"
+                            style="border-bottom: 1px solid var(--color-divider-primary);"
+                            data-qa="item:redirect-protection:exception:${hostname}"
+                          >
+                            <ui-text type="body-s">${hostname}</ui-text>
+                            <ui-action>
+                              <button
+                                onclick="${removeException(hostname)}"
+                                data-qa="button:redirect-protection:remove:${hostname}"
+                              >
+                                <ui-icon
+                                  name="trash"
+                                  color="danger-secondary"
+                                  layout="size:2.5"
+                                ></ui-icon>
+                              </button>
+                            </ui-action>
+                          </div>
+                        `,
+                      )}
+                    </div>
+                  `
+                : html`
+                    <div
+                      layout="column center gap:2 padding:4"
+                      style="background: var(--background-secondary); border-radius: 8px;"
+                      data-qa="component:redirect-protection:empty-state"
+                    >
+                      <ui-icon
+                        name="shield"
+                        color="quaternary"
+                        layout="size:4"
+                      ></ui-icon>
+                      <ui-text type="body-s" color="secondary">
+                        No exceptions added yet
+                      </ui-text>
+                    </div>
+                  `}
+            </div>
+          `}
+        </section>
       </settings-page-layout>
     </template>
   `,

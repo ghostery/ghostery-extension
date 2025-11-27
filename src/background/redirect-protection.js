@@ -25,7 +25,7 @@ function getRedirectUrlStorageKey(tabId) {
 
 async function updateOptionsWithDisabledHostname(hostname) {
   const options = await store.resolve(Options);
-  const disabled = options.redirectProtection?.disabled || [];
+  const disabled = options.redirectProtection.disabled || [];
 
   if (!disabled.includes(hostname)) {
     await store.set(Options, {

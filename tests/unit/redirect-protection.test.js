@@ -25,13 +25,22 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      1,
+    );
     assert.ok(redirect);
     assert.strictEqual(redirect.priority, 100);
-    assert.strictEqual(redirect.action.redirect.extensionPath, '/pages/redirect-protection/index.html');
+    assert.strictEqual(
+      redirect.action.redirect.extensionPath,
+      '/pages/redirect-protection/index.html',
+    );
     assert.strictEqual(redirect.condition.resourceTypes.length, 1);
     assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
     assert.strictEqual(redirect.condition.urlFilter, '||tracker.com^');
@@ -48,11 +57,17 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
     const redirect = result.find((r) => r.action.type === 'redirect');
     const block = result.find((r) => r.action.type === 'block');
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      1,
+    );
     assert.ok(redirect);
     assert.strictEqual(redirect.condition.resourceTypes.length, 1);
     assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
@@ -73,9 +88,15 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: false, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: false,
+      priority: 100,
+    });
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      0,
+    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'block');
     assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
@@ -92,9 +113,15 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      0,
+    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'block');
     assert.strictEqual(result[0].condition.resourceTypes.length, 2);
@@ -106,7 +133,8 @@ describe('applyRedirectProtection', () => {
         id: 1,
         action: { type: 'block' },
         condition: {
-          regexFilter: '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+          regexFilter:
+            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
           requestDomains: ['com'],
           excludedRequestDomains: ['trusted.com'],
           resourceTypes: ['main_frame'],
@@ -114,14 +142,26 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 1);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      1,
+    );
     assert.ok(redirect);
-    assert.strictEqual(redirect.condition.regexFilter, '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b');
+    assert.strictEqual(
+      redirect.condition.regexFilter,
+      '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+    );
     assert.strictEqual(redirect.condition.requestDomains[0], 'com');
-    assert.strictEqual(redirect.condition.excludedRequestDomains[0], 'trusted.com');
+    assert.strictEqual(
+      redirect.condition.excludedRequestDomains[0],
+      'trusted.com',
+    );
     assert.strictEqual(redirect.condition.isUrlFilterCaseSensitive, true);
   });
 
@@ -144,13 +184,20 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
     const redirects = result.filter((r) => r.action.type === 'redirect');
 
     assert.strictEqual(redirects.length, 2);
     assert.ok(redirects.every((r) => r.priority === 100));
-    assert.ok(redirects.some((r) => r.condition.urlFilter === '||tracker1.com^'));
-    assert.ok(redirects.some((r) => r.condition.urlFilter === '||tracker2.com^'));
+    assert.ok(
+      redirects.some((r) => r.condition.urlFilter === '||tracker1.com^'),
+    );
+    assert.ok(
+      redirects.some((r) => r.condition.urlFilter === '||tracker2.com^'),
+    );
   });
 
   it('should preserve non-blocking rules unchanged', () => {
@@ -164,9 +211,15 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, { enabled: true, priority: 100 });
+    const result = applyRedirectProtection(rules, {
+      enabled: true,
+      priority: 100,
+    });
 
-    assert.strictEqual(result.filter((r) => r.action.type === 'redirect').length, 0);
+    assert.strictEqual(
+      result.filter((r) => r.action.type === 'redirect').length,
+      0,
+    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'allow');
     assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
