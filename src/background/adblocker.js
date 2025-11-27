@@ -149,7 +149,7 @@ export async function reloadMainEngine() {
       `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
     );
   } else {
-    engines.create(engines.MAIN_ENGINE);
+    await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 
