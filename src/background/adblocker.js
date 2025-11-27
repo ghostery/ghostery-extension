@@ -34,7 +34,7 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
-import { handleRedirectProtection } from './redirect-protection.js';
+import { getRedirectProtectionUrl } from './redirect-protection.js';
 
 let options = Options;
 
@@ -546,33 +546,20 @@ if (__PLATFORM__ === 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
-      // Handle redirect protection for main_frame requests
-      if (details.type === 'main_frame') {
-        const redirectProtectionResult = handleRedirectProtection(
-          details,
-          request,
-          options,
-          isTrusted,
-          () => engines.get(engines.MAIN_ENGINE),
-          updateTabStats,
-        );
-
-        if (redirectProtectionResult) {
-          return redirectProtectionResult;
-        }
-
-        // If not handled by redirect protection, allow the request
-        return;
-      }
-
-      // Handle other request types normally
       let result = undefined;
       if (request.sourceHostname && !isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
 
         const { redirect, match } = engine.match(request);
 
-        if (redirect !== undefined) {
+        if (details.type === 'main_frame') {
+          const redirectUrl = getRedirectProtectionUrl(
+            details.url,
+            request.hostname,
+            options,
+          );
+          return { redirectUrl };
+        } else if (redirect !== undefined) {
           request.blocked = true;
           // There's a possibility that redirecting to file URL can expose
           // extension existence.

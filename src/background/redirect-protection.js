@@ -41,58 +41,29 @@ async function updateOptionsWithDisabledHostname(hostname) {
 
 const allowedRedirectUrls = new Set();
 
-function shouldProtectRedirect(options, hostname) {
-  if (!options.redirectProtection?.enabled) {
-    return false;
-  }
-
-  const disabledDomains = options.redirectProtection.disabled || [];
-  return !disabledDomains.some((domain) => hostname.endsWith(domain));
-}
-
-export function handleRedirectProtection(
-  details,
-  request,
-  options,
-  isTrusted,
-  getEngine,
-  updateTabStats,
-) {
-  if (details.type !== 'main_frame') {
+export function getRedirectProtectionUrl(url, hostname, options) {
+  if (allowedRedirectUrls.has(url)) {
+    allowedRedirectUrls.delete(url);
     return undefined;
   }
 
-  const hostname = request.hostname;
-
-  if (allowedRedirectUrls.has(details.url)) {
-    allowedRedirectUrls.delete(details.url);
+  if (!options.redirectProtection.enabled) {
     return undefined;
   }
 
   if (
-    !shouldProtectRedirect(options, hostname) ||
-    isTrusted(request, details.type)
+    options.redirectProtection.disabled.some((domain) =>
+      hostname.endsWith(domain),
+    )
   ) {
     return undefined;
   }
 
-  const engine = getEngine();
-  const { redirect, match } = engine.match(request);
-
-  if (match === true || redirect !== undefined) {
-    request.blocked = true;
-    updateTabStats(details.tabId, [request]);
-
-    const encodedUrl = btoa(details.url);
-    const protectionUrl =
-      chrome.runtime.getURL('pages/redirect-protection/index.html') +
-      '?url=' +
-      encodedUrl;
-
-    return { redirectUrl: protectionUrl };
-  }
-
-  return undefined;
+  return (
+    chrome.runtime.getURL('pages/redirect-protection/index.html') +
+    '?url=' +
+    btoa(url)
+  );
 }
 
 if (__PLATFORM__ === 'firefox') {
