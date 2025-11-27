@@ -55,7 +55,7 @@ for (const [name, target] of Object.entries(RULESETS)) {
   /* DNR rules */
 
   if (list.dnr) {
-    const dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
+    let dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
       if (!res.ok) {
         throw new Error(
           `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
@@ -65,14 +65,9 @@ for (const [name, target] of Object.entries(RULESETS)) {
       return res.json();
     });
 
-    const filteredRules = filterMaxPriorityRules(dnr);
+    dnr = filterMaxPriorityRules(dnr);
 
-    const removedCount = dnr.length - filteredRules.length;
-    if (removedCount > 0) {
-      process.stdout.write(` (removed ${removedCount} max priority rule(s))`);
-    }
-
-    writeFileSync(outputPath, JSON.stringify(filteredRules, null, 2));
+    writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
     process.stdout.write(' done\n');
   }
 }
