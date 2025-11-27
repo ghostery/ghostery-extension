@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
-  REDIRECT_PROTECTION_SESSION_PRIORITY,
+  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
   REDIRECT_PROTECTION_ID_RANGE,
   getDynamicRulesIds,
   createRedirectProtectionExceptionRules,
@@ -186,7 +186,7 @@ if (__PLATFORM__ === 'firefox') {
             addRules: [
               {
                 id: REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId,
-                priority: REDIRECT_PROTECTION_SESSION_PRIORITY,
+                priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
                 action: { type: 'allow' },
                 condition: {
                   urlFilter: urlPattern,

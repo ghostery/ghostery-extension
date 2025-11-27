@@ -25,7 +25,6 @@ export const REDIRECT_PROTECTION_SESSION_ID_RANGE = {
 export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const REDIRECT_PROTECTION_EXCEPTION_PRIORITY = 200;
-export const REDIRECT_PROTECTION_SESSION_PRIORITY = 300;
 
 const MAX_DNR_PRIORITY = 1073741823;
 
@@ -54,16 +53,6 @@ export function createRedirectProtectionExceptionRules(
   }));
 }
 
-/**
- * Apply redirect protection to DNR rules
- * Converts blocking rules that target main_frame to redirect rules
- *
- * @param {Array} rules - Array of DNR rules
- * @param {Object} options - Options
- * @param {boolean} options.enabled - Whether redirect protection is enabled
- * @param {number} options.priority - Priority for redirect rules (default: 100)
- * @returns {Array} Array with redirect rules added and original rules modified
- */
 export function applyRedirectProtection(
   rules,
   { enabled = false, priority = REDIRECT_PROTECTION_EXCEPTION_PRIORITY } = {},
@@ -76,12 +65,10 @@ export function applyRedirectProtection(
   const modifiedRules = [];
 
   for (const rule of rules) {
-    // Only process blocking rules that include main_frame
     if (
       rule.action?.type === 'block' &&
       rule.condition?.resourceTypes?.includes('main_frame')
     ) {
-      // Create a redirect rule with the same condition but only main_frame
       redirectRules.push({
         ...rule,
         priority: priority,
@@ -97,7 +84,6 @@ export function applyRedirectProtection(
         },
       });
 
-      // If the original rule had other resource types, keep the block rule for those
       const otherTypes = rule.condition.resourceTypes.filter(
         (type) => type !== 'main_frame',
       );
@@ -111,7 +97,6 @@ export function applyRedirectProtection(
         });
       }
     } else {
-      // Keep non-blocking rules and rules that don't target main_frame
       modifiedRules.push(rule);
     }
   }
