@@ -22,8 +22,9 @@ import Options, { ENGINES, getPausedDetails } from '/store/options.js';
 
 import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
+  FLAG_INJECTION_TARGET_DOCUMENT_ID,
+  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
 } from '/utils/config-types.js';
 import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
@@ -230,6 +231,26 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
+const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(
+  FLAG_INJECTION_TARGET_DOCUMENT_ID,
+);
+
+function resolveInjectionTarget(details) {
+  const target = { tabId: details.tabId };
+
+  if (
+    __PLATFORM__ !== 'firefox' &&
+    INJECTION_TARGET_DOCUMENT_ID.enabled &&
+    details.documentId
+  ) {
+    target.documentIds = [details.documentId];
+  } else {
+    target.frameIds = [details.frameId];
+  }
+
+  return target;
+}
+
 const scriptletGlobals = {
   // Request a real extension resource to obtain a dynamic ID to the resource.
   // Redirect resources are defined with `use_dynamic_url` restriction.
@@ -240,7 +261,7 @@ const scriptletGlobals = {
     .slice(0, -6),
 };
 
-function injectScriptlets(filters, tabId, frameId, hostname) {
+function injectScriptlets(filters, hostname, details) {
   let contentScript = '';
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -281,7 +302,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
         world:
           chrome.scripting.ExecutionWorld?.MAIN ??
           (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-        target: { tabId, frameIds: [frameId] },
+        target: resolveInjectionTarget(details),
         func,
         args,
       },
@@ -304,17 +325,17 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
   }
 }
 
-function injectStyles(styles, tabId, frameId) {
+function injectStyles(styles, details) {
   chrome.scripting
     .insertCSS({
       css: styles,
       origin: 'USER',
-      target: { tabId, frameIds: [frameId] },
+      target: resolveInjectionTarget(details),
     })
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
-let EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
+const EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
 
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
@@ -350,6 +371,8 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
 
+  // Domain specific cosmetic filters (scriptlets and styles)
+  // Execution: bootstrap, DOM mutations
   {
     const { matches } = engine.matchCosmeticFilters({
       domain,
@@ -386,7 +409,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptFilters, tabId, frameId, hostname);
+      injectScriptlets(scriptFilters, hostname, details);
     }
 
     if (scriptletsOnly) {
@@ -403,7 +426,7 @@ async function injectCosmetics(details, config) {
     });
 
     if (styles) {
-      injectStyles(styles, tabId, frameId);
+      injectStyles(styles, details);
     }
 
     if (EXTENDED_SELECTORS.enabled && extended && extended.length > 0) {
@@ -415,6 +438,8 @@ async function injectCosmetics(details, config) {
     }
   }
 
+  // Global cosmetic filters (styles only)
+  // Execution: bootstrap
   if (isBootstrap) {
     const { styles } = engine.getCosmeticsFilters({
       domain,
@@ -427,7 +452,7 @@ async function injectCosmetics(details, config) {
       getRulesFromHostname: false,
     });
 
-    injectStyles(styles, tabId, frameId);
+    injectStyles(styles, details);
   }
 }
 
