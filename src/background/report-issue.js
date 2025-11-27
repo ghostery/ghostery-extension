@@ -84,12 +84,25 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'report-broken-page') {
     (async () => {
       try {
+        // Fetch CSRF token first
+        const csrfResponse = await fetch(`${SUPPORT_PAGE_URL}/csrf_token`);
+
+        if (!csrfResponse.ok) {
+          throw new Error('Failed to fetch CSRF token');
+        }
+
+        const { csrf_token: csrfToken, csrf_param: csrfParam } =
+          await csrfResponse.json();
+
         const formData = new FormData();
         const browserInfo = await getBrowserInfo();
         const { version } = chrome.runtime.getManifest();
 
         const email = msg.email || 'noreplay@ghostery.com';
         const domain = parse(msg.url).domain || '';
+
+        // Add CSRF token to form data
+        formData.append(csrfParam, csrfToken);
 
         formData.append('support_ticket[user_name]', email);
         formData.append('support_ticket[user_email]', email);
