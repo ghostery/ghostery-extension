@@ -95,14 +95,6 @@ export function handleRedirectProtection(
   return undefined;
 }
 
-export function allowRedirectUrl(url) {
-  allowedRedirectUrls.add(url);
-}
-
-export async function disableRedirectProtectionForHostname(hostname) {
-  await updateOptionsWithDisabledHostname(hostname);
-}
-
 if (__PLATFORM__ === 'firefox') {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'allowRedirect') {
@@ -112,7 +104,7 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       try {
-        allowRedirectUrl(message.url);
+        allowedRedirectUrls.add(message.url);
         sendResponse({ success: true });
       } catch (error) {
         console.error('[redirect-protection] Error allowing redirect:', error);
@@ -128,7 +120,7 @@ if (__PLATFORM__ === 'firefox') {
         return false;
       }
 
-      disableRedirectProtectionForHostname(message.hostname, Options)
+      updateOptionsWithDisabledHostname(message.hostname, Options)
         .then(() => {
           sendResponse({ success: true });
         })
@@ -148,9 +140,7 @@ if (__PLATFORM__ === 'firefox') {
 
     return false;
   });
-}
-
-if (__PLATFORM__ !== 'firefox') {
+} else {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
       if (

@@ -34,11 +34,7 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
-import {
-  handleRedirectProtection,
-  allowRedirectUrl,
-  disableRedirectProtectionForHostname,
-} from './redirect-protection.js';
+import { handleRedirectProtection } from './redirect-protection.js';
 
 let options = Options;
 
@@ -463,15 +459,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
     };
 
     injectCosmetics(details, msg);
-  }
-
-  // Handle redirect protection messages (Firefox only)
-  if (__PLATFORM__ === 'firefox') {
-    if (msg.action === 'allowRedirect' && msg.url) {
-      allowRedirectUrl(msg.url);
-    } else if (msg.action === 'disableRedirectProtection' && msg.hostname) {
-      disableRedirectProtectionForHostname(msg.hostname, Options);
-    }
   }
 });
 
