@@ -14,3 +14,4 @@ import './main.spec.js';
 import './panel.spec.js';
 import './whotracksme.spec.js';
 import './advanced.spec.js';
+import './redirect-protection.spec.js';
