@@ -26,18 +26,59 @@ function goBack() {
   }
 }
 
+async function getTarget() {
+  const params = new URLSearchParams(window.location.search);
+  const encodedUrl = params.get('url');
+
+  let targetUrl = '';
+
+  if (encodedUrl) {
+    try {
+      targetUrl = atob(encodedUrl);
+    } catch (e) {
+      console.error('[redirect-protection] Failed to decode URL:', e);
+    }
+  } else if (__PLATFORM__ !== 'firefox') {
+    try {
+      const response = await chrome.runtime.sendMessage({
+        action: 'getRedirectUrl',
+      });
+      if (response?.url) {
+        targetUrl = response.url;
+      }
+    } catch (e) {
+      console.error('[redirect-protection] Failed to get URL:', e);
+    }
+  }
+
+  if (!targetUrl) {
+    return { targetUrl: '', hostname: '' };
+  }
+
+  try {
+    const url = new URL(targetUrl);
+    return {
+      targetUrl,
+      hostname: url.hostname,
+    };
+  } catch {
+    return { targetUrl, hostname: '' };
+  }
+}
+
 async function allow(host) {
-  if (!host.targetUrl) return;
+  const { targetUrl } = await host.target;
+  if (!targetUrl) return;
 
   try {
     const response = await chrome.runtime.sendMessage({
       action: 'allowRedirect',
-      url: host.targetUrl,
+      url: targetUrl,
     });
     await chrome.runtime.sendMessage({ action: 'idle' });
 
     if (response?.success) {
-      location.replace(host.targetUrl);
+      location.replace(targetUrl);
     }
   } catch (error) {
     console.error('[redirect-protection] Failed to allow redirect:', error);
@@ -45,69 +86,24 @@ async function allow(host) {
 }
 
 async function alwaysAllow(host) {
-  if (!host.hostname) return;
+  const { targetUrl, hostname } = await host.target;
+  if (!hostname) return;
 
   try {
     await store.set(Options, {
-      redirectProtection: { disabled: { [host.hostname]: true } },
+      redirectProtection: { disabled: { [hostname]: true } },
     });
-    // needs to await twice as sendMessage arrives before chrome.storage.local listener fires
     await chrome.runtime.sendMessage({ action: 'idle' });
     await chrome.runtime.sendMessage({ action: 'idle' });
-    location.replace(host.targetUrl);
+    location.replace(targetUrl);
   } catch (error) {
     console.error('[redirect-protection] Failed to disable protection:', error);
   }
 }
 
 const RedirectProtection = {
-  targetUrl: {
-    value: '',
-    connect: async (host) => {
-      const params = new URLSearchParams(window.location.search);
-      const encodedUrl = params.get('url');
-
-      if (encodedUrl) {
-        try {
-          const url = atob(encodedUrl);
-          host.targetUrl = url;
-        } catch (e) {
-          console.error('[redirect-protection] Failed to decode URL:', e);
-        }
-      } else if (__PLATFORM__ !== 'firefox') {
-        try {
-          const response = await chrome.runtime.sendMessage({
-            action: 'getRedirectUrl',
-          });
-
-          if (response?.url) {
-            host.targetUrl = response.url;
-          }
-        } catch (e) {
-          console.error('[redirect-protection] Failed to get URL:', e);
-        }
-      }
-    },
-  },
-  hostname: ({ targetUrl }) => {
-    if (!targetUrl) return '';
-    try {
-      return new URL(targetUrl).hostname;
-    } catch {
-      return '';
-    }
-  },
-  displayUrl: ({ targetUrl }) => {
-    if (!targetUrl) return '';
-    try {
-      const url = new URL(targetUrl);
-      // Return URL without scheme (e.g., "example.com/path" instead of "https://example.com/path")
-      return url.host + url.pathname + url.search + url.hash;
-    } catch {
-      return '';
-    }
-  },
-  render: ({ targetUrl, displayUrl }) =>
+  target: getTarget,
+  render: ({ target }) =>
     html`
       <template layout="block overflow">
         <style>
@@ -214,45 +210,49 @@ const RedirectProtection = {
               Tracking Redirect Alert
             </ui-text>
 
-            ${targetUrl
-              ? html`
-                  <ui-text type="body-m" layout="block:center">
-                    This page was prevented from loading because it's a known
-                    tracking URL:
-                  </ui-text>
+            ${html.resolve(
+              target.then(({ targetUrl, hostname }) =>
+                targetUrl
+                  ? html`
+                      <ui-text type="body-m" layout="block:center">
+                        This page was prevented from loading because it's a
+                        known tracking URL:
+                      </ui-text>
 
-                  <div layout="block:center margin:1:0">
-                    <a class="link" href="${targetUrl}">${displayUrl}</a>
-                  </div>
-
-                  <ui-text type="body-m" layout="block:center">
-                    To visit this page anyway, you need to allow it.
-                  </ui-text>
-
-                  <div layout="column items:center margin:top:2">
-                    <div layout="column gap:1">
-                      <ui-button type="primary" onclick="${allow}">
-                        <button layout="width:::100%">Allow</button>
-                      </ui-button>
-
-                      <div layout="row gap:1">
-                        <ui-button onclick="${goBack}">
-                          <button style="min-width: 80px;">Back</button>
-                        </ui-button>
-                        <ui-button onclick="${alwaysAllow}">
-                          <button layout="grow">
-                            Always allow from this domain
-                          </button>
-                        </ui-button>
+                      <div layout="block:center margin:1:0">
+                        <a class="link" href="${targetUrl}">${hostname}</a>
                       </div>
-                    </div>
-                  </div>
-                `
-              : html`
-                  <ui-text type="body-m" layout="block:center">
-                    Loading...
-                  </ui-text>
-                `}
+
+                      <ui-text type="body-m" layout="block:center">
+                        To visit this page anyway, you need to allow it.
+                      </ui-text>
+
+                      <div layout="column items:center margin:top:2">
+                        <div layout="column gap:1">
+                          <ui-button type="primary" onclick="${allow}">
+                            <button layout="width:::100%">Allow</button>
+                          </ui-button>
+
+                          <div layout="row gap:1">
+                            <ui-button onclick="${goBack}">
+                              <button style="min-width: 80px;">Back</button>
+                            </ui-button>
+                            <ui-button onclick="${alwaysAllow}">
+                              <button layout="grow">
+                                Always allow from this domain
+                              </button>
+                            </ui-button>
+                          </div>
+                        </div>
+                      </div>
+                    `
+                  : html`
+                      <ui-text type="body-m" layout="block:center">
+                        Loading...
+                      </ui-text>
+                    `,
+              ),
+            )}
           </div>
         </div>
       </template>
