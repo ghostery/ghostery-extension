@@ -85,9 +85,7 @@ export default {
           exceptions: new Set(),
           counter: 0,
         }));
-    }
-
-    if (options.filteringMode === FILTERING_MODE_ZAP) {
+    } else if (options.filteringMode === FILTERING_MODE_ZAP) {
       websites = Object.keys(options.zapped).map((id) => ({
         id,
         exceptions: new Set(),
