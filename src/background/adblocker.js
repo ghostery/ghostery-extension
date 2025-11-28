@@ -552,7 +552,7 @@ if (__PLATFORM__ === 'firefox') {
 
         const { redirect, match } = engine.match(request);
 
-        if (details.type === 'main_frame') {
+        if (match === true && details.type === 'main_frame') {
           const redirectUrl = getRedirectProtectionUrl(
             details.url,
             request.hostname,
