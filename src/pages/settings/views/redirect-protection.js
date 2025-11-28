@@ -88,11 +88,8 @@ export default {
               </div>
               ${Object.keys(options.redirectProtection.disabled).length
                 ? html`
-                    <div layout="column gap:0.5">
-                      <div
-                        layout="grid:1|max padding:1 gap"
-                        style="background: var(--background-secondary); border-radius: 8px;"
-                      >
+                    <settings-table>
+                      <div slot="header" layout="grid:1|max gap">
                         <ui-text type="label-s" color="secondary">
                           Website
                           (${Object.keys(options.redirectProtection.disabled)
@@ -102,8 +99,7 @@ export default {
                       ${Object.keys(options.redirectProtection.disabled).map(
                         (hostname) => html`
                           <div
-                            layout="grid:1|max content:center padding:1 gap"
-                            style="border-bottom: 1px solid var(--color-divider-primary);"
+                            layout="grid:1|max content:center gap"
                             data-qa="item:redirect-protection:exception:${hostname}"
                           >
                             <ui-text type="body-s">${hostname}</ui-text>
@@ -122,12 +118,12 @@ export default {
                           </div>
                         `,
                       )}
-                    </div>
+                    </settings-table>
                   `
                 : html`
-                    <div
+                    <settings-card
+                      type="content"
                       layout="column center gap:2 padding:4"
-                      style="background: var(--background-secondary); border-radius: 8px;"
                       data-qa="component:redirect-protection:empty-state"
                     >
                       <ui-icon
@@ -138,7 +134,7 @@ export default {
                       <ui-text type="body-s" color="secondary">
                         No exceptions added yet
                       </ui-text>
-                    </div>
+                    </settings-card>
                   `}
             </div>
           `}

@@ -60,7 +60,7 @@ async function alwaysAllow(host) {
   }
 }
 
-const App = {
+const RedirectProtection = {
   targetUrl: {
     value: '',
     connect: async (host) => {
@@ -259,4 +259,4 @@ const App = {
     `.use(themeToggle),
 };
 
-mount(document.body, App);
+mount(document.body, RedirectProtection);
