@@ -18,6 +18,10 @@ import {
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
+const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL(
+  'pages/redirect-protection/index.html',
+);
+
 function getRedirectUrlStorageKey(tabId) {
   return `redirectUrl_${tabId}`;
 }
@@ -42,11 +46,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
     return undefined;
   }
 
-  return (
-    chrome.runtime.getURL('pages/redirect-protection/index.html') +
-    '?url=' +
-    btoa(url)
-  );
+  return REDIRECT_PROTECTION_PAGE_URL + '?url=' + btoa(url);
 }
 
 if (__PLATFORM__ === 'firefox') {
@@ -76,7 +76,7 @@ if (__PLATFORM__ === 'firefox') {
       if (
         details.frameId === 0 &&
         details.url &&
-        !details.url.includes('redirect-protection')
+        !details.url.startsWith(REDIRECT_PROTECTION_PAGE_URL)
       ) {
         chrome.storage.session
           .set({
