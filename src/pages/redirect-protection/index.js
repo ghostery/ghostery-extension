@@ -34,6 +34,7 @@ async function allow(host) {
       action: 'allowRedirect',
       url: host.targetUrl,
     });
+    await chrome.runtime.sendMessage({ action: 'idle' });
 
     if (response?.success) {
       location.replace(host.targetUrl);
@@ -50,6 +51,9 @@ async function alwaysAllow(host) {
     await store.set(Options, {
       redirectProtection: { disabled: { [host.hostname]: true } },
     });
+    // needs to await twice as sendMessage arrives before chrome.storage.local listener fires
+    await chrome.runtime.sendMessage({ action: 'idle' });
+    await chrome.runtime.sendMessage({ action: 'idle' });
     location.replace(host.targetUrl);
   } catch (error) {
     console.error('[redirect-protection] Failed to disable protection:', error);

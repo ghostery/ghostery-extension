@@ -16,9 +16,10 @@ import RedirectProtectionAddException from './redirect-protection-add-exception.
 
 function removeException(hostname) {
   return ({ options }) => {
-    const { [hostname]: _, ...newDisabled } = options.redirectProtection.disabled;
     store.set(options, {
-      redirectProtection: { disabled: newDisabled },
+      redirectProtection: {
+        disabled: { [hostname]: null },
+      },
     });
   };
 }
