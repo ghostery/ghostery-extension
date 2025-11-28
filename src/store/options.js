@@ -257,6 +257,16 @@ async function manage(options) {
   return options;
 }
 
+export function getTopDomainFromRecord(record, hostname = '') {
+  if (!hostname) return null;
+
+  const domain = Object.keys(record)
+    .sort((a, b) => b.localeCompare(a))
+    .find((d) => hostname.endsWith(d));
+
+  return domain || null;
+}
+
 export function getPausedDetails(options, hostname = '') {
   switch (options.filteringMode) {
     case FILTERING_MODE_GHOSTERY: {
@@ -266,19 +276,13 @@ export function getPausedDetails(options, hostname = '') {
 
       if (!hostname) return null;
 
-      const pausedHostname = Object.keys(options.paused).find((domain) =>
-        hostname.endsWith(domain),
-      );
-
+      const pausedHostname = getTopDomainFromRecord(options.paused, hostname);
       return pausedHostname ? options.paused[pausedHostname] : null;
     }
     case FILTERING_MODE_ZAP: {
-      if (!hostname) return null;
+      if (!hostname) return { revokeAt: 0 };
 
-      const zappedHostname = Object.keys(options.zapped).find((domain) =>
-        hostname.endsWith(domain),
-      );
-
+      const zappedHostname = getTopDomainFromRecord(options.zapped, hostname);
       return zappedHostname ? null : { revokeAt: 0 };
     }
     default:

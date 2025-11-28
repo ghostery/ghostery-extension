@@ -15,9 +15,10 @@ import { isWebkit } from '/utils/browser-info.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, {
+  getPausedDetails,
+  getTopDomainFromRecord,
   FILTERING_MODE_GHOSTERY,
   FILTERING_MODE_ZAP,
-  getPausedDetails,
   GLOBAL_PAUSE_ID,
 } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
@@ -69,9 +70,10 @@ async function togglePause(host, event) {
   const { options, stats } = host;
 
   if (paused) {
-    const pausedHostname = Object.keys(options.paused)
-      .sort((a, b) => b.localeCompare(a))
-      .find((domain) => stats.hostname.endsWith(domain));
+    const pausedHostname = getTopDomainFromRecord(
+      options.paused,
+      stats.hostname,
+    );
 
     store.set(options, {
       paused: { [pausedHostname]: null },
@@ -106,9 +108,7 @@ async function togglePause(host, event) {
 async function toggleZapped(host) {
   const { options, stats, paused } = host;
 
-  const zappedHostname = Object.keys(options.zapped)
-    .sort((a, b) => b.localeCompare(a))
-    .find((d) => stats.hostname.endsWith(d));
+  const zappedHostname = getTopDomainFromRecord(options.zapped, stats.hostname);
 
   await store.set(options, {
     zapped: { [zappedHostname || stats.hostname]: paused ? true : null },
