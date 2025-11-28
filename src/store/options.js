@@ -99,7 +99,7 @@ const Options = {
 
   // Zapped domains (zap filtering mode)
   // Empty record for future additions (if any)
-  zapped: store.record(true),
+  zapped: store.record({}),
 
   // Sync & Update
   sync: true,
