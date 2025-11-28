@@ -33,6 +33,7 @@ export default {
             href="${router.url(Privacy)}"
             class="${{ active: router.active(Privacy, { stack: true }) }}"
             slot="nav"
+            data-qa="button:privacy-protection"
           >
             <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
             Privacy protection
@@ -45,6 +46,7 @@ export default {
                 !router.active(Trackers, { stack: true }),
             }}"
             slot="nav"
+            data-qa="button:websites"
           >
             <ui-icon name="websites" color="nav" layout="size:3"></ui-icon>
             Websites
@@ -74,6 +76,7 @@ export default {
             href="${router.url(MyGhostery)}"
             class="${{ active: router.active(MyGhostery), bottom: true }}"
             slot="nav"
+            data-qa="button:my-ghostery"
           >
             <ui-icon name="user" color="nav"></ui-icon>
             My Ghostery
@@ -82,8 +85,8 @@ export default {
             layout="hidden"
             layout@992px="
               area::6/7 self:end:stretch
-              margin:top:2 padding:2 gap content:center
-              column
+              margin:top:2 padding:2 gap
+              column items:center
             "
             slot="nav"
           >
@@ -111,7 +114,7 @@ export default {
               </ui-button>
             </div>
           </settings-card>
-          <div layout="column grow height::0 view:main">${stack}</div>
+          <div layout="column grow height::0 view:main layer">${stack}</div>
         </settings-layout>
       </template>
     `.use(html.transition),

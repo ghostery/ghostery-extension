@@ -15,7 +15,6 @@ import Config from '/store/config.js';
 
 import { isWebkit } from '/utils/browser-info.js';
 import { CDN_URL } from '/utils/urls.js';
-import * as OptionsObserver from '/utils/options-observer.js';
 import { debugMode } from '/utils/debug.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
@@ -107,16 +106,12 @@ export default async function syncConfig() {
   }
 }
 
-OptionsObserver.addListener(function config(options, lastOptions) {
-  // Disable syncing in debug mode
-  if (debugMode) return;
+if (!debugMode) {
+  // Sync on SW startup and when config updatedAt is reset
+  store.observe(Config, (_, config, lastConfig) => {
+    if (!lastConfig || config.updatedAt === 0) syncConfig();
+  });
 
-  if (
-    // Background startup with terms already set
-    (!lastOptions && options.terms) ||
-    // User just accepted the terms
-    (lastOptions && !lastOptions.terms && options.terms)
-  ) {
-    syncConfig();
-  }
-});
+  // Initial sync
+  store.resolve(Config);
+}

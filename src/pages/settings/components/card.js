@@ -13,7 +13,7 @@ import { html } from 'hybrids';
 export default {
   type: { value: '', reflect: true },
   render: () => html`
-    <template layout="block padding:2 relative">
+    <template layout="block padding:2">
       <slot name="picture"></slot>
       <div layout="column gap:2 grow"><slot></slot></div>
     </template>
@@ -28,6 +28,7 @@ export default {
     :host([type="content"]) {
       background: var(--background-secondary);
       border: none;
+      border-radius: 12px;
       box-shadow: none;
     }
 
@@ -42,6 +43,7 @@ export default {
       overflow: hidden;
       box-shadow: none;
       padding: 12px;
+      position: relative;
     }
 
     :host([type="pause-assistant"])::before {

@@ -20,6 +20,9 @@ import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
+export const FILTERING_MODE_GHOSTERY = 'ghostery';
+export const FILTERING_MODE_ZAP = 'zap';
+
 export const ENGINES = [
   { name: 'ads', key: 'blockAds' },
   { name: 'tracking', key: 'blockTrackers' },
@@ -35,11 +38,14 @@ const LOCAL_OPTIONS = [
   'revision',
   'filtersUpdatedAt',
 ];
-const PROTECTED_OPTIONS = ['exceptions', 'paused'];
+const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
 
 const OPTIONS_VERSION = 3;
 
 const Options = {
+  // Mode
+  filteringMode: FILTERING_MODE_GHOSTERY, // 'ghostery' | 'zap'
+
   // Main features
   blockAds: true,
   blockTrackers: true,
@@ -88,12 +94,18 @@ const Options = {
   // Tracker exceptions
   exceptions: store.record({ global: false, domains: [String] }),
 
-  // Paused domains
+  // Paused domains (ghostery filtering mode)
   paused: store.record({ revokeAt: 0, assist: false, managed: false }),
+
+  // Zapped domains (zap filtering mode)
+  // Empty record for future additions (if any)
+  zapped: store.record({}),
 
   // Sync & Update
   sync: true,
   revision: 0,
+
+  // Filters update timestamp
   filtersUpdatedAt: 0,
 
   // What's new
@@ -245,16 +257,35 @@ async function manage(options) {
   return options;
 }
 
+export function getTopDomainFromRecord(record, hostname = '') {
+  if (!hostname) return null;
+
+  const domain = Object.keys(record)
+    .sort((a, b) => b.localeCompare(a))
+    .find((d) => hostname.endsWith(d));
+
+  return domain || null;
+}
+
 export function getPausedDetails(options, hostname = '') {
   if (options.paused[GLOBAL_PAUSE_ID]) {
     return options.paused[GLOBAL_PAUSE_ID];
+  } else if (!hostname) {
+    return null;
   }
 
-  if (!hostname) return null;
-
-  const pausedHostname = Object.keys(options.paused).find((domain) =>
-    hostname.endsWith(domain),
-  );
-
-  return pausedHostname ? options.paused[pausedHostname] : null;
+  switch (options.filteringMode) {
+    case FILTERING_MODE_GHOSTERY: {
+      // The domain is paused when top domain is found in the record
+      const pausedHostname = getTopDomainFromRecord(options.paused, hostname);
+      return pausedHostname ? options.paused[pausedHostname] : null;
+    }
+    case FILTERING_MODE_ZAP: {
+      // The domain is paused when top domain is not found in the record
+      const zappedHostname = getTopDomainFromRecord(options.zapped, hostname);
+      return zappedHostname ? null : { revokeAt: 0 };
+    }
+    default:
+      return null;
+  }
 }
