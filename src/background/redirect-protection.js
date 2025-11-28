@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { store } from 'hybrids';
+
 import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
@@ -17,6 +19,7 @@ import {
   createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
+import Options from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 const redirectUrlMap = new AutoSyncingMap({
@@ -51,28 +54,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
   return REDIRECT_PROTECTION_PAGE_URL + '?url=' + btoa(url);
 }
 
-if (__PLATFORM__ === 'firefox') {
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'allowRedirect') {
-      if (!message.url) {
-        sendResponse({ success: false, error: 'Missing URL' });
-        return false;
-      }
-
-      try {
-        allowedRedirectUrls.add(message.url);
-        sendResponse({ success: true });
-      } catch (error) {
-        console.error('[redirect-protection] Error allowing redirect:', error);
-        sendResponse({ success: false, error: error.message });
-      }
-
-      return false;
-    }
-
-    return false;
-  });
-} else {
+if (__PLATFORM__ !== 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
       if (
@@ -96,67 +78,6 @@ if (__PLATFORM__ === 'firefox') {
         removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
       })
       .catch(() => {});
-  });
-
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'getRedirectUrl') {
-      const url =
-        sender.tab && sender.tab.id
-          ? redirectUrlMap.get(sender.tab.id) || null
-          : null;
-      sendResponse({ url });
-      return false;
-    }
-
-    if (message.action === 'allowRedirect') {
-      if (!sender.tab || !sender.tab.id || !message.url) {
-        console.error(
-          '[redirect-protection] Missing tab or URL in allowRedirect',
-        );
-        sendResponse({ success: false, error: 'Missing tab or URL' });
-        return false;
-      }
-
-      const tabId = sender.tab.id;
-      const url = message.url;
-
-      (async () => {
-        try {
-          const urlObj = new URL(url);
-          const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
-
-          await chrome.declarativeNetRequest.updateSessionRules({
-            addRules: [
-              {
-                id: REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId,
-                priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
-                action: { type: 'allow' },
-                condition: {
-                  urlFilter: urlPattern,
-                  resourceTypes: ['main_frame'],
-                  tabIds: [tabId],
-                },
-              },
-            ],
-            removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
-          });
-
-          redirectUrlMap.delete(tabId);
-
-          sendResponse({ success: true });
-        } catch (error) {
-          console.error(
-            '[redirect-protection] Error creating session rule:',
-            error,
-          );
-          sendResponse({ success: false, error: error.message });
-        }
-      })();
-
-      return true;
-    }
-
-    return false;
   });
 
   OptionsObserver.addListener(
@@ -210,3 +131,100 @@ if (__PLATFORM__ === 'firefox') {
     },
   );
 }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'getRedirectUrl') {
+    if (__PLATFORM__ === 'firefox') {
+      return false;
+    }
+    const url =
+      sender.tab && sender.tab.id
+        ? redirectUrlMap.get(sender.tab.id) || null
+        : null;
+    sendResponse({ url });
+    return false;
+  }
+
+  if (message.action === 'allowRedirect') {
+    if (!message.url) {
+      sendResponse({ success: false, error: 'Missing URL' });
+      return false;
+    }
+
+    if (__PLATFORM__ === 'firefox') {
+      allowedRedirectUrls.add(message.url);
+      sendResponse({ success: true });
+      return false;
+    }
+
+    if (!sender.tab || !sender.tab.id) {
+      console.error('[redirect-protection] Missing tab in allowRedirect');
+      sendResponse({ success: false, error: 'Missing tab' });
+      return false;
+    }
+
+    const tabId = sender.tab.id;
+    const url = message.url;
+
+    (async () => {
+      try {
+        const urlObj = new URL(url);
+        const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
+
+        await chrome.declarativeNetRequest.updateSessionRules({
+          addRules: [
+            {
+              id: REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId,
+              priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+              action: { type: 'allow' },
+              condition: {
+                urlFilter: urlPattern,
+                resourceTypes: ['main_frame'],
+                tabIds: [tabId],
+              },
+            },
+          ],
+          removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
+        });
+
+        redirectUrlMap.delete(tabId);
+
+        sendResponse({ success: true });
+      } catch (error) {
+        console.error(
+          '[redirect-protection] Error creating session rule:',
+          error,
+        );
+        sendResponse({ success: false, error: error.message });
+      }
+    })();
+
+    return true;
+  }
+
+  if (message.action === 'alwaysAllowRedirect') {
+    if (!message.hostname) {
+      sendResponse({ success: false, error: 'Missing hostname' });
+      return false;
+    }
+
+    store
+      .set(Options, {
+        redirectProtection: { disabled: { [message.hostname]: true } },
+      })
+      .then(() => {
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        console.error(
+          '[redirect-protection] Error disabling protection:',
+          error,
+        );
+        sendResponse({ success: false, error: error.message });
+      });
+
+    return true;
+  }
+
+  return false;
+});
