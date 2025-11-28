@@ -16,15 +16,17 @@ import {
   getDynamicRulesIds,
   createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
+import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+
+const redirectUrlMap = new AutoSyncingMap({
+  storageKey: 'redirectUrls:v1',
+  ttlInMs: 5 * 60 * 1000,
+});
 
 const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL(
   'pages/redirect-protection/index.html',
 );
-
-function getRedirectUrlStorageKey(tabId) {
-  return `redirectUrl_${tabId}`;
-}
 
 const allowedRedirectUrls = new Set();
 
@@ -78,13 +80,7 @@ if (__PLATFORM__ === 'firefox') {
         details.url &&
         !details.url.startsWith(REDIRECT_PROTECTION_PAGE_URL)
       ) {
-        chrome.storage.session
-          .set({
-            [getRedirectUrlStorageKey(details.tabId)]: details.url,
-          })
-          .catch((err) => {
-            console.error('[redirect-protection] Failed to store URL:', err);
-          });
+        redirectUrlMap.set(details.tabId, details.url);
       }
     },
     {
@@ -93,9 +89,7 @@ if (__PLATFORM__ === 'firefox') {
   );
 
   chrome.tabs.onRemoved.addListener((tabId) => {
-    chrome.storage.session
-      .remove(getRedirectUrlStorageKey(tabId))
-      .catch(() => {});
+    redirectUrlMap.delete(tabId);
 
     chrome.declarativeNetRequest
       .updateSessionRules({
@@ -106,21 +100,11 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'getRedirectUrl') {
-      if (sender.tab && sender.tab.id) {
-        const storageKey = getRedirectUrlStorageKey(sender.tab.id);
-        chrome.storage.session
-          .get(storageKey)
-          .then((result) => {
-            sendResponse({
-              url: result[storageKey] || null,
-            });
-          })
-          .catch(() => {
-            sendResponse({ url: null });
-          });
-        return true;
-      }
-      sendResponse({ url: null });
+      const url =
+        sender.tab && sender.tab.id
+          ? redirectUrlMap.get(sender.tab.id) || null
+          : null;
+      sendResponse({ url });
       return false;
     }
 
@@ -157,7 +141,7 @@ if (__PLATFORM__ === 'firefox') {
             removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
           });
 
-          await chrome.storage.session.remove(getRedirectUrlStorageKey(tabId));
+          redirectUrlMap.delete(tabId);
 
           sendResponse({ success: true });
         } catch (error) {
