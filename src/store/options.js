@@ -268,20 +268,20 @@ export function getTopDomainFromRecord(record, hostname = '') {
 }
 
 export function getPausedDetails(options, hostname = '') {
+  if (options.paused[GLOBAL_PAUSE_ID]) {
+    return options.paused[GLOBAL_PAUSE_ID];
+  } else if (!hostname) {
+    return null;
+  }
+
   switch (options.filteringMode) {
     case FILTERING_MODE_GHOSTERY: {
-      if (options.paused[GLOBAL_PAUSE_ID]) {
-        return options.paused[GLOBAL_PAUSE_ID];
-      }
-
-      if (!hostname) return null;
-
+      // The domain is paused when top domain is found in the record
       const pausedHostname = getTopDomainFromRecord(options.paused, hostname);
       return pausedHostname ? options.paused[pausedHostname] : null;
     }
     case FILTERING_MODE_ZAP: {
-      if (!hostname) return { revokeAt: 0 };
-
+      // The domain is paused when top domain is not found in the record
       const zappedHostname = getTopDomainFromRecord(options.zapped, hostname);
       return zappedHostname ? null : { revokeAt: 0 };
     }

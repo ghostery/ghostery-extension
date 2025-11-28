@@ -111,7 +111,7 @@ async function toggleZapped(host) {
   const zappedHostname = getTopDomainFromRecord(options.zapped, stats.hostname);
 
   await store.set(options, {
-    zapped: { [zappedHostname || stats.hostname]: paused ? true : null },
+    zapped: { [zappedHostname || stats.hostname]: paused ? {} : null },
   });
 
   showAlert(html`
@@ -348,10 +348,10 @@ export default {
             </ui-button>
           </div>
         `}
-        ${!managedConfig.disableUserControl &&
-        options.terms &&
-        options.filteringMode === FILTERING_MODE_GHOSTERY &&
+        ${options.terms &&
         store.ready(stats) &&
+        !managedConfig.disableUserControl &&
+        (options.filteringMode === FILTERING_MODE_GHOSTERY || globalPause) &&
         html`
           <panel-pause
             onaction="${globalPause ? revokeGlobalPause : togglePause}"
@@ -405,10 +405,11 @@ export default {
             `}
           </panel-pause>
         `}
-        ${!managedConfig.disableUserControl &&
-        options.terms &&
-        options.filteringMode === FILTERING_MODE_ZAP &&
+        ${options.terms &&
         store.ready(stats) &&
+        !managedConfig.disableUserControl &&
+        options.filteringMode === FILTERING_MODE_ZAP &&
+        !globalPause &&
         html`
           <panel-zap
             onclick="${toggleZapped}"
