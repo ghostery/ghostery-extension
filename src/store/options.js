@@ -17,6 +17,9 @@ import { isOpera, isSafari } from '/utils/browser-info.js';
 import CustomFilters from './custom-filters.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
 
+const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+export const GLOBAL_PAUSE_ID = '<all_urls>';
+
 export const FILTERING_MODE_GHOSTERY = 'ghostery';
 export const FILTERING_MODE_ZAP = 'zap';
 
@@ -25,8 +28,6 @@ export const ENGINES = [
   { name: 'tracking', key: 'blockTrackers' },
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
-
-export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const LOCAL_OPTIONS = [
   'autoconsent',
@@ -37,10 +38,8 @@ const LOCAL_OPTIONS = [
   'revision',
   'filtersUpdatedAt',
 ];
-
 const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
 
-const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const OPTIONS_VERSION = 3;
 
 const Options = {
