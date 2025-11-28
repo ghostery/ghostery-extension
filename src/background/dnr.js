@@ -16,7 +16,12 @@ import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
 import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
-import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
+import {
+  FIXES_ID_RANGE,
+  getDynamicRulesIds,
+  applyRedirectProtection,
+  filterMaxPriorityRules,
+} from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
@@ -40,6 +45,15 @@ if (__PLATFORM__ !== 'firefox') {
           .map((id) => `lang-${id}`)
           .filter((id) => DNR_RESOURCES.includes(id)),
       );
+    }
+
+    // Add redirect protection if enabled and any blocking is active
+    if (
+      ids.length &&
+      options.redirectProtection.enabled &&
+      DNR_RESOURCES.includes('redirect-protection')
+    ) {
+      ids.push('redirect-protection');
     }
 
     return ids;
@@ -94,14 +108,16 @@ if (__PLATFORM__ !== 'firefox') {
 
             if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
               const rules = new Set(
-                await fetch(list.dnr.url).then((res) =>
-                  res.ok
-                    ? res.json()
-                    : Promise.reject(
-                        new Error(
-                          `Failed to fetch DNR rules: ${res.statusText}`,
+                filterMaxPriorityRules(
+                  await fetch(list.dnr.url).then((res) =>
+                    res.ok
+                      ? res.json()
+                      : Promise.reject(
+                          new Error(
+                            `Failed to fetch DNR rules: ${res.statusText}`,
+                          ),
                         ),
-                      ),
+                  ),
                 ),
               );
 
@@ -120,7 +136,9 @@ if (__PLATFORM__ !== 'firefox') {
 
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: Array.from(rules).map((rule, index) => ({
+                addRules: applyRedirectProtection(Array.from(rules), {
+                  enabled: options.redirectProtection.enabled,
+                }).map((rule, index) => ({
                   ...rule,
                   id: FIXES_ID_RANGE.start + index,
                 })),

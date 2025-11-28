@@ -64,6 +64,12 @@ const Options = {
   // SERP protection
   serpTrackingPrevention: true,
 
+  // Redirect protection
+  redirectProtection: {
+    enabled: true,
+    disabled: store.record(true),
+  },
+
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,

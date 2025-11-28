@@ -62,6 +62,11 @@
         "id": "fixes",
         "enabled": false,
         "path": "rule_resources/dnr-fixes.json"
+      },
+      {
+        "id": "redirect-protection",
+        "enabled": false,
+        "path": "rule_resources/dnr-redirect-protection.json"
       }
     ]
   },
@@ -125,7 +130,8 @@
         "pages/element-picker/index.html",
         "pages/notifications/pause-assistant.html",
         "pages/notifications/pause-resume.html",
-        "pages/notifications/whats-new.html"
+        "pages/notifications/whats-new.html",
+        "pages/redirect-protection/index.html"
       ],
       "matches": ["<all_urls>"],
       "all_frames": true,
