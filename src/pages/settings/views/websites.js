@@ -49,9 +49,7 @@ function revokeCallback(item) {
 
     if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
       store.set(options, { paused: { [item.id]: null }, exceptions });
-    }
-
-    if (options.filteringMode === FILTERING_MODE_ZAP) {
+    } else if (options.filteringMode === FILTERING_MODE_ZAP) {
       store.set(options, { zapped: { [item.id]: null }, exceptions });
     }
   };
