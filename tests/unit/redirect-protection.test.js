@@ -14,6 +14,8 @@ import assert from 'node:assert';
 import { applyRedirectProtection } from '../../src/utils/dnr.js';
 
 describe('applyRedirectProtection', () => {
+  const defaultOptions = { enabled: true, priority: 100 };
+
   it('should convert main_frame blocking rule to redirect rule', () => {
     const rules = [
       {
@@ -25,24 +27,16 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const result = applyRedirectProtection(rules, defaultOptions);
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      1,
-    );
-    assert.ok(redirect);
+    assert.strictEqual(result.length, 1);
+    assert.deepStrictEqual(redirect.action, {
+      type: 'redirect',
+      redirect: { extensionPath: '/pages/redirect-protection/index.html' },
+    });
     assert.strictEqual(redirect.priority, 100);
-    assert.strictEqual(
-      redirect.action.redirect.extensionPath,
-      '/pages/redirect-protection/index.html',
-    );
-    assert.strictEqual(redirect.condition.resourceTypes.length, 1);
-    assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
+    assert.deepStrictEqual(redirect.condition.resourceTypes, ['main_frame']);
     assert.strictEqual(redirect.condition.urlFilter, '||tracker.com^');
   });
 
@@ -57,24 +51,13 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const result = applyRedirectProtection(rules, defaultOptions);
     const redirect = result.find((r) => r.action.type === 'redirect');
     const block = result.find((r) => r.action.type === 'block');
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      1,
-    );
-    assert.ok(redirect);
-    assert.strictEqual(redirect.condition.resourceTypes.length, 1);
-    assert.strictEqual(redirect.condition.resourceTypes[0], 'main_frame');
-    assert.ok(block);
-    assert.strictEqual(block.condition.resourceTypes.length, 2);
-    assert.ok(block.condition.resourceTypes.includes('script'));
-    assert.ok(block.condition.resourceTypes.includes('image'));
+    assert.strictEqual(result.length, 2);
+    assert.deepStrictEqual(redirect.condition.resourceTypes, ['main_frame']);
+    assert.deepStrictEqual(block.condition.resourceTypes, ['script', 'image']);
   });
 
   it('should not convert rules when disabled', () => {
@@ -93,13 +76,9 @@ describe('applyRedirectProtection', () => {
       priority: 100,
     });
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      0,
-    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'block');
-    assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
+    assert.deepStrictEqual(result[0].condition.resourceTypes, ['main_frame']);
   });
 
   it('should preserve non-main_frame blocking rules unchanged', () => {
@@ -113,56 +92,30 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const result = applyRedirectProtection(rules, defaultOptions);
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      0,
-    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'block');
-    assert.strictEqual(result[0].condition.resourceTypes.length, 2);
+    assert.deepStrictEqual(result[0].condition.resourceTypes, [
+      'script',
+      'image',
+    ]);
   });
 
   it('should preserve all condition properties in redirect rules', () => {
-    const rules = [
-      {
-        id: 1,
-        action: { type: 'block' },
-        condition: {
-          regexFilter:
-            '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
-          requestDomains: ['com'],
-          excludedRequestDomains: ['trusted.com'],
-          resourceTypes: ['main_frame'],
-          isUrlFilterCaseSensitive: true,
-        },
-      },
-    ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const condition = {
+      regexFilter: '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
+      requestDomains: ['com'],
+      excludedRequestDomains: ['trusted.com'],
+      resourceTypes: ['main_frame'],
+      isUrlFilterCaseSensitive: true,
+    };
+    const rules = [{ id: 1, action: { type: 'block' }, condition }];
+    const result = applyRedirectProtection(rules, defaultOptions);
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      1,
-    );
-    assert.ok(redirect);
-    assert.strictEqual(
-      redirect.condition.regexFilter,
-      '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
-    );
-    assert.strictEqual(redirect.condition.requestDomains[0], 'com');
-    assert.strictEqual(
-      redirect.condition.excludedRequestDomains[0],
-      'trusted.com',
-    );
-    assert.strictEqual(redirect.condition.isUrlFilterCaseSensitive, true);
+    assert.strictEqual(result.length, 1);
+    assert.deepStrictEqual(redirect.condition, condition);
   });
 
   it('should handle multiple blocking rules', () => {
@@ -184,20 +137,13 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const result = applyRedirectProtection(rules, defaultOptions);
     const redirects = result.filter((r) => r.action.type === 'redirect');
 
     assert.strictEqual(redirects.length, 2);
     assert.ok(redirects.every((r) => r.priority === 100));
-    assert.ok(
-      redirects.some((r) => r.condition.urlFilter === '||tracker1.com^'),
-    );
-    assert.ok(
-      redirects.some((r) => r.condition.urlFilter === '||tracker2.com^'),
-    );
+    const urlFilters = redirects.map((r) => r.condition.urlFilter).sort();
+    assert.deepStrictEqual(urlFilters, ['||tracker1.com^', '||tracker2.com^']);
   });
 
   it('should preserve non-blocking rules unchanged', () => {
@@ -211,17 +157,10 @@ describe('applyRedirectProtection', () => {
         },
       },
     ];
-    const result = applyRedirectProtection(rules, {
-      enabled: true,
-      priority: 100,
-    });
+    const result = applyRedirectProtection(rules, defaultOptions);
 
-    assert.strictEqual(
-      result.filter((r) => r.action.type === 'redirect').length,
-      0,
-    );
     assert.strictEqual(result.length, 1);
     assert.strictEqual(result[0].action.type, 'allow');
-    assert.ok(result[0].condition.resourceTypes.includes('main_frame'));
+    assert.deepStrictEqual(result[0].condition.resourceTypes, ['main_frame']);
   });
 });
