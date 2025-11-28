@@ -77,7 +77,7 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       // in the panel or the settings page.
       !OptionsObserver.isOptionEqual(options.paused, lastOptions?.paused) ||
       // Filtering mode has changed
-      (lastOptions && options.filteringMode !== lastOptions?.filteringMode) ||
+      (lastOptions && options.filteringMode !== lastOptions.filteringMode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
       (await store.resolve(ManagedConfig)).trustedDomains[0] !==
