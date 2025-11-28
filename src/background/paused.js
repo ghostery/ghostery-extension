@@ -70,76 +70,74 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       });
   }
 
-  if (__PLATFORM__ !== 'firefox') {
-    if (
-      // The background process starts and runs for each tab, so we can assume
-      // that this function is called before the user can change the paused state
-      // in the panel or the settings page.
-      !OptionsObserver.isOptionEqual(options.paused, lastOptions?.paused) ||
+  if (
+    __PLATFORM__ !== 'firefox' &&
+    // Paused state has changed by the user interaction
+    ((lastOptions &&
+      !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
       // Filtering mode has changed
       (lastOptions && options.filteringMode !== lastOptions.filteringMode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
       (await store.resolve(ManagedConfig)).trustedDomains[0] !==
-        TRUSTED_DOMAINS_NONE_ID
-    ) {
-      const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
-      const hostnames = Object.keys(options.paused);
+        TRUSTED_DOMAINS_NONE_ID)
+  ) {
+    const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
+    const hostnames = Object.keys(options.paused);
 
-      let globalPause = false;
-      if (hostnames.includes(GLOBAL_PAUSE_ID)) {
-        globalPause = true;
-      }
+    let globalPause = false;
+    if (hostnames.includes(GLOBAL_PAUSE_ID)) {
+      globalPause = true;
+    }
 
-      if (hostnames.length) {
-        await chrome.declarativeNetRequest.updateDynamicRules({
-          addRules: [
-            {
-              id: 1,
-              priority: PAUSED_RULE_PRIORITY,
-              action: { type: 'allow' },
-              condition: {
-                initiatorDomains: globalPause ? undefined : hostnames,
-                resourceTypes: ALL_RESOURCE_TYPES,
-              },
+    if (hostnames.length) {
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        addRules: [
+          {
+            id: 1,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allow' },
+            condition: {
+              initiatorDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ALL_RESOURCE_TYPES,
             },
-            {
-              id: 2,
-              priority: PAUSED_RULE_PRIORITY,
-              action: { type: 'allow' },
-              condition: {
-                requestDomains: globalPause ? undefined : hostnames,
-                resourceTypes: ALL_RESOURCE_TYPES,
-              },
+          },
+          {
+            id: 2,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allow' },
+            condition: {
+              requestDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ALL_RESOURCE_TYPES,
             },
-            {
-              id: 3,
-              priority: PAUSED_RULE_PRIORITY,
-              action: { type: 'allowAllRequests' },
-              condition: {
-                initiatorDomains: globalPause ? undefined : hostnames,
-                resourceTypes: ['main_frame', 'sub_frame'],
-              },
+          },
+          {
+            id: 3,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allowAllRequests' },
+            condition: {
+              initiatorDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ['main_frame', 'sub_frame'],
             },
-            {
-              id: 4,
-              priority: PAUSED_RULE_PRIORITY,
-              action: { type: 'allowAllRequests' },
-              condition: {
-                requestDomains: globalPause ? undefined : hostnames,
-                resourceTypes: ['main_frame', 'sub_frame'],
-              },
+          },
+          {
+            id: 4,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allowAllRequests' },
+            condition: {
+              requestDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ['main_frame', 'sub_frame'],
             },
-          ],
-          removeRuleIds,
-        });
-        console.log('[paused] Pause rules updated:', hostnames.join(', '));
-      } else if (removeRuleIds.length) {
-        await chrome.declarativeNetRequest.updateDynamicRules({
-          removeRuleIds,
-        });
-        console.log('[paused] Pause rules cleared');
-      }
+          },
+        ],
+        removeRuleIds,
+      });
+      console.log('[paused] Pause rules updated:', hostnames.join(', '));
+    } else if (removeRuleIds.length) {
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds,
+      });
+      console.log('[paused] Pause rules cleared');
     }
   }
 });
