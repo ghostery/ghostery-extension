@@ -14,38 +14,10 @@ import {
   getExtensionElement,
   setPrivacyToggle,
   openPanel,
+  setCustomFilters,
 } from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
-
-async function setCustomFilters(filters, callback) {
-  await setPrivacyToggle('custom-filters', true);
-  await getExtensionElement('button:custom-filters').click();
-
-  const checkbox = await getExtensionElement(
-    'checkbox:custom-filters:trusted-scriptlets',
-  );
-
-  if (!(await checkbox.getProperty('checked'))) {
-    await checkbox.click();
-    await expect(checkbox).toHaveElementProperty('checked', true);
-  }
-
-  const input = await getExtensionElement('input:custom-filters');
-  await input.setValue(filters.join('\n'));
-
-  await getExtensionElement('button:custom-filters:save').click();
-
-  await expect(
-    getExtensionElement('component:custom-filters:result'),
-  ).toBeDisplayed();
-
-  if (callback) {
-    await callback();
-  }
-
-  await getExtensionElement('button:back').click();
-}
 
 describe('Advanced Features', function () {
   before(enableExtension);
