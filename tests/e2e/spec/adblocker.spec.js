@@ -50,19 +50,18 @@ async function collectTestResults() {
 }
 
 describe.only('Adblocker Capabilities', function () {
-  before(async () => {
-    await enableExtension();
-    // Disable all community filters to ensure the pure adblocker capability
-    // Community filters often ship generic hides to special hostnames like
-    // localhost.
-    await setPrivacyToggle('ad-blocking', false);
-    await setPrivacyToggle('never-consent', false);
-    await setPrivacyToggle('anti-tracking', false);
-  });
+  before(enableExtension);
+  // Disable all community filters to ensure the pure adblocker capability
+  // Community filters often ship generic hides to special hostnames like
+  // localhost. However, still at least one engine is required to bring
+  // redirect resources to the resulting engine.
+  before(setPrivacyToggle('ad-blocking', false));
+  // We will bring the never-consent engine, which will have minimum effect
+  // to the testing page.
+  before(setPrivacyToggle('never-consent', true));
+  before(setPrivacyToggle('anti-tracking', false));
 
-  after(async () => {
-    await setPrivacyToggle('custom-filters', false);
-  });
+  after(setPrivacyToggle('custom-filters', false));
 
   describe('Styling', function () {
     for (const [id, filter] of [
