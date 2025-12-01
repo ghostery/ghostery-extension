@@ -19,8 +19,9 @@ import {
   createRedirectProtectionExceptionRules,
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
-import Options from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+
+import Options from '/store/options.js';
 
 const redirectUrlMap = new AutoSyncingMap({
   storageKey: 'redirectUrls:v1',

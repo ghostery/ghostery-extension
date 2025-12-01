@@ -174,8 +174,6 @@ export async function updateCustomFilters(input, options) {
 
   // Update DNR rules for Chromium and Safari
   if (__PLATFORM__ !== 'firefox') {
-    const { redirectProtection } = await store.resolve(Options);
-
     let { rules, errors } = await convert(
       [...networkFilters].map((f) => f.toString()),
     );
@@ -184,6 +182,7 @@ export async function updateCustomFilters(input, options) {
       result.errors.push(...errors);
     }
 
+    const { redirectProtection } = await store.resolve(Options);
     rules = applyRedirectProtection(rules, {
       enabled: redirectProtection.enabled,
     });
