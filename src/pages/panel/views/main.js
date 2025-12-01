@@ -16,7 +16,7 @@ import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, {
   getPausedDetails,
-  getTopDomainFromRecord,
+  findParentDomain,
   FILTERING_MODE_GHOSTERY,
   FILTERING_MODE_ZAP,
   GLOBAL_PAUSE_ID,
@@ -70,10 +70,7 @@ async function togglePause(host, event) {
   const { options, stats } = host;
 
   if (paused) {
-    const pausedHostname = getTopDomainFromRecord(
-      options.paused,
-      stats.hostname,
-    );
+    const pausedHostname = findParentDomain(options.paused, stats.hostname);
 
     store.set(options, {
       paused: { [pausedHostname]: null },
@@ -108,7 +105,7 @@ async function togglePause(host, event) {
 async function toggleZapped(host) {
   const { options, stats, paused } = host;
 
-  const zappedHostname = getTopDomainFromRecord(options.zapped, stats.hostname);
+  const zappedHostname = findParentDomain(options.zapped, stats.hostname);
 
   await store.set(options, {
     zapped: { [zappedHostname || stats.hostname]: paused ? {} : null },

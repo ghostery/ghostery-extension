@@ -32,11 +32,10 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
   if (options.filteringMode !== FILTERING_MODE_GHOSTERY) {
     // Filtering mode has changed - clean up alarms
     if (lastOptions && options.filteringMode !== lastOptions?.filteringMode) {
-      const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
-        name.startsWith(PAUSED_ALARM_PREFIX),
-      );
-      alarms.forEach(({ name }) => {
-        chrome.alarms.clear(name);
+      (await chrome.alarms.getAll()).forEach(({ name }) => {
+        if (name.startsWith(PAUSED_ALARM_PREFIX)) {
+          chrome.alarms.clear(name);
+        }
       });
     }
 

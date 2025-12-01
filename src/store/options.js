@@ -257,10 +257,12 @@ async function manage(options) {
   return options;
 }
 
-export function getTopDomainFromRecord(record, hostname = '') {
+export function findParentDomain(record, hostname = '') {
   if (!hostname) return null;
 
   const domain = Object.keys(record)
+    // We need to sort domains by length to check shortest domains first,
+    // but in scope of the same top-level domain
     .sort((a, b) => b.localeCompare(a))
     .find((d) => hostname.endsWith(d));
 
@@ -277,12 +279,12 @@ export function getPausedDetails(options, hostname = '') {
   switch (options.filteringMode) {
     case FILTERING_MODE_GHOSTERY: {
       // The domain is paused when top domain is found in the record
-      const pausedHostname = getTopDomainFromRecord(options.paused, hostname);
+      const pausedHostname = findParentDomain(options.paused, hostname);
       return pausedHostname ? options.paused[pausedHostname] : null;
     }
     case FILTERING_MODE_ZAP: {
       // The domain is paused when top domain is not found in the record
-      const zappedHostname = getTopDomainFromRecord(options.zapped, hostname);
+      const zappedHostname = findParentDomain(options.zapped, hostname);
       return zappedHostname ? null : { revokeAt: 0 };
     }
     default:
