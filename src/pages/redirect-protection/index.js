@@ -223,7 +223,13 @@ const RedirectProtection = {
                       </ui-text>
 
                       <div layout="block:center margin:1:0">
-                        <a class="link" href="${targetUrl}">${hostname}</a>
+                        <a
+                          class="link"
+                          href="${targetUrl}"
+                          data-qa="link:redirect-protection:hostname"
+                        >
+                          ${hostname}
+                        </a>
                       </div>
 
                       <ui-text type="body-m" layout="block:center">
@@ -233,15 +239,28 @@ const RedirectProtection = {
                       <div layout="column items:center margin:top:2">
                         <div layout="column gap:1">
                           <ui-button type="primary" onclick="${allow}">
-                            <button layout="width:::100%">Allow</button>
+                            <button
+                              layout="width:::100%"
+                              data-qa="button:redirect-protection:allow"
+                            >
+                              Allow
+                            </button>
                           </ui-button>
 
                           <div layout="row gap:1">
                             <ui-button onclick="${goBack}">
-                              <button style="min-width: 80px;">Back</button>
+                              <button
+                                style="min-width: 80px;"
+                                data-qa="button:redirect-protection:back"
+                              >
+                                Back
+                              </button>
                             </ui-button>
                             <ui-button onclick="${alwaysAllow}">
-                              <button layout="grow">
+                              <button
+                                layout="grow"
+                                data-qa="button:redirect-protection:always-allow"
+                              >
                                 Always allow from this domain
                               </button>
                             </ui-button>
