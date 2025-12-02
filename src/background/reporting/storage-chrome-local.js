@@ -48,7 +48,7 @@ export default class StorageLocal {
   }
 
   /**
-   * Should be used onyl for debugging. Note that Storage is not designed
+   * Should be used only for debugging. Note that Storage is not designed
    * to support efficient iteration over keys. If you need that, consider
    * using IndexedDBKeyValueStore.
    */
