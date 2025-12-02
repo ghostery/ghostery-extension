@@ -82,44 +82,44 @@ if (__PLATFORM__ !== 'firefox') {
   });
 
   OptionsObserver.addListener(
-    async function redirectProtectionExceptions(options, lastOptions) {
-      if (options.redirectProtection.enabled) {
-        const disabledDomains = Object.keys(
-          options.redirectProtection.disabled,
-        );
-        const lastDisabledDomains = lastOptions
-          ? Object.keys(lastOptions.redirectProtection.disabled)
-          : [];
+    'redirectProtection',
+    async function redirectProtectionExceptions(
+      redirectProtection,
+      lastRedredirectProtection,
+    ) {
+      if (!lastRedredirectProtection) {
+        return;
+      }
 
-        const hasChanges =
-          !lastOptions ||
-          !lastOptions.redirectProtection.enabled ||
-          JSON.stringify(disabledDomains.sort()) !==
-            JSON.stringify(lastDisabledDomains.sort());
+      if (redirectProtection.enabled) {
+        const disabledDomains = Object.keys(redirectProtection.disabled);
 
-        if (hasChanges) {
-          try {
-            const removeRuleIds = await getDynamicRulesIds(
-              REDIRECT_PROTECTION_ID_RANGE,
-            );
+        try {
+          const removeRuleIds = await getDynamicRulesIds(
+            REDIRECT_PROTECTION_ID_RANGE,
+          );
 
-            const addRules = createRedirectProtectionExceptionRules(
-              disabledDomains,
-              REDIRECT_PROTECTION_ID_RANGE.start,
-            );
+          const addRules = createRedirectProtectionExceptionRules(
+            disabledDomains,
+            REDIRECT_PROTECTION_ID_RANGE.start,
+          );
 
-            await chrome.declarativeNetRequest.updateDynamicRules({
-              removeRuleIds,
-              addRules,
-            });
-          } catch (e) {
-            console.error(
-              '[redirect-protection] Error updating exception rules:',
-              e,
-            );
-          }
+          await chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds,
+            addRules,
+          });
+
+          console.log(
+            '[redirect-protection] Updated exception rules for disabled domains:',
+            disabledDomains,
+          );
+        } catch (e) {
+          console.error(
+            '[redirect-protection] Error updating exception rules:',
+            e,
+          );
         }
-      } else if (lastOptions?.redirectProtection.enabled) {
+      } else if (lastRedredirectProtection.enabled) {
         const removeRuleIds = await getDynamicRulesIds(
           REDIRECT_PROTECTION_ID_RANGE,
         );
@@ -127,6 +127,10 @@ if (__PLATFORM__ !== 'firefox') {
           await chrome.declarativeNetRequest.updateDynamicRules({
             removeRuleIds,
           });
+
+          console.log(
+            '[redirect-protection] Removed all exception rules as protection was disabled',
+          );
         }
       }
     },
@@ -134,10 +138,7 @@ if (__PLATFORM__ !== 'firefox') {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'getRedirectUrl') {
-    if (__PLATFORM__ === 'firefox') {
-      return false;
-    }
+  if (__PLATFORM__ !== 'firefox' && message.action === 'getRedirectUrl') {
     const url =
       sender.tab && sender.tab.id
         ? redirectUrlMap.get(sender.tab.id) || null
