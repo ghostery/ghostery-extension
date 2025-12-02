@@ -34,6 +34,12 @@ export function setupTestPage(port = 6789) {
     const filePath = path.resolve(__dirname, fileName);
 
     try {
+      // Handle dynamic asset requests for adblocker library testing page
+      if (filePath.startsWith('/adblocker/gen/') && filePath.endsWith('.js')) {
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.end('void (function () {})();');
+        return;
+      }
       // Prevent path traversal by ensuring filePath starts with baseDir
       if (filePath.startsWith(__dirname) && existsSync(filePath)) {
         const ext = path.extname(fileName).toLowerCase();
