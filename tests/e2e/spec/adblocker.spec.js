@@ -18,13 +18,29 @@ import {
 import { PAGE_DOMAIN, PAGE_URL as baseUrl } from '../wdio.conf.js';
 
 const PAGE_URL = baseUrl + 'adblocker/index.html';
-const BROWSER_CONSTRAINT_FIREFOX = 1;
-const BROWSER_CONSTRAINT_CHROMIUM = 2;
+
+async function disableAllPrivacyToggle() {
+  // Disable all community filters to ensure the pure adblocker capability
+  // Community filters often ship generic hides to special hostnames like
+  // localhost. However, still at least one engine is required to bring
+  // redirect resources to the resulting engine.
+  await setPrivacyToggle('ad-blocking', false);
+  // We will bring the never-consent engine, which will have minimum effect
+  // to the testing page.
+  await setPrivacyToggle('never-consent', true);
+  await setPrivacyToggle('anti-tracking', false);
+}
+
+async function enableAllPrivacyToggle() {
+  await setPrivacyToggle('ad-blocking', true);
+  await setPrivacyToggle('never-consent', true);
+  await setPrivacyToggle('anti-tracking', true);
+}
 
 async function collectTestResults() {
   let result;
   for (let i = 0; i < 4; i++) {
-    result = await browser.execute(() => {
+    result = await browser.execute(function () {
       if (
         typeof suite === 'undefined' ||
         suite.collection.expected !== suite.collection.reports.length
@@ -44,157 +60,186 @@ async function collectTestResults() {
     }
   }
 
-  expect(result).not.toBe(false);
-
   return result;
 }
 
+async function prepareTestPage(filters) {
+  await setCustomFilters(
+    filters.map(function ([id, filter]) {
+      return id.startsWith('generic') ? PAGE_DOMAIN + filter : filter;
+    }),
+  );
+  await browser.url(PAGE_URL);
+}
+
 describe.only('Adblocker Capabilities', function () {
+  // NOTE: Only separate "enableExtension" before hook and merge everything else
   before(enableExtension);
-  // Disable all community filters to ensure the pure adblocker capability
-  // Community filters often ship generic hides to special hostnames like
-  // localhost. However, still at least one engine is required to bring
-  // redirect resources to the resulting engine.
-  before(setPrivacyToggle('ad-blocking', false));
-  // We will bring the never-consent engine, which will have minimum effect
-  // to the testing page.
-  before(setPrivacyToggle('never-consent', true));
-  before(setPrivacyToggle('anti-tracking', false));
+  before(disableAllPrivacyToggle);
 
-  after(setPrivacyToggle('custom-filters', false));
+  after(enableAllPrivacyToggle);
+  after(function () {
+    setPrivacyToggle('custom-filters', false);
+  });
 
-  describe('Styling', function () {
-    for (const [id, filter] of [
-      ['generic-selector-id', '###generic-target'],
-      ['generic-selector-class', '##.generic-target'],
-      ['generic-selector-attribute', '##[generic-target]'],
-      ['generic-selector-has', '##.generic-outer-target:has(span)'],
-      ['generic-selector-lazy', '##[generic-lazy-target="100ms"]'],
-      ['generic-selector-adjunct', '##[generic-adjunct-target="100ms"]'],
+  describe('All platforms', function () {
+    const stylingFilters = [
+      ['generic-selector-id', PAGE_DOMAIN + '###generic-target'],
+      ['generic-selector-class', PAGE_DOMAIN + '##.generic-target'],
+      ['generic-selector-attribute', PAGE_DOMAIN + '##[generic-target]'],
+      [
+        'generic-selector-has',
+        PAGE_DOMAIN + '##.generic-outer-target:has(span)',
+      ],
+      [
+        'generic-selector-lazy',
+        PAGE_DOMAIN + '##[generic-lazy-target="100ms"]',
+      ],
+      [
+        'generic-selector-adjunct',
+        PAGE_DOMAIN + '##[generic-adjunct-target="100ms"]',
+      ],
       ['selector-id', '###target'],
       ['selector-class', '##.target'],
       ['selector-attribute', '##[target]'],
       ['selector-has', '##.outer-target:has(span)'],
       ['selector-lazy', '##[lazy-target="100ms"]'],
       ['selector-adjunct', '##[adjunct-target="100ms"]'],
-    ]) {
-      it(filter, async function () {
-        await setCustomFilters([
-          id.startsWith('generic') ? filter : PAGE_DOMAIN + filter,
-        ]);
-        await browser.url(PAGE_URL);
-
-        const reports = await collectTestResults();
-        const onReadystatechange = reports.find(function (report) {
-          return (
-            report.type === 'styling' && report.phase === 'readystatechange'
-          );
-        });
-        const onDOMContentLoaded = reports.find(function (report) {
-          return (
-            report.type === 'styling' && report.phase === 'DOMContentLoaded'
-          );
-        });
-        const on1000ms = reports.find(function (report) {
-          return report.type === 'styling' && report.phase === '1000ms';
-        });
-
-        expect([
-          onReadystatechange.results[id],
-          onDOMContentLoaded.results[id],
-          on1000ms.results[id],
-        ]).toContain(true);
-      });
-    }
-  });
-
-  describe('Scripting', function () {
-    for (const [id, filter] of [
-      ['globals-safeself', '##+js(json-prune, globals-safeself)'],
-      ['aopr', '##+js(aopr, encodeURIComponent)'],
-      ['aopw', '##+js(aopw, __checkadb__custom)'],
-      ['aeld', '##+js(aeld, click)'],
-      ['call-nothrow', '##+js(call-nothrow, atob)'],
-      ['json-prune', '##+js(json-prune, __checkadb__custom)'],
-      ['set', '##+js(set, checkadb, true)'],
-      ['nostif0', '##+js(nostif, , 0)'],
-      ['nostif50', '##+js(nostif, , 50)'],
-      ['nosiif50', '##+js(nosiif, , 50)'],
-    ]) {
-      it(filter, async function () {
-        await setCustomFilters([PAGE_DOMAIN + filter]);
-        await browser.url(PAGE_URL);
-
-        const reports = await collectTestResults();
-        const onHead = reports.find(function (report) {
-          return report.type === 'scripting' && report.phase === 'head';
-        });
-        const onBody = reports.find(function (report) {
-          return report.type === 'scripting' && report.phase === 'body';
-        });
-        const onDOMContentLoaded = reports.find(function (report) {
-          return (
-            report.type === 'scripting' && report.phase === 'DOMContentLoaded'
-          );
-        });
-        const on1000ms = reports.find(function (report) {
-          return report.type === 'scripting' && report.phase === '1000ms';
-        });
-
-        expect([
-          onHead.results[id],
-          onBody.results[id],
-          onDOMContentLoaded.results[id],
-          on1000ms.results[id],
-        ]).toContain(true);
-      });
-    }
-  });
-
-  describe('Networking', function () {
-    for (const [id, filter, constraint] of [
+    ];
+    const scriptingFilters = [
+      ['globals-safeself', PAGE_DOMAIN + '##+js(json-prune, globals-safeself)'],
+      ['aopr', PAGE_DOMAIN + '##+js(aopr, encodeURIComponent)'],
+      ['aopw', PAGE_DOMAIN + '##+js(aopw, __checkadb__custom)'],
+      ['aeld', PAGE_DOMAIN + '##+js(aeld, click)'],
+      ['call-nothrow', PAGE_DOMAIN + '##+js(call-nothrow, atob)'],
+      ['json-prune', PAGE_DOMAIN + '##+js(json-prune, __checkadb__custom)'],
+      ['set', PAGE_DOMAIN + '##+js(set, checkadb, true)'],
+      ['nostif0', PAGE_DOMAIN + '##+js(nostif, , 0)'],
+      ['nostif50', PAGE_DOMAIN + '##+js(nostif, , 50)'],
+      ['nosiif50', PAGE_DOMAIN + '##+js(nosiif, , 50)'],
+    ];
+    const networkingFilters = [
       ['url', '/gen/url.js^'],
       ['regex', '/gen\\/regex.js\\?t=[a-z0-9]{6}/'],
       ['modscript', '/gen/modscript.js^$script'],
       ['modxhr', '/gen/modxhr.js^$xhr'],
-      [
-        'modmatchcase',
-        '/gen\\/modmatchcase-UPPERCASE.js/$match-case',
-        // modmatchcase is not supported by adblocker library yet
-        // refs https://github.com/ghostery/adblocker/pull/5296
-        BROWSER_CONSTRAINT_CHROMIUM,
-      ],
+      // $match-case (see Firefox)
       ['redirnoopjs', '/gen/redirnoop.js^$redirect=noopjs'],
       [
         'rediradsbygoogle',
         '/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js',
       ],
-      [
-        'redirfallback',
-        '/gen/redirfallback.js^$redirect=something_does_not_exist.js',
-        BROWSER_CONSTRAINT_FIREFOX,
-      ],
-    ]) {
-      if (constraint === BROWSER_CONSTRAINT_CHROMIUM && !browser.isChromium) {
-        continue;
+    ];
+
+    const reports = {
+      styling: [],
+      scripting: [],
+      networking: [],
+    };
+
+    before(async function () {
+      await prepareTestPage([
+        ...stylingFilters,
+        ...scriptingFilters,
+        ...networkingFilters,
+      ]);
+      for (const report of await collectTestResults()) {
+        if (report.type === 'styling') {
+          reports.styling.push(report);
+        } else if (report.type === 'scripting') {
+          reports.scripting.push(report);
+        } else if (report.type === 'networking') {
+          reports.networking.push(report);
+        }
       }
+    });
 
-      if (constraint === BROWSER_CONSTRAINT_FIREFOX && !browser.isFirefox) {
-        continue;
+    describe('Styling', function () {
+      for (const [id, filter] of stylingFilters) {
+        it(filter, async function () {
+          expect(
+            reports.styling.map(function (timing) {
+              return timing.results[id];
+            }),
+          ).toContain(true);
+        });
       }
+    });
 
-      it(filter, async function () {
-        await setCustomFilters([filter]);
-        await browser.url(PAGE_URL);
+    describe('Scripting', function () {
+      for (const [id, filter] of scriptingFilters) {
+        it(filter, async function () {
+          expect(
+            reports.scripting.map(function (timing) {
+              return timing.results[id];
+            }),
+          ).toContain(true);
+        });
+      }
+    });
 
-        const reports = await collectTestResults();
-        // Networking tests only have one timing "lazy" starting in 200ms
-        const report = reports.find(function (report) {
+    describe('Networking', function () {
+      for (const [id, filter] of networkingFilters) {
+        it(filter, async function () {
+          // The networking test only have one timing candidate
+          expect(reports.networking[0].results[id]).toBe(true);
+        });
+      }
+    });
+  });
+
+  if (browser.isChromium) {
+    describe('Chromium', function () {
+      const networkingFilters = [
+        // modmatchcase is not supported by adblocker library yet
+        // refs https://github.com/ghostery/adblocker/pull/5296
+        ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
+      ];
+
+      let report;
+
+      before(async function () {
+        await prepareTestPage(networkingFilters);
+        report = (await collectTestResults()).find(function (report) {
           return report.type === 'networking';
         });
-
-        expect(report.results[id]).toBe(true);
       });
-    }
-  });
+
+      describe('Networking', function () {
+        for (const [id, filter] of networkingFilters) {
+          it(filter, async function () {
+            expect(report.results[id]).toBe(true);
+          });
+        }
+      });
+    });
+  }
+
+  if (browser.isFirefox) {
+    describe('Firefox', function () {
+      const networkingFilters = [
+        [
+          'redirfallback',
+          '/gen/redirfallback.js^$redirect=something_does_not_exist.js',
+        ],
+      ];
+
+      let report;
+
+      before(async function () {
+        await prepareTestPage(networkingFilters);
+        report = (await collectTestResults()).find(function (report) {
+          return report.type === 'networking';
+        });
+      });
+
+      describe('Networking', function () {
+        for (const [id, filter] of networkingFilters) {
+          it(filter, async function () {
+            expect(report.results[id]).toBe(true);
+          });
+        }
+      });
+    });
+  }
 });
