@@ -25,6 +25,7 @@ import { $, expect } from '@wdio/globals';
 import {
   getExtensionElement,
   getExtensionPageURL,
+  setConfigFlags,
   waitForIdleBackgroundTasks,
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
@@ -163,6 +164,8 @@ export const config = {
       await browser.url(getExtensionPageURL('settings'));
       await expect(getExtensionElement('page:settings')).toBeDisplayed();
       await waitForIdleBackgroundTasks();
+
+      await setConfigFlags(wdio.argv.flags);
 
       console.log('Extension updated...');
     } catch (e) {

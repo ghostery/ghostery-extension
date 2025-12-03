@@ -32,6 +32,7 @@ import {
   FLAG_EXTENDED_SELECTORS,
   FLAG_DYNAMIC_DNR_FIXES,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_MODES,
 } from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -66,6 +67,7 @@ export const argv = process.argv.slice(2).reduce(
       FLAG_EXTENDED_SELECTORS,
       FLAG_DYNAMIC_DNR_FIXES,
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+      FLAG_MODES,
     ],
   },
 );
@@ -95,18 +97,12 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: [
-    [
-      // Must be the first to enable the extension
-      'spec/onboarding.spec.js',
-      'spec/index.spec.js',
-    ],
-  ],
+  specs: ['spec/index.spec.js'],
   reporters: [['spec', { showPreface: false }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
-    retries: 2,
+    retries: 1,
   },
   maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [

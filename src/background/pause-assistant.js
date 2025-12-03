@@ -14,7 +14,7 @@ import { parse } from 'tldts-experimental';
 
 import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
-import Options from '/store/options.js';
+import Options, { MODE_DEFAULT } from '/store/options.js';
 
 import {
   ACTION_PAUSE_ASSISTANT,
@@ -32,7 +32,11 @@ async function updatePausedDomains(config, lastConfig) {
 
   let paused = {};
 
-  if (!options.pauseAssistant || !config.hasFlag(FLAG_PAUSE_ASSISTANT)) {
+  if (
+    options.mode !== MODE_DEFAULT ||
+    !options.pauseAssistant ||
+    !config.hasFlag(FLAG_PAUSE_ASSISTANT)
+  ) {
     // Clear out all paused domains by pause assistant
     for (const [domain, { assist }] of Object.entries(options.paused)) {
       if (assist) paused[domain] = null;
@@ -67,8 +71,13 @@ async function updatePausedDomains(config, lastConfig) {
     }
   }
 
-  if (Object.keys(paused).length) {
+  const keys = Object.keys(paused);
+  if (keys.length) {
     store.set(Options, { paused });
+    console.log(
+      '[pause-assistant] Updating domains:',
+      keys.map((k) => `${k} ${paused[k] ? '(add)' : '(remove)'}`).join(', '),
+    );
   }
 }
 
@@ -78,18 +87,28 @@ store.observe(Config, async (_, config, lastConfig) => {
 });
 
 // Clear out domains when the user disables the pause assistant
-OptionsObserver.addListener('pauseAssistant', async (value, lastValue) => {
-  if (lastValue !== undefined) {
-    updatePausedDomains(await store.resolve(Config));
-  }
-});
+// or changes filtering mode
+OptionsObserver.addListener(
+  async function pauseAssistant(options, lastOptions) {
+    if (
+      lastOptions &&
+      (options.pauseAssistant !== lastOptions.pauseAssistant ||
+        options.mode !== lastOptions.mode)
+    ) {
+      updatePausedDomains(await store.resolve(Config));
+    }
+  },
+);
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (details.frameId === 0) {
-    if (!(await store.resolve(Options)).pauseAssistant) return;
-
     const managedConfig = await store.resolve(ManagedConfig);
     if (managedConfig.disableUserControl) return;
+
+    const options = await store.resolve(Options);
+    if (options.mode !== MODE_DEFAULT || !options.pauseAssistant) {
+      return;
+    }
 
     const config = await store.resolve(Config);
     if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;

@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID, MODE_DEFAULT } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
 
@@ -19,33 +19,30 @@ import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,
   PAUSED_RULE_PRIORITY,
+  ALL_RESOURCE_TYPES,
 } from '/utils/dnr.js';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
 
-const ALL_RESOURCE_TYPES = [
-  'main_frame',
-  'sub_frame',
-  'stylesheet',
-  'script',
-  'image',
-  'font',
-  'object',
-  'xmlhttprequest',
-  'ping',
-  'media',
-  'websocket',
-  'webtransport',
-  'webbundle',
-  'other',
-];
+OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
+  if (options.mode !== MODE_DEFAULT) {
+    // Filtering mode has changed - clean up alarms
+    if (lastOptions && options.mode !== lastOptions?.mode) {
+      (await chrome.alarms.getAll()).forEach(({ name }) => {
+        if (name.startsWith(PAUSED_ALARM_PREFIX)) {
+          chrome.alarms.clear(name);
+        }
+      });
+    }
 
-OptionsObserver.addListener('paused', async (paused, lastPaused) => {
+    return;
+  }
+
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );
-  const revokeHostnames = Object.entries(paused).filter(
+  const revokeHostnames = Object.entries(options.paused).filter(
     ([, { revokeAt }]) => revokeAt,
   );
 
@@ -69,19 +66,20 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
       });
   }
 
-  // The background process starts and runs for each tab, so we can assume
-  // that this function is called before the user can change the paused state
-  // in the panel or the settings page.
   if (
     __PLATFORM__ !== 'firefox' &&
-    (lastPaused ||
+    // Paused state has changed by the user interaction
+    ((lastOptions &&
+      !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
+      // Filtering mode has changed
+      (lastOptions && options.mode !== lastOptions.mode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
       (await store.resolve(ManagedConfig)).trustedDomains[0] !==
         TRUSTED_DOMAINS_NONE_ID)
   ) {
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
-    const hostnames = Object.keys(paused);
+    const hostnames = Object.keys(options.paused);
 
     let globalPause = false;
     if (hostnames.includes(GLOBAL_PAUSE_ID)) {
@@ -115,18 +113,18 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
             action: { type: 'allowAllRequests' },
             condition: {
               initiatorDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ['main_frame', 'sub_frame'],
+              resourceTypes: ['main_frame'],
             },
           },
         ],
         removeRuleIds,
       });
-      console.log('[dnr] Pause rules updated:', hostnames.join(', '));
+      console.log('[paused] Pause rules updated:', hostnames.join(', '));
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
-      console.log('[dnr] Pause rules cleared');
+      console.log('[paused] Pause rules cleared');
     }
   }
 });

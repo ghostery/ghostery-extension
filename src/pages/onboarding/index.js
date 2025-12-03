@@ -12,14 +12,17 @@
 import { mount, html, store, router } from 'hybrids';
 
 import '/ui/index.js';
+
+import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
+
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 import './elements.js';
 
 import Main from './views/main.js';
+import Modes from './views/modes.js';
 import Success from './views/success.js';
-import ManagedConfig from '/store/managed-config.js';
 
 Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
   ([{ onboarding, terms }, managedConfig]) => {
@@ -37,7 +40,7 @@ Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
     });
 
     mount(document.body, {
-      stack: router(terms ? [Success] : [Main, Success]),
+      stack: router(terms ? [Success, Modes] : [Main, Modes, Success]),
       render: ({ stack }) => html`
         <template layout="grid height::100%">
           <onboarding-layout>${stack}</onboarding-layout>

@@ -14,7 +14,14 @@ import { html, store, router, msg } from 'hybrids';
 import { isWebkit } from '/utils/browser-info.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
-import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, {
+  isGloballyPaused,
+  revokeGlobalPause,
+  getPausedDetails,
+  findParentDomain,
+  MODE_DEFAULT,
+  MODE_ZAP,
+} from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
 import ManagedConfig from '/store/managed-config.js';
@@ -64,9 +71,7 @@ async function togglePause(host, event) {
   const { options, stats } = host;
 
   if (paused) {
-    const pausedHostname = Object.keys(options.paused)
-      .sort((a, b) => b.localeCompare(a))
-      .find((domain) => stats.hostname.endsWith(domain));
+    const pausedHostname = findParentDomain(options.paused, stats.hostname);
 
     store.set(options, {
       paused: { [pausedHostname]: null },
@@ -98,10 +103,34 @@ async function togglePause(host, event) {
   `);
 }
 
-async function revokeGlobalPause(host) {
-  await store.set(host.options, {
-    paused: { [GLOBAL_PAUSE_ID]: null },
+async function toggleZapped(host) {
+  const { options, stats, paused } = host;
+
+  const zappedHostname = findParentDomain(options.zapped, stats.hostname);
+
+  await store.set(options, {
+    zapped: { [zappedHostname || stats.hostname]: paused ? true : null },
   });
+
+  showAlert(html`
+    <panel-alert type="info">
+      ${paused
+        ? msg`Ghostery has been enabled on this site.`
+        : msg`Ghostery has been disabled on this site.`}
+      <ui-text type="body-s" layout="block" underline>
+        <a
+          href="#"
+          onclick="${reloadTab}"
+          layout="row inline gap:0.5 items:center ::color:inherit"
+          >Reload to see changes</a
+        >.
+      </ui-text>
+    </panel-alert>
+  `);
+}
+
+async function toggleGlobalPause(host) {
+  await revokeGlobalPause(host.options);
 
   showAlert(html`
     <panel-alert type="danger">
@@ -169,7 +198,7 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
-    store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
+    store.ready(options) && isGloballyPaused(options),
   contentBlocksSelectors: ({ elementPickerSelectors, stats }) =>
     (store.ready(stats, elementPickerSelectors) &&
       elementPickerSelectors.hostnames[stats.hostname]?.length) ||
@@ -196,9 +225,17 @@ export default {
         html`
           <ui-header>
             ${store.ready(stats) &&
-            managedConfig.disableUserControl &&
+            (managedConfig.disableUserControl ||
+              (options.mode === MODE_ZAP && paused)) &&
             html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
-            <ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>
+            ${options.mode === MODE_DEFAULT &&
+            html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`}
+            ${options.mode === MODE_ZAP &&
+            html`<ui-icon
+              name="logo-zap"
+              slot="icon"
+              layout="margin:left:-1"
+            ></ui-icon>`}
             ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
@@ -210,6 +247,7 @@ export default {
           </ui-header>
           ${store.ready(stats) &&
           !managedConfig.disableUserControl &&
+          (options.mode !== MODE_ZAP || !paused) &&
           html`
             <panel-actions hostname="${stats.displayHostname}">
               <panel-actions-button
@@ -287,83 +325,104 @@ export default {
             </panel-actions>
           `}
         `}
-        ${options.terms
-          ? store.ready(stats) &&
-            !managedConfig.disableUserControl &&
-            html`
-              <panel-pause
-                onaction="${globalPause ? revokeGlobalPause : togglePause}"
-                paused="${paused || globalPause}"
-                global="${globalPause}"
-                managed="${paused?.managed}"
-                assist="${paused?.assist}"
-                revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
-                data-qa="component:pause"
+        ${!options.terms &&
+        html`
+          <div layout="::background:danger-primary">
+            <ui-button
+              type="danger"
+              layout="height:6 margin:1.5"
+              data-qa="button:enable"
+            >
+              <a
+                href="${ONBOARDING_URL}"
+                layout="row center gap:0.5"
+                onclick="${openTabWithUrl}"
               >
-                ${!!paused?.revokeAt &&
-                !paused.assist &&
-                html`
-                  <div layout="row center">
-                    <ui-action>
-                      <a
-                        href="${router.url(ReportCategory)}"
-                        layout="row center gap padding:0.5:1:1 margin:top:-1"
-                      >
-                        <ui-text type="body-s">Something wrong?</ui-text>
-                        <ui-text
-                          type="label-s"
-                          layout="row inline items:center gap:0.5"
-                        >
-                          Report an issue
-                          <ui-icon
-                            name="chevron-right"
-                            layout="size:1.5"
-                          ></ui-icon>
-                        </ui-text>
-                      </a>
-                    </ui-action>
-                  </div>
-                `}
-                ${!!paused?.assist &&
-                html`
-                  <div layout="row center">
-                    <ui-action>
-                      <a
-                        href="${router.url(PauseAssistant)}"
-                        layout="row center padding:0.5:1:1 margin:top:-1"
-                      >
-                        <ui-text
-                          type="label-s"
-                          color="onbrand"
-                          layout="row items:center gap:0.5"
-                        >
-                          Paused by Browsing Assistant
-                          <ui-icon name="info" layout="size:1.5"></ui-icon>
-                        </ui-text>
-                      </a>
-                    </ui-action>
-                  </div>
-                `}
-              </panel-pause>
-            `
-          : html`
-              <div layout="::background:danger-primary">
-                <ui-button
-                  type="danger"
-                  layout="height:6 margin:1.5"
-                  data-qa="button:enable"
-                >
+                <ui-icon name="play"></ui-icon>
+                Enable Ghostery
+              </a>
+            </ui-button>
+          </div>
+        `}
+        ${options.terms &&
+        store.ready(stats) &&
+        !managedConfig.disableUserControl &&
+        (options.mode === MODE_DEFAULT || globalPause) &&
+        html`
+          <panel-pause
+            onaction="${globalPause ? toggleGlobalPause : togglePause}"
+            paused="${paused || globalPause}"
+            global="${globalPause}"
+            managed="${paused?.managed}"
+            assist="${paused?.assist}"
+            revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
+            data-qa="component:pause"
+          >
+            ${!!paused?.revokeAt &&
+            !paused.assist &&
+            html`
+              <div layout="row center">
+                <ui-action>
                   <a
-                    href="${ONBOARDING_URL}"
-                    layout="row center gap:0.5"
-                    onclick="${openTabWithUrl}"
+                    href="${router.url(ReportCategory)}"
+                    layout="row center gap padding:0.5:1:1 margin:top:-1"
                   >
-                    <ui-icon name="play"></ui-icon>
-                    Enable Ghostery
+                    <ui-text type="body-s">Something wrong?</ui-text>
+                    <ui-text
+                      type="label-s"
+                      layout="row inline items:center gap:0.5"
+                    >
+                      Report an issue
+                      <ui-icon name="chevron-right" layout="size:1.5"></ui-icon>
+                    </ui-text>
                   </a>
-                </ui-button>
+                </ui-action>
               </div>
             `}
+            ${!!paused?.assist &&
+            html`
+              <div layout="row center">
+                <ui-action>
+                  <a
+                    href="${router.url(PauseAssistant)}"
+                    layout="row center padding:0.5:1:1 margin:top:-1"
+                  >
+                    <ui-text
+                      type="label-s"
+                      color="onbrand"
+                      layout="row items:center gap:0.5"
+                    >
+                      Paused by Browsing Assistant
+                      <ui-icon name="info" layout="size:1.5"></ui-icon>
+                    </ui-text>
+                  </a>
+                </ui-action>
+              </div>
+            `}
+          </panel-pause>
+        `}
+        ${options.terms &&
+        store.ready(stats) &&
+        !managedConfig.disableUserControl &&
+        options.mode === MODE_ZAP &&
+        !globalPause &&
+        html`
+          <panel-zap
+            onclick="${toggleZapped}"
+            zapped="${!paused}"
+            data-qa="button:zap:${paused ? 'enable' : 'disable'}"
+          >
+            ${paused
+              ? html`
+                  <ui-icon name="play"></ui-icon>
+                  Enable on this site
+                `
+              : html`
+                  <ui-icon name="stop"></ui-icon>
+                  Disable on this site
+                `}
+          </panel-zap>
+        `}
         <panel-container>
           ${store.ready(stats)
             ? html`
@@ -444,10 +503,10 @@ export default {
                                     ></ui-icon>`}
                                   </a>
                                 </ui-text>
-                                ${!paused &&
-                                !globalPause &&
-                                options.terms &&
+                                ${options.terms &&
                                 !managedConfig.disableUserControl &&
+                                !paused &&
+                                !globalPause &&
                                 html`
                                   <ui-action-button layout="shrink:0 width:4.5">
                                     <a

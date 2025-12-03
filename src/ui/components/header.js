@@ -17,11 +17,11 @@ export default {
       layout="shrink:0 grid:max|1|max items:center gap:2 height:6 padding:0.5:1.5 relative layer:100"
       layout@390px="height:7 padding:2"
     >
-      <div layout="row center width:3">
+      <div layout="row items:center width:3">
         <slot name="icon"></slot>
       </div>
       <div><slot></slot></div>
-      <div layout="row center width::3 gap">
+      <div layout="row items:center width::3 gap">
         <slot name="actions"></slot>
       </div>
     </template>

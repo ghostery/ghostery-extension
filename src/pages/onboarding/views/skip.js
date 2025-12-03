@@ -18,7 +18,7 @@ const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghoster
 
 export default {
   render: () => html`
-    <template layout="column gap:2">
+    <template layout="column gap:2 width:::375px">
       <ui-card data-qa="view:skip">
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>

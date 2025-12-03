@@ -12,10 +12,7 @@
 import { store } from 'hybrids';
 
 import Config from '/store/config.js';
-
 import { deleteDatabases } from '/utils/indexeddb.js';
-
-import syncConfig from './config.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -48,9 +45,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       (async () => {
         try {
           await store.set(Config, msg.values);
-          await syncConfig();
-
-          sendResponse('Config synced');
+          sendResponse('Config updated');
         } catch (e) {
           sendResponse(`[devtools] Error syncing config: ${e}`);
         }

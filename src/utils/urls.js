@@ -14,7 +14,12 @@ import { debugMode, stagingMode } from './debug.js';
 
 export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';
 
+export const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 export const HOME_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/`;
+
+export const SIGNON_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/signin`;
+export const CREATE_ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/register`;
+export const ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/account`;
 
 export const WTM_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme`;
 export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;

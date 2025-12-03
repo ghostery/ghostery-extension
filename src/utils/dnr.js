@@ -17,6 +17,23 @@ export const FIXES_ID_RANGE = { start: 3_000_000, end: 4_000_000 };
 export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 
+export const ALL_RESOURCE_TYPES = [
+  'main_frame',
+  'sub_frame',
+  'stylesheet',
+  'script',
+  'image',
+  'font',
+  'object',
+  'xmlhttprequest',
+  'ping',
+  'media',
+  'websocket',
+  'webtransport',
+  'webbundle',
+  'other',
+];
+
 export async function getDynamicRulesIds(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules())
     .filter((rule) => rule.id >= type.start && rule.id < type.end)

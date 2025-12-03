@@ -11,11 +11,17 @@
 
 import { html, msg, store } from 'hybrids';
 
-import Options from '/store/options.js';
+import modeGhosteryScreenshotUrl from '/ui/assets/mode-ghostery.svg';
+import modeZapScreenshotUrl from '/ui/assets/mode-zap.svg';
+
+import Config from '/store/config.js';
+import ManagedConfig from '/store/managed-config.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
+
+import { FLAG_MODES } from '/utils/config-types.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 import * as backup from '../utils/backup.js';
-import ManagedConfig from '/store/managed-config.js';
-import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 async function importSettings(host, event) {
   try {
@@ -34,9 +40,10 @@ async function importSettings(host, event) {
 
 export default {
   options: store(Options),
+  config: store(Config),
   managedConfig: store(ManagedConfig),
   importStatus: undefined,
-  render: ({ options, managedConfig, importStatus }) => html`
+  render: ({ options, config, managedConfig, importStatus }) => html`
     <template layout="contents">
       <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
@@ -44,8 +51,83 @@ export default {
             <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
           <div layout="column gap:4">
-            ${store.ready(managedConfig) &&
-            !managedConfig.disableUserAccount &&
+            ${config.hasFlag(FLAG_MODES) &&
+            !managedConfig.disableModes &&
+            html`
+              <settings-card
+                type="content"
+                layout="contents"
+                layout@768px="block padding:2 gap:2"
+                layout@1280px="padding:5 gap:4"
+              >
+                <settings-option static>
+                  Filtering Mode
+                  <span slot="description">
+                    Because no two people surf alike, we're giving you the power
+                    to pick how you want to experience the web.
+                  </span>
+                </settings-option>
+                <div layout="column gap" layout@768px="grid:2">
+                  <ui-filtering-mode checked="${options.mode === MODE_DEFAULT}">
+                    <input
+                      type="radio"
+                      name="filtering-mode"
+                      value="${MODE_DEFAULT}"
+                      checked="${options.mode === MODE_DEFAULT}"
+                      onchange="${html.set(options, 'mode')}"
+                      data-qa="input:filtering-mode:ghostery"
+                    />
+                    <img
+                      src="${modeGhosteryScreenshotUrl}"
+                      alt="Ghostery Mode"
+                      layout="ratio:83/45 width:220px"
+                      layout@768px="width:100%"
+                    />
+                    <ui-icon
+                      name="logo-in-box"
+                      layout="width:83px"
+                      layout@768px="width:138px"
+                    ></ui-icon>
+                    <ui-text>
+                      We block it all for you - ads, trackers, distractions.
+                      You’re fully covered, no setup needed.
+                    </ui-text>
+                    <ui-text type="label-s" slot="footer">
+                      Best for full coverage and privacy enthusiasts.
+                    </ui-text>
+                  </ui-filtering-mode>
+                  <ui-filtering-mode checked="${options.mode === MODE_ZAP}">
+                    <input
+                      type="radio"
+                      name="filtering-mode"
+                      value="${MODE_ZAP}"
+                      checked="${options.mode === MODE_ZAP}"
+                      onchange="${html.set(options, 'mode')}"
+                      data-qa="input:filtering-mode:zap"
+                    />
+                    <img
+                      src="${modeZapScreenshotUrl}"
+                      alt="ZAP Mode"
+                      layout="ratio:83/45 width:220px"
+                      layout@768px="width:100%"
+                    />
+                    <ui-icon
+                      name="logo-zap"
+                      layout="width:83px"
+                      layout@768px="width:116px"
+                    ></ui-icon>
+                    <ui-text>
+                      You zap ads away, one site at a time. One button, one
+                      page, and you build your own ad-free list.
+                    </ui-text>
+                    <ui-text type="label-s" slot="footer">
+                      Best for beginners or sharing with family.
+                    </ui-text>
+                  </ui-filtering-mode>
+                </div>
+              </settings-card>
+            `}
+            ${!managedConfig.disableUserAccount &&
             html`
               ${(__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) &&
               html`
