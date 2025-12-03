@@ -41,11 +41,7 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
     );
 
     const { cosmeticFilters } = parseFilters(elementPickerFilters.join('\n'));
-
-    engines.create(engines.ELEMENT_PICKER_ENGINE, {
-      cosmeticFilters,
-      config: (await engines.init(engines.FIXES_ENGINE)).config,
-    });
+    await engines.create(engines.ELEMENT_PICKER_ENGINE, { cosmeticFilters });
 
     console.log(
       `[element-picker] Engine updated with ${

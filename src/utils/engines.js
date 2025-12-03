@@ -416,9 +416,17 @@ export async function init(name) {
   );
 }
 
-export function create(name, options = null) {
+export async function create(name, options = null) {
+  const baseEngine = await init(FIXES_ENGINE);
+
+  options = {
+    ...options,
+    config: baseEngine.config,
+  };
+
   const engine = new FiltersEngine({ ...options });
 
+  engine.resources = Resources.copy(baseEngine.resources);
   engine.updateEnv(ENV);
 
   saveToMemory(name, engine);
