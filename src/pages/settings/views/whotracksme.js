@@ -11,7 +11,7 @@
 
 import { html, store } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, { MODE_DEFAULT } from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import {
@@ -47,42 +47,45 @@ export default {
         ${store.ready(options, managedConfig) &&
         html`
           <section layout="column gap:4">
-            <ui-toggle
-              value="${options.pauseAssistant}"
-              onchange="${html.set(options, 'pauseAssistant')}"
-              data-qa="toggle:pauseAssistant"
-            >
-              <div layout="row items:start gap:2 grow" layout@768px="gap:3">
-                <settings-help-image>
-                  <img
-                    src="${assets.pause_assistant}"
-                    alt="Browsing Assistant"
-                  />
-                </settings-help-image>
-                <settings-option>
-                  Browsing Assistant
-                  <span slot="description">
-                    Detects and prevents ad blocker breakage by automatically
-                    pausing on affected pages.
-                  </span>
-                  <ui-text
-                    type="label-s"
-                    color="secondary"
-                    underline
-                    slot="footer"
-                    layout="self:start"
-                  >
-                    <a
-                      href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
-                      target="_blank"
-                      layout="row gap:0.5"
+            ${options.mode === MODE_DEFAULT &&
+            html`
+              <ui-toggle
+                value="${options.pauseAssistant}"
+                onchange="${html.set(options, 'pauseAssistant')}"
+                data-qa="toggle:pauseAssistant"
+              >
+                <div layout="row items:start gap:2 grow" layout@768px="gap:3">
+                  <settings-help-image>
+                    <img
+                      src="${assets.pause_assistant}"
+                      alt="Browsing Assistant"
+                    />
+                  </settings-help-image>
+                  <settings-option>
+                    Browsing Assistant
+                    <span slot="description">
+                      Detects and prevents ad blocker breakage by automatically
+                      pausing on affected pages.
+                    </span>
+                    <ui-text
+                      type="label-s"
+                      color="secondary"
+                      underline
+                      slot="footer"
+                      layout="self:start"
                     >
-                      Learn more <ui-icon name="arrow-right-s"></ui-icon>
-                    </a>
-                  </ui-text>
-                </settings-option>
-              </div>
-            </ui-toggle>
+                      <a
+                        href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
+                        target="_blank"
+                        layout="row gap:0.5"
+                      >
+                        Learn more <ui-icon name="arrow-right-s"></ui-icon>
+                      </a>
+                    </ui-text>
+                  </settings-option>
+                </div>
+              </ui-toggle>
+            `}
             <ui-toggle
               value="${options.trackerWheel}"
               onchange="${html.set(options, 'trackerWheel')}"

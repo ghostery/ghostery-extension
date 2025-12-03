@@ -131,6 +131,8 @@ describe('Advanced Features', function () {
       await browser.switchFrame(null);
       await browser.switchFrame($('#iframe-local'));
       await expect($('#custom-filter')).not.toBeDisplayed();
+
+      await browser.switchFrame(null);
     });
 
     it('adds custom scriptlet filter', async function () {

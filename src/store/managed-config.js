@@ -23,6 +23,11 @@ const ManagedConfig = {
   disableTrackersPreview: false,
   trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
 
+  disableModes: (config) =>
+    config.disableOnboarding ||
+    config.disableUserControl ||
+    config.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID,
+
   [store.connect]: async () => {
     if (__PLATFORM__ !== 'firefox' && (isOpera() || isWebkit())) return {};
 

@@ -9,9 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './managed.spec.js';
+import './onboarding.spec.js';
+
 import './main.spec.js';
-import './panel.spec.js';
-import './whotracksme.spec.js';
+import './zapped.spec.js';
 import './advanced.spec.js';
 import './redirect-protection.spec.js';
+import './whotracksme.spec.js';
+import './panel.spec.js';
+
+import './managed.spec.js';

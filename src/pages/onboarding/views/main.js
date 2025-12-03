@@ -11,8 +11,12 @@
 
 import { html, msg, router, store } from 'hybrids';
 
+import Config from '/store/config.js';
 import Options from '/store/options.js';
-import { GHOSTERY_DOMAIN } from '/utils/urls.js';
+import ManagedConfig from '/store/managed-config.js';
+
+import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
+import { FLAG_MODES } from '/utils/config-types.js';
 
 import AddonHealth from './addon-health.js';
 import WebTrackers from './web-trackers.js';
@@ -20,8 +24,7 @@ import Performance from './performance.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import Success from './success.js';
-
-const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+import Modes from './modes.js';
 
 function acceptTerms(host, event) {
   router.resolve(
@@ -40,9 +43,15 @@ export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
   },
+  config: store(Config),
+  managedConfig: store(ManagedConfig),
   feedback: true,
-  render: ({ feedback }) => html`
-    <template layout="column gap:2">
+  mode: ({ config, managedConfig }) =>
+    store.ready(config, managedConfig) &&
+    config.hasFlag(FLAG_MODES) &&
+    !managedConfig.disableModes,
+  render: ({ feedback, mode }) => html`
+    <template layout="column gap:2 width:::375px">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="body-m">Welcome to Ghostery</ui-text>
@@ -106,7 +115,10 @@ export default {
         </div>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-            <a href="${router.url(Success)}" onclick="${acceptTerms}">
+            <a
+              href="${router.url(mode ? Modes : Success)}"
+              onclick="${acceptTerms}"
+            >
               Enable Ghostery
             </a>
           </ui-button>

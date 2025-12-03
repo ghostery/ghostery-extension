@@ -39,7 +39,7 @@ if (__PLATFORM__ !== 'firefox') {
 
 export default {
   render: () => html`
-    <template layout="column gap">
+    <template layout="column gap width:::375px">
       <ui-card data-qa="view:success">
         <section layout="block:center column gap:2">
           <div layout="row center">${protection}</div>

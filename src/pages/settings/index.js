@@ -13,6 +13,7 @@ import { mount, store } from 'hybrids';
 
 import '/ui/index.js';
 
+import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
@@ -23,7 +24,11 @@ import './styles.css';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
-Promise.all([store.resolve(Options), store.resolve(ManagedConfig)])
+Promise.all([
+  store.resolve(Options),
+  store.resolve(ManagedConfig),
+  store.resolve(Config),
+])
   .then(([{ terms }, managedConfig]) => {
     if (!terms || managedConfig.disableUserControl) {
       throw new Error('Access denied');

@@ -32,6 +32,23 @@ export function filterMaxPriorityRules(rules) {
   return rules.filter((rule) => rule.priority !== MAX_DNR_PRIORITY);
 }
 
+export const ALL_RESOURCE_TYPES = [
+  'main_frame',
+  'sub_frame',
+  'stylesheet',
+  'script',
+  'image',
+  'font',
+  'object',
+  'xmlhttprequest',
+  'ping',
+  'media',
+  'websocket',
+  'webtransport',
+  'webbundle',
+  'other',
+];
+
 export async function getDynamicRulesIds(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules())
     .filter((rule) => rule.id >= type.start && rule.id < type.end)

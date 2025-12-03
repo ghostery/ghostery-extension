@@ -14,7 +14,7 @@ import { parse } from 'tldts-experimental';
 
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
-import Options, { getPausedDetails } from '/store/options.js';
+import Options, { isGloballyPaused } from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
@@ -94,7 +94,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
         files.push('/content_scripts/trackers-preview.js');
       }
 
-      if (!getPausedDetails(options) && options.serpTrackingPrevention) {
+      if (!isGloballyPaused(options) && options.serpTrackingPrevention) {
         files.push('/content_scripts/prevent-serp-tracking.js');
       }
 
