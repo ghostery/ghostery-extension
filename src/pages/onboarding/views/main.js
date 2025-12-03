@@ -24,7 +24,7 @@ import Performance from './performance.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import Success from './success.js';
-import FilteringMode from './filtering-mode.js';
+import Modes from './modes.js';
 
 function acceptTerms(host, event) {
   router.resolve(
@@ -46,11 +46,11 @@ export default {
   config: store(Config),
   managedConfig: store(ManagedConfig),
   feedback: true,
-  filteringMode: ({ config, managedConfig }) =>
+  mode: ({ config, managedConfig }) =>
     store.ready(config, managedConfig) &&
     config.hasFlag(FLAG_FILTERING_MODE) &&
-    !managedConfig.disableFilteringMode,
-  render: ({ feedback, filteringMode }) => html`
+    !managedConfig.disableModes,
+  render: ({ feedback, mode }) => html`
     <template layout="column gap:2 width:::375px">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
@@ -116,7 +116,7 @@ export default {
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
             <a
-              href="${router.url(filteringMode ? FilteringMode : Success)}"
+              href="${router.url(mode ? Modes : Success)}"
               onclick="${acceptTerms}"
             >
               Enable Ghostery

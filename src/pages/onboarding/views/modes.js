@@ -14,10 +14,7 @@ import { html, router, store } from 'hybrids';
 import modeGhosteryScreenshotUrl from '/ui/assets/mode-ghostery.svg';
 import modeZapScreenshotUrl from '/ui/assets/mode-zap.svg';
 
-import Options, {
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
-} from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
 
@@ -44,15 +41,13 @@ export default {
           </ui-text>
         </section>
         <div layout="column gap" layout@768px="grid:2">
-          <ui-filtering-mode
-            checked="${options.filteringMode === FILTERING_MODE_GHOSTERY}"
-          >
+          <ui-filtering-mode checked="${options.mode === MODE_DEFAULT}">
             <input
               type="radio"
               name="filtering-mode"
-              value="${FILTERING_MODE_GHOSTERY}"
-              checked="${options.filteringMode === FILTERING_MODE_GHOSTERY}"
-              onchange="${html.set(options, 'filteringMode')}"
+              value="${MODE_DEFAULT}"
+              checked="${options.mode === MODE_DEFAULT}"
+              onchange="${html.set(options, 'mode')}"
             />
             <img
               src="${modeGhosteryScreenshotUrl}"
@@ -82,15 +77,13 @@ export default {
             <!-- Ghostery mode "or" ZAP mode -->
             or
           </ui-text>
-          <ui-filtering-mode
-            checked="${options.filteringMode === FILTERING_MODE_ZAP}"
-          >
+          <ui-filtering-mode checked="${options.mode === MODE_ZAP}">
             <input
               type="radio"
               name="filtering-mode"
-              value="${FILTERING_MODE_ZAP}"
-              checked="${options.filteringMode === FILTERING_MODE_ZAP}"
-              onchange="${html.set(options, 'filteringMode')}"
+              value="${MODE_ZAP}"
+              checked="${options.mode === MODE_ZAP}"
+              onchange="${html.set(options, 'mode')}"
             />
             <img
               src="${modeZapScreenshotUrl}"

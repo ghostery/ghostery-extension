@@ -20,8 +20,8 @@ import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
-export const FILTERING_MODE_GHOSTERY = 'ghostery';
-export const FILTERING_MODE_ZAP = 'zap';
+export const MODE_DEFAULT = 'default';
+export const MODE_ZAP = 'zap';
 
 export const ENGINES = [
   { name: 'ads', key: 'blockAds' },
@@ -44,7 +44,7 @@ const OPTIONS_VERSION = 3;
 
 const Options = {
   // Mode
-  filteringMode: FILTERING_MODE_GHOSTERY, // 'ghostery' | 'zap'
+  mode: MODE_DEFAULT, // 'default' | 'zap'
 
   // Main features
   blockAds: true,
@@ -281,13 +281,13 @@ export function getPausedDetails(options, hostname) {
     throw new Error('Hostname is required to get paused details');
   }
 
-  switch (options.filteringMode) {
-    case FILTERING_MODE_GHOSTERY: {
+  switch (options.mode) {
+    case MODE_DEFAULT: {
       // The domain is paused when top domain is found in the record
       const pausedHostname = findParentDomain(options.paused, hostname);
       return pausedHostname ? options.paused[pausedHostname] : null;
     }
-    case FILTERING_MODE_ZAP: {
+    case MODE_ZAP: {
       // The domain is paused when top domain is not found in the record
       const zappedHostname = findParentDomain(options.zapped, hostname);
       return zappedHostname ? null : { revokeAt: 0 };

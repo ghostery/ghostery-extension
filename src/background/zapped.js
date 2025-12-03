@@ -12,10 +12,7 @@
 import { store } from 'hybrids';
 
 import Config from '/store/config.js';
-import Options, {
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
-} from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
 import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
 import {
@@ -39,7 +36,7 @@ store.observe(Config, async (_, config, lastConfig) => {
 
     // Reset filtering mode and zapped data
     await store.set(Options, {
-      filteringMode: FILTERING_MODE_GHOSTERY,
+      mode: MODE_DEFAULT,
       zapped: null,
     });
 
@@ -55,9 +52,9 @@ if (__PLATFORM__ !== 'firefox') {
       // No changes in options
       !lastOptions ||
       // Filtering mode is not zap
-      options.filteringMode !== FILTERING_MODE_ZAP ||
+      options.mode !== MODE_ZAP ||
       // Filtering mode didn't change and 'zapped' option is equal
-      (options.filteringMode === lastOptions.filteringMode &&
+      (options.mode === lastOptions.mode &&
         OptionsObserver.isOptionEqual(options.zapped, lastOptions.zapped))
     ) {
       return;

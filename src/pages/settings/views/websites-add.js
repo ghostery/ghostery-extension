@@ -11,10 +11,7 @@
 
 import { html, router, store, msg } from 'hybrids';
 
-import Options, {
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
-} from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import Hostname from '../store/hostname.js';
 
 async function add({ options, hostname, pauseType }, event) {
@@ -23,8 +20,8 @@ async function add({ options, hostname, pauseType }, event) {
   router.resolve(
     event,
     store.submit(hostname).then(({ value }) => {
-      switch (options.filteringMode) {
-        case FILTERING_MODE_GHOSTERY:
+      switch (options.mode) {
+        case MODE_DEFAULT:
           if (options.paused[value]) return;
 
           return store.set(options, {
@@ -34,7 +31,7 @@ async function add({ options, hostname, pauseType }, event) {
               },
             },
           });
-        case FILTERING_MODE_ZAP:
+        case MODE_ZAP:
           return store.set(options, { zapped: { [value]: true } });
       }
     }),
@@ -58,11 +55,11 @@ export default {
             Add website
           </ui-text>
           <div layout="column gap items:start">
-            ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+            ${options.mode === MODE_DEFAULT &&
             html`
               <ui-text>To adjust privacy protection trust a site:</ui-text>
             `}
-            ${options.filteringMode === FILTERING_MODE_ZAP &&
+            ${options.mode === MODE_ZAP &&
             html`
               <ui-text>To adjust privacy protection enable on a site:</ui-text>
             `}
@@ -79,7 +76,7 @@ export default {
               />
             </ui-input>
           </div>
-          ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+          ${options.mode === MODE_DEFAULT &&
           html`
             <div layout="column gap:0.5">
               <ui-text type="label-m">Select time frame</ui-text>

@@ -14,7 +14,7 @@ import { parse } from 'tldts-experimental';
 
 import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
-import Options, { FILTERING_MODE_GHOSTERY } from '/store/options.js';
+import Options, { MODE_DEFAULT } from '/store/options.js';
 
 import {
   ACTION_PAUSE_ASSISTANT,
@@ -33,7 +33,7 @@ async function updatePausedDomains(config, lastConfig) {
   let paused = {};
 
   if (
-    options.filteringMode !== FILTERING_MODE_GHOSTERY ||
+    options.mode !== MODE_DEFAULT ||
     !options.pauseAssistant ||
     !config.hasFlag(FLAG_PAUSE_ASSISTANT)
   ) {
@@ -93,7 +93,7 @@ OptionsObserver.addListener(
     if (
       lastOptions &&
       (options.pauseAssistant !== lastOptions.pauseAssistant ||
-        options.filteringMode !== lastOptions.filteringMode)
+        options.mode !== lastOptions.mode)
     ) {
       updatePausedDomains(await store.resolve(Config));
     }
@@ -106,10 +106,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (managedConfig.disableUserControl) return;
 
     const options = await store.resolve(Options);
-    if (
-      options.filteringMode !== FILTERING_MODE_GHOSTERY ||
-      !options.pauseAssistant
-    ) {
+    if (options.mode !== MODE_DEFAULT || !options.pauseAssistant) {
       return;
     }
 

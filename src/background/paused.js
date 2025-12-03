@@ -11,10 +11,7 @@
 
 import { store } from 'hybrids';
 
-import Options, {
-  GLOBAL_PAUSE_ID,
-  FILTERING_MODE_GHOSTERY,
-} from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID, MODE_DEFAULT } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
 
@@ -29,9 +26,9 @@ import {
 const PAUSED_ALARM_PREFIX = 'options:revoke';
 
 OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
-  if (options.filteringMode !== FILTERING_MODE_GHOSTERY) {
+  if (options.mode !== MODE_DEFAULT) {
     // Filtering mode has changed - clean up alarms
-    if (lastOptions && options.filteringMode !== lastOptions?.filteringMode) {
+    if (lastOptions && options.mode !== lastOptions?.mode) {
       (await chrome.alarms.getAll()).forEach(({ name }) => {
         if (name.startsWith(PAUSED_ALARM_PREFIX)) {
           chrome.alarms.clear(name);
@@ -75,7 +72,7 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
     ((lastOptions &&
       !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
       // Filtering mode has changed
-      (lastOptions && options.filteringMode !== lastOptions.filteringMode) ||
+      (lastOptions && options.mode !== lastOptions.mode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
       (await store.resolve(ManagedConfig)).trustedDomains[0] !==

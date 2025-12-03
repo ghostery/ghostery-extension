@@ -23,7 +23,7 @@ const ManagedConfig = {
   disableTrackersPreview: false,
   trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
 
-  disableFilteringMode: (config) =>
+  disableModes: (config) =>
     config.disableOnboarding ||
     config.disableUserControl ||
     config.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID,

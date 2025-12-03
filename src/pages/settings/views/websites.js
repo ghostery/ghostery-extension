@@ -13,8 +13,8 @@ import { html, msg, store, router } from 'hybrids';
 
 import Config, { dismissAction } from '/store/config.js';
 import Options, {
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
+  MODE_DEFAULT,
+  MODE_ZAP,
   GLOBAL_PAUSE_ID,
 } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
@@ -47,9 +47,9 @@ function revokeCallback(item) {
 
     store.set(ElementPickerSelectors, { hostnames: { [item.id]: null } });
 
-    if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+    if (options.mode === MODE_DEFAULT) {
       store.set(options, { paused: { [item.id]: null }, exceptions });
-    } else if (options.filteringMode === FILTERING_MODE_ZAP) {
+    } else if (options.mode === MODE_ZAP) {
       store.set(options, { zapped: { [item.id]: null }, exceptions });
     }
   };
@@ -67,7 +67,7 @@ export default {
     query = query.toLowerCase().trim();
 
     let websites;
-    if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+    if (options.mode === MODE_DEFAULT) {
       websites = Object.entries(options.paused)
         .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
         .filter(
@@ -83,7 +83,7 @@ export default {
           exceptions: new Set(),
           counter: 0,
         }));
-    } else if (options.filteringMode === FILTERING_MODE_ZAP) {
+    } else if (options.mode === MODE_ZAP) {
       websites = Object.keys(options.zapped).map((id) => ({
         id,
         exceptions: new Set(),
@@ -97,7 +97,7 @@ export default {
         const website = websites.find((e) => e.id === domain);
         if (website) {
           website.counter += list.length;
-        } else if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+        } else if (options.mode === MODE_DEFAULT) {
           websites.push({
             id: domain,
             exceptions: new Set(),
@@ -113,7 +113,7 @@ export default {
         if (website) {
           website.exceptions.add(id);
           website.counter += 1;
-        } else if (options.filteringMode === FILTERING_MODE_GHOSTERY) {
+        } else if (options.mode === MODE_DEFAULT) {
           websites.push({
             id: domain,
             exceptions: new Set([id]),

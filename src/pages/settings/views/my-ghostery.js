@@ -16,10 +16,7 @@ import modeZapScreenshotUrl from '/ui/assets/mode-zap.svg';
 
 import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
-import Options, {
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
-} from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
 import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
@@ -55,7 +52,7 @@ export default {
           </div>
           <div layout="column gap:4">
             ${config.hasFlag(FLAG_FILTERING_MODE) &&
-            !managedConfig.disableFilteringMode &&
+            !managedConfig.disableModes &&
             html`
               <settings-card
                 type="content"
@@ -71,17 +68,13 @@ export default {
                   </span>
                 </settings-option>
                 <div layout="column gap" layout@768px="grid:2">
-                  <ui-filtering-mode
-                    checked="${options.filteringMode ===
-                    FILTERING_MODE_GHOSTERY}"
-                  >
+                  <ui-filtering-mode checked="${options.mode === MODE_DEFAULT}">
                     <input
                       type="radio"
                       name="filtering-mode"
-                      value="${FILTERING_MODE_GHOSTERY}"
-                      checked="${options.filteringMode ===
-                      FILTERING_MODE_GHOSTERY}"
-                      onchange="${html.set(options, 'filteringMode')}"
+                      value="${MODE_DEFAULT}"
+                      checked="${options.mode === MODE_DEFAULT}"
+                      onchange="${html.set(options, 'mode')}"
                       data-qa="input:filtering-mode:ghostery"
                     />
                     <img
@@ -103,15 +96,13 @@ export default {
                       Best for full coverage and privacy enthusiasts.
                     </ui-text>
                   </ui-filtering-mode>
-                  <ui-filtering-mode
-                    checked="${options.filteringMode === FILTERING_MODE_ZAP}"
-                  >
+                  <ui-filtering-mode checked="${options.mode === MODE_ZAP}">
                     <input
                       type="radio"
                       name="filtering-mode"
-                      value="${FILTERING_MODE_ZAP}"
-                      checked="${options.filteringMode === FILTERING_MODE_ZAP}"
-                      onchange="${html.set(options, 'filteringMode')}"
+                      value="${MODE_ZAP}"
+                      checked="${options.mode === MODE_ZAP}"
+                      onchange="${html.set(options, 'mode')}"
                       data-qa="input:filtering-mode:zap"
                     />
                     <img

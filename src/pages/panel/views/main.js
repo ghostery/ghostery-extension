@@ -19,8 +19,8 @@ import Options, {
   revokeGlobalPause,
   getPausedDetails,
   findParentDomain,
-  FILTERING_MODE_GHOSTERY,
-  FILTERING_MODE_ZAP,
+  MODE_DEFAULT,
+  MODE_ZAP,
 } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
@@ -226,11 +226,11 @@ export default {
           <ui-header>
             ${store.ready(stats) &&
             (managedConfig.disableUserControl ||
-              (options.filteringMode === FILTERING_MODE_ZAP && paused)) &&
+              (options.mode === MODE_ZAP && paused)) &&
             html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
-            ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+            ${options.mode === MODE_DEFAULT &&
             html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`}
-            ${options.filteringMode === FILTERING_MODE_ZAP &&
+            ${options.mode === MODE_ZAP &&
             html`<ui-icon
               name="logo-zap"
               slot="icon"
@@ -247,7 +247,7 @@ export default {
           </ui-header>
           ${store.ready(stats) &&
           !managedConfig.disableUserControl &&
-          (options.filteringMode !== FILTERING_MODE_ZAP || !paused) &&
+          (options.mode !== MODE_ZAP || !paused) &&
           html`
             <panel-actions hostname="${stats.displayHostname}">
               <panel-actions-button
@@ -347,7 +347,7 @@ export default {
         ${options.terms &&
         store.ready(stats) &&
         !managedConfig.disableUserControl &&
-        (options.filteringMode === FILTERING_MODE_GHOSTERY || globalPause) &&
+        (options.mode === MODE_DEFAULT || globalPause) &&
         html`
           <panel-pause
             onaction="${globalPause ? toggleGlobalPause : togglePause}"
@@ -404,7 +404,7 @@ export default {
         ${options.terms &&
         store.ready(stats) &&
         !managedConfig.disableUserControl &&
-        options.filteringMode === FILTERING_MODE_ZAP &&
+        options.mode === MODE_ZAP &&
         !globalPause &&
         html`
           <panel-zap

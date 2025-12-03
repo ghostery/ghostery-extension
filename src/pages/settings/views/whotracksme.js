@@ -11,7 +11,7 @@
 
 import { html, store } from 'hybrids';
 
-import Options, { FILTERING_MODE_GHOSTERY } from '/store/options.js';
+import Options, { MODE_DEFAULT } from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import {
@@ -47,7 +47,7 @@ export default {
         ${store.ready(options, managedConfig) &&
         html`
           <section layout="column gap:4">
-            ${options.filteringMode === FILTERING_MODE_GHOSTERY &&
+            ${options.mode === MODE_DEFAULT &&
             html`
               <ui-toggle
                 value="${options.pauseAssistant}"
