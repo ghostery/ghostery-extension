@@ -281,6 +281,10 @@ export function getPausedDetails(options, hostname) {
     throw new Error('Hostname is required to get paused details');
   }
 
+  if (isGloballyPaused(options)) {
+    return { revokeAt: 0 };
+  }
+
   switch (options.mode) {
     case MODE_DEFAULT: {
       // The domain is paused when top domain is found in the record
