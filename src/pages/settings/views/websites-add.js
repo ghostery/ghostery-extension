@@ -35,7 +35,7 @@ async function add({ options, hostname, pauseType }, event) {
             },
           });
         case FILTERING_MODE_ZAP:
-          return store.set(options, { zapped: { [value]: {} } });
+          return store.set(options, { zapped: { [value]: true } });
       }
     }),
   );

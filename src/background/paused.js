@@ -116,16 +116,7 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
             action: { type: 'allowAllRequests' },
             condition: {
               initiatorDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ['main_frame', 'sub_frame'],
-            },
-          },
-          {
-            id: 4,
-            priority: PAUSED_RULE_PRIORITY,
-            action: { type: 'allowAllRequests' },
-            condition: {
-              requestDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ['main_frame', 'sub_frame'],
+              resourceTypes: ['main_frame'],
             },
           },
         ],

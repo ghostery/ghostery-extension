@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { ENGINES, getPausedDetails } from '/store/options.js';
+import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
@@ -27,7 +27,7 @@ if (__PLATFORM__ !== 'firefox') {
     .map(({ id }) => id);
 
   function getIds(options) {
-    if (!options.terms || getPausedDetails(options)) return [];
+    if (!options.terms || isGloballyPaused(options)) return [];
 
     const ids = ENGINES.reduce((acc, { name, key }) => {
       if (options[key] && DNR_RESOURCES.includes(name)) acc.push(name);
@@ -163,8 +163,22 @@ if (__PLATFORM__ !== 'firefox') {
           console.info('[dnr] Removed dynamic fixes rules');
         }
       }
-    } else if (ids.length) {
-      ids.push('fixes');
+    } else {
+      // Remove dynamic fixes rules if present
+      const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
+      if (removeRuleIds.length) {
+        await chrome.declarativeNetRequest.updateDynamicRules({
+          removeRuleIds,
+        });
+
+        await store.set(Resources, {
+          checksums: { ['dnr-fixes']: null },
+        });
+
+        console.info('[dnr] Removed dynamic fixes rules');
+      }
+
+      if (ids.length) ids.push('fixes');
     }
 
     const enableRulesetIds = [];

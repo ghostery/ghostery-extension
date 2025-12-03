@@ -22,29 +22,42 @@ import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,
   PAUSED_RULE_PRIORITY,
-  ALL_RESOURCE_TYPES,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 // Clear filtering mode and zapped data if the flag is removed
-store.observe(Config, (_, config, lastConfig) => {
+store.observe(Config, async (_, config, lastConfig) => {
   if (
     lastConfig?.hasFlag(FLAG_FILTERING_MODE) &&
     !config.hasFlag(FLAG_FILTERING_MODE)
   ) {
-    store.set(Options, {
+    // Clear out DNR rules related to zap mode
+    const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds,
+    });
+
+    // Reset filtering mode and zapped data
+    await store.set(Options, {
       filteringMode: FILTERING_MODE_GHOSTERY,
       zapped: null,
     });
+
+    console.log(
+      `[zapped] Filtering mode flag removed, resetting filtering mode and zapped data`,
+    );
   }
 });
 
 if (__PLATFORM__ !== 'firefox') {
   OptionsObserver.addListener(async function zapped(options, lastOptions) {
     if (
-      options.filteringMode !== FILTERING_MODE_ZAP || // Filtering mode is not zap
-      !lastOptions || // No changes in options
-      (options.filteringMode === lastOptions.filteringMode && // Filtering mode didn't change and 'zapped' option is equal
+      // No changes in options
+      !lastOptions ||
+      // Filtering mode is not zap
+      options.filteringMode !== FILTERING_MODE_ZAP ||
+      // Filtering mode didn't change and 'zapped' option is equal
+      (options.filteringMode === lastOptions.filteringMode &&
         OptionsObserver.isOptionEqual(options.zapped, lastOptions.zapped))
     ) {
       return;
@@ -59,21 +72,7 @@ if (__PLATFORM__ !== 'firefox') {
           id: 1,
           priority: PAUSED_RULE_PRIORITY,
           action: { type: 'allow' },
-          condition: {
-            excludedInitiatorDomains: excludedDomains,
-            excludedRequestDomains: excludedDomains,
-            resourceTypes: ALL_RESOURCE_TYPES,
-          },
-        },
-        {
-          id: 2,
-          priority: PAUSED_RULE_PRIORITY,
-          action: { type: 'allowAllRequests' },
-          condition: {
-            excludedInitiatorDomains: excludedDomains,
-            excludedRequestDomains: excludedDomains,
-            resourceTypes: ['main_frame', 'sub_frame'],
-          },
+          condition: { excludedInitiatorDomains: excludedDomains },
         },
       ],
       removeRuleIds,

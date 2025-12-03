@@ -98,8 +98,7 @@ const Options = {
   paused: store.record({ revokeAt: 0, assist: false, managed: false }),
 
   // Zapped domains (zap filtering mode)
-  // Empty record for future additions (if any)
-  zapped: store.record({}),
+  zapped: store.record(true),
 
   // Sync & Update
   sync: true,
@@ -269,11 +268,17 @@ export function findParentDomain(record, hostname = '') {
   return domain || null;
 }
 
-export function getPausedDetails(options, hostname = '') {
-  if (options.paused[GLOBAL_PAUSE_ID]) {
-    return options.paused[GLOBAL_PAUSE_ID];
-  } else if (!hostname) {
-    return null;
+export function isGloballyPaused(options) {
+  return !!options.paused[GLOBAL_PAUSE_ID];
+}
+
+export async function revokeGlobalPause(options) {
+  await store.set(options, { paused: { [GLOBAL_PAUSE_ID]: null } });
+}
+
+export function getPausedDetails(options, hostname) {
+  if (!hostname) {
+    throw new Error('Hostname is required to get paused details');
   }
 
   switch (options.filteringMode) {

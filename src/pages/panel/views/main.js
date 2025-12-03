@@ -15,11 +15,12 @@ import { isWebkit } from '/utils/browser-info.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, {
+  isGloballyPaused,
+  revokeGlobalPause,
   getPausedDetails,
   findParentDomain,
   FILTERING_MODE_GHOSTERY,
   FILTERING_MODE_ZAP,
-  GLOBAL_PAUSE_ID,
 } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
@@ -108,7 +109,7 @@ async function toggleZapped(host) {
   const zappedHostname = findParentDomain(options.zapped, stats.hostname);
 
   await store.set(options, {
-    zapped: { [zappedHostname || stats.hostname]: paused ? {} : null },
+    zapped: { [zappedHostname || stats.hostname]: paused ? true : null },
   });
 
   showAlert(html`
@@ -128,10 +129,8 @@ async function toggleZapped(host) {
   `);
 }
 
-async function revokeGlobalPause(host) {
-  await store.set(host.options, {
-    paused: { [GLOBAL_PAUSE_ID]: null },
-  });
+async function toggleGlobalPause(host) {
+  await revokeGlobalPause(host.options);
 
   showAlert(html`
     <panel-alert type="danger">
@@ -199,7 +198,7 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
-    store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
+    store.ready(options) && isGloballyPaused(options),
   contentBlocksSelectors: ({ elementPickerSelectors, stats }) =>
     (store.ready(stats, elementPickerSelectors) &&
       elementPickerSelectors.hostnames[stats.hostname]?.length) ||
@@ -351,7 +350,7 @@ export default {
         (options.filteringMode === FILTERING_MODE_GHOSTERY || globalPause) &&
         html`
           <panel-pause
-            onaction="${globalPause ? revokeGlobalPause : togglePause}"
+            onaction="${globalPause ? toggleGlobalPause : togglePause}"
             paused="${paused || globalPause}"
             global="${globalPause}"
             managed="${paused?.managed}"
