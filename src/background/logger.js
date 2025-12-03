@@ -71,7 +71,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
         { filter },
         { url, request, filterType, callerContext },
       ) {
-        if (filter.isScriptInject()) {
+        if (filterType === FilterType.COSMETIC && filter.isScriptInject()) {
           filter = String(filter);
           const scriptInjectArgumentIndex =
             filter.indexOf('+js(') + 4; /* '+js('.length */
