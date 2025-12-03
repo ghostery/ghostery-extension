@@ -32,7 +32,7 @@ import {
   FLAG_EXTENDED_SELECTORS,
   FLAG_DYNAMIC_DNR_FIXES,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_FILTERING_MODE,
+  FLAG_MODES,
 } from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -67,7 +67,7 @@ export const argv = process.argv.slice(2).reduce(
       FLAG_EXTENDED_SELECTORS,
       FLAG_DYNAMIC_DNR_FIXES,
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-      FLAG_FILTERING_MODE,
+      FLAG_MODES,
     ],
   },
 );

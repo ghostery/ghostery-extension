@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import Config from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
-import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
+import { FLAG_MODES } from '/utils/config-types.js';
 import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,
@@ -24,10 +24,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 
 // Clear filtering mode and zapped data if the flag is removed
 store.observe(Config, async (_, config, lastConfig) => {
-  if (
-    lastConfig?.hasFlag(FLAG_FILTERING_MODE) &&
-    !config.hasFlag(FLAG_FILTERING_MODE)
-  ) {
+  if (lastConfig?.hasFlag(FLAG_MODES) && !config.hasFlag(FLAG_MODES)) {
     // Clear out DNR rules related to zap mode
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
     await chrome.declarativeNetRequest.updateDynamicRules({

@@ -21,4 +21,4 @@ export const FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED =
   'chromium-inject-cosmetics-on-response-started';
 export const FLAG_EXTENDED_SELECTORS = 'extended-selectors';
 export const FLAG_DYNAMIC_DNR_FIXES = 'dynamic-dnr-fixes';
-export const FLAG_FILTERING_MODE = 'filtering-mode';
+export const FLAG_MODES = 'modes';

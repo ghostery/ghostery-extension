@@ -16,7 +16,7 @@ import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
-import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
+import { FLAG_MODES } from '/utils/config-types.js';
 
 import AddonHealth from './addon-health.js';
 import WebTrackers from './web-trackers.js';
@@ -48,7 +48,7 @@ export default {
   feedback: true,
   mode: ({ config, managedConfig }) =>
     store.ready(config, managedConfig) &&
-    config.hasFlag(FLAG_FILTERING_MODE) &&
+    config.hasFlag(FLAG_MODES) &&
     !managedConfig.disableModes,
   render: ({ feedback, mode }) => html`
     <template layout="column gap:2 width:::375px">

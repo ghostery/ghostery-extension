@@ -18,7 +18,7 @@ import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
-import { FLAG_FILTERING_MODE } from '/utils/config-types.js';
+import { FLAG_MODES } from '/utils/config-types.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 import * as backup from '../utils/backup.js';
@@ -51,7 +51,7 @@ export default {
             <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
           <div layout="column gap:4">
-            ${config.hasFlag(FLAG_FILTERING_MODE) &&
+            ${config.hasFlag(FLAG_MODES) &&
             !managedConfig.disableModes &&
             html`
               <settings-card

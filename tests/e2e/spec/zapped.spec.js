@@ -22,7 +22,7 @@ import {
 } from '../utils.js';
 
 import { argv, PAGE_URL, PAGE_DOMAIN } from '../wdio.conf.js';
-import { FLAG_FILTERING_MODE } from '../../../src/utils/config-types.js';
+import { FLAG_MODES } from '../../../src/utils/config-types.js';
 
 async function setFilteringMode(mode) {
   await browser.url(getExtensionPageURL('settings'));
@@ -46,7 +46,7 @@ async function toggleZapInPanel(type) {
   await waitForIdleBackgroundTasks();
 }
 
-if (argv.flags.includes(FLAG_FILTERING_MODE)) {
+if (argv.flags.includes(FLAG_MODES)) {
   describe('ZAP Mode', function () {
     before(enableExtension);
 
