@@ -30,9 +30,7 @@ export function getExtensionElement(id, query) {
 
 async function sendMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
-    throw new Error(
-      'Background idle state must be checked from the extension context',
-    );
+    throw new Error('Message can only be sent from the extension context');
   }
 
   const result = await browser.execute(
@@ -137,14 +135,11 @@ export async function openPanel() {
   });
 }
 
-export async function setConfigFlags(flags, force = false) {
-  if (!force && !flags.length) return;
-
-  await browser.url(getExtensionPageURL('panel'));
-
+export async function setConfigFlags(flags) {
   try {
     console.log('Setting config flags:', flags);
 
+    await browser.url(getExtensionPageURL('panel'));
     await sendMessage({ action: 'e2e:setConfigFlags', flags });
 
     // Reload the extension to apply the new config flags
