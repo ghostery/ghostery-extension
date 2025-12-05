@@ -49,10 +49,14 @@ export const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
+export async function getDynamicRules(type) {
+  return (await chrome.declarativeNetRequest.getDynamicRules()).filter(
+    (rule) => rule.id >= type.start && rule.id < type.end,
+  );
+}
+
 export async function getDynamicRulesIds(type) {
-  return (await chrome.declarativeNetRequest.getDynamicRules())
-    .filter((rule) => rule.id >= type.start && rule.id < type.end)
-    .map((rule) => rule.id);
+  return (await getDynamicRules(type)).map((rule) => rule.id);
 }
 
 export function createRedirectProtectionExceptionRules(

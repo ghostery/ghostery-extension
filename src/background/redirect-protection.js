@@ -13,8 +13,11 @@ import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
   REDIRECT_PROTECTION_ID_RANGE,
+  getDynamicRules,
   getDynamicRulesIds,
   createRedirectProtectionExceptionRules,
+  CUSTOM_FILTERS_ID_RANGE,
+  applyRedirectProtection,
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -87,6 +90,48 @@ if (__PLATFORM__ !== 'firefox') {
         return;
       }
 
+      // Apply redirect rules for custom filters if the main setting changes
+      if (redirectProtection.enabled !== lastRedredirectProtection.enabled) {
+        try {
+          let customRules = await getDynamicRules(CUSTOM_FILTERS_ID_RANGE);
+          const customRulesIds = customRules.map((rule) => rule.id);
+
+          if (customRules.length) {
+            // Enabling redirect protection: apply protection to existing custom rules
+            if (redirectProtection.enabled) {
+              customRules = applyRedirectProtection(customRules, {
+                enabled: true,
+              });
+            } else {
+              // Disabling redirect protection: revert redirect rules to block rules
+              customRules.forEach((rule) => {
+                if (
+                  rule.action?.type === 'redirect' &&
+                  rule.condition?.resourceTypes?.length === 1 &&
+                  rule.condition.resourceTypes[0] === 'main_frame'
+                ) {
+                  rule.action = { type: 'block' };
+                }
+              });
+            }
+
+            await chrome.declarativeNetRequest.updateDynamicRules({
+              removeRuleIds: customRulesIds,
+              addRules: customRules,
+            });
+
+            console.log(
+              `[redirect-protection] Updated redirect protection for custom filters rules`,
+            );
+          }
+        } catch (e) {
+          console.error(
+            '[redirect-protection] Error updating custom filters rules:',
+            e,
+          );
+        }
+      }
+
       if (redirectProtection.enabled) {
         const disabledDomains = Object.keys(redirectProtection.disabled);
 
@@ -106,8 +151,7 @@ if (__PLATFORM__ !== 'firefox') {
           });
 
           console.log(
-            '[redirect-protection] Updated exception rules for disabled domains:',
-            disabledDomains,
+            '[redirect-protection] Updated exception rules for disabled domains',
           );
         } catch (e) {
           console.error(

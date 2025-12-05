@@ -48,7 +48,7 @@ async function waitForNavigation() {
   );
 }
 
-describe.only('Redirect Protection', function () {
+describe('Redirect Protection', function () {
   before(enableExtension);
 
   before(async () => {
@@ -57,9 +57,7 @@ describe.only('Redirect Protection', function () {
   });
 
   after(async () => {
-    await setCustomFilters([]);
     await setPrivacyToggle('custom-filters', false);
-
     await setRedirectProtectionToggle(false);
   });
 
@@ -70,6 +68,16 @@ describe.only('Redirect Protection', function () {
     await expect(
       getExtensionElement('link:redirect-protection:hostname'),
     ).toHaveText(PAGE_DOMAIN);
+  });
+
+  it("doesn't redirect when redirect protection is disabled", async function () {
+    await setRedirectProtectionToggle(false);
+
+    await browser.url(PAGE_URL);
+    await expectOnWarningPage(false);
+
+    // Re-enable for next tests
+    await setRedirectProtectionToggle(true);
   });
 
   describe('Always allow from domain', function () {
