@@ -101,11 +101,20 @@
   "back": {
     "message": "뒤로"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "사람마다 웹 서핑 방식이 다르기 때문에, 여러분이 원하는 방식으로 웹을 경험할 수 있는 선택권을 드립니다."
+  },
   "become_a_contributor": {
     "message": "기여자가 되어보세요"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Ghostery는 유럽 연합 기반의 회사로 사용자 개인정보 보호를 위해 데이터 수집을 규제하는 GDPR을 엄격하게 준수합니다."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "초보자나 가족과 공유하기에 적합합니다."
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "전체적인 보안과 개인정보 보호를 중시하는 사용자에게 적합합니다."
   },
   "block_all": {
     "message": "모두 차단"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "지원팀에 문의하기"
   },
+  "continue": {
+    "message": "계속"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHub에서 Ghostery 트래커 데이터베이스에 기여하기"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "사용 중지"
   },
+  "disable_on_this_site": {
+    "message": "이 사이트에서 비활성화"
+  },
   "disable_trackers_preview": {
     "message": "트래커 개요 사용 중지"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "지금 사용 시작"
+  },
+  "enable_on_this_site": {
+    "message": "이 사이트에서 활성화"
   },
   "enabled": {
     "message": "사용 중"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "피드백 공유"
   },
+  "filtering_mode": {
+    "message": "필터링 모드"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "귀하의 Ghostery 보호 브라우저에서 웹 추적에 대한 글로벌 투명성 보고서를 생성합니다."
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery가 숨긴 부분을 규칙으로 저장했습니다. 웹 사이트 설정에서 언제나 취소할 수 있습니다."
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "이 사이트에서 Ghostery가 비활성화되었습니다."
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "이 사이트에서 Ghostery가 활성화되었습니다."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 사용을 다시 시작합니다."
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "시크릿 탭에서 YouTube 열기"
   },
+  "or": {
+    "message": "또는",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "단체"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "방해요소 선택"
   },
+  "select_filtering_mode": {
+    "message": "필터링 모드 선택"
+  },
   "select_time_frame": {
     "message": "시간 선택"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "이 작업은 로그아웃을 유발하며, 설정이나 저장된 환경설정을 초기화할 수 있습니다. 일부 페이지는 다시 로그인하거나 쿠키를 수락할 때까지 작동하지 않을 수 있습니다."
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "사이트에서 개인정보 보호 설정을 조정하려면:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "다른 페이지에서 문제를 보고하시겠습니까?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "당신을 위해 모든 것을 차단합니다 - 광고, 추적기, 방해 요소. 설정 없이 완벽하게 보호됩니다."
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "여러분이 Ghostery로 매끄럽게 YouTube를 사용하려는 것을 알고 있습니다. 더 나은 해결책이 출시되기 전까지는 임시로 고쳐볼 수 있습니다."
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "이제 검색 결과 옆에 트래커 휠을 더 이상 표시하지 않습니다."
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "광고를 하나씩 제거하세요. 버튼 하나, 페이지 하나로 광고 없는 목록을 직접 만드세요."
   },
   "your_browser_privacy_report": {
     "message": "개인정보 보호 보고서"
