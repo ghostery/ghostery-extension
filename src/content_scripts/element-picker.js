@@ -18,6 +18,7 @@ const PICKER_STYLES = `
   width: 0;
   height: 0;
   display: block;
+  visibility: visible;
   pointer-events: none;
   border-radius: 4px;
   border: 1.5px dashed #715DEE;
@@ -30,6 +31,7 @@ const POPUP_STYLES = `
   position: fixed;
   z-index: 2147483647;
   display: block;
+  visibility: visible;
   padding: 0;
   bottom: 16px;
   right: 16px;
@@ -67,6 +69,7 @@ const POPUP_IFRAME_STYLES = `
   pointer-events: all;
   user-select: none;
   -webkit-user-select: none;
+  visibility: visible;
 `;
 
 const OVERLAY_STYLES = `
@@ -74,6 +77,7 @@ const OVERLAY_STYLES = `
   inset: 0;
   z-index: 2147483645;
   display: block;
+  visibility: visible;
   cursor: default !important;
 `;
 
