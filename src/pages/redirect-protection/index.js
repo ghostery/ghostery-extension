@@ -9,9 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html } from 'hybrids';
+import { mount, html, store } from 'hybrids';
+
 import '/ui/index.js';
 import { themeToggle } from '/ui/theme.js';
+
+import Options from '/store/options.js';
+import { parse } from 'tldts-experimental';
 
 function goBack() {
   if (window.history.length > 1) {
@@ -26,58 +30,40 @@ function goBack() {
 }
 
 async function getTarget() {
-  const params = new URLSearchParams(window.location.search);
-  const encodedUrl = params.get('url');
+  let url = '';
 
-  let targetUrl = '';
+  if (__PLATFORM__ === 'firefox') {
+    const params = new URLSearchParams(window.location.search);
+    const encodedUrl = params.get('url');
 
-  if (encodedUrl) {
     try {
-      targetUrl = atob(encodedUrl);
+      url = atob(encodedUrl);
     } catch (e) {
       console.error('[redirect-protection] Failed to decode URL:', e);
     }
-  } else if (__PLATFORM__ !== 'firefox') {
-    try {
-      const response = await chrome.runtime.sendMessage({
-        action: 'getRedirectUrl',
-      });
-      if (response?.url) {
-        targetUrl = response.url;
-      }
-    } catch (e) {
-      console.error('[redirect-protection] Failed to get URL:', e);
-    }
+  } else {
+    const response = await chrome.runtime.sendMessage({
+      action: 'getRedirectUrl',
+    });
+    url = response.url;
   }
 
-  if (!targetUrl) {
-    return { targetUrl: '', hostname: '' };
-  }
-
-  try {
-    const url = new URL(targetUrl);
-    return {
-      targetUrl,
-      hostname: url.hostname,
-    };
-  } catch {
-    return { targetUrl, hostname: '' };
-  }
+  return { url, hostname: url && parse(url).hostname };
 }
 
 async function allow(host) {
-  const { targetUrl } = await host.target;
-  if (!targetUrl) return;
+  const { url } = await host.target;
+  if (!url) return;
 
   try {
     const response = await chrome.runtime.sendMessage({
       action: 'allowRedirect',
-      url: targetUrl,
+      url,
     });
     await chrome.runtime.sendMessage({ action: 'idle' });
 
     if (response?.success) {
-      location.replace(targetUrl);
+      location.replace(url);
     }
   } catch (error) {
     console.error('[redirect-protection] Failed to allow redirect:', error);
@@ -85,23 +71,15 @@ async function allow(host) {
 }
 
 async function alwaysAllow(host) {
-  const { targetUrl, hostname } = await host.target;
+  const { url, hostname } = await host.target;
   if (!hostname) return;
 
-  const response = await chrome.runtime.sendMessage({
-    action: 'alwaysAllowRedirect',
-    hostname,
+  await store.set(Options, {
+    redirectProtection: { disabled: { [hostname]: true } },
   });
   await chrome.runtime.sendMessage({ action: 'idle' });
 
-  if (response?.success) {
-    location.replace(targetUrl);
-  } else {
-    console.error(
-      '[redirect-protection] Failed to disable protection:',
-      response?.error,
-    );
-  }
+  location.replace(url);
 }
 
 const RedirectProtection = {
@@ -214,8 +192,8 @@ const RedirectProtection = {
             </ui-text>
 
             ${html.resolve(
-              target.then(({ targetUrl, hostname }) =>
-                targetUrl
+              target.then(({ url, hostname }) =>
+                url
                   ? html`
                       <ui-text type="body-m" layout="block:center">
                         This page was prevented from loading because it's a
@@ -225,7 +203,7 @@ const RedirectProtection = {
                       <div layout="block:center margin:1:0">
                         <a
                           class="link"
-                          href="${targetUrl}"
+                          href="${url}"
                           data-qa="link:redirect-protection:hostname"
                         >
                           ${hostname}

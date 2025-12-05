@@ -9,8 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
-
 import {
   REDIRECT_PROTECTION_SESSION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
@@ -20,8 +18,6 @@ import {
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-
-import Options from '/store/options.js';
 
 const redirectUrlMap = new AutoSyncingMap({
   storageKey: 'redirectUrls:v1',
@@ -200,30 +196,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ success: false, error: error.message });
       }
     })();
-
-    return true;
-  }
-
-  if (message.action === 'alwaysAllowRedirect') {
-    if (!message.hostname) {
-      sendResponse({ success: false, error: 'Missing hostname' });
-      return false;
-    }
-
-    store
-      .set(Options, {
-        redirectProtection: { disabled: { [message.hostname]: true } },
-      })
-      .then(() => {
-        sendResponse({ success: true });
-      })
-      .catch((error) => {
-        console.error(
-          '[redirect-protection] Error disabling protection:',
-          error,
-        );
-        sendResponse({ success: false, error: error.message });
-      });
 
     return true;
   }

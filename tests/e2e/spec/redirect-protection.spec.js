@@ -15,25 +15,15 @@ import {
   getExtensionPageURL,
   setPrivacyToggle,
   waitForIdleBackgroundTasks,
+  setCustomFilters,
 } from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
-async function setCustomFilters(filters) {
-  await setPrivacyToggle('custom-filters', true);
-  await getExtensionElement('button:custom-filters').click();
-  await getExtensionElement('input:custom-filters').setValue(
-    filters.join('\n'),
-  );
-  await getExtensionElement('button:custom-filters:save').click();
-  await expect(
-    getExtensionElement('component:custom-filters:result'),
-  ).toBeDisplayed();
-  await getExtensionElement('button:back').click();
-}
-
 async function openRedirectSettings() {
+  await browser.url('about:blank');
   await browser.url(getExtensionPageURL('settings'));
+
   await getExtensionElement('button:redirect-protection').click();
 }
 
@@ -58,20 +48,24 @@ async function waitForNavigation() {
   );
 }
 
-describe('Redirect Protection', function () {
+describe.only('Redirect Protection', function () {
+  before(enableExtension);
+
   before(async () => {
-    await enableExtension();
     await setRedirectProtectionToggle(true);
     await setCustomFilters([`||${PAGE_DOMAIN}^$document`]);
   });
 
   after(async () => {
+    await setCustomFilters([]);
     await setPrivacyToggle('custom-filters', false);
+
     await setRedirectProtectionToggle(false);
   });
 
   it('redirects to warning page when navigating to blocked domain', async function () {
     await browser.url(PAGE_URL);
+
     await expectOnWarningPage(true);
     await expect(
       getExtensionElement('link:redirect-protection:hostname'),
@@ -81,22 +75,25 @@ describe('Redirect Protection', function () {
   describe('Always allow from domain', function () {
     it('adds domain exception when clicking "Always allow"', async function () {
       await browser.url(PAGE_URL);
+
       await getExtensionElement(
         'button:redirect-protection:always-allow',
       ).click();
-      await waitForIdleBackgroundTasks();
       await waitForNavigation();
+
       expect(await browser.getUrl()).toBe(PAGE_URL);
     });
 
     it('navigates directly after domain is added to exceptions', async function () {
       await browser.url('about:blank');
       await browser.url(PAGE_URL);
+
       await expectOnWarningPage(false);
     });
 
     it('shows domain in redirect exceptions list', async function () {
       await openRedirectSettings();
+
       await expect(
         getExtensionElement(
           `item:redirect-protection:exception:${PAGE_DOMAIN}`,
@@ -105,10 +102,12 @@ describe('Redirect Protection', function () {
     });
 
     it('removes domain exception', async function () {
+      await openRedirectSettings();
+
       await getExtensionElement(
         `button:redirect-protection:remove:${PAGE_DOMAIN}`,
       ).click();
-      await waitForIdleBackgroundTasks();
+
       await expect(
         getExtensionElement('component:redirect-protection:empty-state'),
       ).toBeDisplayed();
@@ -126,7 +125,7 @@ describe('Redirect Protection', function () {
         PAGE_DOMAIN,
       );
       await getExtensionElement('button:redirect-protection:save').click();
-      await waitForIdleBackgroundTasks();
+
       await expect(
         getExtensionElement(
           `item:redirect-protection:exception:${PAGE_DOMAIN}`,
@@ -144,7 +143,7 @@ describe('Redirect Protection', function () {
       await getExtensionElement(
         `button:redirect-protection:remove:${PAGE_DOMAIN}`,
       ).click();
-      await waitForIdleBackgroundTasks();
+
       await expect(
         getExtensionElement('component:redirect-protection:empty-state'),
       ).toBeDisplayed();
@@ -159,8 +158,9 @@ describe('Redirect Protection', function () {
   describe('Allow button', function () {
     it('allows navigation when clicking Allow button', async function () {
       await browser.url(PAGE_URL);
+
       await getExtensionElement('button:redirect-protection:allow').click();
-      await waitForIdleBackgroundTasks();
+
       await waitForNavigation();
       expect(await browser.getUrl()).toBe(PAGE_URL);
     });
