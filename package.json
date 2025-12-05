@@ -53,7 +53,7 @@
     "@sentry/browser": "^10.27.0",
     "@whotracksme/reporting": "^7.10.0",
     "apexsankey": "github:ghostery/apexsankey",
-    "bowser": "^2.13.0",
+    "bowser": "^2.13.1",
     "file-saver": "^2.0.5",
     "hybrids": "^9.1.21",
     "idb": "^8.0.2",
