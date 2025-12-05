@@ -101,11 +101,20 @@
   "back": {
     "message": "Retour"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "Parce que chaque personne navigue différemment, nous vous donnons le pouvoir de choisir comment vous souhaitez vivre le web."
+  },
   "become_a_contributor": {
     "message": "Devenez donateur"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "En tant qu'entreprise de l'UE, Ghostery adhère strictement au RGPD (Règlement général sur la protection des données), qui régule la collecte de données pour garantir la confidentialité des utilisateurs."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "Idéal pour les débutants ou pour partager avec la famille."
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "Idéal pour une couverture complète et les passionnés de confidentialité."
   },
   "block_all": {
     "message": "Tout bloquer"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "Contacter l'assistance"
   },
+  "continue": {
+    "message": "Continuer"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribuer à la base de données de trackers de Ghostery sur Github"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "Désactiver"
   },
+  "disable_on_this_site": {
+    "message": "Désactiver sur ce site"
+  },
   "disable_trackers_preview": {
     "message": "Désactiver l'aperçu des trackers"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "Activer maintenant"
+  },
+  "enable_on_this_site": {
+    "message": "Activez sur ce site"
   },
   "enabled": {
     "message": "Activé"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "Partage de commentaires"
   },
+  "filtering_mode": {
+    "message": "Mode de filtrage"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Génère un rapport de transparence global sur le suivi web dans votre navigateur protégé par Ghostery."
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery a ajouté une règle pour garder ce bloc de contenu masqué. Vous pouvez annuler cela à tout moment dans les paramètres du site."
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghostery a été désactivée sur ce site."
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "Ghostery a été activée sur ce site."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery a été repris."
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "Ouvre YouTube dans une fenêtre privée"
   },
+  "or": {
+    "message": "ou",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "Organisation"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "Sélectionner l'élément distrayant"
   },
+  "select_filtering_mode": {
+    "message": "Sélectionner le mode de filtrage"
+  },
   "select_time_frame": {
     "message": "Sélectionnez la période de temps"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "Cela vous déconnectera et peut réinitialiser vos préférences enregistrées. Certaines pages peuvent ne pas fonctionner tant que vous ne vous reconnectez pas ou n’acceptez pas à nouveau les cookies."
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "Pour ajuster la protection de la vie privée sur un site :"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Pour ajuster la protection de la vie privée :"
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Voulez-vous signaler un problème sur une autre page ?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "Nous bloquons tout pour vous - publicités, trackers, distractions. Vous êtes entièrement protégé, aucune configuration nécessaire."
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Nous savons que tu comptes sur Ghostery pour une expérience YouTube fluide. En attendant qu'une solution plus raffinée émerge, voici une solution temporaire."
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Vous ne verrez plus de camembert des trackers à côté des résultats de recherche."
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "Vous éliminez les publicités, un site à la fois. Un bouton, une page, et vous construisez votre propre liste sans pub."
   },
   "your_browser_privacy_report": {
     "message": "Rapport de confidentialité du navigateur"

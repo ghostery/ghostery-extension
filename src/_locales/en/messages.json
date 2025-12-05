@@ -101,11 +101,20 @@
   "back": {
     "message": "Back"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "Because no two people surf alike, we're giving you the power to pick how you want to experience the web."
+  },
   "become_a_contributor": {
     "message": "Become a Contributor"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Being an EU company, Ghostery strictly adheres to the GDPR (The General Data Protection Regulation), which regulates data collection to ensure user's privacy."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "Best for beginners or sharing with family."
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "Best for full coverage and privacy enthusiasts."
   },
   "block_all": {
     "message": "Block all"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "Contact support"
   },
+  "continue": {
+    "message": "Continue"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribute to Ghostery Tracker Database on Github"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "Disable"
   },
+  "disable_on_this_site": {
+    "message": "Disable on this site"
+  },
   "disable_trackers_preview": {
     "message": "Disable Trackers Preview"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "Enable now"
+  },
+  "enable_on_this_site": {
+    "message": "Enable on this site"
   },
   "enabled": {
     "message": "Enabled"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "Feedback Sharing"
   },
+  "filtering_mode": {
+    "message": "Filtering Mode"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery added a rule to keep this content block hidden. You can undo this anytime in website settings."
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghostery has been disabled on this site."
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "Ghostery has been enabled on this site."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "Open YouTube in a private window"
   },
+  "or": {
+    "message": "or",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "Organization"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "Select distracting element"
   },
+  "select_filtering_mode": {
+    "message": "Select filtering mode"
+  },
   "select_time_frame": {
     "message": "Select time frame"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "This will sign you out and may reset preferences or saved settings. Some pages may not work until you sign in or accept cookies again."
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "To adjust privacy protection enable on a site:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "To adjust privacy protection trust a site:"
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Want to report an issue on a different page?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "We block it all for you - ads, trackers, distractions. You’re fully covered, no setup needed."
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "We know you rely on Ghostery for a smooth YouTube experience. Until a more refined solution emerges, here’s a temporary fix."
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "You will no longer see tracker wheels next to the search results."
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "You zap ads away, one site at a time. One button, one page, and you build your own ad-free list."
   },
   "your_browser_privacy_report": {
     "message": "Your Browser Privacy Report"

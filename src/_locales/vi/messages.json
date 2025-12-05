@@ -101,11 +101,20 @@
   "back": {
     "message": "Quay lại"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "Vì không ai lướt web giống nhau, chúng tôi trao cho bạn quyền lựa chọn cách bạn muốn trải nghiệm web."
+  },
   "become_a_contributor": {
     "message": "Trở thành người đóng góp"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Being an EU company, Ghostery strictly adheres to the GDPR (The General Data Protection Regulation), which regulates data collection to ensure user's privacy."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "Tốt nhất cho người mới bắt đầu hoặc chia sẻ với gia đình."
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "Tốt nhất cho sự bảo vệ toàn diện và những người đam mê quyền riêng tư."
   },
   "block_all": {
     "message": "Chặn tất cả"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "Liên hệ hỗ trợ"
   },
+  "continue": {
+    "message": "Continue"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribute to Ghostery Tracker Database on Github"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "Vô hiệu hóa"
   },
+  "disable_on_this_site": {
+    "message": "Tắt trên trang này"
+  },
   "disable_trackers_preview": {
     "message": "Tắt bản theo dõi xem trước"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "Kích hoạt ngay"
+  },
+  "enable_on_this_site": {
+    "message": "Bật trên trang web này"
   },
   "enabled": {
     "message": "Đã kích hoạt"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "Chia sẻ Phản hồi"
   },
+  "filtering_mode": {
+    "message": "Chế độ Lọc"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Tạo báo cáo minh bạch toàn cầu về theo dõi web trong trình duyệt được bảo vệ bởi Ghostery của bạn."
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery đã thêm một quy tắc để giữ cho khối nội dung này bị ẩn. Bạn có thể hoàn tác điều này bất cứ lúc nào trong cài đặt trang web."
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghostery đã bị vô hiệu hóa trên trang web này."
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "Ghostery đã được kích hoạt trên trang web này."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "Mở YouTube trong cửa sổ riêng tư"
   },
+  "or": {
+    "message": "hoặc",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "Organization"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "Chọn yếu tố gây xao lãng"
   },
+  "select_filtering_mode": {
+    "message": "Chọn chế độ lọc"
+  },
   "select_time_frame": {
     "message": "Select time frame"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "Điều này sẽ đăng xuất bạn và có thể đặt lại các tùy chọn hoặc cài đặt đã lưu. Một số trang có thể không hoạt động cho đến khi bạn đăng nhập lại hoặc chấp nhận cookie."
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "Để điều chỉnh bảo vệ quyền riêng tư trên một trang web:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "To adjust privacy protection trust a site:"
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Muốn báo cáo sự cố trên trang khác?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "Chúng tôi chặn tất cả cho bạn - quảng cáo, trình theo dõi, phiền nhiễu. Bạn được bảo vệ hoàn toàn, không cần cài đặt."
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Chúng tôi biết bạn tin tưởng vào Ghostery để có trải nghiệm YouTube mượt mà. Đây là giải pháp tạm thời cho đến khi xuất hiện một giải pháp tinh tế hơn."
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "Bạn loại bỏ quảng cáo, từng trang một. Một nút, một trang, và bạn tự tạo danh sách không quảng cáo của riêng mình."
   },
   "your_browser_privacy_report": {
     "message": "Báo Cáo Quyền Riêng Tư Trình Duyệt Của Bạn"

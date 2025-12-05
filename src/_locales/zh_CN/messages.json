@@ -101,11 +101,20 @@
   "back": {
     "message": "返回"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "因为没有两个人的上网方式是完全相同的，我们赋予您选择如何体验网络的权力。"
+  },
   "become_a_contributor": {
     "message": "成为贡献者"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "作为一家欧盟公司，Ghostery 严格遵守 GDPR（通用数据保护条例），该条例规范数据收集以确保用户隐私。."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "最适合初学者或与家人共享。"
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "最适合全面覆盖和隐私爱好者。"
   },
   "block_all": {
     "message": "全部拦截"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "联系支持人员"
   },
+  "continue": {
+    "message": "继续"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "在 Github 上为 Ghostery Tracker Database 贡献"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "禁用"
   },
+  "disable_on_this_site": {
+    "message": "在此网站停用"
+  },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "立即启用"
+  },
+  "enable_on_this_site": {
+    "message": "在此网站启用"
   },
   "enabled": {
     "message": "已启用"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "反馈共享"
   },
+  "filtering_mode": {
+    "message": "过滤模式"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "在您的Ghostery保护浏览器中生成有关网络跟踪的全球透明度报告。"
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery添加了一条规则以保持此内容块隐藏。您可以随时在网站设置中撤销此操作。"
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghostery 已在此网站上被禁用。"
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "Ghostery 已在此网站上启用。"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 已恢复。"
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "在私人窗口中打开 YouTube"
   },
+  "or": {
+    "message": "或",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "组织机构"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "选择干扰元素"
   },
+  "select_filtering_mode": {
+    "message": "选择过滤模式"
+  },
   "select_time_frame": {
     "message": "选择时间范围"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "这将使您退出登录，并可能重置偏好设置或已保存的设置。在您重新登录或再次接受 cookies 之前，某些页面可能无法正常工作。"
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "要调整隐私保护，请在网站上启用："
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "要调整隐私保护，请信任一个网站："
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "想在其他页面报告问题吗？"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "我们为您屏蔽一切——广告、追踪器、干扰。您已全面覆盖，无需设置。"
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "我们知道，您依赖 Ghostery 来获得流畅的 YouTube 体验。在更完善的解决方案出现之前，这里有一个临时解决方案。"
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "搜索结果旁将不再显示跟踪器轮。"
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "你可以逐个网站地屏蔽广告。一个按钮，一个页面，打造属于你自己的无广告列表。"
   },
   "your_browser_privacy_report": {
     "message": "您的浏览器隐私报告"
