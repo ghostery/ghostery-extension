@@ -25,8 +25,8 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/chrome": "^0.1.32",
-    "@wdio/browser-runner": "^9.20.0",
-    "@wdio/cli": "^9.20.1",
+    "@wdio/browser-runner": "^9.21.0",
+    "@wdio/cli": "^9.21.1",
     "@wdio/globals": "^9.12.7",
     "@wdio/mocha-framework": "^9.12.6",
     "@wdio/spec-reporter": "^9.20.0",
