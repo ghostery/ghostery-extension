@@ -15,7 +15,6 @@ import Options from '/store/options.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import { captureException } from '/utils/errors.js';
 
 import Metrics, { processUrlQuery } from './metrics.js';
 
@@ -47,12 +46,7 @@ async function detectUTMs() {
 }
 
 async function saveStorage(storage) {
-  try {
-    await chrome.storage.local.set({ metrics: storage });
-  } catch (e) {
-    captureException(e);
-    throw e;
-  }
+  await chrome.storage.local.set({ metrics: storage });
 }
 
 let runner;
@@ -68,7 +62,7 @@ const setup = asyncSetup('telemetry', [
       metrics.utm_source = utms.utm_source || '';
       metrics.utm_campaign = utms.utm_campaign || '';
 
-      saveStorage(metrics);
+      await saveStorage(metrics);
     }
 
     runner = new Metrics({
@@ -108,6 +102,6 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action === 'telemetry') {
-    Promise.resolve(setup.pending).then(() => runner.ping(msg.event));
+    Promise.resolve(setup.pending).then(() => runner?.ping(msg.event));
   }
 });
