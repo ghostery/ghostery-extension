@@ -85,7 +85,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     (async () => {
       try {
         // Fetch CSRF token first
-        const csrfResponse = await fetch(`${SUPPORT_PAGE_URL}/csrf_token`);
+        const csrfResponse = await fetch(`${SUPPORT_PAGE_URL}/csrf_token`, {
+          method: 'POST',
+        });
 
         if (!csrfResponse.ok) {
           throw new Error('Failed to fetch CSRF token');
