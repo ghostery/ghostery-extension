@@ -81,15 +81,23 @@ describe('Redirect Protection', function () {
   });
 
   describe('Always allow from domain', function () {
-    it('adds domain exception when clicking "Always allow"', async function () {
+    before(async () => {
       await browser.url(PAGE_URL);
 
       await getExtensionElement(
         'button:redirect-protection:always-allow',
       ).click();
       await waitForNavigation();
+    });
 
-      expect(await browser.getUrl()).toBe(PAGE_URL);
+    it('adds domain exception when clicking "Always allow"', async function () {
+      await openRedirectSettings();
+
+      await expect(
+        getExtensionElement(
+          `item:redirect-protection:exception:${PAGE_DOMAIN}`,
+        ),
+      ).toBeDisplayed();
     });
 
     it('navigates directly after domain is added to exceptions', async function () {

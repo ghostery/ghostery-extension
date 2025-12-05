@@ -116,7 +116,10 @@ export default {
                     </settings-table>
                   `
                 : html`
-                    <div layout="column center gap padding:5:0">
+                    <div
+                      layout="column center gap padding:5:0"
+                      data-qa="component:redirect-protection:empty-state"
+                    >
                       <ui-icon
                         name="block-m"
                         layout="size:4"
