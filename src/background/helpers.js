@@ -59,6 +59,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         },
       );
       break;
+    case 'idle':
+      OptionsObserver.waitForIdle().then(() => {
+        sendResponse('done');
+        console.info('[helpers] "idleOptionsObservers" response...');
+      });
+      return true;
 
     // Messages for e2e tests
 

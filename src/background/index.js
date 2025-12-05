@@ -18,6 +18,7 @@ import './cookies.js';
 import './custom-filters.js';
 import './element-picker.js';
 import './dnr.js';
+import './redirect-protection.js';
 import './exceptions.js';
 import './paused.js';
 import './zapped.js';
