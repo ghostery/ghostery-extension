@@ -43,7 +43,7 @@ Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
       stack: router(terms ? [Success, Modes] : [Main, Modes, Success]),
       render: ({ stack }) => html`
         <template layout="grid height::100%">
-          <onboarding-layout>${stack}</onboarding-layout>
+          <ui-page-layout>${stack}</ui-page-layout>
         </template>
       `,
     });

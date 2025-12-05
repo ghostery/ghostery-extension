@@ -12,251 +12,122 @@
 import { mount, html, store } from 'hybrids';
 
 import '/ui/index.js';
-import { themeToggle } from '/ui/theme.js';
 
 import Options from '/store/options.js';
-import { parse } from 'tldts-experimental';
+import Target from './store/target.js';
 
 function goBack() {
   if (window.history.length > 1) {
     window.history.back();
   } else {
     chrome.tabs.getCurrent((tab) => {
-      if (tab) {
-        chrome.tabs.remove(tab.id);
-      }
+      if (tab) chrome.tabs.remove(tab.id);
     });
   }
 }
 
-async function getTarget() {
-  let url = '';
-
-  if (__PLATFORM__ === 'firefox') {
-    const params = new URLSearchParams(window.location.search);
-    const encodedUrl = params.get('url');
-
-    try {
-      url = atob(encodedUrl);
-    } catch (e) {
-      console.error('[redirect-protection] Failed to decode URL:', e);
-    }
-  } else {
-    const response = await chrome.runtime.sendMessage({
-      action: 'getRedirectUrl',
-    });
-    url = response.url;
-  }
-
-  return { url, hostname: url && parse(url).hostname };
-}
-
-async function allow(host) {
-  const { url } = await host.target;
-  if (!url) return;
-
+async function allow({ target }) {
   try {
     const response = await chrome.runtime.sendMessage({
       action: 'allowRedirect',
-      url,
+      url: target.url,
     });
+    // Wait for the background to process the change
     await chrome.runtime.sendMessage({ action: 'idle' });
 
     if (response?.success) {
-      location.replace(url);
+      location.replace(target.url);
     }
   } catch (error) {
     console.error('[redirect-protection] Failed to allow redirect:', error);
   }
 }
 
-async function alwaysAllow(host) {
-  const { url, hostname } = await host.target;
-  if (!hostname) return;
-
+async function alwaysAllow({ target }) {
   await store.set(Options, {
-    redirectProtection: { disabled: { [hostname]: true } },
+    redirectProtection: { disabled: { [target.hostname]: true } },
   });
+  // Wait for the background to process the change
   await chrome.runtime.sendMessage({ action: 'idle' });
 
-  location.replace(url);
+  location.replace(target.url);
 }
 
 const RedirectProtection = {
-  target: getTarget,
-  render: ({ target }) =>
-    html`
-      <template layout="block overflow">
-        <style>
-          #bg {
-            position: absolute;
-            top: -250px;
-            left: 50%;
-            width: 1648px;
-            height: 1525px;
-            z-index: -1;
-            transform: translateX(-50%);
+  target: store(Target),
+  render: ({ target }) => html`
+    <template layout="grid height::100%">
+      <ui-page-layout>
+        <ui-card
+          layout="block:center column gap width:::640px"
+          layout@768px="padding:5"
+        >
+          <ui-text type="display-s" layout="margin:bottom:2">
+            Tracking Redirect Alert
+          </ui-text>
+
+          <ui-text>
+            This page was prevented from loading because it's a known tracking
+            URL
+          </ui-text>
+
+          ${
+            store.ready(target) &&
+            target.url &&
+            html`
+              ${target.hostname &&
+              html`
+                <ui-text layout="margin:bottom">
+                  <a
+                    class="link"
+                    href="${target.url}"
+                    data-qa="link:redirect-protection:hostname"
+                  >
+                    ${target.hostname}
+                  </a>
+                </ui-text>
+              `}
+
+              <ui-text layout="margin:bottom:2">
+                To visit this page anyway, you need to allow it.
+              </ui-text>
+
+              <div layout="column self:center gap:1">
+                <ui-button
+                  type="primary"
+                  onclick="${allow}"
+                  data-qa="button:redirect-protection:allow"
+                >
+                  <button>Allow</button>
+                </ui-button>
+
+                <div layout="row:wrap gap:1">
+                  <ui-button
+                    onclick="${goBack}"
+                    data-qa="button:redirect-protection:back"
+                    layout="grow"
+                  >
+                    <button>Back</button>
+                  </ui-button>
+                  ${target.hostname &&
+                  html`
+                    <ui-button
+                      onclick="${alwaysAllow}"
+                      data-qa="button:redirect-protection:always-allow"
+                      layout="grow"
+                    >
+                      <button>Always allow from this domain</button>
+                    </ui-button>
+                  `}
+                </div>
+              </div>
+            `
           }
-
-          #c-1 {
-            position: absolute;
-            left: 300px;
-            top: 100px;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(
-              circle,
-              #a1e4ff 0%,
-              rgba(255, 255, 255, 0.1) 70%
-            );
-            opacity: 0.4;
-          }
-
-          #c-2 {
-            position: absolute;
-            left: 420px;
-            top: 320px;
-            width: 1200px;
-            height: 1200px;
-            background: radial-gradient(
-              circle,
-              #3751d5 0%,
-              rgba(255, 255, 255, 0.1) 65%
-            );
-            opacity: 0.3;
-          }
-
-          .container {
-            min-height: 100vh;
-            padding: 2rem 1.5rem 0;
-          }
-
-          .header {
-            color: var(--color-brand-secondary);
-          }
-
-          .modal {
-            background: var(--background-primary);
-            color: var(--color-primary);
-            border-radius: 16px;
-            padding: 32px 16px;
-            box-shadow: 0 4px 24px var(--shadow-panel);
-            max-width: 375px;
-            width: 100%;
-          }
-
-          .link {
-            color: var(--color-brand-secondary);
-            text-decoration: none;
-            word-break: break-all;
-          }
-
-          @media (min-width: 768px) {
-            .container {
-              padding: 2rem 2rem 0;
-            }
-
-            .modal {
-              padding: 40px 24px;
-              max-width: 600px;
-            }
-          }
-
-          @media (min-width: 1024px) {
-            .modal {
-              padding: 40px;
-              max-width: 720px;
-            }
-          }
-
-          @media (prefers-color-scheme: dark) {
-            #bg {
-              display: none;
-            }
-          }
-        </style>
-
-        <div id="bg">
-          <div id="c-1"></div>
-          <div id="c-2"></div>
-        </div>
-
-        <div class="container" layout="column items:center">
-          <div class="header" layout="margin:2:0">
-            <ui-icon name="logo-with-slogan" layout="height:3"></ui-icon>
           </div>
-
-          <div class="modal" layout="column gap:2">
-            <ui-text type="headline-l" layout="block:center">
-              Tracking Redirect Alert
-            </ui-text>
-
-            ${html.resolve(
-              target.then(({ url, hostname }) =>
-                url
-                  ? html`
-                      <ui-text type="body-m" layout="block:center">
-                        This page was prevented from loading because it's a
-                        known tracking URL:
-                      </ui-text>
-
-                      <div layout="block:center margin:1:0">
-                        <a
-                          class="link"
-                          href="${url}"
-                          data-qa="link:redirect-protection:hostname"
-                        >
-                          ${hostname}
-                        </a>
-                      </div>
-
-                      <ui-text type="body-m" layout="block:center">
-                        To visit this page anyway, you need to allow it.
-                      </ui-text>
-
-                      <div layout="column items:center margin:top:2">
-                        <div layout="column gap:1">
-                          <ui-button type="primary" onclick="${allow}">
-                            <button
-                              layout="width:::100%"
-                              data-qa="button:redirect-protection:allow"
-                            >
-                              Allow
-                            </button>
-                          </ui-button>
-
-                          <div layout="row gap:1">
-                            <ui-button onclick="${goBack}">
-                              <button
-                                style="min-width: 80px;"
-                                data-qa="button:redirect-protection:back"
-                              >
-                                Back
-                              </button>
-                            </ui-button>
-                            <ui-button onclick="${alwaysAllow}">
-                              <button
-                                layout="grow"
-                                data-qa="button:redirect-protection:always-allow"
-                              >
-                                Always allow from this domain
-                              </button>
-                            </ui-button>
-                          </div>
-                        </div>
-                      </div>
-                    `
-                  : html`
-                      <ui-text type="body-m" layout="block:center">
-                        Loading...
-                      </ui-text>
-                    `,
-              ),
-            )}
-          </div>
-        </div>
-      </template>
-    `.use(themeToggle),
+        </ui-card>
+      </ui-page-layout>
+    </template>
+  `,
 };
 
 mount(document.body, RedirectProtection);

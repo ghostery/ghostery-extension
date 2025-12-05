@@ -269,7 +269,7 @@ export default {
                     data-qa="button:redirect-protection"
                   >
                     <ui-icon
-                      name="globe"
+                      name="globe-lock"
                       color="quaternary"
                       layout="size:3 margin:right"
                     ></ui-icon>

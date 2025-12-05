@@ -29,7 +29,8 @@ export default {
     stack: [RedirectProtectionAddException],
   },
   options: store(Options),
-  render: ({ options }) => html`
+  hostnames: ({ options }) => Object.keys(options.redirectProtection.disabled),
+  render: ({ options, hostnames }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         <section layout="column gap:4">
@@ -60,12 +61,12 @@ export default {
               <div layout="column grow gap:0.5">
                 <div layout="row gap items:center">
                   <ui-icon
-                    name="globe"
+                    name="globe-lock"
                     color="quaternary"
                     layout="size:3"
                   ></ui-icon>
                   <ui-text type="headline-xs">
-                    Enable Redirect Tracking Protection
+                    Redirect Tracking Protection
                   </ui-text>
                 </div>
               </div>
@@ -75,34 +76,28 @@ export default {
           html`
             <div layout="column gap:2">
               <div layout="row content:space-between items:center">
-                <ui-text type="label-m">Redirect exceptions</ui-text>
-                <ui-button
-                  type="primary"
-                  size="s"
-                  data-qa="button:redirect-protection:add"
-                >
+                <ui-text type="label-l">Redirect exceptions</ui-text>
+                <ui-button data-qa="button:redirect-protection:add">
                   <a href="${router.url(RedirectProtectionAddException)}">
                     Add
                   </a>
                 </ui-button>
               </div>
-              ${Object.keys(options.redirectProtection.disabled).length
+              ${hostnames.length
                 ? html`
                     <settings-table>
                       <div slot="header" layout="grid:1|max gap">
-                        <ui-text type="label-s" color="secondary">
-                          Website
-                          (${Object.keys(options.redirectProtection.disabled)
-                            .length})
+                        <ui-text type="label-m">
+                          Website <span>(${hostnames.length})</span>
                         </ui-text>
                       </div>
-                      ${Object.keys(options.redirectProtection.disabled).map(
+                      ${hostnames.map(
                         (hostname) => html`
                           <div
                             layout="grid:1|max content:center gap"
                             data-qa="item:redirect-protection:exception:${hostname}"
                           >
-                            <ui-text type="body-s">${hostname}</ui-text>
+                            <ui-text type="label-m">${hostname}</ui-text>
                             <ui-action>
                               <button
                                 onclick="${removeException(hostname)}"
@@ -110,8 +105,8 @@ export default {
                               >
                                 <ui-icon
                                   name="trash"
-                                  color="danger-secondary"
-                                  layout="size:2.5"
+                                  color="tertiary"
+                                  layout="size:3"
                                 ></ui-icon>
                               </button>
                             </ui-action>
@@ -121,20 +116,16 @@ export default {
                     </settings-table>
                   `
                 : html`
-                    <settings-card
-                      type="content"
-                      layout="column center gap:2 padding:4"
-                      data-qa="component:redirect-protection:empty-state"
-                    >
+                    <div layout="column center gap padding:5:0">
                       <ui-icon
-                        name="shield"
-                        color="quaternary"
+                        name="block-m"
                         layout="size:4"
+                        color="tertiary"
                       ></ui-icon>
-                      <ui-text type="body-s" color="secondary">
+                      <ui-text layout="block:center width:::200px">
                         No exceptions added yet
                       </ui-text>
-                    </settings-card>
+                    </div>
                   `}
             </div>
           `}
