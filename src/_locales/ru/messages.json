@@ -101,11 +101,20 @@
   "back": {
     "message": "Назад"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "Поскольку каждый человек пользуется интернетом по-своему, мы даем вам возможность выбрать, как вы хотите его использовать."
+  },
   "become_a_contributor": {
     "message": "Стать участником"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Будучи компанией из ЕС, Ghostery строго соблюдает GDPR (Общий регламент по защите данных), который регулирует сбор данных для обеспечения конфиденциальности пользователей."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "Лучше всего для начинающих или для совместного использования с семьей."
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "Лучший выбор для полной защиты и энтузиастов конфиденциальности."
   },
   "block_all": {
     "message": "Заблокировать все"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "Контактная поддержка"
   },
+  "continue": {
+    "message": "Продолжить"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Поддержать базу данных трекеров от Ghostery на Github"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "Отключить"
   },
+  "disable_on_this_site": {
+    "message": "Отключить на этом сайте"
+  },
   "disable_trackers_preview": {
     "message": "Отключить предварительный просмотр трекеров"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "Включить"
+  },
+  "enable_on_this_site": {
+    "message": "Включить на этом сайте"
   },
   "enabled": {
     "message": "Включено"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "Обмен отзывами"
   },
+  "filtering_mode": {
+    "message": "Режим фильтрации"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Создает глобальный отчет о прозрачности веб-трекинга в вашем браузере, защищенном Ghostery."
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery добавил правило, чтобы этот блок контента оставался скрытым. Вы можете отменить это в любое время в настройках сайта."
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghostery был отключен на этом сайте."
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "На этом сайте включен Ghostery."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery возобновлен."
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "Открой YouTube в закрытом окне"
   },
+  "or": {
+    "message": "или",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "Организация"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "Выберите отвлекающий элемент"
   },
+  "select_filtering_mode": {
+    "message": "Выберите режим фильтрации"
+  },
   "select_time_frame": {
     "message": "Выберите временной интервал"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "Это приведет к выходу из системы и может сбросить настройки или сохраненные предпочтения. Некоторые страницы могут не работать, пока вы не войдете в систему или не примете файлы cookie снова."
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "Чтобы настроить защиту конфиденциальности на сайте, включите:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Чтобы настроить защиту конфиденциальности, доверьтесь сайту:"
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Хотите сообщить о проблеме на другой странице?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "Мы блокируем всё для вас — рекламу, трекеры, отвлекающие факторы. Вы полностью защищены, настройка не требуется."
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Мы знаем, что ты полагаешься на Ghostery для бесперебойной работы с YouTube. Пока не появится более совершенное решение, вот временное исправление."
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Вы больше не будете видеть статистику трекера рядом с результатами поиска."
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "Вы убираете рекламу, один сайт за раз. Одна кнопка, одна страница, и вы создаете свой собственный список без рекламы."
   },
   "your_browser_privacy_report": {
     "message": "Отчет о конфиденциальности вашего браузера"
