@@ -119,8 +119,6 @@ describe.only('Adblocker Capabilities', function () {
       ['nosiif50', PAGE_DOMAIN + '##+js(nosiif, , 50)'],
     ];
     const networkingFilters = [
-      ['url', '/gen/url.js^'],
-      ['regex', '/gen\\/regex.js\\?t=[a-z0-9]{6}/'],
       ['modscript', '/gen/modscript.js^$script'],
       ['modxhr', '/gen/modxhr.js^$xhr'],
       // $match-case (see Firefox)
@@ -191,6 +189,9 @@ describe.only('Adblocker Capabilities', function () {
   if (browser.isChromium) {
     describe('Chromium', function () {
       const networkingFilters = [
+        // Firefox requires https://github.com/ghostery/adblocker/pull/5296 for proper URL handling
+        ['url', '/gen/url.js^'],
+        ['regex', '/gen\\/regex.js\\?t=[a-z0-9]{6}/'],
         // modmatchcase is not supported by adblocker library yet
         // refs https://github.com/ghostery/adblocker/pull/5296
         ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
