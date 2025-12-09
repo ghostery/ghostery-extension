@@ -243,23 +243,6 @@ BOB is working and pop-ups are triggering.
 
 Tracker Preview is working. Gathered information for a specific website are visible.
 
-### Ghostery Account synchronization
-
-> Ghostery Account settings synchronization between browser instances. The feature works only on Firefox Desktop, Chrome and Edge Desktop.
-
-Warning: The sync process may take up to 10 minutes. You can try to force syncing by clicking the "Sync Now" button again.
-
-1. Open two Firefox instances - use different channels on one machine, or use two devices.
-2. In both browsers, login into your Firefox Account and ensure the "Add-ons" option is checked in the sync settings.
-3. In both browsers, open Ghostery Settings.
-4. In the first browser turn OFF Ad-Blocking.
-5. Click the "Sync Now" button in the account settings to manually trigger a sync.
-6. In the second browser click the "Sync Now" button in the account settings to manually trigger a sync.
-7. In the second browser reload Ghostery Settings.
-8. Ad-Blocking should be turned OFF.
-
-Synchronization between browsers is working.
-
 ### Other language support
 
 > The default extension' language is set by the browser -check if changing that will change the extension' language
