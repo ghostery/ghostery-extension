@@ -25,8 +25,6 @@ async function disableAllPrivacyToggle() {
   // localhost. However, still at least one engine is required to bring
   // redirect resources to the resulting engine.
   await setPrivacyToggle('ad-blocking', false);
-  // We will bring the never-consent engine, which will have minimum effect
-  // to the testing page.
   await setPrivacyToggle('never-consent', false);
   await setPrivacyToggle('anti-tracking', false);
 }
