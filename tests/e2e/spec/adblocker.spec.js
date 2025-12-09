@@ -27,7 +27,7 @@ async function disableAllPrivacyToggle() {
   await setPrivacyToggle('ad-blocking', false);
   // We will bring the never-consent engine, which will have minimum effect
   // to the testing page.
-  await setPrivacyToggle('never-consent', true);
+  await setPrivacyToggle('never-consent', false);
   await setPrivacyToggle('anti-tracking', false);
 }
 
