@@ -101,11 +101,20 @@
   "back": {
     "message": "戻る"
   },
+  "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
+    "message": "人それぞれ異なる方法でインターネットを利用するため、あなたが望むウェブ体験を選べるようにしています。"
+  },
   "become_a_contributor": {
     "message": "Contributorになる"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "EU企業であるGhosteryは、ユーザーのプライバシーを確保するためにデータ収集を規制するGDPR（一般データ保護規則）を厳格に遵守しています。."
+  },
+  "best_for_beginners_or_sharing_with_family_": {
+    "message": "初心者や家族と共有するのに最適です。"
+  },
+  "best_for_full_coverage_and_privacy_enthusiasts_": {
+    "message": "完全なカバレッジとプライバシー愛好家に最適です。"
   },
   "block_all": {
     "message": "すべてをブロック"
@@ -207,6 +216,9 @@
   "contact_support": {
     "message": "お問い合わせ先"
   },
+  "continue": {
+    "message": "継続"
+  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GithubでGhosteryトラッカーデータベースに寄付"
   },
@@ -271,6 +283,9 @@
   "disable": {
     "message": "無効化"
   },
+  "disable_on_this_site": {
+    "message": "このサイトで無効にする"
+  },
   "disable_trackers_preview": {
     "message": "トラッカーの無効化プレビュー"
   },
@@ -322,6 +337,9 @@
   },
   "enable_now": {
     "message": "今すぐ有効化"
+  },
+  "enable_on_this_site": {
+    "message": "このサイトで有効にする"
   },
   "enabled": {
     "message": "有効になっています"
@@ -385,6 +403,9 @@
   "feedback_sharing": {
     "message": "フィードバック共有"
   },
+  "filtering_mode": {
+    "message": "フィルタリングモード"
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "あなたのGhostery保護ブラウザでウェブトラッキングに関するグローバルな透明性レポートを生成します。"
   },
@@ -393,6 +414,12 @@
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghosteryは、このコンテンツブロックを非表示にするルールを追加しました。ウェブサイトの設定でいつでも元に戻すことができます。"
+  },
+  "ghostery_has_been_disabled_on_this_site_": {
+    "message": "Ghosteryはこのサイトで無効化されています。"
+  },
+  "ghostery_has_been_enabled_on_this_site_": {
+    "message": "Ghosteryがこのサイトで有効になっています。"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghosteryが再開されました。"
@@ -621,6 +648,10 @@
   "open_youtube_in_a_private_window": {
     "message": "YouTubeをプライベートウィンドウで開く"
   },
+  "or": {
+    "message": "または",
+    "description": "Ghostery mode \"or\" ZAP mode"
+  },
   "organization": {
     "message": "組織"
   },
@@ -757,6 +788,9 @@
   "select_distracting_element": {
     "message": "気を散らす要素を選択"
   },
+  "select_filtering_mode": {
+    "message": "フィルタリングモードを選択"
+  },
   "select_time_frame": {
     "message": "時間枠を選択"
   },
@@ -843,6 +877,9 @@
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "サインアウトされ、設定や保存された設定がリセットされる可能性があります。サインインし直すか、再度クッキーを受け入れるまで、一部のページが正常に動作しない場合があります。"
+  },
+  "to_adjust_privacy_protection_enable_on_a_site_": {
+    "message": "サイトのプライバシー保護を調整するには:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "サイトのプライバシー保護を調整するには:"
@@ -958,6 +995,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "別のページで問題を報告しますか？"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
+    "message": "あなたのためにすべてをブロックします - 広告、トラッカー、気を散らすもの。設定不要で完全にカバーされています。"
+  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"
   },
@@ -1014,6 +1054,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
+  },
+  "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
+    "message": "広告を一つずつ消していきます。ボタンを一つ押すだけで、ページごとに自分専用の広告なしリストを作成できます。"
   },
   "your_browser_privacy_report": {
     "message": "ブラウザのプライバシーレポート"
