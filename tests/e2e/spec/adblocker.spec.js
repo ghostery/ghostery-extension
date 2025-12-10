@@ -70,7 +70,7 @@ async function prepareTestPage(filters) {
   await browser.url(PAGE_URL);
 }
 
-describe.only('Adblocker Capabilities', function () {
+describe('Adblocker Capabilities', function () {
   // NOTE: Only separate "enableExtension" before hook and merge everything else
   before(enableExtension);
   before(disableAllPrivacyToggle);
