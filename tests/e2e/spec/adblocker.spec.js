@@ -63,8 +63,8 @@ async function collectTestResults() {
 
 async function prepareTestPage(filters) {
   await setCustomFilters(
-    filters.map(function ([id, filter]) {
-      return id.startsWith('generic') ? PAGE_DOMAIN + filter : filter;
+    filters.map(function ([, filter]) {
+      return filter;
     }),
   );
   await browser.url(PAGE_URL);
