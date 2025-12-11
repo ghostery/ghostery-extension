@@ -17,6 +17,8 @@ import { FLAG_MODES } from '../../src/utils/config-types.js';
 export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
 export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
 
+export const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
+
 let BASE_URL = '';
 export function setExtensionBaseUrl(url) {
   BASE_URL = url;

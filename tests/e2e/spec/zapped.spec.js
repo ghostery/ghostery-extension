@@ -19,6 +19,7 @@ import {
   expectAdsBlocked,
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
+  TRACKER_IDS,
 } from '../utils.js';
 
 import { argv, PAGE_URL, PAGE_DOMAIN } from '../wdio.conf.js';
@@ -77,6 +78,40 @@ if (argv.flags.includes(FLAG_MODES)) {
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
       await browser.switchFrame(null);
+    });
+
+    it('does not block trackers when not enabled', async function () {
+      await browser.url(PAGE_URL);
+
+      await openPanel();
+      await getExtensionElement('button:detailed-view').click();
+
+      for (const trackerId of TRACKER_IDS) {
+        await expect(
+          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+        ).not.toBeDisplayed();
+        await expect(
+          getExtensionElement(`icon:tracker:${trackerId}:modified`),
+        ).not.toBeDisplayed();
+      }
+    });
+
+    describe('block trackers and ads when enabled in the panel', function () {
+      before(() => toggleZapInPanel('enable'));
+      after(() => toggleZapInPanel('disable'));
+
+      it('blocks trackers when enabled in the panel', async function () {
+        await browser.url(PAGE_URL);
+
+        await openPanel();
+        await getExtensionElement('button:detailed-view').click();
+
+        for (const trackerId of TRACKER_IDS) {
+          await expect(
+            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+          ).toBeDisplayed();
+        }
+      });
     });
 
     describe('block ads when enabled in the panel', function () {

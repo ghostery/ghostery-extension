@@ -19,6 +19,7 @@ import {
   expectAdsBlocked,
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
+  TRACKER_IDS,
 } from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
@@ -144,8 +145,6 @@ describe('Main Features', function () {
   });
 
   describe('Anti-Tracking', function () {
-    const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
-
     it('does not block tracker requests on the page', async function () {
       await setPrivacyToggle('anti-tracking', false);
       await browser.url(PAGE_URL);
