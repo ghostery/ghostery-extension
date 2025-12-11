@@ -15,9 +15,9 @@ import {
   setCustomFilters,
 } from '../utils.js';
 
-import { PAGE_DOMAIN, PAGE_URL as baseUrl } from '../wdio.conf.js';
+import { PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
 
-const PAGE_URL = baseUrl + 'adblocker/index.html';
+const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 
 async function disableAllPrivacyToggle() {
   // Disable all community filters to ensure the pure adblocker capability
@@ -35,10 +35,11 @@ async function enableAllPrivacyToggle() {
   await setPrivacyToggle('anti-tracking', true);
 }
 
-async function collectTestResults() {
-  let result;
+async function collectTestPageResponse() {
+  let response;
+
   for (let i = 0; i < 4; i++) {
-    result = await browser.execute(function () {
+    response = await browser.execute(function () {
       if (
         typeof suite === 'undefined' ||
         suite.collection.expected !== suite.collection.reports.length
@@ -47,37 +48,56 @@ async function collectTestResults() {
       }
       return suite.collection.reports;
     });
-    if (result === false) {
+
+    if (response === false) {
       await new Promise(function (resolve) {
         setTimeout(function () {
           resolve(null);
         }, 1000);
       });
     } else {
-      return result;
+      return response;
     }
   }
 
-  return result;
+  return false;
 }
 
-async function prepareTestPage(filters) {
+async function test(filters) {
   await setCustomFilters(
     filters.map(function ([, filter]) {
       return filter;
     }),
   );
-  await browser.url(PAGE_URL);
+  await browser.url(ADBLOCKER_PAGE_URL);
+
+  const response = await collectTestPageResponse();
+  const reports = {
+    styling: [],
+    scripting: [],
+    networking: [],
+  };
+
+  for (const report of response) {
+    if (report.type === 'styling') {
+      reports.styling.push(report);
+    } else if (report.type === 'scripting') {
+      reports.scripting.push(report);
+    } else if (report.type === 'networking') {
+      reports.networking.push(report);
+    }
+  }
+
+  return reports;
 }
 
 describe('Adblocker Capabilities', function () {
-  // NOTE: Only separate "enableExtension" before hook and merge everything else
   before(enableExtension);
   before(disableAllPrivacyToggle);
 
   after(enableAllPrivacyToggle);
-  after(function () {
-    setPrivacyToggle('custom-filters', false);
+  after(async function () {
+    await setPrivacyToggle('custom-filters', false);
   });
 
   describe('All platforms', function () {
@@ -127,27 +147,14 @@ describe('Adblocker Capabilities', function () {
       ],
     ];
 
-    const reports = {
-      styling: [],
-      scripting: [],
-      networking: [],
-    };
+    let reports;
 
     before(async function () {
-      await prepareTestPage([
+      reports = await test([
         ...stylingFilters,
         ...scriptingFilters,
         ...networkingFilters,
       ]);
-      for (const report of await collectTestResults()) {
-        if (report.type === 'styling') {
-          reports.styling.push(report);
-        } else if (report.type === 'scripting') {
-          reports.scripting.push(report);
-        } else if (report.type === 'networking') {
-          reports.networking.push(report);
-        }
-      }
     });
 
     describe('Styling', function () {
@@ -195,19 +202,16 @@ describe('Adblocker Capabilities', function () {
         ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
       ];
 
-      let report;
+      let reports;
 
       before(async function () {
-        await prepareTestPage(networkingFilters);
-        report = (await collectTestResults()).find(function (report) {
-          return report.type === 'networking';
-        });
+        reports = await test(networkingFilters);
       });
 
       describe('Networking', function () {
         for (const [id, filter] of networkingFilters) {
           it(filter, async function () {
-            expect(report.results[id]).toBe(true);
+            expect(reports.networking[0].results[id]).toBe(true);
           });
         }
       });
@@ -223,19 +227,16 @@ describe('Adblocker Capabilities', function () {
         ],
       ];
 
-      let report;
+      let reports;
 
       before(async function () {
-        await prepareTestPage(networkingFilters);
-        report = (await collectTestResults()).find(function (report) {
-          return report.type === 'networking';
-        });
+        reports = await test(networkingFilters);
       });
 
       describe('Networking', function () {
         for (const [id, filter] of networkingFilters) {
           it(filter, async function () {
-            expect(report.results[id]).toBe(true);
+            expect(reports.networking[0].results[id]).toBe(true);
           });
         }
       });
