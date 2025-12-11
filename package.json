@@ -57,6 +57,7 @@
     "file-saver": "^2.0.5",
     "hybrids": "^9.1.21",
     "idb": "^8.0.2",
+    "lottie-web": "^5.13.0",
     "plotly.js-basic-dist": "^3.3.0",
     "tldts-experimental": "^7.0.19"
   },
