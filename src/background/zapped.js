@@ -14,6 +14,7 @@ import { store } from 'hybrids';
 import Config from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
+import { isWebkit } from '/utils/browser-info.js';
 import { FLAG_MODES } from '/utils/config-types.js';
 import {
   getDynamicRulesIds,
@@ -62,12 +63,25 @@ if (__PLATFORM__ !== 'firefox') {
 
     await chrome.declarativeNetRequest.updateDynamicRules({
       addRules: [
-        {
-          id: 1,
-          priority: PAUSED_RULE_PRIORITY,
-          action: { type: 'allow' },
-          condition: { excludedInitiatorDomains: excludedDomains },
-        },
+        isWebkit()
+          ? // Safari/WebKit has a bug with setting excludedRequestDomains,
+            // it simply doesn't work and still allow on excluded domains
+            // the only way is to use `allow` action with excludedInitiatorDomains
+            {
+              id: 1,
+              priority: PAUSED_RULE_PRIORITY,
+              action: { type: 'allow' },
+              condition: { excludedInitiatorDomains: excludedDomains },
+            }
+          : {
+              id: 1,
+              priority: PAUSED_RULE_PRIORITY,
+              action: { type: 'allowAllRequests' },
+              condition: {
+                excludedRequestDomains: excludedDomains,
+                resourceTypes: ['main_frame'],
+              },
+            },
       ],
       removeRuleIds,
     });
