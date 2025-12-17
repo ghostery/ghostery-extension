@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      function createSuite() {
+        let expected = 0;
+
+        /**
+         * @type {Array<{ type: string; phase: string; results: Record<string, boolean>; }>}
+         **/
+        const reports = [];
+
+        /**
+         * @type {{ type: string; phase: string; results: Record<string, boolean>; }}
+         **/
+        function publish(report) {
+          const table = document.querySelector(
+            `#${report.type}-report + table`,
+          );
+          // Find the corresponding index for the phase
+          const headers = table.getElementsByTagName("th");
+          let i = 0;
+          for (; i < headers.length; i++) {
+            if (headers[i].textContent.includes(`+${report.phase}`)) {
+              ++i;
+              break;
+            }
+          }
+          for (const [id, passed] of Object.entries(report.results)) {
+            if (passed === false) {
+              continue;
+            }
+            const section = document
+              .getElementById(id)
+              .querySelector(`td:nth-child(${i}) > section`);
+            section.removeAttribute("fail");
+            section.setAttribute("pass", "1");
+          }
+        }
+
+        /**
+         * @type {(type: string, phase: string) => (results: Record<string, boolean>) => void}
+         **/
+        function createCallback(type, phase) {
+          return function callback(results) {
+            reports.push({
+              type,
+              phase,
+              results,
+            });
+            if (document.readyState === "loading") {
+              document.addEventListener(
+                "readystatechange",
+                function () {
+                  publish({
+                    type,
+                    phase,
+                    results,
+                  });
+                },
+                { once: true },
+              );
+            } else {
+              publish({
+                type,
+                phase,
+                results,
+              });
+            }
+          };
+        }
+
+        /**
+         * @type {(type: string, phase: string, body: (done: (results: Record<string, boolean>) => void): void | Promise<void>) => void}
+         **/
+        function test(type, phase, body) {
+          expected++;
+          void body(createCallback(type, phase));
+        }
+
+        return {
+          test,
+          collection: {
+            get expected() {
+              return expected;
+            },
+            reports,
+          },
+        };
+      }
+
+      /**
+       * @type {(callback: (results: Record<string, boolean>) => void) => void}
+       **/
+      function assertStyling(callback) {
+        if (document.readyState === "loading") {
+          return callback({});
+        }
+        const results = {};
+        const table = document.querySelector("#styling-report + table");
+        const rows = table.querySelectorAll("tr[id]");
+        for (const row of rows) {
+          const id = row.getAttribute("id");
+          const target = row.querySelector("div");
+          if (target instanceof Element === false) {
+            results[id] = false;
+            continue;
+          }
+          const targetRect = target.getBoundingClientRect();
+          results[id] = targetRect.height === 0 && targetRect.width === 0;
+        }
+        callback(results);
+      }
+
+      /**
+       * @type {(callback: (results: Record<string, boolean>) => void) => void}
+       **/
+      function assertScripting(callback) {
+        const results = {};
+
+        // Iteration marker to avoid using async-await
+        let i = 0;
+        let l = 0;
+        function done() {
+          if (++i === l) {
+            callback(results);
+          }
+        }
+
+        // scriptletGlobals.safeSelf /w json-prune
+        results["globals-safeself"] = false;
+        // Inject malicious proxy function to `Object.hasOwn` to distrub checking property existence
+        // refs https://github.com/gorhill/uBlock/blob/ede6b17060210e983aedafc6486859e77be51a26/src/js/resources/safe-self.js#L49
+        // refs https://github.com/gorhill/uBlock/blob/ede6b17060210e983aedafc6486859e77be51a26/src/js/resources/object-prune.js#L52
+        const ObjectHasOwn = Object.hasOwn;
+        Object.hasOwn = new Proxy(Object.hasOwn, {
+          apply(target, thisArg, argArray) {
+            return false;
+          },
+        });
+        results["globals-safeself"] =
+          JSON.parse('{"globals-safeself":1}')["globals-safeself"] ===
+          undefined;
+        Object.hasOwn = ObjectHasOwn;
+
+        // aopr
+        results["aopr"] = false;
+        try {
+          encodeURIComponent("1");
+        } catch (e) {
+          results["aopr"] = true;
+        }
+
+        // aopw
+        results["aopw"] = false;
+        try {
+          window.__checkadb__custom = 1;
+        } catch (e) {
+          results["aopw"] = true;
+        }
+
+        // aeld
+        results["aeld"] = true;
+        const aeld = document.createElement("a");
+        aeld.addEventListener(
+          "click",
+          function () {
+            results["aeld"] = false;
+          },
+          { once: true },
+        );
+        aeld.click();
+
+        // call-nothrow
+        try {
+          atob("this is not a valid input!");
+          results["call-nothrow"] = true;
+        } catch (e) {
+          results["call-nothrow"] = false;
+        }
+
+        // json-prune
+        results["json-prune"] =
+          typeof JSON.parse(`{"__checkadb__custom":1}`).__checkadb__custom ===
+          "undefined";
+
+        // set
+        results["set"] = typeof window.checkadb !== "undefined";
+
+        // nostif10
+        l++;
+        let nostif0 = 0;
+        setTimeout(function () {
+          nostif0 = 1;
+        }, 0);
+        setTimeout(function () {
+          results["nostif0"] = nostif0 === 0;
+          done();
+        }, 5);
+
+        // nostif50
+        l++;
+        let nostif50 = 0;
+        setTimeout(function () {
+          nostif50 = 1;
+        }, 50);
+        setTimeout(function () {
+          results["nostif50"] = nostif50 === 0;
+          done();
+        }, 55);
+
+        // nosiif50
+        l++;
+        let nosiif50 = setInterval(function () {
+          clearInterval(nosiif50);
+          nosiif50 = -1;
+        }, 50);
+        setTimeout(function () {
+          results["nosiif50"] = nosiif50 !== -1;
+          if (nosiif50 !== -1) {
+            clearInterval(nosiif50);
+          }
+          done();
+        }, 55);
+      }
+
+      /**
+       * @type {(callback: (results: Record<string, boolean>) => void) => void}
+       **/
+      function assertNetworking(callback) {
+        const results = {};
+
+        // Iteration marker to avoid using async-await
+        let i = 0;
+        let l = 0;
+        function done() {
+          if (++i === l) {
+            callback(results);
+          }
+        }
+
+        // url
+        l++;
+        fetch("./gen/url.js")
+          .then(function () {
+            results["url"] = false;
+            done();
+          })
+          .catch(function () {
+            fetch("./gen/URL.js")
+              .then(function () {
+                results["url"] = false;
+                done();
+              })
+              .catch(function () {
+                results["url"] = true;
+                done();
+              });
+          });
+
+        // regex
+        l++;
+        const rand = `./gen/regex.js?t=${Date.now().toString(36).slice(0, 6)}`;
+        fetch(rand)
+          .then(function () {
+            results["regex"] = false;
+            done();
+          })
+          .catch(function () {
+            fetch(rand.toUpperCase())
+              .then(function () {
+                results["regex"] = false;
+                done();
+              })
+              .catch(function () {
+                results["regex"] = true;
+                done();
+              });
+          });
+
+        // script
+        l++;
+        const script = document.createElement("script");
+        script.addEventListener(
+          "error",
+          function () {
+            results["modscript"] = true;
+            done();
+          },
+          { once: true },
+        );
+        script.addEventListener(
+          "load",
+          function () {
+            results["modscript"] = false;
+            done();
+          },
+          { once: true },
+        );
+        script.setAttribute("src", "./gen/modscript.js");
+        document.head.appendChild(script);
+
+        // xhr
+        l++;
+        fetch("./gen/modxhr.js")
+          .then(function () {
+            results["modxhr"] = false;
+            done();
+          })
+          .catch(function () {
+            results["modxhr"] = true;
+            done();
+          });
+
+        for (const [id, url, body] of [
+          ["redirnoopjs", "./gen/redirnoop.js", ";"],
+          ["rediradsbygoogle", "./gen/rediradsbygoogle.js", "google"],
+          ["redirfallback", "./gen/redirfallback.js", ""],
+        ]) {
+          l++;
+          fetch(url, {
+            redirect: "error",
+          })
+            .then(function () {
+              // If the redirect didn't happen, it means it's static file
+              results[id] = false;
+              done();
+            })
+            .catch(function () {
+              fetch(url)
+                .then(function (res) {
+                  return res.text();
+                })
+                .then(function (text) {
+                  // Check for the actual payload
+                  results[id] = text.includes(body);
+                  done();
+                })
+                .catch(function () {
+                  results[id] = false;
+                  done();
+                });
+            });
+        }
+
+        // matchcase
+        l++;
+        fetch("./gen/modmatchcase-uppercase.js")
+          .then(function () {
+            fetch("./gen/modmatchcase-UPPERCASE.js")
+              .then(function () {
+                results["modmatchcase"] = false;
+                done();
+              })
+              .catch(function () {
+                results["modmatchcase"] = true;
+                done();
+              });
+          })
+          .catch(function () {
+            results["modmatchcase"] = false;
+            done();
+          });
+      }
+
+      const suite = createSuite();
+      suite.test("scripting", "head", function (done) {
+        assertScripting(done);
+      });
+    </script>
+
+    <style>
+      body {
+        font-family:
+          Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+          sans-serif;
+      }
+
+      td > section[pass] {
+        display: inline-block;
+        height: 16px;
+        width: 50px;
+        color: darkcyan;
+      }
+
+      td > section[fail] {
+        display: inline-block;
+        height: 16px;
+        width: 50px;
+        color: red;
+      }
+
+      td > section[pass]::after {
+        content: "pass";
+      }
+
+      td > section[fail]::after {
+        content: "fail";
+      }
+
+      td > div {
+        width: 50px;
+        height: 15px;
+        background-color: darkcyan;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a href="https://github.com/seia-soto/checkadb">checkadb</a></h1>
+    <p>
+      <code>checkadb</code> is a half-automated ad-blocking capability
+      end-to-end testing framework.<br />
+      This framework helps ad-blockers to test their functionality with an ease.
+    </p>
+
+    <h2 id="styling-report">styling</h2>
+    <table>
+      <tr>
+        <th>filter</th>
+        <th>+readystatechange</th>
+        <th>+DOMContentLoaded</th>
+        <th>+1000ms</th>
+        <th></th>
+      </tr>
+      <tr id="generic-selector-id">
+        <td><code>###generic-target</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div id="generic-target"></div>
+        </td>
+      </tr>
+      <tr id="generic-selector-class">
+        <td><code>##.generic-target</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div class="generic-target"></div>
+        </td>
+      </tr>
+      <tr id="generic-selector-attribute">
+        <td><code>##[generic-target]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div generic-target></div>
+        </td>
+      </tr>
+      <tr id="generic-selector-has">
+        <td><code>##.generic-outer-target:has(span)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div class="generic-outer-target"><span></span></div>
+        </td>
+      </tr>
+      <tr id="generic-selector-lazy">
+        <td><code>##[generic-lazy-target="100ms"]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div generic-lazy-target></div>
+        </td>
+      </tr>
+      <tr id="generic-selector-adjunct">
+        <td><code>##[generic-adjunct-target="100ms"]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td></td>
+      </tr>
+      <tr id="selector-id">
+        <td><code>localhost###target</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div id="target"></div>
+        </td>
+      </tr>
+      <tr id="selector-class">
+        <td><code>localhost##.target</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div class="target"></div>
+        </td>
+      </tr>
+      <tr id="selector-attribute">
+        <td><code>localhost##[target]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div target></div>
+        </td>
+      </tr>
+      <tr id="selector-has">
+        <td><code>localhost##.outer-target:has(span)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div class="outer-target"><span></span></div>
+        </td>
+      </tr>
+      <tr id="selector-lazy">
+        <td><code>localhost##[lazy-target="100ms"]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td>
+          <div lazy-target></div>
+        </td>
+      </tr>
+      <tr id="selector-adjunct">
+        <td><code>localhost##[adjunct-target="100ms"]</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <h2 id="scripting-report">scripting</h2>
+    <table>
+      <tr>
+        <th>filter</th>
+        <th>+head</th>
+        <th>+body</th>
+        <th>+readystatechange</th>
+        <th>+DOMContentLoaded</th>
+        <th>+1000ms</th>
+      </tr>
+      <tr id="globals-safeself">
+        <td><code>localhost##+js(json-prune, globals-safeself)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="aopr">
+        <td><code>localhost##+js(aopr, encodeURIComponent)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="aopw">
+        <td><code>localhost##+js(aopw, __checkadb__custom)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="aeld">
+        <td><code>localhost##+js(aeld, click)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="call-nothrow">
+        <td><code>localhost##+js(call-nothrow, atob)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="json-prune">
+        <td><code>localhost##+js(json-prune, __checkadb__custom)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="set">
+        <td><code>localhost##+js(set, checkadb, true)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="nostif0">
+        <td><code>localhost##+js(nostif, , 0)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="nostif50">
+        <td><code>localhost##+js(nostif, , 50)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="nosiif50">
+        <td><code>localhost##+js(nosiif, , 50)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+      </tr>
+    </table>
+
+    <h2 id="networking-report">networking</h2>
+    <table>
+      <tr>
+        <th>filter</th>
+        <th>+lazy</th>
+      </tr>
+      <tr id="url">
+        <td><code>/gen/url.js^</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="regex">
+        <td><code>/gen\/regex.js\?t=[a-z0-9]{6}/</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="modscript">
+        <td><code>/gen/modscript.js^$script</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="modxhr">
+        <td><code>/gen/modxhr.js^$xhr</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="modmatchcase">
+        <td><code>/gen\/modmatchcase-UPPERCASE.js/$match-case</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="redirnoopjs">
+        <td><code>/gen/redirnoop.js^$redirect=noopjs</code></td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="rediradsbygoogle">
+        <td>
+          <code
+            >/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js</code
+          >
+        </td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="redirfallback">
+        <td>
+          <code
+            >/gen/redirfallback.js^$redirect=something_does_not_exist.js</code
+          >
+        </td>
+        <td><section fail></section></td>
+      </tr>
+    </table>
+
+    <script>
+      suite.test("scripting", "body", function (done) {
+        assertScripting(done);
+      });
+      suite.test("scripting", "readystatechange", function (done) {
+        document.addEventListener(
+          "readystatechange",
+          function () {
+            assertScripting(done);
+          },
+          { once: true },
+        );
+      });
+      suite.test("scripting", "DOMContentLoaded", function (done) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          function () {
+            assertScripting(done);
+          },
+          { once: true },
+        );
+      });
+      suite.test("scripting", "1000ms", function (done) {
+        setTimeout(function () {
+          assertScripting(done);
+        }, 1000);
+      });
+
+      suite.test("styling", "readystatechange", function (done) {
+        document.addEventListener(
+          "readystatechange",
+          function () {
+            assertStyling(done);
+          },
+          { once: true },
+        );
+      });
+      suite.test("styling", "DOMContentLoaded", function (done) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          function () {
+            assertStyling(done);
+          },
+          { once: true },
+        );
+      });
+      suite.test("styling", "1000ms", function (done) {
+        setTimeout(function () {
+          assertStyling(done);
+        }, 1000);
+      });
+      suite.test("networking", "lazy", function (done) {
+        setTimeout(function () {
+          assertNetworking(done);
+        }, 200);
+      });
+
+      document.addEventListener(
+        "readystatechange",
+        function () {
+          setTimeout(function () {
+            document
+              .querySelector("[lazy-target]")
+              .setAttribute("lazy-target", "100ms");
+            document
+              .querySelector("[generic-lazy-target]")
+              .setAttribute("generic-lazy-target", "100ms");
+            const child1 = document.createElement("div");
+            child1.setAttribute("adjunct-target", "100ms");
+            document
+              .querySelector("#selector-adjunct>td:empty")
+              .appendChild(child1);
+            const child2 = document.createElement("div");
+            child2.setAttribute("generic-adjunct-target", "100ms");
+            document
+              .querySelector("#generic-selector-adjunct>td:empty")
+              .appendChild(child2);
+          }, 100);
+
+          // Reflect the current hostname
+          for (const element of document.querySelectorAll("code")) {
+            element.textContent = element.textContent.replace(
+              "localhost",
+              document.location.hostname,
+            );
+          }
+        },
+        { once: true },
+      );
+    </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.5.22",
+  "version": "10.5.23",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
@@ -39,19 +39,19 @@
     "license-report": "^6.8.1",
     "prettier": "^3.6.2",
     "sinon-chrome": "^3.0.1",
-    "vite": "^7.2.6",
+    "vite": "^7.2.7",
     "web-ext": "^9.2.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.41.0",
-    "@ghostery/adblocker": "^2.13.0",
-    "@ghostery/adblocker-content": "^2.12.2",
-    "@ghostery/adblocker-extended-selectors": "^2.12.2",
-    "@ghostery/adblocker-webextension": "^2.13.0",
+    "@duckduckgo/autoconsent": "^14.43.0",
+    "@ghostery/adblocker": "^2.12.5",
+    "@ghostery/adblocker-content": "^2.12.5",
+    "@ghostery/adblocker-extended-selectors": "^2.12.5",
+    "@ghostery/adblocker-webextension": "^2.12.5",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^1.6.3",
-    "@github/relative-time-element": "^4.5.1",
-    "@sentry/browser": "^10.29.0",
+    "@github/relative-time-element": "^5.0.0",
+    "@sentry/browser": "^10.30.0",
     "@whotracksme/reporting": "^7.10.0",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.13.1",
@@ -62,8 +62,8 @@
     "tldts-experimental": "^7.0.19"
   },
   "dataDependencies": {
-    "redirect-resources": "1c4e245353773758275d0b6a0ed1987aab16279b14d06780b6f2623266c0687f",
-    "wtm-bloomfilter": "2025-12-01",
+    "redirect-resources": "4b6cdba5cab43f59b50c83154a695ababed66c392eacbd7ab8175eb82a5ac9b0",
+    "wtm-bloomfilter": "2025-12-15",
     "wtm-stats": "dc44480e5f348a60ea44a4618a530b72c13afe03"
   },
   "engineStrict": true,

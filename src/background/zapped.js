@@ -77,8 +77,10 @@ if (__PLATFORM__ !== 'firefox') {
               id: 1,
               priority: PAUSED_RULE_PRIORITY,
               action: { type: 'allowAllRequests' },
-              condition: { excludedRequestDomains: excludedDomains },
-              resourceTypes: ['main_frame'],
+              condition: {
+                excludedRequestDomains: excludedDomains,
+                resourceTypes: ['main_frame'],
+              },
             },
       ],
       removeRuleIds,
