@@ -85,14 +85,14 @@ function execSyncNode(command) {
 
 export function buildForFirefox() {
   if (!existsSync(FIREFOX_PATH)) {
-    execSyncNode('npm run build -- firefox --silent --debug');
+    execSyncNode('npm run build -- firefox --silent --debug --clean');
     execSyncNode('web-ext build --overwrite-dest -n ghostery-firefox.zip');
   }
 }
 
 export function buildForChrome() {
   if (!existsSync(CHROME_PATH)) {
-    execSyncNode('npm run build -- --silent --debug');
+    execSyncNode('npm run build -- --silent --debug --clean');
     rmSync(CHROME_PATH, { recursive: true, force: true });
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
@@ -102,7 +102,12 @@ export function buildForChrome() {
 
 export const config = {
   specs: ['spec/index.spec.js'],
-  reporters: [['spec', { showPreface: false }]],
+  reporters: [
+    [
+      'spec',
+      { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS },
+    ],
+  ],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
@@ -126,6 +131,7 @@ export const config = {
     {
       browserName: 'chrome',
       browserVersion: 'stable',
+      cacheDir: '.wdio',
       'goog:chromeOptions': {
         args: (argv.debug ? [] : ['headless', 'disable-gpu']).concat([
           `--load-extension=${CHROME_PATH}`,

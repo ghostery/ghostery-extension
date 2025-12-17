@@ -18,7 +18,8 @@ import {
   setCustomFilters,
 } from '../utils.js';
 
-import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
+import { argv, PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
+import { FLAG_REDIRECT_PROTECTION } from '../../../src/utils/config-types.js';
 
 async function openRedirectSettings() {
   await browser.url('about:blank');
@@ -48,137 +49,139 @@ async function waitForNavigation() {
   );
 }
 
-describe('Redirect Protection', function () {
-  before(enableExtension);
+if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
+  describe('Redirect Protection', function () {
+    before(enableExtension);
 
-  before(async () => {
-    await setRedirectProtectionToggle(true);
-    await setCustomFilters([`||${PAGE_DOMAIN}^$document`]);
-  });
-
-  after(async () => {
-    await setPrivacyToggle('custom-filters', false);
-    await setRedirectProtectionToggle(false);
-  });
-
-  it('redirects to warning page when navigating to blocked domain', async function () {
-    await browser.url(PAGE_URL);
-
-    await expectOnWarningPage(true);
-    await expect(
-      getExtensionElement('link:redirect-protection:hostname'),
-    ).toHaveText(PAGE_DOMAIN);
-  });
-
-  it("doesn't redirect when redirect protection is disabled", async function () {
-    await setRedirectProtectionToggle(false);
-
-    await browser.url(PAGE_URL);
-    await expectOnWarningPage(false);
-
-    // Re-enable for next tests
-    await setRedirectProtectionToggle(true);
-  });
-
-  describe('Always allow from domain', function () {
     before(async () => {
+      await setRedirectProtectionToggle(true);
+      await setCustomFilters([`||${PAGE_DOMAIN}^$document`]);
+    });
+
+    after(async () => {
+      await setPrivacyToggle('custom-filters', false);
+      await setRedirectProtectionToggle(false);
+    });
+
+    it('redirects to warning page when navigating to blocked domain', async function () {
       await browser.url(PAGE_URL);
 
-      await getExtensionElement(
-        'button:redirect-protection:always-allow',
-      ).click();
-      await waitForNavigation();
-    });
-
-    it('adds domain exception when clicking "Always allow"', async function () {
-      await openRedirectSettings();
-
-      await expect(
-        getExtensionElement(
-          `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-        ),
-      ).toBeDisplayed();
-    });
-
-    it('navigates directly after domain is added to exceptions', async function () {
-      await browser.url('about:blank');
-      await browser.url(PAGE_URL);
-
-      await expectOnWarningPage(false);
-    });
-
-    it('shows domain in redirect exceptions list', async function () {
-      await openRedirectSettings();
-
-      await expect(
-        getExtensionElement(
-          `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-        ),
-      ).toBeDisplayed();
-    });
-
-    it('removes domain exception', async function () {
-      await openRedirectSettings();
-
-      await getExtensionElement(
-        `button:redirect-protection:remove:${PAGE_DOMAIN}`,
-      ).click();
-
-      await expect(
-        getExtensionElement('component:redirect-protection:empty-state'),
-      ).toBeDisplayed();
-    });
-  });
-
-  describe('Settings page exceptions management', function () {
-    it('adds exception via settings page', async function () {
-      await browser.url(PAGE_URL);
       await expectOnWarningPage(true);
-
-      await openRedirectSettings();
-      await getExtensionElement('button:redirect-protection:add').click();
-      await getExtensionElement('input:redirect-protection:hostname').setValue(
-        PAGE_DOMAIN,
-      );
-      await getExtensionElement('button:redirect-protection:save').click();
-
       await expect(
-        getExtensionElement(
-          `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-        ),
-      ).toBeDisplayed();
+        getExtensionElement('link:redirect-protection:hostname'),
+      ).toHaveText(PAGE_DOMAIN);
     });
 
-    it('navigates directly when exception is added', async function () {
+    it("doesn't redirect when redirect protection is disabled", async function () {
+      await setRedirectProtectionToggle(false);
+
       await browser.url(PAGE_URL);
       await expectOnWarningPage(false);
+
+      // Re-enable for next tests
+      await setRedirectProtectionToggle(true);
     });
 
-    it('removes exception via settings page', async function () {
-      await openRedirectSettings();
-      await getExtensionElement(
-        `button:redirect-protection:remove:${PAGE_DOMAIN}`,
-      ).click();
+    describe('Always allow from domain', function () {
+      before(async () => {
+        await browser.url(PAGE_URL);
 
-      await expect(
-        getExtensionElement('component:redirect-protection:empty-state'),
-      ).toBeDisplayed();
+        await getExtensionElement(
+          'button:redirect-protection:always-allow',
+        ).click();
+        await waitForNavigation();
+      });
+
+      it('adds domain exception when clicking "Always allow"', async function () {
+        await openRedirectSettings();
+
+        await expect(
+          getExtensionElement(
+            `item:redirect-protection:exception:${PAGE_DOMAIN}`,
+          ),
+        ).toBeDisplayed();
+      });
+
+      it('navigates directly after domain is added to exceptions', async function () {
+        await browser.url('about:blank');
+        await browser.url(PAGE_URL);
+
+        await expectOnWarningPage(false);
+      });
+
+      it('shows domain in redirect exceptions list', async function () {
+        await openRedirectSettings();
+
+        await expect(
+          getExtensionElement(
+            `item:redirect-protection:exception:${PAGE_DOMAIN}`,
+          ),
+        ).toBeDisplayed();
+      });
+
+      it('removes domain exception', async function () {
+        await openRedirectSettings();
+
+        await getExtensionElement(
+          `button:redirect-protection:remove:${PAGE_DOMAIN}`,
+        ).click();
+
+        await expect(
+          getExtensionElement('component:redirect-protection:empty-state'),
+        ).toBeDisplayed();
+      });
     });
 
-    it('redirects again after exception is removed', async function () {
-      await browser.url(PAGE_URL);
-      await expectOnWarningPage(true);
+    describe('Settings page exceptions management', function () {
+      it('adds exception via settings page', async function () {
+        await browser.url(PAGE_URL);
+        await expectOnWarningPage(true);
+
+        await openRedirectSettings();
+        await getExtensionElement('button:redirect-protection:add').click();
+        await getExtensionElement(
+          'input:redirect-protection:hostname',
+        ).setValue(PAGE_DOMAIN);
+        await getExtensionElement('button:redirect-protection:save').click();
+
+        await expect(
+          getExtensionElement(
+            `item:redirect-protection:exception:${PAGE_DOMAIN}`,
+          ),
+        ).toBeDisplayed();
+      });
+
+      it('navigates directly when exception is added', async function () {
+        await browser.url(PAGE_URL);
+        await expectOnWarningPage(false);
+      });
+
+      it('removes exception via settings page', async function () {
+        await openRedirectSettings();
+        await getExtensionElement(
+          `button:redirect-protection:remove:${PAGE_DOMAIN}`,
+        ).click();
+
+        await expect(
+          getExtensionElement('component:redirect-protection:empty-state'),
+        ).toBeDisplayed();
+      });
+
+      it('redirects again after exception is removed', async function () {
+        await browser.url(PAGE_URL);
+        await expectOnWarningPage(true);
+      });
+    });
+
+    describe('Allow button', function () {
+      it('allows navigation when clicking Allow button', async function () {
+        await browser.url(PAGE_URL);
+
+        await getExtensionElement('button:redirect-protection:allow').click();
+
+        await waitForNavigation();
+        expect(await browser.getUrl()).toBe(PAGE_URL);
+      });
     });
   });
-
-  describe('Allow button', function () {
-    it('allows navigation when clicking Allow button', async function () {
-      await browser.url(PAGE_URL);
-
-      await getExtensionElement('button:redirect-protection:allow').click();
-
-      await waitForNavigation();
-      expect(await browser.getUrl()).toBe(PAGE_URL);
-    });
-  });
-});
+}

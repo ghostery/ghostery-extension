@@ -37,3 +37,6 @@ web-ext-artifacts/
 *.xcuserstate
 xcuserdata
 *.xcloc
+
+# WDIO
+.wdio
