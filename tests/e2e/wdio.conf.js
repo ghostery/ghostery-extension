@@ -34,6 +34,7 @@ import {
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_MODES,
+  FLAG_REDIRECT_PROTECTION,
 } from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -70,6 +71,7 @@ export const argv = process.argv.slice(2).reduce(
       FLAG_INJECTION_TARGET_DOCUMENT_ID,
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
       FLAG_MODES,
+      FLAG_REDIRECT_PROTECTION,
     ],
   },
 );

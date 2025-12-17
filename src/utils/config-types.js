@@ -23,3 +23,4 @@ export const FLAG_EXTENDED_SELECTORS = 'extended-selectors';
 export const FLAG_INJECTION_TARGET_DOCUMENT_ID = 'injection-target-document-id';
 export const FLAG_DYNAMIC_DNR_FIXES = 'dynamic-dnr-fixes';
 export const FLAG_MODES = 'modes';
+export const FLAG_REDIRECT_PROTECTION = 'redirect-protection';

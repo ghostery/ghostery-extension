@@ -72,7 +72,7 @@ const Options = {
 
   // Redirect protection
   redirectProtection: {
-    enabled: true,
+    enabled: false,
     disabled: store.record(true),
   },
 

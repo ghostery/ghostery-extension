@@ -26,11 +26,23 @@ import {
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_DYNAMIC_DNR_FIXES,
   FLAG_MODES,
+  FLAG_REDIRECT_PROTECTION,
 } from '/utils/config-types.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
 const VERSION = chrome.runtime.getManifest().version;
+
+const FLAGS = [
+  FLAG_PAUSE_ASSISTANT,
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_EXTENDED_SELECTORS,
+  FLAG_INJECTION_TARGET_DOCUMENT_ID,
+  FLAG_DYNAMIC_DNR_FIXES,
+  FLAG_MODES,
+  FLAG_REDIRECT_PROTECTION,
+];
 
 export async function asyncAction(event, promise) {
   const button = event.currentTarget;
@@ -89,32 +101,10 @@ async function testConfigDomain() {
   });
 }
 
-async function testConfigFlag(host) {
-  const flags = window.prompt(
-    'Enter flags to test:',
-    [
-      FLAG_PAUSE_ASSISTANT,
-      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-      FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-      FLAG_EXTENDED_SELECTORS,
-      FLAG_INJECTION_TARGET_DOCUMENT_ID,
-      FLAG_DYNAMIC_DNR_FIXES,
-      FLAG_MODES,
-    ].join(', '),
-  );
-
-  await setConfig({
-    flags: flags
-      .split(',')
-      .map((f) => f.trim())
-      .filter(Boolean)
-      .reduce(
-        (acc, f) => ((acc[f] = { enabled: true }), acc),
-        Object.fromEntries(
-          Object.keys(host.config.flags).map((k) => [k, { enabled: false }]),
-        ),
-      ),
-  });
+function toggleFlag(name) {
+  return async (host, event) => {
+    await setConfig({ flags: { [name]: { enabled: event.target.checked } } });
+  };
 }
 
 function createClearConfigDomain(name) {
@@ -173,20 +163,55 @@ export default {
           <ui-text type="headline-s">Developer tools</ui-text>
           ${store.ready(config) &&
           html`
-            <div layout="column gap" translate="no">
-              <ui-toggle
-                value="${config.enabled}"
-                onchange="${html.set(config, 'enabled')}"
-              >
-                <div layout="column">
-                  <ui-text type="headline-s">Remote Configuration</ui-text>
-                  <ui-text type="body-xs" color="tertiary">
-                    Updated at:
-                    ${longDateFormatter.format(new Date(config.updatedAt))}
-                  </ui-text>
+            <div layout="column gap:2" translate="no">
+              <div layout="column gap">
+                <ui-toggle
+                  value="${config.enabled}"
+                  onchange="${html.set(config, 'enabled')}"
+                >
+                  <div layout="column">
+                    <ui-text type="headline-s">Remote Configuration</ui-text>
+                    <ui-text type="body-xs" color="tertiary">
+                      Updated at:
+                      ${longDateFormatter.format(new Date(config.updatedAt))}
+                    </ui-text>
+                  </div>
+                </ui-toggle>
+                <div layout="row">
+                  <ui-button
+                    onclick="${forceConfigSync}"
+                    layout="shrink:0 self:start"
+                    size="s"
+                  >
+                    <button>
+                      <ui-icon name="refresh" layout="size:2"></ui-icon>
+                      Force sync
+                    </button>
+                  </ui-button>
                 </div>
-              </ui-toggle>
-              <div>
+              </div>
+              <div layout="column gap">
+                <ui-text type="label-m">Flags</ui-text>
+                <div layout="row:wrap gap:2:1">
+                  ${FLAGS.map(
+                    (name) => html`
+                      <label layout="row items:center gap">
+                        <ui-input>
+                          <input
+                            type="checkbox"
+                            checked="${config.hasFlag(name)}"
+                            onchange="${toggleFlag(name)}"
+                          />
+                        </ui-input>
+                        <ui-text type="body-xs" color="tertiary">
+                          ${name}
+                        </ui-text>
+                      </label>
+                    `,
+                  )}
+                </div>
+              </div>
+              <div layout="column gap">
                 <ui-text type="label-m">Domains</ui-text>
                 <div layout="row:wrap gap">
                   ${Object.entries(config.domains)
@@ -202,37 +227,12 @@ export default {
                         </ui-text>`,
                     ) || 'none'}
                 </div>
-              </div>
-              <div>
-                <ui-text type="label-m">Flags</ui-text>
-                <ui-text color="secondary">
-                  ${Object.entries(config.flags)
-                    .filter(([, f]) => f.enabled)
-                    .map(([name]) => name)
-                    .join(' ') || 'none'}
-                </ui-text>
-              </div>
-              <div layout="row gap">
                 <ui-button
                   layout="shrink:0 self:start"
                   onclick="${testConfigDomain}"
+                  size="s"
                 >
-                  <button>Test domain</button>
-                </ui-button>
-                <ui-button
-                  layout="shrink:0 self:start"
-                  onclick="${testConfigFlag}"
-                >
-                  <button>Test flags</button>
-                </ui-button>
-                <ui-button
-                  onclick="${forceConfigSync}"
-                  layout="shrink:0 self:start"
-                >
-                  <button>
-                    <ui-icon name="refresh" layout="size:2"></ui-icon>
-                    Force sync
-                  </button>
+                  <button>Add domain</button>
                 </ui-button>
               </div>
             </div>
@@ -260,7 +260,7 @@ export default {
                     ),
                 )}
               </div>
-              <ui-button onclick="${refresh}" layout="shrink:0">
+              <ui-button onclick="${refresh}" layout="shrink:0" size="s">
                 <button>Refresh</button>
               </ui-button>
             </div>
@@ -284,7 +284,7 @@ export default {
           <div layout="column gap">
             <ui-text type="headline-s">Actions</ui-text>
             <div layout="row gap items:start">
-              <ui-button onclick="${clearStorage}" layout="shrink:0">
+              <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
                 <button>
                   <ui-icon name="trash" layout="size:2"></ui-icon>
                   Clear storage
