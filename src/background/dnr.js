@@ -19,11 +19,12 @@ import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
 import {
   FIXES_ID_RANGE,
   getDynamicRulesIds,
-  applyRedirectProtection,
   filterMaxPriorityRules,
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
+
+import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
@@ -108,8 +109,8 @@ if (__PLATFORM__ !== 'firefox') {
 
             if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
               const rules = new Set(
-                filterMaxPriorityRules(
-                  await fetch(list.dnr.url).then((res) =>
+                await fetch(list.dnr.url)
+                  .then((res) =>
                     res.ok
                       ? res.json()
                       : Promise.reject(
@@ -117,8 +118,8 @@ if (__PLATFORM__ !== 'firefox') {
                             `Failed to fetch DNR rules: ${res.statusText}`,
                           ),
                         ),
-                  ),
-                ),
+                  )
+                  .then(filterMaxPriorityRules),
               );
 
               for (const rule of rules) {
@@ -136,9 +137,7 @@ if (__PLATFORM__ !== 'firefox') {
 
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: applyRedirectProtection(Array.from(rules), {
-                  enabled: options.redirectProtection.enabled,
-                }).map((rule, index) => ({
+                addRules: Array.from(rules).map((rule, index) => ({
                   ...rule,
                   id: FIXES_ID_RANGE.start + index,
                 })),
@@ -151,6 +150,9 @@ if (__PLATFORM__ !== 'firefox') {
               await store.set(Resources, {
                 checksums: { [DNR_FIXES_KEY]: list.dnr.checksum },
               });
+
+              // Reload redirect protection rules to include fixes changes
+              await updateRedirectProtectionRules(options);
             }
           } catch (e) {
             console.error('[dnr] Error while updating dynamic fixes rules:', e);

@@ -11,7 +11,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { RESOURCES_PATH } from './utils/urls.js';
-import { applyRedirectProtection } from '../src/utils/dnr.js';
+import { getRedirectProtectionRules } from '../src/utils/dnr.js';
 
 if (!existsSync(RESOURCES_PATH)) {
   console.error(`Error: Resources directory not found at ${RESOURCES_PATH}`);
@@ -25,7 +25,7 @@ if (existsSync(outputPath)) {
   process.exit(0);
 }
 
-console.log('[redirect-protection] Building redirect protection rules...\n');
+console.log('Building redirect protection rules...');
 
 // Only use ads and tracking rulesets as the base for redirect protection
 const TARGET_RULESETS = ['dnr-ads.json', 'dnr-tracking.json'];
@@ -41,51 +41,23 @@ if (files.length === 0) {
   process.exit(1);
 }
 
-console.log(`Using ${files.length} DNR ruleset files for redirect protection:`);
-files.forEach((f) => console.log(`  - ${f}`));
-console.log('');
-
-const allBlockingRules = [];
-let totalRulesProcessed = 0;
-let totalBlockingRules = 0;
+let redirectRules = [];
 
 for (const file of files) {
   const filePath = `${RESOURCES_PATH}/${file}`;
   const content = readFileSync(filePath, 'utf-8');
   const rules = JSON.parse(content);
 
-  totalRulesProcessed += rules.length;
-
-  const blockingRules = rules.filter((rule) => rule.action?.type === 'block');
-  totalBlockingRules += blockingRules.length;
-
-  console.log(
-    `Processed ${file}: ${rules.length} total rules, ${blockingRules.length} blocking rules`,
-  );
-
-  allBlockingRules.push(...blockingRules);
+  redirectRules = redirectRules.concat(getRedirectProtectionRules(rules));
 }
 
-console.log(`\nSummary:`);
-console.log(`  Total rules processed: ${totalRulesProcessed}`);
-console.log(`  Total blocking rules: ${totalBlockingRules}`);
+writeFileSync(
+  outputPath,
+  JSON.stringify(
+    redirectRules.map((rule, index) => ({ ...rule, id: index + 1 })),
+    null,
+    2,
+  ),
+);
 
-const redirectRulesWithoutIds = applyRedirectProtection(allBlockingRules, {
-  enabled: true,
-  priority: 100,
-}).filter((rule) => rule.action.type === 'redirect');
-
-const redirectRules = redirectRulesWithoutIds.map((rule, index) => ({
-  ...rule,
-  id: index + 1,
-}));
-
-console.log(`\nGenerated ${redirectRules.length} redirect rules`);
-
-writeFileSync(outputPath, JSON.stringify(redirectRules, null, 2));
-
-const fileSize = (readFileSync(outputPath).length / 1024).toFixed(2);
-console.log(`\nSaved redirect protection rules to ${outputPath}`);
-console.log(`File size: ${fileSize} KB`);
-
-console.log('\n✅ Redirect protection rules built successfully!');
+console.log(`Generated ${redirectRules.length} redirect rules`);

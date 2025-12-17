@@ -17,6 +17,7 @@ import {
   CosmeticFilter,
 } from '@ghostery/adblocker';
 
+import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -25,11 +26,7 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker.js';
-import {
-  CUSTOM_FILTERS_ID_RANGE,
-  getDynamicRulesIds,
-  applyRedirectProtection,
-} from '/utils/dnr.js';
+import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 class TrustedScriptletError extends Error {}
 
@@ -118,7 +115,7 @@ async function updateDNRRules(dnrRules) {
   if (dnrRules.length) {
     dnrRules = dnrRules.map((rule, index) => ({
       ...rule,
-      id: 1000000 + index,
+      id: CUSTOM_FILTERS_ID_RANGE.start + index,
     }));
 
     await chrome.declarativeNetRequest.updateDynamicRules({
@@ -173,7 +170,7 @@ export async function updateCustomFilters(input, options) {
 
   // Update DNR rules for Chromium and Safari
   if (__PLATFORM__ !== 'firefox') {
-    let { rules, errors } = await convert(
+    const { rules, errors } = await convert(
       [...networkFilters].map((f) => f.toString()),
     );
 
@@ -181,12 +178,12 @@ export async function updateCustomFilters(input, options) {
       result.errors.push(...errors);
     }
 
-    const { redirectProtection } = await store.resolve(Options);
-    rules = applyRedirectProtection(rules, {
-      enabled: redirectProtection.enabled,
-    });
-
     result.dnrRules = await updateDNRRules(rules);
+  }
+
+  // Reload redirect protection rules to include custom filters changes
+  if (__PLATFORM__ !== 'firefox') {
+    await updateRedirectProtectionRules(await store.resolve(Options));
   }
 
   return result;

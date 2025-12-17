@@ -10,26 +10,97 @@
  */
 
 import {
-  REDIRECT_PROTECTION_SESSION_ID_RANGE,
-  REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+  EXCEPTIONS_RULE_PRIORITY,
   REDIRECT_PROTECTION_ID_RANGE,
-  getDynamicRules,
+  REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
   getDynamicRulesIds,
-  createRedirectProtectionExceptionRules,
   CUSTOM_FILTERS_ID_RANGE,
-  applyRedirectProtection,
+  getRedirectProtectionRules,
+  FIXES_ID_RANGE,
+  MAX_RULE_PRIORITY,
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+
+const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL(
+  'pages/redirect-protection/index.html',
+);
+
+export async function updateRedirectProtectionRules(options) {
+  if (options.redirectProtection.enabled) {
+    const rules = (await chrome.declarativeNetRequest.getDynamicRules()).filter(
+      (rule) =>
+        (rule.id >= CUSTOM_FILTERS_ID_RANGE.start &&
+          rule.id < CUSTOM_FILTERS_ID_RANGE.end) ||
+        (rule.id >= FIXES_ID_RANGE.start && rule.id < FIXES_ID_RANGE.end),
+    );
+
+    const addRules = getRedirectProtectionRules(rules).map((rule, index) => ({
+      ...rule,
+      id: REDIRECT_PROTECTION_ID_RANGE.start + index,
+    }));
+
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: await getDynamicRulesIds(REDIRECT_PROTECTION_ID_RANGE),
+      addRules,
+    });
+
+    console.info(
+      `[redirect-protection] Updated redirect protection rules for custom filters and fixes: ${addRules.length}/${rules.length}`,
+    );
+  }
+}
+
+async function updateRedirectProtectionExceptions(options) {
+  if (options.redirectProtection.enabled) {
+    const disabledDomains = Object.keys(options.redirectProtection.disabled);
+
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: await getDynamicRulesIds(
+        REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
+      ),
+      addRules: disabledDomains.map((hostname, index) => ({
+        id: REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE.start + index,
+        priority: EXCEPTIONS_RULE_PRIORITY,
+        action: { type: 'allow' },
+        condition: {
+          urlFilter: `||${hostname}^`,
+          resourceTypes: ['main_frame'],
+        },
+      })),
+    });
+
+    console.info(
+      '[redirect-protection] Updated exception rules for disabled domains',
+    );
+  } else {
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: await getDynamicRulesIds(
+        REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
+      ),
+      addRules: [
+        {
+          id: REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE.start,
+          priority: MAX_RULE_PRIORITY,
+          action: { type: 'allow' },
+          condition: {
+            urlFilter: '*',
+            resourceTypes: ['main_frame'],
+          },
+        },
+      ],
+    });
+
+    console.info(
+      '[redirect-protection] Removed all exception rules as protection was disabled',
+    );
+  }
+}
 
 const redirectUrlMap = new AutoSyncingMap({
   storageKey: 'redirectUrls:v1',
   ttlInMs: 5 * 60 * 1000,
 });
-
-const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL(
-  'pages/redirect-protection/index.html',
-);
 
 const allowedRedirectUrls = new Set();
 
@@ -72,106 +143,36 @@ if (__PLATFORM__ !== 'firefox') {
 
   chrome.tabs.onRemoved.addListener((tabId) => {
     redirectUrlMap.delete(tabId);
-
-    chrome.declarativeNetRequest
-      .updateSessionRules({
-        removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
-      })
-      .catch(() => {});
   });
 
   OptionsObserver.addListener(
     'redirectProtection',
     async function redirectProtectionExceptions(
       redirectProtection,
-      lastRedredirectProtection,
+      lastRedirectProtection,
     ) {
-      if (!lastRedredirectProtection) {
-        return;
-      }
+      if (!lastRedirectProtection) return;
 
-      // Apply redirect rules for custom filters if the main setting changes
-      if (redirectProtection.enabled !== lastRedredirectProtection.enabled) {
-        try {
-          let customRules = await getDynamicRules(CUSTOM_FILTERS_ID_RANGE);
-          const customRulesIds = customRules.map((rule) => rule.id);
+      // Update exceptions on any change (enabled/disabled or domains)
+      await updateRedirectProtectionExceptions({ redirectProtection });
 
-          if (customRules.length) {
-            // Enabling redirect protection: apply protection to existing custom rules
-            if (redirectProtection.enabled) {
-              customRules = applyRedirectProtection(customRules, {
-                enabled: true,
-              });
-            } else {
-              // Disabling redirect protection: revert redirect rules to block rules
-              customRules.forEach((rule) => {
-                if (
-                  rule.action?.type === 'redirect' &&
-                  rule.condition?.resourceTypes?.length === 1 &&
-                  rule.condition.resourceTypes[0] === 'main_frame'
-                ) {
-                  rule.action = { type: 'block' };
-                }
-              });
-            }
+      // If redirect protection was disabled, remove all rules
+      if (!redirectProtection.enabled) {
+        // Remove all redirect protection rules
+        const ruleIds = await getDynamicRulesIds(REDIRECT_PROTECTION_ID_RANGE);
 
-            await chrome.declarativeNetRequest.updateDynamicRules({
-              removeRuleIds: customRulesIds,
-              addRules: customRules,
-            });
-
-            console.log(
-              `[redirect-protection] Updated redirect protection for custom filters rules`,
-            );
-          }
-        } catch (e) {
-          console.error(
-            '[redirect-protection] Error updating custom filters rules:',
-            e,
-          );
-        }
-      }
-
-      if (redirectProtection.enabled) {
-        const disabledDomains = Object.keys(redirectProtection.disabled);
-
-        try {
-          const removeRuleIds = await getDynamicRulesIds(
-            REDIRECT_PROTECTION_ID_RANGE,
-          );
-
-          const addRules = createRedirectProtectionExceptionRules(
-            disabledDomains,
-            REDIRECT_PROTECTION_ID_RANGE.start,
-          );
-
+        if (ruleIds.length) {
           await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds,
-            addRules,
+            removeRuleIds: ruleIds,
           });
 
-          console.log(
-            '[redirect-protection] Updated exception rules for disabled domains',
-          );
-        } catch (e) {
-          console.error(
-            '[redirect-protection] Error updating exception rules:',
-            e,
+          console.info(
+            `[redirect-protection] Removed all redirect protection rules: ${ruleIds.length}`,
           );
         }
-      } else if (lastRedredirectProtection.enabled) {
-        const removeRuleIds = await getDynamicRulesIds(
-          REDIRECT_PROTECTION_ID_RANGE,
-        );
-        if (removeRuleIds.length) {
-          await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds,
-          });
-
-          console.log(
-            '[redirect-protection] Removed all exception rules as protection was disabled',
-          );
-        }
+      } else if (!lastRedirectProtection.enabled) {
+        // Reload redirect protection rules, as it was just enabled
+        await updateRedirectProtectionRules({ redirectProtection });
       }
     },
   );
@@ -212,12 +213,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       try {
         const urlObj = new URL(url);
         const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
+        const id = tabId + 1; // tabId can start here from 0, but DNR rule IDs must be > 0
 
         await chrome.declarativeNetRequest.updateSessionRules({
           addRules: [
             {
-              id: REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId,
-              priority: REDIRECT_PROTECTION_EXCEPTION_PRIORITY,
+              id,
+              priority: EXCEPTIONS_RULE_PRIORITY,
               action: { type: 'allow' },
               condition: {
                 urlFilter: urlPattern,
@@ -226,7 +228,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
               },
             },
           ],
-          removeRuleIds: [REDIRECT_PROTECTION_SESSION_ID_RANGE.start + tabId],
+          removeRuleIds: [id],
         });
 
         redirectUrlMap.delete(tabId);

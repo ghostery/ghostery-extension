@@ -55,17 +55,17 @@ for (const [name, target] of Object.entries(RULESETS)) {
   /* DNR rules */
 
   if (list.dnr) {
-    let dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
-      if (!res.ok) {
-        throw new Error(
-          `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
-        );
-      }
+    const dnr = await fetch(list.dnr.url || list.dnr.network)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(
+            `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
+          );
+        }
 
-      return res.json();
-    });
-
-    dnr = filterMaxPriorityRules(dnr);
+        return res.json();
+      })
+      .then(filterMaxPriorityRules);
 
     writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
     process.stdout.write(' done\n');
