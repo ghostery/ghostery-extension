@@ -17,9 +17,7 @@ import RedirectProtectionAddException from './redirect-protection-add-exception.
 function removeException(hostname) {
   return ({ options }) => {
     store.set(options, {
-      redirectProtection: {
-        disabled: { [hostname]: null },
-      },
+      redirectProtection: { exceptions: { [hostname]: null } },
     });
   };
 }
@@ -29,7 +27,8 @@ export default {
     stack: [RedirectProtectionAddException],
   },
   options: store(Options),
-  hostnames: ({ options }) => Object.keys(options.redirectProtection.disabled),
+  hostnames: ({ options }) =>
+    Object.keys(options.redirectProtection.exceptions),
   render: ({ options, hostnames }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">

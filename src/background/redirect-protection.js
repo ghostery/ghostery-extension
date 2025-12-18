@@ -54,13 +54,13 @@ export async function updateRedirectProtectionRules(options) {
 
 async function updateRedirectProtectionExceptions(options) {
   if (options.redirectProtection.enabled) {
-    const disabledDomains = Object.keys(options.redirectProtection.disabled);
+    const hostnames = Object.keys(options.redirectProtection.exceptions);
 
     await chrome.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: await getDynamicRulesIds(
         REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
       ),
-      addRules: disabledDomains.map((hostname, index) => ({
+      addRules: hostnames.map((hostname, index) => ({
         id: REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE.start + index,
         priority: EXCEPTIONS_RULE_PRIORITY,
         action: { type: 'allow' },
@@ -116,7 +116,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
   }
 
   if (
-    Object.keys(options.redirectProtection.disabled).some((domain) =>
+    Object.keys(options.redirectProtection.exceptions).some((domain) =>
       hostname.endsWith(domain),
     )
   ) {

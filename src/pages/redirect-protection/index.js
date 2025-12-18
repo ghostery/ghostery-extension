@@ -32,7 +32,7 @@ async function proceed(host) {
 
   if (exception) {
     await store.set(Options, {
-      redirectProtection: { disabled: { [target.hostname]: true } },
+      redirectProtection: { exceptions: { [target.hostname]: true } },
     });
     // Wait for the background to process the change
     await chrome.runtime.sendMessage({ action: 'idle' });

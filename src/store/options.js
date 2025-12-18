@@ -73,7 +73,7 @@ const Options = {
   // Redirect protection
   redirectProtection: {
     enabled: false,
-    disabled: store.record(true),
+    exceptions: store.record(true),
   },
 
   // WhoTracks.Me
