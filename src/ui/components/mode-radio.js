@@ -79,7 +79,7 @@ export default {
         }
       }
 
-      ::slotted(img) {
+      ::slotted(ui-lottie) {
         max-width: 100%;
         height: auto;
         border-radius: 8px;

@@ -11,8 +11,8 @@
 
 import { html, router, store } from 'hybrids';
 
-import modeGhosteryScreenshotUrl from '/ui/assets/mode-ghostery.svg';
-import modeZapScreenshotUrl from '/ui/assets/mode-zap.svg';
+import modeGhosteryScreenshotUrl from '/ui/assets/lottie-mode-default.json?url';
+import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
 
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
@@ -41,7 +41,10 @@ export default {
           </ui-text>
         </section>
         <div layout="column gap" layout@768px="grid:2">
-          <ui-filtering-mode checked="${options.mode === MODE_DEFAULT}">
+          <ui-mode-radio
+            checked="${options.mode === MODE_DEFAULT}"
+            id="mode-option-default"
+          >
             <input
               type="radio"
               name="filtering-mode"
@@ -49,12 +52,12 @@ export default {
               checked="${options.mode === MODE_DEFAULT}"
               onchange="${html.set(options, 'mode')}"
             />
-            <img
+            <ui-lottie
               src="${modeGhosteryScreenshotUrl}"
-              alt="Ghostery Mode"
               layout="ratio:83/45 width:220px"
               layout@768px="width:100%"
-            />
+              play-on-hover="mode-option-default"
+            ></ui-lottie>
             <ui-icon
               name="logo-in-box"
               layout="width:83px"
@@ -67,7 +70,7 @@ export default {
             <ui-text type="label-s" slot="footer">
               Best for full coverage and privacy enthusiasts.
             </ui-text>
-          </ui-filtering-mode>
+          </ui-mode-radio>
           <ui-text
             type="display-2xs"
             uppercase
@@ -77,7 +80,10 @@ export default {
             <!-- Ghostery mode "or" ZAP mode -->
             or
           </ui-text>
-          <ui-filtering-mode checked="${options.mode === MODE_ZAP}">
+          <ui-mode-radio
+            checked="${options.mode === MODE_ZAP}"
+            id="mode-option-zap"
+          >
             <input
               type="radio"
               name="filtering-mode"
@@ -85,12 +91,12 @@ export default {
               checked="${options.mode === MODE_ZAP}"
               onchange="${html.set(options, 'mode')}"
             />
-            <img
+            <ui-lottie
               src="${modeZapScreenshotUrl}"
-              alt="ZAP Mode"
               layout="ratio:83/45 width:220px"
               layout@768px="width:100%"
-            />
+              play-on-hover="mode-option-zap"
+            ></ui-lottie>
             <ui-icon
               name="logo-zap"
               layout="width:83px"
@@ -103,7 +109,7 @@ export default {
             <ui-text type="label-s" slot="footer">
               Best for beginners or sharing with family.
             </ui-text>
-          </ui-filtering-mode>
+          </ui-mode-radio>
         </div>
         <div layout="column gap:2">
           <ui-button
