@@ -15,6 +15,7 @@ import '/ui/index.js';
 
 import Options from '/store/options.js';
 import Target from './store/target.js';
+import { WTM_PAGE_URL } from '/utils/urls.js';
 
 function goBack() {
   if (window.history.length > 1) {
@@ -26,103 +27,150 @@ function goBack() {
   }
 }
 
-async function allow({ target }) {
-  try {
-    const response = await chrome.runtime.sendMessage({
-      action: 'allowRedirect',
-      url: target.url,
+async function proceed(host) {
+  const { exception, target } = host;
+
+  if (exception) {
+    await store.set(Options, {
+      redirectProtection: { disabled: { [target.hostname]: true } },
     });
+    // Wait for the background to process the change
+    await chrome.runtime.sendMessage({ action: 'idle' });
 
-    if (response?.success) {
-      location.replace(target.url);
+    location.replace(target.url);
+  } else {
+    try {
+      const response = await chrome.runtime.sendMessage({
+        action: 'allowRedirect',
+        url: target.url,
+      });
+
+      if (response?.success) {
+        location.replace(target.url);
+      }
+    } catch (error) {
+      console.error('[redirect-protection] Failed to allow redirect:', error);
     }
-  } catch (error) {
-    console.error('[redirect-protection] Failed to allow redirect:', error);
   }
-}
-
-async function alwaysAllow({ target }) {
-  await store.set(Options, {
-    redirectProtection: { disabled: { [target.hostname]: true } },
-  });
-  // Wait for the background to process the change
-  await chrome.runtime.sendMessage({ action: 'idle' });
-
-  location.replace(target.url);
 }
 
 const RedirectProtection = {
   target: store(Target),
-  render: ({ target }) => html`
+  exception: false,
+  render: ({ target, exception }) => html`
     <template layout="grid height::100%">
       <ui-page-layout>
-        <ui-card
-          layout="block:center column gap width:::640px"
-          layout@768px="padding:5"
-        >
-          <ui-text type="display-s" layout="margin:bottom:2">
-            Tracking Redirect Alert
-          </ui-text>
-
-          <ui-text>
-            This page was prevented from loading because it's a known tracking
-            URL
-          </ui-text>
-
-          ${
-            store.ready(target) &&
-            target.url &&
+        ${store.ready(target) &&
+        html`
+          <ui-card
+            layout="block:center column gap width:::640px"
+            layout@768px="padding:5"
+          >
+            ${target.tracker &&
             html`
-              ${target.hostname &&
-              html`
-                <ui-text layout="margin:bottom">
-                  <a
-                    class="link"
-                    href="${target.url}"
-                    data-qa="link:redirect-protection:hostname"
-                  >
-                    ${target.hostname}
-                  </a>
-                </ui-text>
-              `}
-
-              <ui-text layout="margin:bottom:2">
-                To visit this page anyway, you need to allow it.
+              <ui-text type="display-s" layout="margin:bottom:2">
+                Redirect Alert
               </ui-text>
 
-              <div layout="column self:center gap:1">
-                <ui-button
-                  type="primary"
-                  onclick="${allow}"
-                  data-qa="button:redirect-protection:allow"
-                >
-                  <button>Allow</button>
-                </ui-button>
+              <ui-text>
+                This page was prevented from loading due to a known tracking
+                redirect to:
+              </ui-text>
 
-                <div layout="row:wrap gap:1">
-                  <ui-button
-                    onclick="${goBack}"
-                    data-qa="button:redirect-protection:back"
-                    layout="grow"
+              <div layout="row center gap:0.5 margin:1:0">
+                <ui-text
+                  layout="width:::50"
+                  type="label-m"
+                  color="brand-primary"
+                  ellipsis
+                  data-qa="text:redirect-protection:url"
+                >
+                  ${target.url}
+                </ui-text>
+
+                <ui-tooltip autohide="5" delay="0">
+                  <div slot="content" layout="block:left padding:1:0.5">
+                    <ui-text type="label-s">
+                      Learn more about ${target.tracker.name} on WhoTracks.Me
+                    </ui-text>
+                  </div>
+                  <a
+                    href="${WTM_PAGE_URL}/trackers/${target.tracker.id}"
+                    target="_blank"
                   >
-                    <button>Back</button>
-                  </ui-button>
-                  ${target.hostname &&
-                  html`
-                    <ui-button
-                      onclick="${alwaysAllow}"
-                      data-qa="button:redirect-protection:always-allow"
-                      layout="grow"
-                    >
-                      <button>Always allow from this domain</button>
-                    </ui-button>
-                  `}
-                </div>
+                    <ui-icon name="info" color="brand-primary"></ui-icon>
+                  </a>
+                </ui-tooltip>
               </div>
-            `
-          }
-          </div>
-        </ui-card>
+
+              <ui-text>
+                To visit the intended page, you need to allow this redirect.
+              </ui-text>
+            `}
+            ${!target.tracker &&
+            html`
+              <ui-text type="display-s" layout="margin:bottom:2">
+                Security Alert
+              </ui-text>
+
+              <ui-text>
+                This page was prevented from loading because it may be
+                malicious. The redirect destination is unknown and could pose a
+                security or privacy risk:
+              </ui-text>
+
+              <ui-text
+                layout="self:center margin:1:0 width:::50"
+                type="label-m"
+                color="brand-primary"
+                ellipsis
+                data-qa="text:redirect-protection:url"
+              >
+                ${target.url}
+              </ui-text>
+
+              <ui-text>
+                For your safety, Ghostery blocked this page automatically.
+              </ui-text>
+            `}
+
+            <div layout="column gap:2 margin:top:3">
+              <label layout="block:left self:center row gap">
+                <ui-input>
+                  <input
+                    type="checkbox"
+                    checked="${exception}"
+                    onchange="${html.set('exception')}"
+                    data-qa="checkbox:redirect-protection:exception"
+                  />
+                </ui-input>
+                <ui-text type="body-s" color="tertiary">
+                  I understand the risk, don't warn me again about this site
+                </ui-text>
+              </label>
+              <div layout="row:wrap gap:2 center">
+                <ui-button
+                  layout="width::16"
+                  onclick="${goBack}"
+                  data-qa="button:redirect-protection:back"
+                >
+                  <button>Back</button>
+                </ui-button>
+                ${target.url &&
+                html`
+                  <ui-button
+                    type="primary"
+                    layout="width::16"
+                    onclick="${proceed}"
+                    data-qa="button:redirect-protection:proceed"
+                  >
+                    <button>Proceed</button>
+                  </ui-button>
+                `}
+              </div>
+            </div>
+          </ui-card>
+        `}
       </ui-page-layout>
     </template>
   `,

@@ -12,9 +12,13 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
+import Tracker from '/store/tracker.js';
+import { getTrackerByURL } from '/utils/trackerdb.js';
+
 const Target = {
   url: '',
   hostname: '',
+  tracker: Tracker,
   [store.connect]: async () => {
     let url = '';
 
@@ -34,7 +38,11 @@ const Target = {
       url = response.url;
     }
 
-    return { url, hostname: url && parse(url).hostname };
+    return {
+      url,
+      hostname: url && parse(url).hostname,
+      tracker: url && (await getTrackerByURL(url)),
+    };
   },
 };
 
