@@ -289,7 +289,7 @@ export default {
                         type="headline-xs"
                         layout="row gap:0.5 items:center"
                       >
-                        Redirect Tracking Protection
+                        Redirect Protection
                       </ui-text>
                       <ui-icon
                         name="chevron-right"

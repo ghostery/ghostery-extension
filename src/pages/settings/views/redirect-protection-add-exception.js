@@ -44,7 +44,7 @@ export default {
           layout="column gap:3"
         >
           <ui-text type="label-l" layout="block:center margin:bottom">
-            Add redirect exception
+            Add exception
           </ui-text>
           <div layout="column gap items:start">
             <ui-text type="body-m" color="secondary">

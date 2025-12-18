@@ -44,11 +44,11 @@ export default {
                 Back
               </ui-text>
             </settings-link>
-            <ui-text type="headline-m">Redirect Tracking Protection</ui-text>
+            <ui-text type="headline-m">Redirect Protection</ui-text>
             <ui-text type="body-l" mobile-type="body-m" color="secondary">
-              Ghostery blocks redirects to known tracking domains and shows a
-              warning page instead. You can choose to proceed or go back. Add
-              exceptions below for domains you trust.
+              Prevents websites from redirecting you through tracking services
+              or unknown destinations that may compromise your privacy or
+              security.
             </ui-text>
           </div>
           <settings-card type="content">
@@ -64,9 +64,7 @@ export default {
                     color="quaternary"
                     layout="size:3"
                   ></ui-icon>
-                  <ui-text type="headline-xs">
-                    Redirect Tracking Protection
-                  </ui-text>
+                  <ui-text type="headline-xs">Redirect Protection</ui-text>
                 </div>
               </div>
             </ui-toggle>
@@ -75,7 +73,7 @@ export default {
           html`
             <div layout="column gap:2">
               <div layout="row content:space-between items:center">
-                <ui-text type="label-l">Redirect exceptions</ui-text>
+                <ui-text type="label-l">Exceptions</ui-text>
                 <ui-button data-qa="button:redirect-protection:add">
                   <a href="${router.url(RedirectProtectionAddException)}">
                     Add
