@@ -97,6 +97,7 @@ describe('Adblocker Capabilities', function () {
 
   after(enableAllPrivacyToggle);
   after(async function () {
+    await setCustomFilters([]);
     await setPrivacyToggle('custom-filters', false);
   });
 

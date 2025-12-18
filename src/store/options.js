@@ -70,6 +70,12 @@ const Options = {
   // SERP protection
   serpTrackingPrevention: true,
 
+  // Redirect protection
+  redirectProtection: {
+    enabled: false,
+    exceptions: store.record(true),
+  },
+
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
@@ -144,7 +150,7 @@ const Options = {
       });
 
       // Send update message to another contexts (background page / panel / options)
-      chrome.runtime
+      await chrome.runtime
         .sendMessage({
           action: UPDATE_OPTIONS_ACTION_NAME,
         })

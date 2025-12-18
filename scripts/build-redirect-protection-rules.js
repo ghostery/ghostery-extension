@@ -1,0 +1,63 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { RESOURCES_PATH } from './utils/urls.js';
+import { getRedirectProtectionRules } from '../src/utils/dnr.js';
+
+if (!existsSync(RESOURCES_PATH)) {
+  console.error(`Error: Resources directory not found at ${RESOURCES_PATH}`);
+  console.error('Please run "npm run download-dnr-rulesets" first.');
+  process.exit(1);
+}
+
+const outputPath = `${RESOURCES_PATH}/dnr-redirect-protection.json`;
+
+if (existsSync(outputPath)) {
+  process.exit(0);
+}
+
+console.log('Building redirect protection rules...');
+
+// Only use ads and tracking rulesets as the base for redirect protection
+const TARGET_RULESETS = ['dnr-ads.json', 'dnr-tracking.json'];
+const files = TARGET_RULESETS.filter((f) =>
+  existsSync(`${RESOURCES_PATH}/${f}`),
+);
+
+if (files.length === 0) {
+  console.error(
+    'Error: Required DNR ruleset files not found (dnr-ads.json, dnr-tracking.json).',
+  );
+  console.error('Please run "npm run download-dnr-rulesets" first.');
+  process.exit(1);
+}
+
+let redirectRules = [];
+
+for (const file of files) {
+  const filePath = `${RESOURCES_PATH}/${file}`;
+  const content = readFileSync(filePath, 'utf-8');
+  const rules = JSON.parse(content);
+
+  redirectRules = redirectRules.concat(getRedirectProtectionRules(rules));
+}
+
+writeFileSync(
+  outputPath,
+  JSON.stringify(
+    redirectRules.map((rule, index) => ({ ...rule, id: index + 1 })),
+    null,
+    2,
+  ),
+);
+
+console.log(`Generated ${redirectRules.length} redirect rules`);

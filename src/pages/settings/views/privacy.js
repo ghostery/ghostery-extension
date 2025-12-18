@@ -11,16 +11,20 @@
 
 import { html, router, store } from 'hybrids';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
-
 import { longDateFormatter } from '/ui/labels.js';
+
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Config from '/store/config.js';
+
+import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
+import { FLAG_REDIRECT_PROTECTION } from '/utils/config-types.js';
 
 import assets from '../assets/index.js';
 import RegionalFilters from './regional-filters.js';
 import ExperimentalFilters from './experimental-filters.js';
 import CustomFilters from './custom-filters.js';
 import Serp from './serp.js';
-import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
+import RedirectProtection from './redirect-protection.js';
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
@@ -46,9 +50,16 @@ function updateFilters(host) {
 
 export default {
   [router.connect]: {
-    stack: [RegionalFilters, ExperimentalFilters, CustomFilters, Serp],
+    stack: [
+      RegionalFilters,
+      ExperimentalFilters,
+      CustomFilters,
+      Serp,
+      RedirectProtection,
+    ],
   },
   options: store(Options),
+  config: store(Config),
   devMode: false,
   globalPause: {
     value: false,
@@ -61,7 +72,13 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({ options, devMode, globalPause, globalPauseRevokeAt }) => html`
+  render: ({
+    options,
+    config,
+    devMode,
+    globalPause,
+    globalPauseRevokeAt,
+  }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -256,6 +273,42 @@ export default {
                   >
                   </ui-toggle>
                 </div>
+                ${config.hasFlag(FLAG_REDIRECT_PROTECTION) &&
+                html`
+                  <div layout="grid:1|max content:center gap">
+                    <settings-link
+                      href="${router.url(RedirectProtection)}"
+                      data-qa="button:redirect-protection"
+                    >
+                      <ui-icon
+                        name="globe-lock"
+                        color="quaternary"
+                        layout="size:3 margin:right"
+                      ></ui-icon>
+                      <ui-text
+                        type="headline-xs"
+                        layout="row gap:0.5 items:center"
+                      >
+                        Redirect Protection
+                      </ui-text>
+                      <ui-icon
+                        name="chevron-right"
+                        color="primary"
+                        layout="size:2"
+                      ></ui-icon>
+                    </settings-link>
+                    <ui-toggle
+                      disabled="${globalPause}"
+                      value="${options.redirectProtection.enabled}"
+                      onchange="${html.set(
+                        options,
+                        'redirectProtection.enabled',
+                      )}"
+                      data-qa="toggle:redirect-protection"
+                    >
+                    </ui-toggle>
+                  </div>
+                `}
               </div>
             </div>
           </section>

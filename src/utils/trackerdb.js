@@ -12,6 +12,7 @@ import { sortCategories } from '/ui/categories.js';
 
 import * as engines from './engines.js';
 import asyncSetup from './setup.js';
+import ExtendedRequest from './request.js';
 
 export const setup = asyncSetup('trackerdb', [
   engines.init(engines.TRACKERDB_ENGINE),
@@ -91,6 +92,11 @@ export async function getTracker(key) {
   getTrackers();
 
   return trackersMap.get(key);
+}
+
+export async function getTrackerByURL(url) {
+  setup.pending && (await setup.pending);
+  return getMetadata(ExtendedRequest.fromRequestDetails({ url }));
 }
 
 export async function getSimilarTrackers(tracker) {
