@@ -179,10 +179,8 @@ export async function updateCustomFilters(input, options) {
     }
 
     result.dnrRules = await updateDNRRules(rules);
-  }
 
-  // Reload redirect protection rules to include custom filters changes
-  if (__PLATFORM__ !== 'firefox') {
+    // Reload redirect protection rules to include custom filters changes
     await updateRedirectProtectionRules(await store.resolve(Options));
   }
 

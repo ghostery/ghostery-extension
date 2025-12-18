@@ -101,7 +101,7 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: ['spec/index.spec.js'],
+  specs: [['spec/*.spec.js']],
   reporters: [
     [
       'spec',

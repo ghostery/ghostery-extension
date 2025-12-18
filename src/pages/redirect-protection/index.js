@@ -32,8 +32,6 @@ async function allow({ target }) {
       action: 'allowRedirect',
       url: target.url,
     });
-    // Wait for the background to process the change
-    await chrome.runtime.sendMessage({ action: 'idle' });
 
     if (response?.success) {
       location.replace(target.url);

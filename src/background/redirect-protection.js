@@ -10,14 +10,15 @@
  */
 
 import {
+  getDynamicRulesIds,
+  getRedirectProtectionRules,
+  CUSTOM_FILTERS_ID_RANGE,
+  FIXES_ID_RANGE,
+  MAX_RULE_PRIORITY,
   EXCEPTIONS_RULE_PRIORITY,
   REDIRECT_PROTECTION_ID_RANGE,
   REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
-  getDynamicRulesIds,
-  CUSTOM_FILTERS_ID_RANGE,
-  getRedirectProtectionRules,
-  FIXES_ID_RANGE,
-  MAX_RULE_PRIORITY,
+  REDIRECT_PROTECTION_SESSION_OFFSET,
 } from '/utils/dnr.js';
 import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -213,7 +214,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       try {
         const urlObj = new URL(url);
         const urlPattern = `||${urlObj.host}${urlObj.pathname}${urlObj.search}${urlObj.hash}`;
-        const id = tabId + 1; // tabId can start here from 0, but DNR rule IDs must be > 0
+        const id = REDIRECT_PROTECTION_SESSION_OFFSET + tabId;
 
         await chrome.declarativeNetRequest.updateSessionRules({
           addRules: [
