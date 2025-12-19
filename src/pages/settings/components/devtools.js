@@ -103,7 +103,13 @@ async function testConfigDomain() {
 
 function toggleFlag(name) {
   return async (host, event) => {
-    await setConfig({ flags: { [name]: { enabled: event.target.checked } } });
+    await setConfig({
+      flags: {
+        [name]: event.target.checked
+          ? { percentage: 0, enabled: event.target.checked }
+          : null,
+      },
+    });
   };
 }
 
