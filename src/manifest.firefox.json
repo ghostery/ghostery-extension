@@ -93,7 +93,8 @@
     "pages/notifications/youtube.html",
     "pages/notifications/pause-assistant.html",
     "pages/notifications/pause-resume.html",
-    "pages/notifications/whats-new.html"
+    "pages/notifications/whats-new.html",
+    "pages/redirect-protection/index.html"
   ],
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {

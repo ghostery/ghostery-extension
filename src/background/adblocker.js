@@ -35,6 +35,7 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
+import { getRedirectProtectionUrl } from './redirect-protection.js';
 
 let options = Options;
 
@@ -561,7 +562,7 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (details.type === 'main_frame' || isExtensionRequest(details)) return;
+      if (isExtensionRequest(details)) return;
 
       if (setup.pending) {
         console.error('[adblocker] not ready for network requests blocking');
@@ -576,7 +577,14 @@ if (__PLATFORM__ === 'firefox') {
 
         const { redirect, match } = engine.match(request);
 
-        if (redirect !== undefined) {
+        if (match === true && details.type === 'main_frame') {
+          const redirectUrl = getRedirectProtectionUrl(
+            details.url,
+            request.hostname,
+            options,
+          );
+          return { redirectUrl };
+        } else if (redirect !== undefined) {
           request.blocked = true;
           // There's a possibility that redirecting to file URL can expose
           // extension existence.

@@ -21,16 +21,16 @@ import {
   waitForIdleBackgroundTasks,
 } from '../utils.js';
 
-async function setManagedOptions(options) {
+async function setManagedConfig(config) {
   await browser.url(getExtensionPageURL('panel'));
 
-  await browser.execute((managedOptions) => {
-    if (managedOptions) {
-      chrome.storage.local.set({ debugManagedConfig: managedOptions });
+  await browser.execute((managedConfig) => {
+    if (managedConfig) {
+      chrome.storage.local.set({ managedConfig });
     } else {
-      chrome.storage.local.remove('debugManagedConfig');
+      chrome.storage.local.remove('managedConfig');
     }
-  }, options);
+  }, config);
 
   await waitForIdleBackgroundTasks();
 
@@ -38,18 +38,18 @@ async function setManagedOptions(options) {
   await reloadExtension();
 }
 
-async function cleanManagedOptions() {
-  await setManagedOptions();
+async function cleanManagedConfig() {
+  await setManagedConfig();
 }
 
 describe('Managed Configuration', function () {
   before(enableExtension);
-  after(cleanManagedOptions);
+  after(cleanManagedConfig);
 
   it('pauses domains added to `trustedDomains`', async function () {
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
-    await setManagedOptions({ trustedDomains: [PAGE_DOMAIN] });
+    await setManagedConfig({ trustedDomains: [PAGE_DOMAIN] });
 
     await browser.url(PAGE_URL);
 
@@ -71,7 +71,7 @@ describe('Managed Configuration', function () {
       ).not.toBeDisplayed();
     }
 
-    await setManagedOptions({ trustedDomains: [] });
+    await setManagedConfig({ trustedDomains: [] });
 
     await browser.url(PAGE_URL);
 
@@ -84,7 +84,7 @@ describe('Managed Configuration', function () {
     await openPanel();
     await expect(getExtensionElement('button:menu')).toBeDisplayed();
 
-    await setManagedOptions({ disableUserControl: true });
+    await setManagedConfig({ disableUserControl: true });
 
     await openPanel();
     await expect(getExtensionElement('button:menu')).not.toBeDisplayed();
