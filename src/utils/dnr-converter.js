@@ -23,9 +23,8 @@ export default async function convert(filters) {
         filters,
       });
     } else {
-      const { default: convertWithAdguard } = await import(
-        '@ghostery/urlfilter2dnr/adguard'
-      );
+      const { default: convertWithAdguard } =
+        await import('@ghostery/urlfilter2dnr/adguard');
       result = await convertWithAdguard(filters, {
         resourcesPath: '/rule_resources/redirects',
       });
