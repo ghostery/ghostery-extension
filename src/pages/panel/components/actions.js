@@ -87,14 +87,12 @@ export default {
     #actions {
       background: var(--background-primary);
       transform: translateY(-100%);
-      visibility: hidden;
-      transition: transform 0.2s ease-out, visibility 0s 0.2s;
+      transition: transform 0.2s ease-out;
     }
 
     #actions.open {
       transform: translateY(0);
-      transition: transform 0.2s ease-out, visibility 0s;
-      visibility: visible;
+      transition: transform 0.2s ease-out;
     }
   `,
 };

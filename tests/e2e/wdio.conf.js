@@ -118,7 +118,7 @@ export const config = {
     {
       browserName: 'firefox',
       'moz:firefoxOptions': {
-        args: argv.debug ? [] : ['-headless'],
+        args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
         prefs: {
           'browser.cache.disk.enable': false,
           'browser.cache.memory.enable': false,
@@ -137,6 +137,7 @@ export const config = {
           `--load-extension=${CHROME_PATH}`,
           '--accept-lang=en-GB',
           '--no-sandbox',
+          '--window-size=1024,768',
         ]),
       },
     },
