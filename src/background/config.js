@@ -87,9 +87,10 @@ export default async function syncConfig() {
         flags[name] = null;
         continue;
       }
+
       // Generate local percentage only once for each flag
       const percentage =
-        flags[name]?.percentage || Math.floor(Math.random() * 100) + 1;
+        flags[name]?.percentage ?? Math.floor(Math.random() * 100) + 1;
 
       flags[name] = {
         percentage,
