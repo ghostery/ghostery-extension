@@ -82,13 +82,15 @@ if (argv.clean) {
   rmSync(resolve('src', 'rule_resources'), { recursive: true, force: true });
 }
 
-execSync(
-  'node scripts/download-dnr-rulesets.js' + (argv.staging ? ' --staging' : ''),
-  { stdio: silent ? '' : 'inherit' },
-);
+// DNR rules for Chromium and Safari
+if (argv.target === 'chromium' || argv.target === 'safari') {
+  execSync(
+    'node scripts/download-dnr-rulesets.js' +
+      (argv.staging ? ' --staging' : ''),
+    { stdio: silent ? '' : 'inherit' },
+  );
 
-// Build redirect protection rules from downloaded DNR rulesets (MV3 only)
-if (argv.target !== 'firefox') {
+  // Build redirect protection rules from downloaded DNR rulesets (MV3 only)
   execSync('node scripts/build-redirect-protection-rules.js', {
     stdio: silent ? '' : 'inherit',
   });
@@ -442,7 +444,7 @@ const buildPromise = build({
     },
 
     // This custom plugin cleans ups chunks imports of the `.html` inputs
-    //  to only include CSS files. This is necessary because Vite generates
+    // to only include CSS files. This is necessary because Vite generates
     // every imported JS file as script tag in the resulting HTML file.
     // It is related to our custom usage, where we don't bundle JS into single files.
     {
