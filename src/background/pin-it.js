@@ -17,6 +17,7 @@ import ManagedConfig from '/store/managed-config.js';
 import { getBrowser, getOS, isWebkit } from '/utils/browser-info.js';
 
 import { openNotification } from './notifications.js';
+import { SURVEY_URL } from './onboarding.js';
 
 const browser = getBrowser();
 const os = getOS();
@@ -45,9 +46,11 @@ if (
       managedConfig.disableUserControl ||
       managedConfig.disableOnboarding ||
       // The notification was already shown
-      onboarding.pinIt
+      onboarding.pinIt ||
+      // Opened page is the onboarding survey
+      details.url === SURVEY_URL
     ) {
-      return false;
+      return;
     }
 
     openNotification({
