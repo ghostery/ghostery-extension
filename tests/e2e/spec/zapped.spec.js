@@ -10,6 +10,8 @@
  */
 
 import { browser, expect, $ } from '@wdio/globals';
+import { FLAG_MODES } from '@ghostery/config';
+
 import {
   enableExtension,
   getExtensionElement,
@@ -23,7 +25,6 @@ import {
 } from '../utils.js';
 
 import { argv, PAGE_URL, PAGE_DOMAIN } from '../wdio.conf.js';
-import { FLAG_MODES } from '../../../src/utils/config-types.js';
 
 async function setFilteringMode(mode) {
   await browser.url(getExtensionPageURL('settings'));

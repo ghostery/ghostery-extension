@@ -10,12 +10,12 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_MODES } from '@ghostery/config';
 
 import Config from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
 import { isWebkit } from '/utils/browser-info.js';
-import { FLAG_MODES } from '/utils/config-types.js';
 import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,

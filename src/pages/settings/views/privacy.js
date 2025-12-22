@@ -10,6 +10,7 @@
  */
 
 import { html, router, store } from 'hybrids';
+import { FLAG_REDIRECT_PROTECTION } from '@ghostery/config';
 
 import { longDateFormatter } from '/ui/labels.js';
 
@@ -17,7 +18,6 @@ import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Config from '/store/config.js';
 
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
-import { FLAG_REDIRECT_PROTECTION } from '/utils/config-types.js';
 
 import assets from '../assets/index.js';
 import RegionalFilters from './regional-filters.js';

@@ -10,13 +10,13 @@
  */
 
 import { html, msg, router, store } from 'hybrids';
+import { FLAG_MODES } from '@ghostery/config';
 
 import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
-import { FLAG_MODES } from '/utils/config-types.js';
 
 import AddonHealth from './addon-health.js';
 import WebTrackers from './web-trackers.js';

@@ -23,19 +23,10 @@ import path from 'node:path';
 import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
+import { FLAGS } from '@ghostery/config';
 
 import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
 import { setupTestPage } from './page/server.js';
-import {
-  FLAG_PAUSE_ASSISTANT,
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_EXTENDED_SELECTORS,
-  FLAG_DYNAMIC_DNR_FIXES,
-  FLAG_INJECTION_TARGET_DOCUMENT_ID,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_MODES,
-  FLAG_REDIRECT_PROTECTION,
-} from '../../src/utils/config-types.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
@@ -63,16 +54,7 @@ export const argv = process.argv.slice(2).reduce(
     target: ['firefox', 'chrome'],
     clean: false,
     debug: false,
-    flags: [
-      FLAG_PAUSE_ASSISTANT,
-      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-      FLAG_EXTENDED_SELECTORS,
-      FLAG_DYNAMIC_DNR_FIXES,
-      FLAG_INJECTION_TARGET_DOCUMENT_ID,
-      FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-      FLAG_MODES,
-      FLAG_REDIRECT_PROTECTION,
-    ],
+    flags: FLAGS,
   },
 );
 

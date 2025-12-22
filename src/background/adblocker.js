@@ -16,16 +16,16 @@ import {
 } from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
-
-import { resolveFlag } from '/store/config.js';
-import Options, { ENGINES, getPausedDetails } from '/store/options.js';
-
 import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_EXTENDED_SELECTORS,
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-} from '/utils/config-types.js';
+} from '@ghostery/config';
+
+import { resolveFlag } from '/store/config.js';
+import Options, { ENGINES, getPausedDetails } from '/store/options.js';
+
 import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';

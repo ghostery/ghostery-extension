@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect } from '@wdio/globals';
+import { FLAG_REDIRECT_PROTECTION } from '@ghostery/config';
+
 import {
   enableExtension,
   getExtensionElement,
@@ -19,7 +21,6 @@ import {
 } from '../utils.js';
 
 import { argv, PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
-import { FLAG_REDIRECT_PROTECTION } from '../../../src/utils/config-types.js';
 
 async function openRedirectSettings() {
   await browser.url('about:blank');

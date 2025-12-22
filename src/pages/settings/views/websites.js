@@ -10,6 +10,7 @@
  */
 
 import { html, msg, store, router } from 'hybrids';
+import { ACTION_PAUSE_ASSISTANT } from '@ghostery/config';
 
 import Config, { dismissAction } from '/store/config.js';
 import Options, {
@@ -18,8 +19,6 @@ import Options, {
   GLOBAL_PAUSE_ID,
 } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
-
-import { ACTION_PAUSE_ASSISTANT } from '/utils/config-types.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
