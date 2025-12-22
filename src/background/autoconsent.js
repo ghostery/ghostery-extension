@@ -11,6 +11,7 @@
 
 import { evalSnippets } from '@duckduckgo/autoconsent';
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { ACTION_DISABLE_AUTOCONSENT } from '@ghostery/config';
 
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
@@ -18,8 +19,6 @@ import { store } from 'hybrids';
 import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
-
-import { ACTION_DISABLE_AUTOCONSENT } from '/utils/config-types.js';
 
 async function initialize(msg, tab, frameId) {
   const [options, config] = await Promise.all([

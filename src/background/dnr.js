@@ -10,12 +10,12 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_DYNAMIC_DNR_FIXES } from '@ghostery/config';
 
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
-import { FLAG_DYNAMIC_DNR_FIXES } from '/utils/config-types.js';
 import {
   FIXES_ID_RANGE,
   getDynamicRulesIds,

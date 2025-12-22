@@ -10,9 +10,9 @@
  */
 
 import { browser, expect, $ } from '@wdio/globals';
+import { FLAG_MODES } from '@ghostery/config';
 
 import { argv } from './wdio.conf.js';
-import { FLAG_MODES } from '../../src/utils/config-types.js';
 
 export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
 export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';

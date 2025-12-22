@@ -10,39 +10,20 @@
  */
 
 import { html, store, dispatch } from 'hybrids';
+import {
+  ACTION_DISABLE_AUTOCONSENT,
+  ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+  ACTION_PAUSE_ASSISTANT,
+  FLAGS,
+} from '@ghostery/config';
 
 import Options from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
-import {
-  ACTION_DISABLE_AUTOCONSENT,
-  ACTION_DISABLE_ANTITRACKING_MODIFICATION,
-  ACTION_PAUSE_ASSISTANT,
-  FLAG_PAUSE_ASSISTANT,
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_EXTENDED_SELECTORS,
-  FLAG_INJECTION_TARGET_DOCUMENT_ID,
-  FLAG_DYNAMIC_DNR_FIXES,
-  FLAG_MODES,
-  FLAG_REDIRECT_PROTECTION,
-} from '/utils/config-types.js';
-
 import { longDateFormatter } from '/ui/labels.js';
 
 const VERSION = chrome.runtime.getManifest().version;
-
-const FLAGS = [
-  FLAG_PAUSE_ASSISTANT,
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_EXTENDED_SELECTORS,
-  FLAG_INJECTION_TARGET_DOCUMENT_ID,
-  FLAG_DYNAMIC_DNR_FIXES,
-  FLAG_MODES,
-  FLAG_REDIRECT_PROTECTION,
-];
 
 export async function asyncAction(event, promise) {
   const button = event.currentTarget;

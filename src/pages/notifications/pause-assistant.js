@@ -10,11 +10,12 @@
  */
 
 import { mount, html } from 'hybrids';
+import { ACTION_PAUSE_ASSISTANT } from '@ghostery/config';
+
 import '/ui/index.js';
 
 import { dismissAction } from '/store/config.js';
 
-import { ACTION_PAUSE_ASSISTANT } from '/utils/config-types.js';
 import { setupNotificationPage } from '/utils/notifications.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL } from '/utils/urls.js';
 

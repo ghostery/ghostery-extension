@@ -11,13 +11,13 @@
 
 import { RequestReporter } from '@whotracksme/reporting/reporting';
 import { store } from 'hybrids';
+import { ACTION_DISABLE_ANTITRACKING_MODIFICATION } from '@ghostery/config';
 
 import { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 
 import Request from '/utils/request.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import { ACTION_DISABLE_ANTITRACKING_MODIFICATION } from '/utils/config-types.js';
 
 import { updateTabStats } from '../stats.js';
 
