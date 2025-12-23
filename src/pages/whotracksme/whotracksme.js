@@ -185,7 +185,7 @@ export default {
               layout@1024px:print="grid:5:1"
               layout@print="padding:0:1px"
             >
-              <ui-card layout="column gap padding:2.5">
+              <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon
                     name="websites"
@@ -198,7 +198,7 @@ export default {
                   Pages visited
                 </ui-text>
               </ui-card>
-              <ui-card layout="column gap padding:2.5">
+              <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon
                     name="block-s"
@@ -213,7 +213,7 @@ export default {
                   Trackers blocked
                 </ui-text>
               </ui-card>
-              <ui-card layout="column gap padding:2.5">
+              <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon
                     name="eye"
@@ -228,7 +228,7 @@ export default {
                   Trackers modified
                 </ui-text>
               </ui-card>
-              <ui-card layout="column gap padding:2.5">
+              <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon
                     name="autoconsent-managed"
@@ -241,7 +241,7 @@ export default {
                   Consent managed
                 </ui-text>
               </ui-card>
-              <ui-card layout="column gap padding:2.5">
+              <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon
                     name="cookie"
@@ -295,7 +295,11 @@ export default {
                   ({ id, name, category }, index) => html`
                     <ui-action>
                       <a href="${WTM_PAGE_URL}/trackers/${id}" target="_blank">
-                        <ui-card flat layout="padding row gap items:center">
+                        <ui-card
+                          narrow
+                          flat
+                          layout="padding row gap items:center"
+                        >
                           <ui-text
                             type="label-s"
                             layout="block:center width::3"

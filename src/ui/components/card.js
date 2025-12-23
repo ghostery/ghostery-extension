@@ -21,7 +21,7 @@ export default {
   `.css`
     :host {
       background: var(--background-primary);
-      border-radius: 8px;
+      border-radius: 16px;
       box-shadow: 0px 4px 12px 0px var(--shadow-card);
     }
 

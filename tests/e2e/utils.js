@@ -98,7 +98,7 @@ export async function enableExtension() {
 
     if (argv.flags.includes(FLAG_MODES)) {
       await expect(getExtensionElement('view:filtering-mode')).toBeDisplayed();
-      await getExtensionElement('button:continue').click();
+      await getExtensionElement('button:filtering-mode:ghostery').click();
     }
 
     await expect(getExtensionElement('view:success')).toBeDisplayed();

@@ -14,16 +14,18 @@ import { html, router, store } from 'hybrids';
 import modeGhosteryScreenshotUrl from '/ui/assets/lottie-mode-default.json?url';
 import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
 
-import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
-
+import Options, { MODE_ZAP } from '/store/options.js';
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
 
 import Success from './success.js';
 
+async function selectZap(host, event) {
+  router.resolve(event, store.set(Options, { mode: MODE_ZAP }));
+}
+
 export default {
-  [router.connect]: {},
-  options: store(Options),
-  render: ({ options }) => html`
+  [router.connect]: { stack: [Success] },
+  render: () => html`
     <template layout="column gap:2 width:full::800px">
       <ui-card
         layout="contents gap:2"
@@ -41,36 +43,35 @@ export default {
           </ui-text>
         </section>
         <div layout="column gap" layout@768px="grid:2">
-          <ui-mode-radio
-            checked="${options.mode === MODE_DEFAULT}"
-            id="mode-option-default"
-          >
-            <input
-              type="radio"
-              name="filtering-mode"
-              value="${MODE_DEFAULT}"
-              checked="${options.mode === MODE_DEFAULT}"
-              onchange="${html.set(options, 'mode')}"
-            />
-            <ui-lottie
-              src="${modeGhosteryScreenshotUrl}"
-              layout="ratio:83/45 width:220px"
-              layout@768px="width:100%"
-              play-on-hover="mode-option-default"
-            ></ui-lottie>
-            <ui-icon
-              name="logo-in-box"
-              layout="width:83px"
-              layout@768px="width:138px"
-            ></ui-icon>
-            <ui-text>
-              We block it all for you - ads, trackers, distractions. You’re
-              fully covered, no setup needed.
-            </ui-text>
-            <ui-text type="label-s" slot="footer">
-              Best for full coverage and privacy enthusiasts.
-            </ui-text>
-          </ui-mode-radio>
+          <ui-action>
+            <a
+              href="${router.url(Success)}"
+              layout="row"
+              data-qa="button:filtering-mode:ghostery"
+            >
+              <ui-mode-radio id="mode-option-default" checked>
+                <input type="radio" name="filtering-mode" checked />
+                <ui-lottie
+                  src="${modeGhosteryScreenshotUrl}"
+                  layout="ratio:83/45 width:220px"
+                  layout@768px="width:100%"
+                  play-on-hover="mode-option-default"
+                ></ui-lottie>
+                <ui-icon
+                  name="logo-in-box"
+                  layout="width:83px"
+                  layout@768px="width:138px"
+                ></ui-icon>
+                <ui-text>
+                  We block it all for you - ads, trackers, distractions. You’re
+                  fully covered, no setup needed.
+                </ui-text>
+                <ui-text type="label-s" slot="footer">
+                  Best for full coverage and privacy enthusiasts.
+                </ui-text>
+              </ui-mode-radio>
+            </a>
+          </ui-action>
           <ui-text
             type="display-2xs"
             uppercase
@@ -80,45 +81,35 @@ export default {
             <!-- Ghostery mode "or" ZAP mode -->
             or
           </ui-text>
-          <ui-mode-radio
-            checked="${options.mode === MODE_ZAP}"
-            id="mode-option-zap"
-          >
-            <input
-              type="radio"
-              name="filtering-mode"
-              value="${MODE_ZAP}"
-              checked="${options.mode === MODE_ZAP}"
-              onchange="${html.set(options, 'mode')}"
-            />
-            <ui-lottie
-              src="${modeZapScreenshotUrl}"
-              layout="ratio:83/45 width:220px"
-              layout@768px="width:100%"
-              play-on-hover="mode-option-zap"
-            ></ui-lottie>
-            <ui-icon
-              name="logo-zap"
-              layout="width:83px"
-              layout@768px="width:116px"
-            ></ui-icon>
-            <ui-text>
-              You zap ads away, one site at a time. One button, one page, and
-              you build your own ad-free list.
-            </ui-text>
-            <ui-text type="label-s" slot="footer">
-              Best for beginners or sharing with family.
-            </ui-text>
-          </ui-mode-radio>
-        </div>
-        <div layout="column gap:2">
-          <ui-button
-            type="success"
-            layout="height:5.5"
-            data-qa="button:continue"
-          >
-            <a href="${router.url(Success)}">Continue</a>
-          </ui-button>
+          <ui-action>
+            <a
+              href="${router.url(Success)}"
+              onclick="${selectZap}"
+              layout="row"
+              data-qa="button:filtering-mode:zap"
+            >
+              <ui-mode-radio id="mode-option-zap">
+                <ui-lottie
+                  src="${modeZapScreenshotUrl}"
+                  layout="ratio:83/45 width:220px"
+                  layout@768px="width:100%"
+                  play-on-hover="mode-option-zap"
+                ></ui-lottie>
+                <ui-icon
+                  name="logo-zap"
+                  layout="width:83px"
+                  layout@768px="width:116px"
+                ></ui-icon>
+                <ui-text>
+                  You zap ads away, one site at a time. One button, one page,
+                  and you build your own ad-free list.
+                </ui-text>
+                <ui-text type="label-s" slot="footer">
+                  Best for beginners or sharing with family.
+                </ui-text>
+              </ui-mode-radio>
+            </a>
+          </ui-action>
         </div>
       </ui-card>
       <ui-button type="transparent" layout="self:center">

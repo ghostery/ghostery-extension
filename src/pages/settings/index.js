@@ -17,6 +17,8 @@ import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
+import { debugMode } from '/utils/debug.js';
+
 import Settings from './settings.js';
 
 import './elements.js';
@@ -30,7 +32,7 @@ Promise.all([
   store.resolve(Config),
 ])
   .then(([{ terms }, managedConfig]) => {
-    if (!terms || managedConfig.disableUserControl) {
+    if (!debugMode && (!terms || managedConfig.disableUserControl)) {
       throw new Error('Access denied');
     }
 
