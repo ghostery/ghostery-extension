@@ -17,6 +17,7 @@ import { longDateFormatter } from '/ui/labels.js';
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Config from '/store/config.js';
 
+import { debugMode } from '/utils/debug.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 import assets from '../assets/index.js';
@@ -60,7 +61,7 @@ export default {
   },
   options: store(Options),
   config: store(Config),
-  devMode: false,
+  devMode: debugMode,
   globalPause: {
     value: false,
     observe: updateGlobalPause,

@@ -10,18 +10,19 @@
  */
 
 import { html } from 'hybrids';
-import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
-import disabled from '../illustrations/disabled.js';
+import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
 
-const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+import skipImage from '../assets/skip.svg';
 
 export default {
   render: () => html`
     <template layout="column gap:2 width:::375px">
       <ui-card data-qa="view:skip">
         <section layout="block:center column gap:2">
-          <div layout="row center">${disabled}</div>
+          <div layout="row center">
+            <img src="${skipImage}" alt="Skip" layout="size:20" />
+          </div>
           <ui-text type="display-s" color="danger-secondary">
             Ghostery is installed with limited functionality
           </ui-text>

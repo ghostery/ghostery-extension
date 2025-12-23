@@ -412,15 +412,7 @@ export default {
             zapped="${!paused}"
             data-qa="button:zap:${paused ? 'enable' : 'disable'}"
           >
-            ${paused
-              ? html`
-                  <ui-icon name="play"></ui-icon>
-                  Enable on this site
-                `
-              : html`
-                  <ui-icon name="stop"></ui-icon>
-                  Disable on this site
-                `}
+            ${paused ? html`<ui-icon name="zap"></ui-icon>` : msg`Show ads`}
           </panel-zap>
         `}
         <panel-container>
