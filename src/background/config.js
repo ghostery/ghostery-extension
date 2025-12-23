@@ -98,6 +98,8 @@ export default async function syncConfig() {
       };
     }
 
+    flags['modes'] = { percentage: 0, enabled: true };
+
     // Update the config
     await store.set(Config, { domains, flags, updatedAt: Date.now() });
 
