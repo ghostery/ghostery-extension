@@ -216,9 +216,6 @@
   "contact_support": {
     "message": "联系支持人员"
   },
-  "continue": {
-    "message": "继续"
-  },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "在 Github 上为 Ghostery Tracker Database 贡献"
   },
@@ -283,9 +280,6 @@
   "disable": {
     "message": "禁用"
   },
-  "disable_on_this_site": {
-    "message": "在此网站停用"
-  },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
   },
@@ -338,11 +332,11 @@
   "enable_now": {
     "message": "立即启用"
   },
-  "enable_on_this_site": {
-    "message": "在此网站启用"
-  },
   "enabled": {
     "message": "已启用"
+  },
+  "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
+    "message": "输入您想允许重定向的网站URL。Ghostery将不会为此域名显示警告页面。"
   },
   "enter_website_url": {
     "message": "输入网站 URL"
@@ -405,6 +399,9 @@
   },
   "filtering_mode": {
     "message": "过滤模式"
+  },
+  "for_your_safety__ghostery_blocked_this_page_automatically_": {
+    "message": "为了您的安全，Ghostery 自动屏蔽了此页面。"
   },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "在您的Ghostery保护浏览器中生成有关网络跟踪的全球透明度报告。"
@@ -506,6 +503,9 @@
   "how_browsing_assistant_works": {
     "message": "浏览助手的工作原理"
   },
+  "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
+    "message": "我了解风险，请不要再警告我有关此网站的内容。"
+  },
   "ignore": {
     "message": "忽略"
   },
@@ -553,6 +553,9 @@
   },
   "learn_more": {
     "message": "了解详情"
+  },
+  "learn_more_about_@_0__on_whotracks_me": {
+    "message": "了解更多关于$${0}的信息，请访问WhoTracks.Me"
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "进一步了解 YouTube 对广告拦截器的挑战"
@@ -621,6 +624,9 @@
   "no_activities_detected": {
     "message": "未检测到活动"
   },
+  "no_exceptions_added_yet": {
+    "message": "尚未添加例外"
+  },
   "no_protection_exceptions_added_yet": {
     "message": "尚未添加任何保护例外。"
   },
@@ -638,6 +644,9 @@
   },
   "on": {
     "message": "开启"
+  },
+  "open_a_site__remove_ads_in_ghostery_panel_and_build_your_own_ad_free_internet_": {
+    "message": "打开网站，在Ghostery面板中移除广告，打造属于你自己的无广告互联网。"
   },
   "open_video": {
     "message": "打开视频"
@@ -710,6 +719,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
+  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
+    "message": "防止网站通过跟踪服务或未知目的地重定向您，从而可能危害您的隐私或安全。"
+  },
   "print_to_pdf": {
     "message": "打印为 PDF"
   },
@@ -718,6 +730,9 @@
   },
   "privacy_protection": {
     "message": "隐私保护"
+  },
+  "proceed": {
+    "message": "继续"
   },
   "protection_exceptions": {
     "message": "保护的例外情况"
@@ -730,6 +745,12 @@
   },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
+  },
+  "redirect_alert": {
+    "message": "重定向警报"
+  },
+  "redirect_protection": {
+    "message": "重定向保护"
   },
   "regional_filters": {
     "message": "区域过滤器"
@@ -779,6 +800,9 @@
   "search_website___": {
     "message": "搜索网站..."
   },
+  "security_alert": {
+    "message": "安全警报"
+  },
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "查看 Ghostery 实时阻止的每个追踪器。"
   },
@@ -808,6 +832,9 @@
   },
   "setup_successful": {
     "message": "安装成功"
+  },
+  "show_ads": {
+    "message": "显示广告"
   },
   "show_all": {
     "message": "展示所有"
@@ -863,6 +890,12 @@
   "theme": {
     "message": "主题"
   },
+  "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
+    "message": "此页面已被阻止加载，因为它可能是恶意的。重定向目标未知，可能会带来安全或隐私风险："
+  },
+  "this_page_was_prevented_from_loading_due_to_a_known_tracking_redirect_to_": {
+    "message": "此页面因已知的跟踪重定向而被阻止加载："
+  },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
     "message": "此隐私报告是通过在受Ghostery保护的浏览器中跟踪追踪器生成的。这里的统计数据提供了关于网络追踪的透明度。要了解更多关于Ghostery如何保护其社区的信息，请访问$${0}。"
   },
@@ -892,6 +925,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "为了提供隐私保护功能，收集以下有关网络追踪器的信息："
+  },
+  "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
+    "message": "要访问目标页面，您需要允许此重定向。"
   },
   "top_100": {
     "message": "前100名"
@@ -1051,6 +1087,9 @@
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "您即将删除由 $${0} 存储的所有 Cookie。"
+  },
+  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
+    "message": "你已准备好逐个网站地屏蔽广告。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "搜索结果旁将不再显示跟踪器轮。"
