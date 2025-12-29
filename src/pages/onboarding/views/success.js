@@ -64,10 +64,11 @@ export default {
             <ui-text>
               You’re all set to zap ads away, one site at a time.
             </ui-text>
-            <ui-text>
-              Open a site, remove ads in Ghostery panel and build your own
-              ad-free internet.
-            </ui-text>
+            <div layout="column gap:0.5">
+              <ui-text><span>1.</span> Open a site</ui-text>
+              <ui-text><span>2.</span> Zap ads in the Ghostery panel</ui-text>
+              <ui-text><span>3.</span> Build your own ad-free internet</ui-text>
+            </div>
           `}
         </section>
       </ui-card>
@@ -96,10 +97,21 @@ export default {
               Click the puzzle icon next to the search bar and pin Ghostery to
               your toolbar.
             </ui-text>
-            <ui-text>
-              Ghostery will show how many trackers were blocked on a page.
-              Clicking on the Ghostery icon reveals more detailed information.
-            </ui-text>
+            ${options.mode === MODE_DEFAULT &&
+            html`
+              <ui-text>
+                Ghostery will show how many trackers were blocked on a page.
+                Clicking on the Ghostery icon reveals more detailed information.
+              </ui-text>
+            `}
+            ${options.mode === MODE_ZAP &&
+            html`
+              <ui-text>
+                Ghostery will show how many ad trackers are on a page. Clicking
+                on the Ghostery icon enables you to remove ads and view more
+                details.
+              </ui-text>
+            `}
           </section>
         </ui-card>
         <onboarding-pin-it browser="${type}"> Pin it here </onboarding-pin-it>
