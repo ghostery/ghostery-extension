@@ -67,6 +67,10 @@ export function getBrowser() {
   }
 }
 
+export function isBrave() {
+  return getBrowser().name === 'brave';
+}
+
 export function isFirefox() {
   return getBrowser().name === 'firefox';
 }
