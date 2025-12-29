@@ -11,7 +11,8 @@
 
 import { store } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, { MODE_ZAP, MODE_DEFAULT } from '/store/options.js';
+import Config from '/store/config.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -74,6 +75,7 @@ const setup = asyncSetup('telemetry', [
       saveStorage,
       getConf: async () => ({
         options: await store.resolve(Options),
+        config: await store.resolve(Config),
         userSettings: await chrome.action?.getUserSettings?.(),
       }),
       log: console.log.bind(console, '[telemetry]'),
@@ -82,7 +84,10 @@ const setup = asyncSetup('telemetry', [
 ]);
 
 let enabled = false;
-OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
+OptionsObserver.addListener(async function telemetry(
+  { terms, feedback, mode },
+  lastOptions,
+) {
   enabled = terms && feedback;
 
   if (terms) {
@@ -97,6 +102,12 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
     runner.setUninstallUrl();
   } else {
     chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
+  }
+
+  if (lastOptions?.mode === MODE_ZAP && mode === MODE_DEFAULT) {
+    setup.pending && (await setup.pending);
+    runner.storage.modeTouched = true;
+    await saveStorage(runner.storage);
   }
 });
 
