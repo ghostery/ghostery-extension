@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { FLAG_MODES } from '@ghostery/config';
+
 import getDefaultLanguage from './language.js';
 import getBrowserInfo from '/utils/browser-info.js';
 
@@ -192,7 +194,20 @@ export default class Metrics {
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
       // Toolbar pinned
-      buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1));
+      buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1)) +
+      // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
+      buildQueryPair(
+        'zap',
+        !conf.config.hasFlag(FLAG_MODES)
+          ? '-1'
+          : this.storage.modeTouched
+            ? conf.options.mode === 'zap'
+              ? '3'
+              : '2'
+            : conf.options.mode === 'zap'
+              ? '1'
+              : '0',
+      );
 
     if (type !== 'uninstall') {
       metrics_url +=
