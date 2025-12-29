@@ -195,13 +195,15 @@ export default class Metrics {
       buildQueryPair('id', this.storage.installDate) +
       // Toolbar pinned
       buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1)) +
-      // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = switched from zap to default)
+      // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
       buildQueryPair(
         'zap',
         !conf.config.hasFlag(FLAG_MODES)
           ? '-1'
           : this.storage.modeTouched
-            ? '2'
+            ? conf.options.mode === 'zap'
+              ? '3'
+              : '2'
             : conf.options.mode === 'zap'
               ? '1'
               : '0',

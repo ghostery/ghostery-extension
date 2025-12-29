@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import Options, { MODE_ZAP, MODE_DEFAULT } from '/store/options.js';
+import Options from '/store/options.js';
 import Config from '/store/config.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
@@ -100,14 +100,13 @@ OptionsObserver.addListener(async function telemetry(
     if (feedback) runner.ping('active');
 
     runner.setUninstallUrl();
+
+    if (lastOptions?.mode && lastOptions.mode !== mode) {
+      runner.storage.modeTouched = true;
+      await saveStorage(runner.storage);
+    }
   } else {
     chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
-  }
-
-  if (lastOptions?.mode === MODE_ZAP && mode === MODE_DEFAULT) {
-    setup.pending && (await setup.pending);
-    runner.storage.modeTouched = true;
-    await saveStorage(runner.storage);
   }
 });
 
