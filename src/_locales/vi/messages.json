@@ -159,6 +159,9 @@
   "browsing_assistant": {
     "message": "Trợ lý Duyệt web"
   },
+  "build_your_own_ad_free_internet": {
+    "message": "Xây dựng internet không quảng cáo của riêng bạn"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Bằng cách chia sẻ thông tin chi tiết về <a href=\"$${0}\">tình trạng của tiện ích bổ sung</a> và <a href=\"$${1}\">hiệu suất đo lường</a> như được nêu trong <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Chính sách Bảo mật</a> của chúng tôi, bạn giúp nâng cao bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
@@ -215,9 +218,6 @@
   },
   "contact_support": {
     "message": "Liên hệ hỗ trợ"
-  },
-  "continue": {
-    "message": "Continue"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribute to Ghostery Tracker Database on Github"
@@ -283,9 +283,6 @@
   "disable": {
     "message": "Vô hiệu hóa"
   },
-  "disable_on_this_site": {
-    "message": "Tắt trên trang này"
-  },
   "disable_trackers_preview": {
     "message": "Tắt bản theo dõi xem trước"
   },
@@ -338,11 +335,11 @@
   "enable_now": {
     "message": "Kích hoạt ngay"
   },
-  "enable_on_this_site": {
-    "message": "Bật trên trang web này"
-  },
   "enabled": {
     "message": "Đã kích hoạt"
+  },
+  "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
+    "message": "Nhập URL của trang web mà bạn muốn cho phép chuyển hướng. Ghostery sẽ không hiển thị trang cảnh báo cho miền này."
   },
   "enter_website_url": {
     "message": "Enter website URL"
@@ -405,6 +402,9 @@
   },
   "filtering_mode": {
     "message": "Chế độ Lọc"
+  },
+  "for_your_safety__ghostery_blocked_this_page_automatically_": {
+    "message": "Vì sự an toàn của bạn, Ghostery đã tự động chặn trang này."
   },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Tạo báo cáo minh bạch toàn cầu về theo dõi web trong trình duyệt được bảo vệ bởi Ghostery của bạn."
@@ -472,6 +472,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery sử dụng thông tin này để cung cấp các tính năng bảo mật dựa trên cộng đồng của mình, đảm bảo rằng thông tin cá nhân—chẳng hạn như mật khẩu, lịch sử duyệt web và nội dung trang—không bao giờ bị thu thập."
   },
+  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
+    "message": "Ghostery sẽ hiển thị số lượng trình theo dõi quảng cáo trên một trang. Nhấp vào biểu tượng Ghostery cho phép bạn loại bỏ quảng cáo và xem thêm chi tiết."
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery sẽ hiển thị số lượng trình theo dõi đã bị chặn trên một trang. Nhấp vào biểu tượng Ghostery sẽ hiển thị thông tin chi tiết hơn."
   },
@@ -505,6 +508,9 @@
   },
   "how_browsing_assistant_works": {
     "message": "Cách Trợ lý Duyệt web hoạt động như thế nào"
+  },
+  "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
+    "message": "Tôi hiểu rủi ro, đừng cảnh báo tôi lần nữa về trang web này"
   },
   "ignore": {
     "message": "Không chấp nhận"
@@ -553,6 +559,9 @@
   },
   "learn_more": {
     "message": "Tìm hiểu thêm"
+  },
+  "learn_more_about_@_0__on_whotracks_me": {
+    "message": "Tìm hiểu thêm về $${0} trên WhoTracks.Me"
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Tìm hiểu thêm về những thách thức của YouTube đối với trình chặn quảng cáo"
@@ -621,6 +630,9 @@
   "no_activities_detected": {
     "message": "No activities detected"
   },
+  "no_exceptions_added_yet": {
+    "message": "Chưa có ngoại lệ nào được thêm vào"
+  },
   "no_protection_exceptions_added_yet": {
     "message": "No protection exceptions added yet"
   },
@@ -638,6 +650,9 @@
   },
   "on": {
     "message": "Bật"
+  },
+  "open_a_site": {
+    "message": "Mở một trang web"
   },
   "open_video": {
     "message": "Mở video"
@@ -710,6 +725,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Ngăn chặn các kỹ thuật theo dõi khác nhau bằng công nghệ điều khiển AI."
   },
+  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
+    "message": "Ngăn chặn các trang web chuyển hướng bạn qua các dịch vụ theo dõi hoặc đến các điểm đến không rõ có thể làm tổn hại đến quyền riêng tư hoặc bảo mật của bạn."
+  },
   "print_to_pdf": {
     "message": "In ra PDF"
   },
@@ -718,6 +736,9 @@
   },
   "privacy_protection": {
     "message": "Bảo vệ quyền riêng tư"
+  },
+  "proceed": {
+    "message": "Tiếp tục"
   },
   "protection_exceptions": {
     "message": "Protection exceptions"
@@ -730,6 +751,12 @@
   },
   "read_more_on_whotracks_me": {
     "message": "Đọc thêm tại WhoTracks.Me"
+  },
+  "redirect_alert": {
+    "message": "Cảnh Báo Chuyển Hướng"
+  },
+  "redirect_protection": {
+    "message": "Bảo Vệ Chuyển Hướng"
   },
   "regional_filters": {
     "message": "Regional Filters"
@@ -779,6 +806,9 @@
   "search_website___": {
     "message": "Tìm trang web..."
   },
+  "security_alert": {
+    "message": "Cảnh Báo Bảo Mật"
+  },
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Xem mọi trình theo dõi mà Ghostery ngăn chặn theo thời gian thực."
   },
@@ -808,6 +838,9 @@
   },
   "setup_successful": {
     "message": "Thiết lập thành công"
+  },
+  "show_ads": {
+    "message": "Hiển thị quảng cáo"
   },
   "show_all": {
     "message": "Show all"
@@ -863,6 +896,12 @@
   "theme": {
     "message": "Giao diện"
   },
+  "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
+    "message": "Trang này đã bị ngăn chặn tải vì có thể là độc hại. Điểm đến chuyển hướng không xác định và có thể gây rủi ro về bảo mật hoặc quyền riêng tư:"
+  },
+  "this_page_was_prevented_from_loading_due_to_a_known_tracking_redirect_to_": {
+    "message": "Trang này đã bị ngăn không cho tải do chuyển hướng theo dõi đã biết đến:"
+  },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
     "message": "Báo cáo quyền riêng tư này được tạo ra bằng cách theo dõi các trình theo dõi trong trình duyệt được bảo vệ bởi Ghostery. Các thống kê ở đây cung cấp sự minh bạch về việc theo dõi web. Để tìm hiểu thêm về cách Ghostery bảo vệ cộng đồng của mình, hãy truy cập $${0}."
   },
@@ -892,6 +931,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "To provide privacy protection features, the following information about web trackers is collected:"
+  },
+  "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
+    "message": "Để truy cập trang mong muốn, bạn cần cho phép chuyển hướng này."
   },
   "top_100": {
     "message": "Top 100"
@@ -1052,6 +1094,9 @@
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Bạn sắp xóa tất cả cookie được lưu trữ bởi $${0}."
   },
+  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
+    "message": "Bạn đã sẵn sàng để loại bỏ quảng cáo, từng trang một."
+  },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
   },
@@ -1069,6 +1114,9 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube chặn bạn xem video không có quảng cáo?"
+  },
+  "zap_ads_in_the_ghostery_panel": {
+    "message": "Xóa quảng cáo trong bảng điều khiển Ghostery"
   },
   "zoom_in": {
     "message": "Phóng to"

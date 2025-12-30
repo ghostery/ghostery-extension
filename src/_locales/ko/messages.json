@@ -159,6 +159,9 @@
   "browsing_assistant": {
     "message": "브라우징 도우미"
   },
+  "build_your_own_ad_free_internet": {
+    "message": "자신만의 광고 없는 인터넷을 구축하세요"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "<a href=\"$${0}\">애드온의 상태</a> 및 <a href=\"$${1}\">성능 원격 측정</a>에 대한 통찰을 공유함으로써, <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 명시된 대로 Ghostery 커뮤니티 전체의 개인정보 보호를 강화하는 데 기여할 수 있습니다."
   },
@@ -215,9 +218,6 @@
   },
   "contact_support": {
     "message": "지원팀에 문의하기"
-  },
-  "continue": {
-    "message": "계속"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHub에서 Ghostery 트래커 데이터베이스에 기여하기"
@@ -283,9 +283,6 @@
   "disable": {
     "message": "사용 중지"
   },
-  "disable_on_this_site": {
-    "message": "이 사이트에서 비활성화"
-  },
   "disable_trackers_preview": {
     "message": "트래커 개요 사용 중지"
   },
@@ -338,11 +335,11 @@
   "enable_now": {
     "message": "지금 사용 시작"
   },
-  "enable_on_this_site": {
-    "message": "이 사이트에서 활성화"
-  },
   "enabled": {
     "message": "사용 중"
+  },
+  "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
+    "message": "리디렉션을 허용할 웹사이트 URL을 입력하세요. Ghostery는 이 도메인에 대해 경고 페이지를 표시하지 않습니다."
   },
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
@@ -405,6 +402,9 @@
   },
   "filtering_mode": {
     "message": "필터링 모드"
+  },
+  "for_your_safety__ghostery_blocked_this_page_automatically_": {
+    "message": "고객님의 안전을 위해 Ghostery가 이 페이지를 자동으로 차단했습니다."
   },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "귀하의 Ghostery 보호 브라우저에서 웹 추적에 대한 글로벌 투명성 보고서를 생성합니다."
@@ -472,6 +472,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
   },
+  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
+    "message": "고스트리는 페이지에 몇 개의 광고 추적기가 있는지 보여줍니다. 고스트리 아이콘을 클릭하면 광고를 제거하고 더 많은 세부 정보를 볼 수 있습니다."
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery가 이 페이지에서 얼마나 많은 트래커가 차단되었는지 보여줍니다. Ghostery 아이콘을 클릭하면 더 자세한 정보를 볼 수 있습니다."
   },
@@ -505,6 +508,9 @@
   },
   "how_browsing_assistant_works": {
     "message": "브라우징 도우미의 작동 방식"
+  },
+  "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
+    "message": "위험을 이해했습니다. 이 사이트에 대해 다시 경고하지 마세요."
   },
   "ignore": {
     "message": "무시"
@@ -553,6 +559,9 @@
   },
   "learn_more": {
     "message": "자세히 알아보기"
+  },
+  "learn_more_about_@_0__on_whotracks_me": {
+    "message": "$${0}에 대해 WhoTracks.Me에서 더 알아보세요"
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "광고 차단기들을 향한 YouTube의 도전을 자세히 알아보세요"
@@ -621,6 +630,9 @@
   "no_activities_detected": {
     "message": "아무 활동도 감지되지 않음"
   },
+  "no_exceptions_added_yet": {
+    "message": "예외가 아직 추가되지 않았습니다."
+  },
   "no_protection_exceptions_added_yet": {
     "message": "아직 예외가 추가되지 않았습니다"
   },
@@ -638,6 +650,9 @@
   },
   "on": {
     "message": "켜기"
+  },
+  "open_a_site": {
+    "message": "사이트 열기"
   },
   "open_video": {
     "message": "동영상 보기"
@@ -710,6 +725,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술을 사용하여 여러 추적 기술을 방지합니다."
   },
+  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
+    "message": "웹사이트가 사용자의 개인정보나 보안을 위협할 수 있는 추적 서비스나 알 수 없는 목적지로 리디렉션하는 것을 방지합니다."
+  },
   "print_to_pdf": {
     "message": "PDF로 인쇄"
   },
@@ -718,6 +736,9 @@
   },
   "privacy_protection": {
     "message": "개인정보 보호"
+  },
+  "proceed": {
+    "message": "진행"
   },
   "protection_exceptions": {
     "message": "보호 예외"
@@ -730,6 +751,12 @@
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
+  },
+  "redirect_alert": {
+    "message": "리디렉션 경고"
+  },
+  "redirect_protection": {
+    "message": "리디렉션 보호"
   },
   "regional_filters": {
     "message": "지역 필터"
@@ -779,6 +806,9 @@
   "search_website___": {
     "message": "웹 사이트 검색..."
   },
+  "security_alert": {
+    "message": "보안 경고"
+  },
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Ghostery가 실시간으로 차단하는 모든 추적기를 확인하세요."
   },
@@ -808,6 +838,9 @@
   },
   "setup_successful": {
     "message": "설정을 끝마쳤습니다"
+  },
+  "show_ads": {
+    "message": "광고 표시"
   },
   "show_all": {
     "message": "모두 보기"
@@ -863,6 +896,12 @@
   "theme": {
     "message": "테마"
   },
+  "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
+    "message": "이 페이지는 악성일 수 있어 로딩이 차단되었습니다. 리디렉션 목적지가 알려지지 않았으며 보안 또는 개인정보 보호 위험을 초래할 수 있습니다:"
+  },
+  "this_page_was_prevented_from_loading_due_to_a_known_tracking_redirect_to_": {
+    "message": "이 페이지는 다음으로의 알려진 추적 리디렉션 때문에 로딩이 차단되었습니다:"
+  },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
     "message": "이 개인정보 보고서는 Ghostery로 보호된 브라우저에서 추적기를 추적하여 생성되었습니다. 여기의 통계는 웹 추적에 대한 투명성을 제공합니다. Ghostery가 커뮤니티를 안전하게 보호하는 방법에 대해 더 알아보려면 $${0}을 방문하세요."
   },
@@ -892,6 +931,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "개인정보 보호 기능을 제공하기 위해 웹 사이트 트래커 정보가 수집됩니다:"
+  },
+  "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
+    "message": "의도한 페이지를 방문하려면 이 리디렉션을 허용해야 합니다."
   },
   "top_100": {
     "message": "상위 100개"
@@ -1052,6 +1094,9 @@
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "$${0}에 의해 저장된 모든 쿠키를 삭제하려고 합니다."
   },
+  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
+    "message": "광고를 하나씩 차단할 준비가 되었습니다."
+  },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "이제 검색 결과 옆에 트래커 휠을 더 이상 표시하지 않습니다."
   },
@@ -1069,6 +1114,9 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"
+  },
+  "zap_ads_in_the_ghostery_panel": {
+    "message": "고스트리 패널에서 광고 차단"
   },
   "zoom_in": {
     "message": "축소"

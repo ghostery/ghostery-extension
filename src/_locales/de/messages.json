@@ -102,7 +102,7 @@
     "message": "Zurück"
   },
   "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
-    "message": "Da kein Mensch gleich surft, geben wir dir die Möglichkeit, selbst zu entscheiden, wie du das Web erleben möchtest."
+    "message": "Weil niemand gleich surft, geben wir dir die Wahl, wie du das Internet erleben willst."
   },
   "become_a_contributor": {
     "message": "Werde Ghostery-Förderer"
@@ -111,10 +111,10 @@
     "message": "Als europäisches Unternehmen hält sich Ghostery streng an die Datenschutz-Grundverordnung (DSGVO) der EU. Diese Verordnung regelt die Datenerhebung und stellt sicher, dass die Privatsphäre der Nutzer im Internet geschützt wird."
   },
   "best_for_beginners_or_sharing_with_family_": {
-    "message": "Am besten für Anfänger oder zum Teilen mit der Familie."
+    "message": "Am besten geeignet für Anfänger oder zum Teilen mit der Familie."
   },
   "best_for_full_coverage_and_privacy_enthusiasts_": {
-    "message": "Am besten für umfassenden Schutz und Datenschutz-Enthusiasten."
+    "message": "Am besten geeignet für umfassenden Schutz und Datenschutz-Fans."
   },
   "block_all": {
     "message": "Alle blockieren"
@@ -158,6 +158,9 @@
   },
   "browsing_assistant": {
     "message": "Browsing-Assistent"
+  },
+  "build_your_own_ad_free_internet": {
+    "message": "Gestalte dir dein eigenes werbefreies Internet."
   },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Durch das Teilen von Informationen zum <a href=\"$${0}\">Add-on-Zustand</a> und <a href=\"$${1}\"> Leistungstelemetrie</a>, wie in unserer <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
@@ -215,9 +218,6 @@
   },
   "contact_support": {
     "message": "Kontakt zum Support"
-  },
-  "continue": {
-    "message": "Weiter"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Zur Ghostery Tracker-Datenbank auf Github beitragen"
@@ -283,9 +283,6 @@
   "disable": {
     "message": "Deaktivieren"
   },
-  "disable_on_this_site": {
-    "message": "Deaktivieren auf dieser Seite"
-  },
   "disable_trackers_preview": {
     "message": "Tracker-Vorschau deaktivieren"
   },
@@ -338,11 +335,11 @@
   "enable_now": {
     "message": "Jetzt aktivieren"
   },
-  "enable_on_this_site": {
-    "message": "Aktivieren auf dieser Seite"
-  },
   "enabled": {
     "message": "Aktiviert"
+  },
+  "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
+    "message": "Gib die Website-URL ein, von der du Weiterleitungen zulassen möchtest. Ghostery zeigt für diese Domain künftig keine Warnseite mehr an."
   },
   "enter_website_url": {
     "message": "URL der Website eingeben"
@@ -406,6 +403,9 @@
   "filtering_mode": {
     "message": "Filtermodus"
   },
+  "for_your_safety__ghostery_blocked_this_page_automatically_": {
+    "message": "Zu deiner Sicherheit hat Ghostery diese Seite automatisch blockiert."
+  },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
     "message": "Erstellt einen globalen Transparenzbericht über Web-Tracking in deinem Ghostery-geschützten Browser."
   },
@@ -416,10 +416,10 @@
     "message": "Ghostery hat eine Regel hinzugefügt, um diesen Inhaltsblock verborgen zu halten. Du kannst dies jederzeit in den Website-Einstellungen rückgängig machen."
   },
   "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghostery wurde auf dieser Website deaktiviert."
+    "message": "Ghostery wurde auf dieser Webseite deaktiviert."
   },
   "ghostery_has_been_enabled_on_this_site_": {
-    "message": "Ghostery wurde auf dieser Website aktiviert."
+    "message": "Ghostery wurde auf dieser Webseite aktiviert."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery wird fortgesetzt."
@@ -472,6 +472,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
   },
+  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
+    "message": "Ghostery zeigt dir, wie viele Werbe-Tracker auf einer Seite aktiv sind. Mit einem Klick auf das Ghostery-Symbol kannst du Werbung entfernen und dir weitere Details ansehen."
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery zeigt Ihnen, wie viele Tracker auf einer Seite blockiert wurden. Wenn Sie auf das Ghostery-Symbol klicken, erhalten Sie detailliertere Informationen."
   },
@@ -505,6 +508,9 @@
   },
   "how_browsing_assistant_works": {
     "message": "Wie der Browsing-Assistent funktioniert"
+  },
+  "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
+    "message": "Ich verstehe das Risiko. Diese Warnung für diese Seite nicht mehr anzeigen."
   },
   "ignore": {
     "message": "Ignorieren"
@@ -553,6 +559,9 @@
   },
   "learn_more": {
     "message": "Weitere Informationen"
+  },
+  "learn_more_about_@_0__on_whotracks_me": {
+    "message": "Erfahre mehr über ${0} auf Whotracks.me"
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Erfahre mehr über die Herausforderungen von YouTube gegenüber Werbeblockern"
@@ -621,6 +630,9 @@
   "no_activities_detected": {
     "message": "Keine Aktivitäten erkannt"
   },
+  "no_exceptions_added_yet": {
+    "message": "Noch keine Ausnahmen hinzugefügt"
+  },
   "no_protection_exceptions_added_yet": {
     "message": "Noch keine Schutzausnahmen hinzugefügt"
   },
@@ -638,6 +650,9 @@
   },
   "on": {
     "message": "An"
+  },
+  "open_a_site": {
+    "message": "Öffne eine Seite"
   },
   "open_video": {
     "message": "Video öffnen"
@@ -710,6 +725,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Nutzt KI-basierte Technologie, um verschiedene Tracking-Techniken zu verhindern."
   },
+  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
+    "message": "Verhindert, dass Webseiten dich über Tracking-Dienste oder unbekannte Ziele umleiten, die deine Privatsphäre oder Sicherheit gefährden könnten."
+  },
   "print_to_pdf": {
     "message": "Als PDF speichern"
   },
@@ -718,6 +736,9 @@
   },
   "privacy_protection": {
     "message": "Datenschutz"
+  },
+  "proceed": {
+    "message": "Fortfahren"
   },
   "protection_exceptions": {
     "message": "Schutzausnahmen"
@@ -730,6 +751,12 @@
   },
   "read_more_on_whotracks_me": {
     "message": "Lesen Sie mehr auf WhoTracks.Me"
+  },
+  "redirect_alert": {
+    "message": "Umleitungswarnung"
+  },
+  "redirect_protection": {
+    "message": "Umleitungsschutz"
   },
   "regional_filters": {
     "message": "Regionale Filter"
@@ -779,6 +806,9 @@
   "search_website___": {
     "message": "Website durchsuchen ..."
   },
+  "security_alert": {
+    "message": "Sicherheitswarnung"
+  },
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Erkenne live, welche Tracker Ghostery stoppt."
   },
@@ -789,7 +819,7 @@
     "message": "Wähle ablenkendes Element aus"
   },
   "select_filtering_mode": {
-    "message": "Wählen Sie den Filtermodus aus"
+    "message": "Filtermodus auswählen"
   },
   "select_time_frame": {
     "message": "Zeitraum auswählen"
@@ -808,6 +838,9 @@
   },
   "setup_successful": {
     "message": "Einrichtung erfolgreich"
+  },
+  "show_ads": {
+    "message": "Werbung anzeigen"
   },
   "show_all": {
     "message": "Alle anzeigen"
@@ -863,6 +896,12 @@
   "theme": {
     "message": "Thema"
   },
+  "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
+    "message": "Diese Seite wurde blockiert, da sie möglicherweise unsicher ist. Das Ziel der Weiterleitung ist unbekannt und könnte ein Sicherheits- oder Datenschutzrisiko darstellen:"
+  },
+  "this_page_was_prevented_from_loading_due_to_a_known_tracking_redirect_to_": {
+    "message": "Diese Seite wurde blockiert, da sie eine bekannte Tracking-Weiterleitung beinhaltet:"
+  },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
     "message": "Dieser Datenschutzbericht wurde erstellt, indem die Tracker in einem durch Ghostery geschützten Browser verfolgt wurden. Die hier aufgeführten Statistiken bieten Transparenz über das Web-Tracking. Um mehr darüber zu erfahren, wie Ghostery seine Community schützt, besuchen Sie $${0}."
   },
@@ -879,7 +918,7 @@
     "message": "Du wirst hiermit abgemeldet, und eventuell werden deine Einstellungen zurückgesetzt. Einige Seiten funktionieren möglicherweise erst wieder, wenn du dich erneut anmeldest oder Cookies akzeptierst."
   },
   "to_adjust_privacy_protection_enable_on_a_site_": {
-    "message": "Um den Datenschutz auf einer Website anzupassen, aktivieren Sie:"
+    "message": "Um den Datenschutz auf einer Webseite anzupassen, aktivieren:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Zur Anpassung der Einstellungen, vertrauen Sie einer Webseite:"
@@ -892,6 +931,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Um Datenschutzfunktionen bereitzustellen, werden folgende Informationen über Web-Tracker gesammelt:"
+  },
+  "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
+    "message": "Um die gewünschte Seite zu besuchen, muss die Weiterleitung zugelassen werden."
   },
   "top_100": {
     "message": "Top 100"
@@ -996,7 +1038,7 @@
     "message": "Möchtest du ein Problem auf einer anderen Seite melden?"
   },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
-    "message": "Wir blockieren alles für dich – Werbung, Tracker, Ablenkungen. Du bist vollständig geschützt, keine Einrichtung erforderlich."
+    "message": "Wir blockieren alles für dich - Werbung, Tracker, Unterbrechungen. Du bist vollständig geschützt, keine Einrichtung erforderlich."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
@@ -1052,11 +1094,14 @@
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Du bist dabei, alle gespeicherten Cookies von $${0} zu entfernen."
   },
+  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
+    "message": "Du bist bereit, Werbung Seite für Seite wegzuzappen."
+  },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
   },
   "you_zap_ads_away__one_site_at_a_time__one_button__one_page__and_you_build_your_own_ad_free_list_": {
-    "message": "Du entfernst Werbung, eine Seite nach der anderen. Ein Knopf, eine Seite, und du erstellst deine eigene werbefreie Liste."
+    "message": "Du entfernst Werbung Seite für Seite. Ein Klick pro Seite und du erstellst deine eigene werbefreie Liste."
   },
   "your_browser_privacy_report": {
     "message": "Dein Browser-Datenschutzbericht"
@@ -1069,6 +1114,9 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube hindert dich daran, werbefreie Videos anzusehen?"
+  },
+  "zap_ads_in_the_ghostery_panel": {
+    "message": "Werbung im Ghostery-Panel wegzappen"
   },
   "zoom_in": {
     "message": "Vergrößern"
