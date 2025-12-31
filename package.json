@@ -15,6 +15,7 @@
     "test:unit": "node --test",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
+    "wdio:websites": "wdio tests/e2e/wdio.websites.conf.js",
     "wdio:page": "node tests/e2e/page/server.js",
     "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
