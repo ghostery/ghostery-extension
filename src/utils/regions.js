@@ -19,6 +19,7 @@
 
 const REGIONS = [
   'ar',
+  'bg',
   'cs',
   'de',
   'el',
