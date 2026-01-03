@@ -66,6 +66,7 @@ const Options = {
   // Experimental features
   autoconsent: { autoAction: 'optOut' },
   experimentalFilters: false,
+  brokenPageFilters: true,
 
   // SERP protection
   serpTrackingPrevention: true,

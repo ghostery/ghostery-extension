@@ -100,7 +100,7 @@ function getEnabledEngines(config) {
       list.push(...config.regionalFilters.regions.map((id) => `lang-${id}`));
     }
 
-    if (list.length) {
+    if (config.brokenPageFilters && list.length) {
       list.push(engines.FIXES_ENGINE);
     }
 
