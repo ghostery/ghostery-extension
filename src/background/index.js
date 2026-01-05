@@ -27,8 +27,10 @@ import './notifications.js';
 import './serp.js';
 import './report-issue.js';
 import './pause-assistant.js';
+
 import './whats-new.js';
 import './pin-it.js';
+import './review.js';
 
 import './helpers.js';
 import './sync.js';

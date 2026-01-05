@@ -93,6 +93,7 @@
     "pages/notifications/youtube.html",
     "pages/notifications/pause-assistant.html",
     "pages/notifications/pause-resume.html",
+    "pages/notifications/review.html",
     "pages/notifications/whats-new.html",
     "pages/redirect-protection/index.html"
   ],

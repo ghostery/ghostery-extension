@@ -30,21 +30,13 @@ if (__PLATFORM__ !== 'firefox' && isOpera()) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (details.frameId !== 0 || (await isSerpSupported())) return;
 
-    const { onboarding, terms } = await store.resolve(Options);
-
-    if (
-      // Terms not accepted
-      !terms ||
-      // The notification was already shown maximum times
-      onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
-      // The notification was already shown recently
-      (onboarding.serpShownAt &&
-        Date.now() - onboarding.serpShownAt < NOTIFICATION_DELAY)
-    ) {
-      return false;
-    }
-
-    openNotification({ tabId: details.tabId, id: 'opera-serp' });
+    openNotification({
+      id: 'opera-serp',
+      tabId: details.tabId,
+      shownLimit: NOTIFICATION_SHOW_LIMIT,
+      delay: NOTIFICATION_DELAY,
+      position: 'center',
+    });
   });
 }
 
