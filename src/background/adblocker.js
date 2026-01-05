@@ -36,6 +36,7 @@ import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getRedirectProtectionUrl } from './redirect-protection.js';
+import { createAncestorsList } from '/utils/ancestors.js';
 
 let options = Options;
 
@@ -81,6 +82,8 @@ const contentScripts = (() => {
     },
   };
 })();
+
+const hierarchy = createAncestorsList();
 
 let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
 
@@ -293,6 +296,9 @@ function injectScriptlets(filters, hostname, details) {
       __PLATFORM__ === 'firefox' &&
       FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled
     ) {
+      if (filter.hasSubframeConstraint()) {
+        contentScript += `window.parent!==window&&`;
+      }
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
@@ -348,7 +354,7 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  const { frameId, url, tabId } = details;
+  const { frameId, parentFrameId, url, tabId } = details;
 
   const parsed = parse(url);
   const domain = parsed.domain || '';
@@ -372,6 +378,14 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
 
+  let ancestors = undefined;
+  if (parentFrameId) {
+    ancestors = hierarchy.ancestors(tabId, frameId, parentFrameId, {
+      domain,
+      hostname,
+    });
+  }
+
   // Domain specific cosmetic filters (scriptlets and styles)
   // Execution: bootstrap, DOM mutations
   {
@@ -379,6 +393,7 @@ async function injectCosmetics(details, config) {
       domain,
       hostname,
       url,
+      ancestors,
 
       classes: config.classes,
       hrefs: config.hrefs,
