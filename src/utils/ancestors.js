@@ -63,7 +63,7 @@ export const createAncestorsList = () => {
       // continue the outer loop.
       while (--frameIndex > -1) {
         if (frames[frameIndex].id === parentFrameId) {
-          chain.push(frames[frameIndex].hostname);
+          chain.push(frames[frameIndex].details);
           parentFrameId = frames[frameIndex].parent;
 
           // If it reached the top-most frame, exit with the

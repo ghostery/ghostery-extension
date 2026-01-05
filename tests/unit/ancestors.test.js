@@ -14,7 +14,7 @@ import assert from 'node:assert';
 
 import { createAncestorsList } from '../../src/utils/ancestors.js';
 
-describe.only('createAncestorsList', () => {
+describe('createAncestorsList', () => {
   it('returns ancestor list', () => {
     const { tabs, ancestors, unregister } = createAncestorsList();
 
