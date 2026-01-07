@@ -23,11 +23,6 @@ import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 let screenshotURL = '';
 let type = '';
 
-chrome.runtime.sendMessage({
-  action: 'telemetry',
-  event: 'install_complete',
-});
-
 if (__PLATFORM__ !== 'firefox') {
   const { name } = getBrowser();
 
@@ -45,9 +40,16 @@ if (__PLATFORM__ !== 'firefox') {
 
 export default {
   options: store(Options),
-  render: ({ options }) => html`
-    <template layout="column gap:2 width:::375px">
-      <ui-card data-qa="view:success">
+  render: {
+    connect: () => {
+      chrome.runtime.sendMessage({
+        action: 'telemetry',
+        event: 'install_complete',
+      });
+    },
+    value: ({ options }) => html`
+      <template layout="column gap:2 width:::375px">
+        <ui-card data-qa="view:success">
         <section layout="block:center column gap:2">
           ${options.mode === MODE_DEFAULT &&
           html`
@@ -121,6 +123,7 @@ export default {
         </ui-card>
         <onboarding-pin-it browser="${type}"> Pin it here </onboarding-pin-it>
       `}
-    </template>
-  `,
+      </template>
+    `,
+  },
 };

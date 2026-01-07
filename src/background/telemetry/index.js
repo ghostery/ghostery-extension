@@ -95,7 +95,7 @@ OptionsObserver.addListener(async function telemetry(
   if (terms) {
     setup.pending && (await setup.pending);
 
-    if (!runner.storage.install_all) {
+    if (runner.isJustInstalled()) {
       runner.ping('install');
       chrome.alarms.create(INSTALL_COMPLETE_ALARM, { delayInMinutes: 5 });
     }

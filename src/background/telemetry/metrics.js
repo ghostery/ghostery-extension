@@ -119,6 +119,14 @@ export default class Metrics {
   }
 
   /**
+   * Check if the extension was just installed
+   * @returns {boolean} true if the extension was just installed
+   */
+  isJustInstalled() {
+    return !this.storage.install_all;
+  }
+
+  /**
    * Prepare data and send telemetry pings.
    * @param {string} type    type of the telemetry ping
    */
