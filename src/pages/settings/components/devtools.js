@@ -148,12 +148,11 @@ export default {
             <ui-line></ui-line>
           `}
           <ui-text type="headline-s">Developer tools</ui-text>
-          ${store.ready(options) &&
-          html`
+          ${html`
             <div layout="column gap" translate="no">
               <ui-toggle
-                value="${options.brokenPageFilters}"
-                onchange="${html.set(options, 'brokenPageFilters')}"
+                value="${options.fixesFilters}"
+                onchange="${html.set(options, 'fixesFilters')}"
               >
                 <div layout="column">
                   <ui-text type="headline-s">Ghostery specific fixes</ui-text>
