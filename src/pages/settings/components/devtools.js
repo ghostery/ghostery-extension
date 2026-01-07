@@ -19,6 +19,7 @@ import {
 
 import Options from '/store/options.js';
 import Config from '/store/config.js';
+import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
 
 import { longDateFormatter } from '/ui/labels.js';
@@ -114,8 +115,16 @@ export default {
   counter: 0,
   options: store(Options),
   config: store(Config),
+  notifications: store([Notification]),
   resources: store(Resources),
-  render: ({ visible, counter, options, config, resources }) => html`
+  render: ({
+    visible,
+    counter,
+    options,
+    config,
+    notifications,
+    resources,
+  }) => html`
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
       html`
@@ -217,27 +226,30 @@ export default {
               </ui-button>
             </div>
           </div>
-          <div layout="column gap items:start">
-            <ui-text type="headline-s">Notifications</ui-text>
-            <div layout="row:wrap gap">
-              ${Object.keys(options.notifications).length === 0 &&
-              html`
-                <ui-text type="body-m" color="secondary" translate="no">
-                  No notifications shown yet
-                </ui-text>
-              `}
-              ${Object.entries(options.notifications).map(
-                ([id, { shown, lastShownAt }]) => html`
-                  <ui-text type="body-m" color="secondary">
-                    <ui-text type="label-m">${id}:</ui-text>
-                    ${shown}
-                    ${!!lastShownAt &&
-                    `(${longDateFormatter.format(new Date(lastShownAt))})`}
+          ${store.ready(notifications) &&
+          html`
+            <div layout="column gap items:start">
+              <ui-text type="headline-s">Notifications</ui-text>
+              <div layout="row:wrap gap">
+                ${notifications.length === 0 &&
+                html`
+                  <ui-text type="body-m" color="secondary" translate="no">
+                    No notifications shown yet
                   </ui-text>
-                `,
-              )}
+                `}
+                ${notifications.map(
+                  ({ id, shown, lastShownAt }) => html`
+                    <ui-text type="body-m" color="secondary">
+                      <ui-text type="label-m">${id}:</ui-text>
+                      ${shown}
+                      ${!!lastShownAt &&
+                      `(${longDateFormatter.format(new Date(lastShownAt))})`}
+                    </ui-text>
+                  `,
+                )}
+              </div>
             </div>
-          </div>
+          `}
           ${__PLATFORM__ !== 'firefox' &&
           html`
             <div layout="column gap items:start" translate="no">

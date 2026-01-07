@@ -12,10 +12,12 @@
 import { store } from 'hybrids';
 
 import ManagedConfig from '/store/managed-config.js';
+import Notification from '/store/notification.js';
 import Options from '/store/options.js';
 
 import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
+import { checkStorage } from '/utils/storage.js';
 
 export async function openNotification({
   id,
@@ -28,7 +30,7 @@ export async function openNotification({
   const options = await store.resolve(Options);
   const managedConfig = await store.resolve(ManagedConfig);
 
-  const notification = options.notifications[id];
+  const notification = await store.resolve(Notification, id).catch(() => null);
 
   if (
     // Terms not accepted
@@ -54,6 +56,8 @@ export async function openNotification({
       : '');
 
   try {
+    await checkStorage();
+
     // Try to mount the notification in the specified tab
     const mounted = await chrome.tabs.sendMessage(tabId, {
       action: notifications.MOUNT_ACTION,
@@ -64,13 +68,10 @@ export async function openNotification({
 
     // Update notification stats if mounted successfully
     if (mounted) {
-      await store.set(options, {
-        notifications: {
-          [id]: {
-            shown: (notification?.shown || 0) + 1,
-            lastShownAt: Date.now(),
-          },
-        },
+      await store.set(Notification, {
+        id,
+        shown: (notification?.shown || 0) + 1,
+        lastShownAt: Date.now(),
       });
 
       console.log(

@@ -16,6 +16,7 @@ import { isOpera, isSafari } from '/utils/browser-info.js';
 
 import CustomFilters from './custom-filters.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
+import Notification from './notification.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -35,7 +36,6 @@ const LOCAL_OPTIONS = [
   'feedback',
   'onboarding',
   'panel',
-  'notifications',
   'sync',
   'revision',
   'filtersUpdatedAt',
@@ -93,9 +93,6 @@ const Options = {
   // UI
   panel: { statsType: 'graph', notifications: true },
   theme: '',
-
-  // Notifications
-  notifications: store.record({ shown: 0, lastShownAt: 0 }),
 
   // Tracker exceptions
   exceptions: store.record({ global: false, domains: [String] }),
@@ -212,18 +209,17 @@ async function migrate(options, optionsVersion) {
 
   // Notifications structure changes
   if (optionsVersion < 4) {
-    options.notifications = {};
-
     if (options.onboarding) {
       if (options.onboarding.pinIt) {
-        options.notifications['pin-it'] = { shown: 1 };
+        await store.set(Notification, { id: 'pin-it', shown: 1 });
       }
 
       if (options.onboarding.serpShown) {
-        options.notifications['opera-serp'] = {
+        await store.set(Notification, {
+          id: 'opera-serp',
           shown: options.onboarding.serpShown,
           lastShownAt: options.onboarding.serpShownAt,
-        };
+        });
       }
 
       options.onboarding = !!options.onboarding.shown;
