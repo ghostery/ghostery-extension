@@ -16,6 +16,8 @@ import { FLAG_MODES } from '@ghostery/config';
 import getDefaultLanguage from './language.js';
 import getBrowserInfo from '/utils/browser-info.js';
 
+const ACTIVE_PING_DELAY = 10 * 60 * 1000; // 10 mintues
+
 /**
  * Allows to run async operations one by one (FIFO, first-in first-out).
  * The execution of function will only be started once all previously
@@ -439,10 +441,9 @@ export default class Metrics {
    * @private
    */
   _recordActive() {
-    const TEN_MINUTES = 10 * 60 * 1000;
     if (
       this.storage.install_all &&
-      Date.now() - this.storage.install_all < TEN_MINUTES
+      Date.now() - this.storage.install_all < ACTIVE_PING_DELAY
     ) {
       return;
     }
