@@ -16,6 +16,8 @@ import { FLAG_MODES } from '@ghostery/config';
 import getDefaultLanguage from './language.js';
 import getBrowserInfo from '/utils/browser-info.js';
 
+const ACTIVE_PING_DELAY = 10 * 60 * 1000; // 10 mintues
+
 /**
  * Allows to run async operations one by one (FIFO, first-in first-out).
  * The execution of function will only be started once all previously
@@ -142,6 +144,9 @@ export default class Metrics {
       case 'engaged':
         this._recordEngaged();
         break;
+      case 'install_complete':
+        this._recordInstallComplete();
+        break;
 
       // Uncaught Pings
       default:
@@ -262,7 +267,12 @@ export default class Metrics {
 
         // Protect against calling events immediately after install for all frequencies
         // They should trigger on the trailing edge of the frequency
-        if (!this.storage[key] && type !== 'engaged' && frequency !== 'all') {
+        if (
+          !this.storage[key] &&
+          type !== 'engaged' &&
+          type !== 'active' &&
+          frequency !== 'all'
+        ) {
           this.log(
             `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
           );
@@ -418,11 +428,12 @@ export default class Metrics {
    * @private
    */
   _recordInstall() {
-    if (this.isJustInstalled()) {
-      this._sendReq('install').catch((err) => {
-        this.log('Error sending metrics ("install" event dropped)', err);
-      });
+    if (this.storage.install_all) {
+      return;
     }
+    this._sendReq('install').catch((err) => {
+      this.log('Error sending metrics ("install" event dropped)', err);
+    });
   }
 
   /**
@@ -430,6 +441,13 @@ export default class Metrics {
    * @private
    */
   _recordActive() {
+    if (
+      this.storage.install_all &&
+      Date.now() - this.storage.install_all < ACTIVE_PING_DELAY
+    ) {
+      return;
+    }
+
     const active_daily_velocity = this.storage.active_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
 
@@ -447,6 +465,19 @@ export default class Metrics {
       .catch((err) => {
         this.log('Error sending metrics ("active" event dropped)', err);
       });
+  }
+
+  /**
+   * Record Install Complete event
+   * @private
+   */
+  _recordInstallComplete() {
+    if (this.storage.install_complete_all) {
+      return;
+    }
+    this._sendReq('install_complete').catch((err) => {
+      this.log('Error sending metrics ("install_complete" event dropped)', err);
+    });
   }
 
   /**
