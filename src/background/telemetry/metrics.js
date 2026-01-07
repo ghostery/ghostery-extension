@@ -434,6 +434,11 @@ export default class Metrics {
    * @private
    */
   _recordActive() {
+    const TEN_MINUTES = 10 * 60 * 1000;
+    if (this.storage.install_all && Date.now() - this.storage.install_all < TEN_MINUTES) {
+      return;
+    }
+
     const active_daily_velocity = this.storage.active_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
 
