@@ -265,7 +265,7 @@ export default class Metrics {
 
         // Protect against calling events immediately after install for all frequencies
         // They should trigger on the trailing edge of the frequency
-        if (!this.storage[key] && type !== 'engaged' && frequency !== 'all') {
+        if (!this.storage[key] && type !== 'engaged' && type !== 'active' && frequency !== 'all') {
           this.log(
             `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
           );

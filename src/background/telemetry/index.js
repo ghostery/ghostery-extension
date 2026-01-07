@@ -19,8 +19,6 @@ import * as OptionsObserver from '/utils/options-observer.js';
 
 import Metrics, { processUrlQuery } from './metrics.js';
 
-const INSTALL_COMPLETE_ALARM = 'telemetry:install_complete';
-
 async function detectUTMs() {
   const tabs = await chrome.tabs.query({
     url: [
@@ -97,7 +95,6 @@ OptionsObserver.addListener(async function telemetry(
 
     if (runner.isJustInstalled()) {
       runner.ping('install');
-      chrome.alarms.create(INSTALL_COMPLETE_ALARM, { delayInMinutes: 5 });
     }
 
     if (feedback) runner.ping('active');
@@ -115,20 +112,6 @@ OptionsObserver.addListener(async function telemetry(
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action === 'telemetry') {
-    Promise.resolve(setup.pending).then(() => {
-      runner?.ping(msg.event);
-      if (msg.event === 'install_complete') {
-        chrome.alarms.clear(INSTALL_COMPLETE_ALARM);
-      }
-    });
-  }
-});
-
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === INSTALL_COMPLETE_ALARM) {
-    await setup.pending;
-    if (enabled && runner) {
-      runner.ping('install_complete');
-    }
+    Promise.resolve(setup.pending).then(() => runner?.ping(msg.event));
   }
 });
