@@ -23,6 +23,11 @@ import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 let screenshotURL = '';
 let type = '';
 
+chrome.runtime.sendMessage({
+  action: 'telemetry',
+  event: 'install_complete',
+});
+
 if (__PLATFORM__ !== 'firefox') {
   const { name } = getBrowser();
 

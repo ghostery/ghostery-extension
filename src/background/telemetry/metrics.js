@@ -119,14 +119,6 @@ export default class Metrics {
   }
 
   /**
-   * Check if the extension was just installed
-   * @returns {boolean} true if the extension was just installed
-   */
-  isJustInstalled() {
-    return !this.storage.install_all;
-  }
-
-  /**
    * Prepare data and send telemetry pings.
    * @param {string} type    type of the telemetry ping
    */
@@ -141,6 +133,9 @@ export default class Metrics {
         break;
       case 'engaged':
         this._recordEngaged();
+        break;
+      case 'install_complete':
+        this._recordInstallComplete();
         break;
 
       // Uncaught Pings
@@ -418,11 +413,12 @@ export default class Metrics {
    * @private
    */
   _recordInstall() {
-    if (this.isJustInstalled()) {
-      this._sendReq('install').catch((err) => {
-        this.log('Error sending metrics ("install" event dropped)', err);
-      });
+    if (this.storage.install_all) {
+      return;
     }
+    this._sendReq('install').catch((err) => {
+      this.log('Error sending metrics ("install" event dropped)', err);
+    });
   }
 
   /**
@@ -447,6 +443,19 @@ export default class Metrics {
       .catch((err) => {
         this.log('Error sending metrics ("active" event dropped)', err);
       });
+  }
+
+  /**
+   * Record Install Complete event
+   * @private
+   */
+  _recordInstallComplete() {
+    if (this.storage.install_complete_all) {
+      return;
+    }
+    this._sendReq('install_complete').catch((err) => {
+      this.log('Error sending metrics ("install_complete" event dropped)', err);
+    });
   }
 
   /**
