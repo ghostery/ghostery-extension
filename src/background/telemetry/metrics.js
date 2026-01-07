@@ -265,7 +265,12 @@ export default class Metrics {
 
         // Protect against calling events immediately after install for all frequencies
         // They should trigger on the trailing edge of the frequency
-        if (!this.storage[key] && type !== 'engaged' && type !== 'active' && frequency !== 'all') {
+        if (
+          !this.storage[key] &&
+          type !== 'engaged' &&
+          type !== 'active' &&
+          frequency !== 'all'
+        ) {
           this.log(
             `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
           );
@@ -435,7 +440,10 @@ export default class Metrics {
    */
   _recordActive() {
     const TEN_MINUTES = 10 * 60 * 1000;
-    if (this.storage.install_all && Date.now() - this.storage.install_all < TEN_MINUTES) {
+    if (
+      this.storage.install_all &&
+      Date.now() - this.storage.install_all < TEN_MINUTES
+    ) {
       return;
     }
 
