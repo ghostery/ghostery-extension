@@ -37,6 +37,7 @@ const LOCAL_OPTIONS = [
   'sync',
   'revision',
   'filtersUpdatedAt',
+  'fixesFilters',
 ];
 const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
 

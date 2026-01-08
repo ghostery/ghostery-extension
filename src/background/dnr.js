@@ -122,10 +122,7 @@ if (__PLATFORM__ !== 'firefox') {
                   ),
             );
 
-            if (
-              list.dnr.checksum !== resources.checksums['dnr-fixes'] &&
-              !lastOptions?.fixesFilters
-            ) {
+            if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
               const rules = new Set(
                 await fetch(list.dnr.url)
                   .then((res) =>
