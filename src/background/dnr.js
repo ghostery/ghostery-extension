@@ -31,6 +31,7 @@ if (__PLATFORM__ !== 'firefox') {
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
     .map(({ id }) => id);
+  const DNR_FIXES_KEY = 'dnr-fixes';
 
   function getIds(options) {
     if (!options.terms || isGloballyPaused(options)) return [];
@@ -82,25 +83,10 @@ if (__PLATFORM__ !== 'firefox') {
     const config = await store.resolve(Config);
 
     // Add latest fixes rules
-    if (config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
-      const DNR_FIXES_KEY = 'dnr-fixes';
+    if (options.fixesFilters && config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
       const resources = await store.resolve(Resources);
 
-      if (options.fixesFilters === false) {
-        const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
-
-        if (removeRuleIds.length) {
-          console.info('[dnr] Removing fixes rules...');
-
-          await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-            addRules: [],
-          });
-          await store.set(Resources, {
-            checksums: { ['dnr-fixes']: null },
-          });
-        }
-      } else if (ids.length) {
+      if (ids.length) {
         if (
           !resources.checksums[DNR_FIXES_KEY] ||
           lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
@@ -122,7 +108,7 @@ if (__PLATFORM__ !== 'firefox') {
                   ),
             );
 
-            if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
+            if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
               const rules = new Set(
                 await fetch(list.dnr.url)
                   .then((res) =>
@@ -207,7 +193,7 @@ if (__PLATFORM__ !== 'firefox') {
         });
 
         await store.set(Resources, {
-          checksums: { ['dnr-fixes']: null },
+          checksums: { [DNR_FIXES_KEY]: null },
         });
 
         console.info('[dnr] Removed dynamic fixes rules');
