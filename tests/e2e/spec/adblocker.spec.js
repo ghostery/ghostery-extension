@@ -126,6 +126,7 @@ describe('Adblocker Capabilities', function () {
       ['selector-adjunct', '##[adjunct-target="100ms"]'],
     ];
     const scriptingFilters = [
+      ['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)'],
       ['globals-safeself', PAGE_DOMAIN + '##+js(json-prune, globals-safeself)'],
       ['aopr', PAGE_DOMAIN + '##+js(aopr, encodeURIComponent)'],
       ['aopw', PAGE_DOMAIN + '##+js(aopw, __checkadb__custom)'],
