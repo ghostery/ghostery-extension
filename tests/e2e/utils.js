@@ -43,9 +43,9 @@ async function sendMessage(msg) {
 
   const result = await browser.execute(
     browser.isChromium
-      ? (msg) => chrome.runtime.sendMessage(msg)
-      : (msg) => browser.runtime.sendMessage(msg),
-    msg,
+      ? (msg) => chrome.runtime.sendMessage(JSON.parse(msg))
+      : (msg) => browser.runtime.sendMessage(JSON.parse(msg)),
+    JSON.stringify(msg),
   );
 
   if (result !== 'done') {
