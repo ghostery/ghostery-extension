@@ -24,6 +24,7 @@ import {
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
+import { UPDATE_ENGINES_DELAY } from './adblocker.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__PLATFORM__ !== 'firefox') {
@@ -97,6 +98,15 @@ if (__PLATFORM__ !== 'firefox') {
 
             const list = await fetch(
               `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
+              {
+                // Force no caching if update was triggered by the user ("Update now" action)
+                cache:
+                  lastOptions &&
+                  lastOptions.filtersUpdatedAt >
+                    Date.now() - UPDATE_ENGINES_DELAY
+                    ? 'no-store'
+                    : 'default',
+              },
             ).then((res) =>
               res.ok
                 ? res.json()

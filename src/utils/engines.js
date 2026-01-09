@@ -200,7 +200,7 @@ function check(response) {
   return response;
 }
 
-export async function update(name, { force = false } = {}) {
+export async function update(name, { force = false, cache = true } = {}) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
   // It can also happen if the engine has not finished init.
@@ -220,7 +220,9 @@ export async function update(name, { force = false } = {}) {
 
     console.info(`[engines] Updating engine "${name}"...`);
 
-    const data = await fetch(listURL)
+    const data = await fetch(listURL, {
+      cache: cache ? 'default' : 'no-store',
+    })
       .then(check)
       .then((res) => res.json());
 

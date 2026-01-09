@@ -36,7 +36,7 @@ import webRequestReporter from './webrequest-reporter.js';
   }
 })();
 
-OptionsObserver.addListener(async function reporting({ terms }) {
+OptionsObserver.addListener('terms', async function reporting(terms) {
   if (terms && !isFirefox()) {
     if (webRequestReporter) {
       webRequestReporter.init().catch((e) => {
