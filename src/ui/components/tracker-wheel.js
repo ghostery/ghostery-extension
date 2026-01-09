@@ -57,7 +57,10 @@ export default {
       length += minValue - value;
     });
 
-    let offset = 0;
+    // Compensate for the round stroke cap (stroke-width: 3)
+    // (1.5 / 100) * 360 = 5.4
+    let offset = 5.4;
+
     data.forEach((value, key) => {
       value = Math.max((value / length) * 100 - borderLength, 0);
 
