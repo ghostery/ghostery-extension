@@ -10,14 +10,21 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_NOTIFICATION_REVIEW } from '@ghostery/config';
 
+import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Notification from '/store/notification.js';
 import Options from '/store/options.js';
 
+import { getOS, isOculus, isOpera, isWebkit } from '/utils/browser-info.js';
 import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
+import { isSerpSupported } from '/utils/opera.js';
 import { checkStorage } from '/utils/storage.js';
+
+import * as telemetry from './telemetry/index.js';
+import { SURVEY_URL } from './onboarding.js';
 
 export async function openNotification({
   id,
@@ -114,3 +121,82 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
     }
   }
 });
+
+/*
+  Pin It notification after first navigation (if not on toolbar)
+*/
+
+if (
+  __PLATFORM__ !== 'firefox' &&
+  !isWebkit() && // Safari
+  !isOculus() && // Oculus Browser
+  getOS() !== 'android' // Edge on Android (and possibly other browsers)
+) {
+  chrome.webNavigation.onCompleted.addListener(async (details) => {
+    if (
+      details.frameId !== 0 ||
+      (await chrome.action.getUserSettings()).isOnToolbar
+    ) {
+      return;
+    }
+
+    // Opened page is the onboarding survey
+    if (details.url === SURVEY_URL) return;
+
+    openNotification({
+      id: 'pin-it',
+      tabId: details.tabId,
+      shownLimit: 1,
+      position: 'center',
+    });
+  });
+}
+
+/*
+  Review notification after 30 days
+*/
+
+const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
+
+chrome.webNavigation.onCompleted.addListener(async (details) => {
+  if (details.frameId !== 0) return;
+
+  const { installDate } = await telemetry.getStorage();
+  if (!installDate) return;
+
+  const config = await store.resolve(Config);
+  if (!config.hasFlag(FLAG_NOTIFICATION_REVIEW)) return;
+
+  if (
+    debugMode ||
+    Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY
+  ) {
+    openNotification({
+      id: 'review',
+      tabId: details.tabId,
+      shownLimit: 1,
+      position: 'center',
+    });
+  }
+});
+
+/*
+   Opera SERP notification if the protection is not enabled
+*/
+
+if (__PLATFORM__ !== 'firefox' && isOpera()) {
+  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  const NOTIFICATION_SHOW_LIMIT = 4;
+
+  chrome.webNavigation.onCompleted.addListener(async (details) => {
+    if (details.frameId !== 0 || (await isSerpSupported())) return;
+
+    openNotification({
+      id: 'opera-serp',
+      tabId: details.tabId,
+      shownLimit: NOTIFICATION_SHOW_LIMIT,
+      delay: NOTIFICATION_DELAY,
+      position: 'center',
+    });
+  });
+}

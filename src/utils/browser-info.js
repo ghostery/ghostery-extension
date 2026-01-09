@@ -87,6 +87,10 @@ export function isSafari() {
   return getBrowser().name === 'safari';
 }
 
+export function isOculus() {
+  return getBrowser().name === 'oculus';
+}
+
 export function isWebkit() {
   if (__PLATFORM__ === 'firefox') return false;
 

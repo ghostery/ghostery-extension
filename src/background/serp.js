@@ -15,30 +15,7 @@ import { parse } from 'tldts-experimental';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { isGloballyPaused } from '/store/options.js';
-
-import { isSerpSupported } from '/utils/opera.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
-import { isOpera } from '/utils/browser-info.js';
-
-import { openNotification } from './notifications.js';
-
-// Opera SERP notification
-if (__PLATFORM__ !== 'firefox' && isOpera()) {
-  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-  const NOTIFICATION_SHOW_LIMIT = 4;
-
-  chrome.webNavigation.onCompleted.addListener(async (details) => {
-    if (details.frameId !== 0 || (await isSerpSupported())) return;
-
-    openNotification({
-      id: 'opera-serp',
-      tabId: details.tabId,
-      shownLimit: NOTIFICATION_SHOW_LIMIT,
-      delay: NOTIFICATION_DELAY,
-      position: 'center',
-    });
-  });
-}
 
 // Trackers preview messages
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
