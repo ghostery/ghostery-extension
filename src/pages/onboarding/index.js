@@ -16,7 +16,7 @@ import '/ui/index.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
-import { GHOSTERY_DOMAIN } from '/utils/urls.js';
+import { HOME_PAGE_URL } from '/utils/urls.js';
 
 import './elements.js';
 
@@ -25,19 +25,19 @@ import Modes from './views/modes.js';
 import Success from './views/success.js';
 
 Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
-  ([{ onboarding, terms }, managedConfig]) => {
-    // As the user can access settings page from browser native UI
-    // we must redirect to the Ghostery website if the user has already
-    // accepted the terms and conditions and the extension is managed
-    if (terms && managedConfig.disableUserControl) {
-      return window.location.replace(`https://www.${GHOSTERY_DOMAIN}`);
+  ([{ terms }, managedConfig]) => {
+    // The user can access settings page from browser native UI
+    // which redirects to onboarding. We must prevent showing onboarding
+    // if it is disabled via managed config or user already accepted terms
+    // when user control is disabled.
+    if (
+      managedConfig.disableOnboarding ||
+      (terms && managedConfig.disableUserControl)
+    ) {
+      return window.location.replace(HOME_PAGE_URL);
     }
 
-    store.set(Options, {
-      onboarding: {
-        shown: onboarding.shown + 1,
-      },
-    });
+    store.set(Options, { onboarding: true });
 
     mount(document.body, {
       stack: router(terms ? [Success, Modes] : [Main, Modes, Success]),

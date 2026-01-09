@@ -35,7 +35,7 @@ function openPrivateWindow() {
   });
 
   // Close the notification, but only from the current tab
-  close(false);
+  close({ clear: false });
 }
 
 mount(document.body, {

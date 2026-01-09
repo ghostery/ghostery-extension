@@ -22,31 +22,32 @@ export const SURVEY_URL =
   'https://blocksurvey.io/install-survey-postonboarding-R6q0d5dGR9OY6202iNPmGQ?v=o';
 
 OptionsObserver.addListener('onboarding', async (onboarding) => {
-  if (!onboarding.shown) {
-    // The onboarding page should not be shown in debug mode especially for the e2e tests
-    // which fails if after initializing the extension additional tabs are opened
-    if (debugMode) return;
+  // Onboarding already shown
+  if (onboarding) return;
 
-    const tab = await chrome.tabs.create({
-      url: chrome.runtime.getURL('/pages/onboarding/index.html'),
-    });
+  // The onboarding page should not be shown in debug mode especially for the e2e tests
+  // which fails if after initializing the extension additional tabs are opened
+  if (debugMode) return;
 
-    if (!isBrave()) {
-      // Add listener to show survey after onboarding tab is closed
-      chrome.tabs.onRemoved.addListener(async function listener(closedTabId) {
-        if (closedTabId === tab.id) {
-          chrome.tabs.onRemoved.removeListener(listener);
+  const tab = await chrome.tabs.create({
+    url: chrome.runtime.getURL('/pages/onboarding/index.html'),
+  });
 
-          const config = await store.resolve(Config);
-          const options = await store.resolve(Options);
+  if (!isBrave()) {
+    // Add listener to show survey after onboarding tab is closed
+    chrome.tabs.onRemoved.addListener(async function listener(closedTabId) {
+      if (closedTabId === tab.id) {
+        chrome.tabs.onRemoved.removeListener(listener);
 
-          if (!options.terms || !config.hasFlag(FLAG_ONBOARDING_SURVEY)) {
-            return;
-          }
+        const config = await store.resolve(Config);
+        const options = await store.resolve(Options);
 
-          chrome.tabs.create({ url: SURVEY_URL });
+        if (!options.terms || !config.hasFlag(FLAG_ONBOARDING_SURVEY)) {
+          return;
         }
-      });
-    }
+
+        chrome.tabs.create({ url: SURVEY_URL });
+      }
+    });
   }
 });
