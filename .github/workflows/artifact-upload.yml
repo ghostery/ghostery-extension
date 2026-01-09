@@ -31,12 +31,16 @@ jobs:
         run: npm ci
         working-directory: .
       - name: Build packages
-        run: npm run package -- --simple
+        run: |
+          npm run package -- --simple
+          npm run package -- --simple --debug
       - name: Uncompress packages
         run: |
           for PLATFORM in firefox chromium; do
             mkdir web-ext-artifacts/ghostery-$PLATFORM
             unzip "web-ext-artifacts/ghostery-$PLATFORM.zip" -d "web-ext-artifacts/ghostery-$PLATFORM"
+            mkdir "web-ext-artifacts/ghostery-$PLATFORM-debug"
+            unzip "web-ext-artifacts/ghostery-$PLATFORM-debug.zip" -d "web-ext-artifacts/ghostery-$PLATFORM-debug"
           done
       - name: Upload Chromium build
         uses: actions/upload-artifact@v4
@@ -44,9 +48,21 @@ jobs:
           name: ghostery-chromium-${{ env.VERSION }}-${{ env.SHA }}
           path: web-ext-artifacts/ghostery-chromium/*
           if-no-files-found: error
+      - name: Upload Chromium debug build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ghostery-chromium-${{ env.VERSION }}-${{ env.SHA }}-debug
+          path: web-ext-artifacts/ghostery-chromium-debug/*
+          if-no-files-found: error
       - name: Upload Firefox build
         uses: actions/upload-artifact@v4
         with:
           name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}
           path: web-ext-artifacts/ghostery-firefox/*
+          if-no-files-found: error
+      - name: Upload Firefox debug build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}-debug
+          path: web-ext-artifacts/ghostery-firefox-debug/*
           if-no-files-found: error
