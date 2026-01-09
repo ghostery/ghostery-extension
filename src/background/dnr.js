@@ -83,10 +83,10 @@ if (__PLATFORM__ !== 'firefox') {
     const config = await store.resolve(Config);
 
     // Add latest fixes rules
-    if (options.fixesFilters && config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
+    if (config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
       const resources = await store.resolve(Resources);
 
-      if (ids.length) {
+      if (options.fixesFilters && ids.length) {
         if (
           !resources.checksums[DNR_FIXES_KEY] ||
           lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
