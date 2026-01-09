@@ -271,6 +271,7 @@ export default {
                     disabled="${globalPause}"
                     value="${options.experimentalFilters}"
                     onchange="${html.set(options, 'experimentalFilters')}"
+                    data-qa="toggle:experimental-filters"
                   >
                   </ui-toggle>
                 </div>

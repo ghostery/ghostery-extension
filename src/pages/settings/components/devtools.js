@@ -153,6 +153,7 @@ export default {
               <ui-toggle
                 value="${options.fixesFilters}"
                 onchange="${html.set(options, 'fixesFilters')}"
+                data-qa="toggle:fixes-filters"
               >
                 <div layout="column">
                   <ui-text type="headline-s">Ghostery specific fixes</ui-text>
