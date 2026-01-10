@@ -31,40 +31,39 @@ describe('createAncestorsList', () => {
      */
     assert.deepStrictEqual(ancestors(0, 0, -1, 'foo.com'), []);
     assert.deepStrictEqual(ancestors(0, 1, 0, 'frame.foo.com'), ['foo.com']);
-    assert.deepStrictEqual(ancestors(0, 2, 1, 'frameof.frame.foo.com'), [
-      'foo.com',
-      'frame.foo.com',
-    ]);
     assert.deepStrictEqual(
-      ancestors(0, 3, 2, 'secondframeof.frameof.frame.foo.com'),
+      ancestors(0, 2, 1, 'frameof.frame.foo.com').reverse(),
+      ['foo.com', 'frame.foo.com'],
+    );
+    assert.deepStrictEqual(
+      ancestors(0, 3, 2, 'secondframeof.frameof.frame.foo.com').reverse(),
       ['foo.com', 'frame.foo.com', 'frameof.frame.foo.com'],
     );
 
     // Create another branch of frames
     assert.deepStrictEqual(ancestors(0, 4, 0, 'frame.foo.com'), ['foo.com']);
-    assert.deepStrictEqual(ancestors(0, 5, 4, 'frameof.frame.foo.com'), [
-      'foo.com',
-      'frame.foo.com',
-    ]);
+    assert.deepStrictEqual(
+      ancestors(0, 5, 4, 'frameof.frame.foo.com').reverse(),
+      ['foo.com', 'frame.foo.com'],
+    );
 
     // -- Returns same ancestor list for different branch but
     // same hostname
     assert.deepStrictEqual(
-      ancestors(0, 3, 2, 'secondframeof.frameof.frame.foo.com'),
+      ancestors(0, 3, 2, 'secondframeof.frameof.frame.foo.com').reverse(),
       ['foo.com', 'frame.foo.com', 'frameof.frame.foo.com'],
     );
 
     // Create another branch of frames
     assert.deepStrictEqual(ancestors(0, 6, 0, 'bar.com'), ['foo.com']);
-    assert.deepStrictEqual(ancestors(0, 7, 6, 'frame.bar.com'), [
+    assert.deepStrictEqual(ancestors(0, 7, 6, 'frame.bar.com').reverse(), [
       'foo.com',
       'bar.com',
     ]);
-    assert.deepStrictEqual(ancestors(0, 8, 7, 'frameof.frame.bar.com'), [
-      'foo.com',
-      'bar.com',
-      'frame.bar.com',
-    ]);
+    assert.deepStrictEqual(
+      ancestors(0, 8, 7, 'frameof.frame.bar.com').reverse(),
+      ['foo.com', 'bar.com', 'frame.bar.com'],
+    );
 
     // Validate the entire structure
     assert.deepStrictEqual(tabs, [
@@ -319,7 +318,8 @@ describe('createAncestorsList', () => {
     }
 
     for (let i = 0; i < 100; i++) {
-      for (let k = 0; k < 200; k++) {
+      // Subframe ID should not start with 0.
+      for (let k = 1; k < 200; k++) {
         assert.deepStrictEqual(ancestors(i, k, 0, 'frame.foo.com'), [
           'foo.com',
         ]);
@@ -331,5 +331,55 @@ describe('createAncestorsList', () => {
     }
 
     assert.deepStrictEqual(tabs, []);
+  });
+
+  it('handles incomplete tab information', () => {
+    const { tabs, ancestors } = createAncestorsList();
+
+    // Assume that the main frame tab information didn't reach.
+    // We rather not to execute scripts when the chain is
+    // incomplete, which might lead to the potential breakage.
+    assert.deepStrictEqual(ancestors(0, 10, 2, 'foo.com'), []);
+    assert.deepStrictEqual(ancestors(0, 10, 5, 'foo.com'), []);
+    assert.deepStrictEqual(ancestors(0, 10, 11, 'foo.com'), []);
+
+    assert.deepStrictEqual(tabs, []);
+  });
+
+  it('replaces the tab information', () => {
+    const { tabs, ancestors, replace } = createAncestorsList();
+
+    // Assume that `frameId` is something unexpected, such as
+    // omnibox prehit situation.
+    assert.deepStrictEqual(ancestors(0, 10, -1, 'about:blank'), []);
+    // Replace the tab information.
+    replace(0, 1);
+    // Creates new main frame with `foo.com`.
+    assert.deepStrictEqual(ancestors(1, 0, -1, 'foo.com'), []);
+    // Opens subframe.
+    assert.deepStrictEqual(ancestors(1, 1, 0, 'frame.foo.com'), ['foo.com']);
+
+    assert.deepStrictEqual(tabs, [
+      {
+        id: 1,
+        frames: [
+          {
+            id: 10,
+            parent: -1,
+            details: 'about:blank',
+          },
+          {
+            id: 0,
+            parent: -1,
+            details: 'foo.com',
+          },
+          {
+            id: 1,
+            parent: 0,
+            details: 'frame.foo.com',
+          },
+        ],
+      },
+    ]);
   });
 });

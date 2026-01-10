@@ -47,19 +47,34 @@ export const createAncestorsList = () => {
     // If the frame is registered, use the full length but we
     // exclude the current frame in case it is not registered as
     // `chain` won't include the current details.
-    const framesLength = frames.find(function (frame) {
-      return frame.id === frameId;
-    })
-      ? frames.length
-      : frames.push({
+    let framesLength = frames.length;
+    let frameIndex = framesLength;
+
+    while (--frameIndex !== -1) {
+      if (frames[frameIndex].id === frameId) {
+        break;
+      }
+    }
+
+    if (frameIndex === -1) {
+      framesLength =
+        frames.push({
           id: frameId,
           parent: parentFrameId,
           details,
         }) - 1;
-    let frameIndex = 0;
+    } else {
+      // Update the details to the latest reported values.
+      frames[frameIndex].details = details;
+    }
+
+    if (parentFrameId === -1) {
+      return [];
+    }
 
     // Loop until it reaches the top-most frame or detects an
     // incomplete hierarchy.
+    frameIndex = 0;
     while (frameIndex !== -1) {
       frameIndex = framesLength;
 
