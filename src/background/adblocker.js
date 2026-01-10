@@ -379,7 +379,7 @@ async function injectCosmetics(details, config) {
   const engine = engines.get(engines.MAIN_ENGINE);
 
   let ancestors = undefined;
-  if (parentFrameId) {
+  if (typeof parentFrameId === 'number') {
     ancestors = hierarchy.ancestors(tabId, frameId, parentFrameId, {
       domain,
       hostname,
