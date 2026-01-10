@@ -26,7 +26,7 @@ let type = '';
 if (__PLATFORM__ !== 'firefox') {
   const { name } = getBrowser();
 
-  if (name === 'chrome' || name === 'brave' || name === 'yandex') {
+  if (name === 'chrome' || name === 'yandex') {
     screenshotURL = pinExtensionChrome;
     type = 'chrome';
   } else if (name === 'edge' && !isMobile()) {
@@ -35,6 +35,9 @@ if (__PLATFORM__ !== 'firefox') {
   } else if (name === 'opera') {
     screenshotURL = pinExtensionOpera;
     type = 'opera';
+  } else if (name === 'brave') {
+    screenshotURL = pinExtensionChrome;
+    type = 'brave';
   }
 }
 
