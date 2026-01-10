@@ -139,7 +139,7 @@
           iframe.addEventListener("load", function () {
             if (
               iframe.contentWindow.subdocument === true
-              && typeof window.subdocument === "undefined"
+              && window.subdocument !== true
             ) {
               results["subdocument"] = true;
             }
