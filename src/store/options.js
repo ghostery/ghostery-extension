@@ -16,6 +16,7 @@ import { isOpera, isSafari } from '/utils/browser-info.js';
 
 import CustomFilters from './custom-filters.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
+import Notification from './notification.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -33,15 +34,17 @@ const LOCAL_OPTIONS = [
   'autoconsent',
   'terms',
   'feedback',
+  'onboarding',
   'panel',
   'sync',
   'revision',
   'filtersUpdatedAt',
   'fixesFilters',
+  'whatsNewVersion',
 ];
 const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
 
-const OPTIONS_VERSION = 3;
+const OPTIONS_VERSION = 4;
 
 const Options = {
   // Mode
@@ -87,13 +90,7 @@ const Options = {
   // Onboarding
   terms: false,
   feedback: true,
-  onboarding: {
-    shown: 0,
-    ...(__PLATFORM__ !== 'firefox' && isOpera()
-      ? { serpShownAt: 0, serpShown: 0 }
-      : {}),
-    ...(__PLATFORM__ !== 'firefox' ? { pinIt: false } : {}),
-  },
+  onboarding: false,
 
   // UI
   panel: { statsType: 'graph', notifications: true },
@@ -212,11 +209,34 @@ async function migrate(options, optionsVersion) {
     console.debug('[options] Migrated to version 3:', options);
   }
 
+  // Notifications structure changes
+  if (optionsVersion < 4) {
+    if (options.onboarding) {
+      if (options.onboarding.pinIt) {
+        await store.set(Notification, { id: 'pin-it', shown: 1 });
+      }
+
+      if (options.onboarding.serpShown) {
+        await store.set(Notification, {
+          id: 'opera-serp',
+          shown: options.onboarding.serpShown,
+          lastShownAt: options.onboarding.serpShownAt,
+        });
+      }
+
+      options.onboarding = !!options.onboarding.shown;
+    }
+  }
+
   // Flush updated options and version to the storage
   await chrome.storage.local.set({
     options,
     optionsVersion: OPTIONS_VERSION,
   });
+
+  console.log(
+    `[options] Migrated to version ${OPTIONS_VERSION} from version ${optionsVersion}...`,
+  );
 }
 
 async function manage(options) {
@@ -224,7 +244,7 @@ async function manage(options) {
 
   if (managed.disableOnboarding === true) {
     options.terms = true;
-    options.onboarding = { shown: 1, pinIt: true };
+    options.onboarding = true;
   }
 
   if (managed.disableUserControl === true) {

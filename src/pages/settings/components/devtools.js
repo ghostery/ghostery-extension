@@ -19,6 +19,7 @@ import {
 
 import Options from '/store/options.js';
 import Config from '/store/config.js';
+import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
 
 import { longDateFormatter } from '/ui/labels.js';
@@ -114,39 +115,43 @@ export default {
   counter: 0,
   options: store(Options),
   config: store(Config),
+  notifications: store([Notification]),
   resources: store(Resources),
-  render: ({ visible, counter, options, config, resources }) => html`
+  render: ({
+    visible,
+    counter,
+    options,
+    config,
+    notifications,
+    resources,
+  }) => html`
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
       html`
         <ui-line></ui-line>
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-s">Experimental features</ui-text>
-
-          ${store.ready(options) &&
-          html`
-            <div layout="column gap:2" translate="no">
-              <div layout="grid:1fr|max gap">
-                <settings-option static>
-                  Never-Consent Automatic Action Type
-                  <span slot="description">
-                    Chooses the default behavior for cookie consent notices.
-                  </span>
-                </settings-option>
-                <ui-input>
-                  <select
-                    value="${options.autoconsent.autoAction}"
-                    onchange="${html.set(options, 'autoconsent.autoAction')}"
-                  >
-                    <option value="optOut">Opt out</option>
-                    <option value="optIn">Opt in</option>
-                    <option value="">None</option>
-                  </select>
-                </ui-input>
-              </div>
+          <div layout="column gap:2">
+            <div layout="grid:1fr|max gap">
+              <settings-option static>
+                Never-Consent Automatic Action Type
+                <span slot="description">
+                  Chooses the default behavior for cookie consent notices.
+                </span>
+              </settings-option>
+              <ui-input>
+                <select
+                  value="${options.autoconsent.autoAction}"
+                  onchange="${html.set(options, 'autoconsent.autoAction')}"
+                >
+                  <option value="optOut">Opt out</option>
+                  <option value="optIn">Opt in</option>
+                  <option value="">None</option>
+                </select>
+              </ui-input>
             </div>
-            <ui-line></ui-line>
-          `}
+          </div>
+          <ui-line></ui-line>
           <ui-text type="headline-s">Developer tools</ui-text>
           ${html`
             <div layout="column gap" translate="no">
@@ -161,79 +166,100 @@ export default {
               </ui-toggle>
             </div>
           `}
-          ${store.ready(config) &&
-          html`
-            <div layout="column gap:2" translate="no">
-              <div layout="column gap">
-                <ui-toggle
-                  value="${config.enabled}"
-                  onchange="${html.set(config, 'enabled')}"
-                >
-                  <div layout="column">
-                    <ui-text type="headline-s">Remote Configuration</ui-text>
-                    <ui-text type="body-xs" color="tertiary">
-                      Updated at:
-                      ${longDateFormatter.format(new Date(config.updatedAt))}
-                    </ui-text>
-                  </div>
-                </ui-toggle>
-                <div layout="row">
-                  <ui-button
-                    onclick="${forceConfigSync}"
-                    layout="shrink:0 self:start"
-                    size="s"
-                  >
-                    <button>
-                      <ui-icon name="refresh" layout="size:2"></ui-icon>
-                      Force sync
-                    </button>
-                  </ui-button>
+          <div layout="column gap:2">
+            <div layout="column gap">
+              <ui-toggle
+                value="${config.enabled}"
+                onchange="${html.set(config, 'enabled')}"
+              >
+                <div layout="column">
+                  <ui-text type="headline-s">Remote Configuration</ui-text>
+                  <ui-text type="body-xs" color="tertiary">
+                    Updated at:
+                    ${longDateFormatter.format(new Date(config.updatedAt))}
+                  </ui-text>
                 </div>
-              </div>
-              <div layout="column gap">
-                <ui-text type="label-m">Flags</ui-text>
-                <div layout="row:wrap gap:2:1">
-                  ${FLAGS.map(
-                    (name) => html`
-                      <label layout="row items:center gap">
-                        <ui-input>
-                          <input
-                            type="checkbox"
-                            checked="${config.hasFlag(name)}"
-                            onchange="${toggleFlag(name)}"
-                          />
-                        </ui-input>
-                        <ui-text type="body-xs" color="tertiary">
-                          ${name}
-                        </ui-text>
-                      </label>
-                    `,
-                  )}
-                </div>
-              </div>
-              <div layout="column gap">
-                <ui-text type="label-m">Domains</ui-text>
-                <div layout="row:wrap gap">
-                  ${Object.entries(config.domains)
-                    .filter(([, d]) => d.actions.length)
-                    .map(
-                      ([name, d]) =>
-                        html`<ui-text
-                          color="secondary"
-                          onclick="${createClearConfigDomain(name)}"
-                          style="cursor: pointer;"
-                        >
-                          ${name} (${d.actions.join(', ')})
-                        </ui-text>`,
-                    ) || 'none'}
-                </div>
+              </ui-toggle>
+              <div layout="row">
                 <ui-button
+                  onclick="${forceConfigSync}"
                   layout="shrink:0 self:start"
-                  onclick="${testConfigDomain}"
                   size="s"
                 >
-                  <button>Add domain</button>
+                  <button>
+                    <ui-icon name="refresh" layout="size:2"></ui-icon>
+                    Force sync
+                  </button>
                 </ui-button>
+              </div>
+            </div>
+            <div layout="column gap">
+              <ui-text type="label-m">Flags</ui-text>
+              <div layout="row:wrap gap:2:1">
+                ${FLAGS.map(
+                  (name) => html`
+                    <label layout="row items:center gap">
+                      <ui-input>
+                        <input
+                          type="checkbox"
+                          checked="${config.hasFlag(name)}"
+                          onchange="${toggleFlag(name)}"
+                        />
+                      </ui-input>
+                      <ui-text type="body-xs" color="tertiary">
+                        ${name}
+                      </ui-text>
+                    </label>
+                  `,
+                )}
+              </div>
+            </div>
+            <div layout="column gap">
+              <ui-text type="label-m">Domains</ui-text>
+              <div layout="row:wrap gap">
+                ${Object.entries(config.domains)
+                  .filter(([, d]) => d.actions.length)
+                  .map(
+                    ([name, d]) =>
+                      html`<ui-text
+                        color="secondary"
+                        onclick="${createClearConfigDomain(name)}"
+                        style="cursor: pointer;"
+                      >
+                        ${name} (${d.actions.join(', ')})
+                      </ui-text>`,
+                  ) || 'none'}
+              </div>
+              <ui-button
+                layout="shrink:0 self:start"
+                onclick="${testConfigDomain}"
+                size="s"
+              >
+                <button>Add domain</button>
+              </ui-button>
+            </div>
+          </div>
+          ${store.ready(notifications) &&
+          html`
+            <div layout="column gap items:start">
+              <ui-text type="headline-s">Notifications</ui-text>
+              <div layout="row:wrap gap">
+                ${notifications.length === 0 &&
+                html`
+                  <ui-text type="body-m" color="secondary" translate="no">
+                    No notifications shown yet
+                  </ui-text>
+                `}
+                ${notifications.map(
+                  ({ id, shown, lastShownAt }) => html`
+                    <ui-text type="body-m" color="secondary">
+                      <ui-text type="label-m">${id}:</ui-text>
+                      ${shown}
+                      ${!!lastShownAt &&
+                      `(${longDateFormatter.format(new Date(lastShownAt))})`}
+                    </ui-text>
+                  `,
+                )}
               </div>
             </div>
           `}

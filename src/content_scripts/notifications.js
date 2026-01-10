@@ -13,19 +13,17 @@ import * as notifications from '/utils/notifications.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
 
-function mount(url, position = 'right') {
-  // Prevent multiple iframes be shown at the same time
-  if (document.querySelector(WRAPPER_ELEMENT)) {
-    return;
-  }
+function mount(url, position = 'right', debug = false) {
+  // Prevent showing multiple notifications at the same time
+  if (document.querySelector(WRAPPER_ELEMENT)) return false;
 
   const wrapper = document.createElement(WRAPPER_ELEMENT);
-  const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+  const shadowRoot = wrapper.attachShadow({ mode: debug ? 'open' : 'closed' });
   const template = document.createElement('template');
 
   template.innerHTML = /*html*/ `
     <div id="background"></div>
-    <iframe src="${url}" frameborder="0"></iframe>
+    <iframe src="${url}" frameborder="0" id="ghostery-notification-iframe"></iframe>
     <style>
       :host {
         all: initial;
@@ -142,12 +140,15 @@ function mount(url, position = 'right') {
       wrapper.classList.remove('active');
     }
   });
+
+  return true;
 }
 
-chrome.runtime.onMessage.addListener((msg) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
     case notifications.MOUNT_ACTION: {
-      mount(msg.url, msg.position);
+      const mounted = mount(msg.url, msg.position, msg.debug);
+      sendResponse(mounted);
       break;
     }
     case notifications.UNMOUNT_ACTION: {

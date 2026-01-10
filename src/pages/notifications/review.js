@@ -13,9 +13,7 @@ import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
 import * as notifications from '/utils/notifications.js';
-import { WHATS_NEW_PAGE_URL } from '/utils/urls.js';
-
-import whatsNewImage from './assets/whats-new.png';
+import { REVIEW_PAGE_URL } from '/utils/urls.js';
 
 const close = notifications.setupNotificationPage(390);
 
@@ -23,19 +21,14 @@ mount(document.body, {
   render: () => html`
     <template layout="block overflow">
       <ui-notification-dialog onclose="${close}">
-        <span slot="title">What’s New in Ghostery</span>
-        <img
-          src="${whatsNewImage}"
-          alt="What's New"
-          style="border-radius:8px"
-        />
+        <span slot="title">A Quick Review Goes a Long Way</span>
         <ui-text layout="block:center" color="secondary">
-          Discover fresh features, key improvements, and upgrades driven by
-          community contributions - all in one place.
+          If Ghostery makes your browsing better, a short review helps more
+          people discover a calmer, ad-free web.
         </ui-text>
         <ui-button type="wtm" layout="self:center">
-          <a href="${WHATS_NEW_PAGE_URL}" target="_blank" onclick="${close}">
-            See What's New
+          <a href="${REVIEW_PAGE_URL}" target="_blank" onclick="${close}">
+            Share a Review
           </a>
         </ui-button>
       </ui-notification-dialog>

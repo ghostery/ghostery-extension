@@ -46,15 +46,20 @@ async function detectUTMs() {
   return {};
 }
 
-async function saveStorage(storage) {
-  await chrome.storage.local.set({ metrics: storage });
+export async function getStorage() {
+  const { metrics } = await chrome.storage.local.get(['metrics']);
+  return metrics || {};
+}
+
+async function saveStorage(metrics) {
+  await chrome.storage.local.set({ metrics });
 }
 
 let runner;
 const setup = asyncSetup('telemetry', [
   (async () => {
     const { version } = chrome.runtime.getManifest();
-    const { metrics = {} } = await chrome.storage.local.get(['metrics']);
+    const metrics = await getStorage();
 
     if (!metrics.installDate) {
       metrics.installDate = new Date().toISOString().split('T')[0];

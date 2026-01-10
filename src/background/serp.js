@@ -15,38 +15,7 @@ import { parse } from 'tldts-experimental';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { isGloballyPaused } from '/store/options.js';
-
-import { isSerpSupported } from '/utils/opera.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
-import { isOpera } from '/utils/browser-info.js';
-
-import { openNotification } from './notifications.js';
-
-// Opera SERP notification
-if (__PLATFORM__ !== 'firefox' && isOpera()) {
-  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-  const NOTIFICATION_SHOW_LIMIT = 4;
-
-  chrome.webNavigation.onCompleted.addListener(async (details) => {
-    if (details.frameId !== 0 || (await isSerpSupported())) return;
-
-    const { onboarding, terms } = await store.resolve(Options);
-
-    if (
-      // Terms not accepted
-      !terms ||
-      // The notification was already shown maximum times
-      onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
-      // The notification was already shown recently
-      (onboarding.serpShownAt &&
-        Date.now() - onboarding.serpShownAt < NOTIFICATION_DELAY)
-    ) {
-      return false;
-    }
-
-    openNotification({ tabId: details.tabId, id: 'opera-serp' });
-  });
-}
 
 // Trackers preview messages
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {

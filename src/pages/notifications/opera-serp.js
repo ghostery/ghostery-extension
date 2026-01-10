@@ -9,24 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html, store } from 'hybrids';
+import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
 import * as notifications from '/utils/notifications.js';
-import Options from '/store/options.js';
 
 const close = notifications.setupNotificationPage(360);
-
-async function updateOptions() {
-  const options = await store.resolve(Options);
-
-  return store.set(options, {
-    onboarding: {
-      serpShown: options.onboarding.serpShown + 1,
-      serpShownAt: Date.now(),
-    },
-  });
-}
 
 async function enable() {
   try {
@@ -34,16 +22,6 @@ async function enable() {
       action: 'openTabWithUrl',
       url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera-guide?utm_source=gbe&utm_campaign=opera_serp',
     });
-
-    await updateOptions();
-  } finally {
-    close();
-  }
-}
-
-async function ignore() {
-  try {
-    await updateOptions();
   } finally {
     close();
   }
@@ -64,7 +42,7 @@ mount(document.body, {
             <ui-button type="success" size="s" onclick="${enable}">
               <button>Enable now</button>
             </ui-button>
-            <ui-button type="transparent" size="s" onclick="${ignore}">
+            <ui-button type="transparent" size="s" onclick="${() => close()}">
               <button>Ignore</button>
             </ui-button>
           </div>
