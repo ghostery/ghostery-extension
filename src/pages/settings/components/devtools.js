@@ -153,6 +153,19 @@ export default {
           </div>
           <ui-line></ui-line>
           <ui-text type="headline-s">Developer tools</ui-text>
+          ${html`
+            <div layout="column gap" translate="no">
+              <ui-toggle
+                value="${options.fixesFilters}"
+                onchange="${html.set(options, 'fixesFilters')}"
+                data-qa="toggle:fixes-filters"
+              >
+                <div layout="column">
+                  <ui-text type="headline-s">Ghostery specific fixes</ui-text>
+                </div>
+              </ui-toggle>
+            </div>
+          `}
           <div layout="column gap:2">
             <div layout="column gap">
               <ui-toggle
