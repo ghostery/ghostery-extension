@@ -12,14 +12,19 @@
 export const createAncestorsList = () => {
   const tabs = [];
 
-  function ancestors(tabId, frameId, parentFrameId, details) {
-    // Find the tab.
+  function findTab(tabId) {
     let tabIndex = tabs.length;
     while (--tabIndex > -1) {
       if (tabs[tabIndex].id === tabId) {
         break;
       }
     }
+
+    return tabIndex;
+  }
+
+  function ancestors(tabId, frameId, parentFrameId, details) {
+    let tabIndex = findTab(tabId);
 
     // If the tab is just registered, we can skip retrieving
     // the ancestor chain as there's no details stored.
@@ -69,7 +74,9 @@ export const createAncestorsList = () => {
           // If it reached the top-most frame, exit with the
           // result.
           if (parentFrameId === -1) {
-            return chain.reverse();
+            // The adblocker library doesn't care about the order
+            // of the entries.
+            return chain;
           }
 
           break;
@@ -85,13 +92,7 @@ export const createAncestorsList = () => {
   }
 
   function unregister(tabId, frameId) {
-    // Find the tab
-    let tabIndex = tabs.length;
-    while (--tabIndex > -1) {
-      if (tabs[tabIndex].id === tabId) {
-        break;
-      }
-    }
+    const tabIndex = findTab(tabId);
 
     if (tabIndex === -1) {
       return;
@@ -104,10 +105,15 @@ export const createAncestorsList = () => {
     }
 
     const frames = tabs[tabIndex].frames;
+    // Initialise the list of `frameId`s to remove with the
+    // current `frameId`.
     const parents = [frameId];
 
+    // `frameIndex` here is meant to be reused.
     let frameIndex = 0;
     while (parents.length) {
+      // Pick one `parent` and remove every frames having
+      // `parent` as parent frame ID or frame ID.
       const parent = parents.shift();
       for (frameIndex = 0; frameIndex < frames.length; frameIndex++) {
         if (
@@ -121,9 +127,20 @@ export const createAncestorsList = () => {
     }
   }
 
+  function replace(tabId, newTabId) {
+    const tabIndex = findTab(tabId);
+
+    if (tabIndex === -1) {
+      return;
+    }
+
+    tabs[tabIndex].id = newTabId;
+  }
+
   return {
     tabs,
     ancestors,
     unregister,
+    replace,
   };
 };

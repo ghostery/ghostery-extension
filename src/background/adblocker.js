@@ -502,6 +502,15 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   }
 });
 
+// Listen for tab changes to maintain ancestor chain.
+chrome.tabs.onRemoved.addListener((tabId) => {
+  hierarchy.unregister(tabId, 0);
+});
+
+chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+  hierarchy.replace(removedTabId, addedTabId);
+});
+
 if (__PLATFORM__ === 'firefox') {
   FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.then((enabled) => {
     if (!enabled) contentScripts.unregisterAll();
