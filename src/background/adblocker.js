@@ -380,10 +380,20 @@ async function injectCosmetics(details, config) {
 
   let ancestors = undefined;
   if (typeof parentFrameId === 'number') {
-    ancestors = hierarchy.ancestors(tabId, frameId, parentFrameId, {
-      domain,
-      hostname,
-    });
+    if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+      // On Firefox with content scripts API, we need to collect
+      // every scriptlets will potentially run on the hostname.
+      // Putting same values to `ancestors` enables adblocker to
+      // find all possible cases. The subframe constraint is
+      // validated by the `window.parent` property upon a script
+      // is executed.
+      ancestors = [{ domain, hostname }];
+    } else {
+      ancestors = hierarchy.ancestors(tabId, frameId, parentFrameId, {
+        domain,
+        hostname,
+      });
+    }
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
@@ -504,10 +514,18 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
 // Listen for tab changes to maintain ancestor chain.
 chrome.tabs.onRemoved.addListener((tabId) => {
+  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+    return;
+  }
+
   hierarchy.unregister(tabId, 0);
 });
 
 chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+    return;
+  }
+
   hierarchy.replace(removedTabId, addedTabId);
 });
 
