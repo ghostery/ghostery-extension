@@ -26,8 +26,8 @@
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@types/chrome": "^0.1.32",
-    "@wdio/browser-runner": "^9.22.0",
-    "@wdio/cli": "^9.22.0",
+    "@wdio/browser-runner": "^9.23.0",
+    "@wdio/cli": "^9.23.0",
     "@wdio/globals": "^9.12.7",
     "@wdio/mocha-framework": "^9.12.6",
     "@wdio/spec-reporter": "^9.20.0",
@@ -39,11 +39,11 @@
     "license-report": "^6.8.1",
     "prettier": "^3.7.4",
     "sinon-chrome": "^3.0.1",
-    "vite": "^7.3.0",
+    "vite": "^7.3.1",
     "web-ext": "^9.2.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.46.0",
+    "@duckduckgo/autoconsent": "^14.47.0",
     "@ghostery/adblocker": "^2.13.2",
     "@ghostery/adblocker-content": "^2.13.1",
     "@ghostery/adblocker-extended-selectors": "^2.13.1",
@@ -57,7 +57,7 @@
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.13.1",
     "file-saver": "^2.0.5",
-    "hybrids": "^9.1.21",
+    "hybrids": "^9.1.22",
     "idb": "^8.0.2",
     "lottie-web": "^5.13.0",
     "plotly.js-basic-dist": "^3.3.1",

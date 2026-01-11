@@ -41,7 +41,9 @@ import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
 import PauseAssistant from './pause-assistant.js';
+import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 
+const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
 );
@@ -60,7 +62,10 @@ function reloadTab(host, event) {
     clearAlert();
 
     const tab = await getCurrentTab();
-    if (tab) chrome.tabs.reload(tab.id);
+
+    // Reload only if the panel is opened as a popup window for the current tab
+    // FYI: e2e tests opens panel in a separate tab
+    if (tab && tab.url !== PANEL_URL) chrome.tabs.reload(tab.id);
 
     reloadTimeout = null;
   }, 500);
@@ -103,30 +108,22 @@ async function togglePause(host, event) {
   `);
 }
 
-async function toggleZapped(host) {
+async function toggleZapped(host, event) {
   const { options, stats, paused } = host;
 
-  const zappedHostname = findParentDomain(options.zapped, stats.hostname);
+  // existing zapped hostname in options or current hostname
+  const zappedHostname =
+    findParentDomain(options.zapped, stats.hostname) || stats.hostname;
 
   await store.set(options, {
-    zapped: { [zappedHostname || stats.hostname]: paused ? true : null },
+    zapped: { [zappedHostname]: paused ? true : null },
   });
 
-  showAlert(html`
-    <panel-alert type="info">
-      ${paused
-        ? msg`Ghostery has been enabled on this site.`
-        : msg`Ghostery has been disabled on this site.`}
-      <ui-text type="body-s" layout="block" underline>
-        <a
-          href="#"
-          onclick="${reloadTab}"
-          layout="row inline gap:0.5 items:center ::color:inherit"
-          >Reload to see changes</a
-        >.
-      </ui-text>
-    </panel-alert>
-  `);
+  if (
+    !ZAP_AUTORELOAD_DISABLED_HOSTNAMES.find((h) => zappedHostname.endsWith(h))
+  ) {
+    await reloadTab(host, event);
+  }
 }
 
 async function toggleGlobalPause(host) {

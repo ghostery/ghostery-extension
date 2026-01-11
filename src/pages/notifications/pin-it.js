@@ -9,10 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html, store } from 'hybrids';
+import { mount, html } from 'hybrids';
 import '/ui/index.js';
-
-import Options from '/store/options.js';
 
 import * as notifications from '/utils/notifications.js';
 import { HOME_PAGE_URL } from '/utils/urls.js';
@@ -40,7 +38,6 @@ switch (getBrowser().name) {
 }
 
 const close = notifications.setupNotificationPage(390);
-store.set(Options, { onboarding: { pinIt: true } });
 
 mount(document.body, {
   render: () => html`
