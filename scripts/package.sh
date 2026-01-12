@@ -4,12 +4,16 @@ set -e
 
 SHA=''
 SIMPLE=''
+DEBUG=''
 for val in $@; do
   if [ $val == '--simple' ]; then
     SIMPLE=1
   fi
   if [ $val == '--sha' ]; then
     SHA=$(git rev-parse --short HEAD)
+  fi
+  if [ $val == '--debug' ]; then
+    DEBUG='--debug'
   fi
 done
 
@@ -22,13 +26,16 @@ for PLATFORM in firefox chromium; do
   echo "##################################"
   echo
 
-  npm run build -- $PLATFORM --silent
+  npm run build -- $PLATFORM --silent $DEBUG
   NAME="ghostery-$PLATFORM"
   if ! [ $SIMPLE ]; then
     NAME+="-$VERSION"
     if [ $SHA ]; then
       NAME+="-$SHA"
     fi
+  fi
+  if [ $DEBUG ]; then
+    NAME+="-debug"
   fi
   NAME+=".zip"
 
