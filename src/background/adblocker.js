@@ -161,7 +161,7 @@ export async function reloadMainEngine() {
 }
 
 let updating = false;
-async function updateEngines() {
+export async function updateEngines({ cache = true } = {}) {
   if (updating) return;
 
   try {
@@ -175,13 +175,13 @@ async function updateEngines() {
       await Promise.all(
         enabledEngines.filter(engines.isPersistentEngine).map(async (id) => {
           await engines.init(id);
-          updated = (await engines.update(id)) || updated;
+          updated = (await engines.update(id, { cache })) || updated;
         }),
       );
 
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
-      await engines.update(engines.TRACKERDB_ENGINE);
+      await engines.update(engines.TRACKERDB_ENGINE, { cache });
 
       // Update timestamp after the engines are updated
       await store.set(Options, { filtersUpdatedAt: Date.now() });
@@ -193,7 +193,7 @@ async function updateEngines() {
   }
 }
 
-const HOUR_IN_MS = 60 * 60 * 1000;
+export const UPDATE_ENGINES_DELAY = 60 * 60 * 1000; // 1 hour
 export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
     async function adblockerEngines(value, lastValue) {
@@ -214,7 +214,7 @@ export const setup = asyncSetup('adblocker', [
       }
 
       // Update engines if filters are outdated (older than 1 hour)
-      if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
+      if (options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
         await updateEngines();
       }
     },
