@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1 час"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "Быстрый отзыв имеет значение"
+  },
   "about": {
     "message": "О программе"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery добавил правило, чтобы этот блок контента оставался скрытым. Вы можете отменить это в любое время в настройках сайта."
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghostery был отключен на этом сайте."
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "На этом сайте включен Ghostery."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery возобновлен."
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "Я понимаю риск, не предупреждайте меня снова об этом сайте"
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "Если Ghostery улучшает ваш просмотр, короткий отзыв поможет большему числу людей открыть для себя более спокойный интернет без рекламы."
   },
   "ignore": {
     "message": "Игнорировать"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "Сайтов, добавленных в исключения, пока нет"
+  },
+  "notifications": {
+    "message": "Уведомления"
   },
   "observed_activities": {
     "message": "Отслеживаемые действия"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "Настройка завершена"
+  },
+  "share_a_review": {
+    "message": "Поделитесь отзывом"
   },
   "show_ads": {
     "message": "Показывать рекламу"
