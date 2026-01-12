@@ -24,13 +24,19 @@ import {
 async function setManagedConfig(config) {
   await browser.url(getExtensionPageURL('panel'));
 
-  await browser.execute((managedConfig) => {
-    if (managedConfig) {
-      chrome.storage.local.set({ managedConfig });
-    } else {
-      chrome.storage.local.remove('managedConfig');
-    }
-  }, config);
+  await browser.execute(
+    (managedConfigStr) => {
+      const managedConfig = managedConfigStr
+        ? JSON.parse(managedConfigStr)
+        : null;
+      if (managedConfig) {
+        chrome.storage.local.set({ managedConfig });
+      } else {
+        chrome.storage.local.remove('managedConfig');
+      }
+    },
+    config ? JSON.stringify(config) : null,
+  );
 
   await waitForIdleBackgroundTasks();
 
