@@ -39,6 +39,7 @@ const LOCAL_OPTIONS = [
   'sync',
   'revision',
   'filtersUpdatedAt',
+  'fixesFilters',
   'whatsNewVersion',
 ];
 const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
@@ -69,6 +70,7 @@ const Options = {
   // Experimental features
   autoconsent: { autoAction: 'optOut' },
   experimentalFilters: false,
+  fixesFilters: true,
 
   // SERP protection
   serpTrackingPrevention: true,
