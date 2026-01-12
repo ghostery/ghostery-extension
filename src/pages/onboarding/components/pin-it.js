@@ -15,7 +15,7 @@ export default {
   browser: { value: '', reflect: true },
   render: ({ browser }) => html`
     <template
-      layout="fixed top:3 right:3 layer:1000 row items:center gap:1.5 padding:2:3:2:2"
+      layout="fixed top:3 right:3 layer:1000 row items:center gap:1.5 width::190px padding:2:3:2:2"
     >
       <div id="arrow" layout="absolute top right:150px size:2.5"></div>
       <div id="icon" layout="relative layer row center size:5">
@@ -51,7 +51,10 @@ export default {
       transform: rotate(45deg) translateY(-50%);
     }
 
+    :host([browser='brave']) { right: 66px; }
+
     :host([browser='chrome']) #arrow { right: 85px; }
+
     :host([browser='edge']) { min-width: 220px;  }
     :host([browser='edge']) #arrow { right: 140px; }
 
