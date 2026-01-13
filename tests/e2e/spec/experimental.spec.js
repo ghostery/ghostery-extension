@@ -13,8 +13,9 @@ import { $, browser, expect } from '@wdio/globals';
 import { enableExtension, setPrivacyToggle } from '../utils.js';
 
 describe('Experimental Features', function () {
+  before(enableExtension);
+
   describe('Disable fixes filters', function () {
-    before(enableExtension);
     before(async function () {
       await setPrivacyToggle('experimental-filters', true);
     });

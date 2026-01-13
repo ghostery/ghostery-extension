@@ -27,8 +27,8 @@ describe('Notifications', function () {
       const url = 'notifications/pin-it.html';
       const iframe = $('>>>iframe#ghostery-notification-iframe');
 
-      await expect(iframe).toBeDisplayed();
       await expect(iframe).toHaveAttribute('src', expect.stringContaining(url));
+      await expect(iframe).toBeDisplayed();
     }
 
     // The "review" notification is displayed after 30 days of usage,
@@ -40,8 +40,8 @@ describe('Notifications', function () {
       const url = 'notifications/review.html';
       const iframe = $('>>>iframe#ghostery-notification-iframe');
 
-      await expect(iframe).toBeDisplayed();
       await expect(iframe).toHaveAttribute('src', expect.stringContaining(url));
+      await expect(iframe).toBeDisplayed();
     }
 
     // After pin-it and review notifications have been displayed,

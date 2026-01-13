@@ -17,6 +17,7 @@ import {
   openPanel,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
+  switchFrame,
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
   TRACKER_IDS,
@@ -68,20 +69,15 @@ describe('Main Features', function () {
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
-      await browser.switchFrame($('#iframe-static'));
+      await switchFrame($('#iframe-static'));
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
-      // wait for dynamic and local iframes to load
-      await browser.pause(1000);
-
-      await browser.switchFrame(null);
-      await browser.switchFrame($('#iframe-dynamic'));
+      await switchFrame($('#iframe-dynamic'));
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
-      await browser.switchFrame(null);
-      await browser.switchFrame($('#iframe-local'));
+      await switchFrame($('#iframe-local'));
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
@@ -93,34 +89,28 @@ describe('Main Features', function () {
         await setPrivacyToggle('ad-blocking', true);
         await browser.url(PAGE_URL);
       });
-      afterEach(async function () {
-        await browser.switchFrame(null);
-      });
 
       it('main frame of the page', expectAdsBlocked);
 
       it('subframe of the page', async function () {
-        const iframe = await $('#iframe-static');
-        await browser.switchFrame(iframe);
-
+        await switchFrame($('#iframe-static'));
         await expectAdsBlocked();
+
+        await browser.switchFrame(null);
       });
 
       it('dynamic subframe of the page', async function () {
-        // Wait for iframe to load
-        await browser.pause(1000);
-
-        const dynamicIframe = await $('#iframe-dynamic');
-        await browser.switchFrame(dynamicIframe);
-
+        await switchFrame($('#iframe-dynamic'));
         await expectAdsBlocked();
+
+        await browser.switchFrame(null);
       });
 
       it('local subframe of the page', async function () {
-        const localIframe = await $('#iframe-local');
-        await browser.switchFrame(localIframe);
-
+        await switchFrame($('#iframe-local'));
         await expectAdsBlocked();
+
+        await browser.switchFrame(null);
       });
     });
 
