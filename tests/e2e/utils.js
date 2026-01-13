@@ -200,3 +200,10 @@ export async function setCustomFilters(filters, callback) {
 
   await getExtensionElement('button:back').click();
 }
+
+export async function switchFrame(frameElement) {
+  await browser.switchFrame(null);
+  await frameElement.waitForExist({ timeout: 5000 });
+
+  await browser.switchFrame(frameElement);
+}

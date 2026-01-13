@@ -15,6 +15,7 @@ import {
   setPrivacyToggle,
   openPanel,
   setCustomFilters,
+  switchFrame,
 } from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
@@ -88,18 +89,13 @@ describe('Custom Filters', function () {
     await browser.url(PAGE_URL);
     await expect($('#custom-filter')).not.toBeDisplayed();
 
-    await browser.switchFrame($('#iframe-static'));
+    await switchFrame($('#iframe-static'));
     await expect($('#custom-filter')).not.toBeDisplayed();
 
-    // wait for dynamic and local iframes to load
-    await browser.pause(1000);
-
-    await browser.switchFrame(null);
-    await browser.switchFrame($('#iframe-dynamic'));
+    await switchFrame($('#iframe-dynamic'));
     await expect($('#custom-filter')).not.toBeDisplayed();
 
-    await browser.switchFrame(null);
-    await browser.switchFrame($('#iframe-local'));
+    await switchFrame($('#iframe-local'));
     await expect($('#custom-filter')).not.toBeDisplayed();
 
     await browser.switchFrame(null);
