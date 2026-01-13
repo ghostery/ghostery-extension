@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1 giờ"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "Một Đánh Giá Nhanh Có Thể Tạo Nên Sự Khác Biệt Lớn"
+  },
   "about": {
     "message": "Giới thiệu"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery đã thêm một quy tắc để giữ cho khối nội dung này bị ẩn. Bạn có thể hoàn tác điều này bất cứ lúc nào trong cài đặt trang web."
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghostery đã bị vô hiệu hóa trên trang web này."
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "Ghostery đã được kích hoạt trên trang web này."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "Tôi hiểu rủi ro, đừng cảnh báo tôi lần nữa về trang web này"
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "Nếu Ghostery làm cho việc duyệt web của bạn tốt hơn, một đánh giá ngắn sẽ giúp nhiều người khám phá một web yên tĩnh, không có quảng cáo."
   },
   "ignore": {
     "message": "Không chấp nhận"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "No websites exceptions added yet"
+  },
+  "notifications": {
+    "message": "Thông báo"
   },
   "observed_activities": {
     "message": "Observed activities"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "Thiết lập thành công"
+  },
+  "share_a_review": {
+    "message": "Chia sẻ Đánh giá"
   },
   "show_ads": {
     "message": "Hiển thị quảng cáo"

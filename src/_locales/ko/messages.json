@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1 시간"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "빠른 리뷰가 큰 도움이 됩니다."
+  },
   "about": {
     "message": "소개"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery가 숨긴 부분을 규칙으로 저장했습니다. 웹 사이트 설정에서 언제나 취소할 수 있습니다."
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "이 사이트에서 Ghostery가 비활성화되었습니다."
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "이 사이트에서 Ghostery가 활성화되었습니다."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 사용을 다시 시작합니다."
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "위험을 이해했습니다. 이 사이트에 대해 다시 경고하지 마세요."
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "고스트리가 당신의 브라우징을 더 좋게 만든다면, 짧은 리뷰가 더 많은 사람들이 차분하고 광고 없는 웹을 발견하는 데 도움이 됩니다."
   },
   "ignore": {
     "message": "무시"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "아직 웹 사이트 예외가 추가되지 않았습니다"
+  },
+  "notifications": {
+    "message": "알림"
   },
   "observed_activities": {
     "message": "감지된 활동"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "설정을 끝마쳤습니다"
+  },
+  "share_a_review": {
+    "message": "리뷰 공유"
   },
   "show_ads": {
     "message": "광고 표시"

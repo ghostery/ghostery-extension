@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1 godzina"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "Krótka recenzja może wiele zdziałać"
+  },
   "about": {
     "message": "O nas"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery dodało regułę, aby ten blok treści pozostał ukryty. Możesz to cofnąć w ustawieniach strony w dowolnym momencie."
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghostery zostało wyłączone dla tej witryny."
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "Ghostery zostało włączone dla tej witryny."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery zostało wznowione."
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "Rozumiem ryzyko, nie ostrzegaj mnie ponownie o tej stronie"
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "Jeśli Ghostery poprawia komfort przeglądania stron internetowych, krótka recenzja pomoże większej liczbie osób odkryć spokojniejszy internet bez reklam."
   },
   "ignore": {
     "message": "Zignoruj"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nie dodano jeszcze wyjątków dla poszczególnych stron internetowych"
+  },
+  "notifications": {
+    "message": "Powiadomienia"
   },
   "observed_activities": {
     "message": "Obserwowane aktywności"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "Skonfigurowano pomyślnie"
+  },
+  "share_a_review": {
+    "message": "Udostępnij recenzję"
   },
   "show_ads": {
     "message": "Wyświetlaj reklamy"
