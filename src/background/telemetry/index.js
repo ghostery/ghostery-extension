@@ -17,34 +17,8 @@ import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-import Metrics, { processUrlQuery } from './metrics.js';
-
-async function detectUTMs() {
-  const tabs = await chrome.tabs.query({
-    url: [
-      'https://chromewebstore.google.com/detail/ghostery-*/mlomiejdfkolichcflejclcbmpeaniij*',
-      'https://chrome.google.com/webstore/detail/ghostery-*/mlomiejdfkolichcflejclcbmpeaniij*',
-      'https://microsoftedge.microsoft.com/addons/detail/ghostery-*/fclbdkbhjlgkbpfldjodgjncejkkjcme*',
-      'https://addons.mozilla.org/*/firefox/addon/ghostery/*',
-      'https://addons.opera.com/*/extensions/details/ghostery/*',
-      'https://apps.apple.com/app/apple-store/id6504861501/*',
-      'https://apps.apple.com/*/app/ghostery-*/id6504861501*',
-      'https://www.ghostery.com/*',
-      'https://www.ghosterystage.com/*',
-    ],
-  });
-
-  // find first ghostery.com tab with utm_source and utm_campaign
-  for (const tab of tabs) {
-    const query = processUrlQuery(tab.url);
-
-    if (query.utm_source && query.utm_campaign) {
-      return query;
-    }
-  }
-
-  return {};
-}
+import Metrics from './metrics.js';
+import detectAttribution from './attribution.js';
 
 export async function getStorage() {
   const { metrics } = await chrome.storage.local.get(['metrics']);
@@ -64,9 +38,9 @@ const setup = asyncSetup('telemetry', [
     if (!metrics.installDate) {
       metrics.installDate = new Date().toISOString().split('T')[0];
 
-      const utms = await detectUTMs();
-      metrics.utm_source = utms.utm_source || '';
-      metrics.utm_campaign = utms.utm_campaign || '';
+      const attribution = await detectAttribution();
+      metrics.utm_source = attribution.utm_source || '';
+      metrics.utm_campaign = attribution.utm_campaign || '';
 
       await saveStorage(metrics);
     }
