@@ -320,7 +320,7 @@ export default {
             <ui-text type="headline-s">Actions</ui-text>
             <div layout="row gap items:start">
               <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
-                <button data-qa="button:clear-storage">
+                <button>
                   <ui-icon name="trash" layout="size:2"></ui-icon>
                   Clear storage
                 </button>
