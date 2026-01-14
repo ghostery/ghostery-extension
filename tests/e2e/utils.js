@@ -89,7 +89,7 @@ export async function clearStorageAndReload() {
     await version.click();
   }
 
-  await getExtensionElement('button:clear-storage', 'button').click();
+  await getExtensionElement('button:clear-storage').click();
 
   await browser.pause(3000);
 

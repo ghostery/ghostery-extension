@@ -259,15 +259,21 @@ export default {
               <div layout="column gap:0.5">
                 <ui-text type="body-m" color="secondary">
                   <ui-text type="label-m">Install date:</ui-text>
-                  <span data-qa="text:install-date">${telemetry.installDate || 'N/A'}</span>
+                  <span data-qa="text:install-date"
+                    >${telemetry.installDate || 'N/A'}</span
+                  >
                 </ui-text>
                 <ui-text type="body-m" color="secondary">
                   <ui-text type="label-m">Source:</ui-text>
-                  <span data-qa="text:utm-source">${telemetry.utm_source || 'N/A'}</span>
+                  <span data-qa="text:utm-source"
+                    >${telemetry.utm_source || 'N/A'}</span
+                  >
                 </ui-text>
                 <ui-text type="body-m" color="secondary">
                   <ui-text type="label-m">Campaign:</ui-text>
-                  <span data-qa="text:utm-campaign">${telemetry.utm_campaign || 'N/A'}</span>
+                  <span data-qa="text:utm-campaign"
+                    >${telemetry.utm_campaign || 'N/A'}</span
+                  >
                 </ui-text>
               </div>
             </div>
