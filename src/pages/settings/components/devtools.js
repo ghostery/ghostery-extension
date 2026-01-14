@@ -21,6 +21,7 @@ import Options from '/store/options.js';
 import Config from '/store/config.js';
 import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
+import { getStorage as getTelemetryStorage } from '/background/telemetry/index.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
@@ -96,6 +97,14 @@ export default {
   config: store(Config),
   notifications: store([Notification]),
   resources: store(Resources),
+  telemetry: {
+    value: undefined,
+    connect: (host) => {
+      getTelemetryStorage().then((storage) => {
+        host.telemetry = storage;
+      });
+    },
+  },
   render: ({
     visible,
     counter,
@@ -103,6 +112,7 @@ export default {
     config,
     notifications,
     resources,
+    telemetry,
   }) => html`
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
@@ -242,6 +252,26 @@ export default {
               </div>
             </div>
           `}
+          ${telemetry &&
+          html`
+            <div layout="column gap items:start" translate="no">
+              <ui-text type="headline-s">Attribution</ui-text>
+              <div layout="column gap:0.5">
+                <ui-text type="body-m" color="secondary">
+                  <ui-text type="label-m">Install date:</ui-text>
+                  <span data-qa="text:install-date">${telemetry.installDate || 'N/A'}</span>
+                </ui-text>
+                <ui-text type="body-m" color="secondary">
+                  <ui-text type="label-m">Source:</ui-text>
+                  <span data-qa="text:utm-source">${telemetry.utm_source || 'N/A'}</span>
+                </ui-text>
+                <ui-text type="body-m" color="secondary">
+                  <ui-text type="label-m">Campaign:</ui-text>
+                  <span data-qa="text:utm-campaign">${telemetry.utm_campaign || 'N/A'}</span>
+                </ui-text>
+              </div>
+            </div>
+          `}
           ${__PLATFORM__ !== 'firefox' &&
           html`
             <div layout="column gap items:start" translate="no">
@@ -290,7 +320,7 @@ export default {
             <ui-text type="headline-s">Actions</ui-text>
             <div layout="row gap items:start">
               <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
-                <button>
+                <button data-qa="button:clear-storage">
                   <ui-icon name="trash" layout="size:2"></ui-icon>
                   Clear storage
                 </button>

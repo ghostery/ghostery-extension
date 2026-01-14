@@ -321,6 +321,7 @@ export default {
             <settings-devtools
               onshown="${html.set('devMode', true)}"
               visible="${devMode}"
+              data-qa="component:devtools"
             ></settings-devtools>
             <div layout="row gap items:center">
               <ui-text type="body-m" color="tertiary">
