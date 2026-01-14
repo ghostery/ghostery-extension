@@ -19,7 +19,6 @@ import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
-import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
@@ -332,32 +331,30 @@ export default {
           </div>
         </form>
 
-        ${(__PLATFORM__ === 'firefox' || !isWebkit()) &&
-        html`
-          <div layout="row gap:5">
-            <settings-option static icon="cookie">
+        <div layout="row gap:5">
+          <settings-option static icon="cookie">
+            Clear Cookies
+            <span slot="description">
+              Remove all cookies stored by this site to protect your privacy and
+              reset your browsing data.
+            </span>
+            ${clearedCookies &&
+            html`
+              <ui-text slot="footer" type="body-s" color="success-primary">
+                Cookies successfully cleared
+              </ui-text>
+            `}
+          </settings-option>
+          <ui-button disabled="${clearedCookies}">
+            <a
+              href="${router.url(WebsiteClearCookies, { domain })}"
+              data-qa="button:clear-cookies"
+            >
               Clear Cookies
-              <span slot="description">
-                Remove all cookies stored by this site to protect your privacy
-                and reset your browsing data.
-              </span>
-              ${clearedCookies &&
-              html`
-                <ui-text slot="footer" type="body-s" color="success-primary">
-                  Cookies successfully cleared
-                </ui-text>
-              `}
-            </settings-option>
-            <ui-button disabled="${clearedCookies}">
-              <a
-                href="${router.url(WebsiteClearCookies, { domain })}"
-                data-qa="button:clear-cookies"
-              >
-                Clear Cookies
-              </a>
-            </ui-button>
-          </div>
-        `}
+            </a>
+          </ui-button>
+        </div>
+
         ${hasWTMStats(topLevelDomain) &&
         html`
           <div layout="margin:3:0">

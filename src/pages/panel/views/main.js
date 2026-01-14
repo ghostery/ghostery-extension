@@ -11,7 +11,6 @@
 
 import { html, store, router, msg } from 'hybrids';
 
-import { isWebkit } from '/utils/browser-info.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, {
@@ -273,34 +272,31 @@ export default {
                   ></ui-icon>
                 </a>
               </panel-actions-button>
-              ${(__PLATFORM__ === 'firefox' || !isWebkit()) &&
-              html`
-                <panel-actions-button>
-                  <a
-                    href="${router.url(ClearCookies)}"
-                    data-qa="button:clear-cookies"
-                  >
-                    <panel-actions-icon name="cookie"></panel-actions-icon>
-                    Clear cookies
-                    <ui-icon
-                      name="chevron-right"
-                      color="tertiary"
-                      layout="size:2"
-                    ></ui-icon>
-                  </a>
-                </panel-actions-button>
-                <panel-actions-button>
-                  <button onclick="${openLogger}">
-                    <panel-actions-icon name="open-book"></panel-actions-icon>
-                    View details logs
-                    <ui-icon
-                      name="chevron-right"
-                      color="tertiary"
-                      layout="size:2"
-                    ></ui-icon>
-                  </button>
-                </panel-actions-button>
-              `}
+              <panel-actions-button>
+                <a
+                  href="${router.url(ClearCookies)}"
+                  data-qa="button:clear-cookies"
+                >
+                  <panel-actions-icon name="cookie"></panel-actions-icon>
+                  Clear cookies
+                  <ui-icon
+                    name="chevron-right"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
+                </a>
+              </panel-actions-button>
+              <panel-actions-button>
+                <button onclick="${openLogger}">
+                  <panel-actions-icon name="open-book"></panel-actions-icon>
+                  View details logs
+                  <ui-icon
+                    name="chevron-right"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
+                </button>
+              </panel-actions-button>
               <panel-actions-button>
                 <a
                   onclick="${openTabWithUrl}"
