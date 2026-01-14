@@ -89,29 +89,8 @@ OptionsObserver.addListener(async function telemetry(
   }
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action === 'telemetry') {
     Promise.resolve(setup.pending).then(() => runner?.ping(msg.event));
-  }
-
-  if (msg.action === 'e2e:telemetry:setCookie') {
-    chrome.cookies
-      .set({
-        url: msg.url,
-        name: msg.name,
-        value: msg.value,
-      })
-      .then(() => sendResponse('done'));
-    return true;
-  }
-
-  if (msg.action === 'e2e:telemetry:removeCookie') {
-    chrome.cookies
-      .remove({
-        url: msg.url,
-        name: msg.name,
-      })
-      .then(() => sendResponse('done'));
-    return true;
   }
 });

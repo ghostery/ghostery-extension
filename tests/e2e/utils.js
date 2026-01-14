@@ -54,20 +54,17 @@ async function sendMessage(msg) {
 }
 
 export async function setAttributionCookie(source, campaign) {
-  await sendMessage({
-    action: 'e2e:telemetry:setCookie',
-    url: 'https://www.ghostery.com/',
+  await browser.url('https://www.ghostery.com/');
+  await browser.setCookies({
     name: 'attribution',
     value: `s=${encodeURIComponent(source)}&c=${encodeURIComponent(campaign)}`,
+    domain: '.ghostery.com',
   });
 }
 
 export async function removeAttributionCookie() {
-  await sendMessage({
-    action: 'e2e:telemetry:removeCookie',
-    url: 'https://www.ghostery.com/',
-    name: 'attribution',
-  });
+  await browser.url('https://www.ghostery.com/');
+  await browser.deleteCookies('attribution');
 }
 
 export async function openDevtools() {
