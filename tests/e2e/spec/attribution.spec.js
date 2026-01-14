@@ -21,11 +21,6 @@ describe('Attribution', () => {
 
   it('captures attribution from ghostery.com cookie', async () => {
     await browser.url(getExtensionPageURL('settings'));
-    const version = await getExtensionElement('component:devtools', 'ui-text');
-    for (let i = 0; i < 6; i++) {
-      await version.click();
-    }
-    await expect(getExtensionElement('text:utm-source')).toBeDisplayed();
 
     await expect(getExtensionElement('text:utm-source')).toHaveText('source');
     await expect(getExtensionElement('text:utm-campaign')).toHaveText(

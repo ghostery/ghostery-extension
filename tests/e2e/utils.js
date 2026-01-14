@@ -92,7 +92,6 @@ export async function reloadExtension() {
 
 export async function enableExtension() {
   /* attribution.spec */
-  await browser.url('https://www.ghostery.com/');
   await browser.setCookies({
     name: 'attribution',
     value: `s=source&c=campaign`,

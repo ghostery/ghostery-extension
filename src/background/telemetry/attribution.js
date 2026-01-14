@@ -12,7 +12,7 @@
 import { processUrlQuery } from './metrics.js';
 
 const ATTRIBUTION_COOKIE = 'attribution';
-const ATTRIBUTION_DOMAINS = ['ghostery.com', 'ghostery.info'];
+const ATTRIBUTION_DOMAINS = ['www.ghostery.com', 'ghostery.info'];
 
 function parseAttributionCookie(value) {
   if (!value) return null;
@@ -26,19 +26,36 @@ function parseAttributionCookie(value) {
 }
 
 async function getAttributionFromCookies() {
-  for (const domain of ATTRIBUTION_DOMAINS) {
-    try {
-      const cookies = await chrome.cookies.getAll({
-        domain,
-        name: ATTRIBUTION_COOKIE,
-      });
+  const tabs = await chrome.tabs.query({
+    url: ATTRIBUTION_DOMAINS.map((domain) => `https://${domain}/*`),
+  });
+  const tabIds = new Set(tabs.map((tab) => tab.id));
 
-      for (const cookie of cookies) {
-        const attribution = parseAttributionCookie(cookie.value);
-        if (attribution) return attribution;
+  const cookieStores = await chrome.cookies.getAllCookieStores();
+  const storeIds = cookieStores
+    .filter((store) => store.tabIds.some((id) => tabIds.has(id)))
+    .map((store) => store.id);
+
+  if (storeIds.length === 0) {
+    storeIds.push(undefined);
+  }
+
+  for (const domain of ATTRIBUTION_DOMAINS) {
+    for (const storeId of storeIds) {
+      try {
+        const cookie = await chrome.cookies.get({
+          url: `https://${domain}/`,
+          name: ATTRIBUTION_COOKIE,
+          storeId,
+        });
+
+        if (cookie) {
+          const attribution = parseAttributionCookie(cookie.value);
+          if (attribution) return attribution;
+        }
+      } catch (e) {
+        console.error(`[telemetry] Failed to read cookies for ${domain}:`, e);
       }
-    } catch (e) {
-      console.error(`[telemetry] Failed to read cookies for ${domain}:`, e);
     }
   }
   return null;
