@@ -53,56 +53,6 @@ async function sendMessage(msg) {
   }
 }
 
-export async function setAttributionCookie(source, campaign) {
-  await browser.url('https://www.ghostery.com/');
-  await browser.setCookies({
-    name: 'attribution',
-    value: `s=${encodeURIComponent(source)}&c=${encodeURIComponent(campaign)}`,
-    domain: '.ghostery.com',
-  });
-}
-
-export async function removeAttributionCookie() {
-  await browser.url('https://www.ghostery.com/');
-  await browser.deleteCookies('attribution');
-}
-
-export async function openDevtools() {
-  await browser.url(getExtensionPageURL('settings'));
-
-  const version = await getExtensionElement('component:devtools', 'ui-text');
-  for (let i = 0; i < 6; i++) {
-    await version.click();
-  }
-
-  await expect(getExtensionElement('text:utm-source')).toBeDisplayed();
-}
-
-export async function clearStorageAndReload() {
-  await browser.url(getExtensionPageURL('settings'));
-
-  const version = await getExtensionElement('component:devtools', 'ui-text');
-  for (let i = 0; i < 6; i++) {
-    await version.click();
-  }
-
-  await getExtensionElement('button:clear-storage').click();
-
-  await browser.pause(3000);
-
-  await browser.waitUntil(
-    async () => {
-      const title = await browser.getTitle();
-      if (title !== 'Ghostery panel') {
-        await browser.url(getExtensionPageURL('panel'));
-        return false;
-      }
-      return true;
-    },
-    { timeout: 10000, timeoutMsg: 'Panel did not load after reload' },
-  );
-}
-
 export async function waitForIdleBackgroundTasks() {
   await sendMessage({ action: 'e2e:idleOptionsObservers' });
 }
@@ -141,6 +91,15 @@ export async function reloadExtension() {
 }
 
 export async function enableExtension() {
+  /* attribution.spec */
+  await browser.url('https://www.ghostery.com/');
+  await browser.setCookies({
+    name: 'attribution',
+    value: `s=source&c=campaign`,
+    domain: '.ghostery.com',
+  });
+  /* attribution.spec */
+
   await browser.url(getExtensionPageURL('onboarding'));
 
   if (!(await getExtensionElement('view:success').isDisplayed())) {

@@ -37,11 +37,6 @@ const setup = asyncSetup('telemetry', [
 
     if (!metrics.installDate) {
       metrics.installDate = new Date().toISOString().split('T')[0];
-
-      const attribution = await detectAttribution();
-      metrics.utm_source = attribution.utm_source || '';
-      metrics.utm_campaign = attribution.utm_campaign || '';
-
       await saveStorage(metrics);
     }
 
@@ -73,6 +68,15 @@ OptionsObserver.addListener(async function telemetry(
     setup.pending && (await setup.pending);
 
     if (runner.isJustInstalled()) {
+      try {
+        const attribution = await detectAttribution();
+        runner.storage.utm_source = attribution.utm_source || '';
+        runner.storage.utm_campaign = attribution.utm_campaign || '';
+        await saveStorage(runner.storage);
+      } catch (error) {
+        console.error('Error detecting attribution:', error);
+      }
+
       runner.ping('install');
     }
 
