@@ -43,9 +43,9 @@ async function sendMessage(msg) {
 
   const result = await browser.execute(
     browser.isChromium
-      ? (msg) => chrome.runtime.sendMessage(msg)
-      : (msg) => browser.runtime.sendMessage(msg),
-    msg,
+      ? (msg) => chrome.runtime.sendMessage(JSON.parse(msg))
+      : (msg) => browser.runtime.sendMessage(JSON.parse(msg)),
+    JSON.stringify(msg),
   );
 
   if (result !== 'done') {
@@ -199,4 +199,11 @@ export async function setCustomFilters(filters, callback) {
   }
 
   await getExtensionElement('button:back').click();
+}
+
+export async function switchFrame(frameElement) {
+  await browser.switchFrame(null);
+  await frameElement.waitForExist({ timeout: 5000 });
+
+  await browser.switchFrame(frameElement);
 }

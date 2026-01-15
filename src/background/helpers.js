@@ -15,6 +15,7 @@ import Config from '/store/config.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
+import { updateEngines } from './adblocker.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -59,6 +60,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         },
       );
       break;
+    case 'updateEngines':
+      updateEngines({ cache: false }).then(() => {
+        sendResponse();
+        console.info('[helpers] "updateEngines" response...');
+      });
+      return true;
     case 'idle':
       OptionsObserver.waitForIdle().then(() => {
         sendResponse('done');

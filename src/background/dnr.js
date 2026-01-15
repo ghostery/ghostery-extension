@@ -24,6 +24,7 @@ import {
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
+import { UPDATE_ENGINES_DELAY } from './adblocker.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__PLATFORM__ !== 'firefox') {
@@ -31,6 +32,7 @@ if (__PLATFORM__ !== 'firefox') {
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
     .map(({ id }) => id);
+  const DNR_FIXES_KEY = 'dnr-fixes';
 
   function getIds(options) {
     if (!options.terms || isGloballyPaused(options)) return [];
@@ -69,6 +71,7 @@ if (__PLATFORM__ !== 'firefox') {
     if (
       lastOptions &&
       lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
+      lastOptions.fixesFilters === options.fixesFilters &&
       String(ids) === String(getIds(lastOptions))
     ) {
       // No changes in options triggering an update, skip updating rules
@@ -82,10 +85,9 @@ if (__PLATFORM__ !== 'firefox') {
 
     // Add latest fixes rules
     if (config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
-      const DNR_FIXES_KEY = 'dnr-fixes';
       const resources = await store.resolve(Resources);
 
-      if (ids.length) {
+      if (options.fixesFilters && ids.length) {
         if (
           !resources.checksums[DNR_FIXES_KEY] ||
           lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
@@ -97,6 +99,15 @@ if (__PLATFORM__ !== 'firefox') {
 
             const list = await fetch(
               `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
+              {
+                // Force no caching if update was triggered by the user ("Update now" action)
+                cache:
+                  lastOptions &&
+                  lastOptions.filtersUpdatedAt >
+                    Date.now() - UPDATE_ENGINES_DELAY
+                    ? 'no-store'
+                    : 'default',
+              },
             ).then((res) =>
               res.ok
                 ? res.json()
@@ -107,7 +118,7 @@ if (__PLATFORM__ !== 'firefox') {
                   ),
             );
 
-            if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
+            if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
               const rules = new Set(
                 await fetch(list.dnr.url)
                   .then((res) =>
@@ -192,13 +203,13 @@ if (__PLATFORM__ !== 'firefox') {
         });
 
         await store.set(Resources, {
-          checksums: { ['dnr-fixes']: null },
+          checksums: { [DNR_FIXES_KEY]: null },
         });
 
         console.info('[dnr] Removed dynamic fixes rules');
       }
 
-      if (ids.length) ids.push('fixes');
+      if (options.fixesFilters && ids.length) ids.push('fixes');
     }
 
     const enableRulesetIds = [];

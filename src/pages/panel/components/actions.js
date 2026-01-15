@@ -39,10 +39,17 @@ export default {
         </ui-button>
       </div>
       <div
-        id="overlay"
+        id="overlay-header"
+        class="${{ open }}"
+        layout="absolute layer:101 top:0 left:0 right:0 height:6"
+        layout@390px="height:7"
+      ></div>
+      <div
+        id="overlay-actions"
         class="${{ open }}"
         layout="absolute layer:1 inset top:6"
         onclick="${html.set('open', false)}"
+        inert="${!open}"
       ></div>
       <div
         id="actions"
@@ -71,15 +78,23 @@ export default {
       pointer-events: all;
     }
 
-    #overlay {
+    #overlay-header, #overlay-actions {
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease-out;
+    }
+
+    #overlay-header {
+      background: var(--background-primary);
+    }
+
+    #overlay-actions {
       background: var(--component-custom-token-modal-overlay);
       backdrop-filter: blur(2px);
     }
 
-    #overlay.open {
+    #overlay-header.open,
+    #overlay-actions.open {
       opacity: 1;
       pointer-events: all;
     }

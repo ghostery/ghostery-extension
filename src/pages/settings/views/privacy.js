@@ -20,7 +20,9 @@ import Config from '/store/config.js';
 import { debugMode } from '/utils/debug.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
+import { asyncAction } from '../utils/actions.js';
 import assets from '../assets/index.js';
+
 import RegionalFilters from './regional-filters.js';
 import ExperimentalFilters from './experimental-filters.js';
 import CustomFilters from './custom-filters.js';
@@ -45,8 +47,8 @@ function updateGlobalPause({ options }, value, lastValue) {
   });
 }
 
-function updateFilters(host) {
-  store.set(host.options, { filtersUpdatedAt: 0 });
+function updateEngines(host, event) {
+  asyncAction(event, chrome.runtime.sendMessage({ action: 'updateEngines' }));
 }
 
 export default {
@@ -271,6 +273,7 @@ export default {
                     disabled="${globalPause}"
                     value="${options.experimentalFilters}"
                     onchange="${html.set(options, 'experimentalFilters')}"
+                    data-qa="toggle:experimental-filters"
                   >
                   </ui-toggle>
                 </div>
@@ -330,7 +333,7 @@ export default {
                 type="outline"
                 size="s"
                 style="height:26px"
-                onclick="${updateFilters}"
+                onclick="${updateEngines}"
                 disabled="${!options.filtersUpdatedAt}"
               >
                 <button layout="padding:0:1">Update Now</button>

@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1 小时"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "快速评价，效果显著"
+  },
   "about": {
     "message": "关于"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghostery添加了一条规则以保持此内容块隐藏。您可以随时在网站设置中撤销此操作。"
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghostery 已在此网站上被禁用。"
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "Ghostery 已在此网站上启用。"
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 已恢复。"
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "我了解风险，请不要再警告我有关此网站的内容。"
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "如果Ghostery让你的浏览体验更好，简短的评价可以帮助更多人发现一个更宁静、无广告的网络。"
   },
   "ignore": {
     "message": "忽略"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
+  },
+  "notifications": {
+    "message": "通知"
   },
   "observed_activities": {
     "message": "已观察过的活动"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "安装成功"
+  },
+  "share_a_review": {
+    "message": "分享评价"
   },
   "show_ads": {
     "message": "显示广告"

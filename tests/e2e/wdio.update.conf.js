@@ -16,7 +16,6 @@ import {
   cpSync,
   renameSync,
   existsSync,
-  writeFileSync,
 } from 'node:fs';
 import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
@@ -61,49 +60,46 @@ export const config = {
       }
 
       for (const capability of capabilities) {
-        const target =
-          capability.browserName === 'chrome' ? 'chromium' : 'firefox';
-
-        const fileName = `ghostery-${target}-${version}.zip`;
         const url = `https://github.com/ghostery/ghostery-extension/releases/download/v${version}/`;
+        const fileName = `ghostery-${capability.browserName === 'chrome' ? 'chromium' : 'firefox'}-${version}.zip`;
 
         const buildPath = resolve(wdio.WEB_EXT_PATH, fileName);
 
         // Download build artifacts
-        if (!existsSync(resolve(buildPath))) {
+        if (!existsSync(buildPath)) {
           console.log(`Downloading Ghostery extension from ${url}${fileName}`);
           execSync(`curl -L -o ${buildPath} "${url}${fileName}"`);
         }
 
-        switch (target) {
+        switch (capability.browserName) {
           case 'firefox': {
-            wdio.buildForFirefox();
+            // Prepare source archive for Firefox
+            const sourcePath = `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`;
+            if (!existsSync(sourcePath)) {
+              wdio.buildForFirefox();
 
-            cpSync(
-              wdio.FIREFOX_PATH,
-              `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
-            );
+              cpSync(
+                wdio.FIREFOX_PATH,
+                `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
+              );
+            }
 
+            // Use the downloaded build artifact
             cpSync(buildPath, wdio.FIREFOX_PATH);
             break;
           }
-          case 'chromium': {
+          case 'chrome': {
             const sourcePath = `${wdio.CHROME_PATH}-source`;
 
-            wdio.buildForChrome();
+            // Prepare source folder for Chrome
+            if (!existsSync(sourcePath)) {
+              wdio.buildForChrome();
+              cpSync(wdio.CHROME_PATH, sourcePath, { recursive: true });
+            }
 
-            rmSync(sourcePath, { recursive: true, force: true });
-            cpSync(wdio.CHROME_PATH, sourcePath, { recursive: true });
+            // Use the downloaded build artifact
             rmSync(wdio.CHROME_PATH, { recursive: true, force: true });
-
-            console.log(`Unzipping Ghostery extension...`);
             execSync(`unzip ${buildPath} -d ${wdio.CHROME_PATH}`);
-
-            const manifestPath = `${wdio.CHROME_PATH}/manifest.json`;
-            const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-            manifest.debug = true;
-
-            writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
             break;
           }
         }
@@ -125,20 +121,11 @@ export const config = {
 
       // Reload extension with the source
       switch (capabilities.browserName) {
-        case 'chrome': {
-          await browser.url('chrome://extensions');
-
-          renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
-          cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
-            recursive: true,
-          });
-          rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
-
-          await $('>>>#dev-reload-button').click();
-
-          break;
-        }
         case 'firefox': {
+          // Clean up replaced original path
+          rmSync(wdio.FIREFOX_PATH, { force: true });
+
+          // Replace extension files with the source
           const extension = readFileSync(
             `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
           );
@@ -153,6 +140,20 @@ export const config = {
               'extension-backgroundscript__status--running',
             ),
           );
+
+          break;
+        }
+        case 'chrome': {
+          // Replace and remove extension files with the source
+          renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
+          cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
+            recursive: true,
+          });
+          rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
+
+          // Reload the extension in the browser
+          await browser.url('chrome://extensions');
+          await $('>>>#dev-reload-button').click();
 
           break;
         }

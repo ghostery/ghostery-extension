@@ -24,30 +24,9 @@ import Resources from '/store/resources.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
+import { asyncAction } from '../utils/actions.js';
+
 const VERSION = chrome.runtime.getManifest().version;
-
-export async function asyncAction(event, promise) {
-  const button = event.currentTarget;
-  const el = button.children[0];
-  const origText = el.textContent;
-
-  button.disabled = true;
-  el.textContent = '...';
-
-  const response = await promise;
-
-  if (response) {
-    el.textContent = response;
-
-    setTimeout(() => {
-      button.disabled = false;
-      el.textContent = origText;
-    }, 2000);
-  } else {
-    button.disabled = false;
-    el.textContent = origText;
-  }
-}
 
 function clearStorage(host, event) {
   asyncAction(event, chrome.runtime.sendMessage({ action: 'clearStorage' }));
@@ -153,6 +132,19 @@ export default {
           </div>
           <ui-line></ui-line>
           <ui-text type="headline-s">Developer tools</ui-text>
+          ${html`
+            <div layout="column gap" translate="no">
+              <ui-toggle
+                value="${options.fixesFilters}"
+                onchange="${html.set(options, 'fixesFilters')}"
+                data-qa="toggle:fixes-filters"
+              >
+                <div layout="column">
+                  <ui-text type="headline-s">Ghostery specific fixes</ui-text>
+                </div>
+              </ui-toggle>
+            </div>
+          `}
           <div layout="column gap:2">
             <div layout="column gap">
               <ui-toggle

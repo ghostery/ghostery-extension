@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.5.24",
+  "version": "10.5.25",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
@@ -44,13 +44,13 @@
   },
   "dependencies": {
     "@duckduckgo/autoconsent": "^14.47.0",
-    "@ghostery/adblocker": "^2.13.2",
-    "@ghostery/adblocker-content": "^2.13.1",
-    "@ghostery/adblocker-extended-selectors": "^2.13.1",
-    "@ghostery/adblocker-webextension": "^2.13.2",
+    "@ghostery/adblocker": "^2.13.3",
+    "@ghostery/adblocker-content": "^2.13.3",
+    "@ghostery/adblocker-extended-selectors": "^2.13.3",
+    "@ghostery/adblocker-webextension": "^2.13.3",
     "@ghostery/config": "^0.0.5",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
-    "@ghostery/urlfilter2dnr": "^1.6.3",
+    "@ghostery/urlfilter2dnr": "^1.6.5",
     "@github/relative-time-element": "^5.0.0",
     "@sentry/browser": "^10.32.1",
     "@whotracksme/reporting": "^7.10.0",
@@ -64,8 +64,8 @@
     "tldts-experimental": "^7.0.19"
   },
   "dataDependencies": {
-    "redirect-resources": "5857391984919478fd5601d94a2b4a3e52694eb1394be35adba34f68b4cb8ffa",
-    "wtm-bloomfilter": "2025-12-29",
+    "redirect-resources": "a8ff7a3856dec301207e9e1a70701a6217b09fef788d954a56b4d361fd19de01",
+    "wtm-bloomfilter": "2026-01-12",
     "wtm-stats": "dc44480e5f348a60ea44a4618a530b72c13afe03"
   },
   "engineStrict": true,

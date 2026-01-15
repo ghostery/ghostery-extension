@@ -11,6 +11,9 @@
   "1_hour": {
     "message": "1時間"
   },
+  "a_quick_review_goes_a_long_way": {
+    "message": "簡単なレビューが大きな効果をもたらす"
+  },
   "about": {
     "message": "バージョン情報"
   },
@@ -415,12 +418,6 @@
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
     "message": "Ghosteryは、このコンテンツブロックを非表示にするルールを追加しました。ウェブサイトの設定でいつでも元に戻すことができます。"
   },
-  "ghostery_has_been_disabled_on_this_site_": {
-    "message": "Ghosteryはこのサイトで無効化されています。"
-  },
-  "ghostery_has_been_enabled_on_this_site_": {
-    "message": "Ghosteryがこのサイトで有効になっています。"
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghosteryが再開されました。"
   },
@@ -511,6 +508,9 @@
   },
   "i_understand_the_risk__don_t_warn_me_again_about_this_site": {
     "message": "リスクを理解しました。このサイトについて再度警告しないでください。"
+  },
+  "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
+    "message": "Ghosteryがあなたのブラウジングを向上させるなら、短いレビューを書くことで、より多くの人々が落ち着いた広告なしのウェブを発見する手助けになります。"
   },
   "ignore": {
     "message": "無視する"
@@ -638,6 +638,9 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "ウェブサイトの例外はまだ追加されていません"
+  },
+  "notifications": {
+    "message": "通知"
   },
   "observed_activities": {
     "message": "観察済みのアクティビティ"
@@ -838,6 +841,9 @@
   },
   "setup_successful": {
     "message": "セットアップ成功"
+  },
+  "share_a_review": {
+    "message": "レビューを共有する"
   },
   "show_ads": {
     "message": "広告を表示"
