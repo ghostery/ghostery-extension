@@ -65,7 +65,7 @@
       "run_at": "document_start"
     },
     {
-      "js": ["content_scripts/whotracksme/reporting.js"],
+      "js": ["content_scripts/whotracksme.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start"
     },
