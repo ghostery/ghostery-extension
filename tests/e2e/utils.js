@@ -91,14 +91,6 @@ export async function reloadExtension() {
 }
 
 export async function enableExtension() {
-  /* attribution.spec */
-  await browser.setCookies({
-    name: 'attribution',
-    value: `s=source&c=campaign`,
-    domain: '.ghostery.com',
-  });
-  /* attribution.spec */
-
   await browser.url(getExtensionPageURL('onboarding'));
 
   if (!(await getExtensionElement('view:success').isDisplayed())) {

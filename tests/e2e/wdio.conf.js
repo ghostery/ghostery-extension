@@ -186,6 +186,14 @@ export const config = {
         await browser.pause(2000);
       }
 
+      /* attribution.spec */
+      await browser.setCookies({
+        name: 'attribution',
+        value: `s=source&c=campaign`,
+        domain: '.ghostery.com',
+      });
+      /* attribution.spec */
+
       await setConfigFlags(argv.flags);
     } catch (e) {
       console.error('Error while setting up test environment', e);

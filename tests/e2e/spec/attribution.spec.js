@@ -17,7 +17,7 @@ import {
 } from '../utils.js';
 
 describe('Attribution', () => {
-  // The attribution cookie must be set before enableExtension() - see tests/e2e/utils.js
+  // The attribution cookie must be set before enableExtension() - see tests/e2e/wdio.js
   before(enableExtension);
 
   it('captures attribution from ghostery.com cookie', async () => {
