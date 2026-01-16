@@ -382,4 +382,28 @@ describe('createAncestorsList', () => {
       },
     ]);
   });
+
+  it('handles service worker restart', () => {
+    const { tabs, ancestors, sync } = createAncestorsList();
+
+    assert.deepStrictEqual(ancestors(0, 0, -1, 'foo.com'), []);
+    assert.deepStrictEqual(ancestors(0, 1, 0, 'frame.foo.com'), ['foo.com']);
+    assert.deepStrictEqual(ancestors(0, 2, 1, 'bar.com').reverse(), [
+      'foo.com',
+      'frame.foo.com',
+    ]);
+
+    const tabsBeforeClear = structuredClone(tabs);
+
+    // Clear tabs; emulating the service worker restart
+    tabs.splice(0, tabs.length);
+
+    sync(0, [
+      { frameId: 0, parentFrameId: -1, _details: 'foo.com' },
+      { frameId: 1, parentFrameId: 0, _details: 'frame.foo.com' },
+      { frameId: 2, parentFrameId: 1, _details: 'bar.com' },
+    ]);
+
+    assert.deepStrictEqual(tabsBeforeClear, tabs);
+  });
 });
