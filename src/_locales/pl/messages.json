@@ -639,9 +639,6 @@
   "no_websites_exceptions_added_yet": {
     "message": "Nie dodano jeszcze wyjątków dla poszczególnych stron internetowych"
   },
-  "notifications": {
-    "message": "Powiadomienia"
-  },
   "observed_activities": {
     "message": "Obserwowane aktywności"
   },
@@ -843,7 +840,7 @@
     "message": "Skonfigurowano pomyślnie"
   },
   "share_a_review": {
-    "message": "Udostępnij recenzję"
+    "message": "Napisz recenzję"
   },
   "show_ads": {
     "message": "Wyświetlaj reklamy"
