@@ -38,6 +38,11 @@ import { setupTestPage } from './page/server.js';
  */
 export const config = {
   ...wdio.config,
+  exclude: [
+    // The `attribution.spec.js` tests relates to the code running only on the first install
+    // and can't be run during the update process.
+    './spec/attribution.spec.js',
+  ],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
       rmSync(wdio.WEB_EXT_PATH, { recursive: true, force: true });
