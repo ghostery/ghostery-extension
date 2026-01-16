@@ -84,9 +84,15 @@ export function buildForChrome() {
 
 export const config = {
   specs: [
-    // Onboarding tests should run first to avoid interference with other tests
-    // Notifications must run after onboarding to ensure a clean state for triggering notifications
-    ['spec/onboarding.spec.js', 'spec/notifications.spec.js', 'spec/*.spec.js'],
+    [
+      // Onboarding tests should run first to avoid interference with other tests
+      'spec/onboarding.spec.js',
+      // Notifications must run after onboarding to ensure
+      // a clean state for triggering notifications
+      'spec/notifications.spec.js',
+      // Other tests
+      'spec/*.spec.js',
+    ],
   ],
   reporters: [
     [
