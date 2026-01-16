@@ -15,7 +15,7 @@ import { getOffscreenImageData } from '/ui/wheel.js';
 import { order } from '/ui/categories.js';
 
 import DailyStats from '/store/daily-stats.js';
-import Options, { getPausedDetails } from '/store/options.js';
+import Options, { getPausedDetails, MODE_ZAP } from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -86,8 +86,8 @@ async function refreshIcon(tabId) {
   const stats = tabStats.get(tabId);
   if (!stats) return;
 
-  const inactive =
-    !options.terms || !!getPausedDetails(options, stats.hostname);
+  const paused = !!getPausedDetails(options, stats.hostname);
+  const inactive = options.mode !== MODE_ZAP && (!options.terms || paused);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {
@@ -116,7 +116,10 @@ async function refreshIcon(tabId) {
     try {
       await chromeAction.setBadgeText({
         tabId,
-        text: options.trackerCount ? String(stats.trackers.length) : '',
+        text:
+          options.trackerCount && (options.mode !== MODE_ZAP || !paused)
+            ? String(stats.trackers.length)
+            : '',
       });
     } catch (e) {
       console.error('Error while trying update the badge', e);
