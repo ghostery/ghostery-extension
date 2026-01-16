@@ -17,7 +17,7 @@ import ManagedConfig from '/store/managed-config.js';
 import Notification from '/store/notification.js';
 import Options from '/store/options.js';
 
-import { getOS, isOculus, isOpera, isWebkit } from '/utils/browser-info.js';
+import { getOS, isOpera, isWebkit } from '/utils/browser-info.js';
 import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
@@ -129,7 +129,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 if (
   __PLATFORM__ !== 'firefox' &&
   !isWebkit() && // Safari
-  !isOculus() && // Oculus Browser
   getOS() !== 'android' // Edge on Android (and possibly other browsers)
 ) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {

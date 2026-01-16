@@ -26,7 +26,7 @@ let type = '';
 if (__PLATFORM__ !== 'firefox') {
   const { name } = getBrowser();
 
-  if (name === 'chrome' || name === 'yandex') {
+  if (name === 'chrome' || name === 'yandex' || name === 'oculus') {
     screenshotURL = pinExtensionChrome;
     type = 'chrome';
   } else if (name === 'edge' && !isMobile()) {
