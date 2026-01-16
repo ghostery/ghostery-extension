@@ -15,7 +15,10 @@ import Options from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { isEdge, isMobile, isOpera, isSafari } from '/utils/browser-info.js';
-import { BECOME_A_CONTRIBUTOR_PAGE_URL, REVIEW_PAGE_URL } from '/utils/urls';
+import {
+  BECOME_A_CONTRIBUTOR_PAGE_URL,
+  PANEL_STORE_PAGE_URL,
+} from '/utils/urls';
 
 import callForReviewImage from '../assets/call-for-review.svg';
 import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
@@ -51,7 +54,7 @@ const NOTIFICATIONS = {
     img: callForReviewImage,
     type: 'review',
     text: msg`We're so glad Ghostery has your heart! Help others find us too - it only takes a moment.`,
-    url: REVIEW_PAGE_URL,
+    url: PANEL_STORE_PAGE_URL,
     action: msg`Leave a review today`,
   },
   contribution: {
