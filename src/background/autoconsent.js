@@ -9,8 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { evalSnippets } from '@duckduckgo/autoconsent';
-import rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { evalSnippets, filterCompactRules } from '@duckduckgo/autoconsent';
+import compactRules from '@duckduckgo/autoconsent/rules/compact-rules.json';
 import { ACTION_DISABLE_AUTOCONSENT } from '@ghostery/config';
 
 import { parse } from 'tldts-experimental';
@@ -20,14 +20,17 @@ import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
-async function initialize(msg, tab, frameId) {
+async function initialize(msg, sender) {
   const [options, config] = await Promise.all([
     store.resolve(Options),
     store.resolve(Config),
   ]);
 
   if (options.terms && options.blockAnnoyances) {
-    const hostname = tab.url ? parse(tab.url).hostname : '';
+    const { tab, frameId } = sender;
+
+    const senderUrl = sender.url || `${sender.origin}/`;
+    const hostname = senderUrl ? parse(senderUrl).hostname : '';
 
     if (
       getPausedDetails(options, hostname) ||
@@ -36,22 +39,25 @@ async function initialize(msg, tab, frameId) {
       return;
     }
 
+    const compact = filterCompactRules(compactRules, {
+      url: senderUrl,
+      mainFrame: frameId === 0,
+    });
+
     try {
       chrome.tabs.sendMessage(
         tab.id,
         {
           action: 'autoconsent',
           type: 'initResp',
-          rules,
+          rules: { compact },
           config: {
             autoAction: options.autoconsent.autoAction,
             enableCosmeticRules: false,
             enableFilterList: false,
           },
         },
-        {
-          frameId,
-        },
+        { frameId },
       );
     } catch {
       // The error is thrown when the tab is not ready to receive messages,
@@ -94,7 +100,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
   switch (msg.type) {
     case 'init':
-      return initialize(msg, sender.tab, frameId);
+      return initialize(msg, sender);
     case 'eval':
       return evalCode(msg.snippetId, msg.id, sender.tab.id, frameId);
     case 'optInResult':

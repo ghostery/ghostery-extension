@@ -408,22 +408,6 @@ const buildPromise = build({
     },
   },
   plugins: [
-    {
-      name: 'transform-autoconsent-rules',
-      load(id) {
-        if (id.endsWith('@duckduckgo/autoconsent/rules/rules.json')) {
-          const rules = JSON.parse(readFileSync(id, 'utf-8'));
-          const result = [];
-
-          for (const rule of rules.autoconsent) {
-            if (!rule.name.startsWith('auto_')) {
-              result.push(rule);
-            }
-          }
-          return JSON.stringify({ autoconsent: result });
-        }
-      },
-    },
     // Keep offscreen documents from @whotracksme/reporting
     {
       name: 'copy-reporting-assets',
