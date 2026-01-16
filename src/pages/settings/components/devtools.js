@@ -221,7 +221,7 @@ export default {
           </div>
           ${store.ready(notifications) &&
           html`
-            <div layout="column gap items:start">
+            <div layout="column gap items:start" translate="no">
               <ui-text type="headline-s">Notifications</ui-text>
               <div layout="row:wrap gap">
                 ${notifications.length === 0 &&
