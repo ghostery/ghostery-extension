@@ -85,6 +85,57 @@ const contentScripts = (() => {
 
 const hierarchy = createAncestorsList();
 
+// Start syncing tab information as the service worker started.
+chrome.tabs
+  // Using empty object will query all tabs in all windows.
+  .query({})
+  .then(async function (tabs) {
+    function decorateFrame(frame) {
+      const parsed = parse(frame.url);
+
+      return {
+        frameId: frame.frameId,
+        parentFrameId: frame.parentFrameId,
+        _details: {
+          hostname: parsed.hostname || '',
+          domain: parsed.domain || '',
+        },
+      };
+    }
+
+    async function syncAllFrames(tab) {
+      if (!tab.id) {
+        return;
+      }
+
+      hierarchy.sync(
+        tab.id,
+        (await chrome.webNavigation.getAllFrames({ tabId: tab.id })).map(
+          decorateFrame,
+        ),
+      );
+    }
+
+    await Promise.allSettled(tabs.map(syncAllFrames));
+  });
+
+// Listen for tab changes to maintain ancestor chain.
+chrome.tabs.onRemoved.addListener((tabId) => {
+  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+    return;
+  }
+
+  hierarchy.unregister(tabId, 0);
+});
+
+chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+    return;
+  }
+
+  hierarchy.replace(removedTabId, addedTabId);
+});
+
 let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
 
 if (__PLATFORM__ === 'firefox') {
@@ -510,23 +561,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
     injectCosmetics(details, msg);
   }
-});
-
-// Listen for tab changes to maintain ancestor chain.
-chrome.tabs.onRemoved.addListener((tabId) => {
-  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
-    return;
-  }
-
-  hierarchy.unregister(tabId, 0);
-});
-
-chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
-  if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
-    return;
-  }
-
-  hierarchy.replace(removedTabId, addedTabId);
 });
 
 if (__PLATFORM__ === 'firefox') {

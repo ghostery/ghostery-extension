@@ -142,6 +142,7 @@ export const createAncestorsList = () => {
     }
   }
 
+  // Update `tabId` per `tabs.onReplaced` events.
   function replace(tabId, newTabId) {
     const tabIndex = findTab(tabId);
 
@@ -152,10 +153,36 @@ export const createAncestorsList = () => {
     tabs[tabIndex].id = newTabId;
   }
 
+  // Sync using the return value of the browser extension API:
+  // `webNavigation.getAllFrames()`. This method expects the list
+  // of frames to have `_details` field for the internal use.
+  function sync(tabId, frames) {
+    const tabIndex = findTab(tabId);
+    const newFrameList = frames.map(function (frame) {
+      return {
+        id: frame.frameId,
+        parent: frame.parentFrameId,
+        details: frame._details,
+      };
+    });
+
+    if (tabIndex === -1) {
+      tabs.push({
+        id: tabId,
+        frames: newFrameList,
+      });
+
+      return;
+    }
+
+    tabs[tabIndex].frames = newFrameList;
+  }
+
   return {
     tabs,
     ancestors,
     unregister,
     replace,
+    sync,
   };
 };
