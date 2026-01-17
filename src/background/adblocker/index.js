@@ -34,9 +34,9 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
-import { tabStats, updateTabStats } from './stats.js';
-import { getRedirectProtectionUrl } from './redirect-protection.js';
-import { createAncestorsList } from '/utils/ancestors.js';
+import { tabStats, updateTabStats } from '../stats.js';
+import { getRedirectProtectionUrl } from '../redirect-protection.js';
+import { createAncestorsList } from './ancestors.js';
 
 let options = Options;
 

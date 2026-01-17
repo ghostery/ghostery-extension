@@ -12,7 +12,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 
-import { createAncestorsList } from '../../src/utils/ancestors.js';
+import { createAncestorsList } from '../../src/background/adblocker/ancestors.js';
 
 describe('createAncestorsList', () => {
   it('returns ancestor list', () => {

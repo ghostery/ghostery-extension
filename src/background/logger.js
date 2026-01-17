@@ -13,7 +13,7 @@ import { FilterType } from '@ghostery/adblocker';
 import * as engines from '/utils/engines.js';
 import { getMetadata, getOrganizations } from '/utils/trackerdb.js';
 
-import { setup } from './adblocker.js';
+import { setup } from './adblocker/index.js';
 import debounce from '/utils/debounce.js';
 
 const ports = new Set();
