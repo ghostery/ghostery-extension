@@ -12,7 +12,18 @@
 import { store } from 'hybrids';
 
 import DailyStats from '/store/daily-stats.js';
-import { isWebkit } from '/utils/browser-info.js';
+
+async function getAllCookies(domain) {
+  const stores = await chrome.cookies.getAllCookieStores();
+  const result = [];
+
+  for (const store of stores) {
+    const cookies = await chrome.cookies.getAll({ domain, storeId: store.id });
+    result.push(...cookies);
+  }
+
+  return result;
+}
 
 async function clearCookiesForDomain(domain) {
   if (!domain) {
@@ -22,7 +33,7 @@ async function clearCookiesForDomain(domain) {
 
   try {
     // Get all cookies for the exact domain and its subdomains
-    const cookies = await chrome.cookies.getAll({ domain });
+    const cookies = await getAllCookies(domain);
 
     let removed = 0;
 
@@ -67,18 +78,16 @@ async function clearCookiesForDomain(domain) {
   }
 }
 
-if (__PLATFORM__ === 'firefox' || !isWebkit()) {
-  chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg.action === 'cookies:clean') {
-      clearCookiesForDomain(msg.domain)
-        .then((removed) => {
-          sendResponse({ success: true, removed });
-        })
-        .catch((error) => {
-          sendResponse({ success: false, error: error.message });
-        });
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === 'cookies:clean') {
+    clearCookiesForDomain(msg.domain)
+      .then((removed) => {
+        sendResponse({ success: true, removed });
+      })
+      .catch((error) => {
+        sendResponse({ success: false, error: error.message });
+      });
 
-      return true;
-    }
-  });
-}
+    return true;
+  }
+});

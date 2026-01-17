@@ -90,11 +90,14 @@ export async function reloadExtension() {
   await browser.url('about:blank');
 }
 
-export async function enableExtension() {
+export async function enableExtension({ force = false } = {}) {
+  await browser.url('about:blank');
   await browser.url(getExtensionPageURL('onboarding'));
 
-  if (!(await getExtensionElement('view:success').isDisplayed())) {
-    await getExtensionElement('button:enable').click();
+  const enableButton = await getExtensionElement('button:enable');
+
+  if (force || (await enableButton.isDisplayed())) {
+    await enableButton.click();
 
     if (argv.flags.includes(FLAG_MODES)) {
       await expect(getExtensionElement('view:filtering-mode')).toBeDisplayed();

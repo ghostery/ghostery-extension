@@ -72,17 +72,6 @@
   },
   "content_scripts": [
     {
-      "js": ["content_scripts/whotracksme/index.js"],
-      "matches": ["http://*/*", "https://*/*"],
-      "run_at": "document_start"
-    },
-    {
-      "js": ["content_scripts/whotracksme/ghostery-whotracksme.js"],
-      "matches": ["http://*/*", "https://*/*"],
-      "run_at": "document_start",
-      "world": "MAIN"
-    },
-    {
       "js": ["content_scripts/adblocker/index.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
@@ -101,7 +90,7 @@
       "run_at": "document_start"
     },
     {
-      "js": ["content_scripts/whotracksme/reporting.js"],
+      "js": ["content_scripts/whotracksme.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start"
     },

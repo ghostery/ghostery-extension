@@ -13,30 +13,11 @@ import { store } from 'hybrids';
 
 import Config from '/store/config.js';
 
-import { isWebkit } from '/utils/browser-info.js';
+import { filter } from '/utils/config.js';
 import { CDN_URL } from '/utils/urls.js';
 import { debugMode } from '/utils/debug.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
-
-function filter(item) {
-  if (item.filter) {
-    const { platform } = item.filter;
-    let check = true;
-
-    // Browser check
-    // Possible values: 'chromium', 'firefox', 'webkit'
-    if (check && Array.isArray(platform)) {
-      check = platform.includes(
-        __PLATFORM__ !== 'firefox' && isWebkit() ? 'webkit' : __PLATFORM__,
-      );
-    }
-
-    return check;
-  }
-
-  return true;
-}
 
 const HALF_HOUR_IN_MS = 1000 * 60 * 30;
 

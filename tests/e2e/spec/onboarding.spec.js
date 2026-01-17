@@ -18,35 +18,29 @@ import {
 } from '../utils.js';
 
 describe('Onboarding', function () {
-  beforeEach(async function () {
-    await browser.url('about:blank');
-  });
-
   it('keeps ghostery disabled', async function () {
+    await browser.url('about:blank');
     await browser.url(getExtensionPageURL('onboarding'));
 
-    if (!(await getExtensionElement('view:success').isDisplayed())) {
-      await getExtensionElement('button:skip').click();
-      await expect(getExtensionElement('view:skip')).toBeDisplayed();
+    await getExtensionElement('button:skip').click();
+    await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
-      await openPanel();
-      await expect(getExtensionElement('button:enable')).toBeDisplayed();
-    }
+    await openPanel();
+    await expect(getExtensionElement('button:enable')).toBeDisplayed();
   });
 
   if (browser.isChromium) {
     it('shows the dialog with Privacy Policy', async function () {
+      await browser.url('about:blank');
       await browser.url(getExtensionPageURL('onboarding'));
 
-      if (!(await getExtensionElement('view:success').isDisplayed())) {
-        await getExtensionElement('text:description', 'a:last-of-type').click();
+      await getExtensionElement('text:description', 'a:last-of-type').click();
 
-        await expect(
-          getExtensionElement('text:privacy-policy', 'p'),
-        ).toBeDisplayed();
-      }
+      await expect(
+        getExtensionElement('text:privacy-policy', 'p'),
+      ).toBeDisplayed();
     });
   }
 
-  it('enables ghostery', enableExtension);
+  it('enables ghostery', () => enableExtension({ force: true }));
 });
