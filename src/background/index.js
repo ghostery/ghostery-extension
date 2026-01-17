@@ -13,7 +13,7 @@ import './onboarding.js';
 import './config.js';
 
 import './autoconsent.js';
-import './adblocker.js';
+import './adblocker/index.js';
 import './cookies.js';
 import './custom-filters.js';
 import './element-picker.js';

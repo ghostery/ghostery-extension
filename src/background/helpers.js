@@ -15,7 +15,7 @@ import Config from '/store/config.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
-import { updateEngines } from './adblocker.js';
+import { updateEngines } from './adblocker/index.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
