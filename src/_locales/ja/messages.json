@@ -639,9 +639,6 @@
   "no_websites_exceptions_added_yet": {
     "message": "ウェブサイトの例外はまだ追加されていません"
   },
-  "notifications": {
-    "message": "通知"
-  },
   "observed_activities": {
     "message": "観察済みのアクティビティ"
   },
