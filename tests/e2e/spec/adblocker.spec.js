@@ -146,6 +146,7 @@ describe('Adblocker Capabilities', function () {
         'rediradsbygoogle',
         '/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js',
       ],
+      ['redirgoogleima', '/gen/redirgoogleima.js^$redirect=google-ima.js'],
     ];
 
     let reports;
