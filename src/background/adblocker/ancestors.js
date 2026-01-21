@@ -130,7 +130,7 @@ export const createAncestorsList = () => {
       // Pick one `parent` and remove every frames having
       // `parent` as parent frame ID or frame ID.
       const parent = parents.pop();
-      for (frameIndex = 0; frameIndex < frames.length; frameIndex++) {
+      for (frameIndex = frames.length - 1; frameIndex >= 0; frameIndex--) {
         if (
           frames[frameIndex].parent === parent ||
           frames[frameIndex].id === parent
