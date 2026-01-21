@@ -13,7 +13,86 @@ on:
         type: string
 
 jobs:
-  lint:
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version-file: '.tool-versions'
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Lint
+  #       run: npm run lint
+  # unit:
+  #   runs-on: ubuntu-latest
+  #   needs: lint
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version-file: '.tool-versions'
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Unit Tests
+  #       run: npm run test:unit
+  # e2e:
+  #   needs: unit
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version-file: '.tool-versions'
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Test - Chrome
+  #       run: npm run wdio -- --target=chrome ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+
+  #     - name: Test - Firefox
+  #       run: npm run wdio -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+  # e2e-update:
+  #   needs: e2e
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version-file: '.tool-versions'
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Test - Chrome
+  #       run: npm run wdio:update -- --target=chrome ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+
+  #     - name: Test - Firefox
+  #       run: npm run wdio:update -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+  # e2e-no-flags:
+  #   needs: e2e
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version-file: '.tool-versions'
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Test - Chrome
+  #       run: npm run wdio -- --target=chrome --flags=
+
+  #     - name: Test - Firefox
+  #       run: npm run wdio -- --target=firefox --flags=
+  websites:
+    # needs: e2e
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -24,70 +103,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-  unit:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      # - name: Test Websites - Chrome
+      #   run: npm run wdio:websites -- --target=chrome ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+
+      - name: Test Websites - Firefox
+        run: npm run wdio:websites -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          node-version-file: '.tool-versions'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Unit Tests
-        run: npm run test:unit
-  e2e:
-    needs: unit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version-file: '.tool-versions'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Test - Chrome
-        run: npm run wdio -- --target=chrome ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
-
-      - name: Test - Firefox
-        run: npm run wdio -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
-  e2e-update:
-    needs: e2e
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version-file: '.tool-versions'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Test - Chrome
-        run: npm run wdio:update -- --target=chrome ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
-
-      - name: Test - Firefox
-        run: npm run wdio:update -- --target=firefox ${{ github.event.inputs.flags && format('--flags={0}', github.event.inputs.flags) || '' }}
-  e2e-no-flags:
-    needs: e2e
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version-file: '.tool-versions'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Test - Chrome
-        run: npm run wdio -- --target=chrome --flags=
-
-      - name: Test - Firefox
-        run: npm run wdio -- --target=firefox --flags=
+          name: screenshots
+          path: screenshots/
