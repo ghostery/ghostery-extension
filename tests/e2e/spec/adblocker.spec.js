@@ -138,9 +138,11 @@ describe('Adblocker Capabilities', function () {
       ['nosiif50', PAGE_DOMAIN + '##+js(nosiif, , 50)'],
     ];
     const networkingFilters = [
+      ['url', '/gen/url.js^'],
+      ['regex', '/gen\\/regex.js\\?t=[a-z0-9]{6}/'],
       ['modscript', '/gen/modscript.js^$script'],
       ['modxhr', '/gen/modxhr.js^$xhr'],
-      // $match-case (see Firefox)
+      ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
       ['redirnoopjs', '/gen/redirnoop.js^$redirect=noopjs'],
       [
         'rediradsbygoogle',
@@ -192,33 +194,6 @@ describe('Adblocker Capabilities', function () {
       }
     });
   });
-
-  if (browser.isChromium) {
-    describe('Chromium', function () {
-      const networkingFilters = [
-        // Firefox requires https://github.com/ghostery/adblocker/pull/5296 for proper URL handling
-        ['url', '/gen/url.js^'],
-        ['regex', '/gen\\/regex.js\\?t=[a-z0-9]{6}/'],
-        // modmatchcase is not supported by adblocker library yet
-        // refs https://github.com/ghostery/adblocker/pull/5296
-        ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
-      ];
-
-      let reports;
-
-      before(async function () {
-        reports = await test(networkingFilters);
-      });
-
-      describe('Networking', function () {
-        for (const [id, filter] of networkingFilters) {
-          it(filter, async function () {
-            expect(reports.networking[0].results[id]).toBe(true);
-          });
-        }
-      });
-    });
-  }
 
   if (browser.isFirefox) {
     describe('Firefox', function () {
