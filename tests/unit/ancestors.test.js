@@ -676,7 +676,7 @@ describe('#FramesHierarchy', () => {
 
       const hierarchy = new FramesHierarchy();
 
-      // Start listening to webextension events.
+      // Start syncing by using `chrome.tabs.query()`.
       assert.doesNotReject(async () => {
         await hierarchy.handleWebWorkerStart(
           {
