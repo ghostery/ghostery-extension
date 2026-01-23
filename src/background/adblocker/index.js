@@ -93,7 +93,8 @@ if (__PLATFORM__ === 'firefox') {
 
 const hierarchy = new FramesHierarchy();
 
-hierarchy.handleWebextensionEvents();
+void hierarchy.handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
+void hierarchy.handleWebWorkerStart();
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -356,7 +357,7 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  const { frameId, parentFrameId, url, tabId } = details;
+  const { tabId, frameId, parentFrameId, documentId, url } = details;
 
   const parsed = parse(url);
   const domain = parsed.domain || '';
@@ -391,10 +392,13 @@ async function injectCosmetics(details, config) {
       // is executed.
       ancestors = [{ domain, hostname }];
     } else {
-      ancestors = hierarchy.ancestors(tabId, frameId, parentFrameId, {
-        domain,
-        hostname,
-      });
+      ancestors = hierarchy.ancestors(
+        { tabId, frameId, parentFrameId, documentId },
+        {
+          domain,
+          hostname,
+        },
+      );
     }
   }
 

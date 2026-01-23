@@ -12,13 +12,16 @@
 import { parse } from 'tldts-experimental';
 
 export class FramesHierarchy {
-  #tabs = [];
+  /**
+   * @type {Array<{ id: number; frames: Array<{ id: number; parent: number; documentId: string; details: unknown }> }>}
+   */
+  tabs = [];
 
   // -- Internals
   #findTab(tabId) {
     let tabIndex = this.tabs.length;
     while (--tabIndex > -1) {
-      if (this.#tabs[tabIndex].id === tabId) {
+      if (this.tabs[tabIndex].id === tabId) {
         break;
       }
     }
@@ -27,7 +30,7 @@ export class FramesHierarchy {
   }
 
   ancestors(target, details) {
-    let { tabId, frameId, parentFrameId, documentId } = target;
+    let { tabId, frameId, parentFrameId, documentId = '' } = target;
     let tabIndex = this.#findTab(tabId);
 
     // If the tab is just registered, we can skip retrieving
@@ -35,7 +38,7 @@ export class FramesHierarchy {
     if (tabIndex === -1) {
       // Only build the list from the main frame.
       if (parentFrameId === -1) {
-        tabIndex = this.#tabs.push({
+        tabIndex = this.tabs.push({
           id: tabId,
           frames: [{ id: frameId, parent: parentFrameId, documentId, details }],
         });
@@ -43,7 +46,7 @@ export class FramesHierarchy {
       return [];
     }
 
-    const frames = this.#tabs[tabIndex].frames;
+    const frames = this.tabs[tabIndex].frames;
     // The array of details except for the current one.
     const chain = [];
 
@@ -54,28 +57,71 @@ export class FramesHierarchy {
     let framesLength = frames.length;
     let frameIndex = framesLength;
 
-    while (--frameIndex !== -1) {
-      if (
-        typeof documentId !== 'undefined' &&
-        frames[frameIndex].documentId === documentId &&
-        frames[frameIndex].frameId !== frameId
-      ) {
-        // We need to update the frame details as it's out of
-        // sync. We also need to find all direct children and
-        // update them.
-        for (const frame of frames) {
-          if (frame.parent === frames[frameIndex].frameId) {
-            frame.parent = frameId;
+    if (documentId.length) {
+      while (--frameIndex !== -1) {
+        if (frames[frameIndex].documentId === documentId) {
+          // If we found the frame having same `documentId` and
+          // `frameId`, we can safely exit here.
+          if (frames[frameIndex].id === frameId) {
+            // Update details potentially outdated.
+            frames[frameIndex].parent = parentFrameId;
+            frames[frameIndex].details = details;
+
+            break;
           }
+
+          // If `frameId` doesn't match, it means the frame is
+          // replacing the other frame.
+          const targetFrame = frames[frameIndex];
+
+          // First, we need to unregister the obsolete frame and
+          // its children. However, we need to unlink the
+          // replacing node from the obsolete node by manually
+          // changing `parent` value to `-1`. This will prevent
+          // `unregister` function to remove the replacing node.
+          targetFrame.parent = -1;
+
+          // Now, we call `unregister` and remove the obsolete
+          // node.
+          this.unregister(tabId, frameId);
+
+          // We need to update the frame details as it's out of
+          // sync. We also need to find all direct children and
+          // update them. Hopefully, we don't need to update its
+          // nested frame ids.
+          //
+          // > As of Chrome 49, this ID is also constant for the
+          // > lifetime of the frame ...
+          // > https://developer.chrome.com/docs/extensions/reference/api/webNavigation#frame_ids
+          //
+          // > As a frame navigates its RenderFrameHost may
+          // > change, but its FrameTreeNode stays the same.
+          // > https://chromium.googlesource.com/chromium/src/+/refs/heads/lkgr/docs/frame_trees.md#relationships-between-core-classes-in-content
+          for (const frame of frames) {
+            // Update parent frame ID of every frame pointing to
+            // "this frame" (having outdated "parent" frame id).
+            if (frame.parent === targetFrame.id) {
+              frame.parent = frameId;
+            }
+          }
+
+          // Update details potentially outdated and link the
+          // replacing node again.
+          targetFrame.id = frameId;
+          targetFrame.parent = parentFrameId;
+          targetFrame.details = details;
+
+          break;
         }
+      }
+    } else {
+      while (--frameIndex !== -1) {
+        if (frames[frameIndex].id === frameId) {
+          // Update details potentially outdated.
+          frames[frameIndex].details = details;
 
-        frames[frameIndex].id = frameId;
-        frames[frameIndex].parent = parentFrameId;
-        frames[frameIndex].details = details;
-
-        break;
-      } else if (frames[frameIndex].id === frameId) {
-        break;
+          break;
+        }
       }
     }
 
@@ -84,11 +130,9 @@ export class FramesHierarchy {
         frames.push({
           id: frameId,
           parent: parentFrameId,
+          documentId,
           details,
         }) - 1;
-    } else {
-      // Update the details to the latest reported values.
-      frames[frameIndex].details = details;
     }
 
     if (parentFrameId === -1) {
@@ -124,7 +168,7 @@ export class FramesHierarchy {
 
     // If it ends up detecting an incomplete hierarchy, we drop
     // all the details to prevent further resource use.
-    this.#tabs.splice(tabIndex, 1);
+    this.tabs.splice(tabIndex, 1);
 
     return [];
   }
@@ -136,7 +180,7 @@ export class FramesHierarchy {
       return;
     }
 
-    this.#tabs[tabIndex].id = addedTabId;
+    this.tabs[tabIndex].id = addedTabId;
   }
 
   unregister(tabId, frameId) {
@@ -146,13 +190,7 @@ export class FramesHierarchy {
       return;
     }
 
-    // Drop the full detail in case unregistering the tab.
-    if (frameId === 0) {
-      this.#tabs.splice(tabIndex, 1);
-      return;
-    }
-
-    const frames = this.#tabs[tabIndex].frames;
+    const frames = this.tabs[tabIndex].frames;
     // Initialise the list of `frameId`s to remove with the
     // current `frameId`.
     const parents = [frameId];
@@ -163,7 +201,9 @@ export class FramesHierarchy {
       // Pick one `parent` and remove every frames having
       // `parent` as parent frame ID or frame ID.
       const parent = parents.pop();
-      for (frameIndex = frames.length - 1; frameIndex >= 0; frameIndex--) {
+
+      frameIndex = frames.length;
+      while (frameIndex--) {
         if (
           frames[frameIndex].parent === parent ||
           frames[frameIndex].id === parent
@@ -172,6 +212,11 @@ export class FramesHierarchy {
           frames.splice(frameIndex, 1);
         }
       }
+    }
+
+    // If there's no more frame, remove the tab.
+    if (frames.length === 0) {
+      this.tabs.splice(tabIndex, 1);
     }
   }
 
@@ -184,12 +229,13 @@ export class FramesHierarchy {
       return {
         id: frame.frameId,
         parent: frame.parentFrameId,
+        documentId: frame.documentId || '',
         details: frame._details,
       };
     });
 
     if (tabIndex === -1) {
-      this.#tabs.push({
+      this.tabs.push({
         id: tabId,
         frames: newFrameList,
       });
@@ -197,24 +243,11 @@ export class FramesHierarchy {
       return;
     }
 
-    this.#tabs[tabIndex].frames = newFrameList;
+    this.tabs[tabIndex].frames = newFrameList;
   }
 
   // -- Handle webextension events.
-  async #handleWebWorkerStart({ maxRetries = 25 } = {}) {
-    function decorateFrame(frame) {
-      const parsed = parse(frame.url);
-
-      return {
-        frameId: frame.frameId,
-        parentFrameId: frame.parentFrameId,
-        _details: {
-          hostname: parsed.hostname || '',
-          domain: parsed.domain || '',
-        },
-      };
-    }
-
+  async handleWebWorkerStart({ maxRetries = 25 } = {}) {
     async function handleTab(tab) {
       if (!tab.id) {
         return;
@@ -249,7 +282,22 @@ export class FramesHierarchy {
         return;
       }
 
-      this.sync(tab.id, frames.map(decorateFrame));
+      this.sync(
+        tab.id,
+        frames.map(function (frame) {
+          const parsed = parse(frame.url);
+
+          return {
+            frameId: frame.frameId,
+            parentFrameId: frame.parentFrameId,
+            documentId: frame.documentId || '',
+            _details: {
+              hostname: parsed.hostname || '',
+              domain: parsed.domain || '',
+            },
+          };
+        }),
+      );
     }
 
     // Querying tabs with empty object will return all tabs.
@@ -307,7 +355,5 @@ export class FramesHierarchy {
         this.replace(addedTabId, removedTabId);
       }
     });
-
-    void this.#handleWebWorkerStart();
   }
 }
