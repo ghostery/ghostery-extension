@@ -248,6 +248,8 @@ export class FramesHierarchy {
 
   // -- Handle webextension events.
   async handleWebWorkerStart({ maxRetries = 25 } = {}) {
+    const hierarchy = this;
+
     async function handleTab(tab) {
       if (!tab.id) {
         return;
@@ -282,7 +284,7 @@ export class FramesHierarchy {
         return;
       }
 
-      this.sync(
+      hierarchy.sync(
         tab.id,
         frames.map(function (frame) {
           const parsed = parse(frame.url);
@@ -345,14 +347,16 @@ export class FramesHierarchy {
   // We don't want to sacrifice the ease of understanding. Also,
   // we need to resolve "flag" which will cause prop drilling.
   handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
-    chrome.tabs.onRemoved(function (tabId) {
+    const hierarchy = this;
+
+    chrome.tabs.onRemoved.addListener(function (tabId) {
       if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled === false) {
-        this.unregister(tabId, 0);
+        hierarchy.unregister(tabId, 0);
       }
     });
-    chrome.tabs.onReplaced(function (addedTabId, removedTabId) {
+    chrome.tabs.onReplaced.addListener(function (addedTabId, removedTabId) {
       if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled === false) {
-        this.replace(addedTabId, removedTabId);
+        hierarchy.replace(addedTabId, removedTabId);
       }
     });
   }
