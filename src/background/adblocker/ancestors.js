@@ -59,17 +59,16 @@ export class FramesHierarchy {
 
     if (documentId.length) {
       while (--frameIndex !== -1) {
-        if (frames[frameIndex].documentId === documentId) {
-          // If we found the frame having same `documentId` and
-          // `frameId`, we can safely exit here.
-          if (frames[frameIndex].id === frameId) {
-            // Update details potentially outdated.
-            frames[frameIndex].parent = parentFrameId;
-            frames[frameIndex].details = details;
+        // If we found the frame having same `documentId` and
+        // `frameId`, we can safely exit here.
+        if (frames[frameIndex].id === frameId) {
+          // Update details potentially outdated.
+          frames[frameIndex].parent = parentFrameId;
+          frames[frameIndex].documentId = documentId;
+          frames[frameIndex].details = details;
 
-            break;
-          }
-
+          break;
+        } else if (frames[frameIndex].documentId === documentId) {
           // If `frameId` doesn't match, it means the frame is
           // replacing the other frame.
           const targetFrame = frames[frameIndex];
