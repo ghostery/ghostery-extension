@@ -79,6 +79,8 @@ export class FramesHierarchy {
           targetFrame.parent = parentFrameId;
           targetFrame.documentId = documentId;
           targetFrame.details = details;
+
+          break;
         } else if (frames[frameIndex].documentId === documentId) {
           // If `frameId` doesn't match, it means the frame is
           // replacing the other frame.
