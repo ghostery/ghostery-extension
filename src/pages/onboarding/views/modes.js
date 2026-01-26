@@ -14,13 +14,15 @@ import { html, router, store } from 'hybrids';
 import modeGhosteryScreenshotUrl from '/ui/assets/lottie-mode-default.json?url';
 import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
 
-import Options, { MODE_ZAP } from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
 
 import Success from './success.js';
 
-async function selectZap(host, event) {
-  router.resolve(event, store.set(Options, { mode: MODE_ZAP }));
+function selectMode(mode) {
+  return (host, event) => {
+    router.resolve(event, store.set(Options, { mode }));
+  };
 }
 
 export default {
@@ -46,6 +48,7 @@ export default {
           <ui-action>
             <a
               href="${router.url(Success)}"
+              onclick="${selectMode(MODE_DEFAULT)}"
               layout="row"
               data-qa="button:filtering-mode:ghostery"
             >
@@ -84,7 +87,7 @@ export default {
           <ui-action>
             <a
               href="${router.url(Success)}"
-              onclick="${selectZap}"
+              onclick="${selectMode(MODE_ZAP)}"
               layout="row"
               data-qa="button:filtering-mode:zap"
             >
