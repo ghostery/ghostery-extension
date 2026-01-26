@@ -21,8 +21,8 @@ export const WTM_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme`;
 export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;
 export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/ghostery-extension-v10-5?embed=1&utm_campaign=whatsnew`;
 
-export const PANEL_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/extension?utm_source=gbe&utm_campaign=panel`;
-export const REVIEW_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/extension?utm_source=gbe&utm_campaign=review`;
+export const PANEL_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=panel`;
+export const REVIEW_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=review`;
 
 export const BECOME_A_CONTRIBUTOR_PAGE_URL =
   __PLATFORM__ !== 'firefox' && isSafari()
