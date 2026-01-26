@@ -57,24 +57,28 @@ export class FramesHierarchy {
     let framesLength = frames.length;
     let frameIndex = framesLength;
 
-    // When the main frame refreshes, we assume that subframes
-    // to be refreshed as well. Therefore, we unlink the
-    // subframes from the list.
-    if (frameId === 0) {
-      for (const frame of frames) {
-        if (frame.parent === 0) {
-          this.unregister(tabId, frame.id);
-        }
-      }
-    } else if (documentId.length) {
+    if (documentId.length) {
       while (--frameIndex !== -1) {
         // If we found the frame having same `documentId` and
         // `frameId`, we can safely exit here.
         if (frames[frameIndex].id === frameId) {
+          const targetFrame = frames[frameIndex];
+
+          // When the main frame refreshes, we assume that
+          // subframes to be refreshed as well. Therefore, we
+          // unlink the subframes from the list.
+          if (frameId === 0) {
+            for (const frame of frames) {
+              if (frame.parent === 0) {
+                this.unregister(tabId, frame.id);
+              }
+            }
+          }
+
           // Update details potentially outdated.
-          frames[frameIndex].parent = parentFrameId;
-          frames[frameIndex].documentId = documentId;
-          frames[frameIndex].details = details;
+          targetFrame.parent = parentFrameId;
+          targetFrame.documentId = documentId;
+          targetFrame.details = details;
         } else if (frames[frameIndex].documentId === documentId) {
           // If `frameId` doesn't match, it means the frame is
           // replacing the other frame.
