@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { isOpera, isEdge, isSafari } from './browser-info.js';
+import { isSafari } from './browser-info.js';
 import { debugMode, stagingMode } from './debug.js';
 
 export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';
@@ -21,16 +21,8 @@ export const WTM_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme`;
 export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;
 export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/ghostery-extension-v10-5?embed=1&utm_campaign=whatsnew`;
 
-export const REVIEW_PAGE_URL = (() => {
-  if (__PLATFORM__ === 'firefox') return 'https://mygho.st/ReviewFirefoxPanel';
-
-  if (isSafari()) return 'https://mygho.st/ReviewSafariPanel';
-  if (isOpera()) return 'https://mygho.st/ReviewOperaPanel';
-  if (isEdge()) return 'https://mygho.st/ReviewEdgePanel';
-
-  // Chrome
-  return 'https://mygho.st/ReviewChromePanel';
-})();
+export const PANEL_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=panel`;
+export const REVIEW_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=review`;
 
 export const BECOME_A_CONTRIBUTOR_PAGE_URL =
   __PLATFORM__ !== 'firefox' && isSafari()
