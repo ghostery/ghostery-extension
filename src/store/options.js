@@ -48,7 +48,7 @@ const OPTIONS_VERSION = 4;
 
 const Options = {
   // Mode
-  mode: MODE_DEFAULT, // 'default' | 'zap'
+  mode: MODE_ZAP, // 'default' | 'zap'
 
   // Main features
   blockAds: true,

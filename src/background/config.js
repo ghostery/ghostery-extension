@@ -10,6 +10,7 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_MODES } from '@ghostery/config';
 
 import Config from '/store/config.js';
 
@@ -78,6 +79,8 @@ export default async function syncConfig() {
         enabled: percentage <= item.percentage,
       };
     }
+
+    flags[FLAG_MODES] = { enabled: true };
 
     // Update the config
     await store.set(Config, { domains, flags, updatedAt: Date.now() });

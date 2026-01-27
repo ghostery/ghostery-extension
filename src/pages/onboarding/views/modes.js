@@ -52,8 +52,7 @@ export default {
               layout="row"
               data-qa="button:filtering-mode:ghostery"
             >
-              <ui-mode-radio id="mode-option-default" checked>
-                <input type="radio" name="filtering-mode" checked />
+              <ui-mode-radio id="mode-option-default">
                 <ui-lottie
                   src="${modeGhosteryScreenshotUrl}"
                   layout="ratio:83/45 width:220px"
@@ -91,7 +90,8 @@ export default {
               layout="row"
               data-qa="button:filtering-mode:zap"
             >
-              <ui-mode-radio id="mode-option-zap">
+              <ui-mode-radio id="mode-option-zap" checked>
+                <input type="radio" name="filtering-mode" checked />
                 <ui-lottie
                   src="${modeZapScreenshotUrl}"
                   layout="ratio:83/45 width:220px"
