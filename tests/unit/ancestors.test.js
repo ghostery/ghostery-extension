@@ -731,7 +731,7 @@ describe('#FramesHierarchy', () => {
 
       // Set the active window is being dragged by the user. This
       // makes `tabs.query` to emit an error.
-      context.windows[0].isUserDragging = false;
+      context.windows[0].isUserDragging = true;
 
       const hierarchy = new FramesHierarchy();
 
