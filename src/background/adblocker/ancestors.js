@@ -49,7 +49,11 @@ export class FramesHierarchy {
 
         // When the main frame refreshes, unlink subframes
         if (frameId === 0) {
-          this.#unlinkSubframes(frames, tabId);
+          // Unlink the target frame from the structure
+          // temporarily to remove the previous hierarchy.
+          targetFrame.id = -1;
+          this.unregister(tabId, 0);
+          targetFrame.id = 0;
         }
 
         // Update frame details
@@ -108,14 +112,6 @@ export class FramesHierarchy {
     // If hierarchy is incomplete, remove the tab
     this.tabs.splice(tabIndex, 1);
     return [];
-  }
-
-  #unlinkSubframes(frames, tabId) {
-    for (const frame of frames) {
-      if (frame.parent === 0) {
-        this.unregister(tabId, frame.id);
-      }
-    }
   }
 
   #handleFrameReplacement(

@@ -663,6 +663,65 @@ describe('#FramesHierarchy', () => {
         },
       ]);
     });
+
+    it('tracks main frame refresh', () => {
+      const hierarchy = new FramesHierarchy();
+
+      // Assume that a user opens a new tab.
+      assert.deepStrictEqual(
+        hierarchy.ancestors(
+          { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'A0' },
+          'about:blank',
+        ),
+        [],
+      );
+      // Assume that a user navigates the tab into the website.
+      assert.deepStrictEqual(
+        hierarchy.ancestors(
+          { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'B1' },
+          'foo.com',
+        ),
+        [],
+      );
+      // Assume the page creates some frames.
+      assert.deepStrictEqual(
+        hierarchy.ancestors(
+          { tabId: 0, frameId: 1, parentFrameId: 0, documentId: 'B2' },
+          'oauth.foo.com',
+        ),
+        ['foo.com'],
+      );
+      assert.deepStrictEqual(
+        hierarchy.ancestors(
+          { tabId: 0, frameId: 2, parentFrameId: 0, documentId: 'B3' },
+          'consent.foo.com',
+        ),
+        ['foo.com'],
+      );
+
+      // Assume user refreshes the page.
+      assert.deepStrictEqual(
+        hierarchy.ancestors(
+          { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'C1' },
+          'foo.com',
+        ),
+        [],
+      );
+
+      assert.deepStrictEqual(hierarchy.tabs, [
+        {
+          id: 0,
+          frames: [
+            {
+              id: 0,
+              parent: -1,
+              documentId: 'C1',
+              details: 'foo.com',
+            },
+          ],
+        },
+      ]);
+    });
   });
 
   describe('#handleWebextensionEvents', () => {
