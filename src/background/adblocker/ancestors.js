@@ -57,7 +57,10 @@ export class FramesHierarchy {
         targetFrame.documentId = documentId;
         targetFrame.details = details;
         break;
-      } else if (frames[frameIndex].documentId === documentId) {
+      } else if (
+        documentId.length &&
+        frames[frameIndex].documentId === documentId
+      ) {
         this.#handleFrameReplacement(
           frames,
           frameIndex,
