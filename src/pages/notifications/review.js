@@ -13,7 +13,7 @@ import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
 import * as notifications from '/utils/notifications.js';
-import { REVIEW_PAGE_URL } from '/utils/urls.js';
+import { REVIEW_STORE_PAGE_URL } from '/utils/urls.js';
 
 const close = notifications.setupNotificationPage(390);
 
@@ -27,7 +27,7 @@ mount(document.body, {
           people discover a calmer, ad-free web.
         </ui-text>
         <ui-button type="wtm" layout="self:center">
-          <a href="${REVIEW_PAGE_URL}" target="_blank" onclick="${close}">
+          <a href="${REVIEW_STORE_PAGE_URL}" target="_blank" onclick="${close}">
             Share a Review
           </a>
         </ui-button>

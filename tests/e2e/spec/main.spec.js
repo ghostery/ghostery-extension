@@ -169,7 +169,7 @@ describe('Main Features', function () {
 
   describe('Regional Filters', function () {
     const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
-    const SELECTOR = '.a-slider';
+    const SELECTOR = '.a-re';
 
     it('shows the ads on the page', async function () {
       await setPrivacyToggle('regional-filters', false);
