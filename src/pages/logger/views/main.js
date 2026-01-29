@@ -11,6 +11,7 @@
 
 import { html, store } from 'hybrids';
 import { saveAs } from 'file-saver';
+import { stringify } from 'csv-stringify/browser/esm/sync';
 
 import Log from '../store/log.js';
 import Tab from '../store/tab.js';
@@ -22,27 +23,31 @@ function refreshSelectedTab(host) {
   chrome.tabs.reload(Number(host.tabId));
 }
 
+const REPORT_COLUMNS = [
+  'Date',
+  'Filter',
+  'Type',
+  'Blocked',
+  'Modified',
+  'URL',
+  'Tracker',
+  'Organization',
+];
+
 function downloadReport(host) {
-  let report = `Date\tFilter\tType\tBlocked\tModified\tURL\tTracker\tOrganization\n`;
+  const report = host.logs.map((log) => [
+    new Date(log.timestamp).toISOString(),
+    log.typeLabel,
+    log.filter,
+    log.blocked,
+    log.modified,
+    log.url,
+    log.tracker,
+    log.organization ?? '',
+  ]);
 
-  for (const log of host.logs) {
-    report +=
-      [
-        new Date(log.timestamp).toISOString(),
-        log.typeLabel,
-        log.filter,
-        log.blocked,
-        log.modified,
-        log.url,
-        log.tracker,
-        log.organization ?? '',
-      ].join('\t') + '\n';
-  }
-
-  saveAs(
-    new Blob([report], { type: 'text/csv' }),
-    'Ghostery Logger Report.csv',
-  );
+  const data = stringify(report, { header: true, columns: REPORT_COLUMNS });
+  saveAs(new Blob([data], { type: 'text/csv' }), 'Ghostery Logger Report.csv');
 }
 
 function disableEllipsis(host, event) {

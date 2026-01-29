@@ -11,6 +11,7 @@
 
 import { html, router, store } from 'hybrids';
 import { saveAs } from 'file-saver';
+import { stringify } from 'csv-stringify/browser/esm/sync';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
@@ -20,12 +21,13 @@ import modifiedImageUrl from '../assets/trackers-modified.svg';
 
 import { showCopyNotification } from '../components/alert.js';
 
+const REPORT_COLUMNS = ['Tracker', 'Organization', 'URL'];
+
 async function downloadReport(host, event) {
   const button = event.currentTarget;
   button.disabled = true;
 
-  let report = `Tracker\tOrganization\tURL\n`;
-
+  const report = [];
   for (const tracker of host.trackers) {
     const organization =
       tracker.organization && (await store.resolve(tracker.organization));
@@ -33,12 +35,13 @@ async function downloadReport(host, event) {
     const organizationName = organization?.name ?? '';
 
     for (const request of tracker.requestsBlocked) {
-      report += `${tracker.name}\t${organizationName}\t${request.url}\n`;
+      report.push([tracker.name, organizationName, request.url]);
     }
   }
 
+  const data = stringify(report, { header: true, columns: REPORT_COLUMNS });
   saveAs(
-    new Blob([report], { type: 'text/csv' }),
+    new Blob([data], { type: 'text/csv' }),
     `Ghostery Website Report (${host.stats.hostname}).csv`,
   );
 
