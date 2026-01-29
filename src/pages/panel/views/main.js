@@ -39,7 +39,7 @@ import ReportCategory from './report-category.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import TrackerDetails from './tracker-details.js';
-import TrackersBlocked from './trackers-blocked.js';
+import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 
@@ -183,7 +183,7 @@ export default {
       ReportForm,
       ReportConfirm,
       TrackerDetails,
-      TrackersBlocked,
+      TrackersReport,
       WhoTracksMe,
     ],
   },
@@ -525,7 +525,7 @@ export default {
                       type="blocked"
                       icon="block-s"
                       value="${stats.trackersBlocked}"
-                      href="${router.url(TrackersBlocked)}"
+                      href="${router.url(TrackersReport, { type: 'blocked' })}"
                     >
                       Trackers blocked
                     </panel-feedback-button>
@@ -536,6 +536,7 @@ export default {
                       type="modified"
                       icon="eye"
                       value="${stats.trackersModified}"
+                      href="${router.url(TrackersReport, { type: 'modified' })}"
                     >
                       Trackers modified
                     </panel-feedback-button>

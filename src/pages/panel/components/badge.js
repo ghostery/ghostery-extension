@@ -28,5 +28,10 @@ export default {
       color: var(--color-danger-primary);
       background: var(--background-danger-primary);
     }
+
+    :host([type='brand']) {
+      color: var(--color-brand-primary);
+      background: var(--background-brand-primary);
+    }
   `,
 };

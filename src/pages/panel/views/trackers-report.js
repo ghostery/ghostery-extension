@@ -15,7 +15,9 @@ import { saveAs } from 'file-saver';
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
-import headerImageUrl from '../assets/trackers-blocked.svg';
+import blockedImageUrl from '../assets/trackers-blocked.svg';
+import modifiedImageUrl from '../assets/trackers-modified.svg';
+
 import { showCopyNotification } from '../components/alert.js';
 
 async function downloadReport(host, event) {
@@ -45,22 +47,38 @@ async function downloadReport(host, event) {
 
 export default {
   [router.connect]: { dialog: true },
+  type: '', // 'blocked' | 'modified'
   options: store(Options),
   stats: store(TabStats),
-  trackers: ({ stats }) => stats.trackers.filter((t) => t.blocked),
-  render: ({ stats, trackers }) => html`
+  trackers: ({ type, stats }) => stats.trackers.filter((t) => t[type]),
+  render: ({ type, stats, trackers }) => html`
     <template layout="column">
       <panel-dialog header>
         <div layout="column center gap:2.5 margin:1:0">
-          <img
-            src="${headerImageUrl}"
+          ${type === 'blocked' &&
+          html`<img
+            src="${blockedImageUrl}"
             alt="Trackers Blocked"
             layout="width:300px"
-          />
+          />`}
+          ${type === 'modified' &&
+          html`<img
+            src="${modifiedImageUrl}"
+            alt="Trackers Blocked"
+            layout="width:300px"
+          />`}
           <div layout="block:center column gap:0.5">
             <div layout="row items:center gap:0.5">
-              <panel-badge type="danger">${trackers.length}</panel-badge>
-              <ui-text type="label-m">Trackers blocked</ui-text>
+              ${type === 'blocked' &&
+              html`
+                <panel-badge type="danger">${trackers.length}</panel-badge>
+                <ui-text type="label-m">Trackers blocked</ui-text>
+              `}
+              ${type === 'modified' &&
+              html`
+                <panel-badge type="brand">${trackers.length}</panel-badge>
+                <ui-text type="label-m">Trackers modified</ui-text>
+              `}
             </div>
             <ui-text type="body-s" color="secondary">${stats.hostname}</ui-text>
           </div>
@@ -91,7 +109,7 @@ export default {
           )}
         </div>
         <ui-button type="primary" slot="footer" onclick="${downloadReport}">
-          <button><ui-icon name="download"></ui-icon> Download Report</button>
+          <button><ui-icon name="download"></ui-icon> Download report</button>
         </ui-button>
       </panel-dialog>
     </template>

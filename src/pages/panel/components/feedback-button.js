@@ -66,6 +66,11 @@ export default {
         border: 1px solid var(--border-danger-secondary);
       }
 
+      :host([type="modified"]) ui-button:hover {
+        background-color: var(--background-brand-primary);
+        border: 1px solid var(--border-brand-secondary);
+      }
+
       :host([type="content"]) ui-button:hover {
         background-color: var(--background-brand-primary);
         border: 1px solid var(--border-brand-secondary);
