@@ -33,13 +33,14 @@ import { clearAlert, showAlert } from '../components/alert.js';
 
 import ClearCookies from './clear-cookies.js';
 import Menu from './menu.js';
-import TrackerDetails from './tracker-details.js';
+import PauseAssistant from './pause-assistant.js';
 import ProtectionStatus from './protection-status.js';
 import ReportCategory from './report-category.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
+import TrackerDetails from './tracker-details.js';
+import TrackersBlocked from './trackers-blocked.js';
 import WhoTracksMe from './whotracksme.js';
-import PauseAssistant from './pause-assistant.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
@@ -176,13 +177,14 @@ export default {
     stack: [
       ClearCookies,
       Menu,
+      PauseAssistant,
+      ProtectionStatus,
       ReportCategory,
       ReportForm,
       ReportConfirm,
       TrackerDetails,
-      ProtectionStatus,
+      TrackersBlocked,
       WhoTracksMe,
-      PauseAssistant,
     ],
   },
   options: store(Options),
@@ -523,6 +525,7 @@ export default {
                       type="blocked"
                       icon="block-s"
                       value="${stats.trackersBlocked}"
+                      href="${router.url(TrackersBlocked)}"
                     >
                       Trackers blocked
                     </panel-feedback-button>
@@ -556,6 +559,7 @@ export default {
                         '/pages/settings/index.html#@settings-website-details?domain=' +
                           stats.hostname,
                       )}"
+                      external
                     >
                       Blocked manually
                     </panel-feedback-button>

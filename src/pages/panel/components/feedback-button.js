@@ -18,12 +18,13 @@ export default {
   icon: '',
   value: '',
   href: '',
-  render: ({ icon, value, href }) => html`
+  external: false,
+  render: ({ icon, value, href, external }) => html`
     <template layout="column grow">
       <ui-button inert="${!href}" layout="grow">
         <a
           href="${href}"
-          onclick="${openTabWithUrl}"
+          onclick="${external && openTabWithUrl}"
           layout="column center padding:0.5 gap:0"
         >
           <div layout="row items:center gap:0.5 height:22px">
@@ -60,6 +61,11 @@ export default {
     }
 
     @media (hover: hover) {
+      :host([type="blocked"]) ui-button:hover {
+        background-color: var(--background-danger-primary);
+        border: 1px solid var(--border-danger-secondary);
+      }
+
       :host([type="content"]) ui-button:hover {
         background-color: var(--background-brand-primary);
         border: 1px solid var(--border-brand-secondary);
