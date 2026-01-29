@@ -21,18 +21,10 @@ import { openTabWithUrl } from '/utils/tabs.js';
 
 import ProtectionStatus from './protection-status.js';
 
-import { showAlert } from '../components/alert.js';
+import { showCopyNotification } from '../components/alert.js';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
-}
-
-function showCopyNotification() {
-  showAlert(html`
-    <panel-alert type="success" autoclose="2">
-      Copied to clipboard
-    </panel-alert>
-  `);
 }
 
 export default {

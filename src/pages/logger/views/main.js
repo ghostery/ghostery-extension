@@ -23,23 +23,26 @@ function refreshSelectedTab(host) {
 }
 
 function downloadReport(host) {
-  const report =
-    `Date,Filter,Type,Blocked,Modified,URL,Tracker,Organization\n` +
-    host.logs
-      .map((log) =>
-        [
-          new Date(log.timestamp).toISOString(),
-          log.typeLabel,
-          log.filter,
-          log.blocked,
-          log.modified,
-          log.url,
-          log.tracker,
-        ].join(','),
-      )
-      .join('\n');
+  let report = `Date\tFilter\tType\tBlocked\tModified\tURL\tTracker\tOrganization\n`;
 
-  saveAs(new Blob([report], { type: 'text/csv' }), 'report.csv');
+  for (const log of host.logs) {
+    report +=
+      [
+        new Date(log.timestamp).toISOString(),
+        log.typeLabel,
+        log.filter,
+        log.blocked,
+        log.modified,
+        log.url,
+        log.tracker,
+        log.organization ?? '',
+      ].join('\t') + '\n';
+  }
+
+  saveAs(
+    new Blob([report], { type: 'text/csv' }),
+    'Ghostery Logger Report.csv',
+  );
 }
 
 function disableEllipsis(host, event) {

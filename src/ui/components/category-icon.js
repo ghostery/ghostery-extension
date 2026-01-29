@@ -34,6 +34,15 @@ export default {
       border-radius: 4px;
     }
 
+    :host([size='small']) {
+      width: 20px;
+      height: 20px;
+    }
+
+    :host([size='small'])::before {
+      border-radius: 4px;
+    }
+
     :host([size='large']) {
       width: 48px;
       height: 48px;
