@@ -10,7 +10,7 @@
  */
 
 import { describe, it, before } from 'node:test';
-import assert from 'node:assert';
+import assert from 'node:assert/strict';
 
 import { filter } from '../../src/utils/config.js';
 
@@ -30,52 +30,52 @@ describe('Remote config', () => {
       };
 
       try {
-        assert.strictEqual(filter({ filter: { unsupported: 'check' } }), false);
-        assert.strictEqual(warnCalled, true);
+        assert.deepEqual(filter({ filter: { unsupported: 'check' } }), false);
+        assert.deepEqual(warnCalled, true);
       } finally {
         console.warn = originalWarn;
       }
     });
 
     it('should return true if no filter is provided', () => {
-      assert.strictEqual(filter({}), true);
+      assert.deepEqual(filter({}), true);
     });
 
     it('should return true if version matches exactly', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
-      assert.strictEqual(filter({ filter: { version: '2.0.0' } }), true);
+      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), true);
     });
 
     it('should return true if current version is higher', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.1.0' });
-      assert.strictEqual(filter({ filter: { version: '2.0.0' } }), true);
+      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), true);
     });
 
     it('should return false if current version is lower', () => {
       global.chrome.runtime.getManifest = () => ({ version: '1.9.9' });
-      assert.strictEqual(filter({ filter: { version: '2.0.0' } }), false);
+      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), false);
     });
 
     it('should handle multi-part versions correctly', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
-      assert.strictEqual(filter({ filter: { version: '1.5.0' } }), true); // 2 > 1
-      assert.strictEqual(filter({ filter: { version: '2.0.1' } }), false); // 0 < 1
+      assert.deepEqual(filter({ filter: { version: '1.5.0' } }), true); // 2 > 1
+      assert.deepEqual(filter({ filter: { version: '2.0.1' } }), false); // 0 < 1
     });
 
     it('should return true if platform matches', () => {
       global.__PLATFORM__ = 'chromium';
-      assert.strictEqual(filter({ filter: { platform: ['chromium'] } }), true);
+      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), true);
     });
 
     it('should return false if platform does not match', () => {
       global.__PLATFORM__ = 'chromium';
-      assert.strictEqual(filter({ filter: { platform: ['firefox'] } }), false);
+      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), false);
     });
 
     it('should return true for firefox platform when set', () => {
       global.__PLATFORM__ = 'firefox';
-      assert.strictEqual(filter({ filter: { platform: ['firefox'] } }), true);
-      assert.strictEqual(filter({ filter: { platform: ['chromium'] } }), false);
+      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), true);
+      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), false);
     });
 
     it('should combine version and platform checks', () => {
@@ -83,19 +83,19 @@ describe('Remote config', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
 
       // Both match
-      assert.strictEqual(
+      assert.deepEqual(
         filter({ filter: { version: '1.0.0', platform: ['chromium'] } }),
         true,
       );
 
       // Version mismatch
-      assert.strictEqual(
+      assert.deepEqual(
         filter({ filter: { version: '3.0.0', platform: ['chromium'] } }),
         false,
       );
 
       // Platform mismatch
-      assert.strictEqual(
+      assert.deepEqual(
         filter({ filter: { version: '1.0.0', platform: ['firefox'] } }),
         false,
       );

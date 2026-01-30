@@ -10,7 +10,7 @@
  */
 
 import { describe, it } from 'node:test';
-import assert from 'node:assert';
+import assert from 'node:assert/strict';
 import { getRedirectProtectionRules } from '../../src/utils/dnr.js';
 
 describe('getRedirectProtectionRules', () => {
@@ -29,14 +29,14 @@ describe('getRedirectProtectionRules', () => {
     const result = getRedirectProtectionRules(rules);
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(result.length, 1);
-    assert.deepStrictEqual(redirect.action, {
+    assert.deepEqual(result.length, 1);
+    assert.deepEqual(redirect.action, {
       type: 'redirect',
       redirect: { extensionPath: '/pages/redirect-protection/index.html' },
     });
-    assert.strictEqual(redirect.priority, 2);
-    assert.deepStrictEqual(redirect.condition.resourceTypes, ['main_frame']);
-    assert.strictEqual(redirect.condition.urlFilter, '||tracker.com^');
+    assert.deepEqual(redirect.priority, 2);
+    assert.deepEqual(redirect.condition.resourceTypes, ['main_frame']);
+    assert.deepEqual(redirect.condition.urlFilter, '||tracker.com^');
   });
 
   it('should preserve all condition properties in redirect rules', () => {
@@ -51,8 +51,8 @@ describe('getRedirectProtectionRules', () => {
     const result = getRedirectProtectionRules(rules);
     const redirect = result.find((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(result.length, 1);
-    assert.deepStrictEqual(redirect.condition, condition);
+    assert.deepEqual(result.length, 1);
+    assert.deepEqual(redirect.condition, condition);
   });
 
   it('should handle multiple blocking rules', () => {
@@ -79,10 +79,10 @@ describe('getRedirectProtectionRules', () => {
     const result = getRedirectProtectionRules(rules);
     const redirects = result.filter((r) => r.action.type === 'redirect');
 
-    assert.strictEqual(redirects.length, 2);
+    assert.deepEqual(redirects.length, 2);
     assert.ok(redirects.every((r) => r.priority === 11));
 
     const urlFilters = redirects.map((r) => r.condition.urlFilter).sort();
-    assert.deepStrictEqual(urlFilters, ['||tracker1.com^', '||tracker2.com^']);
+    assert.deepEqual(urlFilters, ['||tracker1.com^', '||tracker2.com^']);
   });
 });
