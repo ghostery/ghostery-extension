@@ -65,7 +65,7 @@
     "tldts-experimental": "^7.0.19"
   },
   "dataDependencies": {
-    "redirect-resources": "bc37f357322ccf30981c7d0f53f7e805ef65c514266101eee38cfccfd4c197d8",
+    "redirect-resources": "cfd2cc855f9f685ed9062b4c7323be7ff6fefe3ea22bdeb14ae8bed953ee77bd",
     "wtm-bloomfilter": "2026-01-26",
     "wtm-stats": "9d949e1801a0e66dafe29f8ca96bd2f6b93deaf3"
   },
