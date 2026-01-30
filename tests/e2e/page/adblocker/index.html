@@ -319,6 +319,7 @@
         for (const [id, url, body] of [
           ["redirnoopjs", "./gen/redirnoop.js", ";"],
           ["rediradsbygoogle", "./gen/rediradsbygoogle.js", "google"],
+          ["redirgoogleima", "./gen/redirgoogleima.js", "googleads"],
           ["redirfallback", "./gen/redirfallback.js", ""],
         ]) {
           l++;
@@ -656,17 +657,19 @@
       </tr>
       <tr id="rediradsbygoogle">
         <td>
-          <code
-            >/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js</code
-          >
+          <code>/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js</code>
+        </td>
+        <td><section fail></section></td>
+      </tr>
+      <tr id="redirgoogleima">
+        <td>
+          <code>/gen/redirgoogleima.js^$redirect=google-ima.js</code>
         </td>
         <td><section fail></section></td>
       </tr>
       <tr id="redirfallback">
         <td>
-          <code
-            >/gen/redirfallback.js^$redirect=something_does_not_exist.js</code
-          >
+          <code>/gen/redirfallback.js^$redirect=something_does_not_exist.js</code>
         </td>
         <td><section fail></section></td>
       </tr>
