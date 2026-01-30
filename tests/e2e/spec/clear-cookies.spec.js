@@ -9,7 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect } from '@wdio/globals';
-import { enableExtension, getExtensionElement, openPanel } from '../utils.js';
+import {
+  enableExtension,
+  getExtensionElement,
+  openPanel,
+  waitForIdleBackgroundTasks,
+} from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
@@ -36,8 +41,9 @@ describe('Clear Cookies', () => {
     await browser.pause(1000); // wait for opening menu animation to finish
 
     await getExtensionElement('button:clear-cookies').click();
-
     await getExtensionElement('button:confirm-clear-cookies').click();
+
+    await waitForIdleBackgroundTasks();
 
     const cookies = await browser.getCookies({ domain: PAGE_DOMAIN });
     expect(cookies.length).toBe(0);
@@ -57,6 +63,8 @@ describe('Clear Cookies', () => {
 
     await getExtensionElement('button:clear-cookies').click();
     await getExtensionElement('button:confirm-clear-cookies').click();
+
+    await waitForIdleBackgroundTasks();
 
     const cookies = await browser.getCookies({ domain: PAGE_DOMAIN });
     expect(cookies.length).toBe(0);
