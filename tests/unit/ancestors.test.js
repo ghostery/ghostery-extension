@@ -10,7 +10,7 @@
  */
 
 import { describe, it } from 'node:test';
-import assert from 'node:assert';
+import assert from 'node:assert/strict';
 
 import { FramesHierarchy } from '../../src/background/adblocker/ancestors.js';
 import { createWebExtensionAPIMock } from './mocks/browser.js';
@@ -30,21 +30,21 @@ describe('#FramesHierarchy', () => {
      *    -> frame.bar.com (7)
      *      -> frameof.frame.bar.com (8)
      */
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 0, parentFrameId: -1 },
         'foo.com',
       ),
       [],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 1, parentFrameId: 0 },
         'frame.foo.com',
       ),
       ['foo.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors(
           { tabId: 0, frameId: 2, parentFrameId: 1 },
@@ -53,7 +53,7 @@ describe('#FramesHierarchy', () => {
         .reverse(),
       ['foo.com', 'frame.foo.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors(
           { tabId: 0, frameId: 3, parentFrameId: 2 },
@@ -64,14 +64,14 @@ describe('#FramesHierarchy', () => {
     );
 
     // Create another branch of frames
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 4, parentFrameId: 0 },
         'frame.foo.com',
       ),
       ['foo.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors(
           { tabId: 0, frameId: 5, parentFrameId: 4 },
@@ -83,7 +83,7 @@ describe('#FramesHierarchy', () => {
 
     // -- Returns same ancestor list for different branch but
     // same hostname
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors(
           { tabId: 0, frameId: 3, parentFrameId: 2 },
@@ -94,20 +94,20 @@ describe('#FramesHierarchy', () => {
     );
 
     // Create another branch of frames
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 6, parentFrameId: 0 },
         'bar.com',
       ),
       ['foo.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors({ tabId: 0, frameId: 7, parentFrameId: 6 }, 'frame.bar.com')
         .reverse(),
       ['foo.com', 'bar.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors(
           { tabId: 0, frameId: 8, parentFrameId: 7 },
@@ -118,7 +118,7 @@ describe('#FramesHierarchy', () => {
     );
 
     // Validate the entire structure
-    assert.deepStrictEqual(hierarchy.tabs, [
+    assert.deepEqual(hierarchy.tabs, [
       {
         id: 0,
         frames: [
@@ -182,7 +182,7 @@ describe('#FramesHierarchy', () => {
 
     // Unregister specific frame branch: frame.foo.com (1)
     hierarchy.unregister(0, 1);
-    assert.deepStrictEqual(hierarchy.tabs, [
+    assert.deepEqual(hierarchy.tabs, [
       {
         id: 0,
         frames: [
@@ -227,7 +227,7 @@ describe('#FramesHierarchy', () => {
     ]);
 
     hierarchy.unregister(0, 7);
-    assert.deepStrictEqual(hierarchy.tabs, [
+    assert.deepEqual(hierarchy.tabs, [
       {
         id: 0,
         frames: [
@@ -260,7 +260,7 @@ describe('#FramesHierarchy', () => {
     ]);
 
     hierarchy.unregister(0, 5);
-    assert.deepStrictEqual(hierarchy.tabs, [
+    assert.deepEqual(hierarchy.tabs, [
       {
         id: 0,
         frames: [
@@ -287,7 +287,7 @@ describe('#FramesHierarchy', () => {
     ]);
 
     hierarchy.unregister(0, 0);
-    assert.deepStrictEqual(hierarchy.tabs, []);
+    assert.deepEqual(hierarchy.tabs, []);
   });
 
   // `concurrent` here assumes the situation that the browser
@@ -425,7 +425,7 @@ describe('#FramesHierarchy', () => {
     const hierarchy = new FramesHierarchy();
 
     for (let i = 0; i < 100; i++) {
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: i, frameId: 0, parentFrameId: -1 },
           'foo.com',
@@ -437,7 +437,7 @@ describe('#FramesHierarchy', () => {
     for (let i = 0; i < 100; i++) {
       // Subframe ID should not start with 0.
       for (let k = 1; k < 200; k++) {
-        assert.deepStrictEqual(
+        assert.deepEqual(
           hierarchy.ancestors(
             { tabId: i, frameId: k, parentFrameId: 0 },
             'frame.foo.com',
@@ -451,7 +451,7 @@ describe('#FramesHierarchy', () => {
       hierarchy.unregister(i, 0);
     }
 
-    assert.deepStrictEqual(hierarchy.tabs, []);
+    assert.deepEqual(hierarchy.tabs, []);
   });
 
   it('handles incomplete tab information', () => {
@@ -460,21 +460,21 @@ describe('#FramesHierarchy', () => {
     // Assume that the main frame tab information didn't reach.
     // We rather not to execute scripts when the chain is
     // incomplete, which might lead to the potential breakage.
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 10, parentFrameId: 2 },
         'foo.com',
       ),
       [],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 10, parentFrameId: 5 },
         'foo.com',
       ),
       [],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 10, parentFrameId: 11 },
         'foo.com',
@@ -482,7 +482,7 @@ describe('#FramesHierarchy', () => {
       [],
     );
 
-    assert.deepStrictEqual(hierarchy.tabs, []);
+    assert.deepEqual(hierarchy.tabs, []);
   });
 
   it('replaces the tab information', () => {
@@ -490,7 +490,7 @@ describe('#FramesHierarchy', () => {
 
     // Assume that `frameId` is something unexpected, such as
     // omnibox prehit situation.
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 10, parentFrameId: -1 },
         'about:blank',
@@ -498,7 +498,7 @@ describe('#FramesHierarchy', () => {
       [],
     );
     // Creates new main frame with `foo.com`.
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 0, parentFrameId: -1 },
         'foo.com',
@@ -506,7 +506,7 @@ describe('#FramesHierarchy', () => {
       [],
     );
     // Opens subframe.
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 1, parentFrameId: 0 },
         'frame.foo.com',
@@ -514,7 +514,7 @@ describe('#FramesHierarchy', () => {
       ['foo.com'],
     );
 
-    assert.deepStrictEqual(hierarchy.tabs, [
+    assert.deepEqual(hierarchy.tabs, [
       {
         id: 0,
         frames: [
@@ -544,21 +544,21 @@ describe('#FramesHierarchy', () => {
   it('handles service worker restart', () => {
     const hierarchy = new FramesHierarchy();
 
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 0, parentFrameId: -1 },
         'foo.com',
       ),
       [],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy.ancestors(
         { tabId: 0, frameId: 1, parentFrameId: 0 },
         'frame.foo.com',
       ),
       ['foo.com'],
     );
-    assert.deepStrictEqual(
+    assert.deepEqual(
       hierarchy
         .ancestors({ tabId: 0, frameId: 2, parentFrameId: 1 }, 'bar.com')
         .reverse(),
@@ -588,7 +588,7 @@ describe('#FramesHierarchy', () => {
       },
     ]);
 
-    assert.deepStrictEqual(tabsBeforeClear, hierarchy.tabs);
+    assert.deepEqual(tabsBeforeClear, hierarchy.tabs);
   });
 
   describe('`documentId` tracking', () => {
@@ -596,7 +596,7 @@ describe('#FramesHierarchy', () => {
       const hierarchy = new FramesHierarchy();
 
       // Assume that a user opens a new tab.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'A0' },
           'about:blank',
@@ -605,7 +605,7 @@ describe('#FramesHierarchy', () => {
       );
       // Assume there's a pre-rendering frame as the user types
       // into the omnibox or the address bar.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 1_000, parentFrameId: 0, documentId: 'Z0' },
           'foo.com',
@@ -613,7 +613,7 @@ describe('#FramesHierarchy', () => {
         ['about:blank'],
       );
       // The pre-rendering frame calls another frame.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy
           .ancestors(
             {
@@ -628,14 +628,14 @@ describe('#FramesHierarchy', () => {
         ['about:blank', 'foo.com'],
       );
       // The pre-rendered frame gets replaced into main frame.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'Z0' },
           'foo.com',
         ),
         [],
       );
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 1_001, parentFrameId: 0, documentId: 'Z1' },
           'frame.foo.com',
@@ -643,7 +643,7 @@ describe('#FramesHierarchy', () => {
         ['foo.com'],
       );
 
-      assert.deepStrictEqual(hierarchy.tabs, [
+      assert.deepEqual(hierarchy.tabs, [
         {
           id: 0,
           frames: [
@@ -668,7 +668,7 @@ describe('#FramesHierarchy', () => {
       const hierarchy = new FramesHierarchy();
 
       // Assume that a user opens a new tab.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'A0' },
           'about:blank',
@@ -676,7 +676,7 @@ describe('#FramesHierarchy', () => {
         [],
       );
       // Assume that a user navigates the tab into the website.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'B1' },
           'foo.com',
@@ -684,14 +684,14 @@ describe('#FramesHierarchy', () => {
         [],
       );
       // Assume the page creates some frames.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 1, parentFrameId: 0, documentId: 'B2' },
           'oauth.foo.com',
         ),
         ['foo.com'],
       );
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 2, parentFrameId: 0, documentId: 'B3' },
           'consent.foo.com',
@@ -700,7 +700,7 @@ describe('#FramesHierarchy', () => {
       );
 
       // Assume user refreshes the page.
-      assert.deepStrictEqual(
+      assert.deepEqual(
         hierarchy.ancestors(
           { tabId: 0, frameId: 0, parentFrameId: -1, documentId: 'C1' },
           'foo.com',
@@ -708,7 +708,7 @@ describe('#FramesHierarchy', () => {
         [],
       );
 
-      assert.deepStrictEqual(hierarchy.tabs, [
+      assert.deepEqual(hierarchy.tabs, [
         {
           id: 0,
           frames: [
