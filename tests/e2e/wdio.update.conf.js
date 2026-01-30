@@ -59,7 +59,7 @@ export const config = {
       if (!version) {
         execSync('git fetch --tags --quiet');
         version = execSync(
-          'git describe --tags $(git rev-list --tags --max-count=1)',
+          'git tag --sort=-creatordate | grep -E "^v[0-9]+\\.[0-9]+\\.[0-9]+$" | head -n 1',
         )
           .toString()
           .trim()
