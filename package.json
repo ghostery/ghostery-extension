@@ -35,7 +35,7 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.1.0",
+    "globals": "^17.2.0",
     "license-report": "^6.8.1",
     "prettier": "^3.8.1",
     "sinon-chrome": "^3.0.1",
@@ -43,7 +43,7 @@
     "web-ext": "^9.2.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.50.1",
+    "@duckduckgo/autoconsent": "^14.51.0",
     "@ghostery/adblocker": "^2.13.4",
     "@ghostery/adblocker-content": "^2.13.3",
     "@ghostery/adblocker-extended-selectors": "^2.13.3",
@@ -52,10 +52,11 @@
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^1.6.5",
     "@github/relative-time-element": "^5.0.0",
-    "@sentry/browser": "^10.36.0",
+    "@sentry/browser": "^10.38.0",
     "@whotracksme/reporting": "^7.10.0",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.13.1",
+    "csv-stringify": "^6.6.0",
     "file-saver": "^2.0.5",
     "hybrids": "^9.1.22",
     "idb": "^8.0.2",
@@ -64,7 +65,7 @@
     "tldts-experimental": "^7.0.19"
   },
   "dataDependencies": {
-    "redirect-resources": "bc37f357322ccf30981c7d0f53f7e805ef65c514266101eee38cfccfd4c197d8",
+    "redirect-resources": "cfd2cc855f9f685ed9062b4c7323be7ff6fefe3ea22bdeb14ae8bed953ee77bd",
     "wtm-bloomfilter": "2026-01-26",
     "wtm-stats": "9d949e1801a0e66dafe29f8ca96bd2f6b93deaf3"
   },

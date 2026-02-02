@@ -10,10 +10,8 @@
  */
 
 import { store } from 'hybrids';
-import { FLAG_DYNAMIC_DNR_FIXES } from '@ghostery/config';
 
 import { ENGINES, isGloballyPaused } from '/store/options.js';
-import Config from '/store/config.js';
 import Resources from '/store/resources.js';
 
 import {
@@ -81,135 +79,112 @@ if (__PLATFORM__ !== 'firefox') {
     const enabledRulesetIds =
       (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
-    const config = await store.resolve(Config);
-
     // Add latest fixes rules
-    if (config.hasFlag(FLAG_DYNAMIC_DNR_FIXES)) {
-      const resources = await store.resolve(Resources);
+    const resources = await store.resolve(Resources);
 
-      if (options.fixesFilters && ids.length) {
-        if (
-          !resources.checksums[DNR_FIXES_KEY] ||
-          lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
-        ) {
-          const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
+    if (options.fixesFilters && ids.length) {
+      if (
+        !resources.checksums[DNR_FIXES_KEY] ||
+        lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
+      ) {
+        const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
 
-          try {
-            console.info('[dnr] Updating dynamic fixes rules...');
+        try {
+          console.info('[dnr] Updating dynamic fixes rules...');
 
-            const list = await fetch(
-              `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
-              {
-                // Force no caching if update was triggered by the user ("Update now" action)
-                cache:
-                  lastOptions &&
-                  lastOptions.filtersUpdatedAt >
-                    Date.now() - UPDATE_ENGINES_DELAY
-                    ? 'no-store'
-                    : 'default',
-              },
-            ).then((res) =>
-              res.ok
-                ? res.json()
-                : Promise.reject(
-                    new Error(
-                      `Failed to fetch allowed lists: ${res.statusText}`,
-                    ),
-                  ),
+          const list = await fetch(
+            `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
+            {
+              // Force no caching if update was triggered by the user ("Update now" action)
+              cache:
+                lastOptions &&
+                lastOptions.filtersUpdatedAt > Date.now() - UPDATE_ENGINES_DELAY
+                  ? 'no-store'
+                  : 'default',
+            },
+          ).then((res) =>
+            res.ok
+              ? res.json()
+              : Promise.reject(
+                  new Error(`Failed to fetch allowed lists: ${res.statusText}`),
+                ),
+          );
+
+          if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
+            const rules = new Set(
+              await fetch(list.dnr.url)
+                .then((res) =>
+                  res.ok
+                    ? res.json()
+                    : Promise.reject(
+                        new Error(
+                          `Failed to fetch DNR rules: ${res.statusText}`,
+                        ),
+                      ),
+                )
+                .then(filterMaxPriorityRules),
             );
 
-            if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
-              const rules = new Set(
-                await fetch(list.dnr.url)
-                  .then((res) =>
-                    res.ok
-                      ? res.json()
-                      : Promise.reject(
-                          new Error(
-                            `Failed to fetch DNR rules: ${res.statusText}`,
-                          ),
-                        ),
-                  )
-                  .then(filterMaxPriorityRules),
-              );
+            for (const rule of rules) {
+              if (rule.condition.regexFilter) {
+                const { isSupported } =
+                  await chrome.declarativeNetRequest.isRegexSupported({
+                    regex: rule.condition.regexFilter,
+                  });
 
-              for (const rule of rules) {
-                if (rule.condition.regexFilter) {
-                  const { isSupported } =
-                    await chrome.declarativeNetRequest.isRegexSupported({
-                      regex: rule.condition.regexFilter,
-                    });
-
-                  if (!isSupported) {
-                    rules.delete(rule);
-                  }
+                if (!isSupported) {
+                  rules.delete(rule);
                 }
               }
-
-              await chrome.declarativeNetRequest.updateDynamicRules({
-                removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: Array.from(rules).map((rule, index) => ({
-                  ...rule,
-                  id: FIXES_ID_RANGE.start + index,
-                })),
-              });
-
-              console.info(
-                '[dnr] Updated dynamic fixes rules:',
-                list.dnr.checksum,
-              );
-              await store.set(Resources, {
-                checksums: { [DNR_FIXES_KEY]: list.dnr.checksum },
-              });
-
-              // Reload redirect protection rules to include fixes changes
-              await updateRedirectProtectionRules(options);
             }
-          } catch (e) {
-            console.error('[dnr] Error while updating dynamic fixes rules:', e);
 
-            // If no dynamic rules are applied, it means that initial fetch failed.
-            // As a fallback we need to add static fixes rules.
-            if (!removeRuleIds.length) {
-              console.warn('[dnr] Falling back to static fixes rules');
-              ids.push('fixes');
+            await chrome.declarativeNetRequest.updateDynamicRules({
+              removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
+              addRules: Array.from(rules).map((rule, index) => ({
+                ...rule,
+                id: FIXES_ID_RANGE.start + index,
+              })),
+            });
 
-              await store.set(Resources, {
-                checksums: { [DNR_FIXES_KEY]: 'filesystem' },
-              });
-            }
+            console.info(
+              '[dnr] Updated dynamic fixes rules:',
+              list.dnr.checksum,
+            );
+            await store.set(Resources, {
+              checksums: { [DNR_FIXES_KEY]: list.dnr.checksum },
+            });
+
+            // Reload redirect protection rules to include fixes changes
+            await updateRedirectProtectionRules(options);
+          }
+        } catch (e) {
+          console.error('[dnr] Error while updating dynamic fixes rules:', e);
+
+          // If no dynamic rules are applied, it means that initial fetch failed.
+          // As a fallback we need to add static fixes rules.
+          if (!removeRuleIds.length) {
+            console.warn('[dnr] Falling back to static fixes rules');
+            ids.push('fixes');
+
+            await store.set(Resources, {
+              checksums: { [DNR_FIXES_KEY]: 'filesystem' },
+            });
           }
         }
-      } else if (resources.checksums[DNR_FIXES_KEY]) {
-        // Remove all dynamic fixes rules
-        const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
-        if (removeRuleIds.length) {
-          await chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds,
-          });
-          await store.set(resources, {
-            checksums: { [DNR_FIXES_KEY]: null },
-          });
-
-          console.info('[dnr] Removed dynamic fixes rules');
-        }
       }
-    } else {
-      // Remove dynamic fixes rules if present
+    } else if (resources.checksums[DNR_FIXES_KEY]) {
+      // Remove all dynamic fixes rules
       const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
       if (removeRuleIds.length) {
         await chrome.declarativeNetRequest.updateDynamicRules({
           removeRuleIds,
         });
-
-        await store.set(Resources, {
+        await store.set(resources, {
           checksums: { [DNR_FIXES_KEY]: null },
         });
 
         console.info('[dnr] Removed dynamic fixes rules');
       }
-
-      if (options.fixesFilters && ids.length) ids.push('fixes');
     }
 
     const enableRulesetIds = [];

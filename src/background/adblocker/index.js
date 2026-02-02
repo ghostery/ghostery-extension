@@ -18,7 +18,6 @@ import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
 import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_EXTENDED_SELECTORS,
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
 } from '@ghostery/config';
@@ -345,8 +344,6 @@ function injectStyles(styles, details) {
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
-const EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
-
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
@@ -461,7 +458,7 @@ async function injectCosmetics(details, config) {
       injectStyles(styles, details);
     }
 
-    if (EXTENDED_SELECTORS.enabled && extended && extended.length > 0) {
+    if (extended && extended.length > 0) {
       chrome.tabs.sendMessage(
         tabId,
         { action: 'evaluateExtendedSelectors', extended },

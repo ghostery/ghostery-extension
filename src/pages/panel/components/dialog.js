@@ -39,6 +39,7 @@ export default {
     },
   },
   header: { value: false, reflect: true },
+  footer: { value: false, reflect: true },
   render: () => html`
     <template layout="block fixed inset layer:400">
       <div id="backdrop" layout="fixed inset:0" onclick="${close}"></div>
@@ -76,6 +77,9 @@ export default {
         <section id="content" layout="column overflow:y:auto gap:2 padding:1.5">
           <slot></slot>
         </section>
+        <section id="footer" layout="padding:1.5:2">
+          <slot name="footer" onslotchange="${html.set('footer', true)}"></slot>
+        </section>
       </div>
     </template>
   `.css`
@@ -108,6 +112,14 @@ export default {
 
     #header {
       border-bottom: 1px solid var(--border-primary);
+    }
+
+    :host(:not([footer])) #footer {
+      display: none;
+    }
+
+    #footer {
+      border-top: 1px solid var(--border-primary);
     }
 
     a > div {
