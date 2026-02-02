@@ -313,6 +313,9 @@
   "done": {
     "message": "完成"
   },
+  "download_report": {
+    "message": "Download report"
+  },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由於瀏覽器限制和缺少額外權限，Ghostery 無法為您提供保護。"
   },
