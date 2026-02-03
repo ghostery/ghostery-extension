@@ -11,7 +11,7 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { findParentDomain } from '../../src/store/options.js';
+import { findParentDomain } from '../../src/utils/domains.js';
 
 function forPausedHostnames(...hostnames) {
   return Object.fromEntries(

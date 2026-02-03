@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera, isSafari } from '/utils/browser-info.js';
+import { findParentDomain } from '/utils/domains.js';
 
 import CustomFilters from './custom-filters.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
@@ -282,31 +283,6 @@ async function manage(options) {
   }
 
   return options;
-}
-
-/*
- * Finds the best matching parent domain for a given hostname from a record
- * of domains. The best match is determined as the shortest domain that is
- * either identical to the hostname or is a parent domain of the hostname.
- *
- * Returns null if no match is found or if no hostname is provided.
- */
-export function findParentDomain(record, hostname = '') {
-  if (!hostname) return null;
-
-  let bestMatch = null;
-  let lengthToBeat = hostname.length + 1;
-
-  for (const domain of Object.keys(record)) {
-    if (domain.length < lengthToBeat && hostname.endsWith(domain)) {
-      const startPos = hostname.length - domain.length;
-      if (startPos == 0 || hostname[startPos - 1] === '.') {
-        bestMatch = domain;
-        lengthToBeat = domain.length;
-      }
-    }
-  }
-  return bestMatch;
 }
 
 export function isGloballyPaused(options) {
