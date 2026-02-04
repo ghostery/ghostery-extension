@@ -125,42 +125,43 @@ export default {
                 </div>
               </ui-toggle>
             `}
-            <ui-toggle
-              value="${options.wtmSerpReport}"
-              onchange="${html.set(options, 'wtmSerpReport')}"
-              data-qa="toggle:wtmSerpReport"
-              disabled="${managedConfig.disableTrackersPreview}"
-            >
-              <div layout="row items:start gap:2 grow" layout@768px="gap:3">
-                <settings-help-image>
-                  <img
-                    src="${assets.trackers_preview}"
-                    alt="Trackers Preview"
-                  />
-                </settings-help-image>
-                <settings-option>
-                  Trackers Preview
-                  <span slot="description">
-                    Shows the tracker preview beside search results.
-                  </span>
-                  <ui-text
-                    type="label-s"
-                    color="secondary"
-                    underline
-                    slot="footer"
-                    layout="self:start"
-                  >
-                    <a
-                      href="${TRACKERS_PREVIEW_LEARN_MORE_URL}"
-                      target="_blank"
-                      layout="row gap:0.5"
+            <settings-managed value="${managedConfig.disableTrackersPreview}">
+              <ui-toggle
+                value="${options.wtmSerpReport}"
+                onchange="${html.set(options, 'wtmSerpReport')}"
+                data-qa="toggle:wtmSerpReport"
+              >
+                <div layout="row items:start gap:2 grow" layout@768px="gap:3">
+                  <settings-help-image>
+                    <img
+                      src="${assets.trackers_preview}"
+                      alt="Trackers Preview"
+                    />
+                  </settings-help-image>
+                  <settings-option>
+                    Trackers Preview
+                    <span slot="description">
+                      Shows the tracker preview beside search results.
+                    </span>
+                    <ui-text
+                      type="label-s"
+                      color="secondary"
+                      underline
+                      slot="footer"
+                      layout="self:start"
                     >
-                      Learn more <ui-icon name="arrow-right-s"></ui-icon>
-                    </a>
-                  </ui-text>
-                </settings-option>
-              </div>
-            </ui-toggle>
+                      <a
+                        href="${TRACKERS_PREVIEW_LEARN_MORE_URL}"
+                        target="_blank"
+                        layout="row gap:0.5"
+                      >
+                        Learn more <ui-icon name="arrow-right-s"></ui-icon>
+                      </a>
+                    </ui-text>
+                  </settings-option>
+                </div>
+              </ui-toggle>
+            </settings-managed>
             ${__PLATFORM__ === 'firefox' &&
             html`
               <ui-toggle
