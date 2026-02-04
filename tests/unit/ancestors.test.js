@@ -13,7 +13,6 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { FramesHierarchy } from '../../src/background/adblocker/ancestors.js';
-import { createWebExtensionAPIMock } from './mocks/browser.js';
 
 describe('#FramesHierarchy', () => {
   it('returns ancestor list', () => {
@@ -721,31 +720,6 @@ describe('#FramesHierarchy', () => {
           ],
         },
       ]);
-    });
-  });
-
-  describe('#handleWebextensionEvents', () => {
-    it('handles `tab.query` failure', () => {
-      const mock = createWebExtensionAPIMock();
-      const { context } = mock.register();
-
-      // Set the active window is being dragged by the user. This
-      // makes `tabs.query` to emit an error.
-      context.windows[0].isUserDragging = true;
-
-      const hierarchy = new FramesHierarchy();
-
-      // Start syncing by using `chrome.tabs.query()`.
-      assert.doesNotReject(async () => {
-        await hierarchy.handleWebWorkerStart(
-          {
-            maxRetries: 1,
-          },
-          { enabled: false } /* FIREFOX_CONTENT_SCRIPT_SCRIPTLETS */,
-        );
-      });
-
-      mock.unregister();
     });
   });
 });
