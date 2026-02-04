@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera, isSafari } from '/utils/browser-info.js';
+import { findParentDomain } from '/utils/domains.js';
 
 import CustomFilters from './custom-filters.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
@@ -282,18 +283,6 @@ async function manage(options) {
   }
 
   return options;
-}
-
-export function findParentDomain(record, hostname = '') {
-  if (!hostname) return null;
-
-  const domain = Object.keys(record)
-    // We need to sort domains by length to check shortest domains first,
-    // but in scope of the same top-level domain
-    .sort((a, b) => b.localeCompare(a))
-    .find((d) => hostname.endsWith(d));
-
-  return domain || null;
 }
 
 export function isGloballyPaused(options) {

@@ -12,7 +12,7 @@
     "lint:src": "eslint",
     "lint:build": "npm run build firefox -- --silent && addons-linter dist",
     "test": "npm run test:unit && npm run wdio && npm run wdio:update",
-    "test:unit": "node --test",
+    "test:unit": "node --require ./tests/unit/setup/init-chrome.js --import ./tests/unit/setup/register-import.js --test",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
     "wdio:page": "node tests/e2e/page/server.js",
