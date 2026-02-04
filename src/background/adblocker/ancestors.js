@@ -244,34 +244,10 @@ export class FramesHierarchy {
     );
   }
 
-  async handleWebWorkerStart({ maxRetries = 25 } = {}) {
-    let allTabs;
-    for (let i = 0; i < maxRetries; i++) {
-      try {
-        allTabs = await chrome.tabs.query({});
-        break;
-      } catch (e) {
-        if (e.message.includes('(user may be dragging a tab)')) {
-          const delay = Math.log((i + 1) * 500);
-          console.warn(
-            `Scheduling to query tabs again: delay="${delay}", tries="${i + 1}"`,
-            allTabs,
-          );
-          await new Promise((resolve) => setTimeout(resolve, delay));
-          continue;
-        }
-        console.error(
-          'Failed to query tabs. The whole tabs will not be synchronised, but',
-          'we will continue to build the hierarchy with cosmetic filter handlers.',
-          e,
-        );
-        return;
-      }
-    }
-
-    if (allTabs) {
-      await Promise.all(allTabs.map((tab) => this.#handleTab(tab)));
-    }
+  async handleWebWorkerStart() {
+    await Promise.all(
+      (await chrome.tabs.query({})).map((tab) => this.#handleTab(tab)),
+    );
   }
 
   handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
