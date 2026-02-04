@@ -17,7 +17,6 @@ import Options, {
   isGloballyPaused,
   revokeGlobalPause,
   getPausedDetails,
-  findParentDomain,
   MODE_DEFAULT,
   MODE_ZAP,
 } from '/store/options.js';
@@ -41,6 +40,7 @@ import ReportConfirm from './report-confirm.js';
 import TrackerDetails from './tracker-details.js';
 import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
+import { findParentDomain } from '/utils/domains.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
