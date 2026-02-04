@@ -92,8 +92,8 @@ if (__PLATFORM__ === 'firefox') {
 
 const hierarchy = new FramesHierarchy();
 
-void hierarchy.handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
-void hierarchy.handleWebWorkerStart();
+hierarchy.handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
+hierarchy.handleWebWorkerStart();
 
 function getEnabledEngines(config) {
   if (config.terms) {
