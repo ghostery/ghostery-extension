@@ -152,6 +152,13 @@ describe('Adblocker Capabilities', function () {
       ['redirgoogleima', '/gen/redirgoogleima.js^$redirect=google-ima.js'],
     ];
 
+    if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
+      scriptingFilters.push([
+        'subdocument',
+        PAGE_DOMAIN + '>>##+js(set, subdocument, true)',
+      ]);
+    }
+
     let reports;
 
     before(async function () {
@@ -215,32 +222,6 @@ describe('Adblocker Capabilities', function () {
         for (const [id, filter] of networkingFilters) {
           it(filter, async function () {
             expect(reports.networking[0].results[id]).toBe(true);
-          });
-        }
-      });
-    });
-  }
-
-  if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
-    describe('FLAG_SUBFRAME_SCRIPTING', function () {
-      const scriptingFilters = [
-        ['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)'],
-      ];
-
-      let reports;
-
-      before(async function () {
-        reports = await test(scriptingFilters);
-      });
-
-      describe('Scripting', function () {
-        for (const [id, filter] of scriptingFilters) {
-          it(filter, async function () {
-            expect(
-              reports.scripting.map(function (timing) {
-                return timing.results[id];
-              }),
-            ).toContain(true);
           });
         }
       });
