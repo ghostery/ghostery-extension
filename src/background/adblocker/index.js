@@ -20,6 +20,7 @@ import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_SUBFRAME_SCRIPTING,
 } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -83,12 +84,15 @@ const contentScripts = (() => {
 })();
 
 let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
+let SUBFRAME_SCRIPTING = { enabled: false };
 
 if (__PLATFORM__ === 'firefox') {
   FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = resolveFlag(
     FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   );
 }
+
+SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
 const hierarchy = new FramesHierarchy();
 
@@ -379,7 +383,7 @@ async function injectCosmetics(details, config) {
   const engine = engines.get(engines.MAIN_ENGINE);
 
   let ancestors = undefined;
-  if (typeof parentFrameId === 'number') {
+  if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
     if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
       // On Firefox with content scripts API, we need to collect
       // every scriptlets will potentially run on the hostname.
