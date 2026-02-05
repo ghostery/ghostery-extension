@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { browser, expect } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 import {
@@ -94,5 +94,24 @@ describe('Managed Configuration', function () {
 
     await openPanel();
     await expect(getExtensionElement('button:menu')).not.toBeDisplayed();
+  });
+
+  it('applies custom filters added to `customFilters`', async function () {
+    await browser.url(PAGE_URL);
+    await expect($('#custom-filter')).toBeDisplayed();
+
+    await setManagedConfig({
+      customFilters: [`${PAGE_DOMAIN}###custom-filter`],
+    });
+
+    await browser.url(PAGE_URL);
+    await expect($('#custom-filter')).not.toBeDisplayed();
+
+    await setManagedConfig({
+      customFilters: [],
+    });
+
+    await browser.url(PAGE_URL);
+    await expect($('#custom-filter')).toBeDisplayed();
   });
 });

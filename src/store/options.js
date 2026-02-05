@@ -282,6 +282,10 @@ async function manage(options) {
     });
   }
 
+  if (managed.customFilters.enabled) {
+    options.customFilters = { enabled: true, trustedScriptlets: true };
+  }
+
   return options;
 }
 
