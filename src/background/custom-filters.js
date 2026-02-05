@@ -27,6 +27,7 @@ import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
+import ManagedConfig from '/store/managed-config.js';
 
 class TrustedScriptletError extends Error {}
 
@@ -188,6 +189,25 @@ export async function updateCustomFilters(input, options) {
 }
 
 OptionsObserver.addListener('customFilters', async (value, lastValue) => {
+  // Check managed config custom filters. Managed config has to enable it first,
+  // so we proceed only if customFilters are enabled (performance optimization).
+  if (value.enabled) {
+    const managedConfig = await store.resolve(ManagedConfig);
+    if (managedConfig.customFilters.enabled) {
+      const currentText = (await store.resolve(CustomFilters)).text;
+      const text = managedConfig.customFilters.filters.join('\n');
+
+      // Update custom filters only if the text is different
+      if (text !== currentText) {
+        await store.set(CustomFilters, { text });
+        await updateCustomFilters(text, value);
+
+        // Avoid multiple updates and exit early
+        return;
+      }
+    }
+  }
+
   // 1. Background startup
   // 2. Custom filters are enabled
   // 3. We cannot initialize engine (adblocker version mismatch, etc.)

@@ -21,7 +21,11 @@ const ManagedConfig = {
   disableUserControl: false,
   disableUserAccount: false,
   disableTrackersPreview: false,
+
+  // TODO: Update the structure of `trustedDomains` as is with `customFilters`
+  // to have `enabled` flag and `domains` array
   trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
+  customFilters: { enabled: false, filters: [String] },
 
   disableNotifications: (config) =>
     config.disableOnboarding || config.disableUserControl,
@@ -29,7 +33,8 @@ const ManagedConfig = {
   disableModes: (config) =>
     config.disableOnboarding ||
     config.disableUserControl ||
-    config.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID,
+    config.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID ||
+    config.customFilters.enabled,
 
   [store.connect]: async () => {
     if (__PLATFORM__ !== 'firefox' && (isOpera() || isWebkit())) return {};
@@ -59,6 +64,14 @@ const ManagedConfig = {
 
           managedConfig = fallbackConfig;
         }
+      }
+
+      // Translate `customFilters` storage.managed key (an array) to model structure
+      if (managedConfig.customFilters) {
+        managedConfig.customFilters = {
+          enabled: true,
+          filters: managedConfig.customFilters,
+        };
       }
 
       return managedConfig || {};

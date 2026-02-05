@@ -14,8 +14,9 @@ import { FLAG_REDIRECT_PROTECTION } from '@ghostery/config';
 
 import { longDateFormatter } from '/ui/labels.js';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Config from '/store/config.js';
+import ManagedConfig from '/store/managed-config.js';
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 
 import { debugMode } from '/utils/debug.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
@@ -63,6 +64,7 @@ export default {
   },
   options: store(Options),
   config: store(Config),
+  managedConfig: store(ManagedConfig),
   devMode: debugMode,
   globalPause: {
     value: false,
@@ -78,6 +80,7 @@ export default {
   render: ({
     options,
     config,
+    managedConfig,
     devMode,
     globalPause,
     globalPauseRevokeAt,
@@ -123,7 +126,6 @@ export default {
             >
               <div layout="column gap:3">
                 <ui-toggle
-                  disabled="${globalPause}"
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
                   data-qa="toggle:ad-blocking"
@@ -136,7 +138,6 @@ export default {
                   </settings-option>
                 </ui-toggle>
                 <ui-toggle
-                  disabled="${globalPause}"
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
                   data-qa="toggle:anti-tracking"
@@ -150,7 +151,6 @@ export default {
                   </settings-option>
                 </ui-toggle>
                 <ui-toggle
-                  disabled="${globalPause}"
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
                   data-qa="toggle:never-consent"
@@ -184,7 +184,6 @@ export default {
                     ></ui-icon>
                   </settings-link>
                   <ui-toggle
-                    disabled="${globalPause}"
                     value="${options.serpTrackingPrevention}"
                     onchange="${html.set(options, 'serpTrackingPrevention')}"
                   >
@@ -213,43 +212,47 @@ export default {
                     ></ui-icon>
                   </settings-link>
                   <ui-toggle
-                    disabled="${globalPause}"
                     value="${options.regionalFilters.enabled}"
                     onchange="${html.set(options, 'regionalFilters.enabled')}"
                     data-qa="toggle:regional-filters"
                   >
                   </ui-toggle>
                 </div>
-                <div layout="grid:1|max content:center gap">
-                  <settings-link
-                    href="${router.url(CustomFilters)}"
-                    data-qa="button:custom-filters"
-                  >
-                    <ui-icon
-                      name="detailed-view"
-                      color="quaternary"
-                      layout="size:3 margin:right"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      layout="row gap:0.5 items:center"
+                <settings-managed
+                  value="${managedConfig.customFilters.enabled}"
+                >
+                  <div layout="grid:1|max content:center gap">
+                    <settings-link
+                      href="${!managedConfig.customFilters.enabled
+                        ? router.url(CustomFilters)
+                        : ''}"
+                      data-qa="button:custom-filters"
                     >
-                      Custom Filters
-                    </ui-text>
-                    <ui-icon
-                      name="chevron-right"
-                      color="primary"
-                      layout="size:2"
-                    ></ui-icon>
-                  </settings-link>
-                  <ui-toggle
-                    disabled="${globalPause}"
-                    value="${options.customFilters.enabled}"
-                    onchange="${html.set(options, 'customFilters.enabled')}"
-                    data-qa="toggle:custom-filters"
-                  >
-                  </ui-toggle>
-                </div>
+                      <ui-icon
+                        name="detailed-view"
+                        color="quaternary"
+                        layout="size:3 margin:right"
+                      ></ui-icon>
+                      <ui-text
+                        type="headline-xs"
+                        layout="row gap:0.5 items:center"
+                      >
+                        Custom Filters
+                      </ui-text>
+                      <ui-icon
+                        name="chevron-right"
+                        color="primary"
+                        layout="size:2"
+                      ></ui-icon>
+                    </settings-link>
+                    <ui-toggle
+                      value="${options.customFilters.enabled}"
+                      onchange="${html.set(options, 'customFilters.enabled')}"
+                      data-qa="toggle:custom-filters"
+                    >
+                    </ui-toggle>
+                  </div>
+                </settings-managed>
                 <div layout="grid:1|max content:center gap">
                   <settings-link href="${router.url(ExperimentalFilters)}">
                     <ui-icon
@@ -270,7 +273,6 @@ export default {
                     ></ui-icon>
                   </settings-link>
                   <ui-toggle
-                    disabled="${globalPause}"
                     value="${options.experimentalFilters}"
                     onchange="${html.set(options, 'experimentalFilters')}"
                     data-qa="toggle:experimental-filters"
@@ -302,7 +304,6 @@ export default {
                       ></ui-icon>
                     </settings-link>
                     <ui-toggle
-                      disabled="${globalPause}"
                       value="${options.redirectProtection.enabled}"
                       onchange="${html.set(
                         options,
