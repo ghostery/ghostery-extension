@@ -9,16 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { describe, it, before } from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { filter } from '../../src/utils/config.js';
 
 describe('Remote config', () => {
-  before(() => {
-    global.chrome = { runtime: {} };
-  });
-
   describe('filter()', () => {
     it('should return false for unsupported filters', () => {
       const originalWarn = console.warn;
@@ -39,6 +35,38 @@ describe('Remote config', () => {
 
     it('should return true if no filter is provided', () => {
       assert.deepEqual(filter({}), true);
+    });
+
+    it('should return true if platform matches', () => {
+      global.__PLATFORM__ = 'chromium';
+      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), true);
+    });
+
+    it('should return false if platform does not match', () => {
+      global.__PLATFORM__ = 'chromium';
+      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), false);
+    });
+
+    it('should return true for firefox platform when set', () => {
+      global.__PLATFORM__ = 'firefox';
+      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), true);
+      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), false);
+    });
+
+    it('should return true if browser matches', () => {
+      global.__PLATFORM__ = 'chromium';
+      assert.deepEqual(filter({ filter: { browser: 'chrome' } }), true);
+    });
+
+    it('should return false if browser does not match', () => {
+      global.__PLATFORM__ = 'chromium';
+      assert.deepEqual(filter({ filter: { browser: 'firefox' } }), false);
+    });
+
+    it('should return true for firefox browser when set', () => {
+      global.__PLATFORM__ = 'firefox';
+      assert.deepEqual(filter({ filter: { browser: 'firefox' } }), true);
+      assert.deepEqual(filter({ filter: { browser: 'chrome' } }), false);
     });
 
     it('should return true if version matches exactly', () => {
@@ -62,22 +90,6 @@ describe('Remote config', () => {
       assert.deepEqual(filter({ filter: { version: '2.0.1' } }), false); // 0 < 1
     });
 
-    it('should return true if platform matches', () => {
-      global.__PLATFORM__ = 'chromium';
-      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), true);
-    });
-
-    it('should return false if platform does not match', () => {
-      global.__PLATFORM__ = 'chromium';
-      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), false);
-    });
-
-    it('should return true for firefox platform when set', () => {
-      global.__PLATFORM__ = 'firefox';
-      assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), true);
-      assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), false);
-    });
-
     it('should combine version and platform checks', () => {
       global.__PLATFORM__ = 'chromium';
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
@@ -97,6 +109,29 @@ describe('Remote config', () => {
       // Platform mismatch
       assert.deepEqual(
         filter({ filter: { version: '1.0.0', platform: ['firefox'] } }),
+        false,
+      );
+    });
+
+    it('should combine version and browser checks', () => {
+      global.__PLATFORM__ = 'chromium';
+      global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
+
+      // Both match
+      assert.deepEqual(
+        filter({ filter: { version: '1.0.0', browser: 'chrome' } }),
+        true,
+      );
+
+      // Version mismatch
+      assert.deepEqual(
+        filter({ filter: { version: '3.0.0', browser: 'chrome' } }),
+        false,
+      );
+
+      // Browser mismatch
+      assert.deepEqual(
+        filter({ filter: { version: '1.0.0', browser: 'firefox' } }),
         false,
       );
     });

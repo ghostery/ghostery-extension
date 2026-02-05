@@ -8,9 +8,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { isWebkit } from './browser-info.js';
+import { getBrowser, isWebkit } from './browser-info.js';
 
-const SUPPORTED_FILTERS = ['version', 'platform'];
+const SUPPORTED_FILTERS = ['platform', 'browser', 'version'];
 
 export function filter(item) {
   if (item.filter) {
@@ -31,6 +31,12 @@ export function filter(item) {
       check = item.filter.platform.includes(
         __PLATFORM__ !== 'firefox' && isWebkit() ? 'webkit' : __PLATFORM__,
       );
+    }
+
+    // Browser check
+    // Values from getBrowser() method
+    if (check && typeof item.filter.browser === 'string') {
+      check = getBrowser().name === item.filter.browser;
     }
 
     // Version check
