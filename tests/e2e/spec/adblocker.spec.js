@@ -9,13 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect } from '@wdio/globals';
+import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 import {
   enableExtension,
   setPrivacyToggle,
   setCustomFilters,
 } from '../utils.js';
 
-import { PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
+import { argv, PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
 
 const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 
@@ -126,7 +127,6 @@ describe('Adblocker Capabilities', function () {
       ['selector-adjunct', '##[adjunct-target="100ms"]'],
     ];
     const scriptingFilters = [
-      ['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)'],
       ['globals-safeself', PAGE_DOMAIN + '##+js(json-prune, globals-safeself)'],
       ['aopr', PAGE_DOMAIN + '##+js(aopr, encodeURIComponent)'],
       ['aopw', PAGE_DOMAIN + '##+js(aopw, __checkadb__custom)'],
@@ -215,6 +215,32 @@ describe('Adblocker Capabilities', function () {
         for (const [id, filter] of networkingFilters) {
           it(filter, async function () {
             expect(reports.networking[0].results[id]).toBe(true);
+          });
+        }
+      });
+    });
+  }
+
+  if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
+    describe('FLAG_SUBFRAME_SCRIPTING', function () {
+      const scriptingFilters = [
+        ['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)'],
+      ];
+
+      let reports;
+
+      before(async function () {
+        reports = await test(scriptingFilters);
+      });
+
+      describe('Scripting', function () {
+        for (const [id, filter] of scriptingFilters) {
+          it(filter, async function () {
+            expect(
+              reports.scripting.map(function (timing) {
+                return timing.results[id];
+              }),
+            ).toContain(true);
           });
         }
       });
