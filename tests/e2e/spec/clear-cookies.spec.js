@@ -13,6 +13,7 @@ import {
   enableExtension,
   getExtensionElement,
   openPanel,
+  setCookieInBrowserContext,
   waitForIdleBackgroundTasks,
 } from '../utils.js';
 
@@ -24,12 +25,7 @@ describe('Clear Cookies', () => {
   before(enableExtension);
 
   beforeEach(async () => {
-    await browser.url(PAGE_URL, { waitUntil: 'load' });
-    await browser.setCookies({
-      name: COOKIE_NAME,
-      value: 'test-value',
-      domain: PAGE_DOMAIN,
-    });
+    await setCookieInBrowserContext(PAGE_URL, COOKIE_NAME, 'test-value');
   });
 
   afterEach(async () => {
