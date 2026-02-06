@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { parseWithCache } from '/utils/request';
+import { parseWithCache } from '/utils/request.js';
 
 export class FramesHierarchy {
   /**
