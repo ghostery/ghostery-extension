@@ -10,7 +10,6 @@
  */
 
 import { store } from 'hybrids';
-import { parse } from 'tldts-experimental';
 
 import Config from '/store/config.js';
 import Options, { REPORT_OPTIONS } from '/store/options.js';
@@ -19,6 +18,7 @@ import Resources from '/store/resources.js';
 import getBrowserInfo from '/utils/browser-info.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 import { isOptionEqual } from '/utils/options-observer.js';
+import { parseWithCache } from '/utils/request.js';
 
 import { tabStats } from './stats.js';
 
@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         const { version } = chrome.runtime.getManifest();
 
         const email = msg.email || 'noreplay@ghostery.com';
-        const domain = parse(msg.url).domain || '';
+        const domain = parseWithCache(msg.url).domain || '';
 
         // Add CSRF token to form data
         formData.append(csrfParam, csrfToken);
