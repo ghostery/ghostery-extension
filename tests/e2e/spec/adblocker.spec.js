@@ -172,7 +172,7 @@ describe('Adblocker Capabilities', function () {
     describe('Styling', function () {
       for (const [id, filter] of stylingFilters) {
         it(filter, async function () {
-          expect(
+          await expect(
             reports.styling.map(function (timing) {
               return timing.results[id];
             }),
@@ -184,7 +184,7 @@ describe('Adblocker Capabilities', function () {
     describe('Scripting', function () {
       for (const [id, filter] of scriptingFilters) {
         it(filter, async function () {
-          expect(
+          await expect(
             reports.scripting.map(function (timing) {
               return timing.results[id];
             }),
@@ -197,7 +197,7 @@ describe('Adblocker Capabilities', function () {
       for (const [id, filter] of networkingFilters) {
         it(filter, async function () {
           // The networking test only have one timing candidate
-          expect(reports.networking[0].results[id]).toBe(true);
+          await expect(reports.networking[0].results[id]).toBe(true);
         });
       }
     });
@@ -221,7 +221,7 @@ describe('Adblocker Capabilities', function () {
       describe('Networking', function () {
         for (const [id, filter] of networkingFilters) {
           it(filter, async function () {
-            expect(reports.networking[0].results[id]).toBe(true);
+            await expect(reports.networking[0].results[id]).toBe(true);
           });
         }
       });
