@@ -25,7 +25,11 @@ import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 import { FLAGS } from '@ghostery/config';
 
-import { setConfigFlags, setExtensionBaseUrl } from './utils.js';
+import {
+  setConfigFlags,
+  setCookieInBrowserContext,
+  setExtensionBaseUrl,
+} from './utils.js';
 import { setupTestPage } from './page/server.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -193,12 +197,11 @@ export const config = {
       }
 
       /* attribution.spec */
-      await browser.url('https://www.ghostery.com/', { waitUntil: 'load' });
-      await browser.setCookies({
-        name: 'attribution',
-        value: `s=source&c=campaign`,
-        domain: '.ghostery.com',
-      });
+      await setCookieInBrowserContext(
+        'https://www.ghostery.com/',
+        'attribution',
+        's=source&c=campaign',
+      );
       /* attribution.spec */
 
       await setConfigFlags(argv.flags);

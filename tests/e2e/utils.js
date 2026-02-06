@@ -210,3 +210,15 @@ export async function switchFrame(frameElement) {
 
   await browser.switchFrame(frameElement);
 }
+
+export async function setCookieInBrowserContext(url, name, value) {
+  await browser.url(url, { waitUntil: 'load' });
+
+  await browser.execute(
+    (name, value) => {
+      document.cookie = `${name}=${value}`;
+    },
+    name,
+    value,
+  );
+}
