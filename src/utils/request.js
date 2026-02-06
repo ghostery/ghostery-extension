@@ -15,7 +15,7 @@ import { parse } from 'tldts-experimental';
 const PARSE_CACHE_LIMIT = 1000;
 const parseCache = new Map();
 
-function parseWithCache(url) {
+export function parseWithCache(url) {
   if (parseCache.has(url)) {
     return parseCache.get(url);
   }

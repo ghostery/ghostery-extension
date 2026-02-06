@@ -13,12 +13,12 @@ import { evalSnippets, filterCompactRules } from '@duckduckgo/autoconsent';
 import compactRules from '@duckduckgo/autoconsent/rules/compact-rules.json';
 import { ACTION_DISABLE_AUTOCONSENT } from '@ghostery/config';
 
-import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
+import { parseWithCache } from '/utils/request.js';
 
 async function initialize(msg, sender) {
   const [options, config] = await Promise.all([
@@ -30,7 +30,7 @@ async function initialize(msg, sender) {
     const { tab, frameId } = sender;
 
     const senderUrl = sender.url || `${sender.origin}/`;
-    const hostname = senderUrl ? parse(senderUrl).hostname : '';
+    const hostname = senderUrl ? parseWithCache(senderUrl).hostname : '';
 
     if (
       getPausedDetails(options, hostname) ||
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
     case 'optInResult':
     case 'optOutResult': {
       if (msg.result === true) {
-        const { domain } = parse(sender.url);
+        const { domain } = parseWithCache(sender.url);
         if (domain) {
           store.set(Resources, { autoconsent: { [domain]: Date.now() } });
         }

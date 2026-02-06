@@ -10,19 +10,19 @@
  */
 
 import { store } from 'hybrids';
-import { parse } from 'tldts-experimental';
 
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { isGloballyPaused } from '/store/options.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
+import { parseWithCache } from '/utils/request.js';
 
 // Trackers preview messages
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getWTMReport') {
     sendResponse({
       wtmStats: msg.links.map((url) => {
-        const { domain } = parse(url);
+        const { domain } = parseWithCache(url);
 
         return {
           stats: getWTMStats(domain),
