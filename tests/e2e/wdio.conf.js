@@ -193,6 +193,7 @@ export const config = {
       }
 
       /* attribution.spec */
+      await browser.url('https://www.ghostery.com/', { waitUntil: 'load' });
       await browser.setCookies({
         name: 'attribution',
         value: `s=source&c=campaign`,
