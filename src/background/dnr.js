@@ -22,7 +22,7 @@ import {
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
-import { UPDATE_ENGINES_DELAY } from './adblocker.js';
+import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__PLATFORM__ !== 'firefox') {

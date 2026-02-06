@@ -19,6 +19,7 @@ import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_SUBFRAME_SCRIPTING,
 } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -32,8 +33,9 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import Request, { parseWithCache } from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
-import { tabStats, updateTabStats } from './stats.js';
-import { getRedirectProtectionUrl } from './redirect-protection.js';
+import { tabStats, updateTabStats } from '../stats.js';
+import { getRedirectProtectionUrl } from '../redirect-protection.js';
+import { FramesHierarchy } from './ancestors.js';
 
 let options = Options;
 
@@ -81,12 +83,20 @@ const contentScripts = (() => {
 })();
 
 let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
+let SUBFRAME_SCRIPTING = { enabled: false };
 
 if (__PLATFORM__ === 'firefox') {
   FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = resolveFlag(
     FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   );
 }
+
+SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
+
+const hierarchy = new FramesHierarchy();
+
+hierarchy.handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
+hierarchy.handleWebWorkerStart();
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -291,6 +301,9 @@ function injectScriptlets(filters, hostname, details) {
       __PLATFORM__ === 'firefox' &&
       FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled
     ) {
+      if (filter.hasSubframeConstraint()) {
+        contentScript += `window.parent!==window&&`;
+      }
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
@@ -344,7 +357,7 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  const { frameId, url, tabId } = details;
+  const { tabId, frameId, parentFrameId, documentId, url } = details;
 
   const parsed = parseWithCache(url);
   const domain = parsed.domain || '';
@@ -368,6 +381,27 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
 
+  let ancestors = undefined;
+  if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
+    if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+      // On Firefox with content scripts API, we need to collect
+      // every scriptlets will potentially run on the hostname.
+      // Putting same values to `ancestors` enables adblocker to
+      // find all possible cases. The subframe constraint is
+      // validated by the `window.parent` property upon a script
+      // is executed.
+      ancestors = [{ domain, hostname }];
+    } else {
+      ancestors = hierarchy.ancestors(
+        { tabId, frameId, parentFrameId, documentId },
+        {
+          domain,
+          hostname,
+        },
+      );
+    }
+  }
+
   // Domain specific cosmetic filters (scriptlets and styles)
   // Execution: bootstrap, DOM mutations
   {
@@ -375,6 +409,7 @@ async function injectCosmetics(details, config) {
       domain,
       hostname,
       url,
+      ancestors,
 
       classes: config.classes,
       hrefs: config.hrefs,

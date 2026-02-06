@@ -9,13 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect } from '@wdio/globals';
+import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 import {
   enableExtension,
   setPrivacyToggle,
   setCustomFilters,
 } from '../utils.js';
 
-import { PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
+import { argv, PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
 
 const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 
@@ -150,6 +151,13 @@ describe('Adblocker Capabilities', function () {
       ],
       ['redirgoogleima', '/gen/redirgoogleima.js^$redirect=google-ima.js'],
     ];
+
+    if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
+      scriptingFilters.push([
+        'subdocument',
+        PAGE_DOMAIN + '>>##+js(set, subdocument, true)',
+      ]);
+    }
 
     let reports;
 

@@ -131,6 +131,27 @@
           }
         }
 
+        // subdocument
+        results["subdocument"] = false;
+        if (document.readyState !== "loading") {
+          l++;
+          const iframe = document.createElement("iframe");
+          iframe.addEventListener("load", function () {
+            if (
+              iframe.contentWindow.subdocument === true
+              && window.subdocument !== true
+            ) {
+              results["subdocument"] = true;
+            }
+            done();
+          }, { once: true });
+          iframe.setAttribute("src", "./subdocument.html");
+          iframe.style.width = "1px";
+          iframe.style.height = "1px";
+          iframe.style.opacity = 0;
+          document.body.appendChild(iframe);
+        }
+
         // scriptletGlobals.safeSelf /w json-prune
         results["globals-safeself"] = false;
         // Inject malicious proxy function to `Object.hasOwn` to distrub checking property existence
@@ -542,6 +563,14 @@
         <th>+readystatechange</th>
         <th>+DOMContentLoaded</th>
         <th>+1000ms</th>
+      </tr>
+      <tr id="subdocument">
+        <td><code>localhost>>##+js(set, subdocument, true)</code></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
+        <td><section fail></section></td>
       </tr>
       <tr id="globals-safeself">
         <td><code>localhost##+js(json-prune, globals-safeself)</code></td>
