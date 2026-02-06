@@ -90,6 +90,14 @@ async function togglePause(host, event) {
     });
   }
 
+  if (stats.hostname) {
+    await chrome.runtime.sendMessage({
+      action: 'updateHostnamePause',
+      hostname: stats.hostname,
+      paused: !paused, // paused is the old value, but we want the current state
+    });
+  }
+
   showAlert(html`
     <panel-alert type="danger">
       ${paused
