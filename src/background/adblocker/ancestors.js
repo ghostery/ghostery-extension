@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { parse } from 'tldts-experimental';
+import { parseWithCache } from '/utils/request';
 
 export class FramesHierarchy {
   /**
@@ -230,7 +230,7 @@ export class FramesHierarchy {
     this.sync(
       tab.id,
       frames.map((frame) => {
-        const parsed = parse(frame.url);
+        const parsed = parseWithCache(frame.url);
         return {
           frameId: frame.frameId,
           parentFrameId: frame.parentFrameId,
