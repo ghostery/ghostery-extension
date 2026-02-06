@@ -23,3 +23,26 @@ export async function checkStorage() {
     throw e;
   }
 }
+
+export function getLocalStorageItem(key) {
+  try {
+    return globalThis.localStorage.getItem(key);
+  } catch (e) {
+    console.error(
+      `[storage] Failed to get localStorage item for key "${key}":`,
+      e,
+    );
+    return null;
+  }
+}
+
+export function setLocalStorageItem(key, value) {
+  try {
+    globalThis.localStorage.setItem(key, value);
+  } catch (e) {
+    console.error(
+      `[storage] Failed to set localStorage item for key "${key}":`,
+      e,
+    );
+  }
+}

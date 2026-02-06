@@ -14,7 +14,6 @@ import {
   filterRequestHTML,
   updateResponseHeadersWithCSP,
 } from '@ghostery/adblocker-webextension';
-import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
 import {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
@@ -31,7 +30,7 @@ import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import Request from '/utils/request.js';
+import Request, { parseWithCache } from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from '../stats.js';
@@ -360,7 +359,7 @@ async function injectCosmetics(details, config) {
 
   const { tabId, frameId, parentFrameId, documentId, url } = details;
 
-  const parsed = parse(url);
+  const parsed = parseWithCache(url);
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 

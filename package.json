@@ -31,11 +31,11 @@
     "@wdio/globals": "^9.12.7",
     "@wdio/mocha-framework": "^9.12.6",
     "@wdio/spec-reporter": "^9.23.2",
-    "addons-linter": "^9.5.0",
+    "addons-linter": "^9.6.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.2.0",
+    "globals": "^17.3.0",
     "license-report": "^6.8.1",
     "prettier": "^3.8.1",
     "sinon-chrome": "^3.0.1",
@@ -43,14 +43,14 @@
     "web-ext": "^9.2.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.51.0",
+    "@duckduckgo/autoconsent": "^14.52.0",
     "@ghostery/adblocker": "^2.13.4",
     "@ghostery/adblocker-content": "^2.13.3",
     "@ghostery/adblocker-extended-selectors": "^2.13.3",
     "@ghostery/adblocker-webextension": "^2.13.4",
     "@ghostery/config": "^0.0.7",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
-    "@ghostery/urlfilter2dnr": "^1.6.5",
+    "@ghostery/urlfilter2dnr": "^1.6.6",
     "@github/relative-time-element": "^5.0.0",
     "@sentry/browser": "^10.38.0",
     "@whotracksme/reporting": "^7.10.0",
@@ -62,7 +62,7 @@
     "idb": "^8.0.2",
     "lottie-web": "^5.13.0",
     "plotly.js-basic-dist": "^3.3.1",
-    "tldts-experimental": "^7.0.19"
+    "tldts-experimental": "^7.0.22"
   },
   "dataDependencies": {
     "redirect-resources": "7b612019b634b0b6c4692fe323010a612e2eda61fdac83d74a852bb2cf69aaca",

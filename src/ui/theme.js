@@ -10,8 +10,9 @@
  */
 
 import * as OptionsObserver from '/utils/options-observer.js';
+import { getLocalStorageItem, setLocalStorageItem } from '/utils/storage.js';
 
-let mode = localStorage.getItem('theme') || '';
+let mode = getLocalStorageItem('theme') || '';
 const styleSheets = new Set(Array.from(document.styleSheets));
 
 function updateStylesheet(styleSheet) {
@@ -59,7 +60,7 @@ if (document.documentElement.dataset.theme) {
 } else {
   OptionsObserver.addListener('theme', (theme, lastTheme) => {
     if (theme || lastTheme) {
-      localStorage.setItem('theme', theme);
+      setLocalStorageItem('theme', theme);
       mode = theme;
 
       reloadTheme();
