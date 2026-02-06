@@ -19,18 +19,22 @@ import {
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 describe('Clear Cookies', () => {
+  const COOKIE_NAME = 'test-cookie';
+
   before(enableExtension);
 
   beforeEach(async () => {
+    await browser.url(PAGE_URL, { waitUntil: 'load' });
     await browser.setCookies({
-      name: 'test-cookie',
+      name: COOKIE_NAME,
       value: 'test-value',
       domain: PAGE_DOMAIN,
     });
   });
 
   afterEach(async () => {
-    await browser.deleteCookies({ domain: PAGE_DOMAIN });
+    await browser.url(PAGE_URL, { waitUntil: 'load' });
+    await browser.deleteCookies({ name: COOKIE_NAME, domain: PAGE_DOMAIN });
   });
 
   it('clears cookies when action is triggered in the panel', async () => {
