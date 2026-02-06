@@ -64,7 +64,7 @@ if (__PLATFORM__ !== 'firefox') {
     await chrome.declarativeNetRequest.updateDynamicRules({
       addRules: [
         isWebkit()
-          ? // Safari/WebKit has a bug with setting excludedRequestDomains,
+          ? // TODO: Safari/WebKit has a bug with setting excludedRequestDomains,
             // it simply doesn't work and still allow on excluded domains
             // the only way is to use `allow` action with excludedInitiatorDomains
             {

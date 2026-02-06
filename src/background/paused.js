@@ -19,7 +19,6 @@ import {
   getDynamicRulesIds,
   PAUSED_ID_RANGE,
   PAUSED_RULE_PRIORITY,
-  ALL_RESOURCE_TYPES,
 } from '/utils/dnr.js';
 
 // Pause / unpause hostnames
@@ -92,27 +91,9 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
           {
             id: 1,
             priority: PAUSED_RULE_PRIORITY,
-            action: { type: 'allow' },
-            condition: {
-              initiatorDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ALL_RESOURCE_TYPES,
-            },
-          },
-          {
-            id: 2,
-            priority: PAUSED_RULE_PRIORITY,
-            action: { type: 'allow' },
-            condition: {
-              requestDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ALL_RESOURCE_TYPES,
-            },
-          },
-          {
-            id: 3,
-            priority: PAUSED_RULE_PRIORITY,
             action: { type: 'allowAllRequests' },
             condition: {
-              initiatorDomains: globalPause ? undefined : hostnames,
+              requestDomains: globalPause ? undefined : hostnames,
               resourceTypes: ['main_frame'],
             },
           },
