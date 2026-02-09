@@ -16,7 +16,6 @@ import {
 } from '@ghostery/adblocker-webextension';
 import scriptlets from '@ghostery/scriptlets';
 import {
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_SUBFRAME_SCRIPTING,
@@ -81,22 +80,6 @@ const contentScripts = (() => {
     },
   };
 })();
-
-let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
-let SUBFRAME_SCRIPTING = { enabled: false };
-
-if (__PLATFORM__ === 'firefox') {
-  FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = resolveFlag(
-    FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  );
-}
-
-SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
-
-const hierarchy = new FramesHierarchy();
-
-hierarchy.handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
-hierarchy.handleWebWorkerStart();
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -163,7 +146,7 @@ export async function reloadMainEngine() {
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 
-  if (__PLATFORM__ === 'firefox' && FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+  if (__PLATFORM__ === 'firefox') {
     contentScripts.unregisterAll();
   }
 }
@@ -297,10 +280,7 @@ function injectScriptlets(filters, hostname, details) {
       ...parsed.args.map((arg) => decodeURIComponent(arg)),
     ];
 
-    if (
-      __PLATFORM__ === 'firefox' &&
-      FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled
-    ) {
+    if (__PLATFORM__ === 'firefox') {
       if (filter.hasSubframeConstraint()) {
         contentScript += `window.parent!==window&&`;
       }
@@ -326,7 +306,7 @@ function injectScriptlets(filters, hostname, details) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox' && FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+  if (__PLATFORM__ === 'firefox') {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -347,6 +327,16 @@ function injectStyles(styles, details) {
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
+const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
+
+let framesHierarchy;
+if (__PLATFORM__ !== 'firefox') {
+  framesHierarchy = new FramesHierarchy();
+
+  framesHierarchy.handleWebWorkerStart();
+  framesHierarchy.handleWebextensionEvents();
+}
+
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
@@ -365,7 +355,6 @@ async function injectCosmetics(details, config) {
 
   if (
     __PLATFORM__ === 'firefox' &&
-    FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled &&
     scriptletsOnly &&
     contentScripts.isRegistered(hostname)
   ) {
@@ -383,7 +372,7 @@ async function injectCosmetics(details, config) {
 
   let ancestors = undefined;
   if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+    if (__PLATFORM__ === 'firefox') {
       // On Firefox with content scripts API, we need to collect
       // every scriptlets will potentially run on the hostname.
       // Putting same values to `ancestors` enables adblocker to
@@ -392,12 +381,9 @@ async function injectCosmetics(details, config) {
       // is executed.
       ancestors = [{ domain, hostname }];
     } else {
-      ancestors = hierarchy.ancestors(
+      ancestors = framesHierarchy.ancestors(
         { tabId, frameId, parentFrameId, documentId },
-        {
-          domain,
-          hostname,
-        },
+        { domain, hostname },
       );
     }
   }
@@ -519,14 +505,9 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 
 if (__PLATFORM__ === 'firefox') {
-  FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.then((enabled) => {
-    if (!enabled) contentScripts.unregisterAll();
-  });
-
   OptionsObserver.addListener(
     'paused',
     function firefoxContentScriptScriptlets(paused) {
-      if (!FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) return;
       for (const hostname of Object.keys(paused)) {
         contentScripts.unregister(hostname);
       }
@@ -535,9 +516,7 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
-      if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
-        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-      }
+      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );

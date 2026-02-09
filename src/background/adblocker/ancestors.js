@@ -250,16 +250,13 @@ export class FramesHierarchy {
     );
   }
 
-  handleWebextensionEvents(FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
+  handleWebextensionEvents() {
     chrome.tabs.onRemoved.addListener((tabId) => {
-      if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled === false) {
-        this.unregister(tabId, 0);
-      }
+      this.unregister(tabId, 0);
     });
+
     chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
-      if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled === false) {
-        this.replace(addedTabId, removedTabId);
-      }
+      this.replace(addedTabId, removedTabId);
     });
   }
 }
