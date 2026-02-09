@@ -249,4 +249,14 @@ export class FramesHierarchy {
       (await chrome.tabs.query({})).map((tab) => this.#handleTab(tab)),
     );
   }
+
+  handleWebextensionEvents() {
+    chrome.tabs.onRemoved.addListener((tabId) => {
+      this.unregister(tabId, 0);
+    });
+
+    chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+      this.replace(addedTabId, removedTabId);
+    });
+  }
 }

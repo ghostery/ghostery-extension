@@ -81,13 +81,6 @@ const contentScripts = (() => {
   };
 })();
 
-let SUBFRAME_SCRIPTING = { enabled: false };
-
-SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
-
-const hierarchy = new FramesHierarchy();
-hierarchy.handleWebWorkerStart();
-
 function getEnabledEngines(config) {
   if (config.terms) {
     const list = ENGINES.filter(({ key }) => config[key]).map(
@@ -334,6 +327,16 @@ function injectStyles(styles, details) {
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
+const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
+
+let framesHierarchy;
+if (__PLATFORM__ !== 'firefox') {
+  framesHierarchy = new FramesHierarchy();
+
+  framesHierarchy.handleWebWorkerStart();
+  framesHierarchy.handleWebextensionEvents();
+}
+
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
@@ -378,7 +381,7 @@ async function injectCosmetics(details, config) {
       // is executed.
       ancestors = [{ domain, hostname }];
     } else {
-      ancestors = hierarchy.ancestors(
+      ancestors = framesHierarchy.ancestors(
         { tabId, frameId, parentFrameId, documentId },
         { domain, hostname },
       );
