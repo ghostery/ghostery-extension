@@ -314,7 +314,7 @@
     "message": "Terminé"
   },
   "download_report": {
-    "message": "Download report"
+    "message": "Télécharger le rapport"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "En raison des restrictions du navigateur et d'autorisations supplémentaires manquantes, Ghostery n'est pas en mesure de vous protéger."
@@ -898,6 +898,9 @@
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "La sauvegarde de $${0} a été importée avec succès."
+  },
+  "the_feature_is_managed_by_your_organization": {
+    "message": "Cette fonctionnalité est gérée par votre organisation"
   },
   "theme": {
     "message": "Thème"

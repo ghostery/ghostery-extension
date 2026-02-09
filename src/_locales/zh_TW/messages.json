@@ -314,7 +314,7 @@
     "message": "完成"
   },
   "download_report": {
-    "message": "Download report"
+    "message": "下載報告"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由於瀏覽器限制和缺少額外權限，Ghostery 無法為您提供保護。"
@@ -898,6 +898,9 @@
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "來自 $${0} 的備份已成功匯入。"
+  },
+  "the_feature_is_managed_by_your_organization": {
+    "message": "此功能由您的組織管理"
   },
   "theme": {
     "message": "主題"

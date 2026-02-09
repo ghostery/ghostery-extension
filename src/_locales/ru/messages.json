@@ -314,7 +314,7 @@
     "message": "Готово"
   },
   "download_report": {
-    "message": "Download report"
+    "message": "Скачать отчёт"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "Ghostery не работает из-за ограничений браузера и отсутствия дополнительных разрешений."
@@ -898,6 +898,9 @@
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Резервная копия из $${0} успешно импортирована."
+  },
+  "the_feature_is_managed_by_your_organization": {
+    "message": "Эта функция управляется вашей организацией"
   },
   "theme": {
     "message": "Тема"
