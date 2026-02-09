@@ -899,6 +899,9 @@
   "the_backup_from_@_0__imported_successfully_": {
     "message": "The backup from $${0} imported successfully."
   },
+  "the_feature_is_managed_by_your_organization": {
+    "message": "The feature is managed by your organization"
+  },
   "theme": {
     "message": "Theme"
   },

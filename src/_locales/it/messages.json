@@ -314,7 +314,7 @@
     "message": "Fatto"
   },
   "download_report": {
-    "message": "Download report"
+    "message": "Scarica il report"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "A causa delle limitazioni del browser e alla mancanza di alcune autorizzazioni, Ghostery non è in grado di proteggerti."
@@ -628,7 +628,7 @@
     "message": "Filtri di rete: $${0}"
   },
   "never_consent": {
-    "message": "Never-Cosent"
+    "message": "Never-Consent"
   },
   "no_activities_detected": {
     "message": "Nessuna attività rilevata"
@@ -714,7 +714,7 @@
     "message": "Appunta Ghostery – Riprendi il controllo"
   },
   "pin_it_here": {
-    "message": "Blocca qui"
+    "message": "Fissa qui"
   },
   "please_describe_the_issue_you_re_experiencing": {
     "message": "Per favore descrivi il problema che stai riscontrando"
@@ -898,6 +898,9 @@
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Il backup da $${0} è stato importato con successo."
+  },
+  "the_feature_is_managed_by_your_organization": {
+    "message": "La funzionalità è gestita dalla tua organizzazione"
   },
   "theme": {
     "message": "Tema"
