@@ -10,13 +10,12 @@
  */
 
 import { store, msg } from 'hybrids';
-import { saveAs } from 'file-saver';
 
 import Options, { SYNC_OPTIONS } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
-import getBrowserInfo from '/utils/browser-info.js';
+import { download } from '/utils/files.js';
 
 const DATA_VERSION = 1;
 
@@ -54,27 +53,10 @@ export async function exportToFile() {
     data.blockedElements = elementPickerSelectors.hostnames;
   }
 
-  const blob = new Blob([JSON.stringify(data, null, 2)], {
-    type: 'application/json',
+  await download({
+    data: JSON.stringify(data, null, 2),
+    filename: `ghostery-settings-${new Date().toISOString()}.json`,
   });
-
-  if (__PLATFORM__ !== 'firefox') {
-    const browserInfo = await getBrowserInfo();
-
-    if (browserInfo.os === 'ios' || browserInfo.os === 'ipados') {
-      const fileReader = new FileReader();
-
-      fileReader.onload = function (e) {
-        const url = e.target.result;
-        chrome.tabs.create({ url });
-      };
-      fileReader.readAsDataURL(blob);
-
-      return;
-    }
-  }
-
-  saveAs(blob, `ghostery-settings-${new Date().toISOString()}.json`);
 }
 
 function resolveBackupFormat(text) {

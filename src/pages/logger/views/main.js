@@ -10,14 +10,15 @@
  */
 
 import { html, store } from 'hybrids';
-import { saveAs } from 'file-saver';
+import { FilterType } from '@ghostery/adblocker';
 import { stringify } from 'csv-stringify/browser/esm/sync';
+
+import { download } from '/utils/files.js';
 
 import Log from '../store/log.js';
 import Tab from '../store/tab.js';
 
 import refreshImage from '../assets/refresh.svg';
-import { FilterType } from '@ghostery/adblocker';
 
 function refreshSelectedTab(host) {
   chrome.tabs.reload(Number(host.tabId));
@@ -34,7 +35,7 @@ const REPORT_COLUMNS = [
   'Organization',
 ];
 
-function downloadReport(host) {
+async function downloadReport(host) {
   const report = host.logs.map((log) => [
     new Date(log.timestamp).toISOString(),
     log.typeLabel,
@@ -46,8 +47,11 @@ function downloadReport(host) {
     log.organization ?? '',
   ]);
 
-  const data = stringify(report, { header: true, columns: REPORT_COLUMNS });
-  saveAs(new Blob([data], { type: 'text/csv' }), 'Ghostery Logger Report.csv');
+  await download({
+    data: stringify(report, { header: true, columns: REPORT_COLUMNS }),
+    filename: `ghostery-logger-report-${new Date().toISOString()}.csv`,
+    type: 'text/csv;charset=utf-8;',
+  });
 }
 
 function disableEllipsis(host, event) {
