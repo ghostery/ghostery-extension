@@ -51,9 +51,9 @@ describe('Notifications', function () {
     const iframe = $('>>>iframe#ghostery-notification-iframe');
     try {
       await expect(iframe).not.toBeDisplayed();
-    } catch (e) {
+    } catch {
       throw new Error(
-        `No notification should be displayed after notifications have been shown: ${e.message}`,
+        `No notification should be displayed after notifications have been shown`,
       );
     }
   });

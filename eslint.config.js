@@ -46,6 +46,7 @@ export default [
   },
   {
     ignores: [
+      '.wdio',
       'dist/*',
       'xcode/*',
       'src/rule_resources*',
