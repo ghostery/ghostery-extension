@@ -10,11 +10,13 @@
  */
 
 import { html, router, store } from 'hybrids';
-import { saveAs } from 'file-saver';
 import { stringify } from 'csv-stringify/browser/esm/sync';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+
+import { isWebkit } from '/utils/browser-info.js';
+import { download } from '/utils/files.js';
 
 import blockedImageUrl from '../assets/trackers-blocked.svg';
 import modifiedImageUrl from '../assets/trackers-modified.svg';
@@ -39,11 +41,18 @@ async function downloadReport(host, event) {
     }
   }
 
-  const data = stringify(report, { header: true, columns: REPORT_COLUMNS });
-  saveAs(
-    new Blob([data], { type: 'text/csv' }),
-    `Ghostery Website Report (${host.stats.hostname}).csv`,
-  );
+  await download({
+    data: stringify(report, {
+      header: true,
+      columns: REPORT_COLUMNS,
+      escape_formulas: true,
+    }),
+    filename: `ghostery-website-report-${host.stats.hostname}.csv`,
+    type: 'text/csv;charset=utf-8;',
+    // Safari does not support downloading files from the popup window,
+    // so we need to open the download helper page in a new tab
+    forceNewTab: __PLATFORM__ !== 'firefox' && isWebkit(),
+  });
 
   button.disabled = false;
 }

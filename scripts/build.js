@@ -161,6 +161,14 @@ if (argv.target !== 'firefox') {
   }
 }
 
+// --- Download helper page ---
+
+// This page is used to trigger downloads in Safari,
+// as it does not support downloading files from the popup window
+if (argv.target !== 'firefox') {
+  options.pages.push('download');
+}
+
 // --- Base Vite Config ---
 
 const config = {
