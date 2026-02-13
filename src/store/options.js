@@ -45,7 +45,7 @@ const LOCAL_OPTIONS = [
 ];
 const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
 
-const OPTIONS_VERSION = 4;
+const OPTIONS_VERSION = 5;
 
 const Options = {
   // Mode
@@ -78,7 +78,7 @@ const Options = {
 
   // Redirect protection
   redirectProtection: {
-    enabled: false,
+    enabled: true,
     exceptions: store.record(true),
   },
 
@@ -226,6 +226,13 @@ async function migrate(options, optionsVersion) {
       }
 
       options.onboarding = !!options.onboarding.shown;
+    }
+  }
+
+  // Change redirect protection default to enabled
+  if (optionsVersion < 5) {
+    if (options.redirectProtection) {
+      options.redirectProtection.enabled = true;
     }
   }
 
