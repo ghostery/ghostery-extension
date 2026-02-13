@@ -49,7 +49,7 @@ async function downloadReport(host) {
 
   await download({
     data: stringify(report, { header: true, columns: REPORT_COLUMNS }),
-    filename: `ghostery-logger-report-${new Date().toISOString()}.csv`,
+    filename: `ghostery-logger-report.csv`,
     type: 'text/csv;charset=utf-8;',
   });
 }
