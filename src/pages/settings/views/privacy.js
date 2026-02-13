@@ -16,7 +16,7 @@ import { longDateFormatter } from '/ui/labels.js';
 
 import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
 import { debugMode } from '/utils/debug.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
@@ -280,6 +280,7 @@ export default {
                   </ui-toggle>
                 </div>
                 ${config.hasFlag(FLAG_REDIRECT_PROTECTION) &&
+                options.mode !== MODE_ZAP &&
                 html`
                   <div layout="grid:1|max content:center gap">
                     <settings-link
