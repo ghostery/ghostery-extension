@@ -106,8 +106,8 @@ export default {
                 ></ui-icon>
                 ${lang === 'en'
                   ? html`<ui-text translate="no">
-                      You zap ads away, one site at a time. One button, one
-                      page, and you build your own ad-free list.
+                      You zap ads away on the sites you use. Zap once. They stay
+                      ad-free every time you visit.
                     </ui-text>`
                   : html`<ui-text>
                       You block ads on the sites you use. Block once. They stay
