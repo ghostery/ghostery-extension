@@ -62,7 +62,7 @@
     "idb": "^8.0.2",
     "lottie-web": "^5.13.0",
     "plotly.js-basic-dist": "^3.3.1",
-    "tldts-experimental": "^7.0.22"
+    "tldts-experimental": "^7.0.23"
   },
   "dataDependencies": {
     "redirect-resources": "0a264a278c7277d0977ff85e5ebd4783c5c209f683d3f937f3da825388d335b3",
