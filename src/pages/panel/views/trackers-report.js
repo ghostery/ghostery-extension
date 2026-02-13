@@ -42,7 +42,11 @@ async function downloadReport(host, event) {
   }
 
   await download({
-    data: stringify(report, { header: true, columns: REPORT_COLUMNS }),
+    data: stringify(report, {
+      header: true,
+      columns: REPORT_COLUMNS,
+      escape_formulas: true,
+    }),
     filename: `ghostery-website-report-${host.stats.hostname}.csv`,
     type: 'text/csv;charset=utf-8;',
     // Safari does not support downloading files from the popup window,
