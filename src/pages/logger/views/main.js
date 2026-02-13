@@ -48,7 +48,7 @@ async function downloadReport(host) {
   ]);
 
   await download({
-    data: stringify(report, { header: true, columns: REPORT_COLUMNS }),
+    data: stringify(report, { header: true, columns: REPORT_COLUMNS, escape_formulas: true }),
     filename: `ghostery-logger-report.csv`,
     type: 'text/csv;charset=utf-8;',
   });
