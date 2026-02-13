@@ -55,7 +55,7 @@
     "@sentry/browser": "^10.38.0",
     "@whotracksme/reporting": "^7.11.0",
     "apexsankey": "github:ghostery/apexsankey",
-    "bowser": "^2.13.1",
+    "bowser": "^2.14.1",
     "csv-stringify": "^6.6.0",
     "file-saver": "^2.0.5",
     "hybrids": "^9.1.22",
