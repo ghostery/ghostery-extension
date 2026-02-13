@@ -26,10 +26,13 @@ export default {
             layout="absolute left:420px top:320px size:1200px"
           ></div>
         </div>
-        <header layout="row center self:stretch gap:2 height:88px">
+        <header
+          layout="row center padding:top:2"
+          layout@1280px="absolute top:3 left:3 padding:0;"
+        >
           <ui-icon name="logo-with-slogan"></ui-icon>
         </header>
-        <div layout="grow row content:center margin:0:1:4">
+        <div layout="grow row content:center padding:3:1:4">
           <div layout="column items:center grow">
             <slot></slot>
           </div>

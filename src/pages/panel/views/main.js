@@ -42,6 +42,7 @@ import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
 import { findParentDomain } from '/utils/domains.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
+import { lang } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 const SETTINGS_URL = chrome.runtime.getURL(
@@ -407,7 +408,15 @@ export default {
             zapped="${!paused}"
             data-qa="button:zap:${paused ? 'enable' : 'disable'}"
           >
-            ${paused ? html`<ui-icon name="zap"></ui-icon>` : msg`Show ads`}
+            ${paused
+              ? html`
+                  <div layout="row items:center gap">
+                    ${lang === 'en'
+                      ? html`<ui-icon name="zap-with-text"></ui-icon>`
+                      : html`<ui-icon name="zap"></ui-icon> Block ads`}
+                  </div>
+                `
+              : msg`Show ads`}
           </panel-zap>
         `}
         <panel-container>

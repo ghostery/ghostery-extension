@@ -18,6 +18,7 @@ import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import { TERMS_AND_CONDITIONS_URL } from '/utils/urls.js';
 
 import Success from './success.js';
+import { lang } from '/ui/labels.js';
 
 function selectMode(mode) {
   return (host, event) => {
@@ -49,7 +50,7 @@ export default {
             <a
               href="${router.url(Success)}"
               onclick="${selectMode(MODE_DEFAULT)}"
-              layout="row"
+              layout="grid"
               data-qa="button:filtering-mode:ghostery"
             >
               <ui-mode-radio id="mode-option-default" checked>
@@ -66,8 +67,8 @@ export default {
                   layout@768px="width:138px"
                 ></ui-icon>
                 <ui-text>
-                  We block it all for you - ads, trackers, distractions. You’re
-                  fully covered, no setup needed.
+                  We block it all for you - ads, trackers, distractions. Always
+                  on when you browse.
                 </ui-text>
                 <ui-text type="label-s" slot="footer">
                   Best for full coverage and privacy enthusiasts.
@@ -88,7 +89,7 @@ export default {
             <a
               href="${router.url(Success)}"
               onclick="${selectMode(MODE_ZAP)}"
-              layout="row"
+              layout="grid"
               data-qa="button:filtering-mode:zap"
             >
               <ui-mode-radio id="mode-option-zap">
@@ -103,10 +104,15 @@ export default {
                   layout="width:83px"
                   layout@768px="width:116px"
                 ></ui-icon>
-                <ui-text>
-                  You zap ads away, one site at a time. One button, one page,
-                  and you build your own ad-free list.
-                </ui-text>
+                ${lang === 'en'
+                  ? html`<ui-text translate="no">
+                      You zap ads away, one site at a time. One button, one
+                      page, and you build your own ad-free list.
+                    </ui-text>`
+                  : html`<ui-text>
+                      You block ads on the sites you use. Block once. They stay
+                      ad-free every time you visit.
+                    </ui-text>`}
                 <ui-text type="label-s" slot="footer">
                   Best for beginners or sharing with family.
                 </ui-text>
