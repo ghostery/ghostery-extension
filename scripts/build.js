@@ -19,7 +19,7 @@ import {
   cpSync,
   existsSync,
 } from 'node:fs';
-import { exec, execSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { build } from 'vite';
 import webExt from 'web-ext';
 
@@ -501,9 +501,6 @@ if (argv.watch) {
 
         let settings;
         switch (argv.target) {
-          case 'safari':
-            exec('xed xcode');
-            return;
           case 'firefox':
             settings = {
               target: 'firefox-desktop',
