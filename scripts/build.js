@@ -49,7 +49,14 @@ const argv = process.argv.slice(2).reduce(
     }
     return acc;
   },
-  { target: 'chromium' },
+  {
+    target: 'chromium',
+    debug: false,
+    staging: false,
+    silent: false,
+    clean: false,
+    watch: false,
+  },
 );
 
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
@@ -82,8 +89,8 @@ if (argv.clean) {
   rmSync(resolve('src', 'rule_resources'), { recursive: true, force: true });
 }
 
-// DNR rules for Chromium and Safari
-if (argv.target === 'chromium' || argv.target === 'safari') {
+// DNR rules for Chromium-based browsers
+if (argv.target === 'chromium') {
   execSync(
     'node scripts/download-dnr-rulesets.js' +
       (argv.staging ? ' --staging' : ''),
@@ -178,14 +185,7 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: {
-    __PLATFORM__: JSON.stringify(
-      // Safari must use separate manifest (loaded from above), as it does not support
-      // the 'webRequest' API but the `__PLATFORM__` should return 'chromium' as
-      // the Edge on iOS/iPadOS uses the same build as for Edge Desktop
-      argv.target === 'safari' ? 'chromium' : argv.target,
-    ),
-  },
+  define: { __PLATFORM__: JSON.stringify(argv.target) },
   build: {
     outDir: options.outDir,
     assetsDir: '',
@@ -406,7 +406,7 @@ const buildPromise = build({
           const path = name.replace(pwd, '');
           if (path.length > 110 && !argv['no-filename-limit']) {
             throw new Error(
-              `Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable; for instance, "npm run build firefox -- --no-filename-limit")`,
+              `Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable; for instance, "npm run build -- --no-filename-limit")`,
             );
           }
 
