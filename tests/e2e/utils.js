@@ -36,7 +36,7 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
-async function sendMessage(msg) {
+export async function sendMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
     throw new Error('Message can only be sent from the extension context');
   }
@@ -204,9 +204,37 @@ export async function setCustomFilters(filters, callback) {
   await getExtensionElement('button:back').click();
 }
 
+export function getNotificationIframe(id) {
+  return $(
+    `>>>iframe#ghostery-notification-iframe[src*="notifications/${id}.html"]`,
+  );
+}
+
+// FYI: Firefox has a bug where clicking a button in an iframe
+// that is inside a Shadow DOM does not work by using `el.click()`,
+// but works when using `browser.execute()` to click the button.
+// For the consistency and to avoid switching between different
+// methods of clicking, we use `browser.execute()` in both browsers.
+export async function dismissNotification(id, action = 'button:dismiss') {
+  const iframe = await getNotificationIframe(id);
+  await switchFrame(iframe);
+
+  await browser.execute((action) => {
+    document.querySelector(`[data-qa="${action}"]`).click();
+  }, action);
+
+  await browser.switchFrame(null);
+  await expect(getNotificationIframe(id)).not.toExist();
+}
+
 export async function switchFrame(frameElement) {
   await browser.switchFrame(null);
-  await frameElement.waitForExist({ timeout: 5000 });
+
+  // Using `el.waitForExist()` when targeting iframes in Shadow DOM
+  // throws an error about not found context after using this function
+  if (!(await frameElement.isExisting())) {
+    await frameElement.waitForExist({ timeout: 5000 });
+  }
 
   await browser.switchFrame(frameElement);
 }
