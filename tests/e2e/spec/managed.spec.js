@@ -18,7 +18,6 @@ import {
   getExtensionElement,
   getExtensionPageURL,
   reloadExtension,
-  waitForIdleBackgroundTasks,
 } from '../utils.js';
 
 async function setManagedConfig(config) {
@@ -37,8 +36,6 @@ async function setManagedConfig(config) {
     },
     config ? JSON.stringify(config) : null,
   );
-
-  await waitForIdleBackgroundTasks();
 
   // Reload extension to pick up managed config changes
   await reloadExtension();
@@ -105,6 +102,11 @@ describe('Managed Configuration', function () {
     });
 
     await browser.url(PAGE_URL);
+
+    // Reload the page to ensure filters are applied
+    // Possible fix for some CI runs failing
+    await browser.url(PAGE_URL);
+
     await expect($('#custom-filter')).not.toBeDisplayed();
 
     await setManagedConfig({
