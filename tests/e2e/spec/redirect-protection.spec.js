@@ -64,6 +64,15 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
       await setRedirectProtectionToggle(false);
     });
 
+    it('is enabled by default', async function () {
+      await openRedirectSettings();
+
+      const toggle = await getExtensionElement('toggle:redirect-protection');
+      const value = await toggle.getProperty('value');
+
+      await expect(value).toBe(true);
+    });
+
     it('redirects to warning page when navigating to blocked domain', async function () {
       await browser.url(PAGE_URL);
 
