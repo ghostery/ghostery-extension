@@ -105,11 +105,17 @@ export default {
                   layout@768px="width:116px"
                 ></ui-icon>
                 ${lang === 'en'
-                  ? html`<ui-text translate="no">
-                      You zap ads away on the sites you use. Zap once. They stay
-                      ad-free every time you visit.
-                    </ui-text>`
-                  : html`<ui-text>
+                  ? html`
+                      <div translate="no">
+                        <ui-text>
+                          You zap ads away on the sites you use.
+                        </ui-text>
+                        <ui-text>
+                          Zap once. They stay ad-free every time you visit.
+                        </ui-text>
+                      </div>
+                    `
+                  : html`<ui-text balance>
                       You block ads on the sites you use. Block once. They stay
                       ad-free every time you visit.
                     </ui-text>`}
