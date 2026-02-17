@@ -119,6 +119,12 @@
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "Tốt nhất cho sự bảo vệ toàn diện và những người đam mê quyền riêng tư."
   },
+  "block_ads": {
+    "message": "Chặn quảng cáo"
+  },
+  "block_ads_once": {
+    "message": "Chặn quảng cáo một lần"
+  },
   "block_all": {
     "message": "Chặn tất cả"
   },
@@ -162,9 +168,6 @@
   "browsing_assistant": {
     "message": "Trợ lý Duyệt web"
   },
-  "build_your_own_ad_free_internet": {
-    "message": "Xây dựng internet không quảng cáo của riêng bạn"
-  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Bằng cách chia sẻ thông tin chi tiết về <a href=\"$${0}\">tình trạng của tiện ích bổ sung</a> và <a href=\"$${1}\">hiệu suất đo lường</a> như được nêu trong <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Chính sách Bảo mật</a> của chúng tôi, bạn giúp nâng cao bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
@@ -196,8 +199,8 @@
   "clear_cookies_": {
     "message": "Xóa cookie?"
   },
-  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "Nhấp vào biểu tượng câu đố bên cạnh thanh tìm kiếm và ghim Ghostery vào thanh công cụ của bạn."
+  "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
+    "message": "Nhấp vào biểu tượng câu đố bên cạnh thanh tìm kiếm và <strong>ghim Ghostery</strong> vào thanh công cụ của bạn."
   },
   "close": {
     "message": "Close"
@@ -472,12 +475,6 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery sử dụng thông tin này để cung cấp các tính năng bảo mật dựa trên cộng đồng của mình, đảm bảo rằng thông tin cá nhân—chẳng hạn như mật khẩu, lịch sử duyệt web và nội dung trang—không bao giờ bị thu thập."
   },
-  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
-    "message": "Ghostery sẽ hiển thị số lượng trình theo dõi quảng cáo trên một trang. Nhấp vào biểu tượng Ghostery cho phép bạn loại bỏ quảng cáo và xem thêm chi tiết."
-  },
-  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery sẽ hiển thị số lượng trình theo dõi đã bị chặn trên một trang. Nhấp vào biểu tượng Ghostery sẽ hiển thị thông tin chi tiết hơn."
-  },
   "gone_": {
     "message": "Biến mất!"
   },
@@ -708,7 +705,7 @@
     "message": "Cần quyền"
   },
   "pin_extension_for_easy_access": {
-    "message": "Pin mở rộng để dễ dàng truy cập"
+    "message": "Ghim tiện ích mở rộng để dễ dàng truy cập"
   },
   "pin_ghostery___take_back_control": {
     "message": "Ghim Ghostery – Giành lại quyền kiểm soát"
@@ -860,6 +857,9 @@
   "site_analytics": {
     "message": "Phân tích trang web",
     "description": "Tracker category name"
+  },
+  "site_stays_ad_free_every_time_you_visit": {
+    "message": "Trang web không có quảng cáo mỗi khi bạn truy cập"
   },
   "social_media": {
     "message": "Truyền thông xã hội",
@@ -1046,6 +1046,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Muốn báo cáo sự cố trên trang khác?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__always_on_when_you_browse_": {
+    "message": "Chúng tôi chặn tất cả cho bạn - quảng cáo, trình theo dõi, phiền nhiễu. Luôn bật khi bạn duyệt web."
+  },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
     "message": "Chúng tôi chặn tất cả cho bạn - quảng cáo, trình theo dõi, phiền nhiễu. Bạn được bảo vệ hoàn toàn, không cần cài đặt."
   },
@@ -1079,9 +1082,6 @@
   "what_s_new_in_ghostery": {
     "message": "Có gì mới trong Ghostery"
   },
-  "what_s_next_": {
-    "message": "Cái gì mới?"
-  },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, được điều hành bởi Ghostery, là một nền tảng quan trọng trong công nghệ chống theo dõi AI của Ghostery, đóng vai trò then chốt trong việc cung cấp bảo vệ quyền riêng tư theo thời gian thực cho cộng đồng Ghostery. Đây là một nguồn tài nguyên toàn cầu toàn diện về các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."
   },
@@ -1100,11 +1100,14 @@
   "yesterday": {
     "message": "Hôm qua"
   },
+  "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
+    "message": "Bạn chặn quảng cáo trên các trang web bạn sử dụng. Chặn một lần. Các trang web sẽ không có quảng cáo mỗi khi bạn truy cập."
+  },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Bạn sắp xóa tất cả cookie được lưu trữ bởi $${0}."
   },
-  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
-    "message": "Bạn đã sẵn sàng để loại bỏ quảng cáo, từng trang một."
+  "you_re_ready_to_block_ads": {
+    "message": "Bạn đã sẵn sàng chặn quảng cáo"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
@@ -1123,9 +1126,6 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube chặn bạn xem video không có quảng cáo?"
-  },
-  "zap_ads_in_the_ghostery_panel": {
-    "message": "Xóa quảng cáo trong bảng điều khiển Ghostery"
   },
   "zoom_in": {
     "message": "Phóng to"
