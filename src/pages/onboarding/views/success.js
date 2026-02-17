@@ -9,13 +9,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
+import { html, msg, store } from 'hybrids';
+
+import { lang } from '/ui/labels.js';
 
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import { getBrowser, isMobile } from '/utils/browser-info.js';
 
+import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
+
 import successDefaultImage from '../assets/success-default.svg';
-import successZapImage from '../assets/success-zap.svg';
+
 import pinExtensionChrome from '../assets/pin-extension-chrome.jpg';
 import pinExtensionEdge from '../assets/pin-extension-edge.jpg';
 import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
@@ -51,7 +55,7 @@ export default {
       });
     },
     value: ({ options }) => html`
-      <template layout="column gap:2 width:::375px">
+      <template layout="column gap:2 width:::500px">
         <ui-card data-qa="view:success">
           <section layout="block:center column gap:2">
             ${options.mode === MODE_DEFAULT &&
@@ -67,19 +71,50 @@ export default {
             `}
             ${options.mode === MODE_ZAP &&
             html`
-              <div layout="row center">
-                <img src="${successZapImage}" layout="size:20" />
+              <ui-text type="display-s">You’re ready to block ads</ui-text>
+              <div
+                layout="block:left column gap padding:1:5 relative"
+                layout@520px="block:center grid:3 padding:1:0"
+              >
+                <div
+                  layout="hidden"
+                  layout@520px="block absolute top:28px left:100px right:100px height:4px"
+                  style="
+                    border-top:3px dashed var(--background-primary);
+                    background:
+                      linear-gradient(var(--background-primary) 0 0) padding-box,
+                      linear-gradient(to right, var(--background-brand-primary), var(--background-danger-primary), var(--background-success-primary));
+                  "
+                ></div>
+                <div layout="row items:center gap" layout@520px="column">
+                  <onboarding-step number="1" icon="websites" type="brand">
+                  </onboarding-step>
+                  <ui-text type="label-m">Open a site</ui-text>
+                </div>
+                <div layout="row items:center gap" layout@520px="column">
+                  <onboarding-step number="2" icon="block-m" type="danger">
+                  </onboarding-step>
+                  ${lang === 'en'
+                    ? html`<ui-text type="label-m" translate="no">
+                        Zap ads once
+                      </ui-text>`
+                    : html`<ui-text type="label-m">Block ads once</ui-text>`}
+                </div>
+                <div layout="row items:center gap" layout@520px="column">
+                  <onboarding-step number="3" icon="trust-m" type="success">
+                  </onboarding-step>
+                  <ui-text type="label-m">
+                    Site stays ad-free every time you visit
+                  </ui-text>
+                </div>
               </div>
-              <ui-text type="display-s">Setup Successful</ui-text>
-              <ui-text>
-                You’re all set to zap ads away, one site at a time.
-              </ui-text>
-              <div layout="column gap:0.5">
-                <ui-text><span>1.</span> Open a site</ui-text>
-                <ui-text><span>2.</span> Zap ads in the Ghostery panel</ui-text>
-                <ui-text
-                  ><span>3.</span> Build your own ad-free internet</ui-text
-                >
+              <div layout="row center">
+                <ui-lottie
+                  src="${modeZapScreenshotUrl}"
+                  autoplay
+                  style="border-radius:8px"
+                  layout="ratio:83/45 width:100%::400px overflow"
+                ></ui-lottie>
               </div>
             `}
           </section>
@@ -88,43 +123,23 @@ export default {
         screenshotURL &&
         html`
           <ui-card>
-            <section layout="column gap:2">
-              <ui-text type="display-xs" layout="block:center">
-                What’s next?
-              </ui-text>
+            <section layout="column center gap:3">
+              <div
+                layout="block:center column gap"
+                layout@520px="padding:1:2:0"
+              >
+                <ui-text type="display-s">
+                  Pin extension for easy access
+                </ui-text>
+                <ui-text layout="padding:0:2">
+                  ${msg.html`Click the puzzle icon next to the search bar and <strong>pin Ghostery</strong> to your toolbar.`}
+                </ui-text>
+              </div>
               <img
                 src="${screenshotURL}"
-                layout="width:::full"
+                layout="width:full::400px"
                 style="border-radius:8px; overflow:hidden;"
               />
-              <div layout="row items:center gap">
-                <ui-icon
-                  name="extension-${type}"
-                  layout="block inline size:3"
-                  color="tertiary"
-                ></ui-icon>
-                <ui-text type="label-m">Pin Extension for easy access</ui-text>
-              </div>
-              <ui-text>
-                Click the puzzle icon next to the search bar and pin Ghostery to
-                your toolbar.
-              </ui-text>
-              ${options.mode === MODE_DEFAULT &&
-              html`
-                <ui-text>
-                  Ghostery will show how many trackers were blocked on a page.
-                  Clicking on the Ghostery icon reveals more detailed
-                  information.
-                </ui-text>
-              `}
-              ${options.mode === MODE_ZAP &&
-              html`
-                <ui-text>
-                  Ghostery will show how many ad trackers are on a page.
-                  Clicking on the Ghostery icon enables you to remove ads and
-                  view more details.
-                </ui-text>
-              `}
             </section>
           </ui-card>
           <onboarding-pin-it browser="${type}"> Pin it here </onboarding-pin-it>

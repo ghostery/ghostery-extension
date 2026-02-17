@@ -34,7 +34,7 @@ export const categories = {
   other: msg`Other | Tracker category name`,
 };
 
-const lang = chrome.i18n.getUILanguage().split('-')[0];
+export const lang = chrome.i18n.getUILanguage().split('-')[0];
 
 export const regions = new Intl.DisplayNames(lang, { type: 'region' });
 export const languages = new Intl.DisplayNames(lang, { type: 'language' });
