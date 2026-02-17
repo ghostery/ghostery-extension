@@ -104,27 +104,18 @@ describe('Adblocker Capabilities', function () {
 
   describe('All platforms', function () {
     const stylingFilters = [
-      ['generic-selector-id', PAGE_DOMAIN + '###generic-target'],
-      ['generic-selector-class', PAGE_DOMAIN + '##.generic-target'],
-      ['generic-selector-attribute', PAGE_DOMAIN + '##[generic-target]'],
-      [
-        'generic-selector-has',
-        PAGE_DOMAIN + '##.generic-outer-target:has(span)',
-      ],
-      [
-        'generic-selector-lazy',
-        PAGE_DOMAIN + '##[generic-lazy-target="100ms"]',
-      ],
-      [
-        'generic-selector-adjunct',
-        PAGE_DOMAIN + '##[generic-adjunct-target="100ms"]',
-      ],
-      ['selector-id', '###target'],
-      ['selector-class', '##.target'],
-      ['selector-attribute', '##[target]'],
-      ['selector-has', '##.outer-target:has(span)'],
-      ['selector-lazy', '##[lazy-target="100ms"]'],
-      ['selector-adjunct', '##[adjunct-target="100ms"]'],
+      ['generic-selector-id', '###generic-target'],
+      ['generic-selector-class', '##.generic-target'],
+      ['generic-selector-attribute', '##[generic-target]'],
+      ['generic-selector-has', '##.generic-outer-target:has(span)'],
+      ['generic-selector-lazy', '##[generic-lazy-target="100ms"]'],
+      ['generic-selector-adjunct', '##[generic-adjunct-target="100ms"]'],
+      ['selector-id', PAGE_DOMAIN + '###target'],
+      ['selector-class', PAGE_DOMAIN + '##.target'],
+      ['selector-attribute', PAGE_DOMAIN + '##[target]'],
+      ['selector-has', PAGE_DOMAIN + '##.outer-target:has(span)'],
+      ['selector-lazy', PAGE_DOMAIN + '##[lazy-target="100ms"]'],
+      ['selector-adjunct', PAGE_DOMAIN + '##[adjunct-target="100ms"]'],
     ];
     const scriptingFilters = [
       ['globals-safeself', PAGE_DOMAIN + '##+js(json-prune, globals-safeself)'],
