@@ -57,6 +57,7 @@ mount(document.body, {
             size="s"
             onclick="${dismiss}"
             layout="width::10"
+            data-qa="button:dismiss"
           >
             <button>OK</button>
           </ui-button>

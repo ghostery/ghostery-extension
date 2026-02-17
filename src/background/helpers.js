@@ -99,6 +99,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       });
       return true;
 
+    case 'e2e:setConfigDomains':
+      store.resolve(Config).then(async (config) => {
+        const domains = {};
+
+        for (const domain of Object.keys(config.domains)) {
+          domains[domain] = null;
+        }
+
+        Object.assign(domains, msg.domains);
+
+        await store.set(Config, { domains });
+        sendResponse('done');
+      });
+      return true;
+
     case 'e2e:reloadExtension':
       setTimeout(() => chrome.runtime.reload(), 2000);
       sendResponse('done');

@@ -40,7 +40,11 @@ mount(document.body, {
           </ui-text>
         </div>
         <div layout="row gap" layout="width::10">
-          <ui-button type="success" onclick="${resume}">
+          <ui-button
+            type="success"
+            onclick="${resume}"
+            data-qa="button:dismiss"
+          >
             <button>OK</button>
           </ui-button>
         </div>
