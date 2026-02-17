@@ -65,6 +65,13 @@ function fixScriptlet(filter, trustedScriptlets) {
   return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
 }
 
+/**
+ * @returns {{
+ * networkFilters: Set<import('@ghostery/adblocker').NetworkFilter>;
+ * cosmeticFilters: Set<import('@ghostery/adblocker').CosmeticFilter>;
+ * errors: string[];
+ * }}
+ */
 function normalizeFilters(text = '', { trustedScriptlets }) {
   const rows = text.split('\n').map((f) => f.trim());
 
@@ -159,7 +166,14 @@ export async function updateCustomFilters(input, options) {
 
   const result = await updateEngine(
     [
-      ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
+      __PLATFORM__ === 'firefox'
+        ? Array.from(networkFilters)
+        : Array.from(networkFilters).filter(function (filter) {
+            // Generic or specific hide modifier controls the cosmetic filter
+            // injection. These filters need to be preserved for the correct
+            // behaviour.
+            return filter.isGenericHide() || filter.isSpecificHide();
+          }),
       ...cosmeticFilters,
     ].join('\n'),
   );
