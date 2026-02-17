@@ -15,6 +15,7 @@ import {
   detectFilterType,
   FilterType,
   CosmeticFilter,
+  NetworkFilter,
 } from '@ghostery/adblocker';
 
 import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
@@ -65,13 +66,6 @@ function fixScriptlet(filter, trustedScriptlets) {
   return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
 }
 
-/**
- * @returns {{
- * networkFilters: Set<import('@ghostery/adblocker').NetworkFilter>;
- * cosmeticFilters: Set<import('@ghostery/adblocker').CosmeticFilter>;
- * errors: string[];
- * }}
- */
 function normalizeFilters(text = '', { trustedScriptlets }) {
   const rows = text.split('\n').map((f) => f.trim());
 
@@ -168,11 +162,15 @@ export async function updateCustomFilters(input, options) {
     [
       __PLATFORM__ === 'firefox'
         ? Array.from(networkFilters)
-        : Array.from(networkFilters).filter(function (filter) {
+        : Array.from(networkFilters).filter(function (line) {
             // Generic or specific hide modifier controls the cosmetic filter
             // injection. These filters need to be preserved for the correct
             // behaviour.
-            return filter.isGenericHide() || filter.isSpecificHide();
+            const filter = NetworkFilter.parse(line);
+            return (
+              filter !== null &&
+              (filter.isGenericHide() || filter.isSpecificHide())
+            );
           }),
       ...cosmeticFilters,
     ].join('\n'),
