@@ -11,6 +11,8 @@
 
 import { html, msg, store } from 'hybrids';
 
+import { lang } from '/ui/labels.js';
+
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import { getBrowser, isMobile } from '/utils/browser-info.js';
 
@@ -92,7 +94,11 @@ export default {
                 <div layout="row items:center gap" layout@520px="column">
                   <onboarding-step number="2" icon="block-m" type="danger">
                   </onboarding-step>
-                  <ui-text type="label-m">Block ads once</ui-text>
+                  ${lang === 'en'
+                    ? html`<ui-text type="label-m" translate="no">
+                        Zap ads once
+                      </ui-text>`
+                    : html`<ui-text type="label-m">Block ads once</ui-text>`}
                 </div>
                 <div layout="row items:center gap" layout@520px="column">
                   <onboarding-step number="3" icon="trust-m" type="success">
