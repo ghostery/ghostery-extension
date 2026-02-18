@@ -44,9 +44,7 @@ mount(document.body, {
       <ui-notification>
         <div layout="column gap:1.5">
           <div layout="row gap">
-            <ui-text type="label-l">
-              YouTube blocking you from watching ad-free videos?
-            </ui-text>
+            <ui-text type="label-l"> YouTube blocking you from watching ad-free videos? </ui-text>
             <ui-action>
               <button
                 id="close"
@@ -54,18 +52,14 @@ mount(document.body, {
                 layout="margin:-1 self:start shrink:0 padding"
               >
                 <div layout="row center size:3">
-                  <ui-icon
-                    name="close"
-                    color="tertiary"
-                    layout="size:3"
-                  ></ui-icon>
+                  <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
                 </div>
               </button>
             </ui-action>
           </div>
           <ui-text type="body-s">
-            We know you rely on Ghostery for a smooth YouTube experience. Until
-            a more refined solution emerges, here’s a temporary fix.
+            We know you rely on Ghostery for a smooth YouTube experience. Until a more refined
+            solution emerges, here’s a temporary fix.
           </ui-text>
           <div layout="column gap">
             <div layout="row gap:0.5">
@@ -74,10 +68,7 @@ mount(document.body, {
               </ui-text>
             </div>
             <div layout="row">
-              <ui-button
-                size="s"
-                onclick="${() => openBlog('enable-extensions-in-incognito')}"
-              >
+              <ui-button size="s" onclick="${() => openBlog('enable-extensions-in-incognito')}">
                 <button>Learn how</button>
               </ui-button>
             </div>
@@ -96,14 +87,9 @@ mount(document.body, {
           </div>
           <ui-line></ui-line>
           <div layout="column gap:2">
-            <ui-text type="body-s">
-              Learn more about YouTube’s challenges to ad blockers
-            </ui-text>
+            <ui-text type="body-s"> Learn more about YouTube’s challenges to ad blockers </ui-text>
             <div layout="row:wrap gap">
-              <ui-button
-                size="s"
-                onclick="${() => openBlog('whats-happening-with-youtube-ads')}"
-              >
+              <ui-button size="s" onclick="${() => openBlog('whats-happening-with-youtube-ads')}">
                 <button>Visit our blog</button>
               </ui-button>
               <ui-button size="s" type="transparent" onclick="${dontAsk}">

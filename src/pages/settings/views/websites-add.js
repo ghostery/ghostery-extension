@@ -46,23 +46,13 @@ export default {
   render: ({ options, hostname, pauseType }) => html`
     <template layout>
       <settings-dialog closable>
-        <form
-          action="${router.backUrl()}"
-          onsubmit="${add}"
-          layout="column gap:3"
-        >
-          <ui-text type="label-l" layout="block:center margin:bottom">
-            Add website
-          </ui-text>
+        <form action="${router.backUrl()}" onsubmit="${add}" layout="column gap:3">
+          <ui-text type="label-l" layout="block:center margin:bottom"> Add website </ui-text>
           <div layout="column gap items:start">
             ${options.mode === MODE_DEFAULT &&
-            html`
-              <ui-text>To adjust privacy protection trust a site:</ui-text>
-            `}
+            html` <ui-text>To adjust privacy protection trust a site:</ui-text> `}
             ${options.mode === MODE_ZAP &&
-            html`
-              <ui-text>To adjust privacy protection enable on a site:</ui-text>
-            `}
+            html` <ui-text>To adjust privacy protection enable on a site:</ui-text> `}
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>

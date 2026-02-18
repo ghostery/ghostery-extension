@@ -31,19 +31,13 @@ export default {
         layout.responsive@768px="row"
       >
         <ui-action-button grouped active="${!value}">
-          <button
-            layout="row relative gap:0.5 padding:0.5"
-            onclick="${updateValue(false)}"
-          >
+          <button layout="row relative gap:0.5 padding:0.5" onclick="${updateValue(false)}">
             <ui-icon name="block-s"></ui-icon>
             <ui-text type="label-xs" color="inherit">Blocked</ui-text>
           </button>
         </ui-action-button>
         <ui-action-button class="trusted" grouped active="${value}">
-          <button
-            layout="row gap:0.5 padding:0.5"
-            onclick="${updateValue(true)}"
-          >
+          <button layout="row gap:0.5 padding:0.5" onclick="${updateValue(true)}">
             <ui-icon name="trust-s"></ui-icon>
             <ui-text type="label-xs" color="inherit">Trusted</ui-text>
           </button>

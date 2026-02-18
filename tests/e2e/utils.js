@@ -60,9 +60,7 @@ export async function waitForIdleBackgroundTasks() {
 export async function reloadExtension() {
   await browser.url('about:blank');
 
-  await browser[browser.isFirefox ? 'newWindow' : 'url'](
-    getExtensionPageURL('panel'),
-  );
+  await browser[browser.isFirefox ? 'newWindow' : 'url'](getExtensionPageURL('panel'));
 
   await sendMessage({ action: 'e2e:reloadExtension' });
 
@@ -158,9 +156,7 @@ export async function setConfigFlags(flags) {
     // Reload the extension to apply the new config flags
     await reloadExtension();
   } catch {
-    console.warn(
-      'Current extension version does not support setting config flags',
-    );
+    console.warn('Current extension version does not support setting config flags');
   }
 }
 
@@ -179,9 +175,7 @@ export async function setCustomFilters(filters, callback) {
   await setPrivacyToggle('custom-filters', true);
   await getExtensionElement('button:custom-filters').click();
 
-  const checkbox = await getExtensionElement(
-    'checkbox:custom-filters:trusted-scriptlets',
-  );
+  const checkbox = await getExtensionElement('checkbox:custom-filters:trusted-scriptlets');
 
   if (!(await checkbox.getProperty('checked'))) {
     await checkbox.click();
@@ -193,9 +187,7 @@ export async function setCustomFilters(filters, callback) {
 
   await getExtensionElement('button:custom-filters:save').click();
 
-  await expect(
-    getExtensionElement('component:custom-filters:result'),
-  ).toBeDisplayed();
+  await expect(getExtensionElement('component:custom-filters:result')).toBeDisplayed();
 
   if (callback) {
     await callback();
@@ -205,9 +197,7 @@ export async function setCustomFilters(filters, callback) {
 }
 
 export function getNotificationIframe(id) {
-  return $(
-    `>>>iframe#ghostery-notification-iframe[src*="notifications/${id}.html"]`,
-  );
+  return $(`>>>iframe#ghostery-notification-iframe[src*="notifications/${id}.html"]`);
 }
 
 // FYI: Firefox has a bug where clicking a button in an iframe

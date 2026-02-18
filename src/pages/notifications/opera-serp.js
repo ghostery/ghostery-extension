@@ -32,9 +32,7 @@ mount(document.body, {
     <template layout="block overflow">
       <ui-notification icon="protection-l" alert>
         <div layout="column gap:1.5">
-          <ui-text type="label-l" layout="margin:bottom:-1">
-            More ad blocking available
-          </ui-text>
+          <ui-text type="label-l" layout="margin:bottom:-1"> More ad blocking available </ui-text>
           <ui-text type="body-s" color="secondary">
             Expand Ghostery ad blocking to search engines in a few easy steps.
           </ui-text>

@@ -27,8 +27,7 @@ import TrackerDetails from './tracker-details.js';
 import WebsiteClearCookies from './website-clear-cookies.js';
 
 function removeDomain(tracker) {
-  return ({ options, domain }) =>
-    exceptions.toggleDomain(options, tracker.id, domain);
+  return ({ options, domain }) => exceptions.toggleDomain(options, tracker.id, domain);
 }
 
 function revokePaused({ options, domain }) {
@@ -73,10 +72,8 @@ export default {
   topLevelDomain: ({ domain }) => parse(domain).domain,
   options: store(Options),
   config: store(Config),
-  paused: ({ options, domain }) =>
-    (store.ready(options) && options.paused[domain]) || {},
-  issueUrl: ({ config, domain }) =>
-    store.ready(config) && config.domains[domain]?.issueUrl,
+  paused: ({ options, domain }) => (store.ready(options) && options.paused[domain]) || {},
+  issueUrl: ({ config, domain }) => store.ready(config) && config.domains[domain]?.issueUrl,
   trackers: ({ options, domain }) =>
     store.ready(options)
       ? Object.entries(options.exceptions)
@@ -84,16 +81,11 @@ export default {
           .map(([id]) => id)
           .sort((a, b) => a.localeCompare(b))
           .map((id) => store.get(Tracker, id))
-          .map((tracker) =>
-            store.error(tracker)
-              ? { id: tracker.id, name: tracker.id }
-              : tracker,
-          )
+          .map((tracker) => (store.error(tracker) ? { id: tracker.id, name: tracker.id } : tracker))
       : [],
   elementPickerSelectors: store(ElementPickerSelectors),
   selectors: ({ elementPickerSelectors, domain }) =>
-    (store.ready(elementPickerSelectors) &&
-      elementPickerSelectors.hostnames[domain]?.join('\n')) ||
+    (store.ready(elementPickerSelectors) && elementPickerSelectors.hostnames[domain]?.join('\n')) ||
     '',
   clearedCookies: false,
   render: ({
@@ -108,19 +100,11 @@ export default {
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
-          <settings-link
-            href="${router.backUrl()}"
-            data-qa="button:back"
-            layout="self:start"
-          >
+          <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
             <ui-icon name="chevron-left" color="primary"></ui-icon>
-            <ui-text type="headline-s" layout="row gap items:center">
-              Back
-            </ui-text>
+            <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
           </settings-link>
-          <ui-text type="headline-l" style="word-break:break-word">
-            ${domain}
-          </ui-text>
+          <ui-text type="headline-l" style="word-break:break-word"> ${domain} </ui-text>
 
           ${paused.revokeAt !== undefined &&
           !paused.assist &&
@@ -150,9 +134,7 @@ export default {
             <settings-card type="pause-assistant" layout="self:stretch">
               <div layout="column gap:2" layout@768px="row gap:2 items:center">
                 <div layout="grow">
-                  <ui-text type="label-m" color="onbrand">
-                    Paused by Browsing Assistant
-                  </ui-text>
+                  <ui-text type="label-m" color="onbrand"> Paused by Browsing Assistant </ui-text>
                   <ui-text type="body-s" color="onbrand">
                     Automatically paused to prevent adblocker breakage
                   </ui-text>
@@ -166,14 +148,8 @@ export default {
                           rel="noopener noreferrer"
                           layout="padding:0"
                         >
-                          <ui-icon
-                            name="doc-m"
-                            color="onbrand"
-                            layout="size:2"
-                          ></ui-icon>
-                          <ui-text type="label-s" color="onbrand">
-                            Broken page report
-                          </ui-text>
+                          <ui-icon name="doc-m" color="onbrand" layout="size:2"></ui-icon>
+                          <ui-text type="label-s" color="onbrand"> Broken page report </ui-text>
                         </a>
                       </ui-button>
                     `}
@@ -183,14 +159,8 @@ export default {
                         target="_blank"
                         layout="padding:0"
                       >
-                        <ui-icon
-                          name="info"
-                          color="onbrand"
-                          layout="size:2"
-                        ></ui-icon>
-                        <ui-text type="label-s" color="onbrand">
-                          Learn more
-                        </ui-text>
+                        <ui-icon name="info" color="onbrand" layout="size:2"></ui-icon>
+                        <ui-text type="label-s" color="onbrand"> Learn more </ui-text>
                       </a>
                     </ui-button>
                   </div>
@@ -218,27 +188,15 @@ export default {
             <ui-text type="label-l">Protection exceptions</ui-text>
           </div>
           <settings-table>
-            <div
-              slot="header"
-              layout="grid:2 gap:2"
-              layout@768px="grid:2fr|2fr|3fr gap:4"
-            >
+            <div slot="header" layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
               <ui-text type="label-m" mobile-type="label-s">Name</ui-text>
-              <ui-text type="label-m" layout="hidden" layout@768px="block">
-                Category
-              </ui-text>
-              <ui-text type="label-m" mobile-type="label-s">
-                Protection status
-              </ui-text>
+              <ui-text type="label-m" layout="hidden" layout@768px="block"> Category </ui-text>
+              <ui-text type="label-m" mobile-type="label-s"> Protection status </ui-text>
             </div>
             ${!trackers.length &&
             html`
               <div layout="column center gap padding:5:0">
-                <ui-icon
-                  name="block-m"
-                  layout="size:4"
-                  color="tertiary"
-                ></ui-icon>
+                <ui-icon name="block-m" layout="size:4" color="tertiary"></ui-icon>
                 <ui-text layout="block:center width:::180px">
                   No protection exceptions added yet
                 </ui-text>
@@ -248,10 +206,7 @@ export default {
               (tracker) =>
                 !store.pending(tracker) &&
                 html`
-                  <div
-                    layout="grid:2 gap:2"
-                    layout@768px="grid:2fr|2fr|3fr gap:4"
-                  >
+                  <div layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
                     ${store.ready(tracker) &&
                     html`<ui-action>
                       <a
@@ -260,9 +215,7 @@ export default {
                         })}"
                         layout="column gap:0.5"
                       >
-                        <ui-text type="label-m" mobile-type="label-s">
-                          ${tracker.name}
-                        </ui-text>
+                        <ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>
                         ${tracker.organization &&
                         html`
                           <ui-text type="body-s" color="secondary">
@@ -272,20 +225,12 @@ export default {
                       </a>
                     </ui-action>`}
                     ${!store.ready(tracker) &&
-                    html`<ui-text type="label-m" mobile-type="label-s">
-                      ${tracker.name}
-                    </ui-text>`}
-                    <ui-text
-                      type="label-m"
-                      layout="hidden"
-                      layout@768px="row items:center"
-                    >
+                    html`<ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>`}
+                    <ui-text type="label-m" layout="hidden" layout@768px="row items:center">
                       ${labels.categories[tracker.category]}
                     </ui-text>
                     <div layout="row gap items:center content:space-between">
-                      <settings-badge>
-                        <ui-icon name="trust-s"></ui-icon> Trusted
-                      </settings-badge>
+                      <settings-badge> <ui-icon name="trust-s"></ui-icon> Trusted </settings-badge>
                       <ui-action>
                         <button layout@768px="order:1">
                           <ui-icon
@@ -306,8 +251,8 @@ export default {
           <settings-option static icon="hide-element">
             Blocked elements on this site
             <span slot="description">
-              Displays all content blocks manually hidden on this site. You can
-              remove them individually or clear the entire list.
+              Displays all content blocks manually hidden on this site. You can remove them
+              individually or clear the entire list.
             </span>
           </settings-option>
           <ui-input>
@@ -335,8 +280,8 @@ export default {
           <settings-option static icon="cookie">
             Clear Cookies
             <span slot="description">
-              Remove all cookies stored by this site to protect your privacy and
-              reset your browsing data.
+              Remove all cookies stored by this site to protect your privacy and reset your browsing
+              data.
             </span>
             ${clearedCookies &&
             html`
@@ -346,10 +291,7 @@ export default {
             `}
           </settings-option>
           <ui-button disabled="${clearedCookies}">
-            <a
-              href="${router.url(WebsiteClearCookies, { domain })}"
-              data-qa="button:clear-cookies"
-            >
+            <a href="${router.url(WebsiteClearCookies, { domain })}" data-qa="button:clear-cookies">
               Clear Cookies
             </a>
           </ui-button>
@@ -359,13 +301,8 @@ export default {
         html`
           <div layout="margin:3:0">
             <ui-action>
-              <a
-                href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}"
-                target="_blank"
-              >
-                <settings-wtm-link>
-                  WhoTracks.Me Statistical Report
-                </settings-wtm-link>
+              <a href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}" target="_blank">
+                <settings-wtm-link> WhoTracks.Me Statistical Report </settings-wtm-link>
               </a>
             </ui-action>
           </div>

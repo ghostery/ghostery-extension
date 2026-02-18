@@ -13,11 +13,7 @@ import { html, msg, store, router } from 'hybrids';
 import { ACTION_PAUSE_ASSISTANT } from '@ghostery/config';
 
 import Config, { dismissAction } from '/store/config.js';
-import Options, {
-  MODE_DEFAULT,
-  MODE_ZAP,
-  GLOBAL_PAUSE_ID,
-} from '/store/options.js';
+import Options, { MODE_DEFAULT, MODE_ZAP, GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
@@ -34,10 +30,7 @@ function revokeCallback(item) {
       const exception = options.exceptions[id];
       const domains = exception.domains.filter((d) => d !== item.id);
 
-      acc[id] =
-        exception.global || domains.length > 0
-          ? { ...exception, domains }
-          : null;
+      acc[id] = exception.global || domains.length > 0 ? { ...exception, domains } : null;
 
       return acc;
     }, {});
@@ -91,20 +84,18 @@ export default {
     }
 
     // Add custom content blocks
-    Object.entries(elementPickerSelectors.hostnames).forEach(
-      ([domain, list]) => {
-        const website = websites.find((e) => e.id === domain);
-        if (website) {
-          website.counter += list.length;
-        } else if (options.mode === MODE_DEFAULT) {
-          websites.push({
-            id: domain,
-            exceptions: new Set(),
-            counter: list.length,
-          });
-        }
-      },
-    );
+    Object.entries(elementPickerSelectors.hostnames).forEach(([domain, list]) => {
+      const website = websites.find((e) => e.id === domain);
+      if (website) {
+        website.counter += list.length;
+      } else if (options.mode === MODE_DEFAULT) {
+        websites.push({
+          id: domain,
+          exceptions: new Set(),
+          counter: list.length,
+        });
+      }
+    });
 
     Object.entries(options.exceptions).forEach(([id, { domains }]) => {
       domains.forEach((domain) => {
@@ -162,35 +153,18 @@ export default {
           ${websites.length
             ? html`
                 <settings-table responsive>
-                  <div
-                    slot="header"
-                    layout="column"
-                    layout@768px="grid:3fr|3fr|1fr|60px gap:4"
-                  >
-                    <ui-text type="label-m">
-                      Website <span>(${websites.length})</span>
-                    </ui-text>
-                    <ui-text
-                      type="label-m"
-                      layout="hidden"
-                      layout@768px="block"
-                    >
+                  <div slot="header" layout="column" layout@768px="grid:3fr|3fr|1fr|60px gap:4">
+                    <ui-text type="label-m"> Website <span>(${websites.length})</span> </ui-text>
+                    <ui-text type="label-m" layout="hidden" layout@768px="block">
                       Protection status
                     </ui-text>
-                    <ui-text
-                      type="label-m"
-                      layout="hidden"
-                      layout@768px="block"
-                    >
+                    <ui-text type="label-m" layout="hidden" layout@768px="block">
                       Exceptions
                     </ui-text>
                   </div>
                   ${websites.map(
                     (item) => html`
-                      <ui-action
-                        layout="block"
-                        data-qa="component:website:${item.id}"
-                      >
+                      <ui-action layout="block" data-qa="component:website:${item.id}">
                         <a
                           href="${router.url(WebsiteDetails, {
                             domain: item.id,
@@ -198,28 +172,16 @@ export default {
                           layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
                           layout@768px="grid:3fr|3fr|1fr|60px gap:4"
                         >
-                          <ui-text type="label-l" ellipsis>
-                            ${item.id}
-                          </ui-text>
+                          <ui-text type="label-l" ellipsis> ${item.id} </ui-text>
                           ${!item.managed &&
                           html`
                             <ui-action>
-                              <button
-                                layout@768px="order:1"
-                                onclick="${revokeCallback(item)}"
-                              >
-                                <ui-icon
-                                  name="trash"
-                                  layout="size:3"
-                                  color="tertiary"
-                                ></ui-icon>
+                              <button layout@768px="order:1" onclick="${revokeCallback(item)}">
+                                <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
                               </button>
                             </ui-action>
                           `}
-                          <ui-line
-                            layout="area:2"
-                            layout@768px="hidden"
-                          ></ui-line>
+                          <ui-line layout="area:2" layout@768px="hidden"></ui-line>
                           <settings-protection-status
                             layout@768px="grow"
                             revokeAt="${item.revokeAt}"
@@ -229,9 +191,7 @@ export default {
                             layout="row items:center gap self:center"
                             layout@768px="grow self:auto"
                           >
-                            <ui-text type="label-m">
-                              ${item.counter || ''}
-                            </ui-text>
+                            <ui-text type="label-m"> ${item.counter || ''} </ui-text>
                           </div>
                         </a>
                       </ui-action>
@@ -241,15 +201,8 @@ export default {
               `
             : !query &&
               html`
-                <div
-                  layout="block:center width:::400px margin:2:auto"
-                  layout@768px="margin:top:4"
-                >
-                  <img
-                    src="${NoWebsitesSVG}"
-                    layout="size:96px"
-                    layout@768px="size:128px"
-                  />
+                <div layout="block:center width:::400px margin:2:auto" layout@768px="margin:top:4">
+                  <img src="${NoWebsitesSVG}" layout="size:96px" layout@768px="size:128px" />
                 </div>
               `}
         </section>

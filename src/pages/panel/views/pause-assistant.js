@@ -23,41 +23,26 @@ export default {
   config: store(Config),
   issueUrl: ({ stats, config }) =>
     store.ready(stats, config) &&
-    Object.entries(config.domains).find(([domain]) =>
-      stats.hostname.includes(domain),
-    )?.[1].issueUrl,
+    Object.entries(config.domains).find(([domain]) => stats.hostname.includes(domain))?.[1]
+      .issueUrl,
   render: ({ issueUrl }) => html`
     <template layout="column">
       <panel-dialog>
-        <ui-text slot="header" type="label-m" layout="padding:1:0">
-          Browsing Assistant
-        </ui-text>
+        <ui-text slot="header" type="label-m" layout="padding:1:0"> Browsing Assistant </ui-text>
         <div layout="column gap:2 padding:1:0">
           ${issueUrl &&
           html`
             <ui-action>
-              <a
-                href="${issueUrl}"
-                onclick="${openTabWithUrl}"
-                layout="row gap:2"
-              >
-                <ui-icon
-                  name="doc-m"
-                  color="tertiary"
-                  layout="size:3"
-                ></ui-icon>
+              <a href="${issueUrl}" onclick="${openTabWithUrl}" layout="row gap:2">
+                <ui-icon name="doc-m" color="tertiary" layout="size:3"></ui-icon>
                 <div layout="column grow gap:0.5">
                   <ui-text type="label-m">Broken page report</ui-text>
                   <ui-text type="body-s" color="tertiary">
-                    View a detailed report showing which adblocker functionality
-                    may have caused the issue.
+                    View a detailed report showing which adblocker functionality may have caused the
+                    issue.
                   </ui-text>
                 </div>
-                <ui-icon
-                  name="link-external-m"
-                  color="quaternary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
               </a>
             </ui-action>
           `}
@@ -74,11 +59,7 @@ export default {
                   Learn how Ghostery is automatically paused to avoid breakage.
                 </ui-text>
               </div>
-              <ui-icon
-                name="link-external-m"
-                color="quaternary"
-                layout="size:2"
-              ></ui-icon>
+              <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
             </a>
           </ui-action>
         </div>

@@ -90,11 +90,7 @@ class IndexedDBKeyValueStore {
    */
   async _dumpToMap() {
     const keys = await this.keys();
-    return new Map(
-      await Promise.all(
-        keys.sort().map(async (key) => [key, await this.get(key)]),
-      ),
-    );
+    return new Map(await Promise.all(keys.sort().map(async (key) => [key, await this.get(key)])));
   }
 }
 

@@ -30,10 +30,7 @@ Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
     // which redirects to onboarding. We must prevent showing onboarding
     // if it is disabled via managed config or user already accepted terms
     // when user control is disabled.
-    if (
-      managedConfig.disableOnboarding ||
-      (terms && managedConfig.disableUserControl)
-    ) {
+    if (managedConfig.disableOnboarding || (terms && managedConfig.disableUserControl)) {
       return window.location.replace(HOME_PAGE_URL);
     }
 

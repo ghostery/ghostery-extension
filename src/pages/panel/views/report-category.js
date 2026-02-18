@@ -17,9 +17,7 @@ export default {
   render: () => html`
     <template layout="column grow shrink">
       <ui-header>
-        <ui-text type="label-m" layout="row gap items:center">
-          Report an issue
-        </ui-text>
+        <ui-text type="label-m" layout="row gap items:center"> Report an issue </ui-text>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
             <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
@@ -28,43 +26,27 @@ export default {
       </ui-header>
       <panel-container>
         <div layout="padding:2:1.5">
-          <ui-text type="label-s" layout="margin:bottom">
-            Choose category
-          </ui-text>
+          <ui-text type="label-s" layout="margin:bottom"> Choose category </ui-text>
           <div layout="column gap:0.5">
             <panel-actions-button>
-              <a
-                href="${router.url(ReportForm, { category: 'cookie-banner' })}"
-              >
+              <a href="${router.url(ReportForm, { category: 'cookie-banner' })}">
                 <panel-actions-icon name="cookie"></panel-actions-icon>
                 Cookie banner visible
-                <ui-icon
-                  name="chevron-right"
-                  color="tertiary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
               </a>
             </panel-actions-button>
             <panel-actions-button>
               <a href="${router.url(ReportForm, { category: 'ads-showing' })}">
                 <panel-actions-icon name="ads"></panel-actions-icon>
                 Ads are showing
-                <ui-icon
-                  name="chevron-right"
-                  color="tertiary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
               </a>
             </panel-actions-button>
             <panel-actions-button>
               <a href="${router.url(ReportForm, { category: 'page-frozen' })}">
                 <panel-actions-icon name="panel-top"></panel-actions-icon>
                 Page frozen
-                <ui-icon
-                  name="chevron-right"
-                  color="tertiary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
               </a>
             </panel-actions-button>
             <panel-actions-button>
@@ -75,24 +57,14 @@ export default {
               >
                 <panel-actions-icon name="report"></panel-actions-icon>
                 Ad blocker detected
-                <ui-icon
-                  name="chevron-right"
-                  color="tertiary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
               </a>
             </panel-actions-button>
             <panel-actions-button>
-              <a
-                href="${router.url(ReportForm, { category: 'layout-broken' })}"
-              >
+              <a href="${router.url(ReportForm, { category: 'layout-broken' })}">
                 <panel-actions-icon name="panels-top-left"></panel-actions-icon>
                 Layout broken
-                <ui-icon
-                  name="chevron-right"
-                  color="tertiary"
-                  layout="size:2"
-                ></ui-icon>
+                <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
               </a>
             </panel-actions-button>
           </div>

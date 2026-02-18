@@ -17,11 +17,7 @@ import Options from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import convert from '/utils/dnr-converter.js';
-import {
-  EXCEPTIONS_ID_RANGE,
-  EXCEPTIONS_RULE_PRIORITY,
-  getDynamicRulesIds,
-} from '/utils/dnr.js';
+import { EXCEPTIONS_ID_RANGE, EXCEPTIONS_RULE_PRIORITY, getDynamicRulesIds } from '/utils/dnr.js';
 
 async function updateFilters() {
   const options = await store.resolve(Options);
@@ -47,9 +43,7 @@ async function updateFilters() {
 
     for (const rule of result.rules) {
       if (domains && domains.length) {
-        rule.condition.initiatorDomains = domains.concat(
-          rule.condition.initiatorDomains || [],
-        );
+        rule.condition.initiatorDomains = domains.concat(rule.condition.initiatorDomains || []);
       }
 
       rules.push({
@@ -90,11 +84,8 @@ if (__PLATFORM__ !== 'firefox') {
     },
   );
 
-  OptionsObserver.addListener(
-    'exceptions',
-    async function updateExceptions(value, lastValue) {
-      if (lastValue === undefined) return;
-      await updateFilters();
-    },
-  );
+  OptionsObserver.addListener('exceptions', async function updateExceptions(value, lastValue) {
+    if (lastValue === undefined) return;
+    await updateFilters();
+  });
 }

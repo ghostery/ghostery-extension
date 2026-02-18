@@ -22,23 +22,16 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <settings-link
-                href="${router.backUrl()}"
-                data-qa="button:back"
-                layout="self:start"
-              >
+              <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
                 <ui-icon name="chevron-left" color="primary"></ui-icon>
-                <ui-text type="headline-s" layout="row gap items:center">
-                  Back
-                </ui-text>
+                <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
               </settings-link>
               <ui-text type="headline-m">Experimental Filters</ui-text>
               <div layout="column gap:0.5">
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                  Helps Ghostery fix broken pages faster. By activating you can
-                  test experimental filters and support us with feedback. Please
-                  send a message to support@ghostery.com describing how your
-                  experience changed after enabling.
+                  Helps Ghostery fix broken pages faster. By activating you can test experimental
+                  filters and support us with feedback. Please send a message to
+                  support@ghostery.com describing how your experience changed after enabling.
                 </ui-text>
                 <ui-text type="label-s" color="secondary" underline>
                   <a
@@ -60,11 +53,7 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon
-                      name="flask"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
+                    <ui-icon name="flask" color="quaternary" layout="size:3"></ui-icon>
                     <ui-text type="headline-xs">Experimental Filters</ui-text>
                   </div>
                 </div>

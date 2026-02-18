@@ -144,9 +144,7 @@ const Options = {
       await chrome.storage.local.set({
         options:
           // Firefox does not serialize correctly objects with getters
-          __PLATFORM__ === 'firefox'
-            ? JSON.parse(JSON.stringify(options))
-            : options,
+          __PLATFORM__ === 'firefox' ? JSON.parse(JSON.stringify(options)) : options,
       });
 
       // Send update message to another contexts (background page / panel / options)
@@ -163,9 +161,7 @@ const Options = {
   },
 };
 
-export const SYNC_OPTIONS = Object.keys(Options).filter(
-  (key) => !LOCAL_OPTIONS.includes(key),
-);
+export const SYNC_OPTIONS = Object.keys(Options).filter((key) => !LOCAL_OPTIONS.includes(key));
 
 export const REPORT_OPTIONS = [
   ...SYNC_OPTIONS.filter((key) => !PROTECTED_OPTIONS.includes(key)),
@@ -242,9 +238,7 @@ async function migrate(options, optionsVersion) {
     optionsVersion: OPTIONS_VERSION,
   });
 
-  console.log(
-    `[options] Migrated to version ${OPTIONS_VERSION} from version ${optionsVersion}...`,
-  );
+  console.log(`[options] Migrated to version ${OPTIONS_VERSION} from version ${optionsVersion}...`);
 }
 
 async function manage(options) {

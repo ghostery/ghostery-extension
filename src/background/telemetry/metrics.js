@@ -102,14 +102,7 @@ const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
  * @memberOf  BackgroundClasses
  */
 export default class Metrics {
-  constructor({
-    getConf,
-    log,
-    EXTENSION_VERSION,
-    METRICS_BASE_URL,
-    saveStorage,
-    storage,
-  }) {
+  constructor({ getConf, log, EXTENSION_VERSION, METRICS_BASE_URL, saveStorage, storage }) {
     this.EXTENSION_VERSION = EXTENSION_VERSION;
     this.METRICS_BASE_URL = METRICS_BASE_URL;
 
@@ -267,12 +260,7 @@ export default class Metrics {
 
         // Protect against calling events immediately after install for all frequencies
         // They should trigger on the trailing edge of the frequency
-        if (
-          !this.storage[key] &&
-          type !== 'engaged' &&
-          type !== 'active' &&
-          frequency !== 'all'
-        ) {
+        if (!this.storage[key] && type !== 'engaged' && type !== 'active' && frequency !== 'all') {
           this.log(
             `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
           );
@@ -299,8 +287,7 @@ export default class Metrics {
         const key = `${type}_${frequency}`;
 
         let shouldSendPing =
-          frequency === 'all' ||
-          now >= (this.storage[key] || 0) + FREQUENCIES[frequency];
+          frequency === 'all' || now >= (this.storage[key] || 0) + FREQUENCIES[frequency];
         if (shouldSendPing) {
           this.storage[key] = now;
           this.log(`ping: ${frequency} ${type} (preparing...)`);
@@ -317,10 +304,9 @@ export default class Metrics {
       try {
         await this.saveStorage(this.storage);
       } catch (err) {
-        throw new Error(
-          `Error sending metrics (type=${type}. Failed to write on disk.`,
-          { cause: err },
-        );
+        throw new Error(`Error sending metrics (type=${type}. Failed to write on disk.`, {
+          cause: err,
+        });
       }
 
       // 3. Finally, send the request
@@ -343,9 +329,7 @@ export default class Metrics {
           const response = await fetch(request);
           const ok = response.status >= 200 && response.status < 400;
           if (!ok) {
-            throw new Error(
-              `Error sending metrics (type=${type}, status=${response.status}`,
-            );
+            throw new Error(`Error sending metrics (type=${type}, status=${response.status}`);
           }
           this.log(`ping: ${frequency} ${type} (successfully sent)`);
         }),
@@ -441,10 +425,7 @@ export default class Metrics {
    * @private
    */
   _recordActive() {
-    if (
-      this.storage.install_all &&
-      Date.now() - this.storage.install_all < ACTIVE_PING_DELAY
-    ) {
+    if (this.storage.install_all && Date.now() - this.storage.install_all < ACTIVE_PING_DELAY) {
       return;
     }
 
@@ -487,8 +468,7 @@ export default class Metrics {
   _recordEngaged() {
     const engaged_daily_velocity = this.storage.engaged_daily_velocity || [];
     const engaged_daily_count =
-      this.storage.engaged_daily_count ||
-      new Array(engaged_daily_velocity.length).fill(0);
+      this.storage.engaged_daily_count || new Array(engaged_daily_velocity.length).fill(0);
 
     const today = Math.floor(Date.now() / 86400000); // Today's time
 

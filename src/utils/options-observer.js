@@ -17,10 +17,7 @@ export function isOptionEqual(a, b) {
   const aKeys = Object.keys(a);
   const bKeys = Object.keys(b);
 
-  return (
-    aKeys.length === bKeys.length &&
-    aKeys.every((key) => isOptionEqual(a[key], b[key]))
-  );
+  return aKeys.length === bKeys.length && aKeys.every((key) => isOptionEqual(a[key], b[key]));
 }
 
 const observers = [];

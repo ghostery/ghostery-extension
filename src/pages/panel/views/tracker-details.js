@@ -33,8 +33,7 @@ export default {
   stats: store(TabStats),
   managedConfig: store(ManagedConfig),
   trackerId: '',
-  tracker: ({ stats, trackerId }) =>
-    stats.trackers.find((t) => t.id === trackerId),
+  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.id === trackerId),
   exceptionStatus: ({ options, stats, tracker }) =>
     exceptions.getStatus(options, tracker.id, stats.hostname),
   exceptionLabel: ({ options, stats, tracker }) =>
@@ -55,41 +54,26 @@ export default {
   }) => html`
     <template layout="column">
       <panel-dialog>
-        <div
-          id="panel-company-alerts"
-          layout="absolute inset:1 bottom:auto"
-        ></div>
+        <div id="panel-company-alerts" layout="absolute inset:1 bottom:auto"></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        <div
-          slot="header"
-          layout="center row items:center gap overflow margin:0.5:0:0:0"
-        >
-          <ui-category-icon
-            name="${tracker.category}"
-            layout="size:2.5"
-          ></ui-category-icon>
+        <div slot="header" layout="center row items:center gap overflow margin:0.5:0:0:0">
+          <ui-category-icon name="${tracker.category}" layout="size:2.5"></ui-category-icon>
           <ui-text slot="header" type="body-s" color="secondary">
-            ${tracker.company &&
-            tracker.company !== tracker.name &&
-            tracker.company + ' •'}
+            ${tracker.company && tracker.company !== tracker.name && tracker.company + ' •'}
             ${labels.categories[tracker.category]}
           </ui-text>
         </div>
         ${options.terms &&
         !managedConfig.disableUserControl &&
         html`
-          <div
-            layout="grid:1|max gap:0.5 padding:1.5 margin:-1.5:-1.5:-2 ::background:secondary"
-          >
+          <div layout="grid:1|max gap:0.5 padding:1.5 margin:-1.5:-1.5:-2 ::background:secondary">
             ${paused
               ? html`
                   <ui-button layout="width:full height:auto:6" disabled>
                     <div layout="row gap">
                       <ui-icon name="pause" color="inherit"></ui-icon>
-                      <ui-text type="label-m" color="inherit">
-                        Ghostery paused
-                      </ui-text>
+                      <ui-text type="label-m" color="inherit"> Ghostery paused </ui-text>
                     </div>
                   </ui-button>
                 `
@@ -105,10 +89,7 @@ export default {
                       color="secondary"
                       layout="size:2"
                     ></ui-icon>
-                    <ui-text
-                      type="label-m"
-                      layout="block:center row gap center padding:2px:0"
-                    >
+                    <ui-text type="label-m" layout="block:center row gap center padding:2px:0">
                       ${exceptionLabel}
                     </ui-text>
                   </a>
@@ -135,16 +116,12 @@ export default {
             ${store.ready(tracker.organization) &&
             tracker.organization.description &&
             html`
-              <ui-text type="body-s">
-                ${cleanUp(tracker.organization?.description)}
-              </ui-text>
+              <ui-text type="body-s"> ${cleanUp(tracker.organization?.description)} </ui-text>
             `}
             ${wtmUrl &&
             html`
               <ui-text type="label-xs" color="brand-primary" underline>
-                <a href="${wtmUrl}" onclick="${openTabWithUrl}">
-                  Read more on WhoTracks.Me
-                </a>
+                <a href="${wtmUrl}" onclick="${openTabWithUrl}"> Read more on WhoTracks.Me </a>
               </ui-text>
             `}
           </div>
@@ -165,9 +142,7 @@ export default {
                 <div layout="column gap">
                   ${tracker.requestsBlocked.map(
                     ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}">
-                        ${url}
-                      </panel-copy>
+                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
                     `,
                   )}
                 </div>
@@ -183,9 +158,7 @@ export default {
                 <div layout="column gap">
                   ${tracker.requestsModified.map(
                     ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}">
-                        ${url}
-                      </panel-copy>
+                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
                     `,
                   )}
                 </div>
@@ -201,9 +174,7 @@ export default {
                 <div layout="column gap">
                   ${tracker.requestsObserved.map(
                     ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}">
-                        ${url}
-                      </panel-copy>
+                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
                     `,
                   )}
                 </div>
@@ -216,14 +187,8 @@ export default {
             <ui-icon name="pin"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">Country</ui-text>
-              <ui-text
-                type="body-s"
-                color="secondary"
-                ellipsis
-                layout="padding margin:-1"
-              >
-                ${labels.regions.of(tracker.organization.country) ||
-                tracker.organization.country}
+              <ui-text type="body-s" color="secondary" ellipsis layout="padding margin:-1">
+                ${labels.regions.of(tracker.organization.country) || tracker.organization.country}
               </ui-text>
             </div>
           `}
@@ -259,10 +224,7 @@ export default {
                   underline
                   layout="padding margin:-1"
                 >
-                  <a
-                    href="${tracker.organization.websiteUrl}"
-                    onclick="${openTabWithUrl}"
-                  >
+                  <a href="${tracker.organization.websiteUrl}" onclick="${openTabWithUrl}">
                     ${tracker.organization.websiteUrl}
                   </a>
                 </ui-text>
@@ -280,10 +242,7 @@ export default {
                   underline
                   layout="padding margin:-1"
                 >
-                  <a
-                    href="${tracker.organization.privacyPolicy}"
-                    onclick="${openTabWithUrl}"
-                  >
+                  <a href="${tracker.organization.privacyPolicy}" onclick="${openTabWithUrl}">
                     ${tracker.organization.privacyPolicy}
                   </a>
                 </ui-text>

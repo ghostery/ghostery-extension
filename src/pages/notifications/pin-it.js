@@ -49,11 +49,7 @@ mount(document.body, {
           See every tracker Ghostery stops in real time.
         </ui-text>
         <ui-button type="wtm" layout="self:center">
-          <a
-            href="${HOME_PAGE_URL + pathname}"
-            target="_blank"
-            onclick="${close}"
-          >
+          <a href="${HOME_PAGE_URL + pathname}" target="_blank" onclick="${close}">
             Need more help?
           </a>
         </ui-button>

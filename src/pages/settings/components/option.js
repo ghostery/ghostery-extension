@@ -16,12 +16,7 @@ export default {
   static: { value: false, reflect: true },
   render: ({ icon }) => html`
     <template layout="row gap grow">
-      ${icon &&
-      html`<ui-icon
-        name="${icon}"
-        color="quaternary"
-        layout="size:3"
-      ></ui-icon>`}
+      ${icon && html`<ui-icon name="${icon}" color="quaternary" layout="size:3"></ui-icon>`}
 
       <div layout="column gap:0.5 grow">
         <ui-text id="name" type="headline-xs"><slot></slot></ui-text>

@@ -109,18 +109,13 @@ export default {
               ${paused
                 ? html`
                     <ui-icon name="play"></ui-icon>
-                    <ui-text
-                      type="label-m"
-                      layout="margin:left:0.5"
-                      color="inherit"
-                    >
+                    <ui-text type="label-m" layout="margin:left:0.5" color="inherit">
                       Resume
                     </ui-text>
                   `
                 : html`
                     <ui-text type="label-m" layout="grow" color="inherit">
-                      ${PAUSE_TYPES.find(({ value }) => value === pauseType)
-                        .label}
+                      ${PAUSE_TYPES.find(({ value }) => value === pauseType).label}
                     </ui-text>
                     <ui-icon name="chevron-down"></ui-icon>
                   `}
@@ -144,9 +139,7 @@ export default {
               >
                 <ui-text type="label-m">${label}</ui-text>
                 ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
-                <ui-text type="body-s" color="secondary" layout="area:2">
-                  ${description}
-                </ui-text>
+                <ui-text type="body-s" color="secondary" layout="area:2"> ${description} </ui-text>
               </button>
             `,
           )}

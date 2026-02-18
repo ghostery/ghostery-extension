@@ -23,16 +23,13 @@ import {
 import AutoSyncingMap from '/utils/map.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL(
-  'pages/redirect-protection/index.html',
-);
+const REDIRECT_PROTECTION_PAGE_URL = chrome.runtime.getURL('pages/redirect-protection/index.html');
 
 export async function updateRedirectProtectionRules(options) {
   if (options.redirectProtection.enabled) {
     const rules = (await chrome.declarativeNetRequest.getDynamicRules()).filter(
       (rule) =>
-        (rule.id >= CUSTOM_FILTERS_ID_RANGE.start &&
-          rule.id < CUSTOM_FILTERS_ID_RANGE.end) ||
+        (rule.id >= CUSTOM_FILTERS_ID_RANGE.start && rule.id < CUSTOM_FILTERS_ID_RANGE.end) ||
         (rule.id >= FIXES_ID_RANGE.start && rule.id < FIXES_ID_RANGE.end),
     );
 
@@ -57,9 +54,7 @@ async function updateRedirectProtectionExceptions(options) {
     const hostnames = Object.keys(options.redirectProtection.exceptions);
 
     await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: await getDynamicRulesIds(
-        REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
-      ),
+      removeRuleIds: await getDynamicRulesIds(REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE),
       addRules: hostnames.map((hostname, index) => ({
         id: REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE.start + index,
         priority: EXCEPTIONS_RULE_PRIORITY,
@@ -71,14 +66,10 @@ async function updateRedirectProtectionExceptions(options) {
       })),
     });
 
-    console.info(
-      '[redirect-protection] Updated exception rules for disabled domains',
-    );
+    console.info('[redirect-protection] Updated exception rules for disabled domains');
   } else {
     await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: await getDynamicRulesIds(
-        REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE,
-      ),
+      removeRuleIds: await getDynamicRulesIds(REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE),
       addRules: [
         {
           id: REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE.start,
@@ -92,9 +83,7 @@ async function updateRedirectProtectionExceptions(options) {
       ],
     });
 
-    console.info(
-      '[redirect-protection] Removed all exception rules as protection was disabled',
-    );
+    console.info('[redirect-protection] Removed all exception rules as protection was disabled');
   }
 }
 
@@ -116,9 +105,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
   }
 
   if (
-    Object.keys(options.redirectProtection.exceptions).some((domain) =>
-      hostname.endsWith(domain),
-    )
+    Object.keys(options.redirectProtection.exceptions).some((domain) => hostname.endsWith(domain))
   ) {
     return undefined;
   }
@@ -148,10 +135,7 @@ if (__PLATFORM__ !== 'firefox') {
 
   OptionsObserver.addListener(
     'redirectProtection',
-    async function redirectProtectionExceptions(
-      redirectProtection,
-      lastRedirectProtection,
-    ) {
+    async function redirectProtectionExceptions(redirectProtection, lastRedirectProtection) {
       if (!lastRedirectProtection) return;
 
       // Update exceptions on any change (enabled/disabled or domains)
@@ -181,10 +165,7 @@ if (__PLATFORM__ !== 'firefox') {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (__PLATFORM__ !== 'firefox' && message.action === 'getRedirectUrl') {
-    const url =
-      sender.tab && sender.tab.id
-        ? redirectUrlMap.get(sender.tab.id) || null
-        : null;
+    const url = sender.tab && sender.tab.id ? redirectUrlMap.get(sender.tab.id) || null : null;
     sendResponse({ url });
     return false;
   }
@@ -236,10 +217,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
         sendResponse({ success: true });
       } catch (error) {
-        console.error(
-          '[redirect-protection] Error creating session rule:',
-          error,
-        );
+        console.error('[redirect-protection] Error creating session rule:', error);
         sendResponse({ success: false, error: error.message });
       }
     })();

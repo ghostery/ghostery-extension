@@ -24,13 +24,9 @@ console.log(`Downloading wtm-bloomfilter (${version})...`);
 
 mkdirSync(TARGET_PATH, { recursive: true });
 
-const bloomfilter = await fetch(
-  `${WTM_BASE_URL}/${version}/bloom_filter.gz`,
-).then((res) => {
+const bloomfilter = await fetch(`${WTM_BASE_URL}/${version}/bloom_filter.gz`).then((res) => {
   if (!res.ok) {
-    throw new Error(
-      `Failed to download bloom_filter.gz": ${res.status}: ${res.statusText}`,
-    );
+    throw new Error(`Failed to download bloom_filter.gz": ${res.status}: ${res.statusText}`);
   }
 
   return res.arrayBuffer();
@@ -38,7 +34,4 @@ const bloomfilter = await fetch(
 
 writeFileSync(`${TARGET_PATH}/bloom_filter.dat`, new Uint8Array(bloomfilter));
 
-writeFileSync(
-  `${TARGET_PATH}/update.json`,
-  JSON.stringify({ version, useDiff: false }),
-);
+writeFileSync(`${TARGET_PATH}/update.json`, JSON.stringify({ version, useDiff: false }));

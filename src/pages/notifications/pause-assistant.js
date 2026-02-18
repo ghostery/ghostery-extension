@@ -33,12 +33,11 @@ mount(document.body, {
       <ui-notification icon="pause-l">
         <div layout="column gap">
           <ui-text type="label-m">
-            Ghostery users report that adblockers break this page. Ghostery has
-            been paused.
+            Ghostery users report that adblockers break this page. Ghostery has been paused.
           </ui-text>
           <ui-text type="body-s">
-            Blocking has been paused temporarily, and only on this page.
-            Consider pausing other adblockers for best results.
+            Blocking has been paused temporarily, and only on this page. Consider pausing other
+            adblockers for best results.
           </ui-text>
           <ui-text type="body-s">
             <a

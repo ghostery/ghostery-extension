@@ -43,21 +43,15 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <settings-link
-                href="${router.backUrl()}"
-                data-qa="button:back"
-                layout="self:start"
-              >
+              <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
                 <ui-icon name="chevron-left" color="primary"></ui-icon>
-                <ui-text type="headline-s" layout="row gap items:center">
-                  Back
-                </ui-text>
+                <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
               </settings-link>
               <ui-text type="headline-m">Custom Filters</ui-text>
               <div layout="column gap:0.5">
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                  Facilitates the creation of your own ad-blocking rules to
-                  customize your Ghostery experience.
+                  Facilitates the creation of your own ad-blocking rules to customize your Ghostery
+                  experience.
                 </ui-text>
                 <ui-text type="label-s" color="secondary" underline>
                   <a
@@ -79,11 +73,7 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon
-                      name="flask"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
+                    <ui-icon name="flask" color="quaternary" layout="size:3"></ui-icon>
                     <ui-text type="headline-xs">Custom Filters</ui-text>
                   </div>
                 </div>
@@ -98,10 +88,7 @@ export default {
                     <input
                       type="checkbox"
                       checked="${options.customFilters.trustedScriptlets}"
-                      onchange="${html.set(
-                        options,
-                        'customFilters.trustedScriptlets',
-                      )}"
+                      onchange="${html.set(options, 'customFilters.trustedScriptlets')}"
                       data-qa="checkbox:custom-filters:trusted-scriptlets"
                     />
                   </ui-input>
@@ -129,10 +116,7 @@ export default {
                 </ui-button>
                 ${result &&
                 html`
-                  <div
-                    layout="column gap margin:top"
-                    data-qa="component:custom-filters:result"
-                  >
+                  <div layout="column gap margin:top" data-qa="component:custom-filters:result">
                     <div layout="column gap:0.5">
                       <ui-text type="label-s" color="secondary">
                         Custom filters have been updated
@@ -143,11 +127,7 @@ export default {
                           : html`
                               <details>
                                 <summary>
-                                  <ui-text
-                                    type="body-s"
-                                    layout="inline"
-                                    color="secondary"
-                                  >
+                                  <ui-text type="body-s" layout="inline" color="secondary">
                                     DNR rules: ${result.dnrRules.length}
                                   </ui-text>
                                 </summary>
@@ -169,18 +149,13 @@ export default {
                 `}
                 ${!!result?.errors.length &&
                 html`
-                  <div
-                    layout="column gap:0.5"
-                    data-qa="component:custom-filters:errors"
-                  >
+                  <div layout="column gap:0.5" data-qa="component:custom-filters:errors">
                     <ui-text type="label-s" color="secondary">
                       Errors (${result.errors.length})
                     </ui-text>
                     ${result?.errors.map(
                       (error) =>
-                        html`<ui-text type="body-s" color="danger-secondary">
-                          ${error}
-                        </ui-text>`,
+                        html`<ui-text type="body-s" color="danger-secondary"> ${error} </ui-text>`,
                     )}
                   </div>
                 `}

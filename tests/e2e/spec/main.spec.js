@@ -143,12 +143,8 @@ describe('Main Features', function () {
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-        ).not.toBeDisplayed();
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:modified`),
-        ).not.toBeDisplayed();
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
       }
     });
 
@@ -160,9 +156,7 @@ describe('Main Features', function () {
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-        ).toBeDisplayed();
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).toBeDisplayed();
       }
     });
   });
@@ -181,9 +175,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('regional-filters', true);
       await getExtensionElement('button:regional-filters').click();
 
-      const checkbox = await getExtensionElement(
-        'checkbox:regional-filters:pl',
-      );
+      const checkbox = await getExtensionElement('checkbox:regional-filters:pl');
 
       if (!(await checkbox.getProperty('checked'))) {
         await checkbox.click();

@@ -41,26 +41,16 @@ export default {
   otherTrackers: ({ tracker }) =>
     store.ready(tracker) && store.get([Tracker], { tracker: tracker.id }),
   domains: ({ options, tracker }) =>
-    (store.ready(options, tracker) &&
-      options.exceptions[tracker.id]?.domains) ||
-    [],
+    (store.ready(options, tracker) && options.exceptions[tracker.id]?.domains) || [],
   exceptionStatus: ({ options, tracker }) =>
     store.ready(options, tracker) && exceptions.getStatus(options, tracker.id),
-  render: ({
-    options,
-    tracker,
-    otherTrackers,
-    domains,
-    exceptionStatus,
-  }) => html`
+  render: ({ options, tracker, otherTrackers, domains, exceptionStatus }) => html`
     <template layout="contents">
       <settings-page-layout>
         <div layout="column gap">
           <settings-link href="${router.backUrl()}" data-qa="button:back">
             <ui-icon name="chevron-left" color="primary"></ui-icon>
-            <ui-text type="headline-s" layout="row gap items:center">
-              Back
-            </ui-text>
+            <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
           </settings-link>
           ${store.ready(options, tracker) &&
           html`
@@ -97,8 +87,7 @@ export default {
                     <div layout="column gap:0.5 grow">
                       <ui-text type="label-l">Protection status</ui-text>
                       <ui-text type="body-m" color="secondary">
-                        Modify the recommended blocking settings for every
-                        website.
+                        Modify the recommended blocking settings for every website.
                       </ui-text>
                     </div>
 
@@ -114,35 +103,19 @@ export default {
               <div layout="column gap:2">
                 <div layout="row gap items:center content:space-between">
                   <ui-text type="label-l">Website exceptions</ui-text>
-                  <ui-button
-                    disabled="${exceptionStatus.trusted &&
-                    exceptionStatus.global}"
-                  >
-                    <a href="${router.url(TrackerAddException, { tracker })}">
-                      Add
-                    </a>
+                  <ui-button disabled="${exceptionStatus.trusted && exceptionStatus.global}">
+                    <a href="${router.url(TrackerAddException, { tracker })}"> Add </a>
                   </ui-button>
                 </div>
-                <settings-table
-                  disabled="${exceptionStatus.trusted &&
-                  exceptionStatus.global}"
-                >
+                <settings-table disabled="${exceptionStatus.trusted && exceptionStatus.global}">
                   <div slot="header" layout="grid:2 gap:4">
-                    <ui-text type="label-m" mobile-type="label-s">
-                      Website
-                    </ui-text>
-                    <ui-text type="label-m" mobile-type="label-s">
-                      Protection status
-                    </ui-text>
+                    <ui-text type="label-m" mobile-type="label-s"> Website </ui-text>
+                    <ui-text type="label-m" mobile-type="label-s"> Protection status </ui-text>
                   </div>
                   ${!domains.length &&
                   html`
                     <div layout="column center gap padding:5:0">
-                      <ui-icon
-                        name="no-websites"
-                        layout="size:4"
-                        color="tertiary"
-                      ></ui-icon>
+                      <ui-icon name="no-websites" layout="size:4" color="tertiary"></ui-icon>
                       <ui-text layout="block:center width:::180px">
                         No websites exceptions added yet
                       </ui-text>
@@ -157,9 +130,7 @@ export default {
                           })}"
                           layout="grid:2 items:center:stretch gap:4"
                         >
-                          <ui-text type="label-m" mobile-type="label-s">
-                            ${domain}
-                          </ui-text>
+                          <ui-text type="label-m" mobile-type="label-s"> ${domain} </ui-text>
                           <div layout="row content:space-between gap">
                             <settings-protection-badge></settings-protection-badge>
                             <ui-action>
@@ -167,11 +138,7 @@ export default {
                                 layout@768px="order:1 padding:0.5"
                                 onclick="${toggleDomain(domain)}"
                               >
-                                <ui-icon
-                                  name="trash"
-                                  layout="size:3"
-                                  color="tertiary"
-                                ></ui-icon>
+                                <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
                               </button>
                             </ui-action>
                           </div>
@@ -183,13 +150,8 @@ export default {
               </div>
               <div layout="margin:3:0">
                 <ui-action>
-                  <a
-                    href="${`${WTM_PAGE_URL}/trackers/${tracker.id}`}"
-                    target="_blank"
-                  >
-                    <settings-wtm-link>
-                      WhoTracks.Me Statistical Report
-                    </settings-wtm-link>
+                  <a href="${`${WTM_PAGE_URL}/trackers/${tracker.id}`}" target="_blank">
+                    <settings-wtm-link> WhoTracks.Me Statistical Report </settings-wtm-link>
                   </a>
                 </ui-action>
               </div>
@@ -200,15 +162,11 @@ export default {
                     ${tracker.organization.name &&
                     html`
                       <div layout="column gap">
-                        <ui-text type="label-xs" uppercase
-                          >Organization</ui-text
-                        >
+                        <ui-text type="label-xs" uppercase>Organization</ui-text>
                         <ui-text type="label-l" mobile-type="label-m">
                           ${tracker.organization.name}
                         </ui-text>
-                        <ui-text color="secondary">
-                          ${tracker.organization.description}
-                        </ui-text>
+                        <ui-text color="secondary"> ${tracker.organization.description} </ui-text>
                       </div>
                     `}
                     <div layout="column gap">
@@ -216,9 +174,7 @@ export default {
                       <ui-text type="label-l" mobile-type="label-m">
                         ${labels.categories[tracker.category]}
                       </ui-text>
-                      <ui-text color="secondary">
-                        ${tracker.categoryDescription}
-                      </ui-text>
+                      <ui-text color="secondary"> ${tracker.categoryDescription} </ui-text>
                     </div>
                   </div>
                   ${tracker.organization.country &&
@@ -233,14 +189,9 @@ export default {
                   `}
                   ${tracker.organization.websiteUrl &&
                   html` <div layout="column gap">
-                    <ui-text type="label-xs" uppercase>
-                      Organization's website
-                    </ui-text>
+                    <ui-text type="label-xs" uppercase> Organization's website </ui-text>
                     <ui-text type="label-s" color="brand-primary" underline>
-                      <a
-                        href="${tracker.organization.websiteUrl}"
-                        target="_blank"
-                      >
+                      <a href="${tracker.organization.websiteUrl}" target="_blank">
                         ${tracker.organization.websiteUrl}
                       </a>
                     </ui-text>
@@ -248,14 +199,9 @@ export default {
                   ${tracker.organization.privacyPolicyUrl &&
                   html`
                     <div layout="column gap">
-                      <ui-text type="label-xs" uppercase>
-                        Privacy policy
-                      </ui-text>
+                      <ui-text type="label-xs" uppercase> Privacy policy </ui-text>
                       <ui-text type="label-s" color="brand-primary" underline>
-                        <a
-                          href="${tracker.organization.privacyPolicyUrl}"
-                          target="_blank"
-                        >
+                        <a href="${tracker.organization.privacyPolicyUrl}" target="_blank">
                           ${tracker.organization.privacyPolicyUrl}
                         </a>
                       </ui-text>
@@ -273,9 +219,7 @@ export default {
                         layout="padding margin:-1"
                       >
                         <a
-                          href="${tracker.organization.contact.startsWith(
-                            'http',
-                          )
+                          href="${tracker.organization.contact.startsWith('http')
                             ? ''
                             : 'mailto:'}${tracker.organization.contact}"
                           target="_blank"

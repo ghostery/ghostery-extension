@@ -39,10 +39,7 @@ function resolveSourceURL(details) {
 
   /* Chrome APIs */
   const { frameType, initiator } = details;
-  if (
-    initiator &&
-    (frameType === 'outermost_frame' || frameType === 'sub_frame')
-  ) {
+  if (initiator && (frameType === 'outermost_frame' || frameType === 'sub_frame')) {
     return initiator;
   }
 

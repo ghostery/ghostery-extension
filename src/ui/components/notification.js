@@ -17,19 +17,12 @@ export default {
   render: ({ icon, alert }) => html`
     <template layout="block">
       <ui-card narrow layout="relative padding:2">
-        <ui-icon
-          name="logo"
-          layout="absolute bottom:2 right:2 size:3"
-        ></ui-icon>
+        <ui-icon name="logo" layout="absolute bottom:2 right:2 size:3"></ui-icon>
         <div layout="row items:start gap:2">
           ${icon &&
           html`
             <div layout="relative">
-              <ui-icon
-                name="${icon}"
-                layout="size:6"
-                color="gray-300"
-              ></ui-icon>
+              <ui-icon name="${icon}" layout="size:6" color="gray-300"></ui-icon>
               ${alert &&
               html`
                 <ui-icon

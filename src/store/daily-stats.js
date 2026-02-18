@@ -98,11 +98,7 @@ const DailyStats = {
     },
     async list({ dateFrom, dateTo }) {
       const db = await getDb();
-      return db.getAllFromIndex(
-        'daily',
-        'day',
-        IDBKeyRange.bound(dateFrom, dateTo),
-      );
+      return db.getAllFromIndex('daily', 'day', IDBKeyRange.bound(dateFrom, dateTo));
     },
   },
 };

@@ -26,11 +26,7 @@ import './styles.css';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
-Promise.all([
-  store.resolve(Options),
-  store.resolve(ManagedConfig),
-  store.resolve(Config),
-])
+Promise.all([store.resolve(Options), store.resolve(ManagedConfig), store.resolve(Config)])
   .then(([{ terms }, managedConfig]) => {
     if (!debugMode && (!terms || managedConfig.disableUserControl)) {
       throw new Error('Access denied');
@@ -42,7 +38,5 @@ Promise.all([
     mount(document.body, Settings);
   })
   .catch(() => {
-    window.location.replace(
-      chrome.runtime.getURL('/pages/onboarding/index.html'),
-    );
+    window.location.replace(chrome.runtime.getURL('/pages/onboarding/index.html'));
   });

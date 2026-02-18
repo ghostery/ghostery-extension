@@ -95,22 +95,13 @@ describe('Remote config', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
 
       // Both match
-      assert.deepEqual(
-        filter({ filter: { version: '1.0.0', platform: ['chromium'] } }),
-        true,
-      );
+      assert.deepEqual(filter({ filter: { version: '1.0.0', platform: ['chromium'] } }), true);
 
       // Version mismatch
-      assert.deepEqual(
-        filter({ filter: { version: '3.0.0', platform: ['chromium'] } }),
-        false,
-      );
+      assert.deepEqual(filter({ filter: { version: '3.0.0', platform: ['chromium'] } }), false);
 
       // Platform mismatch
-      assert.deepEqual(
-        filter({ filter: { version: '1.0.0', platform: ['firefox'] } }),
-        false,
-      );
+      assert.deepEqual(filter({ filter: { version: '1.0.0', platform: ['firefox'] } }), false);
     });
 
     it('should combine version and browser checks', () => {
@@ -118,22 +109,13 @@ describe('Remote config', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
 
       // Both match
-      assert.deepEqual(
-        filter({ filter: { version: '1.0.0', browser: 'chrome' } }),
-        true,
-      );
+      assert.deepEqual(filter({ filter: { version: '1.0.0', browser: 'chrome' } }), true);
 
       // Version mismatch
-      assert.deepEqual(
-        filter({ filter: { version: '3.0.0', browser: 'chrome' } }),
-        false,
-      );
+      assert.deepEqual(filter({ filter: { version: '3.0.0', browser: 'chrome' } }), false);
 
       // Browser mismatch
-      assert.deepEqual(
-        filter({ filter: { version: '1.0.0', browser: 'firefox' } }),
-        false,
-      );
+      assert.deepEqual(filter({ filter: { version: '1.0.0', browser: 'firefox' } }), false);
     });
   });
 });

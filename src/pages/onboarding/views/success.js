@@ -65,8 +65,8 @@ export default {
               </div>
               <ui-text type="display-s">Setup Successful</ui-text>
               <ui-text>
-                Ghostery is all set to stop trackers in their tracks and protect
-                your privacy while browsing!
+                Ghostery is all set to stop trackers in their tracks and protect your privacy while
+                browsing!
               </ui-text>
             `}
             ${options.mode === MODE_ZAP &&
@@ -87,25 +87,18 @@ export default {
                   "
                 ></div>
                 <div layout="row items:center gap" layout@520px="column">
-                  <onboarding-step number="1" icon="websites" type="brand">
-                  </onboarding-step>
+                  <onboarding-step number="1" icon="websites" type="brand"> </onboarding-step>
                   <ui-text type="label-m">Open a site</ui-text>
                 </div>
                 <div layout="row items:center gap" layout@520px="column">
-                  <onboarding-step number="2" icon="block-m" type="danger">
-                  </onboarding-step>
+                  <onboarding-step number="2" icon="block-m" type="danger"> </onboarding-step>
                   ${lang === 'en'
-                    ? html`<ui-text type="label-m" translate="no">
-                        Zap ads once
-                      </ui-text>`
+                    ? html`<ui-text type="label-m" translate="no"> Zap ads once </ui-text>`
                     : html`<ui-text type="label-m">Block ads once</ui-text>`}
                 </div>
                 <div layout="row items:center gap" layout@520px="column">
-                  <onboarding-step number="3" icon="trust-m" type="success">
-                  </onboarding-step>
-                  <ui-text type="label-m">
-                    Site stays ad-free every time you visit
-                  </ui-text>
+                  <onboarding-step number="3" icon="trust-m" type="success"> </onboarding-step>
+                  <ui-text type="label-m"> Site stays ad-free every time you visit </ui-text>
                 </div>
               </div>
               <div layout="row center">
@@ -124,13 +117,8 @@ export default {
         html`
           <ui-card>
             <section layout="column center gap:3">
-              <div
-                layout="block:center column gap"
-                layout@520px="padding:1:2:0"
-              >
-                <ui-text type="display-s">
-                  Pin extension for easy access
-                </ui-text>
+              <div layout="block:center column gap" layout@520px="padding:1:2:0">
+                <ui-text type="display-s"> Pin extension for easy access </ui-text>
                 <ui-text layout="padding:0:2">
                   ${msg.html`Click the puzzle icon next to the search bar and <strong>pin Ghostery</strong> to your toolbar.`}
                 </ui-text>

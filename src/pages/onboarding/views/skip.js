@@ -27,15 +27,14 @@ export default {
             Ghostery is installed with limited functionality
           </ui-text>
           <ui-text type="body-m">
-            Ghostery Tracker & Ad Blocker is naming the trackers present on
-            websites you visit. You are browsing the web unprotected.
+            Ghostery Tracker & Ad Blocker is naming the trackers present on websites you visit. You
+            are browsing the web unprotected.
           </ui-text>
           ${chrome.management?.uninstallSelf &&
           html`
             <ui-button
               type="danger"
-              onclick="${() =>
-                chrome.management.uninstallSelf({ showConfirmDialog: true })}"
+              onclick="${() => chrome.management.uninstallSelf({ showConfirmDialog: true })}"
               layout="self:center margin:top:2"
             >
               <button>Uninstall</button>
@@ -44,9 +43,7 @@ export default {
         </section>
       </ui-card>
       <ui-button type="transparent" layout="self:center">
-        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
-          Terms & Conditions
-        </a>
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank"> Terms & Conditions </a>
       </ui-button>
     </template>
   `,

@@ -14,9 +14,7 @@ import * as engines from './engines.js';
 import asyncSetup from './setup.js';
 import ExtendedRequest from './request.js';
 
-export const setup = asyncSetup('trackerdb', [
-  engines.init(engines.TRACKERDB_ENGINE),
-]);
+export const setup = asyncSetup('trackerdb', [engines.init(engines.TRACKERDB_ENGINE)]);
 
 export function getUnidentifiedTracker(hostname) {
   return {
@@ -71,8 +69,7 @@ function getTrackers() {
         id: p.key,
         name: p.name,
         category: p.category,
-        categoryDescription: categories.find((c) => c.key === p.category)
-          ?.description,
+        categoryDescription: categories.find((c) => c.key === p.category)?.description,
         websiteUrl: p.website_url,
         exception: p.key,
         filters: p.filters,

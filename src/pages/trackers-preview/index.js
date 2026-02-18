@@ -58,21 +58,14 @@ define({
                     Are you sure you want to disable Trackers Preview?
                   </ui-text>
                   <ui-text>
-                    You will no longer see tracker wheels next to the search
-                    results.
+                    You will no longer see tracker wheels next to the search results.
                   </ui-text>
                 </div>
                 <div layout="grid:2 gap:2">
                   <ui-button>
-                    <button onclick="${html.set('confirmDisabled', false)}">
-                      Cancel
-                    </button>
+                    <button onclick="${html.set('confirmDisabled', false)}">Cancel</button>
                   </ui-button>
-                  <ui-button
-                    id="disable"
-                    type="outline-danger"
-                    data-qa="button:confirm"
-                  >
+                  <ui-button id="disable" type="outline-danger" data-qa="button:confirm">
                     <button onclick="${disable}">Disable</button>
                   </ui-button>
                 </div>
@@ -84,11 +77,7 @@ define({
                 <ui-text type="label-m">${domain}</ui-text>
                 <ui-action slot="actions">
                   <button onclick="${close}" layout="row center size:3">
-                    <ui-icon
-                      name="close"
-                      color="primary"
-                      layout="size:2.5"
-                    ></ui-icon>
+                    <ui-icon name="close" color="primary" layout="size:2.5"></ui-icon>
                   </button>
                 </ui-action>
               </ui-header>
@@ -104,10 +93,7 @@ define({
                   <ui-tooltip position="bottom" slot="actions">
                     <span slot="content">WhoTracks.Me Statistical Report</span>
                     <ui-action-button layout="size:4.5">
-                      <a
-                        href="${`${WTM_PAGE_URL}/websites/${domain}`}"
-                        target="_blank"
-                      >
+                      <a href="${`${WTM_PAGE_URL}/websites/${domain}`}" target="_blank">
                         <ui-icon name="whotracksme" color="primary"></ui-icon>
                       </a>
                     </ui-action-button>
@@ -124,9 +110,7 @@ define({
                     data-qa="button:disable"
                   >
                     <ui-icon name="block-s" color="secondary"></ui-icon>
-                    <ui-text type="label-s" color="secondary">
-                      Disable Trackers Preview
-                    </ui-text>
+                    <ui-text type="label-s" color="secondary"> Disable Trackers Preview </ui-text>
                   </button>
                 </ui-action>
               </footer>`}

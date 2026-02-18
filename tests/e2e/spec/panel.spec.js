@@ -18,8 +18,7 @@ describe('Panel', function () {
     await openPanel();
 
     await getExtensionElement('button:menu').click();
-    const url =
-      await getExtensionElement('button:licenses').getProperty('href');
+    const url = await getExtensionElement('button:licenses').getProperty('href');
 
     const currentUrl = await browser.getUrl();
     await browser.url(url);

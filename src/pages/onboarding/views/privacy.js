@@ -29,20 +29,16 @@ function scrollToAnchor(host, event) {
 export default {
   [router.connect]: { dialog: true },
   policy: () =>
-    fetch(chrome.runtime.getURL('/static_pages/privacy-policy.html')).then(
-      (res) => {
-        if (res.ok) {
-          return res.text();
-        }
+    fetch(chrome.runtime.getURL('/static_pages/privacy-policy.html')).then((res) => {
+      if (res.ok) {
+        return res.text();
+      }
 
-        throw new Error('Failed to load privacy policy');
-      },
-    ),
+      throw new Error('Failed to load privacy policy');
+    }),
   render: ({ policy }) => html`
     <onboarding-dialog>
-      <ui-text slot="header" type="headline-m">
-        Ghostery Privacy Policy
-      </ui-text>
+      <ui-text slot="header" type="headline-m"> Ghostery Privacy Policy </ui-text>
       <div>
         ${html.resolve(
           policy.then(

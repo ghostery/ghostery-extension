@@ -25,9 +25,7 @@ async function add({ options, tracker, hostname }, event) {
     event,
     store
       .submit(hostname)
-      .then(({ value }) =>
-        exceptions.toggleDomain(options, tracker.id, value, true),
-      ),
+      .then(({ value }) => exceptions.toggleDomain(options, tracker.id, value, true)),
   );
 }
 
@@ -41,11 +39,7 @@ export default {
       ${store.ready(tracker) &&
       html`
         <settings-dialog closable>
-          <form
-            action="${router.backUrl()}"
-            onsubmit="${add}"
-            layout="column gap:3"
-          >
+          <form action="${router.backUrl()}" onsubmit="${add}" layout="column gap:3">
             <ui-text type="label-l" layout="block:center margin:bottom">
               Add website exception
             </ui-text>

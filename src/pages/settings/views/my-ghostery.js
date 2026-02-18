@@ -63,8 +63,8 @@ export default {
                 <settings-option static>
                   Filtering Mode
                   <span slot="description">
-                    Because no two people surf alike, we're giving you the power
-                    to pick how you want to experience the web.
+                    Because no two people surf alike, we're giving you the power to pick how you
+                    want to experience the web.
                   </span>
                 </settings-option>
                 <div layout="column gap" layout@768px="grid:2">
@@ -92,17 +92,14 @@ export default {
                       layout@768px="width:138px"
                     ></ui-icon>
                     <ui-text>
-                      We block it all for you - ads, trackers, distractions.
-                      You’re fully covered, no setup needed.
+                      We block it all for you - ads, trackers, distractions. You’re fully covered,
+                      no setup needed.
                     </ui-text>
                     <ui-text type="label-s" slot="footer">
                       Best for full coverage and privacy enthusiasts.
                     </ui-text>
                   </ui-mode-radio>
-                  <ui-mode-radio
-                    checked="${options.mode === MODE_ZAP}"
-                    id="mode-option-zap"
-                  >
+                  <ui-mode-radio checked="${options.mode === MODE_ZAP}" id="mode-option-zap">
                     <input
                       type="radio"
                       name="filtering-mode"
@@ -123,8 +120,8 @@ export default {
                       layout@768px="width:116px"
                     ></ui-icon>
                     <ui-text>
-                      You zap ads away, one site at a time. One button, one
-                      page, and you build your own ad-free list.
+                      You zap ads away, one site at a time. One button, one page, and you build your
+                      own ad-free list.
                     </ui-text>
                     <ui-text type="label-s" slot="footer">
                       Best for beginners or sharing with family.
@@ -137,15 +134,11 @@ export default {
             html`
               ${(__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) &&
               html`
-                <ui-toggle
-                  value="${options.sync}"
-                  onchange="${html.set(options, 'sync')}"
-                >
+                <ui-toggle value="${options.sync}" onchange="${html.set(options, 'sync')}">
                   <settings-option>
                     Settings Sync
                     <span slot="description">
-                      Saves and synchronizes your custom settings between
-                      different devices.
+                      Saves and synchronizes your custom settings between different devices.
                     </span>
                   </settings-option>
                 </ui-toggle>
@@ -155,35 +148,26 @@ export default {
                 <settings-option static>
                   Settings Backup
                   <span slot="description">
-                    Save your custom settings to a file, or restore them from a
-                    file.
+                    Save your custom settings to a file, or restore them from a file.
                   </span>
                   <ui-text type="body-xs" color="tertiary" slot="footer">
-                    Importing supports uBlock Origin file format with selected
-                    features.
+                    Importing supports uBlock Origin file format with selected features.
                   </ui-text>
 
                   ${importStatus &&
                   html`
-                    <ui-text
-                      type="body-s"
-                      color="${importStatus.type}"
-                      slot="footer"
-                    >
+                    <ui-text type="body-s" color="${importStatus.type}" slot="footer">
                       ${importStatus.msg}
                     </ui-text>
                   `}
                 </settings-option>
                 <div layout="row:wrap gap" layout@768px="content:end">
                   <ui-button size="s" onclick="${backup.exportToFile}">
-                    <button>
-                      <ui-icon name="arrow-square-up"></ui-icon> Export to file
-                    </button>
+                    <button><ui-icon name="arrow-square-up"></ui-icon> Export to file</button>
                   </ui-button>
                   <ui-button size="s">
                     <label for="import-settings-input">
-                      <ui-icon name="arrow-square-down"></ui-icon> Import from
-                      file
+                      <ui-icon name="arrow-square-down"></ui-icon> Import from file
                     </label>
                     <input
                       id="import-settings-input"
@@ -212,15 +196,10 @@ export default {
             <div layout="row gap:2">
               <settings-option static>
                 Theme
-                <span slot="description">
-                  Changes application color theme.
-                </span>
+                <span slot="description"> Changes application color theme. </span>
               </settings-option>
               <ui-input>
-                <select
-                  value="${options.theme}"
-                  onchange="${html.set(options, 'theme')}"
-                >
+                <select value="${options.theme}" onchange="${html.set(options, 'theme')}">
                   <option value="">Default</option>
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>

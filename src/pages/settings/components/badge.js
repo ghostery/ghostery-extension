@@ -16,11 +16,7 @@ export default {
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
-      <ui-text
-        type="label-s"
-        color="inherit"
-        layout="row items:center gap:0.5 relative"
-      >
+      <ui-text type="label-s" color="inherit" layout="row items:center gap:0.5 relative">
         <slot></slot>
       </ui-text>
     </template>

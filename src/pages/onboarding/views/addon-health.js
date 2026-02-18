@@ -23,8 +23,8 @@ export default {
           Add-on's Health
         </ui-text>
         <ui-text>
-          To monitor critical crash information of the extension, the following
-          information about errors is collected:
+          To monitor critical crash information of the extension, the following information about
+          errors is collected:
         </ui-text>
         <ui-text>
           <ul>
@@ -34,22 +34,17 @@ export default {
         </ui-text>
         <ui-text> Extension ID is removed from the stack traces. </ui-text>
         <ui-text>
-          Sentry SDK is in use to gather and send the reports, but Sentry does
-          only receive information above - no two requests can be linked with
-          one another and browser IP is never shared with Sentry.
+          Sentry SDK is in use to gather and send the reports, but Sentry does only receive
+          information above - no two requests can be linked with one another and browser IP is never
+          shared with Sentry.
         </ui-text>
-        <ui-text
-          type="body-s"
-          color="secondary"
-          layout="margin:top block:justify"
-        >
-          Ghostery never collects personal information like passwords, browsing
-          history or the content of the pages you visit.
+        <ui-text type="body-s" color="secondary" layout="margin:top block:justify">
+          Ghostery never collects personal information like passwords, browsing history or the
+          content of the pages you visit.
         </ui-text>
         <ui-text type="body-s" color="secondary" layout="block:justify">
-          Being an EU company, Ghostery strictly adheres to the GDPR (The
-          General Data Protection Regulation), which regulates data collection
-          to ensure user's privacy.
+          Being an EU company, Ghostery strictly adheres to the GDPR (The General Data Protection
+          Regulation), which regulates data collection to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
           <a href="${router.backUrl()}">Close</a>

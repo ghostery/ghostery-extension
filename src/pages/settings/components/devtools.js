@@ -67,9 +67,7 @@ function toggleFlag(name) {
   return async (host, event) => {
     await setConfig({
       flags: {
-        [name]: event.target.checked
-          ? { percentage: 0, enabled: event.target.checked }
-          : null,
+        [name]: event.target.checked ? { percentage: 0, enabled: event.target.checked } : null,
       },
     });
   };
@@ -97,14 +95,7 @@ export default {
   config: store(Config),
   notifications: store([Notification]),
   resources: store(Resources),
-  render: ({
-    visible,
-    counter,
-    options,
-    config,
-    notifications,
-    resources,
-  }) => html`
+  render: ({ visible, counter, options, config, notifications, resources }) => html`
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
       html`
@@ -148,24 +139,16 @@ export default {
           `}
           <div layout="column gap:2">
             <div layout="column gap">
-              <ui-toggle
-                value="${config.enabled}"
-                onchange="${html.set(config, 'enabled')}"
-              >
+              <ui-toggle value="${config.enabled}" onchange="${html.set(config, 'enabled')}">
                 <div layout="column">
                   <ui-text type="headline-s">Remote Configuration</ui-text>
                   <ui-text type="body-xs" color="tertiary">
-                    Updated at:
-                    ${longDateFormatter.format(new Date(config.updatedAt))}
+                    Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
                   </ui-text>
                 </div>
               </ui-toggle>
               <div layout="row">
-                <ui-button
-                  onclick="${forceConfigSync}"
-                  layout="shrink:0 self:start"
-                  size="s"
-                >
+                <ui-button onclick="${forceConfigSync}" layout="shrink:0 self:start" size="s">
                   <button>
                     <ui-icon name="refresh" layout="size:2"></ui-icon>
                     Force sync
@@ -186,9 +169,7 @@ export default {
                           onchange="${toggleFlag(name)}"
                         />
                       </ui-input>
-                      <ui-text type="body-xs" color="tertiary">
-                        ${name}
-                      </ui-text>
+                      <ui-text type="body-xs" color="tertiary"> ${name} </ui-text>
                     </label>
                   `,
                 )}
@@ -210,11 +191,7 @@ export default {
                       </ui-text>`,
                   ) || 'none'}
               </div>
-              <ui-button
-                layout="shrink:0 self:start"
-                onclick="${testConfigDomain}"
-                size="s"
-              >
+              <ui-button layout="shrink:0 self:start" onclick="${testConfigDomain}" size="s">
                 <button>Add domain</button>
               </ui-button>
             </div>
@@ -235,8 +212,7 @@ export default {
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">${id}:</ui-text>
                       ${shown}
-                      ${!!lastShownAt &&
-                      `(${longDateFormatter.format(new Date(lastShownAt))})`}
+                      ${!!lastShownAt && `(${longDateFormatter.format(new Date(lastShownAt))})`}
                     </ui-text>
                   `,
                 )}
@@ -251,21 +227,15 @@ export default {
                   <div layout="column gap:0.5">
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Install date:</ui-text>
-                      <span data-qa="text:install-date"
-                        >${telemetry.installDate || 'N/A'}</span
-                      >
+                      <span data-qa="text:install-date">${telemetry.installDate || 'N/A'}</span>
                     </ui-text>
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Source:</ui-text>
-                      <span data-qa="text:utm-source"
-                        >${telemetry.utm_source || 'N/A'}</span
-                      >
+                      <span data-qa="text:utm-source">${telemetry.utm_source || 'N/A'}</span>
                     </ui-text>
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Campaign:</ui-text>
-                      <span data-qa="text:utm-campaign"
-                        >${telemetry.utm_campaign || 'N/A'}</span
-                      >
+                      <span data-qa="text:utm-campaign">${telemetry.utm_campaign || 'N/A'}</span>
                     </ui-text>
                   </div>
                 </div>
@@ -277,8 +247,7 @@ export default {
             <div layout="column gap items:start" translate="no">
               <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
               <ui-text type="body-xs" color="tertiary">
-                The below list is not reactive to changes made in the extension
-                - use refresh button
+                The below list is not reactive to changes made in the extension - use refresh button
               </ui-text>
               <div layout="row gap">
                 ${html.resolve(
@@ -288,9 +257,7 @@ export default {
                       (rules) => html`
                         ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
                         ${!rules.length &&
-                        html`<ui-text translate="no">
-                          No rulesets enabled...
-                        </ui-text>`}
+                        html`<ui-text translate="no"> No rulesets enabled... </ui-text>`}
                       `,
                     ),
                 )}
@@ -307,9 +274,7 @@ export default {
               <div>
                 ${Object.entries(resources.checksums).map(
                   ([key, value]) => html`
-                    <ui-text type="body-m" color="secondary">
-                      ${key}: ${value}
-                    </ui-text>
+                    <ui-text type="body-m" color="secondary"> ${key}: ${value} </ui-text>
                   `,
                 )}
               </div>
@@ -332,12 +297,7 @@ export default {
       `}
       <div layout="column">
         <div onclick="${refresh}">
-          <ui-text
-            type="body-m"
-            color="tertiary"
-            translate="no"
-            style="user-select: none;"
-          >
+          <ui-text type="body-m" color="tertiary" translate="no" style="user-select: none;">
             v${VERSION}
           </ui-text>
         </div>

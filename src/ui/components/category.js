@@ -28,11 +28,7 @@ export default {
         layout="row gap items:center grow padding:0.5:0"
         layout.large="padding:1:0"
       >
-        <ui-text
-          type="body-${large ? 'm' : 's'}"
-          color="secondary"
-          layout="grow"
-        >
+        <ui-text type="body-${large ? 'm' : 's'}" color="secondary" layout="grow">
           ${labels.categories[getCategoryKey(name)]}
         </ui-text>
         <ui-text type="label-${large ? 'm' : 's'}" id="count">${count}</ui-text>

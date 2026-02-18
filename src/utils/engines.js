@@ -48,11 +48,7 @@ const ENV = new Map([
 ]);
 
 export function isPersistentEngine(name) {
-  return (
-    name !== ELEMENT_PICKER_ENGINE &&
-    name !== CUSTOM_ENGINE &&
-    name !== MAIN_ENGINE
-  );
+  return name !== ELEMENT_PICKER_ENGINE && name !== CUSTOM_ENGINE && name !== MAIN_ENGINE;
 }
 
 export function setEnv(key, value) {
@@ -192,9 +188,7 @@ async function loadFromCDN(name) {
 
 function check(response) {
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch engine "${name}": ${response.status}: ${response.statusText}`,
-    );
+    throw new Error(`Failed to fetch engine "${name}": ${response.status}: ${response.statusText}`);
   }
 
   return response;
@@ -207,9 +201,7 @@ export async function update(name, { force = false, cache = true } = {}) {
   // The `force` option allows us to bypass this check, as when
   // engine is being loaded from CDN for the first time the `loadFromStorage` returns null
   if (!force && (await loadFromStorage(name)) === null) {
-    console.warn(
-      `[engines] Skipping update for engine "${name}" as the engine is not available`,
-    );
+    console.warn(`[engines] Skipping update for engine "${name}" as the engine is not available`);
 
     return false;
   }
@@ -227,9 +219,7 @@ export async function update(name, { force = false, cache = true } = {}) {
       .then((res) => res.json());
 
     if (!data.engines[ENGINE_VERSION]) {
-      throw new Error(
-        `Engine "${name}" for "${ENGINE_VERSION}" engine version not found`,
-      );
+      throw new Error(`Engine "${name}" for "${ENGINE_VERSION}" engine version not found`);
     }
 
     // Get current engine
@@ -284,10 +274,7 @@ export async function update(name, { force = false, cache = true } = {}) {
       saveToMemory(name, engine);
       saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
-      console.info(
-        `Engine "${name}" reloaded:`,
-        data.engines[ENGINE_VERSION].checksum,
-      );
+      console.info(`Engine "${name}" reloaded:`, data.engines[ENGINE_VERSION].checksum);
 
       return true;
     }
@@ -374,10 +361,7 @@ export async function update(name, { force = false, cache = true } = {}) {
 
     // Last but not least, check if resources.json should be updated. This can be
     // done independently of filters as the data is stored in a separate object.
-    if (
-      data.resourcesJson &&
-      data.resourcesJson.checksum !== engine.resources.checksum
-    ) {
+    if (data.resourcesJson && data.resourcesJson.checksum !== engine.resources.checksum) {
       engine.updateResources(
         await fetch(data.resourcesJson.url)
           .then(check)
@@ -388,10 +372,7 @@ export async function update(name, { force = false, cache = true } = {}) {
     }
 
     if (updated) {
-      console.info(
-        `[engines] Engine "${name}" updated:`,
-        data.engines[ENGINE_VERSION].checksum,
-      );
+      console.info(`[engines] Engine "${name}" updated:`, data.engines[ENGINE_VERSION].checksum);
 
       // Save the new engine to storage
       saveToStorage(name, data.engines[ENGINE_VERSION].checksum);

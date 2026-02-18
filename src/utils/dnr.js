@@ -65,10 +65,7 @@ export function getRedirectProtectionRules(rules) {
   const result = [];
 
   for (const rule of rules) {
-    if (
-      rule.action?.type === 'block' &&
-      rule.condition?.resourceTypes?.includes('main_frame')
-    ) {
+    if (rule.action?.type === 'block' && rule.condition?.resourceTypes?.includes('main_frame')) {
       result.push({
         ...rule,
         priority: rule.priority + 1,

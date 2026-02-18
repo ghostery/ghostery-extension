@@ -40,8 +40,7 @@ if (chrome.webRequest) {
 
   try {
     webRequestReporter = new RequestReporter(config.request, {
-      onMessageReady:
-        urlReporter.forwardRequestReporterMessage.bind(urlReporter),
+      onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
       countryProvider: urlReporter.countryProvider,
       trustedClock: communication.trustedClock,
       isRequestAllowed: (state) => {
@@ -49,10 +48,7 @@ if (chrome.webRequest) {
         return (
           !options.blockTrackers ||
           !!getPausedDetails(options, hostname) ||
-          remoteConfig?.hasAction(
-            hostname,
-            ACTION_DISABLE_ANTITRACKING_MODIFICATION,
-          )
+          remoteConfig?.hasAction(hostname, ACTION_DISABLE_ANTITRACKING_MODIFICATION)
         );
       },
       onTrackerInteraction: (event, state) => {
@@ -72,19 +68,11 @@ if (chrome.webRequest) {
 
     chrome.runtime.onMessage.addListener((msg, sender) => {
       if (msg.action === 'mousedown') {
-        webRequestReporter.recordClick(
-          msg.event,
-          msg.context,
-          msg.href,
-          sender,
-        );
+        webRequestReporter.recordClick(msg.event, msg.context, msg.href, sender);
       }
     });
   } catch (e) {
-    console.warn(
-      'Failed to create webRequestReporter. Leaving it disabled.',
-      e,
-    );
+    console.warn('Failed to create webRequestReporter. Leaving it disabled.', e);
   }
 }
 

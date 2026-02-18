@@ -67,14 +67,10 @@ chrome.runtime.onConnect.addListener(async (port) => {
       const organizations = await getOrganizations();
       const engine = engines.get(engines.MAIN_ENGINE);
 
-      const logFilterMatched = function (
-        { filter },
-        { url, request, filterType, callerContext },
-      ) {
+      const logFilterMatched = function ({ filter }, { url, request, filterType, callerContext }) {
         if (filterType === FilterType.COSMETIC && filter.isScriptInject()) {
           filter = String(filter);
-          const scriptInjectArgumentIndex =
-            filter.indexOf('+js(') + 4; /* '+js('.length */
+          const scriptInjectArgumentIndex = filter.indexOf('+js(') + 4; /* '+js('.length */
           filter =
             filter.slice(0, scriptInjectArgumentIndex) +
             decodeURIComponent(filter.slice(scriptInjectArgumentIndex, -1)) +

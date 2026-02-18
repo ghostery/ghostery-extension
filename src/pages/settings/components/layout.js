@@ -20,18 +20,9 @@ export default {
         layout@992px="grid:280px|1:min|1"
         layout@1280px="grid:320px|1:min|1"
       >
-        <header
-          layout="row center gap padding:2"
-          layout@992px="padding:5:3:3 content:start"
-        >
-          <ui-icon
-            name="logo"
-            color="brand-secondary"
-            layout="size:3"
-          ></ui-icon>
-          <ui-text type="headline-s" color="brand-secondary">
-            Ghostery settings
-          </ui-text>
+        <header layout="row center gap padding:2" layout@992px="padding:5:3:3 content:start">
+          <ui-icon name="logo" color="brand-secondary" layout="size:3"></ui-icon>
+          <ui-text type="headline-s" color="brand-secondary"> Ghostery settings </ui-text>
         </header>
         <nav
           layout="order:1 row content:space-around padding gap:0.5"

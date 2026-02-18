@@ -41,9 +41,7 @@ const setup = asyncSetup('telemetry', [
     }
 
     runner = new Metrics({
-      METRICS_BASE_URL: debugMode
-        ? 'https://staging-d.ghostery.com'
-        : 'https://d.ghostery.com',
+      METRICS_BASE_URL: debugMode ? 'https://staging-d.ghostery.com' : 'https://d.ghostery.com',
       EXTENSION_VERSION: version,
       storage: metrics,
       saveStorage,
@@ -58,10 +56,7 @@ const setup = asyncSetup('telemetry', [
 ]);
 
 let enabled = false;
-OptionsObserver.addListener(async function telemetry(
-  { terms, feedback, mode },
-  lastOptions,
-) {
+OptionsObserver.addListener(async function telemetry({ terms, feedback, mode }, lastOptions) {
   enabled = terms && feedback;
 
   if (terms) {

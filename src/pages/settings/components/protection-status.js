@@ -32,9 +32,7 @@ export default {
         <ui-tooltip autohide="5" delay="0">
           <div slot="content" layout="block:left padding:1:0.5">
             <ui-text type="label-s">Paused by Browsing Assistant</ui-text>
-            <ui-text type="body-s">
-              Automatically paused to prevent adblocker breakage
-            </ui-text>
+            <ui-text type="body-s"> Automatically paused to prevent adblocker breakage </ui-text>
           </div>
           <settings-badge type="pause-assistant" uppercase assist>
             Paused

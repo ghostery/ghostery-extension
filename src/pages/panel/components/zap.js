@@ -15,16 +15,8 @@ export default {
   zapped: { value: false, reflect: true },
   render: () => html`
     <template layout="grid padding:1.5">
-      <button
-        layout="row center height:7"
-        data-qa="button:zap"
-        aria-label="Zap"
-      >
-        <ui-text
-          type="headline-s"
-          color="inherit"
-          layout="row items:center gap:0.5"
-        >
+      <button layout="row center height:7" data-qa="button:zap" aria-label="Zap">
+        <ui-text type="headline-s" color="inherit" layout="row items:center gap:0.5">
           <slot></slot>
         </ui-text>
       </button>

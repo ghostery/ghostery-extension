@@ -26,14 +26,7 @@ import { checkStorage } from '/utils/storage.js';
 import * as telemetry from './telemetry/index.js';
 import { SURVEY_URL } from './onboarding.js';
 
-export async function openNotification({
-  id,
-  tabId,
-  shownLimit = 0,
-  delay,
-  params,
-  position,
-}) {
+export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
   const options = await store.resolve(Options);
   const managedConfig = await store.resolve(ManagedConfig);
 
@@ -47,9 +40,7 @@ export async function openNotification({
     // Shown limit set and reached
     (shownLimit > 0 && notification?.shown >= shownLimit) ||
     // Delay set and notification shown recently
-    (delay &&
-      notification?.lastShownAt &&
-      Date.now() - notification.lastShownAt < delay)
+    (delay && notification?.lastShownAt && Date.now() - notification.lastShownAt < delay)
   ) {
     return false;
   }
@@ -81,19 +72,12 @@ export async function openNotification({
         lastShownAt: Date.now(),
       });
 
-      console.log(
-        `[notifications] Opened notification "${id}" with params:`,
-        params,
-      );
+      console.log(`[notifications] Opened notification "${id}" with params:`, params);
     }
 
     return mounted;
   } catch (e) {
-    console.error(
-      `[notifications] Failed to open notification "${id}" in tab:`,
-      tabId,
-      e,
-    );
+    console.error(`[notifications] Failed to open notification "${id}" in tab:`, tabId, e);
 
     return false;
   }
@@ -132,10 +116,7 @@ if (
   getOS() !== 'android' // Edge on Android (and possibly other browsers)
 ) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
-    if (
-      details.frameId !== 0 ||
-      (await chrome.action.getUserSettings()).isOnToolbar
-    ) {
+    if (details.frameId !== 0 || (await chrome.action.getUserSettings()).isOnToolbar) {
       return;
     }
 
@@ -166,10 +147,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   const config = await store.resolve(Config);
   if (!config.hasFlag(FLAG_NOTIFICATION_REVIEW)) return;
 
-  if (
-    debugMode ||
-    Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY
-  ) {
+  if (debugMode || Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
     openNotification({
       id: 'review',
       tabId: details.tabId,

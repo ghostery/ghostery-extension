@@ -61,18 +61,8 @@ export class FramesHierarchy {
         targetFrame.documentId = documentId;
         targetFrame.details = details;
         break;
-      } else if (
-        documentId.length &&
-        frames[frameIndex].documentId === documentId
-      ) {
-        this.#handleFrameReplacement(
-          frames,
-          frameIndex,
-          frameId,
-          parentFrameId,
-          details,
-          tabId,
-        );
+      } else if (documentId.length && frames[frameIndex].documentId === documentId) {
+        this.#handleFrameReplacement(frames, frameIndex, frameId, parentFrameId, details, tabId);
         break;
       }
     }
@@ -114,14 +104,7 @@ export class FramesHierarchy {
     return [];
   }
 
-  #handleFrameReplacement(
-    frames,
-    frameIndex,
-    frameId,
-    parentFrameId,
-    details,
-    tabId,
-  ) {
+  #handleFrameReplacement(frames, frameIndex, frameId, parentFrameId, details, tabId) {
     const targetFrame = frames[frameIndex];
     targetFrame.parent = -1;
     this.unregister(tabId, frameId);
@@ -170,10 +153,7 @@ export class FramesHierarchy {
       const parent = parents.pop();
       let frameIndex = frames.length;
       while (frameIndex--) {
-        if (
-          frames[frameIndex].parent === parent ||
-          frames[frameIndex].id === parent
-        ) {
+        if (frames[frameIndex].parent === parent || frames[frameIndex].id === parent) {
           parents.push(frames[frameIndex].id);
           frames.splice(frameIndex, 1);
         }
@@ -220,10 +200,7 @@ export class FramesHierarchy {
     } catch (error) {
       // may happen when we try to query non-existing tab or the tab is inaccessible
       // for prerendering or lacking permission (user might change)
-      console.error(
-        `Failed to get frames of the tab: tabId="${tab.id}"`,
-        error,
-      );
+      console.error(`Failed to get frames of the tab: tabId="${tab.id}"`, error);
       return;
     }
 
@@ -245,9 +222,7 @@ export class FramesHierarchy {
   }
 
   async handleWebWorkerStart() {
-    await Promise.all(
-      (await chrome.tabs.query({})).map((tab) => this.#handleTab(tab)),
-    );
+    await Promise.all((await chrome.tabs.query({})).map((tab) => this.#handleTab(tab)));
   }
 
   handleWebextensionEvents() {

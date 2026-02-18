@@ -36,9 +36,7 @@ describe('Custom Filters', function () {
     await openPanel();
     await getExtensionElement('button:detailed-view').click();
 
-    await expect(
-      getExtensionElement('icon:tracker:facebook_connect:blocked'),
-    ).toBeDisplayed();
+    await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
   });
 
   it('adds custom network filter', async function () {
@@ -49,12 +47,8 @@ describe('Custom Filters', function () {
     await openPanel();
     await getExtensionElement('button:detailed-view').click();
 
-    await expect(
-      getExtensionElement(`icon:tracker:facebook_connect:blocked`),
-    ).not.toBeDisplayed();
-    await expect(
-      getExtensionElement(`icon:tracker:facebook_connect:modified`),
-    ).not.toBeDisplayed();
+    await expect(getExtensionElement(`icon:tracker:facebook_connect:blocked`)).not.toBeDisplayed();
+    await expect(getExtensionElement(`icon:tracker:facebook_connect:modified`)).not.toBeDisplayed();
   });
 
   it('adds supported custom regex filter', async function () {
@@ -65,17 +59,13 @@ describe('Custom Filters', function () {
     await openPanel();
     await getExtensionElement('button:detailed-view').click();
 
-    await expect(
-      getExtensionElement(`icon:tracker:www.example.com:blocked`),
-    ).toBeDisplayed();
+    await expect(getExtensionElement(`icon:tracker:www.example.com:blocked`)).toBeDisplayed();
   });
 
   if (browser.isChromium) {
     it('adds unsupported custom regex filter', async function () {
       await setCustomFilters([`/(?>ab)c/`], async () => {
-        const errors = await getExtensionElement(
-          'component:custom-filters:errors',
-        );
+        const errors = await getExtensionElement('component:custom-filters:errors');
 
         const text = await errors.getText();
         await expect(text).toContain('Could not apply a custom filter');
@@ -102,18 +92,14 @@ describe('Custom Filters', function () {
   });
 
   it('adds custom scriptlet filter', async function () {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
-    ]);
+    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`]);
 
     await browser.url(PAGE_URL);
     await expect($('h1')).toHaveText('Hello world');
   });
 
   it('adds custom scriptlet filter depending on `scriptletsGlobal.warOrigin`', async function () {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:noop.js)`,
-    ]);
+    await setCustomFilters([`${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:noop.js)`]);
 
     await browser.url(PAGE_URL);
     await $('#war').waitForExist();

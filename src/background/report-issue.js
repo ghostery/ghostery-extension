@@ -93,8 +93,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           throw new Error('Failed to fetch CSRF token');
         }
 
-        const { csrf_token: csrfToken, csrf_param: csrfParam } =
-          await csrfResponse.json();
+        const { csrf_token: csrfToken, csrf_param: csrfParam } = await csrfResponse.json();
 
         const formData = new FormData();
         const browserInfo = await getBrowserInfo();
@@ -135,10 +134,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
         let description = `${msg.url}\n\n${msg.description.trim()}${await getMetadata(msg.tab)}`;
 
-        formData.append(
-          'support_ticket[message]',
-          sliceWithEllipsis(description, 5000),
-        );
+        formData.append('support_ticket[message]', sliceWithEllipsis(description, 5000));
 
         if (msg.screenshot) {
           const screenshot = await chrome.tabs.captureVisibleTab(null, {
@@ -157,9 +153,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           body: formData,
         }).then((res) => {
           if (!res.ok || res.status > 204) {
-            throw new Error(
-              `Sending report has failed with status: ${res.status}`,
-            );
+            throw new Error(`Sending report has failed with status: ${res.status}`);
           }
         });
 

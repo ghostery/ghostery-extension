@@ -30,25 +30,16 @@ describe('#FramesHierarchy', () => {
      *      -> frameof.frame.bar.com (8)
      */
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 0, parentFrameId: -1 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com'),
       [],
     );
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 1, parentFrameId: 0 },
-        'frame.foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 1, parentFrameId: 0 }, 'frame.foo.com'),
       ['foo.com'],
     );
     assert.deepEqual(
       hierarchy
-        .ancestors(
-          { tabId: 0, frameId: 2, parentFrameId: 1 },
-          'frameof.frame.foo.com',
-        )
+        .ancestors({ tabId: 0, frameId: 2, parentFrameId: 1 }, 'frameof.frame.foo.com')
         .reverse(),
       ['foo.com', 'frame.foo.com'],
     );
@@ -64,18 +55,12 @@ describe('#FramesHierarchy', () => {
 
     // Create another branch of frames
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 4, parentFrameId: 0 },
-        'frame.foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 4, parentFrameId: 0 }, 'frame.foo.com'),
       ['foo.com'],
     );
     assert.deepEqual(
       hierarchy
-        .ancestors(
-          { tabId: 0, frameId: 5, parentFrameId: 4 },
-          'frameof.frame.foo.com',
-        )
+        .ancestors({ tabId: 0, frameId: 5, parentFrameId: 4 }, 'frameof.frame.foo.com')
         .reverse(),
       ['foo.com', 'frame.foo.com'],
     );
@@ -93,25 +78,16 @@ describe('#FramesHierarchy', () => {
     );
 
     // Create another branch of frames
+    assert.deepEqual(hierarchy.ancestors({ tabId: 0, frameId: 6, parentFrameId: 0 }, 'bar.com'), [
+      'foo.com',
+    ]);
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 6, parentFrameId: 0 },
-        'bar.com',
-      ),
-      ['foo.com'],
-    );
-    assert.deepEqual(
-      hierarchy
-        .ancestors({ tabId: 0, frameId: 7, parentFrameId: 6 }, 'frame.bar.com')
-        .reverse(),
+      hierarchy.ancestors({ tabId: 0, frameId: 7, parentFrameId: 6 }, 'frame.bar.com').reverse(),
       ['foo.com', 'bar.com'],
     );
     assert.deepEqual(
       hierarchy
-        .ancestors(
-          { tabId: 0, frameId: 8, parentFrameId: 7 },
-          'frameof.frame.bar.com',
-        )
+        .ancestors({ tabId: 0, frameId: 8, parentFrameId: 7 }, 'frameof.frame.bar.com')
         .reverse(),
       ['foo.com', 'bar.com', 'frame.bar.com'],
     );
@@ -296,18 +272,12 @@ describe('#FramesHierarchy', () => {
 
     // Opens tab `foo.com`
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 0, parentFrameId: -1 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com'),
       [],
     );
     // Opens tab `bar.com`
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 1, frameId: 0, parentFrameId: -1 },
-        'bar.com',
-      ),
+      hierarchy.ancestors({ tabId: 1, frameId: 0, parentFrameId: -1 }, 'bar.com'),
       [],
     );
 
@@ -338,27 +308,18 @@ describe('#FramesHierarchy', () => {
 
     // `foo.com` creates frame `proxy.foo.com`
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 1, parentFrameId: 0 },
-        'proxy.foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 1, parentFrameId: 0 }, 'proxy.foo.com'),
       ['foo.com'],
     );
     // `bar.com` creates frame `proxy.bar.com`
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 1, frameId: 1, parentFrameId: 0 },
-        'proxy.bar.com',
-      ),
+      hierarchy.ancestors({ tabId: 1, frameId: 1, parentFrameId: 0 }, 'proxy.bar.com'),
       ['bar.com'],
     );
 
     // Opens tab `bar.com`
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 2, frameId: 0, parentFrameId: -1 },
-        'baz.com',
-      ),
+      hierarchy.ancestors({ tabId: 2, frameId: 0, parentFrameId: -1 }, 'baz.com'),
       [],
     );
 
@@ -425,10 +386,7 @@ describe('#FramesHierarchy', () => {
 
     for (let i = 0; i < 100; i++) {
       assert.deepEqual(
-        hierarchy.ancestors(
-          { tabId: i, frameId: 0, parentFrameId: -1 },
-          'foo.com',
-        ),
+        hierarchy.ancestors({ tabId: i, frameId: 0, parentFrameId: -1 }, 'foo.com'),
         [],
       );
     }
@@ -437,10 +395,7 @@ describe('#FramesHierarchy', () => {
       // Subframe ID should not start with 0.
       for (let k = 1; k < 200; k++) {
         assert.deepEqual(
-          hierarchy.ancestors(
-            { tabId: i, frameId: k, parentFrameId: 0 },
-            'frame.foo.com',
-          ),
+          hierarchy.ancestors({ tabId: i, frameId: k, parentFrameId: 0 }, 'frame.foo.com'),
           ['foo.com'],
         );
       }
@@ -460,24 +415,15 @@ describe('#FramesHierarchy', () => {
     // We rather not to execute scripts when the chain is
     // incomplete, which might lead to the potential breakage.
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 10, parentFrameId: 2 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 10, parentFrameId: 2 }, 'foo.com'),
       [],
     );
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 10, parentFrameId: 5 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 10, parentFrameId: 5 }, 'foo.com'),
       [],
     );
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 10, parentFrameId: 11 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 10, parentFrameId: 11 }, 'foo.com'),
       [],
     );
 
@@ -490,26 +436,17 @@ describe('#FramesHierarchy', () => {
     // Assume that `frameId` is something unexpected, such as
     // omnibox prehit situation.
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 10, parentFrameId: -1 },
-        'about:blank',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 10, parentFrameId: -1 }, 'about:blank'),
       [],
     );
     // Creates new main frame with `foo.com`.
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 0, parentFrameId: -1 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com'),
       [],
     );
     // Opens subframe.
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 1, parentFrameId: 0 },
-        'frame.foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 1, parentFrameId: 0 }, 'frame.foo.com'),
       ['foo.com'],
     );
 
@@ -544,23 +481,15 @@ describe('#FramesHierarchy', () => {
     const hierarchy = new FramesHierarchy();
 
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 0, parentFrameId: -1 },
-        'foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com'),
       [],
     );
     assert.deepEqual(
-      hierarchy.ancestors(
-        { tabId: 0, frameId: 1, parentFrameId: 0 },
-        'frame.foo.com',
-      ),
+      hierarchy.ancestors({ tabId: 0, frameId: 1, parentFrameId: 0 }, 'frame.foo.com'),
       ['foo.com'],
     );
     assert.deepEqual(
-      hierarchy
-        .ancestors({ tabId: 0, frameId: 2, parentFrameId: 1 }, 'bar.com')
-        .reverse(),
+      hierarchy.ancestors({ tabId: 0, frameId: 2, parentFrameId: 1 }, 'bar.com').reverse(),
       ['foo.com', 'frame.foo.com'],
     );
 

@@ -41,9 +41,7 @@ describe('Notifications', function () {
       await expect(await getNotificationIframe('pin-it')).not.toBeDisplayed();
       await expect(await getNotificationIframe('review')).not.toBeDisplayed();
     } catch {
-      throw new Error(
-        `No notification should be displayed after notifications have been shown`,
-      );
+      throw new Error(`No notification should be displayed after notifications have been shown`);
     }
   });
 });

@@ -144,9 +144,5 @@ export async function showAlert(renderFn) {
 }
 
 export function showCopyNotification() {
-  showAlert(html`
-    <panel-alert type="success" autoclose="2">
-      Copied to clipboard
-    </panel-alert>
-  `);
+  showAlert(html` <panel-alert type="success" autoclose="2"> Copied to clipboard </panel-alert> `);
 }

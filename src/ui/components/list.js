@@ -36,12 +36,7 @@ export default {
           <slot name="header"></slot>
         </button>
       </ui-action>`}
-      <div
-        id="content"
-        class="${{ name }}"
-        layout="column grow"
-        layout.name="margin:left:4"
-      >
+      <div id="content" class="${{ name }}" layout="column grow" layout.name="margin:left:4">
         <slot></slot>
       </div>
     </template>

@@ -30,15 +30,12 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   }
 
   if (entries.length) {
-    const elementPickerFilters = entries.reduce(
-      (acc, [hostname, selectors]) => {
-        for (const selector of selectors) {
-          acc.push(`${hostname}##${selector}`);
-        }
-        return acc;
-      },
-      [],
-    );
+    const elementPickerFilters = entries.reduce((acc, [hostname, selectors]) => {
+      for (const selector of selectors) {
+        acc.push(`${hostname}##${selector}`);
+      }
+      return acc;
+    }, []);
 
     const { cosmeticFilters } = parseFilters(elementPickerFilters.join('\n'));
     await engines.create(engines.ELEMENT_PICKER_ENGINE, { cosmeticFilters });

@@ -48,12 +48,7 @@ getBrowserInfo().then(
 export async function captureException(error) {
   const { terms, feedback } = await store.resolve(Options);
 
-  if (
-    __PLATFORM__ === 'tests' ||
-    !terms ||
-    !feedback ||
-    !(error instanceof Error)
-  ) {
+  if (__PLATFORM__ === 'tests' || !terms || !feedback || !(error instanceof Error)) {
     return;
   }
 

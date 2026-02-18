@@ -17,10 +17,7 @@ export default {
       layout="column top items:center fixed inset padding:4:2.5:2.5 layer:1000"
       layout@768px="padding:15vh:5:5"
     >
-      <div
-        id="dialog"
-        layout="column shrink:0 relative width:full::600px height:::full"
-      >
+      <div id="dialog" layout="column shrink:0 relative width:full::600px height:::full">
         <div
           layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:12"
           layout@768px="padding:4:4:12"

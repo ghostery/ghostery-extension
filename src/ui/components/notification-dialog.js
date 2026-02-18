@@ -24,11 +24,7 @@ export default {
           <ui-text type="label-m"><slot name="title"></slot></ui-text>
           <ui-button onclick="${close}" type="transparent" size="s">
             <button>
-              <ui-icon
-                name="close"
-                color="quaternary"
-                layout="size:2.5"
-              ></ui-icon>
+              <ui-icon name="close" color="quaternary" layout="size:2.5"></ui-icon>
             </button>
           </ui-button>
         </header>

@@ -36,8 +36,7 @@ describe('Locales', () => {
       });
 
       it('manifest_short_description should be 112 chars or less', () => {
-        const manifestDescription =
-          messages.manifest_short_description?.message;
+        const manifestDescription = messages.manifest_short_description?.message;
 
         assert.ok(
           manifestDescription.length <= 112,

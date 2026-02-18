@@ -14,9 +14,7 @@ import { resolve } from 'node:path';
 
 import { RESOURCES_PATH } from './utils/urls.js';
 
-const { dataDependencies } = JSON.parse(
-  readFileSync(resolve('package.json'), 'utf-8'),
-);
+const { dataDependencies } = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'));
 
 const TARGET_PATH = resolve(RESOURCES_PATH, 'wtm-stats.js');
 if (existsSync(TARGET_PATH)) process.exit(0);

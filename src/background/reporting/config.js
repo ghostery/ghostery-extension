@@ -83,19 +83,7 @@ function platformSpecificSettings() {
     navigator.userAgent.includes('YaBrowser') // same release channel as Opera
   ) {
     return {
-      ALLOWED_COUNTRY_CODES: [
-        'us',
-        'de',
-        'ru',
-        'fr',
-        'pl',
-        'gb',
-        'br',
-        'ca',
-        'ua',
-        'nl',
-        'es',
-      ],
+      ALLOWED_COUNTRY_CODES: ['us', 'de', 'ru', 'fr', 'pl', 'gb', 'br', 'ca', 'ua', 'nl', 'es'],
       PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-opera-desktop/patterns.json`,
       CHANNEL: 'opera',
     };
@@ -222,9 +210,7 @@ function platformSpecificSettings() {
     };
   }
 
-  console.warn(
-    'No matching config found. Falling back to patterns from Chrome Desktop.',
-  );
+  console.warn('No matching config found. Falling back to patterns from Chrome Desktop.');
   return {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
     PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-chrome-desktop/patterns.json`,
@@ -240,8 +226,7 @@ export default {
     COLLECTOR_DIRECT_URL,
     COLLECTOR_PROXY_URL,
     CONFIG_URL: 'https://api.ghostery.net/api/v1/config',
-    SAFE_QUORUM_CONFIG_ENDPOINT:
-      'https://safe-browsing-quorum.privacy.ghostery.net/config',
+    SAFE_QUORUM_CONFIG_ENDPOINT: 'https://safe-browsing-quorum.privacy.ghostery.net/config',
     ...platformSpecificSettings(),
   },
   request: {

@@ -37,12 +37,10 @@ export default {
         data-qa="view:filtering-mode"
       >
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
-          <ui-text type="display-m" mobile-type="display-xs">
-            Select filtering mode
-          </ui-text>
+          <ui-text type="display-m" mobile-type="display-xs"> Select filtering mode </ui-text>
           <ui-text type="body-m" mobile-type="body-s">
-            Because no two people surf alike, we're giving you the power to pick
-            how you want to experience the web.
+            Because no two people surf alike, we're giving you the power to pick how you want to
+            experience the web.
           </ui-text>
         </section>
         <div layout="column gap" layout@768px="grid:2">
@@ -67,8 +65,7 @@ export default {
                   layout@768px="width:138px"
                 ></ui-icon>
                 <ui-text>
-                  We block it all for you - ads, trackers, distractions. Always
-                  on when you browse.
+                  We block it all for you - ads, trackers, distractions. Always on when you browse.
                 </ui-text>
                 <ui-text type="label-s" slot="footer">
                   Best for full coverage and privacy enthusiasts.
@@ -99,25 +96,17 @@ export default {
                   layout@768px="width:100%"
                   play-on-hover="mode-option-zap"
                 ></ui-lottie>
-                <ui-icon
-                  name="logo-zap"
-                  layout="width:83px"
-                  layout@768px="width:116px"
-                ></ui-icon>
+                <ui-icon name="logo-zap" layout="width:83px" layout@768px="width:116px"></ui-icon>
                 ${lang === 'en'
                   ? html`
                       <div translate="no">
-                        <ui-text>
-                          You zap ads away on the sites you use.
-                        </ui-text>
-                        <ui-text>
-                          Zap once. They stay ad-free every time you visit.
-                        </ui-text>
+                        <ui-text> You zap ads away on the sites you use. </ui-text>
+                        <ui-text> Zap once. They stay ad-free every time you visit. </ui-text>
                       </div>
                     `
                   : html`<ui-text balance>
-                      You block ads on the sites you use. Block once. They stay
-                      ad-free every time you visit.
+                      You block ads on the sites you use. Block once. They stay ad-free every time
+                      you visit.
                     </ui-text>`}
                 <ui-text type="label-s" slot="footer">
                   Best for beginners or sharing with family.
@@ -128,9 +117,7 @@ export default {
         </div>
       </ui-card>
       <ui-button type="transparent" layout="self:center">
-        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
-          Terms & Conditions
-        </a>
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank"> Terms & Conditions </a>
       </ui-button>
     </template>
   `,

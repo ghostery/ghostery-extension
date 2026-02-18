@@ -35,18 +35,14 @@ export default {
       if (lastValue) host.scrollIntoViewIfNeeded?.();
     },
   },
-  pageCount: (host, value) =>
-    value || Math.ceil(host.children.length / host.limit),
+  pageCount: (host, value) => value || Math.ceil(host.children.length / host.limit),
   render: ({ page, pageCount }) => html`
     <template layout="relative padding:bottom:8">
       <slot onslotchange="${reset}"></slot>
       ${pageCount > 1 &&
       html`
         <div layout="absolute bottom left right row gap center padding:2">
-          <ui-button
-            onclick="${html.set('page', page - 1)}"
-            disabled="${page <= 1}"
-          >
+          <ui-button onclick="${html.set('page', page - 1)}" disabled="${page <= 1}">
             <button>
               <ui-icon name="chevron-left-s" color="secondary"></ui-icon>
             </button>
@@ -58,8 +54,7 @@ export default {
               <ui-text type="label-m" color="secondary">1</ui-text>
             </button>
           </ui-button>`}
-          ${page > 3 &&
-          html`<ui-text type="label-m" color="secondary">...</ui-text>`}
+          ${page > 3 && html`<ui-text type="label-m" color="secondary">...</ui-text>`}
           ${page > 2 &&
           html`<ui-button onclick="${html.set('page', page - 1)}">
             <button>
@@ -79,8 +74,7 @@ export default {
               <ui-text type="label-m" color="secondary">${page + 1}</ui-text>
             </button>
           </ui-button>`}
-          ${page < pageCount - 2 &&
-          html`<ui-text type="label-m" color="secondary">...</ui-text>`}
+          ${page < pageCount - 2 && html`<ui-text type="label-m" color="secondary">...</ui-text>`}
           ${page !== pageCount &&
           html`<ui-button onclick="${html.set('page', pageCount)}">
             <button>
@@ -88,10 +82,7 @@ export default {
             </button>
           </ui-button>`}
 
-          <ui-button
-            onclick="${html.set('page', page + 1)}"
-            disabled="${page >= pageCount}"
-          >
+          <ui-button onclick="${html.set('page', page + 1)}" disabled="${page >= pageCount}">
             <button>
               <ui-icon name="chevron-right-s" color="secondary"></ui-icon>
             </button>

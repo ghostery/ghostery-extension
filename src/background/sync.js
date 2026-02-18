@@ -30,29 +30,20 @@ const syncOptions = debounce(
       const keys =
         lastOptions &&
         SYNC_OPTIONS.filter(
-          (key) =>
-            !OptionsObserver.isOptionEqual(options[key], lastOptions[key]),
+          (key) => !OptionsObserver.isOptionEqual(options[key], lastOptions[key]),
         );
 
-      const { options: serverOptions = {} } = await chrome.storage.sync.get([
-        'options',
-      ]);
+      const { options: serverOptions = {} } = await chrome.storage.sync.get(['options']);
 
       // Server has newer options - merge with local options
       // The try/catch block is used to prevent failure of updating local options
       // with server options with obsolete structure
       try {
         if (serverOptions.revision > options.revision) {
-          console.info(
-            '[sync] Merging server options with revision:',
-            serverOptions.revision,
-          );
+          console.info('[sync] Merging server options with revision:', serverOptions.revision);
           const values = SYNC_OPTIONS.reduce(
             (acc, key) => {
-              if (
-                !keys?.includes(key) &&
-                hasOwnProperty.call(serverOptions, key)
-              ) {
+              if (!keys?.includes(key) && hasOwnProperty.call(serverOptions, key)) {
                 acc[key] = serverOptions[key];
               }
 

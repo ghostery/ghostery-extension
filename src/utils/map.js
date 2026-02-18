@@ -110,10 +110,7 @@ export default class AutoSyncingMap {
     // This should never trigger. Yet if the maps run full (perhaps
     // as a side-effect of a bug), better reset then continuing with
     // these huge maps.
-    if (
-      this.inMemoryMap.size >= this.maxEntries ||
-      this._ttlMap.size >= this.maxEntries
-    ) {
+    if (this.inMemoryMap.size >= this.maxEntries || this._ttlMap.size >= this.maxEntries) {
       console.warn(
         'AutoSyncingMap: Maps are running full (maybe you found a bug?). Purging data to prevent performance impacts.',
       );

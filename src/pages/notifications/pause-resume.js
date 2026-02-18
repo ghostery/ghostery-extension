@@ -32,19 +32,13 @@ mount(document.body, {
       <ui-notification icon="protection-l">
         <div layout="column gap">
           <ui-text type="label-m">
-            Ghostery users report that ad blockers are no longer breaking this
-            site. Ghostery will be re-enabled.
+            Ghostery users report that ad blockers are no longer breaking this site. Ghostery will
+            be re-enabled.
           </ui-text>
-          <ui-text type="body-s">
-            Tracker & ad blocking will be active on this page.
-          </ui-text>
+          <ui-text type="body-s"> Tracker & ad blocking will be active on this page. </ui-text>
         </div>
         <div layout="row gap" layout="width::10">
-          <ui-button
-            type="success"
-            onclick="${resume}"
-            data-qa="button:dismiss"
-          >
+          <ui-button type="success" onclick="${resume}" data-qa="button:dismiss">
             <button>OK</button>
           </ui-button>
         </div>

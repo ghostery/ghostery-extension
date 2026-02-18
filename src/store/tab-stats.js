@@ -28,8 +28,7 @@ const Tracker = {
   requestsCount: 0,
   requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
   requestsModified: ({ requests }) => requests.filter((r) => r.modified),
-  requestsObserved: ({ requests }) =>
-    requests.filter((r) => !r.blocked && !r.modified),
+  requestsObserved: ({ requests }) => requests.filter((r) => !r.blocked && !r.modified),
 };
 
 let tab = undefined;
@@ -53,10 +52,7 @@ const TabStats = {
       trackers.reduce(
         (categories, tracker) => ({
           ...categories,
-          [tracker.category]: [
-            ...(categories[tracker.category] || []),
-            tracker,
-          ],
+          [tracker.category]: [...(categories[tracker.category] || []), tracker],
         }),
         {},
       ),
@@ -77,9 +73,7 @@ const TabStats = {
         .slice(0, 5)
         .map(([category, count]) => Array(count).fill(category))
         .flat(),
-      ...Array(counts.slice(5).reduce((acc, [, count]) => acc + count, 0)).fill(
-        'other',
-      ),
+      ...Array(counts.slice(5).reduce((acc, [, count]) => acc + count, 0)).fill('other'),
     ];
   },
 

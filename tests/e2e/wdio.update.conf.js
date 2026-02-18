@@ -9,14 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-  readFileSync,
-  rmSync,
-  mkdirSync,
-  cpSync,
-  renameSync,
-  existsSync,
-} from 'node:fs';
+import { readFileSync, rmSync, mkdirSync, cpSync, renameSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
@@ -85,10 +78,7 @@ export const config = {
             if (!existsSync(sourcePath)) {
               wdio.buildForFirefox();
 
-              cpSync(
-                wdio.FIREFOX_PATH,
-                `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
-              );
+              cpSync(wdio.FIREFOX_PATH, `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`);
             }
 
             // Use the downloaded build artifact
@@ -133,19 +123,13 @@ export const config = {
           rmSync(wdio.FIREFOX_PATH, { force: true });
 
           // Replace extension files with the source
-          const extension = readFileSync(
-            `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
-          );
+          const extension = readFileSync(`${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`);
           browser.installAddOn(extension.toString('base64'), true);
 
           await browser.url('about:debugging#/runtime/this-firefox');
 
-          await expect(
-            $('.extension-backgroundscript__status'),
-          ).toHaveElementClass(
-            expect.stringContaining(
-              'extension-backgroundscript__status--running',
-            ),
+          await expect($('.extension-backgroundscript__status')).toHaveElementClass(
+            expect.stringContaining('extension-backgroundscript__status--running'),
           );
 
           break;
