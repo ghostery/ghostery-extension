@@ -108,7 +108,7 @@ function pause(ms) {
 
 export async function reloadMainEngine() {
   // Delay the reload to avoid UI freezes in Firefox and Safari
-  if (__PLATFORM__ === 'firefox' || isWebkit()) await pause(1000);
+  if (__FIREFOX__ || isWebkit()) await pause(1000);
 
   const enabledEngines = getEnabledEngines(options);
   const resolvedEngines = (
@@ -139,7 +139,7 @@ export async function reloadMainEngine() {
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 
-  if (__PLATFORM__ === 'firefox') {
+  if (__FIREFOX__) {
     contentScripts.unregisterAll();
   }
 }
@@ -216,7 +216,7 @@ const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(FLAG_INJECTION_TARGET_DOCUMENT_
 function resolveInjectionTarget(details) {
   const target = { tabId: details.tabId };
 
-  if (__PLATFORM__ !== 'firefox' && INJECTION_TARGET_DOCUMENT_ID.enabled && details.documentId) {
+  if (__CHROMIUM__ && INJECTION_TARGET_DOCUMENT_ID.enabled && details.documentId) {
     target.documentIds = [details.documentId];
   } else {
     target.frameIds = [details.frameId];
@@ -254,7 +254,7 @@ function injectScriptlets(filters, hostname, details) {
     const func = scriptlet.func;
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
 
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       if (filter.hasSubframeConstraint()) {
         contentScript += `window.parent!==window&&`;
       }
@@ -265,9 +265,7 @@ function injectScriptlets(filters, hostname, details) {
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
-        world:
-          chrome.scripting.ExecutionWorld?.MAIN ??
-          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+        world: chrome.scripting.ExecutionWorld?.MAIN ?? (__FIREFOX__ ? undefined : 'MAIN'),
         target: resolveInjectionTarget(details),
         func,
         args,
@@ -280,7 +278,7 @@ function injectScriptlets(filters, hostname, details) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox') {
+  if (__FIREFOX__) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -304,7 +302,7 @@ function injectStyles(styles, details) {
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
 let framesHierarchy;
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   framesHierarchy = new FramesHierarchy();
 
   framesHierarchy.handleWebWorkerStart();
@@ -327,7 +325,7 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
-  if (__PLATFORM__ === 'firefox' && scriptletsOnly && contentScripts.isRegistered(hostname)) {
+  if (__FIREFOX__ && scriptletsOnly && contentScripts.isRegistered(hostname)) {
     return;
   }
 
@@ -342,7 +340,7 @@ async function injectCosmetics(details, config) {
 
   let ancestors = undefined;
   if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       // On Firefox with content scripts API, we need to collect
       // every scriptlets will potentially run on the hostname.
       // Putting same values to `ancestors` enables adblocker to
@@ -474,7 +472,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   }
 });
 
-if (__PLATFORM__ === 'firefox') {
+if (__FIREFOX__) {
   OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
     for (const hostname of Object.keys(paused)) {
       contentScripts.unregister(hostname);
@@ -529,7 +527,7 @@ function isTrusted(request, type) {
   ).trusted;
 }
 
-if (__PLATFORM__ === 'firefox') {
+if (__FIREFOX__) {
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||

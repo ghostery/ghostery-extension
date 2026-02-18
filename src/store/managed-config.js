@@ -36,7 +36,7 @@ const ManagedConfig = {
     config.customFilters.enabled,
 
   [store.connect]: async () => {
-    if (__PLATFORM__ !== 'firefox' && (isOpera() || isWebkit())) return {};
+    if (__CHROMIUM__ && (isOpera() || isWebkit())) return {};
 
     try {
       // Firefox uses filesystem configuration on every platform
@@ -51,7 +51,7 @@ const ManagedConfig = {
       // Chromium-based browsers just return an empty object,
       // and it might be available later (especially on the browser restart),
       // so we try to read it with fallback from local storage
-      if (__PLATFORM__ !== 'firefox' || debugMode) {
+      if (__CHROMIUM__ || debugMode) {
         if (Object.keys(managedConfig).length) {
           // Save local version for fallback usage
           // Don't await - we don't need to block on this

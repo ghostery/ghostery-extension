@@ -28,9 +28,14 @@ export function filter(item) {
     // Platform check
     // Possible values: 'chromium', 'firefox', 'webkit'
     if (check && Array.isArray(item.filter.platform)) {
-      check = item.filter.platform.includes(
-        __PLATFORM__ !== 'firefox' && isWebkit() ? 'webkit' : __PLATFORM__,
-      );
+      let platform;
+      if (__CHROMIUM__) {
+        platform = isWebkit() ? 'webkit' : 'chromium';
+      } else if (__FIREFOX__) {
+        platform = 'firefox';
+      }
+
+      check = item.filter.platform.includes(platform);
     }
 
     // Browser check

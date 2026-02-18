@@ -66,7 +66,7 @@ export default {
           </div>
         </div>
         <div layout="column gap:2">
-          ${__PLATFORM__ === 'firefox' &&
+          ${__FIREFOX__ &&
           html`
             <div layout="row gap items:start">
               <ui-input>
@@ -87,7 +87,7 @@ export default {
               </ui-text>
             </div>
           `}
-          ${__PLATFORM__ !== 'firefox' &&
+          ${__CHROMIUM__ &&
           html`
             <ui-text type="body-s" underline data-qa="text:description">
               ${msg.html`

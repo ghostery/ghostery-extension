@@ -111,7 +111,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 */
 
 if (
-  __PLATFORM__ !== 'firefox' &&
+  __CHROMIUM__ &&
   !isWebkit() && // Safari
   getOS() !== 'android' // Edge on Android (and possibly other browsers)
 ) {
@@ -161,7 +161,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
    Opera SERP notification if the protection is not enabled
 */
 
-if (__PLATFORM__ !== 'firefox' && isOpera()) {
+if (__CHROMIUM__ && isOpera()) {
   const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
   const NOTIFICATION_SHOW_LIMIT = 4;
 

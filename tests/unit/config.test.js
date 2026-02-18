@@ -9,13 +9,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { describe, it } from 'node:test';
+import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { filter } from '../../src/utils/config.js';
 
 describe('Remote config', () => {
   describe('filter()', () => {
+    beforeEach(() => {
+      global.__CHROMIUM__ = true;
+      global.__FIREFOX__ = false;
+    });
+
     it('should return false for unsupported filters', () => {
       const originalWarn = console.warn;
       let warnCalled = false;
@@ -38,33 +43,33 @@ describe('Remote config', () => {
     });
 
     it('should return true if platform matches', () => {
-      global.__PLATFORM__ = 'chromium';
       assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), true);
     });
 
     it('should return false if platform does not match', () => {
-      global.__PLATFORM__ = 'chromium';
       assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), false);
     });
 
     it('should return true for firefox platform when set', () => {
-      global.__PLATFORM__ = 'firefox';
+      global.__CHROMIUM__ = false;
+      global.__FIREFOX__ = true;
+
       assert.deepEqual(filter({ filter: { platform: ['firefox'] } }), true);
       assert.deepEqual(filter({ filter: { platform: ['chromium'] } }), false);
     });
 
     it('should return true if browser matches', () => {
-      global.__PLATFORM__ = 'chromium';
       assert.deepEqual(filter({ filter: { browser: 'chrome' } }), true);
     });
 
     it('should return false if browser does not match', () => {
-      global.__PLATFORM__ = 'chromium';
       assert.deepEqual(filter({ filter: { browser: 'firefox' } }), false);
     });
 
     it('should return true for firefox browser when set', () => {
-      global.__PLATFORM__ = 'firefox';
+      global.__CHROMIUM__ = false;
+      global.__FIREFOX__ = true;
+
       assert.deepEqual(filter({ filter: { browser: 'firefox' } }), true);
       assert.deepEqual(filter({ filter: { browser: 'chrome' } }), false);
     });
@@ -91,7 +96,6 @@ describe('Remote config', () => {
     });
 
     it('should combine version and platform checks', () => {
-      global.__PLATFORM__ = 'chromium';
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
 
       // Both match
@@ -105,7 +109,6 @@ describe('Remote config', () => {
     });
 
     it('should combine version and browser checks', () => {
-      global.__PLATFORM__ = 'chromium';
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
 
       // Both match

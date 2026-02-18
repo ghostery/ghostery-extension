@@ -27,6 +27,5 @@ Object.defineProperty(global, 'navigator', {
   configurable: true,
 });
 
-if (typeof globalThis.__PLATFORM__ === 'undefined') {
-  global.__PLATFORM__ = 'chrome';
-}
+global.__CHROMIUM__ = true;
+global.__FIREFOX__ = false;

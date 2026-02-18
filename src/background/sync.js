@@ -88,7 +88,7 @@ const syncOptions = debounce(
 
 // Opera provides chrome.storage.sync API, but it does not sync data between browsers
 // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync#browser_compatibility
-if (__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) {
+if (__FIREFOX__ || (!isOpera() && !isWebkit())) {
   // Sync options on startup and when options change
   OptionsObserver.addListener(function sync(options, lastOptions) {
     syncOptions(options, lastOptions);
