@@ -119,6 +119,12 @@
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "Mejor para cobertura completa y entusiastas de la privacidad."
   },
+  "block_ads": {
+    "message": "Bloquear anuncios"
+  },
+  "block_ads_once": {
+    "message": "Bloquear anuncios una vez"
+  },
   "block_all": {
     "message": "Bloquear todo"
   },
@@ -162,9 +168,6 @@
   "browsing_assistant": {
     "message": "Asistente de Navegación"
   },
-  "build_your_own_ad_free_internet": {
-    "message": "Construye tu propio internet sin anuncios"
-  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Al compartir información sobre la <a href=\"$${0}\">salud del complemento</a> y la <a href=\"$${1}\">telemetría de rendimiento</a> según lo descrito en nuestra <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidad</a>, ayudas a mejorar las protecciones de privacidad para toda la comunidad de Ghostery."
   },
@@ -196,8 +199,8 @@
   "clear_cookies_": {
     "message": "¿Borrar cookies?"
   },
-  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "Haz clic en el icono con forma de puzle que está junto a la barra de búsqueda y ancla Ghostery a la barra de herramientas."
+  "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
+    "message": "Haz clic en el icono con forma de puzle que está junto a la barra de búsqueda y <strong>ancla Ghostery</strong> a la barra de herramientas."
   },
   "close": {
     "message": "Cerrar"
@@ -471,12 +474,6 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery utiliza esta información para ofrecer sus funciones de privacidad impulsadas por la comunidad, asegurando que nunca se recopile información personal, como contraseñas, historial de navegación y contenido de páginas."
-  },
-  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
-    "message": "Ghostery mostrará cuántos rastreadores de anuncios hay en una página. Al hacer clic en el icono de Ghostery, puedes eliminar anuncios y ver más detalles."
-  },
-  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery mostrará cuántos rastreadores ha bloqueado en una página. Si haces clic en el icono de Ghostery, verás información más detallada."
   },
   "gone_": {
     "message": "¡Desaparecido!"
@@ -861,6 +858,9 @@
     "message": "Estadísticas de sitios",
     "description": "Tracker category name"
   },
+  "site_stays_ad_free_every_time_you_visit": {
+    "message": "El sitio permanece sin anuncios cada vez que lo visitas"
+  },
   "social_media": {
     "message": "Redes sociales",
     "description": "Tracker category name"
@@ -1046,6 +1046,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "¿Quieres informar de un problema en una página diferente?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__always_on_when_you_browse_": {
+    "message": "Lo bloqueamos todo por ti: anuncios, rastreadores, distracciones. Siempre activo cuando navegas."
+  },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
     "message": "Bloqueamos todo para ti: anuncios, rastreadores, distracciones. Estás completamente cubierto, sin necesidad de configuración."
   },
@@ -1079,9 +1082,6 @@
   "what_s_new_in_ghostery": {
     "message": "Novedades en Ghostery"
   },
-  "what_s_next_": {
-    "message": "¿Qué es lo siguiente?"
-  },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operado por Ghostery, es un pilar vital de la tecnología anti-rastreo de inteligencia artificial de Ghostery, desempeñando un papel crucial en proporcionar protección de privacidad en tiempo real para la comunidad de Ghostery. Es un recurso global integral sobre rastreadores, aportando transparencia al seguimiento web."
   },
@@ -1100,11 +1100,14 @@
   "yesterday": {
     "message": "Ayer"
   },
+  "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
+    "message": "Bloqueas anuncios en los sitios que usas. Bloquéalos una vez. Permanecerán sin anuncios cada vez que los visites."
+  },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Estás a punto de eliminar todas las cookies almacenadas por $${0}."
   },
-  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
-    "message": "Estás listo para eliminar anuncios, un sitio a la vez."
+  "you_re_ready_to_block_ads": {
+    "message": "Estás listo para bloquear anuncios"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Ya no verás las ruedas de los rastreadores junto a los resultados de búsqueda."
@@ -1123,9 +1126,6 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "¿Te impide YouTube ver vídeos sin publicidad?"
-  },
-  "zap_ads_in_the_ghostery_panel": {
-    "message": "Elimina anuncios en el panel de Ghostery"
   },
   "zoom_in": {
     "message": "Acercar"

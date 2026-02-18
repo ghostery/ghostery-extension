@@ -119,6 +119,12 @@
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "最適合追求全面保護和隱私的愛好者。"
   },
+  "block_ads": {
+    "message": "阻止廣告"
+  },
+  "block_ads_once": {
+    "message": "阻擋廣告一次"
+  },
   "block_all": {
     "message": "封鎖全部"
   },
@@ -162,9 +168,6 @@
   "browsing_assistant": {
     "message": "瀏覽助理"
   },
-  "build_your_own_ad_free_internet": {
-    "message": "打造屬於你的無廣告網路"
-  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "透過分享<a href=\"$${0}\">附加元件的健康狀況</a>和<a href=\"$${1}\">效能遙測</a>的見解，如我們的<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">隱私政策</a>中所述，您有助於提升整個Ghostery社群的隱私保護。"
   },
@@ -196,8 +199,8 @@
   "clear_cookies_": {
     "message": "清除 Cookie？"
   },
-  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "點擊搜尋欄位旁邊的拼圖圖示，將 Ghostery 釘選至工具列。"
+  "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
+    "message": "點擊搜尋欄位旁邊的拼圖圖示，將 <strong>Ghostery</strong> 釘選至工具列。"
   },
   "close": {
     "message": "關閉"
@@ -471,12 +474,6 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery 使用這些資訊來提供其社群驅動的隱私功能，確保不會收集個人資訊，例如密碼、瀏覽歷史和頁面內容。"
-  },
-  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
-    "message": "Ghostery會顯示頁面上有多少廣告追蹤器。點擊Ghostery圖示可以移除廣告並查看更多詳情。"
-  },
-  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery 將顯示頁面中已經阻擋的追蹤器數量。點擊 Ghostery 圖示可以顯示更多資訊。"
   },
   "gone_": {
     "message": "不见了！"
@@ -861,6 +858,9 @@
     "message": "網站分析",
     "description": "Tracker category name"
   },
+  "site_stays_ad_free_every_time_you_visit": {
+    "message": "每次造訪網站都無廣告"
+  },
   "social_media": {
     "message": "社交媒體",
     "description": "Tracker category name"
@@ -1046,6 +1046,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "想要在其他頁面回報問題嗎？"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__always_on_when_you_browse_": {
+    "message": "我們為您阻擋所有廣告、追蹤器和干擾。瀏覽時隨時為您開啟。"
+  },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
     "message": "我們為您阻擋一切——廣告、追蹤器、干擾。您已全面受到保護，無需設置。"
   },
@@ -1079,9 +1082,6 @@
   "what_s_new_in_ghostery": {
     "message": "Ghostery 的最新動態"
   },
-  "what_s_next_": {
-    "message": "下一步是？"
-  },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me由Ghostery運營，是Ghostery人工智慧反追蹤技術的重要基石，在為Ghostery社群提供即時隱私保護方面發揮了關鍵作用。它是一個關於追蹤器的全面全球資源，為網路追蹤帶來透明度。"
   },
@@ -1100,11 +1100,14 @@
   "yesterday": {
     "message": "昨天"
   },
+  "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
+    "message": "您在使用的網站上阻擋廣告。只要阻擋一次，每次造訪時，這些網站都會保持無廣告狀態。"
+  },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "您即將刪除由 $${0} 儲存的所有 Cookie。"
   },
-  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
-    "message": "你已準備好逐一消除廣告。"
+  "you_re_ready_to_block_ads": {
+    "message": "您已準備好阻擋廣告"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
@@ -1123,9 +1126,6 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 阻止您觀看無廣告的影片？"
-  },
-  "zap_ads_in_the_ghostery_panel": {
-    "message": "在 Ghostery 面板中消除廣告"
   },
   "zoom_in": {
     "message": "放大"

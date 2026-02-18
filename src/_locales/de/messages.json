@@ -119,6 +119,12 @@
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "Am besten geeignet für umfassenden Schutz und Datenschutz-Fans."
   },
+  "block_ads": {
+    "message": "Werbung blockieren"
+  },
+  "block_ads_once": {
+    "message": "Werbung einmalig blockieren"
+  },
   "block_all": {
     "message": "Alle blockieren"
   },
@@ -162,9 +168,6 @@
   "browsing_assistant": {
     "message": "Browsing-Assistent"
   },
-  "build_your_own_ad_free_internet": {
-    "message": "Gestalte dir dein eigenes werbefreies Internet."
-  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Durch das Teilen von Informationen zum <a href=\"$${0}\">Add-on-Zustand</a> und <a href=\"$${1}\"> Leistungstelemetrie</a>, wie in unserer <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
@@ -196,8 +199,8 @@
   "clear_cookies_": {
     "message": "Cookies löschen?"
   },
-  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "Klicken Sie auf das Puzzle-Symbol neben der Suchleiste, um Ghostery an die Werkzeugleiste anzuheften."
+  "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
+    "message": "Klicke auf das Puzzle-Symbol neben der Suchleiste um <strong>Ghostery</strong> an deine Symbolleiste anzuheften."
   },
   "close": {
     "message": "Schließen"
@@ -472,12 +475,6 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
   },
-  "ghostery_will_show_how_many_ad_trackers_are_on_a_page__clicking_on_the_ghostery_icon_enables_you_to_remove_ads_and_view_more_details_": {
-    "message": "Ghostery zeigt dir, wie viele Werbe-Tracker auf einer Seite aktiv sind. Mit einem Klick auf das Ghostery-Symbol kannst du Werbung entfernen und dir weitere Details ansehen."
-  },
-  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery zeigt Ihnen, wie viele Tracker auf einer Seite blockiert wurden. Wenn Sie auf das Ghostery-Symbol klicken, erhalten Sie detailliertere Informationen."
-  },
   "gone_": {
     "message": "Weg!"
   },
@@ -585,7 +582,7 @@
     "message": "Ghostery Werbeblocker"
   },
   "manifest_short_description": {
-    "message": "Schnelles, privates und werbefreies Surfen, dem Sie vertrauen können!"
+    "message": "Schnelles, privates und werbefreies Surfen, dem du vertrauen kannst!"
   },
   "menu": {
     "message": "Menü"
@@ -861,6 +858,9 @@
     "message": "Website-Analytics",
     "description": "Tracker category name"
   },
+  "site_stays_ad_free_every_time_you_visit": {
+    "message": "Die Webseite bleibt werbefrei - bei jedem Besuch"
+  },
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
@@ -1046,6 +1046,9 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "Möchtest du ein Problem auf einer anderen Seite melden?"
   },
+  "we_block_it_all_for_you___ads__trackers__distractions__always_on_when_you_browse_": {
+    "message": "Wir blockieren alles für dich - Werbung, Tracker und Pop-Ups. Immer aktiv beim Surfen."
+  },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
     "message": "Wir blockieren alles für dich - Werbung, Tracker, Unterbrechungen. Du bist vollständig geschützt, keine Einrichtung erforderlich."
   },
@@ -1079,9 +1082,6 @@
   "what_s_new_in_ghostery": {
     "message": "Neu bei Ghostery"
   },
-  "what_s_next_": {
-    "message": "Wie geht es weiter?"
-  },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, betrieben von Ghostery, ist eine wesentliche Komponente der KI-gestützten Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die gesamte Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern und schafft Transparenz im Bereich des Web-Trackings."
   },
@@ -1100,11 +1100,14 @@
   "yesterday": {
     "message": "Gestern"
   },
+  "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
+    "message": "Du blockierst Werbung auf den Webseiten, die du nutzt. Einmal blockieren - und sie bleiben bei jedem Besuch werbefrei."
+  },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Du bist dabei, alle gespeicherten Cookies von $${0} zu entfernen."
   },
-  "you_re_all_set_to_zap_ads_away__one_site_at_a_time_": {
-    "message": "Du bist bereit, Werbung Seite für Seite wegzuzappen."
+  "you_re_ready_to_block_ads": {
+    "message": "Du bist bereit, Werbung zu blockieren"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
@@ -1123,9 +1126,6 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube hindert dich daran, werbefreie Videos anzusehen?"
-  },
-  "zap_ads_in_the_ghostery_panel": {
-    "message": "Werbung im Ghostery-Panel wegzappen"
   },
   "zoom_in": {
     "message": "Vergrößern"
