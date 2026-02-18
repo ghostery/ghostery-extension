@@ -10,11 +10,7 @@
  */
 import { browser, expect } from '@wdio/globals';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
-import {
-  enableExtension,
-  setPrivacyToggle,
-  setCustomFilters,
-} from '../utils.js';
+import { enableExtension, setPrivacyToggle, setCustomFilters } from '../utils.js';
 
 import { argv, PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
 
@@ -136,28 +132,18 @@ describe('Adblocker Capabilities', function () {
       ['modxhr', '/gen/modxhr.js^$xhr'],
       ['modmatchcase', '/gen\\/modmatchcase-UPPERCASE.js/$match-case'],
       ['redirnoopjs', '/gen/redirnoop.js^$redirect=noopjs'],
-      [
-        'rediradsbygoogle',
-        '/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js',
-      ],
+      ['rediradsbygoogle', '/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js'],
       ['redirgoogleima', '/gen/redirgoogleima.js^$redirect=google-ima.js'],
     ];
 
     if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
-      scriptingFilters.push([
-        'subdocument',
-        PAGE_DOMAIN + '>>##+js(set, subdocument, true)',
-      ]);
+      scriptingFilters.push(['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)']);
     }
 
     let reports;
 
     before(async function () {
-      reports = await test([
-        ...stylingFilters,
-        ...scriptingFilters,
-        ...networkingFilters,
-      ]);
+      reports = await test([...stylingFilters, ...scriptingFilters, ...networkingFilters]);
     });
 
     describe('Styling', function () {
@@ -197,10 +183,7 @@ describe('Adblocker Capabilities', function () {
   if (browser.isFirefox) {
     describe('Firefox', function () {
       const networkingFilters = [
-        [
-          'redirfallback',
-          '/gen/redirfallback.js^$redirect=something_does_not_exist.js',
-        ],
+        ['redirfallback', '/gen/redirfallback.js^$redirect=something_does_not_exist.js'],
       ];
 
       let reports;

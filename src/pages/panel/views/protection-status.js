@@ -31,43 +31,23 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   trackerId: '',
-  tracker: ({ stats, trackerId }) =>
-    stats.trackers.find((t) => t.id === trackerId),
+  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.id === trackerId),
   exceptionStatus: ({ options, stats, tracker }) =>
     exceptions.getStatus(options, tracker.id, stats.hostname),
   exceptionLabel: ({ options, stats, tracker }) =>
     exceptions.getLabel(options, tracker.id, stats.hostname),
   domainStatus: ({ options, stats, tracker }) =>
-    options.exceptions[tracker.id]?.domains.some((d) =>
-      stats.hostname.includes(d),
-    ),
-  render: ({
-    stats,
-    tracker,
-    exceptionStatus,
-    exceptionLabel,
-    domainStatus,
-  }) => html`
+    options.exceptions[tracker.id]?.domains.some((d) => stats.hostname.includes(d)),
+  render: ({ stats, tracker, exceptionStatus, exceptionLabel, domainStatus }) => html`
     <template layout="column">
       <panel-dialog>
-        <div
-          id="panel-company-alerts"
-          layout="absolute inset:1 bottom:auto"
-        ></div>
+        <div id="panel-company-alerts" layout="absolute inset:1 bottom:auto"></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        <div
-          slot="header"
-          layout="center row items:center gap overflow margin:0.5:0:0:0"
-        >
-          <ui-category-icon
-            name="${tracker.category}"
-            layout="size:2.5"
-          ></ui-category-icon>
+        <div slot="header" layout="center row items:center gap overflow margin:0.5:0:0:0">
+          <ui-category-icon name="${tracker.category}" layout="size:2.5"></ui-category-icon>
           <ui-text slot="header" type="body-s" color="secondary">
-            ${tracker.company &&
-            tracker.company !== tracker.name &&
-            tracker.company + ' •'}
+            ${tracker.company && tracker.company !== tracker.name && tracker.company + ' •'}
             ${labels.categories[tracker.category]}
           </ui-text>
         </div>
@@ -108,9 +88,7 @@ export default {
             >
               <div layout="grow">
                 <ui-text type="label-m">Trust on all websites</ui-text>
-                <ui-text type="body-s" color="secondary">
-                  Add exception
-                </ui-text>
+                <ui-text type="body-s" color="secondary"> Add exception </ui-text>
               </div>
             </ui-toggle>
           </panel-card>

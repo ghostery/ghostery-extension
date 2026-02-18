@@ -23,13 +23,11 @@ mount(document.body, {
       <ui-notification-dialog onclose="${close}">
         <span slot="title">A Quick Review Goes a Long Way</span>
         <ui-text layout="block:center" color="secondary">
-          If Ghostery makes your browsing better, a short review helps more
-          people discover a calmer, ad-free web.
+          If Ghostery makes your browsing better, a short review helps more people discover a
+          calmer, ad-free web.
         </ui-text>
         <ui-button type="wtm" layout="self:center">
-          <a href="${REVIEW_STORE_PAGE_URL}" target="_blank" onclick="${close}">
-            Share a Review
-          </a>
+          <a href="${REVIEW_STORE_PAGE_URL}" target="_blank" onclick="${close}"> Share a Review </a>
         </ui-button>
       </ui-notification-dialog>
     </template>

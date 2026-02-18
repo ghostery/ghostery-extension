@@ -77,9 +77,9 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
       await browser.url(PAGE_URL);
 
       await expectOnWarningPage(true);
-      await expect(
-        getExtensionElement('text:redirect-protection:url'),
-      ).toHaveText(PAGE_DOMAIN, { containing: true });
+      await expect(getExtensionElement('text:redirect-protection:url')).toHaveText(PAGE_DOMAIN, {
+        containing: true,
+      });
     });
 
     it("doesn't redirect when redirect protection is disabled", async function () {
@@ -110,9 +110,7 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
         await openRedirectSettings();
 
         await expect(
-          getExtensionElement(
-            `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-          ),
+          getExtensionElement(`item:redirect-protection:exception:${PAGE_DOMAIN}`),
         ).toBeDisplayed();
       });
 
@@ -127,18 +125,14 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
         await openRedirectSettings();
 
         await expect(
-          getExtensionElement(
-            `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-          ),
+          getExtensionElement(`item:redirect-protection:exception:${PAGE_DOMAIN}`),
         ).toBeDisplayed();
       });
 
       it('removes domain exception', async function () {
         await openRedirectSettings();
 
-        await getExtensionElement(
-          `button:redirect-protection:remove:${PAGE_DOMAIN}`,
-        ).click();
+        await getExtensionElement(`button:redirect-protection:remove:${PAGE_DOMAIN}`).click();
 
         await expect(
           getExtensionElement('component:redirect-protection:empty-state'),
@@ -152,15 +146,11 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
 
           await openRedirectSettings();
           await getExtensionElement('button:redirect-protection:add').click();
-          await getExtensionElement(
-            'input:redirect-protection:hostname',
-          ).setValue(PAGE_DOMAIN);
+          await getExtensionElement('input:redirect-protection:hostname').setValue(PAGE_DOMAIN);
           await getExtensionElement('button:redirect-protection:save').click();
 
           await expect(
-            getExtensionElement(
-              `item:redirect-protection:exception:${PAGE_DOMAIN}`,
-            ),
+            getExtensionElement(`item:redirect-protection:exception:${PAGE_DOMAIN}`),
           ).toBeDisplayed();
         });
 
@@ -171,9 +161,7 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
 
         it('removes exception via settings page', async function () {
           await openRedirectSettings();
-          await getExtensionElement(
-            `button:redirect-protection:remove:${PAGE_DOMAIN}`,
-          ).click();
+          await getExtensionElement(`button:redirect-protection:remove:${PAGE_DOMAIN}`).click();
 
           await expect(
             getExtensionElement('component:redirect-protection:empty-state'),

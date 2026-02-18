@@ -52,22 +52,12 @@ export default {
           fixed inset bottom top:auto
         "
       >
-        <section
-          id="header"
-          layout="grid:24px|1|24px items:center padding:1.5:2 gap"
-        >
+        <section id="header" layout="grid:24px|1|24px items:center padding:1.5:2 gap">
           <div layout="block:center column items:center area:2/3">
-            <slot
-              name="header"
-              onslotchange="${html.set('header', true)}"
-            ></slot>
+            <slot name="header" onslotchange="${html.set('header', true)}"></slot>
           </div>
           <ui-action>
-            <a
-              onclick="${animateOnClose}"
-              href="${router.backUrl()}"
-              layout="padding:2 margin:-2"
-            >
+            <a onclick="${animateOnClose}" href="${router.backUrl()}" layout="padding:2 margin:-2">
               <div layout="row center size:3">
                 <ui-icon name="close" layout="size:2"></ui-icon>
               </div>

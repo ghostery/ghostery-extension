@@ -19,11 +19,7 @@ export default {
     >
       <div id="arrow" layout="absolute top right:150px size:2.5"></div>
       <div id="icon" layout="relative layer row center size:5">
-        <ui-icon
-          name="extension-${browser}"
-          layout="size:3"
-          color="success-600"
-        ></ui-icon>
+        <ui-icon name="extension-${browser}" layout="size:3" color="success-600"></ui-icon>
       </div>
       <ui-text type="display-xs"><slot></slot></ui-text>
     </template>

@@ -36,9 +36,7 @@ export default {
   render: ({ domain, wtmLink }) => html`
     <template layout="column">
       <panel-dialog>
-        <ui-text slot="header" type="label-m" layout="padding:1:0">
-          WhoTracks.Me Reports
-        </ui-text>
+        <ui-text slot="header" type="label-m" layout="padding:1:0"> WhoTracks.Me Reports </ui-text>
         <div layout="column gap:2 padding:1:0">
           <ui-action>
             <a
@@ -46,16 +44,12 @@ export default {
               onclick="${openTabWithUrl}"
               layout="row gap:2"
             >
-              <ui-icon
-                name="whotracksme"
-                color="tertiary"
-                layout="size:3"
-              ></ui-icon>
+              <ui-icon name="whotracksme" color="tertiary" layout="size:3"></ui-icon>
               <div layout="column gap:0.5">
                 <ui-text type="label-m">Your Browser Privacy Report</ui-text>
                 <ui-text type="body-s" color="tertiary">
-                  Generates a global transparency report on web tracking in your
-                  Ghostery-protected browser.
+                  Generates a global transparency report on web tracking in your Ghostery-protected
+                  browser.
                 </ui-text>
               </div>
               <ui-icon name="chevron-right-s" color="quaternary"></ui-icon>
@@ -67,31 +61,16 @@ export default {
                 link &&
                 html`
                   <ui-action>
-                    <a
-                      href="${link}"
-                      onclick="${openTabWithUrl}"
-                      layout="row gap:2"
-                    >
-                      <ui-icon
-                        name="stats-report"
-                        color="tertiary"
-                        layout="size:3"
-                      ></ui-icon>
+                    <a href="${link}" onclick="${openTabWithUrl}" layout="row gap:2">
+                      <ui-icon name="stats-report" color="tertiary" layout="size:3"></ui-icon>
                       <div layout="column gap:0.5">
-                        <ui-text type="label-m">
-                          Website Statistical Report
-                        </ui-text>
+                        <ui-text type="label-m"> Website Statistical Report </ui-text>
                         <ui-text type="body-s" color="tertiary">
-                          Displays unique insights into observed activities on
-                          ${domain}, revealing affiliation, categories, and
-                          presence across the site.
+                          Displays unique insights into observed activities on ${domain}, revealing
+                          affiliation, categories, and presence across the site.
                         </ui-text>
                       </div>
-                      <ui-icon
-                        name="link-external-m"
-                        color="quaternary"
-                        layout="size:2"
-                      ></ui-icon>
+                      <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
                     </a>
                   </ui-action>
                 `,

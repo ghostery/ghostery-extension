@@ -32,10 +32,7 @@ export default {
       const cb = host.content.addEventListener('scroll', () => {
         if (host.content.scrollLeft === 0) {
           host[key] = 'start';
-        } else if (
-          host.content.scrollLeft + host.content.clientWidth >=
-          host.content.scrollWidth
-        ) {
+        } else if (host.content.scrollLeft + host.content.clientWidth >= host.content.scrollWidth) {
           host[key] = 'end';
         } else {
           host[key] = 'middle';

@@ -47,13 +47,10 @@ export default {
             You’re about to remove all cookies stored by ${domain}.
           </ui-text>
           <ui-text type="body-s" color="tertiary">
-            This will sign you out and may reset preferences or saved settings.
-            Some pages may not work until you sign in or accept cookies again.
+            This will sign you out and may reset preferences or saved settings. Some pages may not
+            work until you sign in or accept cookies again.
           </ui-text>
-          ${error &&
-          html`<ui-text type="body-s" color="warning-primary">
-            ${error}
-          </ui-text>`}
+          ${error && html`<ui-text type="body-s" color="warning-primary"> ${error} </ui-text>`}
         </div>
         <div layout="grid:2 gap margin:top:3">
           <ui-button>

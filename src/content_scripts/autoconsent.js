@@ -13,9 +13,7 @@ import AutoConsent from '@duckduckgo/autoconsent';
 
 if (document.contentType === 'text/html') {
   const consent = new AutoConsent((msg) =>
-    chrome.runtime.sendMessage(
-      Object.assign({}, msg, { action: 'autoconsent' }),
-    ),
+    chrome.runtime.sendMessage(Object.assign({}, msg, { action: 'autoconsent' })),
   );
 
   chrome.runtime.onMessage.addListener((msg) => {

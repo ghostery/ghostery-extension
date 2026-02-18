@@ -91,11 +91,9 @@ if (argv.clean) {
 
 // DNR rules for Chromium-based browsers
 if (argv.target === 'chromium') {
-  execSync(
-    'node scripts/download-dnr-rulesets.js' +
-      (argv.staging ? ' --staging' : ''),
-    { stdio: silent ? '' : 'inherit' },
-  );
+  execSync('node scripts/download-dnr-rulesets.js' + (argv.staging ? ' --staging' : ''), {
+    stdio: silent ? '' : 'inherit',
+  });
 
   // Build redirect protection rules from downloaded DNR rulesets (MV3 only)
   execSync('node scripts/build-redirect-protection-rules.js', {
@@ -103,11 +101,9 @@ if (argv.target === 'chromium') {
   });
 }
 
-execSync(
-  'node scripts/download-redirect-resources.js' +
-    (argv.staging ? ' --staging' : ''),
-  { stdio: silent ? '' : 'inherit' },
-);
+execSync('node scripts/download-redirect-resources.js' + (argv.staging ? ' --staging' : ''), {
+  stdio: silent ? '' : 'inherit',
+});
 
 execSync('node scripts/download-wtm-bloomfilter.js', {
   stdio: silent ? '' : 'inherit',
@@ -161,9 +157,7 @@ if (argv.target !== 'firefox') {
       const text = await policy.text();
       writeFileSync(policyPath, text);
     } else {
-      throw new Error(
-        `Failed to fetch Privacy Policy from '${url}': ${policy.status}`,
-      );
+      throw new Error(`Failed to fetch Privacy Policy from '${url}': ${policy.status}`);
     }
   }
 }
@@ -208,11 +202,9 @@ mkdirSync(options.outDir, { recursive: true });
 options.assets.forEach((path) => {
   mkdirSync(resolve(options.outDir, path), { recursive: true });
   for (const file of readdirSync(resolve(options.srcDir, path))) {
-    cpSync(
-      resolve(options.srcDir, path, file),
-      resolve(options.outDir, path, file),
-      { recursive: true },
-    );
+    cpSync(resolve(options.srcDir, path, file), resolve(options.outDir, path, file), {
+      recursive: true,
+    });
   }
 });
 
@@ -258,9 +250,7 @@ cpSync(
 mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
   recursive: true,
 });
-for (const file of readdirSync(
-  resolve(options.srcDir, 'rule_resources', 'redirects'),
-)) {
+for (const file of readdirSync(resolve(options.srcDir, 'rule_resources', 'redirects'))) {
   if (argv.target !== 'firefox' && file.includes('MIME_TYPE_STUB')) {
     continue;
   }
@@ -271,23 +261,17 @@ for (const file of readdirSync(
 }
 
 // append web_accessible_resources
-const redirectResources = readdirSync(
-  resolve(options.outDir, 'rule_resources/redirects'),
-);
+const redirectResources = readdirSync(resolve(options.outDir, 'rule_resources/redirects'));
 
 if (manifest.manifest_version === 3) {
   manifest.web_accessible_resources.push({
-    resources: redirectResources.map((filename) =>
-      join('rule_resources/redirects', filename),
-    ),
+    resources: redirectResources.map((filename) => join('rule_resources/redirects', filename)),
     matches: ['<all_urls>'],
     use_dynamic_url: true,
   });
 } else {
   redirectResources.forEach((filename) => {
-    manifest.web_accessible_resources.push(
-      join('rule_resources/redirects', filename),
-    );
+    manifest.web_accessible_resources.push(join('rule_resources/redirects', filename));
   });
 }
 
@@ -310,12 +294,10 @@ if (manifest.options_ui?.page) {
 }
 
 // content scripts
-manifest.content_scripts = manifest.content_scripts.filter(
-  ({ js = [], css = [], run_at }) => {
-    [...js, ...css].forEach((src) => content_scripts.push(src));
-    return run_at !== 'background_execute_script';
-  },
-);
+manifest.content_scripts = manifest.content_scripts.filter(({ js = [], css = [], run_at }) => {
+  [...js, ...css].forEach((src) => content_scripts.push(src));
+  return run_at !== 'background_execute_script';
+});
 
 // web-accessible resources
 manifest.web_accessible_resources?.forEach((entry) => {
@@ -342,9 +324,7 @@ manifest.web_accessible_resources?.forEach((entry) => {
 
 // background
 if (manifest.background) {
-  source.push(
-    manifest.background.service_worker || manifest.background.scripts[0],
-  );
+  source.push(manifest.background.service_worker || manifest.background.scripts[0]);
 }
 
 // --- Save manifest ---
@@ -356,10 +336,7 @@ if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
   manifest.permissions.push('declarativeNetRequestFeedback');
 }
 
-writeFileSync(
-  resolve(options.outDir, 'manifest.json'),
-  JSON.stringify(manifest, null, 2),
-);
+writeFileSync(resolve(options.outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
 // --- Build  ---
 
@@ -384,16 +361,13 @@ const buildPromise = build({
       external: ['@adguard/re2-wasm'],
       preserveEntrySignatures: 'exports-only',
       output: {
-        banner:
-          argv.target === 'firefox' &&
-          'globalThis.chrome = globalThis.browser;\n',
+        banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
         dir: options.outDir,
         manualChunks: false,
         preserveModules: true,
         preserveModulesRoot: 'src',
         minifyInternalExports: false,
-        entryFileNames: (chunk) =>
-          `${chunk.name.replace(/\.(png|jpg|jpeg|gif|svg|webp)$/, '')}.js`,
+        entryFileNames: (chunk) => `${chunk.name.replace(/\.(png|jpg|jpeg|gif|svg|webp)$/, '')}.js`,
 
         assetFileNames: 'assets/[name]-[hash].[ext]',
         sanitizeFileName: (name) => {
@@ -480,9 +454,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
         rollupOptions: {
           input: { [id]: path },
           output: {
-            banner:
-              argv.target === 'firefox' &&
-              'globalThis.chrome = globalThis.browser;\n',
+            banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
             format: 'iife',
             dir: options.outDir,
             entryFileNames: '[name].js',
@@ -524,8 +496,7 @@ if (argv.watch) {
                   '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge';
                 break;
               case 'opera':
-                settings.chromiumBinary =
-                  '/Applications/Opera.app/Contents/MacOS/Opera';
+                settings.chromiumBinary = '/Applications/Opera.app/Contents/MacOS/Opera';
                 break;
             }
 

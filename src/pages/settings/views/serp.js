@@ -22,22 +22,14 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <settings-link
-                href="${router.backUrl()}"
-                data-qa="button:back"
-                layout="self:start"
-              >
+              <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
                 <ui-icon name="chevron-left" color="primary"></ui-icon>
-                <ui-text type="headline-s" layout="row gap items:center">
-                  Back
-                </ui-text>
+                <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
               </settings-link>
-              <ui-text type="headline-m">
-                Search Engine Redirect Protection
-              </ui-text>
+              <ui-text type="headline-m"> Search Engine Redirect Protection </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Prevents Google and Bing from redirecting search result links
-                through their servers instead of linking directly to pages.
+                Prevents Google and Bing from redirecting search result links through their servers
+                instead of linking directly to pages.
               </ui-text>
             </div>
             <settings-card type="content">
@@ -47,14 +39,8 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon
-                      name="search"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <ui-text type="headline-xs">
-                      Search Engine Redirect Protection
-                    </ui-text>
+                    <ui-icon name="search" color="quaternary" layout="size:3"></ui-icon>
+                    <ui-text type="headline-xs"> Search Engine Redirect Protection </ui-text>
                   </div>
                 </div>
               </ui-toggle>

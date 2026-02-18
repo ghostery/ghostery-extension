@@ -144,15 +144,9 @@ mount(document.body, {
               </ui-input>
               <label layout="row items:center gap">
                 <ui-input>
-                  <input
-                    type="checkbox"
-                    checked="${similar}"
-                    onchange="${toggleSimilar}"
-                  />
+                  <input type="checkbox" checked="${similar}" onchange="${toggleSimilar}" />
                 </ui-input>
-                <ui-text type="body-xs" color="tertiary">
-                  Block similar elements
-                </ui-text>
+                <ui-text type="body-xs" color="tertiary"> Block similar elements </ui-text>
               </label>
             </div>
             ${sliderMax > 1 &&
@@ -168,12 +162,8 @@ mount(document.body, {
                     oninput="${slide}"
                   ></element-picker-range>
                   <div layout="row content:space-between items:center">
-                    <ui-text type="label-xs" color="tertiary" uppercase>
-                      Zoom out
-                    </ui-text>
-                    <ui-text type="label-xs" color="tertiary" uppercase>
-                      Zoom in
-                    </ui-text>
+                    <ui-text type="label-xs" color="tertiary" uppercase> Zoom out </ui-text>
+                    <ui-text type="label-xs" color="tertiary" uppercase> Zoom in </ui-text>
                   </div>
                 </div>
               </div>
@@ -195,8 +185,8 @@ mount(document.body, {
             <div layout="block:center padding:bottom:2">
               <ui-text type="label-l">Gone!</ui-text>
               <ui-text type="body-s" color="tertiary">
-                Ghostery added a rule to keep this content block hidden. You can
-                undo this anytime in website settings.
+                Ghostery added a rule to keep this content block hidden. You can undo this anytime
+                in website settings.
               </ui-text>
             </div>
           </div>

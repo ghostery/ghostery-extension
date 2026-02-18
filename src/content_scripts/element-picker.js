@@ -95,9 +95,8 @@ const GLOBAL_STYLES = `
 /* Selector generator */
 
 function getSelectorCount(selector, childSelector) {
-  return document.querySelectorAll(
-    childSelector ? `${selector} > ${childSelector}` : selector,
-  ).length;
+  return document.querySelectorAll(childSelector ? `${selector} > ${childSelector}` : selector)
+    .length;
 }
 
 function getSelector(element, similar = false, childSelector = '') {
@@ -147,9 +146,7 @@ const pickersTargets = new WeakMap();
 const pickerTagName = `gh-element-picker-${Math.random().toString(36).slice(2)}`;
 
 function renderPickers(selector, force = false) {
-  const elements = selector
-    ? Array.from(document.querySelectorAll(selector))
-    : [];
+  const elements = selector ? Array.from(document.querySelectorAll(selector)) : [];
 
   elements.forEach((el, index) => {
     let picker = pickers[index];

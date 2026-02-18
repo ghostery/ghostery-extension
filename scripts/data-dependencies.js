@@ -26,17 +26,13 @@ packageJson.dataDependencies['wtm-stats'] = await fetch(
   .then((data) => data[0].sha);
 
 // wtm-bloomfilter
-const wtmUpdateConfig = await fetch(`${WTM_BASE_URL}/update.json.gz`).then(
-  (res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to download update.json": ${res.status}: ${res.statusText}`,
-      );
-    }
+const wtmUpdateConfig = await fetch(`${WTM_BASE_URL}/update.json.gz`).then((res) => {
+  if (!res.ok) {
+    throw new Error(`Failed to download update.json": ${res.status}: ${res.statusText}`);
+  }
 
-    return res.json();
-  },
-);
+  return res.json();
+});
 
 packageJson.dataDependencies['wtm-bloomfilter'] = wtmUpdateConfig.version;
 
@@ -65,8 +61,4 @@ packageJson.dataDependencies['redirect-resources'] = redirectResourcesRevision;
 // Save the updated package.json
 //
 
-writeFileSync(
-  'package.json',
-  JSON.stringify(packageJson, null, 2) + '\n',
-  'utf-8',
-);
+writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + '\n', 'utf-8');

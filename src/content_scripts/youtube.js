@@ -57,10 +57,7 @@ function detectWall(cb) {
 }
 
 async function isFeatureDisabled() {
-  const { options, youtubeDontAsk } = await chrome.storage.local.get([
-    'options',
-    'youtubeDontAsk',
-  ]);
+  const { options, youtubeDontAsk } = await chrome.storage.local.get(['options', 'youtubeDontAsk']);
 
   if (
     // User's choice to not show the wall

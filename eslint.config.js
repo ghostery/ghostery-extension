@@ -45,12 +45,6 @@ export default [
     },
   },
   {
-    ignores: [
-      '.wdio',
-      'dist/*',
-      'xcode/*',
-      'src/rule_resources*',
-      'web-ext-artifacts/*',
-    ],
+    ignores: ['.wdio', 'dist/*', 'xcode/*', 'src/rule_resources*', 'web-ext-artifacts/*'],
   },
 ];

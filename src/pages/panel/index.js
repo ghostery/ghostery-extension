@@ -25,10 +25,7 @@ mount(document.body, {
   platformName: { value: getOS(), reflect: true },
   render: ({ stack }) => html`
     <template layout="row">
-      <div
-        id="alert-container"
-        layout="fixed inset:1 top:0.5 bottom:auto layer:500"
-      ></div>
+      <div id="alert-container" layout="fixed inset:1 top:0.5 bottom:auto layer:500"></div>
       ${stack}
     </template>
   `,

@@ -56,9 +56,7 @@ describe('Clear Cookies', () => {
     await getExtensionElement('button:actions').click();
     await browser.pause(1000); // wait for opening menu animation to finish
 
-    const href = await getExtensionElement(
-      'button:website-settings',
-    ).getAttribute('href');
+    const href = await getExtensionElement('button:website-settings').getAttribute('href');
     await browser.url(href);
 
     await getExtensionElement('button:clear-cookies').click();

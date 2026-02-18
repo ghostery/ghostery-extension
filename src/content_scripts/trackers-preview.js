@@ -27,8 +27,7 @@ function resizePopup(height) {
   });
 }
 
-const getTop = (el) =>
-  el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
+const getTop = (el) => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
 
 function renderPopup(container, stats, popupUrl) {
   closePopups();
@@ -96,9 +95,7 @@ const SELECTORS = [
 ].join(', ');
 
 function setupTrackersPreview(popupUrl) {
-  const elements = [...window.document.querySelectorAll(SELECTORS)].filter(
-    (el) => !el.dataset.wtm,
-  );
+  const elements = [...window.document.querySelectorAll(SELECTORS)].filter((el) => !el.dataset.wtm);
 
   if (elements.length) {
     const links = elements.map((el) => {
@@ -126,58 +123,49 @@ function setupTrackersPreview(popupUrl) {
       return el.href;
     });
 
-    chrome.runtime.sendMessage(
-      { action: 'getWTMReport', links },
-      (response) => {
-        if (chrome.runtime.lastError) {
-          console.error(
-            'Could not retrieve WTM information on URLs',
-            chrome.runtime.lastError,
-          );
-          return;
-        }
+    chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
+        return;
+      }
 
-        elements.forEach((anchor, i) => {
-          const stats = response.wtmStats[i];
-          if (stats) {
-            try {
-              const wheelEl = getWheelElement(stats, popupUrl);
-              if (!wheelEl) return;
+      elements.forEach((anchor, i) => {
+        const stats = response.wtmStats[i];
+        if (stats) {
+          try {
+            const wheelEl = getWheelElement(stats, popupUrl);
+            if (!wheelEl) return;
 
-              const container =
-                /* Google */
-                // Desktop
-                anchor.parentElement.querySelector('.B6fmyf') ||
-                anchor.parentElement.parentElement.querySelector('.B6fmyf') ||
-                // Mobile
-                anchor.querySelector('span.yIn8Od') ||
-                anchor.querySelector('div[role="link"]') ||
-                anchor.querySelector('div.UPmit.AP7Wnd') ||
-                /* Bing */
-                anchor.parentElement.parentElement.querySelector('.b_tpcn');
+            const container =
+              /* Google */
+              // Desktop
+              anchor.parentElement.querySelector('.B6fmyf') ||
+              anchor.parentElement.parentElement.querySelector('.B6fmyf') ||
+              // Mobile
+              anchor.querySelector('span.yIn8Od') ||
+              anchor.querySelector('div[role="link"]') ||
+              anchor.querySelector('div.UPmit.AP7Wnd') ||
+              /* Bing */
+              anchor.parentElement.parentElement.querySelector('.b_tpcn');
 
-              if (!container) return;
+            if (!container) return;
 
-              if (container.classList.contains('b_tpcn')) {
-                container.style.display = 'flex';
-              }
-
-              let tempEl = container.firstElementChild;
-              if (tempEl && tempEl.textContent.includes(stats.domain)) {
-                container.insertBefore(wheelEl, tempEl.nextElementSibling);
-              } else {
-                container.appendChild(wheelEl);
-              }
-            } catch (e) {
-              console.warn(
-                'Unexpected error while rendering the Tracker Preview wheel',
-                e,
-              );
+            if (container.classList.contains('b_tpcn')) {
+              container.style.display = 'flex';
             }
+
+            let tempEl = container.firstElementChild;
+            if (tempEl && tempEl.textContent.includes(stats.domain)) {
+              container.insertBefore(wheelEl, tempEl.nextElementSibling);
+            } else {
+              container.appendChild(wheelEl);
+            }
+          } catch (e) {
+            console.warn('Unexpected error while rendering the Tracker Preview wheel', e);
           }
-        });
-      },
-    );
+        }
+      });
+    });
 
     const observer = new MutationObserver((mutations) => {
       if (mutations.some((m) => m.addedNodes.length)) {
@@ -211,11 +199,9 @@ window.addEventListener('message', (message) => {
       delete el.dataset.wtm;
     });
 
-    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach(
-      (el) => {
-        el.parentElement.removeChild(el);
-      },
-    );
+    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach((el) => {
+      el.parentElement.removeChild(el);
+    });
 
     chrome.runtime.sendMessage({ action: 'disableWTMReport' });
   } else if (message.data?.startsWith('WTMReportResize')) {
@@ -225,7 +211,5 @@ window.addEventListener('message', (message) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  setupTrackersPreview(
-    chrome.runtime.getURL('pages/trackers-preview/index.html'),
-  );
+  setupTrackersPreview(chrome.runtime.getURL('pages/trackers-preview/index.html'));
 });

@@ -24,20 +24,15 @@ export async function exportToFile() {
   const customFilters = await store.resolve(CustomFilters);
   const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
 
-  const cleanedOptions = Object.fromEntries(
-    SYNC_OPTIONS.map((key) => [key, options[key]]),
-  );
+  const cleanedOptions = Object.fromEntries(SYNC_OPTIONS.map((key) => [key, options[key]]));
 
   // Remove managed, assist and temporary paused domains
-  cleanedOptions.paused = Object.entries(cleanedOptions.paused).reduce(
-    (acc, [domain, details]) => {
-      if (!details.managed && !details.assist && !details.revokeAt) {
-        acc[domain] = { revokeAt: 0 };
-      }
-      return acc;
-    },
-    {},
-  );
+  cleanedOptions.paused = Object.entries(cleanedOptions.paused).reduce((acc, [domain, details]) => {
+    if (!details.managed && !details.assist && !details.revokeAt) {
+      acc[domain] = { revokeAt: 0 };
+    }
+    return acc;
+  }, {});
 
   const data = {
     timestamp: Date.now(),
@@ -123,8 +118,7 @@ export function importFromFile(event) {
         await store.set(Options, {
           paused: Object.fromEntries(
             Object.entries(options.paused).filter(
-              ([, details]) =>
-                !details.managed && !details.assist && !details.revokeAt,
+              ([, details]) => !details.managed && !details.assist && !details.revokeAt,
             ),
           ),
           exceptions: null,

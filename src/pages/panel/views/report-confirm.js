@@ -17,25 +17,19 @@ export default {
   render: () => html`
     <template layout="column grow">
       <ui-header>
-        <ui-text type="label-m" layout="row gap items:center">
-          Report an issue
-        </ui-text>
+        <ui-text type="label-m" layout="row gap items:center"> Report an issue </ui-text>
       </ui-header>
 
       <panel-container layout="relative">
         <div layout="column items:center gap:3 padding:2:2:4">
-          <img
-            src="${contributionImage}"
-            alt="Contribution"
-            layout="size:20 margin:3"
-          />
+          <img src="${contributionImage}" alt="Contribution" layout="size:20 margin:3" />
           <div layout="column gap:0.5">
             <ui-text type="label-m" layout="block:center width:::40">
               Thank you for your report!
             </ui-text>
             <ui-text type="body-s" layout="block:center width:::36">
-              Your contribution helps build a more private and safe internet for
-              the entire Ghostery community.
+              Your contribution helps build a more private and safe internet for the entire Ghostery
+              community.
             </ui-text>
           </div>
           <panel-delayed-action delay="8">

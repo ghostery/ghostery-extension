@@ -22,13 +22,8 @@ async function clearCookies(host) {
   });
 
   showAlert(
-    html`<panel-alert
-      type="${result.success ? 'success' : 'danger'}"
-      autoclose="2"
-    >
-      ${result.success
-        ? msg`Cookies successfully cleared`
-        : msg`Failed to clear cookies`}
+    html`<panel-alert type="${result.success ? 'success' : 'danger'}" autoclose="2">
+      ${result.success ? msg`Cookies successfully cleared` : msg`Failed to clear cookies`}
     </panel-alert>`,
   );
 }
@@ -45,8 +40,8 @@ export default {
             You’re about to remove all cookies stored by ${stats.domain}.
           </ui-text>
           <ui-text type="body-s" color="tertiary">
-            This will sign you out and may reset preferences or saved settings.
-            Some pages may not work until you sign in or accept cookies again.
+            This will sign you out and may reset preferences or saved settings. Some pages may not
+            work until you sign in or accept cookies again.
           </ui-text>
         </div>
         <div layout="grid:2 gap">
@@ -54,9 +49,7 @@ export default {
             <a href="${router.backUrl()}">Cancel</a>
           </ui-button>
           <ui-button type="danger" data-qa="button:confirm-clear-cookies">
-            <a onclick="${clearCookies}" href="${router.backUrl()}">
-              Clear cookies
-            </a>
+            <a onclick="${clearCookies}" href="${router.backUrl()}"> Clear cookies </a>
           </ui-button>
         </div>
       </panel-dialog>

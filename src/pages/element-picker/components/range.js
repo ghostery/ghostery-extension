@@ -39,14 +39,7 @@ export default {
   max: 10,
   render: ({ value, max }) => html`
     <template layout="grid relative">
-      <input
-        type="range"
-        min="1"
-        max="${max}"
-        step="1"
-        value="${value}"
-        oninput="${onInput}"
-      />
+      <input type="range" min="1" max="${max}" step="1" value="${value}" oninput="${onInput}" />
       <div class="slide" id="left" layout="left:0"></div>
       <div class="slide" id="right" layout="right:0"></div>
     </template>

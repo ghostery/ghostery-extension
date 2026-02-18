@@ -36,52 +36,37 @@ export default {
         ${store.ready(options) &&
         html`
           <div layout="column gap:0.5 padding:1:0">
-            <ui-text
-              type="label-s"
-              color="secondary"
-              uppercase
-              layout="padding:1:1:0 margin:0:1"
-            >
+            <ui-text type="label-s" color="secondary" uppercase layout="padding:1:1:0 margin:0:1">
               Ghostery settings
             </ui-text>
 
             <panel-menu-item
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@settings-privacy',
-              )}"
+              href="${chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy')}"
               icon="shield-menu"
             >
               Privacy protection
             </panel-menu-item>
             <panel-menu-item
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@settings-websites',
-              )}"
+              href="${chrome.runtime.getURL('/pages/settings/index.html#@settings-websites')}"
               icon="websites"
             >
               Websites
             </panel-menu-item>
             <panel-menu-item
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@settings-trackers',
-              )}"
+              href="${chrome.runtime.getURL('/pages/settings/index.html#@settings-trackers')}"
               icon="block-m"
             >
               Trackers
             </panel-menu-item>
             <panel-menu-item
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@settings-whotracksme',
-              )}"
+              href="${chrome.runtime.getURL('/pages/settings/index.html#@settings-whotracksme')}"
               icon="wtm"
               translate="no"
             >
               WhoTracks.Me
             </panel-menu-item>
             <panel-menu-item
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@settings-my-ghostery',
-              )}"
+              href="${chrome.runtime.getURL('/pages/settings/index.html#@settings-my-ghostery')}"
               icon="user"
             >
               My Ghostery
@@ -99,22 +84,13 @@ export default {
 
             <ui-line></ui-line>
 
-            <ui-text
-              type="label-s"
-              color="secondary"
-              uppercase
-              layout="padding:1:1:0 margin:0:1"
-            >
+            <ui-text type="label-s" color="secondary" uppercase layout="padding:1:1:0 margin:0:1">
               Support
             </ui-text>
 
             ${store.ready(stats) &&
             html`
-              <panel-menu-item
-                href="${router.url(ReportCategory)}"
-                icon="report"
-                internal
-              >
+              <panel-menu-item href="${router.url(ReportCategory)}" icon="report" internal>
                 Report an issue
               </panel-menu-item>
             `}
@@ -137,12 +113,7 @@ export default {
 
             <ui-line></ui-line>
 
-            <ui-text
-              type="label-s"
-              color="secondary"
-              uppercase
-              layout="padding:1:1:0 margin:0:1"
-            >
+            <ui-text type="label-s" color="secondary" uppercase layout="padding:1:1:0 margin:0:1">
               About
             </ui-text>
 

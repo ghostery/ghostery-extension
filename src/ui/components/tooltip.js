@@ -61,9 +61,7 @@ export default {
         if (overflowRight > 0) {
           tooltip.style.transform = `translateX(calc(-50% - ${overflowRight}px)`;
         } else if (overflowLeft < 0) {
-          tooltip.style.transform = `translateX(calc(-50% + ${Math.abs(
-            overflowLeft,
-          )}px)`;
+          tooltip.style.transform = `translateX(calc(-50% + ${Math.abs(overflowLeft)}px)`;
         }
 
         if (host.autohide) {
@@ -99,10 +97,7 @@ export default {
           layout.bottom="top:full"
           hidden
         >
-          <ui-text
-            type="label-s"
-            layout="block:center margin:0.5:0 padding:0.5:1"
-          >
+          <ui-text type="label-s" layout="block:center margin:0.5:0 padding:0.5:1">
             <slot name="content"></slot>
           </ui-text>
         </div>

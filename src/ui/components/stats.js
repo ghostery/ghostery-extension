@@ -48,11 +48,7 @@ export default {
           <ui-action-button-group>
             <ui-tooltip position="bottom">
               <span slot="content">Simple View</span>
-              <ui-action-button
-                grouped
-                active="${type === 'graph'}"
-                layout="size:30px"
-              >
+              <ui-action-button grouped active="${type === 'graph'}" layout="size:30px">
                 <button onclick="${html.set('type', 'graph')}">
                   <ui-icon name="chart" color="primary"></ui-icon>
                 </button>
@@ -75,10 +71,7 @@ export default {
         `}
       </div>
       <ui-switch>
-        <ui-switch-item
-          active="${!type || type === 'graph'}"
-          layout="row gap:3 padding:0:1"
-        >
+        <ui-switch-item active="${!type || type === 'graph'}" layout="row gap:3 padding:0:1">
           <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
@@ -104,10 +97,7 @@ export default {
         </ui-switch-item>
         ${type &&
         html`
-          <ui-switch-item
-            active="${type === 'list'}"
-            layout="column grow height::104px"
-          >
+          <ui-switch-item active="${type === 'list'}" layout="column grow height::104px">
             <slot name="list"></slot>
           </ui-switch-item>
         `}

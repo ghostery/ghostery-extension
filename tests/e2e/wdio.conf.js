@@ -25,11 +25,7 @@ import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 import { FLAGS } from '@ghostery/config';
 
-import {
-  setConfigFlags,
-  setCookieInBrowserContext,
-  setExtensionBaseUrl,
-} from './utils.js';
+import { setConfigFlags, setCookieInBrowserContext, setExtensionBaseUrl } from './utils.js';
 import { setupTestPage } from './page/server.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -98,12 +94,7 @@ export const config = {
       'spec/*.spec.js',
     ],
   ],
-  reporters: [
-    [
-      'spec',
-      { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS },
-    ],
-  ],
+  reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
@@ -172,9 +163,10 @@ export const config = {
         // Get the extension ID from extensions settings page
         await browser.url('about:debugging#/runtime/this-firefox');
 
-        const url = (
-          await $('>>>a.qa-manifest-url').getProperty('href')
-        ).replace('manifest.json', 'pages');
+        const url = (await $('>>>a.qa-manifest-url').getProperty('href')).replace(
+          'manifest.json',
+          'pages',
+        );
 
         setExtensionBaseUrl(url);
       }

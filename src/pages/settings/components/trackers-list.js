@@ -29,16 +29,8 @@ export default {
             layout="block:left row items:center gap:1.5 padding:0.5 grow"
             layout@768px="gap:2"
           >
-            <ui-icon
-              id="arrow"
-              name="chevron-down"
-              layout="size:3"
-              color="secondary"
-            ></ui-icon>
-            <ui-category-icon
-              name="${name}"
-              layout="size:5 padding"
-            ></ui-category-icon>
+            <ui-icon id="arrow" name="chevron-down" layout="size:3" color="secondary"></ui-icon>
+            <ui-category-icon name="${name}" layout="size:5 padding"></ui-category-icon>
             <div layout="column gap:0.5">
               <ui-text type="label-l">${labels.categories[name]}</ui-text>
               <div layout="column" layout@768px="row gap">

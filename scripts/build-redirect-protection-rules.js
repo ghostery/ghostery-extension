@@ -29,14 +29,10 @@ console.log('Building redirect protection rules...');
 
 // Only use ads and tracking rulesets as the base for redirect protection
 const TARGET_RULESETS = ['dnr-ads.json', 'dnr-tracking.json'];
-const files = TARGET_RULESETS.filter((f) =>
-  existsSync(`${RESOURCES_PATH}/${f}`),
-);
+const files = TARGET_RULESETS.filter((f) => existsSync(`${RESOURCES_PATH}/${f}`));
 
 if (files.length === 0) {
-  console.error(
-    'Error: Required DNR ruleset files not found (dnr-ads.json, dnr-tracking.json).',
-  );
+  console.error('Error: Required DNR ruleset files not found (dnr-ads.json, dnr-tracking.json).');
   console.error('Please run "npm run download-dnr-rulesets" first.');
   process.exit(1);
 }

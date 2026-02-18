@@ -27,19 +27,10 @@ export default {
           onclick="${internal ? undefined : openTabWithUrl}"
         >
           <ui-icon name="${icon}" color="secondary" layout="size:2.5"></ui-icon>
-          <ui-text
-            type="label-m"
-            ellipsis
-            layout="column width::0:full"
-            color="inherit"
-          >
+          <ui-text type="label-m" ellipsis layout="column width::0:full" color="inherit">
             <slot></slot>
           </ui-text>
-          <ui-icon
-            name="${suffixIcon}"
-            color="tertiary"
-            layout="size:2"
-          ></ui-icon>
+          <ui-icon name="${suffixIcon}" color="tertiary" layout="size:2"></ui-icon>
         </a>
       </ui-action>
     </template>

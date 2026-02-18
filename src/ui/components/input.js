@@ -25,10 +25,7 @@ export default {
           </div>
         `}
         <slot></slot>
-        ${error &&
-        html`
-          <ui-text color="danger-secondary" type="body-s">${error}</ui-text>
-        `}
+        ${error && html` <ui-text color="danger-secondary" type="body-s">${error}</ui-text> `}
       </template>
     `.css`
     :host {

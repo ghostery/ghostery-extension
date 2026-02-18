@@ -25,12 +25,7 @@ function grayscaleColor(hexColor) {
   return `rgb(${value}, ${value}, ${value})`;
 }
 
-export function drawWheel(
-  ctx,
-  size,
-  categories,
-  { useScale = true, grayscale = false } = {},
-) {
+export function drawWheel(ctx, size, categories, { useScale = true, grayscale = false } = {}) {
   if (useScale && typeof window !== 'undefined') {
     const { canvas } = ctx;
 

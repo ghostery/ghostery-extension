@@ -16,9 +16,7 @@ const CustomFilters = {
   [store.connect]: {
     cache: false,
     async get() {
-      const { customFiltersInput } = await chrome.storage.local.get([
-        'customFiltersInput',
-      ]);
+      const { customFiltersInput } = await chrome.storage.local.get(['customFiltersInput']);
       return { text: customFiltersInput };
     },
     async set(_, { text }) {

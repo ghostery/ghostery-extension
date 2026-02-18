@@ -18,10 +18,7 @@ function updateShadow({ render }) {
   const shadow = root.querySelector('.shadow');
 
   if (el.scrollHeight > el.clientHeight) {
-    shadow.classList.toggle(
-      'show',
-      Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight,
-    );
+    shadow.classList.toggle('show', Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight);
   } else {
     shadow.classList.remove('show');
   }

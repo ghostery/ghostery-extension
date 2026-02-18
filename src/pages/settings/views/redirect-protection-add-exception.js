@@ -38,18 +38,12 @@ export default {
   render: ({ hostname }) => html`
     <template layout>
       <settings-dialog closable>
-        <form
-          action="${router.backUrl()}"
-          onsubmit="${add}"
-          layout="column gap:3"
-        >
-          <ui-text type="label-l" layout="block:center margin:bottom">
-            Add exception
-          </ui-text>
+        <form action="${router.backUrl()}" onsubmit="${add}" layout="column gap:3">
+          <ui-text type="label-l" layout="block:center margin:bottom"> Add exception </ui-text>
           <div layout="column gap items:start">
             <ui-text type="body-m" color="secondary">
-              Enter the website URL you want to allow redirects from. Ghostery
-              will not show the warning page for this domain.
+              Enter the website URL you want to allow redirects from. Ghostery will not show the
+              warning page for this domain.
             </ui-text>
           </div>
           <div layout="column gap:0.5">

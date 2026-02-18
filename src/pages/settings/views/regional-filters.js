@@ -38,21 +38,14 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <settings-link
-                href="${router.backUrl()}"
-                data-qa="button:back"
-                layout="self:start"
-              >
+              <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
                 <ui-icon name="chevron-left" color="primary"></ui-icon>
-                <ui-text type="headline-s" layout="row gap items:center">
-                  Back
-                </ui-text>
+                <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
               </settings-link>
               <ui-text type="headline-m">Regional Filters</ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Blocks additional ads, trackers, and pop-ups specific to the
-                language of websites you visit. Enable only the languages you
-                need to avoid slowing down your browser.
+                Blocks additional ads, trackers, and pop-ups specific to the language of websites
+                you visit. Enable only the languages you need to avoid slowing down your browser.
               </ui-text>
             </div>
             <settings-card type="content">
@@ -63,11 +56,7 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon
-                      name="pin"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
+                    <ui-icon name="pin" color="quaternary" layout="size:3"></ui-icon>
                     <ui-text type="headline-xs">Regional Filters</ui-text>
                   </div>
                 </div>
@@ -78,16 +67,12 @@ export default {
               <div layout="grid:repeat(auto-fill,minmax(140px,1fr)) gap:1:0.5">
                 ${REGIONS.map(
                   (id) => html`
-                    <label
-                      layout="row gap items:center ::user-select:none padding:0.5"
-                    >
+                    <label layout="row gap items:center ::user-select:none padding:0.5">
                       <ui-input>
                         <input
                           type="checkbox"
                           disabled="${!options.regionalFilters.enabled}"
-                          checked="${options.regionalFilters.regions.includes(
-                            id,
-                          )}"
+                          checked="${options.regionalFilters.regions.includes(id)}"
                           onchange="${setRegion(id)}"
                           data-qa="checkbox:regional-filters:${id}"
                         />

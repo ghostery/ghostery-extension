@@ -27,11 +27,7 @@ export default {
         ellipsis
         layout="shrink:0"
       >
-        ${terms
-          ? enabled
-            ? msg`Enabled`
-            : msg`Disabled`
-          : msg`Permission required`}
+        ${terms ? (enabled ? msg`Enabled` : msg`Disabled`) : msg`Permission required`}
       </ui-text>
     </template>
   `.css`

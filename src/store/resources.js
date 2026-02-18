@@ -16,16 +16,10 @@ const Resources = {
   autoconsent: store.record(0), // Timestamps of Opt-out domains resolved by autoconsent
 
   [store.connect]: {
-    get: async () =>
-      chrome.storage.local
-        .get('resources')
-        .then(({ resources = {} }) => resources),
+    get: async () => chrome.storage.local.get('resources').then(({ resources = {} }) => resources),
     set: async (_, values) => {
       await chrome.storage.local.set({
-        resources:
-          __PLATFORM__ === 'firefox'
-            ? JSON.parse(JSON.stringify(values))
-            : values,
+        resources: __PLATFORM__ === 'firefox' ? JSON.parse(JSON.stringify(values)) : values,
       });
 
       return values;

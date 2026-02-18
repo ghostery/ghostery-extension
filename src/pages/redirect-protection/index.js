@@ -62,19 +62,13 @@ const RedirectProtection = {
       <ui-page-layout>
         ${store.ready(target) &&
         html`
-          <ui-card
-            layout="block:center column gap width:::640px"
-            layout@768px="padding:5"
-          >
+          <ui-card layout="block:center column gap width:::640px" layout@768px="padding:5">
             ${target.tracker &&
             html`
-              <ui-text type="display-s" layout="margin:bottom:2">
-                Redirect Alert
-              </ui-text>
+              <ui-text type="display-s" layout="margin:bottom:2"> Redirect Alert </ui-text>
 
               <ui-text>
-                This page was prevented from loading due to a known tracking
-                redirect to:
+                This page was prevented from loading due to a known tracking redirect to:
               </ui-text>
 
               <div layout="row center gap:0.5 margin:1:0">
@@ -94,29 +88,21 @@ const RedirectProtection = {
                       Learn more about ${target.tracker.name} on WhoTracks.Me
                     </ui-text>
                   </div>
-                  <a
-                    href="${WTM_PAGE_URL}/trackers/${target.tracker.id}"
-                    target="_blank"
-                  >
+                  <a href="${WTM_PAGE_URL}/trackers/${target.tracker.id}" target="_blank">
                     <ui-icon name="info" color="brand-primary"></ui-icon>
                   </a>
                 </ui-tooltip>
               </div>
 
-              <ui-text>
-                To visit the intended page, you need to allow this redirect.
-              </ui-text>
+              <ui-text> To visit the intended page, you need to allow this redirect. </ui-text>
             `}
             ${!target.tracker &&
             html`
-              <ui-text type="display-s" layout="margin:bottom:2">
-                Security Alert
-              </ui-text>
+              <ui-text type="display-s" layout="margin:bottom:2"> Security Alert </ui-text>
 
               <ui-text>
-                This page was prevented from loading because it may be
-                malicious. The redirect destination is unknown and could pose a
-                security or privacy risk:
+                This page was prevented from loading because it may be malicious. The redirect
+                destination is unknown and could pose a security or privacy risk:
               </ui-text>
 
               <ui-text
@@ -129,9 +115,7 @@ const RedirectProtection = {
                 ${target.url}
               </ui-text>
 
-              <ui-text>
-                For your safety, Ghostery blocked this page automatically.
-              </ui-text>
+              <ui-text> For your safety, Ghostery blocked this page automatically. </ui-text>
             `}
 
             <div layout="column gap:2 margin:top:3">

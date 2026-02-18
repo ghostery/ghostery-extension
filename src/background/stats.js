@@ -74,11 +74,7 @@ async function refreshIcon(tabId) {
   if (__PLATFORM__ !== 'firefox' && isOpera() && options.terms) {
     isSerpSupported().then(async (supported) => {
       if (!supported) {
-        setBadgeColor(
-          (await hasAccessToPage(tabId))
-            ? undefined
-            : '#f13436' /* danger-500 */,
-        );
+        setBadgeColor((await hasAccessToPage(tabId)) ? undefined : '#f13436' /* danger-500 */);
       }
     });
   }
@@ -161,9 +157,7 @@ async function pushTabStats(stats, requests) {
   for (const request of requests) {
     const metadata =
       getMetadata(request) ||
-      ((request.blocked ||
-        request.modified ||
-        options.exceptions[request.hostname]) &&
+      ((request.blocked || request.modified || options.exceptions[request.hostname]) &&
         getUnidentifiedTracker(request.hostname));
 
     if (metadata) {
@@ -193,8 +187,7 @@ async function pushTabStats(stats, requests) {
         if (
           request.blocked ||
           request.modified ||
-          tracker.requests.filter((r) => !r.blocked && !r.modified).length <
-            OBSERVED_REQUESTS_LIMIT
+          tracker.requests.filter((r) => !r.blocked && !r.modified).length < OBSERVED_REQUESTS_LIMIT
         ) {
           tracker.requests.unshift({
             id: request.requestId,
@@ -231,20 +224,17 @@ export async function updateTabStats(tabId, requests) {
   // (e.g. requests on trailing edge when navigation to a new page is in progress)
   requests = requests.filter(
     // As a fallback, we assume that the request is from the origin URL
-    (request) =>
-      !request.sourceHostname ||
-      request.sourceHostname.endsWith(stats.hostname),
+    (request) => !request.sourceHostname || request.sourceHostname.endsWith(stats.hostname),
   );
 
   let trackersUpdated = await pushTabStats(stats, requests);
 
   if (isWebkit() && chrome.declarativeNetRequest.getMatchedRules) {
     try {
-      const { rulesMatchedInfo } =
-        await chrome.declarativeNetRequest.getMatchedRules({
-          tabId,
-          minTimeStamp: stats.timestamp,
-        });
+      const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({
+        tabId,
+        minTimeStamp: stats.timestamp,
+      });
 
       const notFoundRequests = [];
       for (const info of rulesMatchedInfo) {
@@ -278,8 +268,7 @@ export async function updateTabStats(tabId, requests) {
       }
 
       if (notFoundRequests.length) {
-        trackersUpdated =
-          (await pushTabStats(stats, notFoundRequests)) || trackersUpdated;
+        trackersUpdated = (await pushTabStats(stats, notFoundRequests)) || trackersUpdated;
       }
     } catch (e) {
       console.error('[stats] Failed to get matched rules for stats', e);
@@ -294,9 +283,7 @@ export async function updateTabStats(tabId, requests) {
       // We need to update the icon only if new categories were added
       updateIcon(tabId);
 
-      stats.trackers.sort(
-        (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
-      );
+      stats.trackers.sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
     }
   }
 }
@@ -313,18 +300,13 @@ async function flushTabStatsToDailyStats(tabId) {
     trackersModified += tracker.modified ? 1 : 0;
   }
 
-  const dailyStats = await store.resolve(
-    DailyStats,
-    new Date().toISOString().split('T')[0],
-  );
+  const dailyStats = await store.resolve(DailyStats, new Date().toISOString().split('T')[0]);
 
   await store.set(dailyStats, {
     trackersBlocked: dailyStats.trackersBlocked + trackersBlocked,
     trackersModified: dailyStats.trackersModified + trackersModified,
     pages: dailyStats.pages + 1,
-    patterns: [
-      ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.id)]),
-    ],
+    patterns: [...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.id)])],
   });
 }
 

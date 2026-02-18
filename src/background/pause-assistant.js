@@ -40,13 +40,8 @@ async function updatePausedDomains(config, lastConfig) {
     }
   } else {
     // Add all domains with the action that weren't dismissed
-    for (const [domain, { actions, dismiss }] of Object.entries(
-      config.domains,
-    )) {
-      if (
-        !dismiss[ACTION_PAUSE_ASSISTANT] &&
-        actions.includes(ACTION_PAUSE_ASSISTANT)
-      ) {
+    for (const [domain, { actions, dismiss }] of Object.entries(config.domains)) {
+      if (!dismiss[ACTION_PAUSE_ASSISTANT] && actions.includes(ACTION_PAUSE_ASSISTANT)) {
         paused[domain] = { revokeAt: 0, assist: true };
       }
     }
@@ -85,17 +80,14 @@ store.observe(Config, async (_, config, lastConfig) => {
 
 // Clear out domains when the user disables the pause assistant
 // or changes filtering mode
-OptionsObserver.addListener(
-  async function pauseAssistant(options, lastOptions) {
-    if (
-      lastOptions &&
-      (options.pauseAssistant !== lastOptions.pauseAssistant ||
-        options.mode !== lastOptions.mode)
-    ) {
-      updatePausedDomains(await store.resolve(Config));
-    }
-  },
-);
+OptionsObserver.addListener(async function pauseAssistant(options, lastOptions) {
+  if (
+    lastOptions &&
+    (options.pauseAssistant !== lastOptions.pauseAssistant || options.mode !== lastOptions.mode)
+  ) {
+    updatePausedDomains(await store.resolve(Config));
+  }
+});
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (details.frameId === 0) {
@@ -125,9 +117,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
       });
     } else {
       const options = await store.resolve(Options);
-      const domain = Object.keys(options.paused).find((d) =>
-        hostname.endsWith(d),
-      );
+      const domain = Object.keys(options.paused).find((d) => hostname.endsWith(d));
 
       if (!hasAction && options.paused[domain]?.assist) {
         // The page is loaded, show the pause resume notification

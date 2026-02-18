@@ -78,20 +78,12 @@ export default {
     stack: () => [TrackerDetails],
   },
   options: store(Options),
-  categories: ({ query, filter }) =>
-    store.get([TrackerCategory], { query, filter }),
+  categories: ({ query, filter }) => store.get([TrackerCategory], { query, filter }),
   category: '',
   limits: undefined,
   query: '',
   filter: '',
-  render: ({
-    options,
-    categories,
-    category,
-    limits = {},
-    query,
-    filter,
-  }) => html`
+  render: ({ options, categories, category, limits = {}, query, filter }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         ${store.ready(options) &&
@@ -100,15 +92,10 @@ export default {
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m"> Tracker Database </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Mind that not all listed activities are trackers, that is not
-                all of them collect personal data.
+                Mind that not all listed activities are trackers, that is not all of them collect
+                personal data.
               </ui-text>
-              <ui-text
-                type="label-m"
-                mobile-type="body-m"
-                color="brand-primary"
-                underline
-              >
+              <ui-text type="label-m" mobile-type="body-m" color="brand-primary" underline>
                 <a
                   href="https://github.com/ghostery/trackerdb"
                   rel="noreferrer"
@@ -116,10 +103,7 @@ export default {
                   target="_blank"
                 >
                   Contribute to Ghostery Tracker Database on Github
-                  <ui-icon
-                    name="arrow-right-s"
-                    layout="block inline margin:bottom:-2px"
-                  ></ui-icon>
+                  <ui-icon name="arrow-right-s" layout="block inline margin:bottom:-2px"></ui-icon>
                 </a>
               </ui-text>
             </div>
@@ -127,14 +111,9 @@ export default {
               <ui-button
                 layout="width::12 grow"
                 layout@768px="grow:0"
-                onclick="${html.set(
-                  'category',
-                  category !== '_all' ? '_all' : '',
-                )}"
+                onclick="${html.set('category', category !== '_all' ? '_all' : '')}"
               >
-                <button>
-                  ${category !== '_all' ? msg`Expand` : msg`Collapse`}
-                </button>
+                <button>${category !== '_all' ? msg`Expand` : msg`Collapse`}</button>
               </ui-button>
               <ui-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
@@ -168,21 +147,14 @@ export default {
                     description="${description}"
                     open="${isActive(category, key)}"
                     size="${trackers.length}"
-                    adjusted="${trackers.filter((t) => options.exceptions[t.id])
-                      .length}"
-                    ontoggle="${html.set(
-                      'category',
-                      isActive(category, key) ? '' : key,
-                    )}"
+                    adjusted="${trackers.filter((t) => options.exceptions[t.id]).length}"
+                    ontoggle="${html.set('category', isActive(category, key) ? '' : key)}"
                     onclear="${clearCategory(id)}"
                   >
                     ${isActive(category, key) &&
                     html`
                       <ui-line></ui-line>
-                      <div
-                        layout="column gap"
-                        layout@768px="padding:left:102px"
-                      >
+                      <div layout="column gap" layout@768px="padding:left:102px">
                         ${trackers.map(
                           (tracker, index) =>
                             index <= (limits[key] || PATTERNS_LIMIT) &&
@@ -196,9 +168,7 @@ export default {
                                     layout="column grow basis:0"
                                     layout@768px="row gap:2"
                                   >
-                                    <ui-text type="label-m">
-                                      ${tracker.name}
-                                    </ui-text>
+                                    <ui-text type="label-m"> ${tracker.name} </ui-text>
                                     ${store.ready(tracker.organization) &&
                                     html`
                                       <ui-text color="secondary">

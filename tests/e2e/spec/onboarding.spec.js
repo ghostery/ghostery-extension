@@ -10,12 +10,7 @@
  */
 
 import { browser, expect } from '@wdio/globals';
-import {
-  enableExtension,
-  getExtensionElement,
-  getExtensionPageURL,
-  openPanel,
-} from '../utils.js';
+import { enableExtension, getExtensionElement, getExtensionPageURL, openPanel } from '../utils.js';
 
 describe('Onboarding', function () {
   it('keeps ghostery disabled', async function () {
@@ -36,9 +31,7 @@ describe('Onboarding', function () {
 
       await getExtensionElement('text:description', 'a:last-of-type').click();
 
-      await expect(
-        getExtensionElement('text:privacy-policy', 'p'),
-      ).toBeDisplayed();
+      await expect(getExtensionElement('text:privacy-policy', 'p')).toBeDisplayed();
     });
   }
 

@@ -16,20 +16,11 @@ export default {
   render: () =>
     html`
       <template layout="relative column height::100% width::359px overflow">
-        <div
-          id="bg"
-          layout="absolute top:-250px left:50% size:1648px:1525px layer:-1"
-        >
+        <div id="bg" layout="absolute top:-250px left:50% size:1648px:1525px layer:-1">
           <div id="c-1" layout="absolute left:300px top:100px size:800px"></div>
-          <div
-            id="c-2"
-            layout="absolute left:420px top:320px size:1200px"
-          ></div>
+          <div id="c-2" layout="absolute left:420px top:320px size:1200px"></div>
         </div>
-        <header
-          layout="row center padding:top:2"
-          layout@1280px="absolute top:3 left:3 padding:0;"
-        >
+        <header layout="row center padding:top:2" layout@1280px="absolute top:3 left:3 padding:0;">
           <ui-icon name="logo-with-slogan"></ui-icon>
         </header>
         <div layout="grow row content:center padding:3:1:4">

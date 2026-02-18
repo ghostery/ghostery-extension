@@ -27,28 +27,20 @@ export default {
     stack: [RedirectProtectionAddException],
   },
   options: store(Options),
-  hostnames: ({ options }) =>
-    Object.keys(options.redirectProtection.exceptions),
+  hostnames: ({ options }) => Object.keys(options.redirectProtection.exceptions),
   render: ({ options, hostnames }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         <section layout="column gap:4">
           <div layout="column gap" layout@992px="margin:bottom">
-            <settings-link
-              href="${router.backUrl()}"
-              data-qa="button:back"
-              layout="self:start"
-            >
+            <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
               <ui-icon name="chevron-left" color="primary"></ui-icon>
-              <ui-text type="headline-s" layout="row gap items:center">
-                Back
-              </ui-text>
+              <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
             </settings-link>
             <ui-text type="headline-m">Redirect Protection</ui-text>
             <ui-text type="body-l" mobile-type="body-m" color="secondary">
-              Prevents websites from redirecting you through tracking services
-              or unknown destinations that may compromise your privacy or
-              security.
+              Prevents websites from redirecting you through tracking services or unknown
+              destinations that may compromise your privacy or security.
             </ui-text>
           </div>
           <settings-card type="content">
@@ -59,11 +51,7 @@ export default {
             >
               <div layout="column grow gap:0.5">
                 <div layout="row gap items:center">
-                  <ui-icon
-                    name="globe-lock"
-                    color="quaternary"
-                    layout="size:3"
-                  ></ui-icon>
+                  <ui-icon name="globe-lock" color="quaternary" layout="size:3"></ui-icon>
                   <ui-text type="headline-xs">Redirect Protection</ui-text>
                 </div>
               </div>
@@ -75,9 +63,7 @@ export default {
               <div layout="row content:space-between items:center">
                 <ui-text type="label-l">Exceptions</ui-text>
                 <ui-button data-qa="button:redirect-protection:add">
-                  <a href="${router.url(RedirectProtectionAddException)}">
-                    Add
-                  </a>
+                  <a href="${router.url(RedirectProtectionAddException)}"> Add </a>
                 </ui-button>
               </div>
               ${hostnames.length
@@ -100,11 +86,7 @@ export default {
                                 onclick="${removeException(hostname)}"
                                 data-qa="button:redirect-protection:remove:${hostname}"
                               >
-                                <ui-icon
-                                  name="trash"
-                                  color="tertiary"
-                                  layout="size:3"
-                                ></ui-icon>
+                                <ui-icon name="trash" color="tertiary" layout="size:3"></ui-icon>
                               </button>
                             </ui-action>
                           </div>
@@ -117,11 +99,7 @@ export default {
                       layout="column center gap padding:5:0"
                       data-qa="component:redirect-protection:empty-state"
                     >
-                      <ui-icon
-                        name="block-m"
-                        layout="size:4"
-                        color="tertiary"
-                      ></ui-icon>
+                      <ui-icon name="block-m" layout="size:4" color="tertiary"></ui-icon>
                       <ui-text layout="block:center width:::200px">
                         No exceptions added yet
                       </ui-text>

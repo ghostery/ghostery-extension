@@ -16,11 +16,7 @@ import Config from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
 import { isWebkit } from '/utils/browser-info.js';
-import {
-  getDynamicRulesIds,
-  PAUSED_ID_RANGE,
-  PAUSED_RULE_PRIORITY,
-} from '/utils/dnr.js';
+import { getDynamicRulesIds, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 // Clear filtering mode and zapped data if the flag is removed
@@ -38,9 +34,7 @@ store.observe(Config, async (_, config, lastConfig) => {
       zapped: null,
     });
 
-    console.log(
-      `[zapped] Filtering mode flag removed, resetting filtering mode and zapped data`,
-    );
+    console.log(`[zapped] Filtering mode flag removed, resetting filtering mode and zapped data`);
   }
 });
 

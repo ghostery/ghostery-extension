@@ -19,9 +19,7 @@ export function registerDatabase(name) {
 }
 
 export async function deleteDatabases() {
-  const names = indexedDB.databases
-    ? (await indexedDB.databases()).map((db) => db.name)
-    : [...dbs];
+  const names = indexedDB.databases ? (await indexedDB.databases()).map((db) => db.name) : [...dbs];
 
   await Promise.allSettled(
     names.map((name) => {

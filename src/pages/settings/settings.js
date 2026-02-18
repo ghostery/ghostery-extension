@@ -90,19 +90,11 @@ export default {
             "
             slot="nav"
           >
-            <img
-              src="${assets.hands}"
-              layout="size:12"
-              alt="Contribution"
-              slot="picture"
-            />
+            <img src="${assets.hands}" layout="size:12" alt="Contribution" slot="picture" />
             <div layout="column gap:0.5">
-              <ui-text type="label-l" layout="block:center">
-                Become a Contributor
-              </ui-text>
+              <ui-text type="label-l" layout="block:center"> Become a Contributor </ui-text>
               <ui-text type="body-s" color="secondary" layout="block:center">
-                Help Ghostery fight for a web where privacy is a basic human
-                right.
+                Help Ghostery fight for a web where privacy is a basic human right.
               </ui-text>
               <ui-button type="primary" layout="margin:top">
                 <a

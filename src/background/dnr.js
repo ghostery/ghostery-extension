@@ -14,11 +14,7 @@ import { store } from 'hybrids';
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
 
-import {
-  FIXES_ID_RANGE,
-  getDynamicRulesIds,
-  filterMaxPriorityRules,
-} from '/utils/dnr.js';
+import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
@@ -76,8 +72,7 @@ if (__PLATFORM__ !== 'firefox') {
       return;
     }
 
-    const enabledRulesetIds =
-      (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
+    const enabledRulesetIds = (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
     // Add latest fixes rules
     const resources = await store.resolve(Resources);
@@ -92,22 +87,16 @@ if (__PLATFORM__ !== 'firefox') {
         try {
           console.info('[dnr] Updating dynamic fixes rules...');
 
-          const list = await fetch(
-            `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
-            {
-              // Force no caching if update was triggered by the user ("Update now" action)
-              cache:
-                lastOptions &&
-                lastOptions.filtersUpdatedAt > Date.now() - UPDATE_ENGINES_DELAY
-                  ? 'no-store'
-                  : 'default',
-            },
-          ).then((res) =>
+          const list = await fetch(`${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`, {
+            // Force no caching if update was triggered by the user ("Update now" action)
+            cache:
+              lastOptions && lastOptions.filtersUpdatedAt > Date.now() - UPDATE_ENGINES_DELAY
+                ? 'no-store'
+                : 'default',
+          }).then((res) =>
             res.ok
               ? res.json()
-              : Promise.reject(
-                  new Error(`Failed to fetch allowed lists: ${res.statusText}`),
-                ),
+              : Promise.reject(new Error(`Failed to fetch allowed lists: ${res.statusText}`)),
           );
 
           if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
@@ -116,21 +105,16 @@ if (__PLATFORM__ !== 'firefox') {
                 .then((res) =>
                   res.ok
                     ? res.json()
-                    : Promise.reject(
-                        new Error(
-                          `Failed to fetch DNR rules: ${res.statusText}`,
-                        ),
-                      ),
+                    : Promise.reject(new Error(`Failed to fetch DNR rules: ${res.statusText}`)),
                 )
                 .then(filterMaxPriorityRules),
             );
 
             for (const rule of rules) {
               if (rule.condition.regexFilter) {
-                const { isSupported } =
-                  await chrome.declarativeNetRequest.isRegexSupported({
-                    regex: rule.condition.regexFilter,
-                  });
+                const { isSupported } = await chrome.declarativeNetRequest.isRegexSupported({
+                  regex: rule.condition.regexFilter,
+                });
 
                 if (!isSupported) {
                   rules.delete(rule);
@@ -146,10 +130,7 @@ if (__PLATFORM__ !== 'firefox') {
               })),
             });
 
-            console.info(
-              '[dnr] Updated dynamic fixes rules:',
-              list.dnr.checksum,
-            );
+            console.info('[dnr] Updated dynamic fixes rules:', list.dnr.checksum);
             await store.set(Resources, {
               checksums: { [DNR_FIXES_KEY]: list.dnr.checksum },
             });
@@ -208,10 +189,7 @@ if (__PLATFORM__ !== 'firefox') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info(
-          '[dnr] Updated static rulesets:',
-          ids.length ? ids.join(', ') : 'none',
-        );
+        console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
       }

@@ -64,33 +64,24 @@ export default {
           if (!data.nodes.find((node) => node.id === tracker.organization.id)) {
             data.nodes.push({
               id: tracker.organization.id,
-              title: () =>
-                store.resolve(tracker.organization).then((org) => org.name),
+              title: () => store.resolve(tracker.organization).then((org) => org.name),
               color: 'var(--background-tertiary)',
             });
           }
 
           let edge = data.edges.find(
-            (edge) =>
-              edge.source === tracker.category &&
-              edge.target === tracker.organization.id,
+            (edge) => edge.source === tracker.category && edge.target === tracker.organization.id,
           );
 
           if (edge) {
-            edge.value += stats.trackers.reduce(
-              (acc, id) => acc + (id === tracker.id ? 1 : 0),
-              0,
-            );
+            edge.value += stats.trackers.reduce((acc, id) => acc + (id === tracker.id ? 1 : 0), 0);
             return data;
           }
 
           data.edges.push({
             source: tracker.category,
             target: tracker.organization.id,
-            value: stats.trackers.reduce(
-              (acc, id) => acc + (id === tracker.id ? 1 : 0),
-              0,
-            ),
+            value: stats.trackers.reduce((acc, id) => acc + (id === tracker.id ? 1 : 0), 0),
           });
 
           return data;

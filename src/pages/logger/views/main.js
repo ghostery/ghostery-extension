@@ -96,11 +96,7 @@ export default {
             </select>
           </ui-input>
           <ui-input layout="grow">
-            <input
-              type="search"
-              placeholder="Search..."
-              oninput="${html.set('query')}"
-            />
+            <input type="search" placeholder="Search..." oninput="${html.set('query')}" />
           </ui-input>
           <ui-input>
             <select onchange="${html.set('filterType')}" value="${filterType}">
@@ -118,11 +114,7 @@ export default {
               <ui-icon name="download" layout="size:2"></ui-icon>
             </button>
           </ui-button>
-          <ui-button
-            onclick="${refreshSelectedTab}"
-            layout="width:5"
-            disabled="${!tabId}"
-          >
+          <ui-button onclick="${refreshSelectedTab}" layout="width:5" disabled="${!tabId}">
             <button title="Refresh current tab">
               <ui-icon name="refresh" layout="size:2"></ui-icon>
             </button>
@@ -157,8 +149,8 @@ export default {
                 To view the request log, press refresh on the toolbar
               </ui-text>
               <ui-text type="body-s" color="secondary">
-                This is an experimental feature - if you encounter any issues,
-                please contact our support team.
+                This is an experimental feature - if you encounter any issues, please contact our
+                support team.
               </ui-text>
             </div>
           `}
@@ -171,33 +163,18 @@ export default {
                   layout:hover="::background:secondary"
                   onclick="${disableEllipsis}"
                 >
-                  <ui-text type="body-s" color="tertiary">
-                    ${log.time}
-                  </ui-text>
-                  <ui-text type="body-s" color="secondary">
-                    ${log.typeLabel}
-                  </ui-text>
+                  <ui-text type="body-s" color="tertiary"> ${log.time} </ui-text>
+                  <ui-text type="body-s" color="secondary"> ${log.typeLabel} </ui-text>
                   <ui-text ellipsis>${log.filter}</ui-text>
                   <div layout="row gap:0.5">
                     ${log.blocked &&
-                    html`<ui-icon
-                      name="block-s"
-                      color="danger-primary"
-                      layout="size:2"
-                    ></ui-icon>`}
+                    html`<ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>`}
                     ${log.modified &&
-                    html`<ui-icon
-                      name="eye"
-                      color="brand-primary"
-                      layout="size:2"
-                    ></ui-icon>`}
+                    html`<ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>`}
                   </div>
+                  <ui-text type="body-s" color="tertiary" ellipsis> ${log.url} </ui-text>
                   <ui-text type="body-s" color="tertiary" ellipsis>
-                    ${log.url}
-                  </ui-text>
-                  <ui-text type="body-s" color="tertiary" ellipsis>
-                    ${log.tracker}
-                    ${log.organization && html`(${log.organization})`}
+                    ${log.tracker} ${log.organization && html`(${log.organization})`}
                   </ui-text>
                 </div>
               `.key(log.id),

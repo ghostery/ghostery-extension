@@ -15,11 +15,7 @@ import Options, { GLOBAL_PAUSE_ID, MODE_DEFAULT } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
 
-import {
-  getDynamicRulesIds,
-  PAUSED_ID_RANGE,
-  PAUSED_RULE_PRIORITY,
-} from '/utils/dnr.js';
+import { getDynamicRulesIds, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
@@ -41,15 +37,11 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );
-  const revokeHostnames = Object.entries(options.paused).filter(
-    ([, { revokeAt }]) => revokeAt,
-  );
+  const revokeHostnames = Object.entries(options.paused).filter(([, { revokeAt }]) => revokeAt);
 
   // Clear alarms for removed hostnames
   alarms.forEach(({ name }) => {
-    if (
-      !revokeHostnames.find(([id]) => name === `${PAUSED_ALARM_PREFIX}:${id}`)
-    ) {
+    if (!revokeHostnames.find(([id]) => name === `${PAUSED_ALARM_PREFIX}:${id}`)) {
       chrome.alarms.clear(name);
     }
   });
@@ -68,14 +60,12 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
   if (
     __PLATFORM__ !== 'firefox' &&
     // Paused state has changed by the user interaction
-    ((lastOptions &&
-      !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
+    ((lastOptions && !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
       // Filtering mode has changed
       (lastOptions && options.mode !== lastOptions.mode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
-      (await store.resolve(ManagedConfig)).trustedDomains[0] !==
-        TRUSTED_DOMAINS_NONE_ID)
+      (await store.resolve(ManagedConfig)).trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID)
   ) {
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
     const hostnames = Object.keys(options.paused);

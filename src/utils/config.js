@@ -47,9 +47,7 @@ export function filter(item) {
         .version.split('.')
         .map((n) => parseInt(n, 10));
 
-      const filterVersion = item.filter.version
-        .split('.')
-        .map((n) => parseInt(n, 10));
+      const filterVersion = item.filter.version.split('.').map((n) => parseInt(n, 10));
 
       for (let i = 0; i < filterVersion.length; i += 1) {
         const v = version[i];

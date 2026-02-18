@@ -25,9 +25,7 @@ async function setManagedConfig(config) {
 
   await browser.execute(
     (managedConfigStr) => {
-      const managedConfig = managedConfigStr
-        ? JSON.parse(managedConfigStr)
-        : null;
+      const managedConfig = managedConfigStr ? JSON.parse(managedConfigStr) : null;
       if (managedConfig) {
         chrome.storage.local.set({ managedConfig });
       } else {
@@ -66,12 +64,8 @@ describe('Managed Configuration', function () {
     await getExtensionElement('button:detailed-view').click();
 
     for (const trackerId of TRACKER_IDS) {
-      await expect(
-        getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-      ).not.toBeDisplayed();
-      await expect(
-        getExtensionElement(`icon:tracker:${trackerId}:modified`),
-      ).not.toBeDisplayed();
+      await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
+      await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
     }
 
     await setManagedConfig({ trustedDomains: [] });

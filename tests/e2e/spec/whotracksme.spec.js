@@ -22,21 +22,15 @@ describe('WhoTracksMe', function () {
   describe('Trackers Preview', function () {
     it('displays trackers stats', async function () {
       await setWhoTracksMeToggle('wtmSerpReport', true);
-      await browser.url(
-        getExtensionPageURL('trackers-preview') + '?domain=youtube.com',
-      );
+      await browser.url(getExtensionPageURL('trackers-preview') + '?domain=youtube.com');
 
       const stats = await getExtensionElement('component:stats');
-      await expect((await stats.getProperty('categories')).length > 0).toBe(
-        true,
-      );
+      await expect((await stats.getProperty('categories')).length > 0).toBe(true);
     });
 
     it('disables the feature from popover', async function () {
       await setWhoTracksMeToggle('wtmSerpReport', true);
-      await browser.url(
-        getExtensionPageURL('trackers-preview') + '?domain=youtube.com',
-      );
+      await browser.url(getExtensionPageURL('trackers-preview') + '?domain=youtube.com');
 
       await getExtensionElement('button:disable').click();
       await getExtensionElement('button:confirm').click();
@@ -44,9 +38,7 @@ describe('WhoTracksMe', function () {
       await browser.url(getExtensionPageURL('settings'));
       await getExtensionElement('button:whotracksme').click();
 
-      const toggleValue = await getExtensionElement(
-        'toggle:wtmSerpReport',
-      ).getProperty('value');
+      const toggleValue = await getExtensionElement('toggle:wtmSerpReport').getProperty('value');
 
       await expect(toggleValue).toBe(false);
     });

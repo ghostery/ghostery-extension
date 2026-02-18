@@ -10,10 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import {
-  filterRequestHTML,
-  updateResponseHeadersWithCSP,
-} from '@ghostery/adblocker-webextension';
+import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblocker-webextension';
 import scriptlets from '@ghostery/scriptlets';
 import {
   FLAG_INJECTION_TARGET_DOCUMENT_ID,
@@ -83,9 +80,7 @@ const contentScripts = (() => {
 
 function getEnabledEngines(config) {
   if (config.terms) {
-    const list = ENGINES.filter(({ key }) => config[key]).map(
-      ({ name }) => name,
-    );
+    const list = ENGINES.filter(({ key }) => config[key]).map(({ name }) => name);
 
     if (config.regionalFilters.enabled) {
       list.push(...config.regionalFilters.regions.map((id) => `lang-${id}`));
@@ -138,9 +133,7 @@ export async function reloadMainEngine() {
   if (resolvedEngines.length) {
     engines.replace(engines.MAIN_ENGINE, resolvedEngines);
 
-    console.info(
-      `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
-    );
+    console.info(`[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`);
   } else {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
@@ -186,55 +179,44 @@ export async function updateEngines({ cache = true } = {}) {
 
 export const UPDATE_ENGINES_DELAY = 60 * 60 * 1000; // 1 hour
 export const setup = asyncSetup('adblocker', [
-  OptionsObserver.addListener(
-    async function adblockerEngines(value, lastValue) {
-      options = value;
+  OptionsObserver.addListener(async function adblockerEngines(value, lastValue) {
+    options = value;
 
-      const enabledEngines = getEnabledEngines(value);
-      const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
+    const enabledEngines = getEnabledEngines(value);
+    const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
-      if (
-        // Reload/mismatched main engine
-        !(await engines.init(engines.MAIN_ENGINE)) ||
-        // Enabled engines changed
-        (lastEnabledEngines &&
-          (enabledEngines.length !== lastEnabledEngines.length ||
-            enabledEngines.some((id, i) => id !== lastEnabledEngines[i])))
-      ) {
-        await reloadMainEngine();
-      }
+    if (
+      // Reload/mismatched main engine
+      !(await engines.init(engines.MAIN_ENGINE)) ||
+      // Enabled engines changed
+      (lastEnabledEngines &&
+        (enabledEngines.length !== lastEnabledEngines.length ||
+          enabledEngines.some((id, i) => id !== lastEnabledEngines[i])))
+    ) {
+      await reloadMainEngine();
+    }
 
-      // Update engines if filters are outdated (older than 1 hour)
-      if (options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
-        await updateEngines();
-      }
-    },
-  ),
-  OptionsObserver.addListener(
-    'experimentalFilters',
-    async (value, lastValue) => {
-      engines.setEnv('env_experimental', value);
+    // Update engines if filters are outdated (older than 1 hour)
+    if (options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
+      await updateEngines();
+    }
+  }),
+  OptionsObserver.addListener('experimentalFilters', async (value, lastValue) => {
+    engines.setEnv('env_experimental', value);
 
-      // Experimental filters changed to enabled
-      if (lastValue !== undefined && value) {
-        await updateEngines();
-      }
-    },
-  ),
+    // Experimental filters changed to enabled
+    if (lastValue !== undefined && value) {
+      await updateEngines();
+    }
+  }),
 ]);
 
-const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(
-  FLAG_INJECTION_TARGET_DOCUMENT_ID,
-);
+const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(FLAG_INJECTION_TARGET_DOCUMENT_ID);
 
 function resolveInjectionTarget(details) {
   const target = { tabId: details.tabId };
 
-  if (
-    __PLATFORM__ !== 'firefox' &&
-    INJECTION_TARGET_DOCUMENT_ID.enabled &&
-    details.documentId
-  ) {
+  if (__PLATFORM__ !== 'firefox' && INJECTION_TARGET_DOCUMENT_ID.enabled && details.documentId) {
     target.documentIds = [details.documentId];
   } else {
     target.frameIds = [details.frameId];
@@ -248,9 +230,7 @@ const scriptletGlobals = {
   // Redirect resources are defined with `use_dynamic_url` restriction.
   // The dynamic ID is generated per session.
   // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
-  warOrigin: chrome.runtime
-    .getURL('/rule_resources/redirects/empty')
-    .slice(0, -6),
+  warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
 function injectScriptlets(filters, hostname, details) {
@@ -259,10 +239,7 @@ function injectScriptlets(filters, hostname, details) {
     const parsed = filter.parseScript();
 
     if (!parsed) {
-      console.warn(
-        '[adblocker] could not inject script filter:',
-        filter.toString(),
-      );
+      console.warn('[adblocker] could not inject script filter:', filter.toString());
       continue;
     }
 
@@ -275,10 +252,7 @@ function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [
-      scriptletGlobals,
-      ...parsed.args.map((arg) => decodeURIComponent(arg)),
-    ];
+    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
 
     if (__PLATFORM__ === 'firefox') {
       if (filter.hasSubframeConstraint()) {
@@ -353,11 +327,7 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
-  if (
-    __PLATFORM__ === 'firefox' &&
-    scriptletsOnly &&
-    contentScripts.isRegistered(hostname)
-  ) {
+  if (__PLATFORM__ === 'firefox' && scriptletsOnly && contentScripts.isRegistered(hostname)) {
     return;
   }
 
@@ -505,14 +475,11 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 
 if (__PLATFORM__ === 'firefox') {
-  OptionsObserver.addListener(
-    'paused',
-    function firefoxContentScriptScriptlets(paused) {
-      for (const hostname of Object.keys(paused)) {
-        contentScripts.unregister(hostname);
-      }
-    },
-  );
+  OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
+    for (const hostname of Object.keys(paused)) {
+      contentScripts.unregister(hostname);
+    }
+  });
 
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
@@ -588,11 +555,7 @@ if (__PLATFORM__ === 'firefox') {
         const { redirect, match } = engine.match(request);
 
         if (match === true && details.type === 'main_frame') {
-          const redirectUrl = getRedirectProtectionUrl(
-            details.url,
-            request.hostname,
-            options,
-          );
+          const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
           return { redirectUrl };
         } else if (redirect !== undefined) {
           request.blocked = true;
@@ -600,9 +563,7 @@ if (__PLATFORM__ === 'firefox') {
           // extension existence.
           if (details.type !== 'xmlhttprequest') {
             result = {
-              redirectUrl: chrome.runtime.getURL(
-                'rule_resources/redirects/' + redirect.filename,
-              ),
+              redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
             };
           } else {
             result = { redirectUrl: redirect.dataUrl };
@@ -640,11 +601,7 @@ if (__PLATFORM__ === 'firefox') {
       if (htmlFilters.length !== 0) {
         request.modified = true;
         updateTabStats(details.tabId, [request]);
-        filterRequestHTML(
-          chrome.webRequest.filterResponseData,
-          request,
-          htmlFilters,
-        );
+        filterRequestHTML(chrome.webRequest.filterResponseData, request, htmlFilters);
       }
 
       if (details.type !== 'main_frame') return;

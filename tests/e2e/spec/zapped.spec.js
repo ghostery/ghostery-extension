@@ -84,12 +84,8 @@ if (argv.flags.includes(FLAG_MODES)) {
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-        ).not.toBeDisplayed();
-        await expect(
-          getExtensionElement(`icon:tracker:${trackerId}:modified`),
-        ).not.toBeDisplayed();
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
       }
     });
 
@@ -104,9 +100,7 @@ if (argv.flags.includes(FLAG_MODES)) {
         await getExtensionElement('button:detailed-view').click();
 
         for (const trackerId of TRACKER_IDS) {
-          await expect(
-            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-          ).toBeDisplayed();
+          await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).toBeDisplayed();
         }
       });
     });
@@ -146,9 +140,7 @@ if (argv.flags.includes(FLAG_MODES)) {
         await browser.url(getExtensionPageURL('settings'));
         await getExtensionElement('button:websites').click();
 
-        const pageEntry = await getExtensionElement(
-          `component:website:${PAGE_DOMAIN}`,
-        );
+        const pageEntry = await getExtensionElement(`component:website:${PAGE_DOMAIN}`);
         await expect(pageEntry).toBeDisplayed();
       });
     });

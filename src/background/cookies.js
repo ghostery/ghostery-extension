@@ -49,22 +49,14 @@ async function clearCookiesForDomain(domain) {
         });
         removed++;
 
-        console.debug(
-          `[cookies] Removed cookie ${cookie.name} for domain ${domain}`,
-        );
+        console.debug(`[cookies] Removed cookie ${cookie.name} for domain ${domain}`);
       } catch (error) {
-        console.error(
-          `[cookies] Failed to remove cookie ${cookie.name}:`,
-          error,
-        );
+        console.error(`[cookies] Failed to remove cookie ${cookie.name}:`, error);
       }
     }
 
     // Update daily stats
-    const dailyStats = await store.resolve(
-      DailyStats,
-      new Date().toISOString().split('T')[0],
-    );
+    const dailyStats = await store.resolve(DailyStats, new Date().toISOString().split('T')[0]);
 
     store.set(dailyStats, {
       cookiesRemoved: dailyStats.cookiesRemoved + removed,

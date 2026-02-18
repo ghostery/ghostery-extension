@@ -45,9 +45,7 @@ import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 import { lang } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
-const SETTINGS_URL = chrome.runtime.getURL(
-  '/pages/settings/index.html#@settings-privacy',
-);
+const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy');
 const ONBOARDING_URL = chrome.runtime.getURL(
   '/pages/onboarding/index.html#@onboarding-views-main?scrollToTop=1',
 );
@@ -98,10 +96,7 @@ async function togglePause(host, event) {
         ? msg`Ghostery has been resumed on this site.`
         : msg`Ghostery is paused on this site.`}
       <ui-text type="body-s" layout="block" underline>
-        <a
-          href="#"
-          onclick="${reloadTab}"
-          layout="row inline gap:0.5 items:center ::color:inherit"
+        <a href="#" onclick="${reloadTab}" layout="row inline gap:0.5 items:center ::color:inherit"
           >Reload to see changes</a
         >.
       </ui-text>
@@ -113,16 +108,13 @@ async function toggleZapped(host, event) {
   const { options, stats, paused } = host;
 
   // existing zapped hostname in options or current hostname
-  const zappedHostname =
-    findParentDomain(options.zapped, stats.hostname) || stats.hostname;
+  const zappedHostname = findParentDomain(options.zapped, stats.hostname) || stats.hostname;
 
   await store.set(options, {
     zapped: { [zappedHostname]: paused ? true : null },
   });
 
-  if (
-    !ZAP_AUTORELOAD_DISABLED_HOSTNAMES.find((h) => zappedHostname.endsWith(h))
-  ) {
+  if (!ZAP_AUTORELOAD_DISABLED_HOSTNAMES.find((h) => zappedHostname.endsWith(h))) {
     await reloadTab(host, event);
   }
 }
@@ -134,10 +126,7 @@ async function toggleGlobalPause(host) {
     <panel-alert type="danger">
       Ghostery has been resumed.
       <ui-text type="body-s" layout="block" underline>
-        <a
-          href="#"
-          onclick="${reloadTab}"
-          layout="row inline gap:0.5 items:center ::color:inherit"
+        <a href="#" onclick="${reloadTab}" layout="row inline gap:0.5 items:center ::color:inherit"
           >Reload to see changes</a
         >.
       </ui-text>
@@ -196,8 +185,7 @@ export default {
   resources: store(Resources),
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
-  globalPause: ({ options }) =>
-    store.ready(options) && isGloballyPaused(options),
+  globalPause: ({ options }) => store.ready(options) && isGloballyPaused(options),
   contentBlocksSelectors: ({ elementPickerSelectors, stats }) =>
     (store.ready(stats, elementPickerSelectors) &&
       elementPickerSelectors.hostnames[stats.hostname]?.length) ||
@@ -224,17 +212,12 @@ export default {
         html`
           <ui-header>
             ${store.ready(stats) &&
-            (managedConfig.disableUserControl ||
-              (options.mode === MODE_ZAP && paused)) &&
+            (managedConfig.disableUserControl || (options.mode === MODE_ZAP && paused)) &&
             html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
             ${options.mode === MODE_DEFAULT &&
             html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`}
             ${options.mode === MODE_ZAP &&
-            html`<ui-icon
-              name="logo-zap"
-              slot="icon"
-              layout="margin:left:-1"
-            ></ui-icon>`}
+            html`<ui-icon name="logo-zap" slot="icon" layout="margin:left:-1"></ui-icon>`}
             ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
@@ -257,65 +240,41 @@ export default {
                 <button>
                   <panel-actions-icon name="hide-element"></panel-actions-icon>
                   Hide content block
-                  <ui-icon
-                    name="chevron-right"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
+                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                 </button>
               </panel-actions-button>
               <panel-actions-button>
                 <a href="${router.url(ReportCategory)}">
                   <panel-actions-icon name="report"></panel-actions-icon>
                   Report an issue
-                  <ui-icon
-                    name="chevron-right"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
+                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                 </a>
               </panel-actions-button>
               <panel-actions-button>
-                <a
-                  href="${router.url(ClearCookies)}"
-                  data-qa="button:clear-cookies"
-                >
+                <a href="${router.url(ClearCookies)}" data-qa="button:clear-cookies">
                   <panel-actions-icon name="cookie"></panel-actions-icon>
                   Clear cookies
-                  <ui-icon
-                    name="chevron-right"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
+                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                 </a>
               </panel-actions-button>
               <panel-actions-button>
                 <button onclick="${openLogger}">
                   <panel-actions-icon name="open-book"></panel-actions-icon>
                   View details logs
-                  <ui-icon
-                    name="chevron-right"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
+                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                 </button>
               </panel-actions-button>
               <panel-actions-button>
                 <a
                   onclick="${openTabWithUrl}"
                   href="${chrome.runtime.getURL(
-                    '/pages/settings/index.html#@settings-website-details?domain=' +
-                      stats.hostname,
+                    '/pages/settings/index.html#@settings-website-details?domain=' + stats.hostname,
                   )}"
                   data-qa="button:website-settings"
                 >
                   <panel-actions-icon name="settings"></panel-actions-icon>
                   Open website settings
-                  <ui-icon
-                    name="link-external-m"
-                    color="tertiary"
-                    layout="size:2"
-                  ></ui-icon>
+                  <ui-icon name="link-external-m" color="tertiary" layout="size:2"></ui-icon>
                 </a>
               </panel-actions-button>
             </panel-actions>
@@ -324,16 +283,8 @@ export default {
         ${!options.terms &&
         html`
           <div layout="::background:danger-primary">
-            <ui-button
-              type="danger"
-              layout="height:6 margin:1.5"
-              data-qa="button:enable"
-            >
-              <a
-                href="${ONBOARDING_URL}"
-                layout="row center gap:0.5"
-                onclick="${openTabWithUrl}"
-              >
+            <ui-button type="danger" layout="height:6 margin:1.5" data-qa="button:enable">
+              <a href="${ONBOARDING_URL}" layout="row center gap:0.5" onclick="${openTabWithUrl}">
                 <ui-icon name="play"></ui-icon>
                 Enable Ghostery
               </a>
@@ -364,10 +315,7 @@ export default {
                     layout="row center gap padding:0.5:1:1 margin:top:-1"
                   >
                     <ui-text type="body-s">Something wrong?</ui-text>
-                    <ui-text
-                      type="label-s"
-                      layout="row inline items:center gap:0.5"
-                    >
+                    <ui-text type="label-s" layout="row inline items:center gap:0.5">
                       Report an issue
                       <ui-icon name="chevron-right" layout="size:1.5"></ui-icon>
                     </ui-text>
@@ -383,11 +331,7 @@ export default {
                     href="${router.url(PauseAssistant)}"
                     layout="row center padding:0.5:1:1 margin:top:-1"
                   >
-                    <ui-text
-                      type="label-s"
-                      color="onbrand"
-                      layout="row items:center gap:0.5"
-                    >
+                    <ui-text type="label-s" color="onbrand" layout="row items:center gap:0.5">
                       Paused by Browsing Assistant
                       <ui-icon name="info" layout="size:1.5"></ui-icon>
                     </ui-text>
@@ -439,11 +383,7 @@ export default {
                   ${!stats.groupedTrackers.length &&
                   html`
                     <ui-list layout="grow margin:0.5:0" slot="list">
-                      <ui-text
-                        type="body-s"
-                        color="secondary"
-                        layout="grow row center"
-                      >
+                      <ui-text type="body-s" color="secondary" layout="grow row center">
                         No activities detected
                       </ui-text>
                     </ui-list>
@@ -463,9 +403,7 @@ export default {
                         <section layout="column gap:0.5">
                           ${trackers.map(
                             (tracker) => html`
-                              <div
-                                layout="row gap content:space-between items:center"
-                              >
+                              <div layout="row gap content:space-between items:center">
                                 <ui-text type="body-s">
                                   <a
                                     href="${router.url(TrackerDetails, {
@@ -475,16 +413,10 @@ export default {
                                     data-qa="button:tracker:${tracker.id}"
                                   >
                                     <ui-tooltip>
-                                      <span slot="content">
-                                        View activity details
-                                      </span>
-                                      <ui-tracker-name>
-                                        ${tracker.name}
-                                      </ui-tracker-name>
+                                      <span slot="content"> View activity details </span>
+                                      <ui-tracker-name> ${tracker.name} </ui-tracker-name>
                                     </ui-tooltip>
-                                    <ui-stats-badge>
-                                      ${tracker.requestsCount}
-                                    </ui-stats-badge>
+                                    <ui-stats-badge> ${tracker.requestsCount} </ui-stats-badge>
                                     ${tracker.blocked &&
                                     html`<ui-icon
                                       name="block-s"
@@ -552,10 +484,7 @@ export default {
                   `}
                   ${consentManaged &&
                   html`
-                    <panel-feedback-button
-                      type="autoconsent"
-                      icon="autoconsent-managed"
-                    >
+                    <panel-feedback-button type="autoconsent" icon="autoconsent-managed">
                       Consent managed
                     </panel-feedback-button>
                   `}
@@ -578,15 +507,8 @@ export default {
               `
             : html`
                 <div layout="column items:center gap margin:1.5">
-                  <img
-                    src="${sleep}"
-                    alt="Ghosty sleeping"
-                    layout="size:160px"
-                  />
-                  <ui-text
-                    type="label-l"
-                    layout="block:center width:::210px margin:top"
-                  >
+                  <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
+                  <ui-text type="label-l" layout="block:center width:::210px margin:top">
                     Ghostery has nothing to do on this page
                   </ui-text>
                   <ui-text type="body-m" layout="block:center width:::245px">
@@ -594,26 +516,17 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <ui-action
-            hidden="${globalPause}"
-            inert="${managedConfig.disableUserControl}"
-          >
+          <ui-action hidden="${globalPause}" inert="${managedConfig.disableUserControl}">
             <a
               href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
               class="${{
-                last:
-                  managedConfig.disableUserControl ||
-                  !store.ready(notification),
+                last: managedConfig.disableUserControl || !store.ready(notification),
               }}"
               onclick="${openTabWithUrl}"
               layout="block margin:1.5:1.5:0.5"
               layout.last="margin:bottom:1.5"
             >
-              <panel-options-item
-                icon="ads"
-                enabled="${options.blockAds}"
-                terms="${options.terms}"
-              >
+              <panel-options-item icon="ads" enabled="${options.blockAds}" terms="${options.terms}">
                 Ad-Blocking
               </panel-options-item>
               <panel-options-item

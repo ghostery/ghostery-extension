@@ -28,46 +28,28 @@ function forPausedHostnames(...hostnames) {
 
 describe('findParentDomain', () => {
   it('should find exact matches', () => {
-    assert.equal(
-      findParentDomain(forPausedHostnames('foo.test'), 'foo.test'),
-      'foo.test',
-    );
+    assert.equal(findParentDomain(forPausedHostnames('foo.test'), 'foo.test'), 'foo.test');
   });
 
   it('should return null when no matching domain is found', () => {
-    assert.equal(
-      findParentDomain(forPausedHostnames('foo.test'), 'bar.test'),
-      null,
-    );
+    assert.equal(findParentDomain(forPausedHostnames('foo.test'), 'bar.test'), null);
   });
 
   it('should find parent domain for subdomain', () => {
-    assert.equal(
-      findParentDomain(forPausedHostnames('foo.test'), 'www.foo.test'),
-      'foo.test',
-    );
+    assert.equal(findParentDomain(forPausedHostnames('foo.test'), 'www.foo.test'), 'foo.test');
   });
 
   it('should not match against a smaller included string', () => {
-    assert.equal(
-      findParentDomain(forPausedHostnames('foobar.test'), 'bar.test'),
-      null,
-    );
+    assert.equal(findParentDomain(forPausedHostnames('foobar.test'), 'bar.test'), null);
   });
 
   it('should not match against a bigger included string', () => {
-    assert.equal(
-      findParentDomain(forPausedHostnames('bar.test'), 'foobar.test'),
-      null,
-    );
+    assert.equal(findParentDomain(forPausedHostnames('bar.test'), 'foobar.test'), null);
   });
 
   it('should return the shortest matching domain when multiple match', () => {
     assert.equal(
-      findParentDomain(
-        forPausedHostnames('foo.test', 'sub.foo.test'),
-        'deeper.sub.foo.test',
-      ),
+      findParentDomain(forPausedHostnames('foo.test', 'sub.foo.test'), 'deeper.sub.foo.test'),
       'foo.test',
     );
   });
@@ -77,13 +59,7 @@ describe('findParentDomain', () => {
   });
 
   it('should work in a longer example', () => {
-    const record = forPausedHostnames(
-      'foo.test',
-      'sub.foo.test',
-      'bar.test',
-      'a.test',
-      'b.test',
-    );
+    const record = forPausedHostnames('foo.test', 'sub.foo.test', 'bar.test', 'a.test', 'b.test');
     assert.equal(findParentDomain(record, 'foo.test'), 'foo.test');
     assert.equal(findParentDomain(record, 'sub.foo.test'), 'foo.test');
     assert.equal(findParentDomain(record, 'other.foo.test'), 'foo.test');

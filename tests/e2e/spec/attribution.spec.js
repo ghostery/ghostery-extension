@@ -10,11 +10,7 @@
  */
 
 import { browser, expect } from '@wdio/globals';
-import {
-  enableExtension,
-  getExtensionElement,
-  getExtensionPageURL,
-} from '../utils.js';
+import { enableExtension, getExtensionElement, getExtensionPageURL } from '../utils.js';
 
 describe('Attribution', () => {
   // The attribution cookie must be set before enableExtension() - see tests/e2e/wdio.js
@@ -24,8 +20,6 @@ describe('Attribution', () => {
     await browser.url(getExtensionPageURL('settings'));
 
     await expect(getExtensionElement('text:utm-source')).toHaveText('source');
-    await expect(getExtensionElement('text:utm-campaign')).toHaveText(
-      'campaign',
-    );
+    await expect(getExtensionElement('text:utm-campaign')).toHaveText('campaign');
   });
 });

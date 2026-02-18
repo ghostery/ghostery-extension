@@ -43,10 +43,7 @@ export function setupNotificationPage(width = 440) {
   document.body.style.overflow = 'hidden';
 
   chrome.runtime.onMessage.addListener((msg) => {
-    if (
-      msg.action === CLEAR_ACTION &&
-      location.pathname.split('/').pop() === msg.id
-    ) {
+    if (msg.action === CLEAR_ACTION && location.pathname.split('/').pop() === msg.id) {
       window.parent.postMessage({ type: CLOSE_WINDOW_EVENT }, '*');
     }
   });
@@ -55,10 +52,7 @@ export function setupNotificationPage(width = 440) {
     // In some cases await for store.set() is not enough to propagate changes
     // so we need to wait a bit before sending the message
     setTimeout(() => {
-      window.parent.postMessage(
-        { type: CLOSE_WINDOW_EVENT, clear, reload },
-        '*',
-      );
+      window.parent.postMessage({ type: CLOSE_WINDOW_EVENT, clear, reload }, '*');
     }, 100);
   };
 }

@@ -11,9 +11,7 @@
 
 export default function asyncSetup(id, promises, threshold = 10000) {
   const timeoutId = setTimeout(() => {
-    console.warn(
-      `[setup] Initial setup of '${id}' exceeded threshold of ${threshold / 1000}s`,
-    );
+    console.warn(`[setup] Initial setup of '${id}' exceeded threshold of ${threshold / 1000}s`);
   }, threshold);
 
   const result = {

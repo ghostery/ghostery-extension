@@ -33,21 +33,13 @@ export default {
           html`
             <div id="icon" layout="row center shrink:0">
               ${notification.icon &&
-              html`<ui-icon
-                name="${notification.icon}"
-                layout="margin size:3"
-              ></ui-icon>`}
-              ${notification.img &&
-              html`<img src="${notification.img}" alt="" />`}
+              html`<ui-icon name="${notification.icon}" layout="margin size:3"></ui-icon>`}
+              ${notification.img && html`<img src="${notification.img}" alt="" />`}
             </div>
           `}
           <div layout="column gap grow">
-            <ui-text id="desc" type="body-s" color="secondary">
-              ${notification.text}
-            </ui-text>
-            <ui-text id="action" type="label-s">
-              ${notification.action}
-            </ui-text>
+            <ui-text id="desc" type="body-s" color="secondary"> ${notification.text} </ui-text>
+            <ui-text id="action" type="label-s"> ${notification.action} </ui-text>
           </div>
         </a>
       </ui-action>

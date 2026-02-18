@@ -17,10 +17,8 @@ export default {
   options: store(Options),
   trackerId: '',
   hostname: '',
-  label: ({ options, trackerId, hostname }) =>
-    getLabel(options, trackerId, hostname),
-  exceptionStatus: ({ options, trackerId, hostname }) =>
-    getStatus(options, trackerId, hostname),
+  label: ({ options, trackerId, hostname }) => getLabel(options, trackerId, hostname),
+  exceptionStatus: ({ options, trackerId, hostname }) => getStatus(options, trackerId, hostname),
   render: ({ label, exceptionStatus }) => html`
     <template layout="contents">
       <ui-tooltip>

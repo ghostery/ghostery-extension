@@ -21,10 +21,7 @@ import Resources from '/store/resources.js';
 import { parseWithCache } from '/utils/request.js';
 
 async function initialize(msg, sender) {
-  const [options, config] = await Promise.all([
-    store.resolve(Options),
-    store.resolve(Config),
-  ]);
+  const [options, config] = await Promise.all([store.resolve(Options), store.resolve(Config)]);
 
   if (options.terms && options.blockAnnoyances) {
     const { tab, frameId } = sender;
@@ -73,8 +70,7 @@ async function evalCode(snippetId, id, tabId, frameId) {
       frameIds: [frameId],
     },
     world:
-      chrome.scripting.ExecutionWorld?.MAIN ??
-      (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+      chrome.scripting.ExecutionWorld?.MAIN ?? (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
     func: evalSnippets[snippetId],
   });
 

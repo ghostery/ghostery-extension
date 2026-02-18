@@ -59,10 +59,7 @@ function updateExtended() {
         if (selector.remove === true) {
           element.textContent = '';
           element.remove();
-        } else if (
-          selector.attribute !== undefined &&
-          HIDDEN.has(element) === false
-        ) {
+        } else if (selector.attribute !== undefined && HIDDEN.has(element) === false) {
           elementsToHide.set(element, { selector, root });
         }
       }

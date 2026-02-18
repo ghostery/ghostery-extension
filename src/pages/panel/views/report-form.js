@@ -67,9 +67,7 @@ export default {
   render: ({ form }) => html`
     <template layout="column grow shrink">
       <ui-header>
-        <ui-text type="label-m" layout="row gap items:center">
-          Report an issue
-        </ui-text>
+        <ui-text type="label-m" layout="row gap items:center"> Report an issue </ui-text>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
             <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
@@ -88,11 +86,7 @@ export default {
             !store.pending(form) &&
             html`
               <div layout="row gap">
-                <ui-icon
-                  name="warning"
-                  layout="inline size:2"
-                  color="danger-primary"
-                ></ui-icon>
+                <ui-icon name="warning" layout="inline size:2" color="danger-primary"></ui-icon>
                 <ui-text type="body-s" color="danger-primary">
                   ${store.error(form)?.message}
                 </ui-text>
@@ -156,9 +150,7 @@ export default {
                   onchange="${html.set(form, 'screenshot')}"
                 />
               </ui-input>
-              <ui-text type="body-s">
-                Include a screenshot of the current page
-              </ui-text>
+              <ui-text type="body-s"> Include a screenshot of the current page </ui-text>
             </label>
             <panel-card layout="padding">
               <ui-text type="body-s" color="secondary">

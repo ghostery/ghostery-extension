@@ -14,10 +14,7 @@ import { html } from 'hybrids';
 export default {
   render: () =>
     html`
-      <template
-        layout="column overflow size:96px:64px shrink:0"
-        layout@768px="size:120px:80px"
-      >
+      <template layout="column overflow size:96px:64px shrink:0" layout@768px="size:120px:80px">
         <slot></slot>
       </template>
     `.css`

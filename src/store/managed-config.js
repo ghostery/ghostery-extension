@@ -27,8 +27,7 @@ const ManagedConfig = {
   trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
   customFilters: { enabled: false, filters: [String] },
 
-  disableNotifications: (config) =>
-    config.disableOnboarding || config.disableUserControl,
+  disableNotifications: (config) => config.disableOnboarding || config.disableUserControl,
 
   disableModes: (config) =>
     config.disableOnboarding ||
@@ -59,8 +58,7 @@ const ManagedConfig = {
           chrome.storage.local.set({ managedConfig });
         } else {
           // Try to get local version as fallback
-          const { managedConfig: fallbackConfig } =
-            await chrome.storage.local.get('managedConfig');
+          const { managedConfig: fallbackConfig } = await chrome.storage.local.get('managedConfig');
 
           managedConfig = fallbackConfig;
         }

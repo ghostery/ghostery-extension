@@ -10,12 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import {
-  parseFilters,
-  detectFilterType,
-  FilterType,
-  CosmeticFilter,
-} from '@ghostery/adblocker';
+import { parseFilters, detectFilterType, FilterType, CosmeticFilter } from '@ghostery/adblocker';
 
 import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
@@ -37,11 +32,7 @@ class TrustedScriptletError extends Error {}
 function fixScriptlet(filter, trustedScriptlets) {
   const cosmeticFilter = CosmeticFilter.parse(filter);
 
-  if (
-    !cosmeticFilter ||
-    !cosmeticFilter.isScriptInject() ||
-    !cosmeticFilter.selector
-  ) {
+  if (!cosmeticFilter || !cosmeticFilter.isScriptInject() || !cosmeticFilter.selector) {
     return null;
   }
 
@@ -83,9 +74,7 @@ function normalizeFilters(text = '', { trustedScriptlets }) {
           filters.cosmeticFilters.add(scriptlet || filter);
         } catch (e) {
           if (e instanceof TrustedScriptletError) {
-            filters.errors.push(
-              `Trusted scriptlets are not allowed (${index + 1}): ${filter}`,
-            );
+            filters.errors.push(`Trusted scriptlets are not allowed (${index + 1}): ${filter}`);
           } else {
             console.error(e);
           }
@@ -152,16 +141,10 @@ export async function updateCustomFilters(input, options) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
-  const { networkFilters, cosmeticFilters, errors } = normalizeFilters(
-    input,
-    options,
-  );
+  const { networkFilters, cosmeticFilters, errors } = normalizeFilters(input, options);
 
   const result = await updateEngine(
-    [
-      ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
-      ...cosmeticFilters,
-    ].join('\n'),
+    [...(__PLATFORM__ === 'firefox' ? networkFilters : []), ...cosmeticFilters].join('\n'),
   );
 
   result.errors = errors;
@@ -171,9 +154,7 @@ export async function updateCustomFilters(input, options) {
 
   // Update DNR rules for Chromium and Safari
   if (__PLATFORM__ !== 'firefox') {
-    const { rules, errors } = await convert(
-      [...networkFilters].map((f) => f.toString()),
-    );
+    const { rules, errors } = await convert([...networkFilters].map((f) => f.toString()));
 
     if (errors?.length) {
       result.errors.push(...errors);
@@ -212,11 +193,7 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
   // 2. Custom filters are enabled
   // 3. We cannot initialize engine (adblocker version mismatch, etc.)
   // Result: Re-initialize custom engine
-  if (
-    !lastValue &&
-    value.enabled &&
-    !(await engines.init(engines.CUSTOM_ENGINE))
-  ) {
+  if (!lastValue && value.enabled && !(await engines.init(engines.CUSTOM_ENGINE))) {
     const { text } = await store.resolve(CustomFilters);
     await updateCustomFilters(text, value);
   } else if (

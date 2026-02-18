@@ -19,35 +19,26 @@ export default {
         <ui-text slot="header" type="headline-m" mobile-type="headline-s">
           Data Collection Summary
         </ui-text>
-        <ui-text slot="header" type="headline-s" mobile-type="headline-s">
-          Web Trackers
-        </ui-text>
+        <ui-text slot="header" type="headline-s" mobile-type="headline-s"> Web Trackers </ui-text>
         <ui-text>
-          To provide privacy protection features, the following information
-          about web trackers is collected:
+          To provide privacy protection features, the following information about web trackers is
+          collected:
         </ui-text>
         <ui-text>
           <ul>
             <li>request metadata of potential web trackers</li>
             <li>statistical reports on navigational routes</li>
-            <li>
-              hashes of potentially unique identifier in requests parameters
-            </li>
+            <li>hashes of potentially unique identifier in requests parameters</li>
             <li>k-anonymity protected reports of page shows</li>
           </ul>
         </ui-text>
-        <ui-text
-          type="body-s"
-          color="secondary"
-          layout="margin:top block:justify"
-        >
-          Ghostery never collects personal information like passwords, browsing
-          history or the content of the pages you visit.
+        <ui-text type="body-s" color="secondary" layout="margin:top block:justify">
+          Ghostery never collects personal information like passwords, browsing history or the
+          content of the pages you visit.
         </ui-text>
         <ui-text type="body-s" color="secondary" layout="block:justify">
-          Being an EU company, Ghostery strictly adheres to the GDPR (The
-          General Data Protection Regulation), which regulates data collection
-          to ensure user's privacy.
+          Being an EU company, Ghostery strictly adheres to the GDPR (The General Data Protection
+          Regulation), which regulates data collection to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
           <a href="${router.backUrl()}">Close</a>

@@ -28,9 +28,7 @@ const resources = await fetch(
   `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${revision}/list.txt`,
 ).then((res) => {
   if (!res.ok) {
-    throw new Error(
-      `Failed to fetch resources: ${res.status}: ${res.statusText}`,
-    );
+    throw new Error(`Failed to fetch resources: ${res.status}: ${res.statusText}`);
   }
 
   return res.json();
@@ -40,10 +38,7 @@ for (const redirect of resources.redirects) {
   const outputPath = resolve(redirectsPath, redirect.name);
 
   if (redirect.contentType.includes('base64')) {
-    writeFileSync(
-      outputPath,
-      Buffer.from(redirect.body, 'base64').toString('binary'),
-    );
+    writeFileSync(outputPath, Buffer.from(redirect.body, 'base64').toString('binary'));
   } else {
     writeFileSync(outputPath, redirect.body);
   }

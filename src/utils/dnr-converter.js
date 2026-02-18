@@ -23,8 +23,7 @@ export default async function convert(filters) {
         filters,
       });
     } else {
-      const { default: convertWithAdguard } =
-        await import('@ghostery/urlfilter2dnr/adguard');
+      const { default: convertWithAdguard } = await import('@ghostery/urlfilter2dnr/adguard');
       result = await convertWithAdguard(filters, {
         resourcesPath: '/rule_resources/redirects',
       });
@@ -39,10 +38,9 @@ export default async function convert(filters) {
 
   for (const [index, rule] of result.rules.entries()) {
     if (rule.condition.regexFilter) {
-      const { isSupported, reason } =
-        await chrome.declarativeNetRequest.isRegexSupported({
-          regex: rule.condition.regexFilter,
-        });
+      const { isSupported, reason } = await chrome.declarativeNetRequest.isRegexSupported({
+        regex: rule.condition.regexFilter,
+      });
 
       if (!isSupported) {
         result.errors.push(

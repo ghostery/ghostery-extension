@@ -41,9 +41,7 @@ function updateGlobalPause({ options }, value, lastValue) {
 
   store.set(options, {
     paused: {
-      [GLOBAL_PAUSE_ID]: value
-        ? { revokeAt: Date.now() + 24 * 60 * 60 * 1000 }
-        : null,
+      [GLOBAL_PAUSE_ID]: value ? { revokeAt: Date.now() + 24 * 60 * 60 * 1000 } : null,
     },
   });
 }
@@ -54,13 +52,7 @@ function updateEngines(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [
-      RegionalFilters,
-      ExperimentalFilters,
-      CustomFilters,
-      Serp,
-      RedirectProtection,
-    ],
+    stack: [RegionalFilters, ExperimentalFilters, CustomFilters, Serp, RedirectProtection],
   },
   options: store(Options),
   config: store(Config),
@@ -71,20 +63,12 @@ export default {
     observe: updateGlobalPause,
   },
   globalPauseRevokeAt: {
-    value: ({ options }) =>
-      store.ready(options) && options.paused[GLOBAL_PAUSE_ID]?.revokeAt,
+    value: ({ options }) => store.ready(options) && options.paused[GLOBAL_PAUSE_ID]?.revokeAt,
     observe: (host, value) => {
       host.globalPause = value;
     },
   },
-  render: ({
-    options,
-    config,
-    managedConfig,
-    devMode,
-    globalPause,
-    globalPauseRevokeAt,
-  }) => html`
+  render: ({ options, config, managedConfig, devMode, globalPause, globalPauseRevokeAt }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -93,9 +77,8 @@ export default {
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m">Privacy protection</ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Ghostery protects your privacy by detecting and neutralizing
-                different types of data collection including ads, trackers, and
-                cookie pop-ups.
+                Ghostery protects your privacy by detecting and neutralizing different types of data
+                collection including ads, trackers, and cookie pop-ups.
               </ui-text>
             </div>
             <ui-toggle
@@ -105,15 +88,11 @@ export default {
             >
               <settings-option icon="pause">
                 Pause Ghostery
-                <span slot="description">
-                  Suspends privacy protection globally for 1 day.
-                </span>
+                <span slot="description"> Suspends privacy protection globally for 1 day. </span>
                 ${globalPauseRevokeAt &&
                 html`
                   <ui-text type="body-s" color="secondary" slot="footer">
-                    <ui-revoke-at
-                      revokeAt="${globalPauseRevokeAt}"
-                    ></ui-revoke-at>
+                    <ui-revoke-at revokeAt="${globalPauseRevokeAt}"></ui-revoke-at>
                   </ui-text>
                 `}
               </settings-option>
@@ -145,8 +124,7 @@ export default {
                   <settings-option icon="tracking">
                     Anti-Tracking
                     <span slot="description">
-                      Prevents various tracking techniques using AI-driven
-                      technology.
+                      Prevents various tracking techniques using AI-driven technology.
                     </span>
                   </settings-option>
                 </ui-toggle>
@@ -157,9 +135,7 @@ export default {
                 >
                   <settings-option icon="autoconsent">
                     Never-Consent
-                    <span slot="description">
-                      Automatically rejects cookie consent notices.
-                    </span>
+                    <span slot="description"> Automatically rejects cookie consent notices. </span>
                   </settings-option>
                 </ui-toggle>
               </div>
@@ -172,16 +148,9 @@ export default {
                       color="quaternary"
                       layout="size:3 margin:right"
                     ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      layout="row gap:0.5 items:center"
-                    >
+                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                       Search Engine Redirect Protection </ui-text
-                    ><ui-icon
-                      name="chevron-right"
-                      color="primary"
-                      layout="size:2"
-                    ></ui-icon>
+                    ><ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
                   </settings-link>
                   <ui-toggle
                     value="${options.serpTrackingPrevention}"
@@ -194,22 +163,11 @@ export default {
                     href="${router.url(RegionalFilters)}"
                     data-qa="button:regional-filters"
                   >
-                    <ui-icon
-                      name="pin"
-                      color="quaternary"
-                      layout="size:3 margin:right"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      layout="row gap:0.5 items:center"
-                    >
+                    <ui-icon name="pin" color="quaternary" layout="size:3 margin:right"></ui-icon>
+                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                       Regional Filters
                     </ui-text>
-                    <ui-icon
-                      name="chevron-right"
-                      color="primary"
-                      layout="size:2"
-                    ></ui-icon>
+                    <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
                   </settings-link>
                   <ui-toggle
                     value="${options.regionalFilters.enabled}"
@@ -218,9 +176,7 @@ export default {
                   >
                   </ui-toggle>
                 </div>
-                <settings-managed
-                  value="${managedConfig.customFilters.enabled}"
-                >
+                <settings-managed value="${managedConfig.customFilters.enabled}">
                   <div layout="grid:1|max content:center gap">
                     <settings-link
                       href="${!managedConfig.customFilters.enabled
@@ -233,17 +189,10 @@ export default {
                         color="quaternary"
                         layout="size:3 margin:right"
                       ></ui-icon>
-                      <ui-text
-                        type="headline-xs"
-                        layout="row gap:0.5 items:center"
-                      >
+                      <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                         Custom Filters
                       </ui-text>
-                      <ui-icon
-                        name="chevron-right"
-                        color="primary"
-                        layout="size:2"
-                      ></ui-icon>
+                      <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
                     </settings-link>
                     <ui-toggle
                       value="${options.customFilters.enabled}"
@@ -255,22 +204,11 @@ export default {
                 </settings-managed>
                 <div layout="grid:1|max content:center gap">
                   <settings-link href="${router.url(ExperimentalFilters)}">
-                    <ui-icon
-                      name="flask"
-                      color="quaternary"
-                      layout="size:3 margin:right"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      layout="row gap:0.5 items:center"
-                    >
+                    <ui-icon name="flask" color="quaternary" layout="size:3 margin:right"></ui-icon>
+                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                       Experimental Filters
                     </ui-text>
-                    <ui-icon
-                      name="chevron-right"
-                      color="primary"
-                      layout="size:2"
-                    ></ui-icon>
+                    <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
                   </settings-link>
                   <ui-toggle
                     value="${options.experimentalFilters}"
@@ -292,24 +230,14 @@ export default {
                         color="quaternary"
                         layout="size:3 margin:right"
                       ></ui-icon>
-                      <ui-text
-                        type="headline-xs"
-                        layout="row gap:0.5 items:center"
-                      >
+                      <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                         Redirect Protection
                       </ui-text>
-                      <ui-icon
-                        name="chevron-right"
-                        color="primary"
-                        layout="size:2"
-                      ></ui-icon>
+                      <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
                     </settings-link>
                     <ui-toggle
                       value="${options.redirectProtection.enabled}"
-                      onchange="${html.set(
-                        options,
-                        'redirectProtection.enabled',
-                      )}"
+                      onchange="${html.set(options, 'redirectProtection.enabled')}"
                       data-qa="toggle:redirect-protection"
                     >
                     </ui-toggle>
@@ -343,31 +271,17 @@ export default {
             </div>
           </div>
         `}
-        <section
-          layout="grid:1/1 grow items:end:stretch padding:0"
-          layout@992px="hidden"
-        >
-          <settings-card
-            layout="column items:center gap"
-            layout@768px="row gap:5"
-          >
-            <img
-              src="${assets['hands']}"
-              layout="size:12"
-              alt="Contribution"
-              slot="picture"
-            />
+        <section layout="grid:1/1 grow items:end:stretch padding:0" layout@992px="hidden">
+          <settings-card layout="column items:center gap" layout@768px="row gap:5">
+            <img src="${assets['hands']}" layout="size:12" alt="Contribution" slot="picture" />
             <div
               layout="block:center column gap:0.5"
               layout@768px="block:left row grow gap:5 content:space-between"
             >
               <div layout="column gap:0.5">
-                <ui-text type="label-l" layout="">
-                  Become a Contributor
-                </ui-text>
+                <ui-text type="label-l" layout=""> Become a Contributor </ui-text>
                 <ui-text type="body-s" color="secondary">
-                  Help Ghostery fight for a web where privacy is a basic human
-                  right.
+                  Help Ghostery fight for a web where privacy is a basic human right.
                 </ui-text>
               </div>
               <ui-button type="primary" layout="grow margin:top">

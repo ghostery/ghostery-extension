@@ -31,8 +31,7 @@ async function downloadReport(host, event) {
 
   const report = [];
   for (const tracker of host.trackers) {
-    const organization =
-      tracker.organization && (await store.resolve(tracker.organization));
+    const organization = tracker.organization && (await store.resolve(tracker.organization));
 
     const organizationName = organization?.name ?? '';
 
@@ -68,17 +67,9 @@ export default {
       <panel-dialog header>
         <div layout="column center gap:2.5 margin:1:0">
           ${type === 'blocked' &&
-          html`<img
-            src="${blockedImageUrl}"
-            alt="Trackers Blocked"
-            layout="width:300px"
-          />`}
+          html`<img src="${blockedImageUrl}" alt="Trackers Blocked" layout="width:300px" />`}
           ${type === 'modified' &&
-          html`<img
-            src="${modifiedImageUrl}"
-            alt="Trackers Blocked"
-            layout="width:300px"
-          />`}
+          html`<img src="${modifiedImageUrl}" alt="Trackers Blocked" layout="width:300px" />`}
           <div layout="block:center column gap:0.5">
             <div layout="row items:center gap:0.5">
               ${type === 'blocked' &&
@@ -101,19 +92,14 @@ export default {
               <div layout="column gap">
                 <div layout="row items:center gap:0.5">
                   <ui-text type="label-s">${tracker.name}</ui-text>
-                  <ui-category-icon
-                    name="${tracker.category}"
-                    size="small"
-                  ></ui-category-icon>
+                  <ui-category-icon name="${tracker.category}" size="small"></ui-category-icon>
                   <ui-stats-badge layout="height:full">
                     ${tracker.requestsBlocked.length}
                   </ui-stats-badge>
                 </div>
                 ${tracker.requestsBlocked.map(
                   ({ url }) => html`
-                    <panel-copy oncopy="${showCopyNotification}">
-                      ${url}
-                    </panel-copy>
+                    <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
                   `,
                 )}
               </div>

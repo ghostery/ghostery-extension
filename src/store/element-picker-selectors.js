@@ -23,9 +23,7 @@ const ElementPickerSelectors = {
     set: async (id, values) => {
       await chrome.storage.local.set({
         elementPickerSelectors:
-          __PLATFORM__ === 'firefox'
-            ? JSON.parse(JSON.stringify(values))
-            : values,
+          __PLATFORM__ === 'firefox' ? JSON.parse(JSON.stringify(values)) : values,
       });
 
       return values;
