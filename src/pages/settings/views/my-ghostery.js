@@ -132,7 +132,7 @@ export default {
             `}
             ${!managedConfig.disableUserAccount &&
             html`
-              ${(__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) &&
+              ${(__FIREFOX__ || (!isOpera() && !isWebkit())) &&
               html`
                 <ui-toggle value="${options.sync}" onchange="${html.set(options, 'sync')}">
                   <settings-option>

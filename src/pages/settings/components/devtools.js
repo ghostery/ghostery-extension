@@ -242,7 +242,7 @@ export default {
               `,
             ),
           )}
-          ${__PLATFORM__ !== 'firefox' &&
+          ${__CHROMIUM__ &&
           html`
             <div layout="column gap items:start" translate="no">
               <ui-text type="headline-s">Enabled DNR rulesets</ui-text>

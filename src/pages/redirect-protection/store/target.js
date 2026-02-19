@@ -22,7 +22,7 @@ const Target = {
   [store.connect]: async () => {
     let url = '';
 
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       const params = new URLSearchParams(window.location.search);
       const encodedUrl = params.get('url');
 

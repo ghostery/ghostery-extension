@@ -144,7 +144,7 @@ export async function updateCustomFilters(input, options) {
   const { networkFilters, cosmeticFilters, errors } = normalizeFilters(input, options);
 
   const result = await updateEngine(
-    [...(__PLATFORM__ === 'firefox' ? networkFilters : []), ...cosmeticFilters].join('\n'),
+    [...(__FIREFOX__ ? networkFilters : []), ...cosmeticFilters].join('\n'),
   );
 
   result.errors = errors;
@@ -153,7 +153,7 @@ export async function updateCustomFilters(input, options) {
   await reloadMainEngine();
 
   // Update DNR rules for Chromium and Safari
-  if (__PLATFORM__ !== 'firefox') {
+  if (__CHROMIUM__) {
     const { rules, errors } = await convert([...networkFilters].map((f) => f.toString()));
 
     if (errors?.length) {
@@ -197,7 +197,7 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
     const { text } = await store.resolve(CustomFilters);
     await updateCustomFilters(text, value);
   } else if (
-    __PLATFORM__ !== 'firefox' &&
+    __CHROMIUM__ &&
     lastValue &&
     // Omit if `trustedScriptlets` is changed, as user then must click "save" button
     value.trustedScriptlets === lastValue.trustedScriptlets

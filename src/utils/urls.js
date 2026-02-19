@@ -25,7 +25,7 @@ export const PANEL_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source
 export const REVIEW_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=review`;
 
 export const BECOME_A_CONTRIBUTOR_PAGE_URL =
-  __PLATFORM__ !== 'firefox' && isSafari()
+  __CHROMIUM__ && isSafari()
     ? 'ghosteryapp://www.ghostery.com'
     : 'https://www.ghostery.com/become-a-contributor';
 

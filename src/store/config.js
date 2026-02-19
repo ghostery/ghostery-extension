@@ -80,7 +80,7 @@ const Config = {
       values ||= {};
 
       await chrome.storage.local.set({
-        config: __PLATFORM__ === 'firefox' ? JSON.parse(JSON.stringify(values)) : values,
+        config: __FIREFOX__ ? JSON.parse(JSON.stringify(values)) : values,
       });
       return values;
     },

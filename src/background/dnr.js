@@ -21,7 +21,7 @@ import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)

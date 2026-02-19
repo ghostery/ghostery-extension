@@ -85,7 +85,7 @@ const Options = {
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
-  ...(__PLATFORM__ === 'firefox' || !isSafari() ? { trackerCount: true } : {}),
+  ...(__FIREFOX__ || !isSafari() ? { trackerCount: true } : {}),
   pauseAssistant: true,
 
   // Onboarding
@@ -132,7 +132,7 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (__PLATFORM__ === 'firefox' || (!isSafari() && !isOpera())) {
+      if (__FIREFOX__ || (!isSafari() && !isOpera())) {
         return manage(options);
       }
 
@@ -144,7 +144,7 @@ const Options = {
       await chrome.storage.local.set({
         options:
           // Firefox does not serialize correctly objects with getters
-          __PLATFORM__ === 'firefox' ? JSON.parse(JSON.stringify(options)) : options,
+          __FIREFOX__ ? JSON.parse(JSON.stringify(options)) : options,
       });
 
       // Send update message to another contexts (background page / panel / options)

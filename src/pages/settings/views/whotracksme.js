@@ -149,7 +149,7 @@ export default {
                 </div>
               </ui-toggle>
             </settings-managed>
-            ${__PLATFORM__ === 'firefox' &&
+            ${__FIREFOX__ &&
             html`
               <ui-toggle value="${options.feedback}" onchange="${html.set(options, 'feedback')}">
                 <div layout="row items:start gap:2 grow" layout@768px="gap:3">

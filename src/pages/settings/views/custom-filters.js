@@ -122,7 +122,7 @@ export default {
                         Custom filters have been updated
                       </ui-text>
                       <ui-text type="body-s" color="secondary">
-                        ${__PLATFORM__ === 'firefox'
+                        ${__FIREFOX__
                           ? html`Network filters: ${result.networkFilters || 0} `
                           : html`
                               <details>

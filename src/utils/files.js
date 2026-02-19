@@ -21,7 +21,7 @@ export function saveAs(url, filename) {
 }
 
 function saveOrOpenTab(url, filename, forceNewTab = false) {
-  if (__PLATFORM__ !== 'firefox' && forceNewTab) {
+  if (__CHROMIUM__ && forceNewTab) {
     return chrome.tabs.create({
       url: url.startsWith('data:')
         ? url
@@ -47,7 +47,7 @@ export async function download({
 
   // Safari on iOS does not support downloading blobs,
   // but it can handle data URLs, so we convert the blob to a data URL in that case.
-  if (__PLATFORM__ !== 'firefox') {
+  if (__CHROMIUM__) {
     const { os } = await getBrowserInfo();
 
     if (os === 'ios' || os === 'ipados') {
