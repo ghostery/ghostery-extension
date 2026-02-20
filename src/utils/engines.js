@@ -111,7 +111,7 @@ async function loadFromStorage(name) {
         });
       })
       .catch((e) => {
-        if (__PLATFORM__ === 'firefox') {
+        if (__FIREFOX__) {
           const key = `engines:${name}`;
           return chrome.storage.local.get([key]).then((data) => data[key]);
         } else {
@@ -160,14 +160,14 @@ async function saveToStorage(name, checksum) {
       await table.delete(name);
     }
 
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       // Clear out the fallback local storage if the engine is saved to the IDB
       chrome.storage.local.remove([`engines:${name}`]);
     }
 
     await tx.done;
   } catch (e) {
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       const key = `engines:${name}`;
       if (engine) {
         return chrome.storage.local.set({ [key]: serialized });

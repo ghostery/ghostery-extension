@@ -179,7 +179,10 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: { __PLATFORM__: JSON.stringify(argv.target) },
+  define: {
+    __CHROMIUM__: JSON.stringify(argv.target === 'chromium'),
+    __FIREFOX__: JSON.stringify(argv.target === 'firefox'),
+  },
   build: {
     outDir: options.outDir,
     assetsDir: '',

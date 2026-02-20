@@ -34,7 +34,7 @@ const chromeAction = chrome.action || chrome.browserAction;
 const { icons } = chrome.runtime.getManifest();
 
 // We need to add a leading slash to the icon paths
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   Object.keys(icons).forEach((key) => {
     icons[key] = `/${icons[key]}`;
   });
@@ -71,7 +71,7 @@ async function hasAccessToPage(tabId) {
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
-  if (__PLATFORM__ !== 'firefox' && isOpera() && options.terms) {
+  if (__CHROMIUM__ && isOpera() && options.terms) {
     isSerpSupported().then(async (supported) => {
       if (!supported) {
         setBadgeColor((await hasAccessToPage(tabId)) ? undefined : '#f13436' /* danger-500 */);
@@ -138,7 +138,7 @@ function updateIcon(tabId, force) {
         refreshIcon(tabId);
       },
       // Firefox flickers when updating the icon, so we should expand the debounce delay
-      __PLATFORM__ === 'firefox' ? 1000 : 250,
+      __FIREFOX__ ? 1000 : 250,
     ),
   );
 
@@ -343,7 +343,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   }
 });
 
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   // On Safari we have content script to sends back the list of urls
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
@@ -368,7 +368,7 @@ if (__PLATFORM__ !== 'firefox') {
   });
 }
 
-if (__PLATFORM__ !== 'firefox' && chrome.webRequest) {
+if (__CHROMIUM__ && chrome.webRequest) {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {

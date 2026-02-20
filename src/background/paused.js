@@ -58,7 +58,7 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
   }
 
   if (
-    __PLATFORM__ !== 'firefox' &&
+    __CHROMIUM__ &&
     // Paused state has changed by the user interaction
     ((lastOptions && !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) ||
       // Filtering mode has changed

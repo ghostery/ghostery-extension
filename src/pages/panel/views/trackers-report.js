@@ -50,7 +50,7 @@ async function downloadReport(host, event) {
     type: 'text/csv;charset=utf-8;',
     // Safari does not support downloading files from the popup window,
     // so we need to open the download helper page in a new tab
-    forceNewTab: __PLATFORM__ !== 'firefox' && isWebkit(),
+    forceNewTab: __CHROMIUM__ && isWebkit(),
   });
 
   button.disabled = false;

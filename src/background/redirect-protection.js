@@ -113,7 +113,7 @@ export function getRedirectProtectionUrl(url, hostname, options) {
   return REDIRECT_PROTECTION_PAGE_URL + '?url=' + btoa(url);
 }
 
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
       if (
@@ -164,7 +164,7 @@ if (__PLATFORM__ !== 'firefox') {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (__PLATFORM__ !== 'firefox' && message.action === 'getRedirectUrl') {
+  if (__CHROMIUM__ && message.action === 'getRedirectUrl') {
     const url = sender.tab && sender.tab.id ? redirectUrlMap.get(sender.tab.id) || null : null;
     sendResponse({ url });
     return false;
@@ -176,7 +176,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return false;
     }
 
-    if (__PLATFORM__ === 'firefox') {
+    if (__FIREFOX__) {
       allowedRedirectUrls.add(message.url);
       sendResponse({ success: true });
       return false;

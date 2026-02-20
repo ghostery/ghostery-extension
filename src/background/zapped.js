@@ -38,7 +38,7 @@ store.observe(Config, async (_, config, lastConfig) => {
   }
 });
 
-if (__PLATFORM__ !== 'firefox') {
+if (__CHROMIUM__) {
   OptionsObserver.addListener(async function zapped(options, lastOptions) {
     if (
       // No changes in options

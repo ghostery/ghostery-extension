@@ -12,7 +12,8 @@ export default [
         ...globals.browser,
         ...globals.serviceworker,
         ...globals.webextensions,
-        __PLATFORM__: 'readonly',
+        __CHROMIUM__: 'readonly',
+        __FIREFOX__: 'readonly',
       },
 
       ecmaVersion: 'latest',

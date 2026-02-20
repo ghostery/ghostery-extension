@@ -28,7 +28,7 @@ const NOTIFICATIONS = {
     type: 'danger',
     text: msg`Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.`,
     url:
-      __PLATFORM__ !== 'firefox' && isSafari()
+      __CHROMIUM__ && isSafari()
         ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
         : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
     action: msg`Get help`,
@@ -79,7 +79,7 @@ const Notification = {
     if (!terms) return NOTIFICATIONS.terms;
 
     // Opera SERP support notification
-    if (__PLATFORM__ !== 'firefox' && isOpera() && !(await isSerpSupported())) {
+    if (__CHROMIUM__ && isOpera() && !(await isSerpSupported())) {
       return NOTIFICATIONS.opera;
     }
 
@@ -87,7 +87,7 @@ const Notification = {
     if (!panel.notifications) return null;
 
     // Edge mobile notification for Edge desktop users
-    if (__PLATFORM__ !== 'firefox' && isEdge() && !isMobile()) {
+    if (__CHROMIUM__ && isEdge() && !isMobile()) {
       return NOTIFICATIONS.edgeMobile;
     }
 
