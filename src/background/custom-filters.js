@@ -142,10 +142,7 @@ export async function updateCustomFilters(input, options) {
   setup.pending && (await setup.pending);
 
   const { networkFilters, cosmeticFilters, errors } = normalizeFilters(input, options);
-
-  const result = await updateEngine(
-    [...(__FIREFOX__ ? networkFilters : []), ...cosmeticFilters].join('\n'),
-  );
+  const result = await updateEngine([...networkFilters, ...cosmeticFilters].join('\n'));
 
   result.errors = errors;
 

@@ -32,6 +32,11 @@ async function enableAllPrivacyToggle() {
   await setPrivacyToggle('anti-tracking', true);
 }
 
+async function disableCustomFilters() {
+  await setCustomFilters([]);
+  await setPrivacyToggle('custom-filters', false);
+}
+
 async function collectTestPageResponse() {
   let response;
 
@@ -93,10 +98,7 @@ describe('Adblocker Capabilities', function () {
   before(disableAllPrivacyToggle);
 
   after(enableAllPrivacyToggle);
-  after(async function () {
-    await setCustomFilters([]);
-    await setPrivacyToggle('custom-filters', false);
-  });
+  after(disableCustomFilters);
 
   describe('All platforms', function () {
     const stylingFilters = [
@@ -201,4 +203,57 @@ describe('Adblocker Capabilities', function () {
       });
     });
   }
+});
+
+describe('Capability Controls', function () {
+  before(enableExtension);
+  before(disableAllPrivacyToggle);
+
+  after(enableAllPrivacyToggle);
+  after(disableCustomFilters);
+
+  it('$elemhide exception', async function () {
+    const reports = await test([
+      ['', `@@||${PAGE_DOMAIN}^$elemhide`],
+      ['', PAGE_DOMAIN + '###target'],
+      ['', '###generic-target'],
+    ]);
+
+    await expect(
+      reports.styling.map(function (timing) {
+        return timing.results['generic-selector-id'];
+      }),
+    ).not.toContain(true);
+    await expect(
+      reports.styling.map(function (timing) {
+        return timing.results['selector-id'];
+      }),
+    ).not.toContain(true);
+  });
+
+  it('$ghide exception', async function () {
+    const reports = await test([
+      ['', `@@||${PAGE_DOMAIN}^$ghide`],
+      ['', '###generic-target'],
+    ]);
+
+    await expect(
+      reports.styling.map(function (timing) {
+        return timing.results['generic-selector-id'];
+      }),
+    ).not.toContain(true);
+  });
+
+  it('$shide exception', async function () {
+    const reports = await test([
+      ['', `@@||${PAGE_DOMAIN}^$shide`],
+      ['', PAGE_DOMAIN + '###target'],
+    ]);
+
+    await expect(
+      reports.styling.map(function (timing) {
+        return timing.results['selector-id'];
+      }),
+    ).not.toContain(true);
+  });
 });
