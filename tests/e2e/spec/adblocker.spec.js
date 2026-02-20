@@ -204,11 +204,11 @@ describe('Adblocker Capabilities', function () {
 });
 
 describe('Capability Controls', function () {
-  this.beforeAll(enableExtension);
-  this.beforeAll(disableAllPrivacyToggle);
+  before(enableExtension);
+  before(disableAllPrivacyToggle);
 
-  this.afterAll(enableAllPrivacyToggle);
-  this.afterAll(async function () {
+  after(enableAllPrivacyToggle);
+  after(async function () {
     await setCustomFilters([]);
     await setPrivacyToggle('custom-filters', false);
   });
