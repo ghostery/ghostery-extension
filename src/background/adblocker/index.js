@@ -185,19 +185,23 @@ export const setup = asyncSetup('adblocker', [
     const enabledEngines = getEnabledEngines(value);
     const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
-    if (
-      // Reload/mismatched main engine
-      !(await engines.init(engines.MAIN_ENGINE)) ||
-      // Enabled engines changed
-      (lastEnabledEngines &&
-        (enabledEngines.length !== lastEnabledEngines.length ||
-          enabledEngines.some((id, i) => id !== lastEnabledEngines[i])))
-    ) {
+    // Enabled engines changed (they might contain outdated filters)
+    const engingesChanged =
+      lastEnabledEngines &&
+      (enabledEngines.length !== lastEnabledEngines.length ||
+        enabledEngines.some((id, i) => id !== lastEnabledEngines[i]));
+
+    // Reload main engine:
+    // * when engine is not initialized or initialize fails (adblocker version mismatch)
+    // * when enabled engines changed
+    if (!(await engines.init(engines.MAIN_ENGINE)) || engingesChanged) {
       await reloadMainEngine();
     }
 
-    // Update engines if filters are outdated (older than 1 hour)
-    if (options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
+    // Update engine filters:
+    // * when engines changed, so there might be re-enabled engines with outdated filters
+    // * when filters are outdated (older than 1 hour)
+    if (engingesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
       await updateEngines();
     }
   }),
@@ -466,6 +470,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       url,
       tabId: sender.tab.id,
       frameId: sender.frameId,
+      documentId: sender.documentId,
     };
 
     injectCosmetics(details, msg);
