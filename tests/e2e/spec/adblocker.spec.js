@@ -32,6 +32,11 @@ async function enableAllPrivacyToggle() {
   await setPrivacyToggle('anti-tracking', true);
 }
 
+async function disableCustomFilters() {
+  await setCustomFilters([]);
+  await setPrivacyToggle('custom-filters', false);
+}
+
 async function collectTestPageResponse() {
   let response;
 
@@ -93,10 +98,7 @@ describe('Adblocker Capabilities', function () {
   before(disableAllPrivacyToggle);
 
   after(enableAllPrivacyToggle);
-  after(async function () {
-    await setCustomFilters([]);
-    await setPrivacyToggle('custom-filters', false);
-  });
+  after(disableCustomFilters);
 
   describe('All platforms', function () {
     const stylingFilters = [
@@ -208,10 +210,7 @@ describe('Capability Controls', function () {
   before(disableAllPrivacyToggle);
 
   after(enableAllPrivacyToggle);
-  after(async function () {
-    await setCustomFilters([]);
-    await setPrivacyToggle('custom-filters', false);
-  });
+  after(disableCustomFilters);
 
   it('$elemhide exception', async function () {
     const reports = await test([
