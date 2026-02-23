@@ -55,11 +55,6 @@ export function isPersistentEngine(name) {
   return name !== ELEMENT_PICKER_ENGINE && name !== CUSTOM_ENGINE && name !== MAIN_ENGINE;
 }
 
-// Copy a map to prevent it being immutated from 3rd parties
-export function getEnv() {
-  return structuredClone(ENV);
-}
-
 export function setEnv(key, value) {
   if (ENV.has(key)) {
     ENV.set(key, value);
