@@ -30,8 +30,19 @@ const RULESETS = {
   }, {}),
 };
 
+function generateJSON(type, name) {
+  return function (res) {
+    if (!res.ok) {
+      throw new Error(`Failed to fetch ${type} for "${name}": ${res.status}: ${res.statusText}`);
+    }
+
+    return res.json();
+  };
+}
+
 for (const [name, target] of Object.entries(RULESETS)) {
   const outputPath = `${RESOURCES_PATH}/dnr-${target}.json`;
+  const metadataPath = `${RESOURCES_PATH}/dnr-${target}.metadata.json`;
 
   if (existsSync(outputPath)) {
     continue;
@@ -42,32 +53,25 @@ for (const [name, target] of Object.entries(RULESETS)) {
 
   const list = await fetch(
     `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
-  ).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to download allowed list for "${name}": ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.json();
-  });
+  ).then(generateJSON('allowed-list', name));
 
   /* DNR rules */
 
   if (list.dnr) {
     const dnr = await fetch(list.dnr.url || list.dnr.network)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(
-            `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
-          );
-        }
-
-        return res.json();
-      })
+      .then(generateJSON('DNR ruleset', name))
       .then(filterMaxPriorityRules);
 
     writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
+
+    if (list.dnr.metadataUrl) {
+      const metadata = await fetch(list.dnr.metadataUrl).then(
+        generateJSON('DNR ruleset metadata', name),
+      );
+
+      writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+    }
+
     process.stdout.write(' done\n');
   }
 }
