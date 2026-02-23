@@ -17,6 +17,7 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Resources,
+  evaluatePreprocessor,
 } from '@ghostery/adblocker';
 
 import ResourcesModel from '/store/resources.js';
@@ -458,6 +459,10 @@ export function remove(name) {
   saveToStorage(name).catch(() => {
     console.error(`[engines] Failed to remove engine "${name}" from storage`);
   });
+}
+
+export function evaluatePreprocessorCondition(condition) {
+  return evaluatePreprocessor(condition, ENV);
 }
 
 debug.engines = { get };

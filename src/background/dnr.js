@@ -10,60 +10,23 @@
  */
 
 import { store } from 'hybrids';
-import { evaluatePreprocessor } from '@ghostery/adblocker';
 
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
 
-import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
+import {
+  FIXES_ID_RANGE,
+  getDynamicRulesIds,
+  filterMaxPriorityRules,
+  getExcludedRuleIdsByPreprocessors,
+} from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
-import { getEnv } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__CHROMIUM__) {
-  const DNR_METADATA = (function () {
-    // We need to depend on `eager` option since dynamic imports
-    // are not allowed in web workers scope.
-    const modules = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
-
-    /**
-     * @returns {Record<string, { preprocessor: string; }>}
-     */
-    function getMetadata(rulesetId) {
-      const metadata = modules[`/rule_resources/dnr-${rulesetId}.metadata.json`];
-      if (typeof metadata === 'undefined') {
-        return;
-      }
-      return metadata.default;
-    }
-
-    /**
-     * @param {string} rulesetId
-     * @returns {number[]}
-     */
-    function getDisabledRuleIds(rulesetId) {
-      const env = getEnv();
-      const metadata = getMetadata(rulesetId);
-      if (typeof metadata === 'undefined') {
-        return [];
-      }
-      const disabledRuleIds = [];
-      for (const [ruleId, constraints] of Object.entries(metadata)) {
-        if (!evaluatePreprocessor(constraints.preprocessor, env)) {
-          disabledRuleIds.push(Number(ruleId));
-        }
-      }
-      return disabledRuleIds;
-    }
-
-    return {
-      getDisabledRuleIds,
-    };
-  })();
-
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
@@ -219,7 +182,7 @@ if (__CHROMIUM__) {
       }
 
       try {
-        const disableRuleIds = DNR_METADATA.getDisabledRuleIds(id);
+        const disableRuleIds = getExcludedRuleIdsByPreprocessors(id);
         await chrome.declarativeNetRequest.updateStaticRules({
           rulesetId: id,
           disableRuleIds,
