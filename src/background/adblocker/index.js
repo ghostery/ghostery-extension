@@ -186,7 +186,7 @@ export const setup = asyncSetup('adblocker', [
     const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
     // Enabled engines changed (they might contain outdated filters)
-    const engingesChanged =
+    const enginesChanged =
       lastEnabledEngines &&
       (enabledEngines.length !== lastEnabledEngines.length ||
         enabledEngines.some((id, i) => id !== lastEnabledEngines[i]));
@@ -194,14 +194,14 @@ export const setup = asyncSetup('adblocker', [
     // Reload main engine:
     // * when engine is not initialized or initialize fails (adblocker version mismatch)
     // * when enabled engines changed
-    if (!(await engines.init(engines.MAIN_ENGINE)) || engingesChanged) {
+    if (!(await engines.init(engines.MAIN_ENGINE)) || enginesChanged) {
       await reloadMainEngine();
     }
 
     // Update engine filters:
     // * when engines changed, so there might be re-enabled engines with outdated filters
     // * when filters are outdated (older than 1 hour)
-    if (engingesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
+    if (enginesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
       await updateEngines();
     }
   }),
