@@ -10,6 +10,7 @@
  */
 
 import { store } from 'hybrids';
+import { evaluatePreprocessor } from '@ghostery/adblocker';
 
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
@@ -17,11 +18,78 @@ import Resources from '/store/resources.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
+import { getBrowser, isMobile } from '/utils/browser-info.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 
 if (__CHROMIUM__) {
+  const DNR_METADATA = (function () {
+    // We need to depend on `eager` option since dynamic imports
+    // are not allowed in web workers scope.
+    const modules = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
+    const browser = getBrowser();
+
+    const env = new Map();
+    env.set('ext_ghostery', true);
+    env.set('ext_ublock', true);
+    env.set('ext_ubol', true);
+    env.set('env_ghostery', true);
+    env.set('env_chromium', browser.name !== 'safari');
+    env.set('env_edge', browser.name === 'edge');
+    env.set('env_firefox', false);
+    env.set('env_mobile', isMobile());
+    env.set('env_safari', browser.name === 'safari');
+    env.set('env_mv3', true);
+    env.set('false', false);
+    env.set('cap_html_filtering', false);
+    env.set('cap_user_stylesheet', true);
+    env.set('adguard', false);
+    env.set('adguard_app_android', false);
+    env.set('adguard_app_ios', false);
+    env.set('adguard_app_mac', false);
+    env.set('adguard_app_windows', false);
+    env.set('adguard_ext_android_cb', false);
+    env.set('adguard_ext_chromium', browser.name !== 'safari');
+    env.set('adguard_ext_edge', browser.name === 'edge');
+    env.set('adguard_ext_firefox', false);
+    env.set('adguard_ext_opera', browser.name === 'opera');
+    env.set('adguard_ext_safari', false);
+
+    /**
+     * @returns {Record<string, { preprocessor: string; }>}
+     */
+    function getMetadata(rulesetId) {
+      const metadata = modules[`/rule_resources/dnr-${rulesetId}.metadata.json`];
+      if (typeof metadata === 'undefined') {
+        return;
+      }
+      return metadata.default;
+    }
+
+    /**
+     * @param {string} rulesetId
+     * @returns {number[]}
+     */
+    function getDisabledRuleIds(rulesetId) {
+      const metadata = getMetadata(rulesetId);
+      if (typeof metadata === 'undefined') {
+        return [];
+      }
+      const disabledRuleIds = [];
+      for (const [ruleId, constraints] of Object.entries(metadata)) {
+        if (!evaluatePreprocessor(constraints.preprocessor, env)) {
+          disabledRuleIds.push(Number(ruleId));
+        }
+      }
+      return disabledRuleIds;
+    }
+
+    return {
+      getDisabledRuleIds,
+    };
+  })();
+
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
@@ -174,6 +242,19 @@ if (__CHROMIUM__) {
     for (const id of ids) {
       if (!enabledRulesetIds.includes(id)) {
         enableRulesetIds.push(id);
+      }
+
+      try {
+        const disableRuleIds = DNR_METADATA.getDisabledRuleIds(id);
+        await chrome.declarativeNetRequest.updateStaticRules({
+          rulesetId: id,
+          disableRuleIds,
+        });
+        console.info(
+          `[dnr] Disabled rules in static ruleset: ${id}: ${JSON.stringify(disableRuleIds)}`,
+        );
+      } catch (e) {
+        console.error(`[dnr] Failed to apply preprocessors:`, e);
       }
     }
 
