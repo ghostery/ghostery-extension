@@ -528,7 +528,7 @@ function isTrusted(request, type) {
 }
 
 if (__FIREFOX__) {
-  function resolveRequest(details) {
+  function getMatchableRequest(details) {
     // Extension context request
     if (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
@@ -556,7 +556,7 @@ if (__FIREFOX__) {
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      const request = resolveRequest(details);
+      const request = getMatchableRequest(details);
       if (!request) return;
 
       const engine = engines.get(engines.MAIN_ENGINE);
@@ -593,7 +593,7 @@ if (__FIREFOX__) {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      const request = resolveRequest(details);
+      const request = getMatchableRequest(details);
       if (!request) return;
 
       const engine = engines.get(engines.MAIN_ENGINE);
