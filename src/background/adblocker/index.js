@@ -528,48 +528,59 @@ function isTrusted(request, type) {
 }
 
 if (__FIREFOX__) {
-  function isExtensionRequest(details) {
-    return (
+  function resolveRequest(details) {
+    // Extension context request
+    if (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
       details.originUrl?.startsWith('moz-extension://')
-    );
+    ) {
+      return null;
+    }
+
+    // Engine not ready
+    if (setup.pending) {
+      console.error('[adblocker] not ready for network requests blocking');
+      return null;
+    }
+
+    const request = Request.fromRequestDetails(details);
+
+    // sourceHostname empty - for example for service workers
+    // Trusted request - for example from a paused tab
+    if (!request.sourceHostname || isTrusted(request, details.type)) {
+      return null;
+    }
+
+    return request;
   }
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (isExtensionRequest(details)) return;
+      const request = resolveRequest(details);
+      if (!request) return;
 
-      if (setup.pending) {
-        console.error('[adblocker] not ready for network requests blocking');
-        return;
-      }
-
-      const request = Request.fromRequestDetails(details);
+      const engine = engines.get(engines.MAIN_ENGINE);
+      const { redirect, match } = engine.match(request);
 
       let result = undefined;
-      if (request.sourceHostname && !isTrusted(request, details.type)) {
-        const engine = engines.get(engines.MAIN_ENGINE);
 
-        const { redirect, match } = engine.match(request);
-
-        if (match === true && details.type === 'main_frame') {
-          const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
-          return { redirectUrl };
-        } else if (redirect !== undefined) {
-          request.blocked = true;
-          // There's a possibility that redirecting to file URL can expose
-          // extension existence.
-          if (details.type !== 'xmlhttprequest') {
-            result = {
-              redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
-            };
-          } else {
-            result = { redirectUrl: redirect.dataUrl };
-          }
-        } else if (match === true) {
-          request.blocked = true;
-          result = { cancel: true };
+      if (match === true && details.type === 'main_frame') {
+        const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+        return { redirectUrl };
+      } else if (redirect !== undefined) {
+        request.blocked = true;
+        // There's a possibility that redirecting to file URL can expose
+        // extension existence.
+        if (details.type !== 'xmlhttprequest') {
+          result = {
+            redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
+          };
+        } else {
+          result = { redirectUrl: redirect.dataUrl };
         }
+      } else if (match === true) {
+        request.blocked = true;
+        result = { cancel: true };
       }
 
       updateTabStats(details.tabId, [request]);
@@ -582,16 +593,8 @@ if (__FIREFOX__) {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      if (isExtensionRequest(details)) return;
-
-      if (setup.pending) {
-        console.error('[adblocker] not ready for network headers modification');
-        return;
-      }
-
-      const request = Request.fromRequestDetails(details);
-
-      if (isTrusted(request, details.type)) return;
+      const request = resolveRequest(details);
+      if (!request) return;
 
       const engine = engines.get(engines.MAIN_ENGINE);
 
@@ -603,8 +606,10 @@ if (__FIREFOX__) {
       }
 
       if (details.type !== 'main_frame') return;
+
       const cspPolicies = engine.getCSPDirectives(request);
       if (!cspPolicies || cspPolicies.length === 0) return;
+
       return updateResponseHeadersWithCSP(details, cspPolicies);
     },
     { urls: ['http://*/*', 'https://*/*'] },

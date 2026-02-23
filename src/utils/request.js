@@ -43,7 +43,7 @@ function resolveSourceURL(details) {
     return initiator;
   }
 
-  return details.originUrl || details.documentUrl || details.url;
+  return details.originUrl || details.documentUrl || '';
 }
 
 export default class ExtendedRequest extends Request {
