@@ -22,6 +22,7 @@ import {
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
+import { evaluatePreprocessorCondition } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
@@ -114,6 +115,15 @@ if (__CHROMIUM__) {
                 )
                 .then(filterMaxPriorityRules),
             );
+            const metadata = new Set(
+              await fetch(list.dnr.metadataUrl)
+                .then((res) =>
+                  res.ok
+                    ? res.json()
+                    : Promise.reject(new Error(`Failed to fetch DNR metadata: ${res.statusText}`)),
+                )
+                .then(filterMaxPriorityRules),
+            );
 
             for (const rule of rules) {
               if (rule.condition.regexFilter) {
@@ -129,10 +139,16 @@ if (__CHROMIUM__) {
 
             await chrome.declarativeNetRequest.updateDynamicRules({
               removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-              addRules: Array.from(rules).map((rule, index) => ({
-                ...rule,
-                id: FIXES_ID_RANGE.start + index,
-              })),
+              addRules: Array.from(rules)
+                .filter(
+                  (rule) =>
+                    !metadata[rule.id]?.preprocessor ||
+                    evaluatePreprocessorCondition(metadata[rule.id].preprocessor),
+                )
+                .map((rule, index) => ({
+                  ...rule,
+                  id: FIXES_ID_RANGE.start + index,
+                })),
             });
 
             console.info('[dnr] Updated dynamic fixes rules:', list.dnr.checksum);
