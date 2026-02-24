@@ -185,19 +185,23 @@ export const setup = asyncSetup('adblocker', [
     const enabledEngines = getEnabledEngines(value);
     const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
-    if (
-      // Reload/mismatched main engine
-      !(await engines.init(engines.MAIN_ENGINE)) ||
-      // Enabled engines changed
-      (lastEnabledEngines &&
-        (enabledEngines.length !== lastEnabledEngines.length ||
-          enabledEngines.some((id, i) => id !== lastEnabledEngines[i])))
-    ) {
+    // Enabled engines changed (they might contain outdated filters)
+    const enginesChanged =
+      lastEnabledEngines &&
+      (enabledEngines.length !== lastEnabledEngines.length ||
+        enabledEngines.some((id, i) => id !== lastEnabledEngines[i]));
+
+    // Reload main engine:
+    // * when engine is not initialized or initialize fails (adblocker version mismatch)
+    // * when enabled engines changed
+    if (!(await engines.init(engines.MAIN_ENGINE)) || enginesChanged) {
       await reloadMainEngine();
     }
 
-    // Update engines if filters are outdated (older than 1 hour)
-    if (options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
+    // Update engine filters:
+    // * when engines changed, so there might be re-enabled engines with outdated filters
+    // * when filters are outdated (older than 1 hour)
+    if (enginesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
       await updateEngines();
     }
   }),
@@ -466,6 +470,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       url,
       tabId: sender.tab.id,
       frameId: sender.frameId,
+      documentId: sender.documentId,
     };
 
     injectCosmetics(details, msg);
@@ -528,28 +533,37 @@ function isTrusted(request, type) {
 }
 
 if (__FIREFOX__) {
-  function isExtensionRequest(details) {
-    return (
+  function isMatchableRequest(details, request) {
+    // Extension context request
+    if (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
       details.originUrl?.startsWith('moz-extension://')
-    );
+    ) {
+      return false;
+    }
+
+    // Engine not ready
+    if (setup.pending) {
+      console.error('[adblocker] not ready for network requests blocking');
+      return false;
+    }
+
+    // sourceHostname empty - for example for service workers
+    // Trusted request - for example from a paused tab
+    if (!request.sourceHostname || isTrusted(request, details.type)) {
+      return false;
+    }
+
+    return true;
   }
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (isExtensionRequest(details)) return;
-
-      if (setup.pending) {
-        console.error('[adblocker] not ready for network requests blocking');
-        return;
-      }
-
       const request = Request.fromRequestDetails(details);
-
       let result = undefined;
-      if (request.sourceHostname && !isTrusted(request, details.type)) {
-        const engine = engines.get(engines.MAIN_ENGINE);
 
+      if (isMatchableRequest(details, request)) {
+        const engine = engines.get(engines.MAIN_ENGINE);
         const { redirect, match } = engine.match(request);
 
         if (match === true && details.type === 'main_frame') {
@@ -582,16 +596,8 @@ if (__FIREFOX__) {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      if (isExtensionRequest(details)) return;
-
-      if (setup.pending) {
-        console.error('[adblocker] not ready for network headers modification');
-        return;
-      }
-
       const request = Request.fromRequestDetails(details);
-
-      if (isTrusted(request, details.type)) return;
+      if (!isMatchableRequest(details, request)) return;
 
       const engine = engines.get(engines.MAIN_ENGINE);
 
@@ -603,8 +609,10 @@ if (__FIREFOX__) {
       }
 
       if (details.type !== 'main_frame') return;
+
       const cspPolicies = engine.getCSPDirectives(request);
       if (!cspPolicies || cspPolicies.length === 0) return;
+
       return updateResponseHeadersWithCSP(details, cspPolicies);
     },
     { urls: ['http://*/*', 'https://*/*'] },
