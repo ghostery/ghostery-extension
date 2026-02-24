@@ -533,59 +533,57 @@ function isTrusted(request, type) {
 }
 
 if (__FIREFOX__) {
-  function getMatchableRequest(details) {
+  function isMatchableRequest(details, request) {
     // Extension context request
     if (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
       details.originUrl?.startsWith('moz-extension://')
     ) {
-      return null;
+      return false;
     }
 
     // Engine not ready
     if (setup.pending) {
       console.error('[adblocker] not ready for network requests blocking');
-      return null;
+      return false;
     }
-
-    const request = Request.fromRequestDetails(details);
 
     // sourceHostname empty - for example for service workers
     // Trusted request - for example from a paused tab
     if (!request.sourceHostname || isTrusted(request, details.type)) {
-      return null;
+      return false;
     }
 
-    return request;
+    return true;
   }
 
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      const request = getMatchableRequest(details);
-      if (!request) return;
-
-      const engine = engines.get(engines.MAIN_ENGINE);
-      const { redirect, match } = engine.match(request);
-
+      const request = Request.fromRequestDetails(details);
       let result = undefined;
 
-      if (match === true && details.type === 'main_frame') {
-        const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
-        return { redirectUrl };
-      } else if (redirect !== undefined) {
-        request.blocked = true;
-        // There's a possibility that redirecting to file URL can expose
-        // extension existence.
-        if (details.type !== 'xmlhttprequest') {
-          result = {
-            redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
-          };
-        } else {
-          result = { redirectUrl: redirect.dataUrl };
+      if (isMatchableRequest(details, request)) {
+        const engine = engines.get(engines.MAIN_ENGINE);
+        const { redirect, match } = engine.match(request);
+
+        if (match === true && details.type === 'main_frame') {
+          const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+          return { redirectUrl };
+        } else if (redirect !== undefined) {
+          request.blocked = true;
+          // There's a possibility that redirecting to file URL can expose
+          // extension existence.
+          if (details.type !== 'xmlhttprequest') {
+            result = {
+              redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
+            };
+          } else {
+            result = { redirectUrl: redirect.dataUrl };
+          }
+        } else if (match === true) {
+          request.blocked = true;
+          result = { cancel: true };
         }
-      } else if (match === true) {
-        request.blocked = true;
-        result = { cancel: true };
       }
 
       updateTabStats(details.tabId, [request]);
@@ -598,8 +596,8 @@ if (__FIREFOX__) {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      const request = getMatchableRequest(details);
-      if (!request) return;
+      const request = Request.fromRequestDetails(details);
+      if (!isMatchableRequest(details, request)) return;
 
       const engine = engines.get(engines.MAIN_ENGINE);
 
