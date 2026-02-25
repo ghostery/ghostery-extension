@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { evaluatePreprocessorCondition } from './engines.js';
+import { evaluatePreprocessorCondition } from './env.js';
 
 // Dynamic Rules ID Ranges and Priorities
 
@@ -89,6 +89,14 @@ export function getRedirectProtectionRules(rules) {
 }
 
 export const getExcludedRuleIdsByPreprocessors = (function () {
+  // This simple check is to support unit test without Vite-only
+  // features.
+  if (typeof import.meta.glob === 'undefined') {
+    return function () {
+      return [];
+    };
+  }
+
   // We need to depend on `eager` option since dynamic imports
   // are not allowed in web workers scope.
   const modules = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
