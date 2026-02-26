@@ -49,6 +49,10 @@ export const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
+// We need to depend on `eager` option since dynamic imports are
+// not allowed in web workers scope.
+const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
+
 export function filterMaxPriorityRules(rules) {
   return rules.filter((rule) => rule.priority !== MAX_RULE_PRIORITY);
 }
@@ -88,37 +92,20 @@ export function getRedirectProtectionRules(rules) {
   return result;
 }
 
-export const getExcludedRuleIdsByPreprocessors = (function () {
-  // We need to depend on `eager` option since dynamic imports
-  // are not allowed in web workers scope.
-  const modules = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
-
-  /**
-   * @returns {Record<string, { preprocessor: string; }>}
-   */
-  function getMetadata(rulesetId) {
-    const metadata = modules[`/rule_resources/dnr-${rulesetId}.metadata.json`];
-    if (typeof metadata === 'undefined') {
-      return;
-    }
-    return metadata.default;
-  }
-
-  /**
-   * @param {string} rulesetId
-   * @returns {number[]}
-   */
-  return function (rulesetId) {
-    const metadata = getMetadata(rulesetId);
-    if (typeof metadata === 'undefined') {
-      return [];
-    }
-    const disabledRuleIds = [];
-    for (const [ruleId, constraints] of Object.entries(metadata)) {
-      if (!evaluatePreprocessorCondition(constraints.preprocessor)) {
-        disabledRuleIds.push(Number(ruleId));
-      }
-    }
+/**
+ * @param {string} rulesetId
+ * @returns {number[]}
+ */
+export function getExcludedRuleIdsByPreprocessors(rulesetId) {
+  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
+  const disabledRuleIds = [];
+  if (typeof metadata === 'undefined') {
     return disabledRuleIds;
-  };
-})();
+  }
+  for (const [ruleId, constraints] of Object.entries(metadata)) {
+    if (!evaluatePreprocessorCondition(constraints.preprocessor)) {
+      disabledRuleIds.push(Number(ruleId));
+    }
+  }
+  return disabledRuleIds;
+}
