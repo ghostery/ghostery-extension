@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { evaluatePreprocessorCondition } from './env.js';
+import { evaluatePreprocessorCondition } from './engines.js';
 
 // Dynamic Rules ID Ranges and Priorities
 

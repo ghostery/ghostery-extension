@@ -17,6 +17,7 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Resources,
+  evaluatePreprocessor,
 } from '@ghostery/adblocker';
 
 import ResourcesModel from '/store/resources.js';
@@ -24,7 +25,6 @@ import ResourcesModel from '/store/resources.js';
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 import { CDN_URL } from './urls.js';
-import { ENV } from './env.js';
 
 export const MAIN_ENGINE = 'main';
 
@@ -35,6 +35,21 @@ export const CUSTOM_ENGINE = 'custom-filters';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
+
+const ENV = new Map([
+  ['ext_ghostery', true],
+  ['ext_ublock', true],
+  ['ext_ubol', checkUserAgent('Firefox')],
+  ['cap_html_filtering', checkUserAgent('Firefox')],
+  // can be removed in once $replace support is sufficiently distributed
+  ['cap_replace_modifier', checkUserAgent('Firefox')],
+  ['cap_user_stylesheet', true],
+  ['env_firefox', checkUserAgent('Firefox')],
+  ['env_chromium', checkUserAgent('Chrome')],
+  ['env_edge', checkUserAgent('Edg')],
+  ['env_mobile', checkUserAgent('Mobile')],
+  ['env_experimental', false],
+]);
 
 export function isPersistentEngine(name) {
   return name !== ELEMENT_PICKER_ENGINE && name !== CUSTOM_ENGINE && name !== MAIN_ENGINE;
@@ -52,11 +67,19 @@ export function setEnv(key, value) {
   }
 }
 
+function checkUserAgent(pattern) {
+  return navigator.userAgent.indexOf(pattern) !== -1;
+}
+
 function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
   engine.updateEnv(ENV);
 
   return engine;
+}
+
+export function evaluatePreprocessorCondition(condition) {
+  return evaluatePreprocessor(condition, ENV);
 }
 
 function loadFromMemory(name) {
