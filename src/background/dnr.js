@@ -22,7 +22,7 @@ import {
 } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
-import { evaluatePreprocessorCondition } from '/utils/env.js';
+import { evaluatePreprocessorCondition } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
