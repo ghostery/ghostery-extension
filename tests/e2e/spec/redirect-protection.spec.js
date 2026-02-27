@@ -15,15 +15,14 @@ import {
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
-  setPrivacyToggle,
   waitForIdleBackgroundTasks,
   setCustomFilters,
+  disableCustomFilters,
 } from '../utils.js';
 
 import { argv, PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 async function openRedirectSettings() {
-  await browser.url('about:blank');
   await browser.url(getExtensionPageURL('settings'));
 
   await getExtensionElement('button:redirect-protection').click();
@@ -60,8 +59,8 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
     });
 
     after(async () => {
-      await setPrivacyToggle('custom-filters', false);
       await setRedirectProtectionToggle(false);
+      await disableCustomFilters();
     });
 
     it('is enabled by default', async function () {
@@ -115,7 +114,6 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
       });
 
       it('navigates directly after domain is added to exceptions', async function () {
-        await browser.url('about:blank');
         await browser.url(PAGE_URL);
 
         await expectOnWarningPage(false);

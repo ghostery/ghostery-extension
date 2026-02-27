@@ -29,7 +29,7 @@ describe('Clear Cookies', () => {
   });
 
   afterEach(async () => {
-    await browser.url(PAGE_URL, { waitUntil: 'load' });
+    await browser.url(PAGE_URL);
     await browser.deleteCookies({ name: COOKIE_NAME, domain: PAGE_DOMAIN });
   });
 

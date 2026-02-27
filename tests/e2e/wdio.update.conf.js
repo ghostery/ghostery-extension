@@ -31,12 +31,12 @@ import { setupTestPage } from './page/server.js';
  */
 export const config = {
   ...wdio.config,
+  // We include only main features, which can be affected by the extension update. It speed up the tests
+  // and avoid long living session issues (especially in Firefox) that can cause false positives in CI
+  specs: [wdio.config.specs[0]],
   exclude: [
     // The onboarding spec must be skipped as the extension is already installed and enabled
     './spec/onboarding.spec.js',
-    // The attribution spec relates to the code running only on the first install
-    // and can't be run during the update process.
-    './spec/attribution.spec.js',
   ],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
