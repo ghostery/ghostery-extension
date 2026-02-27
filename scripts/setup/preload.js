@@ -3,4 +3,4 @@ import { pathToFileURL } from 'node:url';
 
 import './init-chrome.js';
 
-register('./tests/unit/setup/loader.js', pathToFileURL('./'));
+register('./scripts/setup/loader.js', pathToFileURL('./'));

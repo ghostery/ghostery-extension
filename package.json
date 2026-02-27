@@ -4,7 +4,7 @@
   "version": "10.5.31",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "NODE_OPTIONS='--import ./scripts/setup/preload.js' node scripts/build.js",
     "start": "npm run build -- --watch",
     "start:update": "./scripts/update.sh",
     "debug": "npm run build -- --watch --debug",
@@ -12,7 +12,7 @@
     "lint:src": "eslint",
     "lint:build": "npm run build firefox -- --silent && addons-linter dist",
     "test": "npm run test:unit && npm run wdio && npm run wdio:update",
-    "test:unit": "node --import ./tests/unit/setup/preload.js --test",
+    "test:unit": "node --import ./scripts/setup/preload.js --test",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
     "wdio:page": "node tests/e2e/page/server.js",
