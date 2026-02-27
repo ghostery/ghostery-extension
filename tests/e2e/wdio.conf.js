@@ -25,7 +25,7 @@ import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 import { FLAGS } from '@ghostery/config';
 
-import { setConfigFlags, setCookieInBrowserContext, setExtensionBaseUrl } from './utils.js';
+import { getExtensionPageURL, setConfigFlags, setExtensionBaseUrl } from './utils.js';
 import { setupTestPage } from './page/server.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -84,14 +84,24 @@ export function buildForChrome() {
 
 export const config = {
   specs: [
+    // Main features
     [
-      // Onboarding tests should run first to avoid interference with other tests
       'spec/onboarding.spec.js',
-      // Notifications must run after onboarding to ensure
-      // a clean state for triggering notifications
-      'spec/notifications.spec.js',
-      // Other tests
-      'spec/*.spec.js',
+      'spec/managed.spec.js',
+      'spec/main.spec.js',
+      'spec/zapped.spec.js',
+      'spec/adblocker.spec.js',
+    ],
+    // The rest explicitly defined (a pattern would match main features too)
+    [
+      'spec/exceptions.spec.js',
+      'spec/custom-filters.spec.js',
+      'spec/redirect-protection.spec.js',
+      'spec/clear-cookies.spec.js',
+      'spec/experimental.spec.js',
+      'spec/panel.spec.js',
+      'spec/pause-assistant.spec.js',
+      'spec/whotracksme.spec.js',
     ],
   ],
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
@@ -104,6 +114,8 @@ export const config = {
   capabilities: [
     {
       browserName: 'firefox',
+      browserVersion: 'stable',
+      cacheDir: '.wdio',
       'moz:firefoxOptions': {
         args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
         prefs: {
@@ -188,13 +200,27 @@ export const config = {
         await browser.pause(2000);
       }
 
-      /* attribution.spec */
-      await setCookieInBrowserContext(
-        'https://www.ghostery.com/',
-        'attribution',
-        's=source&c=campaign',
-      );
-      /* attribution.spec */
+      // Modify browser.url
+      const SETTINGS_PAGE_URL = getExtensionPageURL('settings');
+      browser.overwriteCommand('url', async function (fn, ...args) {
+        const targetUrl = args[0];
+
+        // Force full navigation when navigating:
+        // * PAGE_URL - testing page for clearing cached version of page
+        // * SETTINGS_PAGE_URL - to reload the page completely so it loads the main privacy section
+        if (targetUrl === PAGE_URL || targetUrl === SETTINGS_PAGE_URL) {
+          await fn.call(this, 'about:blank');
+        }
+
+        // Load the target url
+        const result = await fn.call(this, ...args);
+
+        // CSS injection can have a delay after page load,
+        // so we need to add a small delay before the test starts
+        if (targetUrl === PAGE_URL) await browser.pause(100);
+
+        return result;
+      });
 
       await setConfigFlags(argv.flags);
     } catch (e) {
