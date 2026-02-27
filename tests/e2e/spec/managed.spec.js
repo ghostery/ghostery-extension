@@ -24,7 +24,7 @@ async function setManagedConfig(config) {
   await browser.url(getExtensionPageURL('panel'));
 
   await browser.execute(
-    (managedConfigStr) => {
+    function (managedConfigStr) {
       const managedConfig = managedConfigStr ? JSON.parse(managedConfigStr) : null;
       if (managedConfig) {
         chrome.storage.local.set({ managedConfig });
@@ -32,7 +32,7 @@ async function setManagedConfig(config) {
         chrome.storage.local.remove('managedConfig');
       }
     },
-    config ? JSON.stringify(config) : null,
+    config ? JSON.stringify(config) : 'null',
   );
 
   // Reload extension to pick up managed config changes
@@ -96,11 +96,6 @@ describe('Managed Configuration', function () {
     });
 
     await browser.url(PAGE_URL);
-
-    // Reload the page to ensure filters are applied
-    // Possible fix for some CI runs failing
-    await browser.url(PAGE_URL);
-
     await expect($('#custom-filter')).not.toBeDisplayed();
 
     await setManagedConfig({
