@@ -176,7 +176,11 @@ export default {
                           ${!item.managed &&
                           html`
                             <ui-action>
-                              <button layout@768px="order:1" onclick="${revokeCallback(item)}">
+                              <button
+                                layout@768px="order:1 row center"
+                                onclick="${revokeCallback(item)}"
+                                data-qa="button:website:trash:${item.id}"
+                              >
                                 <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
                               </button>
                             </ui-action>

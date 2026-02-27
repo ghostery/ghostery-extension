@@ -260,7 +260,7 @@ export default {
               <panel-actions-button>
                 <button onclick="${openLogger}">
                   <panel-actions-icon name="open-book"></panel-actions-icon>
-                  View details logs
+                  View detailed logs
                   <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                 </button>
               </panel-actions-button>
@@ -442,6 +442,7 @@ export default {
                                         trackerId: tracker.id,
                                       })}"
                                       layout="row center relative"
+                                      data-qa="button:tracker:protection-status:${tracker.id}"
                                     >
                                       <panel-protection-status-icon
                                         options="${options}"
