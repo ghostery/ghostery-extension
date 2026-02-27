@@ -33,7 +33,7 @@ export async function load(url, context, nextLoad) {
 
   if (result.format === 'module') {
     // Skip the bin file.
-    if (result.source.startsWith('#!')) {
+    if (typeof result.source !== 'string' || result.source.startsWith('#!')) {
       return result;
     }
     // import.meta is defined per module and the shim has to be
