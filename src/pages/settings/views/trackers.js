@@ -112,11 +112,16 @@ export default {
                 layout="width::12 grow"
                 layout@768px="grow:0"
                 onclick="${html.set('category', category !== '_all' ? '_all' : '')}"
+                data-qa="button:trackers:expand"
               >
                 <button>${category !== '_all' ? msg`Expand` : msg`Collapse`}</button>
               </ui-button>
               <ui-input layout="grow" layout@768px="grow:0">
-                <select value="${filter}" onchange="${html.set('filter')}">
+                <select
+                  value="${filter}"
+                  onchange="${html.set('filter')}"
+                  data-qa="select:trackers:filter"
+                >
                   <option selected value="">Show all</option>
                   <option value="adjusted">
                     <!-- Plural form - list of adjusted trackers | tracker-list -->Adjusted
@@ -135,6 +140,7 @@ export default {
                   defaultValue="${query}"
                   oninput="${setLazyQuery}"
                   placeholder="${msg`Search for a tracker or organization...`}"
+                  data-qa="input:trackers:search"
                 />
               </ui-input>
             </div>
@@ -167,6 +173,7 @@ export default {
                                     })}"
                                     layout="column grow basis:0"
                                     layout@768px="row gap:2"
+                                    data-qa="button:trackers:details:${tracker.id}"
                                   >
                                     <ui-text type="label-m"> ${tracker.name} </ui-text>
                                     ${store.ready(tracker.organization) &&

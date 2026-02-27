@@ -57,6 +57,7 @@ export default {
               active: router.active(Trackers, { stack: true }),
             }}"
             slot="nav"
+            data-qa="button:trackers"
           >
             <ui-icon name="block-m" color="nav" layout="size:3"></ui-icon>
             Trackers

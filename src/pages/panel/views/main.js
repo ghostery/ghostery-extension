@@ -442,6 +442,7 @@ export default {
                                         trackerId: tracker.id,
                                       })}"
                                       layout="row center relative"
+                                      data-qa="button:tracker:protection-status:${tracker.id}"
                                     >
                                       <panel-protection-status-icon
                                         options="${options}"
