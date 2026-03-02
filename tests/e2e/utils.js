@@ -12,7 +12,13 @@
 import { browser, expect, $ } from '@wdio/globals';
 import { FLAG_MODES, FLAG_NOTIFICATION_REVIEW } from '@ghostery/config';
 
-import { argv, PAGE_URL } from './wdio.conf.js';
+import { argv } from './wdio.conf.js';
+
+export const PAGE_PORT = 6789;
+export const PAGE_DOMAIN = `page.localhost`;
+export const REDIRECT_PAGE_DOMAIN = `redirect.localhost`;
+export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
+export const REDIRECT_PAGE_URL = `http://${REDIRECT_PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
 export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';

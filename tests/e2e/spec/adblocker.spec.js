@@ -17,9 +17,11 @@ import {
   waitForIdleBackgroundTasks,
   setCustomFilters,
   disableCustomFilters,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
 
-import { argv, PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
+import { argv } from '../wdio.conf.js';
 
 const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 

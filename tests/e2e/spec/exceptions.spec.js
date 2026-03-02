@@ -10,7 +10,6 @@
  */
 import { browser, expect } from '@wdio/globals';
 
-import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 import {
   enableExtension,
   getExtensionElement,
@@ -18,6 +17,8 @@ import {
   openPanel,
   TRACKER_IDS,
   waitForIdleBackgroundTasks,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
 
 describe('Exceptions', function () {

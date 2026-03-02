@@ -15,9 +15,9 @@ import {
   openPanel,
   setCookieInBrowserContext,
   waitForIdleBackgroundTasks,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
-
-import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 describe('Clear Cookies', () => {
   const COOKIE_NAME = 'test-cookie';
