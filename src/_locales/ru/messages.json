@@ -1034,8 +1034,8 @@
   "view_activity_details": {
     "message": "Просмотреть подробности действия"
   },
-  "view_details_logs": {
-    "message": "Просмотр журналов деталей"
+  "view_detailed_logs": {
+    "message": "Просмотреть подробные журналы"
   },
   "view_report": {
     "message": "Просмотреть отчет"

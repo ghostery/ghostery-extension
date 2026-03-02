@@ -1034,8 +1034,8 @@
   "view_activity_details": {
     "message": "View activity details"
   },
-  "view_details_logs": {
-    "message": "View details logs"
+  "view_detailed_logs": {
+    "message": "View detailed logs"
   },
   "view_report": {
     "message": "View Report"
