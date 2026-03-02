@@ -13,6 +13,7 @@ import path from 'node:path';
 import url from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { createServer } from 'node:http';
+import { PAGE_DOMAIN, REDIRECT_PAGE_DOMAIN } from '../utils.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 export function setupTestPage(port = 6789) {
@@ -29,6 +30,16 @@ export function setupTestPage(port = 6789) {
   };
 
   const server = createServer((req, res) => {
+    // Redirect subpage.localhost to page.localhost
+    const host = req.headers.host?.split(':')[0];
+
+    if (host === REDIRECT_PAGE_DOMAIN) {
+      const redirectUrl = `http://${PAGE_DOMAIN}:${port}${req.url}`;
+      res.writeHead(302, { Location: redirectUrl });
+      res.end();
+      return;
+    }
+
     // Default to index.html if no specific file is requested
     const fileName = req.url === '/' ? 'index.html' : req.url.slice(1);
     const filePath = path.resolve(__dirname, fileName);

@@ -23,9 +23,11 @@ import {
   waitForIdleBackgroundTasks,
   ADBLOCKING_GLOBAL_SELECTOR,
   expectAdsBlocked,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
 
-import { argv, PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
+import { argv } from '../wdio.conf.js';
 
 if (argv.flags.includes(FLAG_PAUSE_ASSISTANT)) {
   describe('Pause Assistant', function () {

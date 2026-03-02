@@ -21,9 +21,8 @@ import {
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
   TRACKER_IDS,
+  PAGE_URL,
 } from '../utils.js';
-
-import { PAGE_URL } from '../wdio.conf.js';
 
 describe('Main Features', function () {
   before(enableExtension);

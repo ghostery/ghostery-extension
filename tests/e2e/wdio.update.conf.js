@@ -19,6 +19,7 @@ import {
   getExtensionPageURL,
   setConfigFlags,
   waitForIdleBackgroundTasks,
+  PAGE_PORT,
 } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
@@ -102,7 +103,7 @@ export const config = {
         }
       }
 
-      setupTestPage(wdio.PAGE_PORT);
+      setupTestPage(PAGE_PORT);
     } catch (e) {
       console.error('Error while preparing test environment', e);
       process.exit(1);

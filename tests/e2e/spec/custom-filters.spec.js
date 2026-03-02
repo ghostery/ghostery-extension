@@ -17,9 +17,9 @@ import {
   setCustomFilters,
   disableCustomFilters,
   switchFrame,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
-
-import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 describe('Custom Filters', function () {
   before(enableExtension);

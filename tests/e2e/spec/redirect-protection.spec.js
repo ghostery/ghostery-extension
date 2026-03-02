@@ -18,9 +18,12 @@ import {
   waitForIdleBackgroundTasks,
   setCustomFilters,
   disableCustomFilters,
+  PAGE_DOMAIN,
+  PAGE_URL,
+  REDIRECT_PAGE_URL,
 } from '../utils.js';
 
-import { argv, PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
+import { argv } from '../wdio.conf.js';
 
 async function openRedirectSettings() {
   await browser.url(getExtensionPageURL('settings'));
@@ -76,7 +79,16 @@ if (argv.flags.includes(FLAG_REDIRECT_PROTECTION)) {
       await browser.url(PAGE_URL);
 
       await expectOnWarningPage(true);
-      await expect(getExtensionElement('text:redirect-protection:url')).toHaveText(PAGE_DOMAIN, {
+      await expect(getExtensionElement('text:redirect-protection:url')).toHaveText(PAGE_URL, {
+        containing: true,
+      });
+    });
+
+    it('redirects to warning page when navigating to redirecting domain', async function () {
+      await browser.url(REDIRECT_PAGE_URL);
+
+      await expectOnWarningPage(true);
+      await expect(getExtensionElement('text:redirect-protection:url')).toHaveText(PAGE_URL, {
         containing: true,
       });
     });

@@ -11,13 +11,14 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
-import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 import {
   enableExtension,
   openPanel,
   getExtensionElement,
   getExtensionPageURL,
   reloadExtension,
+  PAGE_DOMAIN,
+  PAGE_URL,
 } from '../utils.js';
 
 async function setManagedConfig(config) {
