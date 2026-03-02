@@ -32,8 +32,11 @@ export async function load(url, context, nextLoad) {
   const result = await nextLoad(url, context);
 
   if (result.format === 'module') {
-    // Skip the bin file.
-    if (typeof result.source !== 'string' || result.source.startsWith('#!')) {
+    if (
+      typeof result.source !== 'string' ||
+      result.source.startsWith('#!') ||
+      !result.source.includes('import.meta.glob')
+    ) {
       return result;
     }
     // import.meta is defined per module and the shim has to be

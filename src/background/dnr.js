@@ -14,15 +14,11 @@ import { store } from 'hybrids';
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
 
-import {
-  FIXES_ID_RANGE,
-  getDynamicRulesIds,
-  filterMaxPriorityRules,
-  getExcludedRuleIdsByPreprocessors,
-} from '/utils/dnr.js';
+import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 import { evaluatePreprocessorCondition } from '/utils/engines.js';
+import { getExcludedRuleIdsByPreprocessors } from '/utils/preprocessor.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';

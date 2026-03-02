@@ -93,29 +93,24 @@ if (argv.clean) {
 if (argv.target === 'chromium') {
   execSync('node scripts/download-dnr-rulesets.js' + (argv.staging ? ' --staging' : ''), {
     stdio: silent ? '' : 'inherit',
-    env: process.env,
   });
 
   // Build redirect protection rules from downloaded DNR rulesets (MV3 only)
   execSync('node scripts/build-redirect-protection-rules.js', {
     stdio: silent ? '' : 'inherit',
-    env: process.env,
   });
 }
 
 execSync('node scripts/download-redirect-resources.js' + (argv.staging ? ' --staging' : ''), {
   stdio: silent ? '' : 'inherit',
-  env: process.env,
 });
 
 execSync('node scripts/download-wtm-bloomfilter.js', {
   stdio: silent ? '' : 'inherit',
-  env: process.env,
 });
 
 execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
-  env: process.env,
 });
 
 // --- Generate static pages ---

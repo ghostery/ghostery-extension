@@ -9,8 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { evaluatePreprocessorCondition } from './engines.js';
-
 // Dynamic Rules ID Ranges and Priorities
 
 export const PAUSED_ID_RANGE = { start: 1, end: 1_000_000 };
@@ -49,10 +47,6 @@ export const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
-// We need to depend on `eager` option since dynamic imports are
-// not allowed in web workers scope.
-const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
-
 export function filterMaxPriorityRules(rules) {
   return rules.filter((rule) => rule.priority !== MAX_RULE_PRIORITY);
 }
@@ -90,22 +84,4 @@ export function getRedirectProtectionRules(rules) {
   }
 
   return result;
-}
-
-/**
- * @param {string} rulesetId
- * @returns {number[]}
- */
-export function getExcludedRuleIdsByPreprocessors(rulesetId) {
-  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
-  const disabledRuleIds = [];
-  if (typeof metadata === 'undefined') {
-    return disabledRuleIds;
-  }
-  for (const [ruleId, constraints] of Object.entries(metadata)) {
-    if (!evaluatePreprocessorCondition(constraints.preprocessor)) {
-      disabledRuleIds.push(Number(ruleId));
-    }
-  }
-  return disabledRuleIds;
 }
