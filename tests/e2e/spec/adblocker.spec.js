@@ -10,31 +10,27 @@
  */
 import { browser, expect } from '@wdio/globals';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
-import { enableExtension, setPrivacyToggle, setCustomFilters } from '../utils.js';
+import {
+  enableExtension,
+  getExtensionPageURL,
+  setToggle,
+  waitForIdleBackgroundTasks,
+  setCustomFilters,
+  disableCustomFilters,
+} from '../utils.js';
 
 import { argv, PAGE_DOMAIN, PAGE_URL as PAGE_URL } from '../wdio.conf.js';
 
 const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 
-async function disableAllPrivacyToggle() {
-  // Disable all community filters to ensure the pure adblocker capability
-  // Community filters often ship generic hides to special hostnames like
-  // localhost. However, still at least one engine is required to bring
-  // redirect resources to the resulting engine.
-  await setPrivacyToggle('ad-blocking', false);
-  await setPrivacyToggle('never-consent', false);
-  await setPrivacyToggle('anti-tracking', false);
-}
+async function togglePrivacyFeatures(value) {
+  await browser.url(getExtensionPageURL('settings'));
 
-async function enableAllPrivacyToggle() {
-  await setPrivacyToggle('ad-blocking', true);
-  await setPrivacyToggle('never-consent', true);
-  await setPrivacyToggle('anti-tracking', true);
-}
+  await setToggle('ad-blocking', value);
+  await setToggle('never-consent', value);
+  await setToggle('anti-tracking', value);
 
-async function disableCustomFilters() {
-  await setCustomFilters([]);
-  await setPrivacyToggle('custom-filters', false);
+  await waitForIdleBackgroundTasks();
 }
 
 async function collectTestPageResponse() {
@@ -95,10 +91,18 @@ async function test(filters) {
 
 describe('Adblocker Capabilities', function () {
   before(enableExtension);
-  before(disableAllPrivacyToggle);
+  before(async () => {
+    // Disable all community filters to ensure the pure adblocker capability
+    // Community filters often ship generic hides to special hostnames like
+    // localhost. However, still at least one engine is required to bring
+    // redirect resources to the resulting engine.
+    await togglePrivacyFeatures(false);
+  });
 
-  after(enableAllPrivacyToggle);
-  after(disableCustomFilters);
+  after(async () => {
+    await togglePrivacyFeatures(true);
+    await disableCustomFilters();
+  });
 
   describe('All platforms', function () {
     const stylingFilters = [
@@ -203,57 +207,51 @@ describe('Adblocker Capabilities', function () {
       });
     });
   }
-});
 
-describe('Capability Controls', function () {
-  before(enableExtension);
-  before(disableAllPrivacyToggle);
+  describe(' Controls', function () {
+    it('$elemhide exception', async function () {
+      const reports = await test([
+        ['', `@@||${PAGE_DOMAIN}^$elemhide`],
+        ['', PAGE_DOMAIN + '###target'],
+        ['', '###generic-target'],
+      ]);
 
-  after(enableAllPrivacyToggle);
-  after(disableCustomFilters);
+      await expect(
+        reports.styling.map(function (timing) {
+          return timing.results['generic-selector-id'];
+        }),
+      ).not.toContain(true);
+      await expect(
+        reports.styling.map(function (timing) {
+          return timing.results['selector-id'];
+        }),
+      ).not.toContain(true);
+    });
 
-  it('$elemhide exception', async function () {
-    const reports = await test([
-      ['', `@@||${PAGE_DOMAIN}^$elemhide`],
-      ['', PAGE_DOMAIN + '###target'],
-      ['', '###generic-target'],
-    ]);
+    it('$ghide exception', async function () {
+      const reports = await test([
+        ['', `@@||${PAGE_DOMAIN}^$ghide`],
+        ['', '###generic-target'],
+      ]);
 
-    await expect(
-      reports.styling.map(function (timing) {
-        return timing.results['generic-selector-id'];
-      }),
-    ).not.toContain(true);
-    await expect(
-      reports.styling.map(function (timing) {
-        return timing.results['selector-id'];
-      }),
-    ).not.toContain(true);
-  });
+      await expect(
+        reports.styling.map(function (timing) {
+          return timing.results['generic-selector-id'];
+        }),
+      ).not.toContain(true);
+    });
 
-  it('$ghide exception', async function () {
-    const reports = await test([
-      ['', `@@||${PAGE_DOMAIN}^$ghide`],
-      ['', '###generic-target'],
-    ]);
+    it('$shide exception', async function () {
+      const reports = await test([
+        ['', `@@||${PAGE_DOMAIN}^$shide`],
+        ['', PAGE_DOMAIN + '###target'],
+      ]);
 
-    await expect(
-      reports.styling.map(function (timing) {
-        return timing.results['generic-selector-id'];
-      }),
-    ).not.toContain(true);
-  });
-
-  it('$shide exception', async function () {
-    const reports = await test([
-      ['', `@@||${PAGE_DOMAIN}^$shide`],
-      ['', PAGE_DOMAIN + '###target'],
-    ]);
-
-    await expect(
-      reports.styling.map(function (timing) {
-        return timing.results['selector-id'];
-      }),
-    ).not.toContain(true);
+      await expect(
+        reports.styling.map(function (timing) {
+          return timing.results['selector-id'];
+        }),
+      ).not.toContain(true);
+    });
   });
 });

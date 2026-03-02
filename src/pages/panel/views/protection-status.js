@@ -69,6 +69,7 @@ export default {
               disabled="${exceptionStatus.trusted && exceptionStatus.global}"
               onchange="${toggleDomain}"
               no-label
+              data-qa="button:protection-status:trust:website"
             >
               <div layout="grow">
                 <ui-text type="label-m">Trust on this website</ui-text>
@@ -85,6 +86,7 @@ export default {
               value="${exceptionStatus.trusted && exceptionStatus.global}"
               onchange="${toggleGlobal}"
               no-label
+              data-qa="button:protection-status:trust:global"
             >
               <div layout="grow">
                 <ui-text type="label-m">Trust on all websites</ui-text>

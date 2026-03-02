@@ -15,6 +15,7 @@ import {
   setPrivacyToggle,
   openPanel,
   setCustomFilters,
+  disableCustomFilters,
   switchFrame,
 } from '../utils.js';
 
@@ -22,12 +23,19 @@ import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 describe('Custom Filters', function () {
   before(enableExtension);
-  after(async () => {
-    await setPrivacyToggle('custom-filters', false);
+  before(async () => {
+    await setCustomFilters([
+      `${PAGE_DOMAIN}###custom-filter`,
+      `@@connect.facebook.net^`,
+      `/.*example.com/`,
+      `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
+      `${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:noop.js)`,
+    ]);
   });
 
-  it('disables custom filters', async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
+  after(disableCustomFilters);
+
+  it('disables custom filters by toggle', async function () {
     await setPrivacyToggle('custom-filters', false);
 
     await browser.url(PAGE_URL);
@@ -37,11 +45,11 @@ describe('Custom Filters', function () {
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
+
+    await setPrivacyToggle('custom-filters', true);
   });
 
-  it('adds custom network filter', async function () {
-    await setCustomFilters([`@@connect.facebook.net^`]);
-
+  it('supports custom network filter', async function () {
     await browser.url(PAGE_URL);
 
     await openPanel();
@@ -51,9 +59,7 @@ describe('Custom Filters', function () {
     await expect(getExtensionElement(`icon:tracker:facebook_connect:modified`)).not.toBeDisplayed();
   });
 
-  it('adds supported custom regex filter', async function () {
-    await setCustomFilters([`/.*example.com/`]);
-
+  it('supports regex filter', async function () {
     await browser.url(PAGE_URL);
 
     await openPanel();
@@ -62,20 +68,7 @@ describe('Custom Filters', function () {
     await expect(getExtensionElement(`icon:tracker:www.example.com:blocked`)).toBeDisplayed();
   });
 
-  if (browser.isChromium) {
-    it('adds unsupported custom regex filter', async function () {
-      await setCustomFilters([`/(?>ab)c/`], async () => {
-        const errors = await getExtensionElement('component:custom-filters:errors');
-
-        const text = await errors.getText();
-        await expect(text).toContain('Could not apply a custom filter');
-      });
-    });
-  }
-
-  it('adds custom cosmetic filter', async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
-
+  it('supports cosmetic filter', async function () {
     await browser.url(PAGE_URL);
     await expect($('#custom-filter')).not.toBeDisplayed();
 
@@ -91,16 +84,12 @@ describe('Custom Filters', function () {
     await browser.switchFrame(null);
   });
 
-  it('adds custom scriptlet filter', async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`]);
-
+  it('supports scriptlet filter', async function () {
     await browser.url(PAGE_URL);
     await expect($('h1')).toHaveText('Hello world');
   });
 
-  it('adds custom scriptlet filter depending on `scriptletsGlobal.warOrigin`', async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:noop.js)`]);
-
+  it('supports scriptlet filter depending on `scriptletsGlobal.warOrigin`', async function () {
     await browser.url(PAGE_URL);
     await $('#war').waitForExist();
     await expect($('#war')).toHaveText('(function(){"use strict"})();');
@@ -108,13 +97,24 @@ describe('Custom Filters', function () {
 
   // Scope for Firefox webRequest API tests
   if (browser.isFirefox) {
-    it('adds $replace network filter', async function () {
+    it('supports $replace network filter', async function () {
       await setCustomFilters([
         `||${PAGE_DOMAIN}^$replace=/<title>.*<\\/title>/<title>hello world<\\/title>/`,
       ]);
 
       await browser.url(PAGE_URL);
       await expect(await browser.getTitle()).toBe('hello world');
+    });
+  }
+
+  if (browser.isChromium) {
+    it('throws for unsupported regex filter', async function () {
+      await setCustomFilters([`/(?>ab)c/`]);
+
+      const errors = await getExtensionElement('component:custom-filters:errors');
+
+      const text = await errors.getText();
+      await expect(text).toContain('Could not apply a custom filter');
     });
   }
 });
