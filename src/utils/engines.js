@@ -36,7 +36,7 @@ export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
 
-const ENV = new Map([
+export const ENV = new Map([
   ['ext_ghostery', true],
   ['ext_ublock', true],
   ['ext_ubol', checkUserAgent('Firefox')],

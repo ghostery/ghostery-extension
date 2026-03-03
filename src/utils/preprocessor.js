@@ -11,6 +11,8 @@
 
 import { evaluatePreprocessor } from '@ghostery/adblocker';
 
+import { ENV } from './engines.js';
+
 // We need to depend on `eager` option since dynamic imports are
 // not allowed in web workers scope.
 const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
@@ -26,7 +28,7 @@ export function getExcludedRuleIdsByPreprocessors(rulesetId) {
     return disabledRuleIds;
   }
   for (const [ruleId, constraints] of Object.entries(metadata)) {
-    if (!evaluatePreprocessor(constraints.preprocessor)) {
+    if (!evaluatePreprocessor(constraints.preprocessor, ENV)) {
       disabledRuleIds.push(Number(ruleId));
     }
   }
