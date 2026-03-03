@@ -11,28 +11,9 @@
 
 import { evaluatePreprocessor } from '@ghostery/adblocker';
 
-export const ENV = new Map([
-  ['ext_ghostery', true],
-  ['ext_ublock', true],
-  ['ext_ubol', checkUserAgent('Firefox')],
-  ['cap_html_filtering', checkUserAgent('Firefox')],
-  // can be removed in once $replace support is sufficiently distributed
-  ['cap_replace_modifier', checkUserAgent('Firefox')],
-  ['cap_user_stylesheet', true],
-  ['env_firefox', checkUserAgent('Firefox')],
-  ['env_chromium', checkUserAgent('Chrome')],
-  ['env_edge', checkUserAgent('Edg')],
-  ['env_mobile', checkUserAgent('Mobile')],
-  ['env_experimental', false],
-]);
-
 // We need to depend on `eager` option since dynamic imports are
 // not allowed in web workers scope.
 const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
-
-function checkUserAgent(pattern) {
-  return navigator.userAgent.indexOf(pattern) !== -1;
-}
 
 /**
  * @param {string} rulesetId
