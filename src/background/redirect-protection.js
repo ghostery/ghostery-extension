@@ -124,9 +124,16 @@ if (__CHROMIUM__) {
         redirectUrlMap.set(details.tabId, details.url);
       }
     },
-    {
-      url: [{ schemes: ['http', 'https'] }],
+    { url: [{ schemes: ['http', 'https'] }] },
+  );
+
+  chrome.webRequest?.onBeforeRedirect.addListener(
+    (details) => {
+      if (!details.redirectUrl.startsWith(REDIRECT_PROTECTION_PAGE_URL)) {
+        redirectUrlMap.set(details.tabId, details.redirectUrl);
+      }
     },
+    { urls: ['<all_urls>'] },
   );
 
   chrome.tabs.onRemoved.addListener((tabId) => {

@@ -23,9 +23,11 @@ import {
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
   TRACKER_IDS,
+  PAGE_URL,
+  PAGE_DOMAIN,
 } from '../utils.js';
 
-import { argv, PAGE_URL, PAGE_DOMAIN } from '../wdio.conf.js';
+import { argv } from '../wdio.conf.js';
 
 async function setFilteringMode(mode) {
   await browser.url(getExtensionPageURL('settings'));

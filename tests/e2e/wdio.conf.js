@@ -25,17 +25,20 @@ import { execSync } from 'node:child_process';
 import { $ } from '@wdio/globals';
 import { FLAGS } from '@ghostery/config';
 
-import { getExtensionPageURL, setConfigFlags, setExtensionBaseUrl } from './utils.js';
 import { setupTestPage } from './page/server.js';
+
+import {
+  getExtensionPageURL,
+  setConfigFlags,
+  setExtensionBaseUrl,
+  PAGE_PORT,
+  PAGE_URL,
+} from './utils.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
 export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
-
-const PAGE_PORT = 6789;
-export const PAGE_DOMAIN = `page.localhost`;
-export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
