@@ -1034,8 +1034,8 @@
   "view_activity_details": {
     "message": "Visualizza i dettagli delle attività"
   },
-  "view_details_logs": {
-    "message": "Visualizza i registri dettagliati"
+  "view_detailed_logs": {
+    "message": "Visualizza log dettagliati"
   },
   "view_report": {
     "message": "Visualizza rapporto"

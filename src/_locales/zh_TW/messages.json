@@ -1034,8 +1034,8 @@
   "view_activity_details": {
     "message": "查看活動詳情"
   },
-  "view_details_logs": {
-    "message": "查看詳細日誌"
+  "view_detailed_logs": {
+    "message": "檢視詳細記錄"
   },
   "view_report": {
     "message": "查看報告"

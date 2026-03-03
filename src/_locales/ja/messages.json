@@ -1034,7 +1034,7 @@
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
   },
-  "view_details_logs": {
+  "view_detailed_logs": {
     "message": "詳細ログを表示"
   },
   "view_report": {
