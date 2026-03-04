@@ -1034,8 +1034,8 @@
   "view_activity_details": {
     "message": "활동 세부정보 보기"
   },
-  "view_details_logs": {
-    "message": "세부 로그 보기"
+  "view_detailed_logs": {
+    "message": "자세한 로그 보기"
   },
   "view_report": {
     "message": "보고서 보기"
