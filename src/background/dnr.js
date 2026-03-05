@@ -18,7 +18,7 @@ import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/uti
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 import { evaluatePreprocessorCondition } from '/utils/engines.js';
-import { getExcludedRuleIdsByPreprocessors } from '/utils/preprocessor.js';
+import { disableExcludedRulesByPreprocessor } from '/utils/preprocessor.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
@@ -68,6 +68,7 @@ if (__CHROMIUM__) {
       lastOptions &&
       lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
       lastOptions.fixesFilters === options.fixesFilters &&
+      lastOptions.experimentalFilters === options.experimentalFilters &&
       String(ids) === String(getIds(lastOptions))
     ) {
       // No changes in options triggering an update, skip updating rules
@@ -192,24 +193,15 @@ if (__CHROMIUM__) {
       if (!enabledRulesetIds.includes(id)) {
         enableRulesetIds.push(id);
       }
-
-      try {
-        const disableRuleIds = getExcludedRuleIdsByPreprocessors(id);
-        await chrome.declarativeNetRequest.updateStaticRules({
-          rulesetId: id,
-          disableRuleIds,
-        });
-        console.info(
-          `[dnr] Disabled rules in static ruleset: ${id}: ${JSON.stringify(disableRuleIds)}`,
-        );
-      } catch (e) {
-        console.error(`[dnr] Failed to apply preprocessors:`, e);
-      }
     }
 
     for (const id of enabledRulesetIds) {
       if (!ids.includes(id)) {
         disableRulesetIds.push(id);
+      } else {
+        // The below will run when the extension is installed as
+        // well with the change of `options.terms`.
+        disableExcludedRulesByPreprocessor(id);
       }
     }
 
@@ -222,6 +214,14 @@ if (__CHROMIUM__) {
         console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
+      }
+    }
+  });
+
+  chrome.runtime.onInstalled.addListener(async function finishDnrMigration(details) {
+    if (details.reason === 'update') {
+      for (const id of getIds()) {
+        disableExcludedRulesByPreprocessor(id);
       }
     }
   });

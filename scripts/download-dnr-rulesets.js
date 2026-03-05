@@ -69,7 +69,9 @@ for (const [name, target] of Object.entries(RULESETS)) {
         generateJSON('DNR ruleset metadata', name),
       );
 
-      writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+      if (Object.keys(metadata) === 0) {
+        writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+      }
     }
 
     process.stdout.write(' done\n');

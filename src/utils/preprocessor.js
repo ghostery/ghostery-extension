@@ -15,22 +15,36 @@ import { ENV } from './engines.js';
 
 // We need to depend on `eager` option since dynamic imports are
 // not allowed in web workers scope.
-const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', { eager: true });
+const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', {
+  eager: true,
+  import: 'default',
+});
 
 /**
  * @param {string} rulesetId
- * @returns {number[]}
  */
-export function getExcludedRuleIdsByPreprocessors(rulesetId) {
+export async function disableExcludedRulesByPreprocessor(rulesetId) {
   const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
-  const disabledRuleIds = [];
-  if (typeof metadata === 'undefined') {
-    return disabledRuleIds;
+  if (!metadata) {
+    return;
   }
-  for (const [ruleId, constraints] of Object.entries(metadata)) {
+  const disableRuleIds = Object.entries(metadata).reduce(function (
+    disabledRuleIds,
+    [ruleId, constraints],
+  ) {
     if (!evaluatePreprocessor(constraints.preprocessor, ENV)) {
       disabledRuleIds.push(Number(ruleId));
     }
+  }, []);
+  try {
+    await chrome.declarativeNetRequest.updateStaticRules({
+      rulesetId: rulesetId,
+      disableRuleIds,
+    });
+    console.info(
+      `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds.slice(0, 10))}`,
+    );
+  } catch (e) {
+    console.error(`[dnr] Failed to apply preprocessors:`, e);
   }
-  return disabledRuleIds;
 }
