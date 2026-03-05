@@ -49,10 +49,7 @@ export default {
   options: store(Options),
   render: {
     connect: () => {
-      chrome.runtime.sendMessage({
-        action: 'telemetry',
-        event: 'install_complete',
-      });
+      chrome.runtime.sendMessage({ action: 'telemetry:ping', event: 'install_complete' });
     },
     value: ({ options }) => html`
       <template layout="column gap:2 width:::500px">
