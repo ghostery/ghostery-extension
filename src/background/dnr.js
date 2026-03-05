@@ -198,10 +198,6 @@ if (__CHROMIUM__) {
     for (const id of enabledRulesetIds) {
       if (!ids.includes(id)) {
         disableRulesetIds.push(id);
-      } else {
-        // The below will run when the extension is installed as
-        // well with the change of `options.terms`.
-        disableExcludedRulesByPreprocessor(id);
       }
     }
 
@@ -214,6 +210,19 @@ if (__CHROMIUM__) {
         console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
+      }
+
+      for (const id of enableRulesetIds) {
+        try {
+          // The below will run when the extension is installed as
+          // well with the change of `options.terms`.
+          const disableRuleIds = await disableExcludedRulesByPreprocessor(id);
+          console.info(
+            `[dnr] Disabled rules in static ruleset: ${id}: ${JSON.stringify(disableRuleIds)}`,
+          );
+        } catch (e) {
+          console.error(`[dnr] Failed to apply preprocessors:`, e);
+        }
       }
     }
   });

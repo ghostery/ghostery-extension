@@ -22,11 +22,12 @@ const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', {
 
 /**
  * @param {string} rulesetId
+ * @returns {Promise<number[]>}
  */
 export async function disableExcludedRulesByPreprocessor(rulesetId) {
-  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
+  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`]?.default;
   if (!metadata) {
-    return;
+    return [];
   }
   const disableRuleIds = Object.entries(metadata).reduce(function (
     disabledRuleIds,
@@ -36,15 +37,9 @@ export async function disableExcludedRulesByPreprocessor(rulesetId) {
       disabledRuleIds.push(Number(ruleId));
     }
   }, []);
-  try {
-    await chrome.declarativeNetRequest.updateStaticRules({
-      rulesetId: rulesetId,
-      disableRuleIds,
-    });
-    console.info(
-      `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds.slice(0, 10))}`,
-    );
-  } catch (e) {
-    console.error(`[dnr] Failed to apply preprocessors:`, e);
-  }
+  await chrome.declarativeNetRequest.updateStaticRules({
+    rulesetId: rulesetId,
+    disableRuleIds,
+  });
+  return disableRuleIds;
 }
