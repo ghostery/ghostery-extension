@@ -110,7 +110,7 @@ export default class Metrics {
     this.log = log;
     this.saveStorage = saveStorage;
     this.storage = storage || {};
-    this._sendReqLock = new SeqExecutor();
+    this._seqExecutor = new SeqExecutor();
   }
 
   /**
@@ -126,26 +126,28 @@ export default class Metrics {
    * @param {string} type    type of the telemetry ping
    */
   ping(type) {
-    switch (type) {
-      // Key Performance Metrics
-      case 'install':
-        this._recordInstall();
-        break;
-      case 'active':
-        this._recordActive();
-        break;
-      case 'engaged':
-        this._recordEngaged();
-        break;
-      case 'install_complete':
-        this._recordInstallComplete();
-        break;
+    return this._seqExecutor.run(async () => {
+      switch (type) {
+        // Key Performance Metrics
+        case 'install':
+          await this._recordInstall();
+          break;
+        case 'active':
+          await this._recordActive();
+          break;
+        case 'engaged':
+          await this._recordEngaged();
+          break;
+        case 'install_complete':
+          await this._recordInstallComplete();
+          break;
 
-      // Uncaught Pings
-      default:
-        this.log(`metrics ping() error: ping name ${type} not found`);
-        break;
-    }
+        // Uncaught Pings
+        default:
+          this.log(`metrics ping() error: ping name ${type} not found`);
+          break;
+      }
+    });
   }
 
   /**
@@ -250,97 +252,95 @@ export default class Metrics {
    * @param {array} 		[frequencies = ['all']] 	array of ping frequencies
    */
   async _sendReq(type, frequencies = ['all']) {
-    return this._sendReqLock.run(async () => {
-      const now = Date.now();
+    const now = Date.now();
 
-      // Initialization:
-      let storageDirty = false;
-      for (const frequency of frequencies) {
-        const key = `${type}_${frequency}`;
+    // Initialization:
+    let storageDirty = false;
+    for (const frequency of frequencies) {
+      const key = `${type}_${frequency}`;
 
-        // Protect against calling events immediately after install for all frequencies
-        // They should trigger on the trailing edge of the frequency
-        if (!this.storage[key] && type !== 'engaged' && type !== 'active' && frequency !== 'all') {
-          this.log(
-            `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
-          );
-          this.storage[key] = now;
-          storageDirty = true;
+      // Protect against calling events immediately after install for all frequencies
+      // They should trigger on the trailing edge of the frequency
+      if (!this.storage[key] && type !== 'engaged' && type !== 'active' && frequency !== 'all') {
+        this.log(
+          `ping: initializing metrics (type=${type}, frequency=${frequency}) [should be seen only once per type and frequency]`,
+        );
+        this.storage[key] = now;
+        storageDirty = true;
+      }
+
+      const ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
+      if (this.storage[key] > now + ONE_YEAR) {
+        this.log(
+          `ping: resetting metrics (type=${type}, frequency=${frequency}) [clock jump detected]`,
+        );
+        this.storage[key] = now;
+        storageDirty = true;
+      }
+    }
+    if (storageDirty) {
+      await this.saveStorage(this.storage);
+    }
+
+    // 1. Prepare request (no side-effects on persistence or network requests yet)
+    const preparedRequests = [];
+    for (const frequency of frequencies) {
+      const key = `${type}_${frequency}`;
+
+      let shouldSendPing =
+        frequency === 'all' || now >= (this.storage[key] || 0) + FREQUENCIES[frequency];
+      if (shouldSendPing) {
+        this.storage[key] = now;
+        this.log(`ping: ${frequency} ${type} (preparing...)`);
+
+        preparedRequests.push({ type, frequency });
+      }
+    }
+
+    if (preparedRequests.length === 0) {
+      return;
+    }
+
+    // 2. Write changes to disk (otherwise, drop the signals)
+    try {
+      await this.saveStorage(this.storage);
+    } catch (err) {
+      throw new Error(`Error sending metrics (type=${type}. Failed to write on disk.`, {
+        cause: err,
+      });
+    }
+
+    // 3. Finally, send the request
+    const headers = new Headers();
+    headers.append('Content-Type', 'image/gif');
+    const options = {
+      headers,
+      referrerPolicy: 'no-referrer',
+      credentials: 'omit',
+      type: 'image',
+    };
+
+    // Best-effort approach in sending metrics (no retries).
+    // Note: even if one failed, keep sending to avoid biases.
+    const results = await Promise.allSettled(
+      preparedRequests.map(async ({ type, frequency }) => {
+        const metrics_url = await this._buildMetricsUrl(type, frequency);
+
+        const request = new Request(metrics_url, options);
+        const response = await fetch(request);
+        const ok = response.status >= 200 && response.status < 400;
+        if (!ok) {
+          throw new Error(`Error sending metrics (type=${type}, status=${response.status}`);
         }
-
-        const ONE_YEAR = 1000 * 60 * 60 * 24 * 365;
-        if (this.storage[key] > now + ONE_YEAR) {
-          this.log(
-            `ping: resetting metrics (type=${type}, frequency=${frequency}) [clock jump detected]`,
-          );
-          this.storage[key] = now;
-          storageDirty = true;
-        }
+        this.log(`ping: ${frequency} ${type} (successfully sent)`);
+      }),
+    );
+    for (const { status, reason } of results) {
+      if (status === 'rejected') {
+        throw reason;
       }
-      if (storageDirty) {
-        await this.saveStorage(this.storage);
-      }
-
-      // 1. Prepare request (no side-effects on persistence or network requests yet)
-      const preparedRequests = [];
-      for (const frequency of frequencies) {
-        const key = `${type}_${frequency}`;
-
-        let shouldSendPing =
-          frequency === 'all' || now >= (this.storage[key] || 0) + FREQUENCIES[frequency];
-        if (shouldSendPing) {
-          this.storage[key] = now;
-          this.log(`ping: ${frequency} ${type} (preparing...)`);
-
-          preparedRequests.push({ type, frequency });
-        }
-      }
-
-      if (preparedRequests.length === 0) {
-        return;
-      }
-
-      // 2. Write changes to disk (otherwise, drop the signals)
-      try {
-        await this.saveStorage(this.storage);
-      } catch (err) {
-        throw new Error(`Error sending metrics (type=${type}. Failed to write on disk.`, {
-          cause: err,
-        });
-      }
-
-      // 3. Finally, send the request
-      const headers = new Headers();
-      headers.append('Content-Type', 'image/gif');
-      const options = {
-        headers,
-        referrerPolicy: 'no-referrer',
-        credentials: 'omit',
-        type: 'image',
-      };
-
-      // Best-effort approach in sending metrics (no retries).
-      // Note: even if one failed, keep sending to avoid biases.
-      const results = await Promise.allSettled(
-        preparedRequests.map(async ({ type, frequency }) => {
-          const metrics_url = await this._buildMetricsUrl(type, frequency);
-
-          const request = new Request(metrics_url, options);
-          const response = await fetch(request);
-          const ok = response.status >= 200 && response.status < 400;
-          if (!ok) {
-            throw new Error(`Error sending metrics (type=${type}, status=${response.status}`);
-          }
-          this.log(`ping: ${frequency} ${type} (successfully sent)`);
-        }),
-      );
-      for (const { status, reason } of results) {
-        if (status === 'rejected') {
-          throw reason;
-        }
-      }
-      this.log(`ping: sending metrics of type=${type} succeeded.`);
-    });
+    }
+    this.log(`ping: sending metrics of type=${type} succeeded.`);
   }
 
   /**
@@ -415,7 +415,8 @@ export default class Metrics {
     if (this.storage.install_all) {
       return;
     }
-    this._sendReq('install').catch((err) => {
+
+    return this._sendReq('install').catch((err) => {
       this.log('Error sending metrics ("install" event dropped)', err);
     });
   }
@@ -441,7 +442,7 @@ export default class Metrics {
     }
 
     this.storage.active_daily_velocity = active_daily_velocity;
-    this.saveStorage(this.storage)
+    return this.saveStorage(this.storage)
       .then(() => this._sendReq('active', ['daily', 'weekly', 'monthly']))
       .catch((err) => {
         this.log('Error sending metrics ("active" event dropped)', err);
@@ -456,7 +457,7 @@ export default class Metrics {
     if (this.storage.install_complete_all) {
       return;
     }
-    this._sendReq('install_complete').catch((err) => {
+    return this._sendReq('install_complete').catch((err) => {
       this.log('Error sending metrics ("install_complete" event dropped)', err);
     });
   }
@@ -487,7 +488,7 @@ export default class Metrics {
     this.storage.engaged_daily_count = engaged_daily_count;
     this.storage.engaged_daily_velocity = engaged_daily_velocity;
 
-    this.saveStorage(this.storage)
+    return this.saveStorage(this.storage)
       .then(() => this._sendReq('engaged', ['daily', 'weekly', 'monthly']))
       .catch((err) => {
         this.log('Error sending metrics ("engaged" event dropped)', err);
