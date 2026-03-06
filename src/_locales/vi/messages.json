@@ -579,7 +579,7 @@
     "message": "Load more"
   },
   "manifest_name": {
-    "message": "Ghostery Privacy Ad Blocker"
+    "message": "Ghostery Privacy AdBlocker"
   },
   "manifest_short_description": {
     "message": "Duyệt web nhanh, riêng tư và không quảng cáo mà bạn có thể tin cậy!"
@@ -619,7 +619,7 @@
     "message": "Điều hướng đến một trang web để xem Ghostery hoạt động."
   },
   "need_more_help_": {
-    "message": "Need more help?"
+    "message": "Cần thêm trợ giúp?"
   },
   "network_filters__@_0_": {
     "message": "Network filters: $${0}"
@@ -674,7 +674,7 @@
     "message": "Organization's website"
   },
   "organizations": {
-    "message": "Organizations"
+    "message": "Tổ chức"
   },
   "other": {
     "message": "Khá",
@@ -780,7 +780,7 @@
     "message": "Chọn lại"
   },
   "resume": {
-    "message": "Resume"
+    "message": "Tiếp tục"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Tiết lộ những gì ẩn dưới bề mặt internet. Với WhoTracks.Me, bạn có thể khám phá danh tính đằng sau mọi trình theo dõi."
