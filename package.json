@@ -38,7 +38,6 @@
     "globals": "^17.4.0",
     "license-report": "^6.8.2",
     "prettier": "^3.8.1",
-    "sinon-chrome": "^3.0.1",
     "vite": "^7.3.1",
     "web-ext": "^9.4.0"
   },
