@@ -10,7 +10,28 @@
  */
 import { getBrowser, isWebkit } from './browser-info.js';
 
-const SUPPORTED_FILTERS = ['platform', 'browser', 'version'];
+const SUPPORTED_FILTERS = ['platform', 'browser', 'version', 'minVersion', 'maxVersion'];
+
+/**
+ * Compare two version strings.
+ * Returns -1 if a < b, 0 if a === b, 1 if a > b.
+ */
+export function compareVersions(a, b) {
+  const partsA = a.split('.').map((n) => parseInt(n, 10));
+  const partsB = b.split('.').map((n) => parseInt(n, 10));
+
+  const length = Math.max(partsA.length, partsB.length);
+
+  for (let i = 0; i < length; i += 1) {
+    const va = partsA[i] ?? 0;
+    const vb = partsB[i] ?? 0;
+
+    if (va > vb) return 1;
+    if (va < vb) return -1;
+  }
+
+  return 0;
+}
 
 export function filter(item) {
   if (item.filter) {
@@ -44,30 +65,25 @@ export function filter(item) {
       check = getBrowser().name === item.filter.browser;
     }
 
-    // Version check
+    const extensionVersion = chrome.runtime.getManifest().version;
+
+    // Version check (legacy, same as minVersion)
     // Checks that the extension version is equal or higher
+    // TODO: Remove when no active usage of version check is left
     if (check && typeof item.filter.version === 'string') {
-      const version = chrome.runtime
-        .getManifest()
-        .version.split('.')
-        .map((n) => parseInt(n, 10));
+      item.filter.minVersion = item.filter.version;
+    }
 
-      const filterVersion = item.filter.version.split('.').map((n) => parseInt(n, 10));
+    // minVersion check
+    // Checks that the extension version is equal or higher than minVersion
+    if (check && typeof item.filter.minVersion === 'string') {
+      check = compareVersions(extensionVersion, item.filter.minVersion) >= 0;
+    }
 
-      for (let i = 0; i < filterVersion.length; i += 1) {
-        const v = version[i];
-        const f = filterVersion[i];
-
-        if (v > f) {
-          // check === true
-          break;
-        }
-
-        if (v < f) {
-          check = false;
-          break;
-        }
-      }
+    // maxVersion check
+    // Checks that the extension version is equal or lower than maxVersion
+    if (check && typeof item.filter.maxVersion === 'string') {
+      check = compareVersions(extensionVersion, item.filter.maxVersion) <= 0;
     }
 
     return check;
