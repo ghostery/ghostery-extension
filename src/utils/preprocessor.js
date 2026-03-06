@@ -25,7 +25,7 @@ const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', {
  * @returns {Promise<number[]>}
  */
 export async function disableExcludedRulesByPreprocessor(rulesetId) {
-  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`]?.default;
+  const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
   if (!metadata) {
     return [];
   }
