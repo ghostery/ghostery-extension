@@ -69,7 +69,7 @@ for (const [name, target] of Object.entries(RULESETS)) {
         generateJSON('DNR ruleset metadata', name),
       );
 
-      if (Object.keys(metadata) === 0) {
+      if (Object.keys(metadata).length === 0) {
         writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
       }
     }
