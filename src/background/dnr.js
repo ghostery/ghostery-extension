@@ -20,6 +20,7 @@ import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
+import { captureException } from '/utils/errors.js';
 
 if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
@@ -192,6 +193,7 @@ if (__CHROMIUM__) {
         console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
+        captureException(e, { critical: true, once: true });
       }
     }
   });
