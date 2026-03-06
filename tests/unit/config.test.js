@@ -115,6 +115,15 @@ describe('Remote config', () => {
       assert.deepEqual(filter({ filter: { minVersion: '2.0.0' } }), false);
     });
 
+    it('should return true if legacy version filter matches', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
+      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), true);
+    });
+
+    it('should return false if legacy version filter does not match', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '1.9.9' });
+      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), false);
+    });
     it('should return true if maxVersion matches exactly', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
       assert.deepEqual(filter({ filter: { maxVersion: '2.0.0' } }), true);
