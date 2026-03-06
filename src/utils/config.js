@@ -23,8 +23,8 @@ export function compareVersions(a, b) {
   const length = Math.max(partsA.length, partsB.length);
 
   for (let i = 0; i < length; i += 1) {
-    const va = partsA[i] || 0;
-    const vb = partsB[i] || 0;
+    const va = partsA[i] ?? 0;
+    const vb = partsB[i] ?? 0;
 
     if (va > vb) return 1;
     if (va < vb) return -1;
