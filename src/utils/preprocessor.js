@@ -36,6 +36,7 @@ export async function disableExcludedRulesByPreprocessor(rulesetId) {
     if (!evaluatePreprocessor(constraints.preprocessor, ENV)) {
       disabledRuleIds.push(Number(ruleId));
     }
+    return disabledRuleIds;
   }, []);
   await chrome.declarativeNetRequest.updateStaticRules({
     rulesetId: rulesetId,
