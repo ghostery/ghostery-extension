@@ -68,7 +68,6 @@ if (__CHROMIUM__) {
       lastOptions &&
       lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
       lastOptions.fixesFilters === options.fixesFilters &&
-      lastOptions.experimentalFilters === options.experimentalFilters &&
       String(ids) === String(getIds(lastOptions))
     ) {
       // No changes in options triggering an update, skip updating rules
