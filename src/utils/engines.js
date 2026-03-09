@@ -38,12 +38,13 @@ const engines = new Map();
 const ENV = new Map([
   ['ext_ghostery', true],
   ['cap_html_filtering', checkUserAgent('Firefox')],
-  // can be removed in once $replace support is sufficiently distributed
+  // TODO: Can be removed once $replace support is sufficiently distributed
   ['cap_replace_modifier', checkUserAgent('Firefox')],
   ['env_firefox', checkUserAgent('Firefox')],
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
   ['env_mobile', checkUserAgent('Mobile')],
+  // TODO: Can be removed after clean up of the experimental filters is sufficiently distributed
   ['env_experimental', false],
 ]);
 
