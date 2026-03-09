@@ -205,14 +205,6 @@ export const setup = asyncSetup('adblocker', [
       await updateEngines();
     }
   }),
-  OptionsObserver.addListener('experimentalFilters', async (value, lastValue) => {
-    engines.setEnv('env_experimental', value);
-
-    // Experimental filters changed to enabled
-    if (lastValue !== undefined && value) {
-      await updateEngines();
-    }
-  }),
 ]);
 
 const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(FLAG_INJECTION_TARGET_DOCUMENT_ID);

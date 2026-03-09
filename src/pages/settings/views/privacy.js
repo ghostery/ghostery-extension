@@ -25,7 +25,6 @@ import { asyncAction } from '../utils/actions.js';
 import assets from '../assets/index.js';
 
 import RegionalFilters from './regional-filters.js';
-import ExperimentalFilters from './experimental-filters.js';
 import CustomFilters from './custom-filters.js';
 import Serp from './serp.js';
 import RedirectProtection from './redirect-protection.js';
@@ -52,7 +51,7 @@ function updateEngines(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [RegionalFilters, ExperimentalFilters, CustomFilters, Serp, RedirectProtection],
+    stack: [RegionalFilters, CustomFilters, Serp, RedirectProtection],
   },
   options: store(Options),
   config: store(Config),
@@ -202,21 +201,6 @@ export default {
                     </ui-toggle>
                   </div>
                 </settings-managed>
-                <div layout="grid:1|max content:center gap">
-                  <settings-link href="${router.url(ExperimentalFilters)}">
-                    <ui-icon name="flask" color="quaternary" layout="size:3 margin:right"></ui-icon>
-                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
-                      Experimental Filters
-                    </ui-text>
-                    <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
-                  </settings-link>
-                  <ui-toggle
-                    value="${options.experimentalFilters}"
-                    onchange="${html.set(options, 'experimentalFilters')}"
-                    data-qa="toggle:experimental-filters"
-                  >
-                  </ui-toggle>
-                </div>
                 ${config.hasFlag(FLAG_REDIRECT_PROTECTION) &&
                 options.mode !== MODE_ZAP &&
                 html`

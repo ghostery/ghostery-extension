@@ -101,7 +101,6 @@ export const config = {
       'spec/custom-filters.spec.js',
       'spec/redirect-protection.spec.js',
       'spec/clear-cookies.spec.js',
-      'spec/experimental.spec.js',
       'spec/panel.spec.js',
       'spec/pause-assistant.spec.js',
       'spec/whotracksme.spec.js',
