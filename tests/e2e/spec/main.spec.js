@@ -128,10 +128,8 @@ describe('Main Features', function () {
         document.body.appendChild(adSlot);
       }, DYNAMIC_SELECTOR);
 
-      if (browser.isFirefox) {
-        // In Firefox the dynamic element might be blocked after a delay
-        await browser.pause(100);
-      }
+      // The dynamic element might be blocked after a delay
+      await browser.pause(100);
 
       await expect($(DYNAMIC_SELECTOR)).toExist();
       await expect($(DYNAMIC_SELECTOR)).not.toBeDisplayed();

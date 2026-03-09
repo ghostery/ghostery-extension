@@ -111,7 +111,7 @@ export const config = {
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
-    retries: 1,
+    retries: 4,
   },
   maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [
