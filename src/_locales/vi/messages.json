@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Mở rộng tính năng chặn quảng cáo Ghostery cho các công cụ tìm kiếm chỉ bằng một vài bước đơn giản."
   },
-  "experimental_filters": {
-    "message": "Experimental Filters"
-  },
   "export_to_file": {
     "message": "Xuất ra tệp"
   },
@@ -483,9 +480,6 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Hãy giúp Ghostery đấu tranh cho một trang web nơi quyền riêng tư là quyền cơ bản của con người."
-  },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Này, bạn có thích Ghostery và muốn hỗ trợ công việc của chúng tôi không?"
