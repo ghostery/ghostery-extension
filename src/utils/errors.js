@@ -10,12 +10,16 @@
  */
 
 import * as Sentry from '@sentry/browser';
-
 import { store } from 'hybrids';
+
+import Errors from '/store/errors.js';
 import Options from '/store/options.js';
 
 import getBrowserInfo from './browser-info.js';
 import debug, { debugMode } from './debug.js';
+
+const SAMPLE_RATE = 0.3; // Sampling rate for non-critical errors in production
+const TAG_CRITICAL = 'critical'; // Tag to identify critical errors that should always be sent
 
 const { version } = chrome.runtime.getManifest();
 const hostRegexp = new RegExp(new URL(chrome.runtime.getURL('/')).host, 'g');
@@ -31,25 +35,53 @@ const config = {
   // sending additional messages like session logs, activity pings, etc
   autoSessionTracking: false,
   defaultIntegrations: false,
-  sampleRate: debugMode ? 1.0 : 0.3,
+  // Sampling is handled in beforeSend to allow per-event control
+  sampleRate: 1.0,
+  beforeSend(event) {
+    if (event.tags?.[TAG_CRITICAL]) {
+      return event;
+    }
+
+    if (!debugMode && Math.random() > SAMPLE_RATE) {
+      return null;
+    }
+
+    return event;
+  },
   attachStacktrace: true,
 };
 
 Sentry.init(config);
 
 getBrowserInfo().then(
-  ({ token }) => {
-    Sentry.setTag('ua', token);
-  },
+  ({ token }) => Sentry.setTag('ua', token),
   // empty error handled for tests
   () => {},
 );
 
-export async function captureException(error) {
+export async function captureException(error, { critical = false, once = false } = {}) {
   const { terms, feedback } = await store.resolve(Options);
 
   if (!terms || !feedback || !(error instanceof Error)) {
     return;
+  }
+
+  if (once) {
+    const id = error.message;
+
+    if (typeof id !== 'string' || !id) {
+      console.warn('[errors] error has no message to identify it');
+      return;
+    }
+
+    const errors = await store.resolve(Errors);
+
+    // Already sent this error, skip it
+    if (errors.onceIds[id]) {
+      return;
+    }
+
+    await store.set(errors, { onceIds: { [id]: true } });
   }
 
   const newError = new Error(error.message);
@@ -58,7 +90,10 @@ export async function captureException(error) {
   newError.cause = error.cause;
   newError.stack = error.stack.replace(hostRegexp, 'filtered');
 
-  Sentry.captureException(newError);
+  Sentry.withScope((scope) => {
+    if (critical) scope.setTag(TAG_CRITICAL, true);
+    Sentry.captureException(newError);
+  });
 }
 
 debug.errors = { captureException };
