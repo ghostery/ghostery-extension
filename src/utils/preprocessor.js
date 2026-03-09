@@ -38,9 +38,15 @@ export async function disableExcludedRulesByPreprocessor(rulesetId) {
     }
     return disabledRuleIds;
   }, []);
-  await chrome.declarativeNetRequest.updateStaticRules({
-    rulesetId: rulesetId,
-    disableRuleIds,
-  });
-  return disableRuleIds;
+  try {
+    await chrome.declarativeNetRequest.updateStaticRules({
+      rulesetId: rulesetId,
+      disableRuleIds,
+    });
+  } catch (e) {
+    console.error(`[dnr] Failed to apply preprocessors:`, e);
+  }
+  console.info(
+    `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds)}`,
+  );
 }

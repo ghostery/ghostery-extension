@@ -212,26 +212,13 @@ if (__CHROMIUM__) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
       }
 
-      for (const id of enableRulesetIds) {
-        try {
-          // The below will run when the extension is installed as
-          // well with the change of `options.terms`.
-          const disableRuleIds = await disableExcludedRulesByPreprocessor(id);
-          console.info(
-            `[dnr] Disabled rules in static ruleset: ${id}: ${JSON.stringify(disableRuleIds)}`,
-          );
-        } catch (e) {
-          console.error(`[dnr] Failed to apply preprocessors:`, e);
-        }
-      }
-    }
-  });
-
-  chrome.runtime.onInstalled.addListener(async function finishDnrMigration(details) {
-    if (details.reason === 'update') {
-      for (const id of getIds()) {
-        disableExcludedRulesByPreprocessor(id);
-      }
+      // The below will run when the extension is installed as
+      // well with the change of `options.terms`.
+      await Promise.all(
+        enabledRulesetIds.map(async function (id) {
+          return disableExcludedRulesByPreprocessor(id);
+        }),
+      );
     }
   });
 }
