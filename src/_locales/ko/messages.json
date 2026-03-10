@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "몇 번의 쉬운 단계만으로 검색 엔진에 Ghostery 광고 차단 기능을 확장할 수 있습니다."
   },
-  "experimental_filters": {
-    "message": "실험적 필터"
-  },
   "export_to_file": {
     "message": "파일로 내보내기"
   },
@@ -483,9 +480,6 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주세요."
-  },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "이 항목을 사용하면 실험적 필터를 사용해보고 후기를 남겨 저희를 도울 수 있습니다. support@ghostery.com으로 메세지를 보내 사용 후 경험이 어떻게 바뀌었는지 알려주세요. Ghostery가 망가진 페이지를 더 빠르게 고치도록 돕습니다."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghostery가 마음에 드셨다면 저희 제품을 함께 개선해보지 않으시겠습니까?"

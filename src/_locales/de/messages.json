@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Erweitern Sie den Ghostery-Werbeblocker in wenigen einfachen Schritten auf Suchmaschinen."
   },
-  "experimental_filters": {
-    "message": "Experimentelle Filter"
-  },
   "export_to_file": {
     "message": "In Datei exportieren"
   },
@@ -483,9 +480,6 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
-  },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Hilft Ghostery, defekte Seiten schneller zu reparieren. Durch Aktivierung können Sie experimentelle Filter testen und uns Feedback geben. Bitte senden Sie eine Nachricht an support@ghostery.com und beschreiben Sie, wie sich Ihre Erfahrung nach der Aktivierung geändert hat."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Gefällt Ihnen Ghostery? Möchten Sie unsere Arbeit unterstützen?"
