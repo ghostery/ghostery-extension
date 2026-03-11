@@ -17,19 +17,54 @@ import Resources from '/store/resources.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
-import { evaluatePreprocessorCondition } from '/utils/engines.js';
-import { disableExcludedRulesByPreprocessor } from '/utils/preprocessor.js';
+import { ENV, evaluatePreprocessorCondition } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 import { captureException } from '/utils/errors.js';
+import { evaluatePreprocessor } from '@ghostery/adblocker';
 
 if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
     .map(({ id }) => id);
+  const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', {
+    eager: true,
+    import: 'default',
+  });
   const DNR_FIXES_KEY = 'dnr-fixes';
+
+  /**
+   * @param {string} rulesetId
+   * @returns {Promise<number[]>}
+   */
+  async function disableExcludedRulesByPreprocessor(rulesetId) {
+    const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
+    if (!metadata) {
+      return [];
+    }
+    const disableRuleIds = Object.entries(metadata).reduce(function (
+      disabledRuleIds,
+      [ruleId, constraints],
+    ) {
+      if (!evaluatePreprocessor(constraints.preprocessor, ENV)) {
+        disabledRuleIds.push(Number(ruleId));
+      }
+      return disabledRuleIds;
+    }, []);
+    try {
+      await chrome.declarativeNetRequest.updateStaticRules({
+        rulesetId: rulesetId,
+        disableRuleIds,
+      });
+    } catch (e) {
+      console.error(`[dnr] Failed to apply preprocessors:`, e);
+    }
+    console.info(
+      `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds)}`,
+    );
+  }
 
   function getIds(options) {
     if (!options.terms || isGloballyPaused(options)) return [];
