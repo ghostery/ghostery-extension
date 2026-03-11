@@ -22,7 +22,7 @@ import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
 import { checkStorage } from '/utils/storage.js';
-import * as telemetry from './utils/telemetry.js';
+import * as telemetry from '/utils/telemetry.js';
 
 import { SURVEY_URL } from './onboarding.js';
 
