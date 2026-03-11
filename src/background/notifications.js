@@ -22,8 +22,8 @@ import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
 import { checkStorage } from '/utils/storage.js';
+import * as telemetry from './utils/telemetry.js';
 
-import * as telemetry from './telemetry/index.js';
 import { SURVEY_URL } from './onboarding.js';
 
 export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
