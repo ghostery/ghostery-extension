@@ -22,6 +22,7 @@ import { disableExcludedRulesByPreprocessor } from '/utils/preprocessor.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
+import { captureException } from '/utils/errors.js';
 
 if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
@@ -209,6 +210,7 @@ if (__CHROMIUM__) {
         console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
+        captureException(e, { critical: true, once: true });
       }
 
       // The below will run when the extension is installed as

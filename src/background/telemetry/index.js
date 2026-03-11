@@ -50,13 +50,13 @@ const setup = asyncSetup('telemetry', [
         config: await store.resolve(Config),
         userSettings: await chrome.action?.getUserSettings?.(),
       }),
-      log: console.log.bind(console, '[telemetry]'),
+      log: console.debug.bind(console, '[telemetry]'),
     });
   })(),
 ]);
 
 let enabled = false;
-OptionsObserver.addListener(async function telemetry({ terms, feedback, mode }, lastOptions) {
+OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
   enabled = terms && feedback;
 
   if (terms) {
@@ -69,7 +69,7 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback, mode }, 
         runner.storage.utm_campaign = attribution.utm_campaign || '';
         await saveStorage(runner.storage);
       } catch (error) {
-        console.error('Error detecting attribution:', error);
+        console.error('[telemetry] Error detecting attribution:', error);
       }
 
       runner.ping('install');
@@ -78,18 +78,27 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback, mode }, 
     if (feedback) runner.ping('active');
 
     runner.setUninstallUrl();
-
-    if (lastOptions?.mode && lastOptions.mode !== mode) {
-      runner.storage.modeTouched = true;
-      await saveStorage(runner.storage);
-    }
   } else {
     chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
 
 chrome.runtime.onMessage.addListener((msg) => {
-  if (enabled && msg.action === 'telemetry') {
-    Promise.resolve(setup.pending).then(() => runner?.ping(msg.event));
+  if (enabled && msg.action.startsWith('telemetry:')) {
+    (async () => {
+      setup.pending && (await setup.pending);
+
+      switch (msg.action) {
+        case 'telemetry:ping':
+          await runner.ping(msg.event);
+          break;
+        case 'telemetry:modeTouched': {
+          runner.storage.modeTouched = true;
+          await saveStorage(runner.storage);
+          console.debug('[telemetry] "modeTouched" flag set');
+          break;
+        }
+      }
+    })();
   }
 });

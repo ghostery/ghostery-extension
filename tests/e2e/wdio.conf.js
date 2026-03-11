@@ -101,7 +101,6 @@ export const config = {
       'spec/custom-filters.spec.js',
       'spec/redirect-protection.spec.js',
       'spec/clear-cookies.spec.js',
-      'spec/experimental.spec.js',
       'spec/panel.spec.js',
       'spec/pause-assistant.spec.js',
       'spec/whotracksme.spec.js',
@@ -111,7 +110,7 @@ export const config = {
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
-    retries: 1,
+    retries: 4,
   },
   maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [

@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
   },
-  "experimental_filters": {
-    "message": "Experimental Filters"
-  },
   "export_to_file": {
     "message": "Export to file"
   },
@@ -484,9 +481,6 @@
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Help Ghostery fight for a web where privacy is a basic human right."
   },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
-  },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
@@ -579,7 +573,7 @@
     "message": "Load more"
   },
   "manifest_name": {
-    "message": "Ghostery Privacy Ad Blocker"
+    "message": "Ghostery Privacy AdBlocker"
   },
   "manifest_short_description": {
     "message": "Fast, private and ad free browsing you can trust!"

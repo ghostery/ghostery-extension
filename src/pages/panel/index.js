@@ -32,7 +32,7 @@ mount(document.body, {
 });
 
 // Ping telemetry on panel open
-chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
+chrome.runtime.sendMessage({ action: 'telemetry:ping', event: 'engaged' });
 
 // Sync options with background
 chrome.runtime.sendMessage({ action: 'syncOptions' });

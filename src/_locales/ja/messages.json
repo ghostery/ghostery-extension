@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "簡単なステップで、Ghosteryの広告ブロッキングを検索エンジンへと拡張できます。"
   },
-  "experimental_filters": {
-    "message": "実験的フィルター"
-  },
   "export_to_file": {
     "message": "ファイルにエクスポート"
   },
@@ -483,9 +480,6 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
-  },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Ghosteryが壊れたページをより早く修正するのを助けます。アクティベートすることで、実験的なフィルターをテストし、フィードバックで私たちをサポートできます。有効化後の体験の変化について、詳細を含めてsupport@ghostery.comにメッセージを送ってください。あなたのフィードバックは、私たちのサービス向上に非常に役立ちます。"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghosteryが好きで、私たちの仕事をサポートしていただける方を募集中です。"

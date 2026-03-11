@@ -378,9 +378,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需简单几步，即可将 Ghostery 广告拦截功能扩展到搜索引擎。"
   },
-  "experimental_filters": {
-    "message": "实验性过滤器"
-  },
   "export_to_file": {
     "message": "导出到文件"
   },
@@ -483,9 +480,6 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "帮助 Ghostery 为建立以隐私为基本人权的网络而奋斗。"
-  },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "帮助Ghostery更快修复损坏的页面。通过激活，您可以测试实验性过滤器并通过反馈支持我们。请发送消息至support@ghostery.com，详细描述启用后的体验变化。"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜欢 Ghostery 并愿意支持我们的工作吗？"
