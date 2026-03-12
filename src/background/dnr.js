@@ -17,12 +17,11 @@ import Resources from '/store/resources.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
-import { ENV, evaluatePreprocessorCondition } from '/utils/engines.js';
+import { evaluatePreprocessorCondition } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 import { captureException } from '/utils/errors.js';
-import { evaluatePreprocessor } from '@ghostery/adblocker';
 
 if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
@@ -48,7 +47,7 @@ if (__CHROMIUM__) {
       disabledRuleIds,
       [ruleId, constraints],
     ) {
-      if (!evaluatePreprocessor(constraints.preprocessor, ENV)) {
+      if (!evaluatePreprocessorCondition(constraints.preprocessor)) {
         disabledRuleIds.push(Number(ruleId));
       }
       return disabledRuleIds;
