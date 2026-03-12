@@ -24,7 +24,7 @@ export default {
         <button onclick="${copy}" layout="block padding margin:-1">
           <ui-tooltip position="top" delay="0.5" autohide="0">
             <div layout="row content:space-between items:center gap:0.5">
-              <ui-text id="full" type="body-s" color="secondary" ellipsis>
+              <ui-text type="body-s" color="secondary" ellipsis layout="shrink:1">
                 <slot></slot>
               </ui-text>
               <ui-icon name="copy" layout="shrink:0"></ui-icon>
