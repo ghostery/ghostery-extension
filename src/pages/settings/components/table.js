@@ -48,10 +48,6 @@ export default {
       border-bottom: 1px solid var(--border-primary);
     }
 
-    div ::slotted(*:last-child) {
-      border-bottom: none;
-    }
-
     @media screen and (min-width: 768px) {
       div ::slotted(*),
       :host([responsive]) div ::slotted(*) {
@@ -59,10 +55,6 @@ export default {
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--border-primary);
-      }
-
-      :host([responsive]) div ::slotted(*:last-child) {
-        border-bottom: none;
       }
     }
   `,
