@@ -364,9 +364,8 @@ const buildPromise = build({
       external: ['@adguard/re2-wasm'],
       preserveEntrySignatures: 'exports-only',
       output: {
-        banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
+        banner: argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : '',
         dir: options.outDir,
-        manualChunks: false,
         preserveModules: true,
         preserveModulesRoot: 'src',
         minifyInternalExports: false,
@@ -457,7 +456,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
         rollupOptions: {
           input: { [id]: path },
           output: {
-            banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
+            banner: argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : '',
             format: 'iife',
             dir: options.outDir,
             entryFileNames: '[name].js',
