@@ -352,6 +352,7 @@ function mapPaths(paths) {
   }, {});
 }
 
+const shortenedPaths = new Map();
 const buildPromise = build({
   ...config,
   build: {
@@ -380,10 +381,50 @@ const buildPromise = build({
             .replace('node_modules', 'npm')
             .replace('_virtual', 'virtual');
 
-          const path = name.replace(pwd, '');
-          if (path.length > 110 && !argv['no-filename-limit']) {
+          const PATH_LIMIT = 110;
+          const hasPwd = name.startsWith(pwd);
+          let relPath = hasPwd ? name.slice(pwd.length) : name;
+
+          if (relPath.length > PATH_LIMIT) {
+            const segments = relPath.split('/');
+
+            while (segments.join('/').length > PATH_LIMIT) {
+              let maxLen = 0;
+              let maxIdx = -1;
+
+              for (let i = 0; i < segments.length; i++) {
+                const dotIdx = segments[i].lastIndexOf('.');
+                const base = dotIdx > 0 ? segments[i].slice(0, dotIdx) : segments[i];
+                if (base.length > maxLen) {
+                  maxLen = base.length;
+                  maxIdx = i;
+                }
+              }
+
+              if (maxLen <= 6) break;
+
+              const seg = segments[maxIdx];
+              const dotIdx = seg.lastIndexOf('.');
+              const ext = dotIdx > 0 ? seg.slice(dotIdx) : '';
+              const base = dotIdx > 0 ? seg.slice(0, dotIdx) : seg;
+
+              let hash = 5381;
+              for (let i = 0; i < base.length; i++) {
+                hash = ((hash << 5) + hash + base.charCodeAt(i)) >>> 0;
+              }
+
+              segments[maxIdx] = base[0] + hash.toString(36).slice(0, 4) + ext;
+            }
+
+            const shortened = segments.join('/');
+            shortenedPaths.set(shortened, relPath);
+            relPath = shortened;
+            name = hasPwd ? pwd + relPath : relPath;
+          }
+
+          if (relPath.length > PATH_LIMIT && !argv['no-filename-limit']) {
             throw new Error(
-              `Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable; for instance, "npm run build -- --no-filename-limit")`,
+              `Filename too long: ${relPath} (${relPath.length}) (pass --no-filename-limit to disable; for instance, "npm run build -- --no-filename-limit")`,
             );
           }
 
@@ -393,6 +434,18 @@ const buildPromise = build({
     },
   },
   plugins: [
+    {
+      name: 'shortened-path-banner',
+      generateBundle(_, bundle) {
+        for (const [fileName, chunk] of Object.entries(bundle)) {
+          if (chunk.type !== 'chunk') continue;
+          const original = shortenedPaths.get('/' + fileName);
+          if (original) {
+            chunk.code = `/* original: ${original} */\n` + chunk.code;
+          }
+        }
+      },
+    },
     // Keep offscreen documents from @whotracksme/reporting
     {
       name: 'copy-reporting-assets',
