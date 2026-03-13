@@ -4,6 +4,7 @@ html {
 
 html,
 body {
+  background: var(--background-primary);
   overflow: hidden;
 }
 
@@ -18,14 +19,23 @@ body[platform-name='ios'] {
   min-width: auto;
 }
 
-@media screen and (max-height: 600px) {
+/* Prevents from scrolling not expanded popup window on iOS */
+@media screen and (height <= 450px) {
+  body[platform-name='ios'] panel-container::part(scrollable) {
+    overflow-y: hidden;
+  }
+}
+
+@media screen and (height <= 600px) {
   body {
     max-height: 600px;
   }
 }
 
-@media screen and (max-height: 450px) {
-  body[platform-name='ios'] panel-container::part(scrollable) {
-    overflow-y: hidden;
+/* On iOS the popup window can be expanded to the full height of the screen */
+@media screen and (height > 600px) {
+  html,
+  body {
+    height: 100%;
   }
 }

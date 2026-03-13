@@ -18,9 +18,6 @@ import TabStats from '/store/tab-stats.js';
 import { isWebkit } from '/utils/browser-info.js';
 import { download } from '/utils/files.js';
 
-import blockedImageUrl from '../assets/trackers-blocked.svg';
-import modifiedImageUrl from '../assets/trackers-modified.svg';
-
 import { showCopyNotification } from '../components/alert.js';
 
 const REPORT_COLUMNS = ['Tracker', 'Organization', 'URL'];
@@ -65,26 +62,20 @@ export default {
   render: ({ type, stats, trackers }) => html`
     <template layout="column">
       <panel-dialog header>
-        <div layout="column center gap:2.5 margin:1:0">
-          ${type === 'blocked' &&
-          html`<img src="${blockedImageUrl}" alt="Trackers Blocked" layout="width:300px" />`}
-          ${type === 'modified' &&
-          html`<img src="${modifiedImageUrl}" alt="Trackers Blocked" layout="width:300px" />`}
-          <div layout="block:center column gap:0.5">
-            <div layout="row items:center gap:0.5">
-              ${type === 'blocked' &&
-              html`
-                <panel-badge type="danger">${trackers.length}</panel-badge>
-                <ui-text type="label-m">Trackers blocked</ui-text>
-              `}
-              ${type === 'modified' &&
-              html`
-                <panel-badge type="brand">${trackers.length}</panel-badge>
-                <ui-text type="label-m">Trackers modified</ui-text>
-              `}
-            </div>
-            <ui-text type="body-s" color="secondary">${stats.hostname}</ui-text>
+        <div slot="header" layout="block:center column center">
+          <div layout="row items:center gap:0.5">
+            ${type === 'blocked' &&
+            html`
+              <panel-badge type="danger">${trackers.length}</panel-badge>
+              <ui-text type="label-m">Trackers blocked</ui-text>
+            `}
+            ${type === 'modified' &&
+            html`
+              <panel-badge type="brand">${trackers.length}</panel-badge>
+              <ui-text type="label-m">Trackers modified</ui-text>
+            `}
           </div>
+          <ui-text type="body-s" color="secondary">${stats.hostname}</ui-text>
         </div>
         <div layout="column gap:2.5">
           ${trackers.map(
@@ -94,10 +85,18 @@ export default {
                   <ui-text type="label-s">${tracker.name}</ui-text>
                   <ui-category-icon name="${tracker.category}" size="small"></ui-category-icon>
                   <ui-stats-badge layout="height:full">
-                    ${tracker.requestsBlocked.length}
+                    ${type === 'blocked' && tracker.requestsBlocked.length}
+                    ${type === 'modified' && tracker.requestsModified.length}
                   </ui-stats-badge>
                 </div>
-                ${tracker.requestsBlocked.map(
+                ${type === 'blocked' &&
+                tracker.requestsBlocked.map(
+                  ({ url }) => html`
+                    <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
+                  `,
+                )}
+                ${type === 'modified' &&
+                tracker.requestsModified.map(
                   ({ url }) => html`
                     <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
                   `,
@@ -105,10 +104,10 @@ export default {
               </div>
             `,
           )}
+          <ui-button type="primary" onclick="${downloadReport}" layout="shrink:0">
+            <button><ui-icon name="download"></ui-icon> Download report</button>
+          </ui-button>
         </div>
-        <ui-button type="primary" slot="footer" onclick="${downloadReport}">
-          <button><ui-icon name="download"></ui-icon> Download report</button>
-        </ui-button>
       </panel-dialog>
     </template>
   `,

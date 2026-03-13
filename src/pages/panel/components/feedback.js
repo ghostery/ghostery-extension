@@ -66,7 +66,7 @@ export default {
           </button>
         </ui-button>
       </div>
-      <div id="content" layout="row padding:0.5:0 gap:0.5 overflow:scroll">
+      <div id="content" layout="row padding:0.5:0 gap:0.5 overflow:x:auto overflow:y:hidden">
         <div layout="width:1 shrink:0"></div>
         <slot onslotchange="${checkElements}"></slot>
         <div layout="width:1 shrink:0"></div>
