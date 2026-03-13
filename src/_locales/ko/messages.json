@@ -95,6 +95,9 @@
     "message": "음악/동영상 플레이어",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "자동으로 조정됨"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "광고 차단기 손상을 방지하기 위해 자동으로 일시 중지됨"
   },
@@ -578,6 +581,9 @@
   "manifest_short_description": {
     "message": "빠르고, 비공개이며, 광고 없는 브라우징을 믿고 사용하세요!"
   },
+  "manually_adjusted": {
+    "message": "수동으로 조정됨"
+  },
   "menu": {
     "message": "메뉴"
   },
@@ -688,6 +694,9 @@
   },
   "paused": {
     "message": "일시 중지됨"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "광고 차단기 오작동을 방지하기 위해 Ghostery의 브라우징 어시스턴트가 자동으로 일시 중지했습니다."
   },
   "paused_by_browsing_assistant": {
     "message": "탐색 도우미에 의해 일시 중지됨"
@@ -1096,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "사용하는 사이트의 광고를 차단합니다. 한 번 차단하면 방문할 때마다 광고 없이 이용할 수 있습니다."
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "<a href=\"$${0}\">WhoTracks.Me 설정</a>에서 비활성화할 수 있습니다."
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "$${0}에 의해 저장된 모든 쿠키를 삭제하려고 합니다."
