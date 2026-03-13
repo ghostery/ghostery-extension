@@ -90,9 +90,7 @@ function normalizeFilters(text = '', { trustedScriptlets }) {
 
     // Skip errors that we don't want to report.
     if (
-      // On empty line
       filterType === FilterType.NOT_SUPPORTED_EMPTY ||
-      // On comment; this includes preprocessor
       filterType === FilterType.NOT_SUPPORTED_COMMENT
     ) {
       continue;
