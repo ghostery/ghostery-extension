@@ -20,6 +20,7 @@ import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
 import WebsitesAdd from './websites-add.js';
+import Whotracksme from './whotracksme.js';
 
 function revokeCallback(item) {
   return ({ options }, event) => {
@@ -125,7 +126,11 @@ export default {
         return 0;
       });
   },
-  render: ({ websites, query }) => html`
+  assistWebsites: ({ websites }) =>
+    websites.filter(({ assist, managed, counter }) => assist && !managed && counter === 0),
+  userWebsites: ({ websites, assistWebsites }) =>
+    websites.filter((item) => !assistWebsites.includes(item)),
+  render: ({ websites, assistWebsites, userWebsites, query }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
@@ -150,19 +155,29 @@ export default {
               <a href="${router.url(WebsitesAdd)}">Add</a>
             </ui-button>
           </div>
-          ${websites.length
-            ? html`
+          <div layout="column gap:7">
+            ${!websites.length &&
+            !query &&
+            html`
+              <div layout="block:center width:::400px margin:2:auto" layout@768px="margin:top:4">
+                <img src="${NoWebsitesSVG}" layout="size:96px" layout@768px="size:128px" />
+              </div>
+            `}
+            ${userWebsites.length > 0 &&
+            html`
+              <div layout="column gap:2">
+                <ui-text type="headline-s">Manually Adjusted</ui-text>
                 <settings-table responsive>
                   <div slot="header" layout="column" layout@768px="grid:3fr|3fr|1fr|60px gap:4">
-                    <ui-text type="label-m"> Website <span>(${websites.length})</span> </ui-text>
+                    <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
                     <ui-text type="label-m" layout="hidden" layout@768px="block">
                       Protection status
                     </ui-text>
-                    <ui-text type="label-m" layout="hidden" layout@768px="block">
-                      Exceptions
-                    </ui-text>
+                    <ui-text type="label-m" layout="hidden" layout@768px="block"
+                      >Exceptions</ui-text
+                    >
                   </div>
-                  ${websites.map(
+                  ${userWebsites.map(
                     (item) => html`
                       <ui-action layout="block" data-qa="component:website:${item.id}">
                         <a
@@ -202,13 +217,53 @@ export default {
                     `,
                   )}
                 </settings-table>
-              `
-            : !query &&
-              html`
-                <div layout="block:center width:::400px margin:2:auto" layout@768px="margin:top:4">
-                  <img src="${NoWebsitesSVG}" layout="size:96px" layout@768px="size:128px" />
+              </div>
+            `}
+            ${assistWebsites.length > 0 &&
+            html`
+              <div layout="column gap:2">
+                <div layout="column gap:0.5">
+                  <ui-text type="headline-s">Automatically Adjusted</ui-text>
+                  <ui-text color="tertiary">
+                    Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker
+                    breakage.
+                  </ui-text>
+                  <ui-text color="tertiary" underline>
+                    ${msg.html`You can disable it in <a href="${router.url(Whotracksme)}">WhoTracks.Me settings</a>.`}
+                  </ui-text>
                 </div>
-              `}
+                <settings-table responsive>
+                  <div slot="header" layout="column" layout@768px="grid:3fr|60px gap:4">
+                    <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
+                  </div>
+                  ${assistWebsites.map(
+                    (item) => html`
+                      <ui-action layout="block" data-qa="component:website:${item.id}">
+                        <a
+                          href="${router.url(WebsiteDetails, {
+                            domain: item.id,
+                          })}"
+                          layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
+                          layout@768px="grid:3fr|60px gap:4"
+                        >
+                          <ui-text type="label-l" ellipsis>${item.id}</ui-text>
+                          <ui-action>
+                            <button
+                              layout@768px="order:1 row center"
+                              onclick="${revokeCallback(item)}"
+                              data-qa="button:website:trash:${item.id}"
+                            >
+                              <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
+                            </button>
+                          </ui-action>
+                        </a>
+                      </ui-action>
+                    `,
+                  )}
+                </settings-table>
+              </div>
+            `}
+          </div>
         </section>
       </settings-page-layout>
     </template>

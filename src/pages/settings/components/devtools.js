@@ -21,7 +21,7 @@ import Options from '/store/options.js';
 import Config from '/store/config.js';
 import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
-import { getStorage as getTelemetryStorage } from '/background/telemetry/index.js';
+import * as telemetry from '/utils/telemetry.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
@@ -220,22 +220,22 @@ export default {
             </div>
           `}
           ${html.resolve(
-            getTelemetryStorage().then(
-              (telemetry) => html`
+            telemetry.getStorage().then(
+              (storage) => html`
                 <div layout="column gap items:start" translate="no">
                   <ui-text type="headline-s">Attribution</ui-text>
                   <div layout="column gap:0.5">
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Install date:</ui-text>
-                      <span data-qa="text:install-date">${telemetry.installDate || 'N/A'}</span>
+                      <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
                     </ui-text>
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Source:</ui-text>
-                      <span data-qa="text:utm-source">${telemetry.utm_source || 'N/A'}</span>
+                      <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
                     </ui-text>
                     <ui-text type="body-m" color="secondary">
                       <ui-text type="label-m">Campaign:</ui-text>
-                      <span data-qa="text:utm-campaign">${telemetry.utm_campaign || 'N/A'}</span>
+                      <span data-qa="text:utm-campaign">${storage.utm_campaign || 'N/A'}</span>
                     </ui-text>
                   </div>
                 </div>

@@ -217,9 +217,9 @@ export const config = {
         // Load the target url
         const result = await fn.call(this, ...args);
 
-        // CSS injection can have a delay after page load,
-        // so we need to add a small delay before the test starts
-        if (targetUrl === PAGE_URL) await browser.pause(100);
+        // Add a small pause to allow client-side views to load and CSS injection
+        // to be applied before the tests start interacting with the page.
+        await browser.pause(100);
 
         return result;
       });

@@ -22,7 +22,7 @@ export default {
     reflect: true,
   },
   render: ({ notification }) => html`
-    <template layout="block width:min:full padding:1:2:1.5:1.5">
+    <template layout="block width:min:full padding:1:1.5:1.5">
       <ui-action>
         <a
           href="${notification.url}"

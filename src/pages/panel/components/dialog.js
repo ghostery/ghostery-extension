@@ -64,7 +64,7 @@ export default {
             </a>
           </ui-action>
         </section>
-        <section id="content" layout="column overflow:y:auto gap:2 padding:1.5">
+        <section id="content" layout="column overflow:y:auto overflow:x:hidden gap:2 padding:1.5">
           <slot></slot>
         </section>
         <section id="footer" layout="padding:1.5:2">
