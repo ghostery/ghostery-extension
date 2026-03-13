@@ -16,18 +16,10 @@ import Config from '/store/config.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { getStorage, saveStorage } from '/utils/telemetry.js';
 
 import Metrics from './metrics.js';
 import detectAttribution from './attribution.js';
-
-export async function getStorage() {
-  const { metrics } = await chrome.storage.local.get(['metrics']);
-  return metrics || {};
-}
-
-async function saveStorage(metrics) {
-  await chrome.storage.local.set({ metrics });
-}
 
 let runner;
 const setup = asyncSetup('telemetry', [
