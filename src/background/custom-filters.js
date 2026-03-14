@@ -10,7 +10,13 @@
  */
 
 import { store } from 'hybrids';
-import { parseFilters, detectFilterType, FilterType, CosmeticFilter } from '@ghostery/adblocker';
+import {
+  parseFilters,
+  detectFilterType,
+  FilterType,
+  FiltersEngine,
+  parseFilter,
+} from '@ghostery/adblocker';
 
 import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
@@ -24,75 +30,146 @@ import { setup, reloadMainEngine } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 import ManagedConfig from '/store/managed-config.js';
 
-class TrustedScriptletError extends Error {}
-
-// returns a scriptlet with encoded arguments
-// returns undefined if not a scriptlet
-// throws if scriptlet cannot be trusted
-function fixScriptlet(filter, trustedScriptlets) {
-  const cosmeticFilter = CosmeticFilter.parse(filter);
-
-  if (!cosmeticFilter || !cosmeticFilter.isScriptInject() || !cosmeticFilter.selector) {
-    return null;
-  }
-
-  const parsedScript = cosmeticFilter.parseScript();
-
-  if (!parsedScript || !parsedScript.name) {
-    return null;
-  }
-
-  if (
-    !trustedScriptlets &&
-    (parsedScript.name === 'rpnt' ||
-      parsedScript.name === 'replace-node-text' ||
-      parsedScript.name.startsWith('trusted-'))
-  ) {
-    throw new TrustedScriptletError();
-  }
-
-  const [front] = filter.split(`#+js(${parsedScript.name}`);
-  const args = parsedScript.args.map((arg) => encodeURIComponent(arg));
-  return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
+function isTrustedScriptInject(scriptName) {
+  return (
+    scriptName === 'rpnt' || scriptName === 'replace-node-text' || scriptName.startsWith('trusted-')
+  );
 }
 
+/**
+ * @param {import('@ghostery/adblocker').CosmeticFilter} filter
+ * @param {string[]} args
+ */
+function encodeScriptInject(filter, args) {
+  // Cosmetic filter saves the whole script inject arguments in
+  // `filter.selector`: e.g. `script, arg1, arg2, ...`
+  const frontIndex = filter.selector.indexOf(',');
+  // If the delim was not found, it doesn't have any args.
+  if (frontIndex !== -1) {
+    filter.selector =
+      // Make the range comma-inclusive
+      filter.selector.slice(0, frontIndex + 1) +
+      args.map((arg) => encodeURIComponent(arg)).join(',');
+    // Update the raw line as we will grab this value before
+    // passing to the actual engine.
+    filter.rawLine = filter.rawLine.split('+js(')[0] + '+js(' + filter.selector + ')';
+  }
+}
+
+function getPreprocessorCondition(engine, filter) {
+  const conditions = [];
+  for (const preprocessor of engine.preprocessors.preprocessors) {
+    if (!preprocessor.filterIDs.has(filter.getId())) {
+      continue;
+    }
+    conditions.push(preprocessor.condition);
+  }
+  if (conditions.length === 0) {
+    return undefined;
+  }
+  if (conditions.length === 1) {
+    return conditions[0];
+  }
+  return conditions.map((condition) => `(${condition})`).join('&&');
+}
+
+/**
+ * @returns {Record<'cosmeticFilters' | 'networkFilters' | 'errors', string[]>}
+ */
 function normalizeFilters(text = '', { trustedScriptlets }) {
-  const rows = text.split('\n').map((f) => f.trim());
+  const lines = text.split('\n');
+  const uniqueFilterIds = new Set();
+  const cosmeticFilters = [];
+  const errors = [];
 
-  return rows.reduce(
-    (filters, filter, index) => {
-      if (!filter) return filters;
+  // Try to iterate for each line (regardless of the filter type)
+  // to collect errors.
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
+    const filterType = detectFilterType(line, { extendedNonSupportedTypes: true });
 
-      const filterType = detectFilterType(filter, {
-        extendedNonSupportedTypes: true,
-      });
-      if (filterType === FilterType.NETWORK) {
-        filters.networkFilters.add(filter);
-      } else if (filterType === FilterType.COSMETIC) {
-        try {
-          const scriptlet = fixScriptlet(filter, trustedScriptlets);
-          filters.cosmeticFilters.add(scriptlet || filter);
-        } catch (e) {
-          if (e instanceof TrustedScriptletError) {
-            filters.errors.push(`Trusted scriptlets are not allowed (${index + 1}): ${filter}`);
-          } else {
-            console.error(e);
-          }
-        }
-      } else if (
-        filterType === FilterType.NOT_SUPPORTED ||
-        filterType === FilterType.NOT_SUPPORTED_ADGUARD
-      ) {
-        filters.errors.push(`Filter not supported (${index + 1}): ${filter}`);
+    // Skip errors that we don't want to report.
+    if (
+      filterType === FilterType.NOT_SUPPORTED_EMPTY ||
+      filterType === FilterType.NOT_SUPPORTED_COMMENT
+    ) {
+      continue;
+    }
+
+    // Detect the possible errors from `detectFilterType`.
+    if (filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
+      errors.push(`Filter not supported (${index + 1}): ${line}`);
+      continue;
+    }
+
+    // Detect if the syntax is invalid from the parse phase. All
+    // error detections outside of the syntax should be processed
+    // before here.
+    const filter = parseFilter(line);
+    if (filter === null) {
+      errors.push(`Syntax error (${index + 1}): ${line}`);
+      continue;
+    }
+
+    // We will only stringify the cosmetic filters here. Network
+    // filters collection depend on full list parsing with
+    // preprocessors.
+    if (!filter.isCosmeticFilter()) {
+      continue;
+    }
+
+    // Filter out duplicates. We share `uniqueFilterIds` with the
+    // network filters below, so we only want to add cosmetic
+    // filter id here.
+    if (uniqueFilterIds.has(filter.getId())) {
+      continue;
+    } else {
+      uniqueFilterIds.add(filter.getId());
+    }
+
+    if (filter.isScriptInject()) {
+      // In case of script inject filter, `parseScript` always
+      // returns a value.
+      const script = filter.parseScript();
+      if (!trustedScriptlets && isTrustedScriptInject(script.name)) {
+        errors.push(`Trusted scriptlets are not allowed (${index + 1}): ${line}`);
+        continue;
       }
-      return filters;
-    },
-    {
-      networkFilters: new Set(),
-      cosmeticFilters: new Set(),
-      errors: [],
-    },
-  );
+      encodeScriptInject(filter, script.args);
+    }
+
+    cosmeticFilters.push(filter.toString());
+  }
+
+  const adblocker = FiltersEngine.parse(text, {
+    loadNetworkFilters: true,
+    loadCosmeticFilters: false,
+    loadPreprocessors: true,
+    debug: true,
+  });
+  const { networkFilters } = adblocker.getFilters();
+
+  return {
+    networkFilters: networkFilters
+      .filter(function (filter) {
+        const condition = getPreprocessorCondition(adblocker, filter);
+        // Filter by preprocessor condition.
+        if (typeof condition !== 'undefined' && !engines.evaluatePreprocessorCondition(condition)) {
+          return false;
+        }
+        // Filter by uniqueness.
+        if (uniqueFilterIds.has(filter.getId())) {
+          return false;
+        }
+        uniqueFilterIds.add(filter.getId());
+        return true;
+      })
+      .map(function (filter) {
+        return filter.toString();
+      }),
+    cosmeticFilters,
+    errors,
+  };
 }
 
 async function updateDNRRules(dnrRules) {
