@@ -39,6 +39,34 @@ describe('getRedirectProtectionRules', () => {
     assert.deepEqual(redirect.condition.urlFilter, '||tracker.com^');
   });
 
+  it('should convert rules without contraint to redirect rule', () => {
+    assert.deepEqual(
+      getRedirectProtectionRules([
+        {
+          id: 1,
+          priority: 1,
+          action: { type: 'block' },
+          condition: {
+            urlFilter: '||foo.com^',
+          },
+        },
+      ]),
+      [
+        {
+          id: 1,
+          priority: 2,
+          action: {
+            type: 'redirect',
+            redirect: { extensionPath: '/pages/redirect-protection/index.html' },
+          },
+          condition: {
+            urlFilter: '||foo.com^',
+          },
+        },
+      ],
+    );
+  });
+
   it('should preserve all condition properties in redirect rules', () => {
     const condition = {
       regexFilter: '^https:\\/\\/server\\.[a-z0-9]{4}\\.com\\/invite\\/\\d+\\b',
@@ -84,5 +112,40 @@ describe('getRedirectProtectionRules', () => {
 
     const urlFilters = redirects.map((r) => r.condition.urlFilter).sort();
     assert.deepEqual(urlFilters, ['||tracker1.com^', '||tracker2.com^']);
+  });
+
+  it('should not convert other types of rules to redirect rule', () => {
+    assert.equal(
+      getRedirectProtectionRules([
+        {
+          id: 1,
+          priority: 1,
+          action: { type: 'block' },
+          condition: {
+            urlFilter: '||foo.com^',
+            domainType: 'thirdParty',
+          },
+        },
+        {
+          id: 2,
+          priority: 1,
+          action: { type: 'block' },
+          condition: {
+            urlFilter: '||foo.com^',
+            excludedResourceTypes: ['main_frame'],
+          },
+        },
+        {
+          id: 3,
+          priority: 1,
+          action: { type: 'block' },
+          condition: {
+            urlFilter: '||foo.com^',
+            resourceTypes: ['script'],
+          },
+        },
+      ]).length,
+      0,
+    );
   });
 });
