@@ -15,6 +15,7 @@ import {
   setPrivacyToggle,
   openPanel,
   setCustomFilters,
+  getCustomFilterRulesResponse,
   disableCustomFilters,
   switchFrame,
   PAGE_DOMAIN,
@@ -115,6 +116,12 @@ describe('Custom Filters', function () {
 
       const text = await errors.getText();
       await expect(text).toContain('Syntax error');
+    });
+
+    it('shows the available preprocessed custom DNR filter', async function () {
+      await setCustomFilters(['!#if false', '||foo.com^', '!#endif', '||bar.com^']);
+      const rules = await getCustomFilterRulesResponse();
+      await expect(rules[0].condition.urlFilter).toContain('bar.com');
     });
   }
 });

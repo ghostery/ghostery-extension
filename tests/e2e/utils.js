@@ -179,6 +179,29 @@ export async function setCustomFilters(filters) {
   await expect(getExtensionElement('component:custom-filters:result')).toBeDisplayed();
 }
 
+/**
+ * @returns {Promise<{Record<string, unknown>[]}>}
+ */
+export async function getCustomFilterRulesResponse() {
+  const result = await getExtensionElement('component:custom-filters:result');
+  await expect(result).toBeDisplayed();
+
+  const details = await getExtensionElement('component:custom-filters:result', 'details');
+  if (!(await details.isExisting())) {
+    return [];
+  }
+
+  await browser.execute(function (element) {
+    element.open = true;
+  }, details);
+
+  return await browser
+    .execute(function (element) {
+      return Array.from(element.querySelectorAll('pre'), (rule) => rule.textContent);
+    }, details)
+    .then((rules) => rules.map((rule) => JSON.parse(rule)));
+}
+
 export async function disableCustomFilters() {
   await setCustomFilters([]);
   await setPrivacyToggle('custom-filters', false);
