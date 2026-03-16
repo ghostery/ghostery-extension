@@ -20,7 +20,7 @@ const SELECTORS = [
   'tp-yt-paper-dialog .ytd-enforcement-message-view-model',
 ];
 
-// DEBUG: Add the app selector to test the wall
+// DEBUG: Add the app selector to trigger showing the popup
 if (debugMode) SELECTORS.push('ytd-app');
 
 function detectWall(cb) {
@@ -68,6 +68,7 @@ async function isFeatureDisabled() {
     // IMPORTANT: to avoid referencing the file, the `GLOBAL_PAUSE_ID`
     // is used as is, instead from the `/store/options.js` file
     !!options.paused['<all_urls>'] ||
+    !!options.paused['www.youtube.com'] ||
     !!options.paused['youtube.com']
   ) {
     return true;
