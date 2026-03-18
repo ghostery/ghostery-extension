@@ -13,8 +13,6 @@ import { browser, expect } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
-  getExtensionPageURL,
-  openPanel,
   TRACKER_IDS,
   waitForIdleBackgroundTasks,
   PAGE_DOMAIN,
@@ -29,7 +27,7 @@ describe('Exceptions', function () {
   it('adds global exception to the selected tracker', async function () {
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
@@ -46,13 +44,13 @@ describe('Exceptions', function () {
     // Check that the tracker is now marked as trusted in the panel
 
     await browser.url(PAGE_URL);
-    await openPanel();
+    await browser.url('ghostery:panel');
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
     await expect(getExtensionElement(`icon:tracker:${TRACKER_ID}:blocked`)).not.toBeDisplayed();
 
     // Open list of trackers and go to tracker details
 
-    await browser.url(getExtensionPageURL('settings'));
+    await browser.url('ghostery:settings');
     await getExtensionElement('button:trackers').click();
 
     const filterSelect = await getExtensionElement('select:trackers:filter');
@@ -68,7 +66,7 @@ describe('Exceptions', function () {
 
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
     await expect(getExtensionElement(`icon:tracker:${TRACKER_ID}:blocked`)).toBeDisplayed();
   });
@@ -76,7 +74,7 @@ describe('Exceptions', function () {
   it('adds website exception to the selected tracker', async function () {
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
@@ -93,13 +91,13 @@ describe('Exceptions', function () {
     // Check that the tracker is now marked as trusted in the panel
 
     await browser.url(PAGE_URL);
-    await openPanel();
+    await browser.url('ghostery:panel');
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
     await expect(getExtensionElement(`icon:tracker:${TRACKER_ID}:blocked`)).not.toBeDisplayed();
 
     // Go to settings and check that the website is listed in the list of websites
 
-    await browser.url(getExtensionPageURL('settings'));
+    await browser.url('ghostery:settings');
     await getExtensionElement('button:websites').click();
 
     const trashButton = getExtensionElement(`button:website:trash:${PAGE_DOMAIN}`);
@@ -114,7 +112,7 @@ describe('Exceptions', function () {
 
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await expect(getExtensionElement(`button:tracker:${TRACKER_ID}`)).toBeDisplayed();
     await expect(getExtensionElement(`icon:tracker:${TRACKER_ID}:blocked`)).toBeDisplayed();
   });

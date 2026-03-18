@@ -10,13 +10,10 @@
  */
 
 import { browser, expect, $ } from '@wdio/globals';
-import { FLAG_MODES } from '@ghostery/config';
 
 import {
   enableExtension,
   getExtensionElement,
-  getExtensionPageURL,
-  openPanel,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
   switchFrame,
@@ -27,10 +24,8 @@ import {
   PAGE_DOMAIN,
 } from '../utils.js';
 
-import { argv } from '../wdio.conf.js';
-
 async function setFilteringMode(mode) {
-  await browser.url(getExtensionPageURL('settings'));
+  await browser.url('ghostery:settings');
   await getExtensionElement('button:my-ghostery').click();
 
   const modeInput = await getExtensionElement(`input:filtering-mode:${mode}`);
@@ -43,7 +38,7 @@ async function setFilteringMode(mode) {
 async function toggleZapInPanel(type) {
   await browser.url(PAGE_URL);
 
-  await openPanel();
+  await browser.url('ghostery:panel');
 
   const toggle = await getExtensionElement(`button:zap:${type}`);
   await toggle.click();
@@ -51,100 +46,98 @@ async function toggleZapInPanel(type) {
   await waitForIdleBackgroundTasks();
 }
 
-if (argv.flags.includes(FLAG_MODES)) {
-  describe('ZAP Mode', function () {
-    before(enableExtension);
+describe('ZAP Mode', function () {
+  before(enableExtension);
 
-    before(() => setFilteringMode('zap'));
-    after(() => setFilteringMode('ghostery'));
+  before(() => setFilteringMode('zap'));
+  after(() => setFilteringMode('ghostery'));
 
-    it('does not block ads when not enabled', async function () {
+  it('does not block ads when not enabled', async function () {
+    await browser.url(PAGE_URL);
+
+    await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+    await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+    await switchFrame($('#iframe-static'));
+    await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+    await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+    await switchFrame($('#iframe-dynamic'));
+    await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+    await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+    await switchFrame($('#iframe-local'));
+    await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+    await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+
+    await browser.switchFrame(null);
+  });
+
+  it('does not block trackers when not enabled', async function () {
+    await browser.url(PAGE_URL);
+
+    await browser.url('ghostery:panel');
+    await getExtensionElement('button:detailed-view').click();
+
+    for (const trackerId of TRACKER_IDS) {
+      await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
+      await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
+    }
+  });
+
+  describe('block trackers and ads when enabled in the panel', function () {
+    before(() => toggleZapInPanel('enable'));
+    after(() => toggleZapInPanel('disable'));
+
+    it('blocks trackers when enabled in the panel', async function () {
       await browser.url(PAGE_URL);
 
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:detailed-view').click();
 
+      for (const trackerId of TRACKER_IDS) {
+        await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).toBeDisplayed();
+      }
+    });
+  });
+
+  describe('block ads when enabled in the panel', function () {
+    before(() => toggleZapInPanel('enable'));
+    after(() => toggleZapInPanel('disable'));
+
+    before(async function () {
+      await browser.url(PAGE_URL);
+    });
+
+    it('main frame of the page', expectAdsBlocked);
+
+    it('subframe of the page', async function () {
       await switchFrame($('#iframe-static'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
-
-      await switchFrame($('#iframe-dynamic'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
-
-      await switchFrame($('#iframe-local'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+      await expectAdsBlocked();
 
       await browser.switchFrame(null);
     });
 
-    it('does not block trackers when not enabled', async function () {
-      await browser.url(PAGE_URL);
+    it('dynamic subframe of the page', async function () {
+      await switchFrame($('#iframe-dynamic'));
+      await expectAdsBlocked();
 
-      await openPanel();
-      await getExtensionElement('button:detailed-view').click();
-
-      for (const trackerId of TRACKER_IDS) {
-        await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
-        await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
-      }
+      await browser.switchFrame(null);
     });
 
-    describe('block trackers and ads when enabled in the panel', function () {
-      before(() => toggleZapInPanel('enable'));
-      after(() => toggleZapInPanel('disable'));
+    it('local subframe of the page', async function () {
+      await switchFrame($('#iframe-local'));
+      await expectAdsBlocked();
 
-      it('blocks trackers when enabled in the panel', async function () {
-        await browser.url(PAGE_URL);
-
-        await openPanel();
-        await getExtensionElement('button:detailed-view').click();
-
-        for (const trackerId of TRACKER_IDS) {
-          await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).toBeDisplayed();
-        }
-      });
+      await browser.switchFrame(null);
     });
 
-    describe('block ads when enabled in the panel', function () {
-      before(() => toggleZapInPanel('enable'));
-      after(() => toggleZapInPanel('disable'));
+    it('displays the page in Websites section of the settings page', async function () {
+      await browser.url('ghostery:settings');
+      await getExtensionElement('button:websites').click();
 
-      before(async function () {
-        await browser.url(PAGE_URL);
-      });
-
-      it('main frame of the page', expectAdsBlocked);
-
-      it('subframe of the page', async function () {
-        await switchFrame($('#iframe-static'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
-      });
-
-      it('dynamic subframe of the page', async function () {
-        await switchFrame($('#iframe-dynamic'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
-      });
-
-      it('local subframe of the page', async function () {
-        await switchFrame($('#iframe-local'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
-      });
-
-      it('displays the page in Websites section of the settings page', async function () {
-        await browser.url(getExtensionPageURL('settings'));
-        await getExtensionElement('button:websites').click();
-
-        const pageEntry = await getExtensionElement(`component:website:${PAGE_DOMAIN}`);
-        await expect(pageEntry).toBeDisplayed();
-      });
+      const pageEntry = await getExtensionElement(`component:website:${PAGE_DOMAIN}`);
+      await expect(pageEntry).toBeDisplayed();
     });
   });
-}
+});

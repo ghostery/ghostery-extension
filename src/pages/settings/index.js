@@ -17,8 +17,6 @@ import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
-import { debugMode } from '/utils/debug.js';
-
 import Settings from './settings.js';
 
 import './elements.js';
@@ -28,7 +26,7 @@ import './styles.css';
 // we must redirect to onboarding if terms are not accepted
 Promise.all([store.resolve(Options), store.resolve(ManagedConfig), store.resolve(Config)])
   .then(([{ terms }, managedConfig]) => {
-    if (!debugMode && (!terms || managedConfig.disableUserControl)) {
+    if (!__DEBUG__ && (!terms || managedConfig.disableUserControl)) {
       throw new Error('Access denied');
     }
 

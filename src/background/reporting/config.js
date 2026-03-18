@@ -9,9 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { stagingMode } from '../../utils/debug.js';
-
-const URL_INFIX = stagingMode ? 'staging-patterns/' : '';
+const URL_INFIX = __STAGING__ ? 'staging-patterns/' : '';
 
 function platformSpecificSettings() {
   if (

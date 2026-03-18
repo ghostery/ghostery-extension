@@ -10,7 +10,6 @@
  */
 
 import * as notifications from '/utils/notifications.js';
-import { debugMode } from '/utils/debug.js';
 
 const SELECTORS = [
   // Based on https://github.com/AdguardTeam/AdguardFilters/blob/e5ae8e3194f8d18bdcc660d4c42282e4a96ca5b9/AnnoyancesFilter/Popups/sections/antiadblock.txt#L2044
@@ -20,8 +19,8 @@ const SELECTORS = [
   'tp-yt-paper-dialog .ytd-enforcement-message-view-model',
 ];
 
-// DEBUG: Add the app selector to trigger showing the popup
-if (debugMode) SELECTORS.push('ytd-app');
+// DEBUG: Add the app selector to test the wall
+if (__DEBUG__) SELECTORS.push('ytd-app');
 
 function detectWall(cb) {
   let timeout = null;

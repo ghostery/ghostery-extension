@@ -9,10 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect } from '@wdio/globals';
-import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 import {
   enableExtension,
-  getExtensionPageURL,
   setToggle,
   waitForIdleBackgroundTasks,
   setCustomFilters,
@@ -21,12 +19,10 @@ import {
   PAGE_URL,
 } from '../utils.js';
 
-import { argv } from '../wdio.conf.js';
-
 const ADBLOCKER_PAGE_URL = PAGE_URL + 'adblocker/index.html';
 
 async function togglePrivacyFeatures(value) {
-  await browser.url(getExtensionPageURL('settings'));
+  await browser.url('ghostery:settings');
 
   await setToggle('ad-blocking', value);
   await setToggle('never-consent', value);
@@ -132,6 +128,7 @@ describe('Adblocker Capabilities', function () {
       ['nostif0', PAGE_DOMAIN + '##+js(nostif, , 0)'],
       ['nostif50', PAGE_DOMAIN + '##+js(nostif, , 50)'],
       ['nosiif50', PAGE_DOMAIN + '##+js(nosiif, , 50)'],
+      ['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)'],
     ];
     const networkingFilters = [
       ['url', '/gen/url.js^'],
@@ -143,10 +140,6 @@ describe('Adblocker Capabilities', function () {
       ['rediradsbygoogle', '/gen/rediradsbygoogle.js^$redirect=googlesyndication_adsbygoogle.js'],
       ['redirgoogleima', '/gen/redirgoogleima.js^$redirect=google-ima.js'],
     ];
-
-    if (argv.flags.includes(FLAG_SUBFRAME_SCRIPTING)) {
-      scriptingFilters.push(['subdocument', PAGE_DOMAIN + '>>##+js(set, subdocument, true)']);
-    }
 
     let reports;
 

@@ -82,23 +82,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       });
       return true;
 
-    case 'e2e:setConfigFlags':
-      store.resolve(Config).then(async (config) => {
-        const flags = {};
-
-        for (const name of Object.keys(config.flags)) {
-          flags[name] = null;
-        }
-
-        for (const name of msg.flags) {
-          flags[name] = { enabled: true };
-        }
-
-        await store.set(Config, { flags });
-        sendResponse('done');
-      });
-      return true;
-
     case 'e2e:setConfigDomains':
       store.resolve(Config).then(async (config) => {
         const domains = {};
@@ -118,6 +101,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       setTimeout(() => chrome.runtime.reload(), 2000);
       sendResponse('done');
       break;
+
+    case 'e2e:managedConfig':
+      chrome.storage.local.set({ managedConfig: msg.config }).then(() => {
+        sendResponse('done');
+      });
+      return true;
   }
 
   return false;
