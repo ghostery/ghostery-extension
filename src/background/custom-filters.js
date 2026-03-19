@@ -145,28 +145,36 @@ function normalizeFilters(text = '', { trustedScriptlets }) {
     loadNetworkFilters: true,
     loadCosmeticFilters: false,
     loadPreprocessors: true,
+    // The filters will be dropped later in case of unsupported
+    // platform.
+    enableHtmlFiltering: true,
+    // Disable unnecessary internals since this engine is only
+    // for the validation.
+    enableOptimizations: false,
+    enableCompression: false,
     debug: true,
   });
-  const { networkFilters } = adblocker.getFilters();
+  const networkFilters = adblocker
+    .getFilters()
+    .networkFilters.filter(function (filter) {
+      const condition = getPreprocessorCondition(adblocker, filter);
+      // Filter by preprocessor condition.
+      if (typeof condition !== 'undefined' && !engines.evaluatePreprocessorCondition(condition)) {
+        return false;
+      }
+      // Filter by uniqueness.
+      if (uniqueFilterIds.has(filter.getId())) {
+        return false;
+      }
+      uniqueFilterIds.add(filter.getId());
+      return true;
+    })
+    .map(function (filter) {
+      return filter.toString();
+    });
 
   return {
-    networkFilters: networkFilters
-      .filter(function (filter) {
-        const condition = getPreprocessorCondition(adblocker, filter);
-        // Filter by preprocessor condition.
-        if (typeof condition !== 'undefined' && !engines.evaluatePreprocessorCondition(condition)) {
-          return false;
-        }
-        // Filter by uniqueness.
-        if (uniqueFilterIds.has(filter.getId())) {
-          return false;
-        }
-        uniqueFilterIds.add(filter.getId());
-        return true;
-      })
-      .map(function (filter) {
-        return filter.toString();
-      }),
+    networkFilters,
     cosmeticFilters,
     errors,
   };
