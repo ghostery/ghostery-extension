@@ -95,6 +95,9 @@
     "message": "Audio/Video Player",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "Automatically Adjusted"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "Automatically paused to prevent adblocker breakage"
   },
@@ -578,6 +581,9 @@
   "manifest_short_description": {
     "message": "Fast, private and ad free browsing you can trust!"
   },
+  "manually_adjusted": {
+    "message": "Manually Adjusted"
+  },
   "menu": {
     "message": "Menu"
   },
@@ -688,6 +694,9 @@
   },
   "paused": {
     "message": "Paused"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker breakage."
   },
   "paused_by_browsing_assistant": {
     "message": "Paused by Browsing Assistant"
@@ -1096,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "You block ads on the sites you use. Block once. They stay ad-free every time you visit."
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "You can disable it in <a href=\"$${0}\">WhoTracks.Me settings</a>."
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "You’re about to remove all cookies stored by $${0}."
