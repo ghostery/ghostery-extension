@@ -19,7 +19,7 @@ import * as trackerdb from '/utils/trackerdb.js';
 import convert from '/utils/dnr-converter.js';
 import { EXCEPTIONS_ID_RANGE, EXCEPTIONS_RULE_PRIORITY, getDynamicRulesIds } from '/utils/dnr.js';
 
-async function updateFilters() {
+export async function updateDNRRulesForExceptions() {
   const options = await store.resolve(Options);
   const rules = [];
 
@@ -66,26 +66,15 @@ async function updateFilters() {
       removeRuleIds,
     });
 
-    console.info('[exceptions] Updated DNR rules');
+    console.info(
+      `[exceptions] Added ${addRules.length} network rules, removed ${removeRuleIds.length} network rules`,
+    );
   }
 }
 
 if (__CHROMIUM__) {
-  // Update exceptions filters every time TrackerDB updates
-  // It happens when all engines are updated
-  OptionsObserver.addListener(
-    'filtersUpdatedAt',
-    async function updateExceptions(value, lastValue) {
-      // Only update exceptions filters if the value has changed and is set to timestamp.
-      // It will happen only after successful update of the engines.
-      if (lastValue !== undefined && value !== 0) {
-        await updateFilters();
-      }
-    },
-  );
-
-  OptionsObserver.addListener('exceptions', async function updateExceptions(value, lastValue) {
+  OptionsObserver.addListener('exceptions', async function (value, lastValue) {
     if (lastValue === undefined) return;
-    await updateFilters();
+    await updateDNRRulesForExceptions();
   });
 }
