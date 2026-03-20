@@ -108,7 +108,9 @@ describe('Custom Filters', function () {
 
     if (browser.isChromium) {
       await expect(getExtensionElement(`icon:tracker:www.example.net:blocked`)).toBeDisplayed();
+      await expect(getExtensionElement(`icon:tracker:www.example.org:blocked`)).not.toBeDisplayed();
     } else if (browser.isFirefox) {
+      await expect(getExtensionElement(`icon:tracker:www.example.net:blocked`)).not.toBeDisplayed();
       await expect(getExtensionElement(`icon:tracker:www.example.org:blocked`)).toBeDisplayed();
     }
   });
