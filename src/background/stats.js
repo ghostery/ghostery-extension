@@ -229,7 +229,7 @@ export async function updateTabStats(tabId, requests) {
 
   let trackersUpdated = await pushTabStats(stats, requests);
 
-  if (isWebkit() && chrome.declarativeNetRequest.getMatchedRules) {
+  if (__CHROMIUM__ && isWebkit() && chrome.declarativeNetRequest.getMatchedRules) {
     try {
       const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({
         tabId,

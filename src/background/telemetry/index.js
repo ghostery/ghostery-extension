@@ -40,7 +40,7 @@ const setup = asyncSetup('telemetry', [
       getConf: async () => ({
         options: await store.resolve(Options),
         config: await store.resolve(Config),
-        userSettings: await chrome.action?.getUserSettings?.(),
+        userSettings: __CHROMIUM__ ? await chrome.action?.getUserSettings?.() : undefined,
       }),
       log: console.debug.bind(console, '[telemetry]'),
     });
