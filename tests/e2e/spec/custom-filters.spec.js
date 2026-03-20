@@ -103,12 +103,12 @@ describe('Custom Filters', function () {
   it('applies preprocessor to the network filter', async function () {
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
-    if (browser.isFirefox) {
+    if (browser.isChromium) {
       await expect(getExtensionElement(`icon:tracker:www.example.net:blocked`)).toBeDisplayed();
-    } else if (browser.isChromium) {
+    } else if (browser.isFirefox) {
       await expect(getExtensionElement(`icon:tracker:www.example.org:blocked`)).toBeDisplayed();
     }
   });
