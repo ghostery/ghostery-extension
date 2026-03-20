@@ -41,13 +41,17 @@ async function updatePausedDomains(config, lastConfig) {
   } else {
     // Add all domains with the action that weren't dismissed
     for (const [domain, { actions, dismiss }] of Object.entries(config.domains)) {
-      if (!dismiss[ACTION_PAUSE_ASSISTANT] && actions.includes(ACTION_PAUSE_ASSISTANT)) {
+      if (
+        !options.paused[domain] &&
+        !dismiss[ACTION_PAUSE_ASSISTANT] &&
+        actions.includes(ACTION_PAUSE_ASSISTANT)
+      ) {
         paused[domain] = { revokeAt: 0, assist: true };
       }
     }
 
     // Remove domains that the action has been removed and user didn't interact
-    // with the notification (no dismiss)
+    // with the notification - no dismiss, so we don't have to show "resume" notification
     if (lastConfig) {
       for (const id of Object.keys(lastConfig.domains)) {
         // The current config removed the action, but the previous one
