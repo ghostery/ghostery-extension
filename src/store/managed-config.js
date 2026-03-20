@@ -12,7 +12,6 @@
 import { store } from 'hybrids';
 
 import { isOpera, isWebkit } from '/utils/browser-info.js';
-import { debugMode } from '/utils/debug.js';
 
 export const TRUSTED_DOMAINS_NONE_ID = '<none>';
 
@@ -44,14 +43,14 @@ const ManagedConfig = {
       // so we can skip fallback for it
       let managedConfig = await chrome.storage.managed.get().catch((e) => {
         // Allow fallback in debug mode (for e2e tests)
-        if (debugMode) return {};
+        if (__DEBUG__) return {};
         throw e;
       });
 
       // Chromium-based browsers just return an empty object,
       // and it might be available later (especially on the browser restart),
       // so we try to read it with fallback from local storage
-      if (__CHROMIUM__ || debugMode) {
+      if (__CHROMIUM__ || __DEBUG__) {
         if (Object.keys(managedConfig).length) {
           // Save local version for fallback usage
           // Don't await - we don't need to block on this

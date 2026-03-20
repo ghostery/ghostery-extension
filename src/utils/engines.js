@@ -23,7 +23,6 @@ import {
 import ResourcesModel from '/store/resources.js';
 
 import { registerDatabase } from './indexeddb.js';
-import debug from './debug.js';
 import { CDN_URL } from './urls.js';
 
 export const MAIN_ENGINE = 'main';
@@ -461,4 +460,6 @@ export function remove(name) {
   });
 }
 
-debug.engines = { get };
+if (__DEBUG__) {
+  (globalThis.ghostery ??= {}).engines = { get };
+}

@@ -18,7 +18,6 @@ import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
-import { debugMode } from '/utils/debug.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 import { asyncAction } from '../utils/actions.js';
@@ -56,7 +55,7 @@ export default {
   options: store(Options),
   config: store(Config),
   managedConfig: store(ManagedConfig),
-  devMode: debugMode,
+  devMode: __DEBUG__,
   globalPause: {
     value: false,
     observe: updateGlobalPause,

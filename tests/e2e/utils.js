@@ -10,14 +10,13 @@
  */
 
 import { browser, expect, $ } from '@wdio/globals';
-import { FLAG_MODES, FLAG_NOTIFICATION_REVIEW } from '@ghostery/config';
-
-import { argv } from './wdio.conf.js';
 
 export const PAGE_PORT = 6789;
 export const PAGE_DOMAIN = `page.localhost`;
+export const SUBPAGE_DOMAIN = `subpage.localhost`;
 export const REDIRECT_PAGE_DOMAIN = `redirect.localhost`;
 export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
+export const SUBPAGE_URL = `http://${SUBPAGE_DOMAIN}:${PAGE_PORT}/`;
 export const REDIRECT_PAGE_URL = `http://${REDIRECT_PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 export const ADBLOCKING_GLOBAL_SELECTOR = 'ad-slot';
@@ -72,23 +71,17 @@ export async function waitForIdleBackgroundTasks() {
 }
 
 export async function reloadExtension() {
-  await browser.url('about:blank');
-
-  await browser[browser.isFirefox ? 'newWindow' : 'url'](getExtensionPageURL('panel'));
-
+  await browser.url('ghostery:panel');
   await sendMessage({ action: 'e2e:reloadExtension' });
 
-  if (browser.isFirefox) {
-    await browser.switchWindow('about:blank');
-  }
-
-  await browser.pause(3000);
+  await browser.url('about:blank');
+  await browser.pause(5000);
 
   await browser.waitUntil(
     async () => {
       const title = await browser.getTitle();
       if (title !== 'Ghostery panel') {
-        await browser.url(getExtensionPageURL('panel'));
+        await browser.url('ghostery:panel');
         return false;
       }
 
@@ -98,7 +91,6 @@ export async function reloadExtension() {
   );
 
   await waitForIdleBackgroundTasks();
-  await browser.url('about:blank');
 }
 
 export async function setToggle(name, value) {
@@ -115,37 +107,16 @@ export async function setToggle(name, value) {
 }
 
 export async function setPrivacyToggle(name, value) {
-  await browser.url(getExtensionPageURL('settings'));
+  await browser.url('ghostery:settings');
 
   await setToggle(name, value);
 }
 
 export async function setWhoTracksMeToggle(name, value) {
-  await browser.url(getExtensionPageURL('settings'));
+  await browser.url('ghostery:settings');
   await getExtensionElement('button:whotracksme').click();
 
   await setToggle(name, value);
-}
-
-export async function openPanel() {
-  await browser.url(getExtensionPageURL('panel'));
-
-  // The panel has a bugfix for closing the panel when links are clicked.
-  // Source: /pages/panel/index.js - L52
-  // In test environment it must be disabled to allow the test to switch back to the panel
-  await browser.execute(function () {
-    Object.defineProperty(window, 'close', { value: function () {} });
-  });
-}
-
-export async function setConfigFlags(flags) {
-  console.log('Setting config flags:', flags.join(', '));
-
-  await browser.url(getExtensionPageURL('panel'));
-  await sendMessage({ action: 'e2e:setConfigFlags', flags });
-
-  // Reload the extension to apply the new config flags
-  await reloadExtension();
 }
 
 export async function expectAdsBlocked() {
@@ -272,9 +243,7 @@ async function dismissNotifications() {
   // The "review" notification is displayed after 30 days of usage,
   // but in debug mode it is shown immediately. As the code in background
   // runs after the "pin-it" notification, it will be shown after it.
-  if (argv.flags.includes(FLAG_NOTIFICATION_REVIEW)) {
-    await expectPageNotification(PAGE_URL, 'review');
-  }
+  await expectPageNotification(PAGE_URL, 'review');
 
   // After pin-it and review notifications have been displayed,
   // no further notification should be shown
@@ -283,22 +252,21 @@ async function dismissNotifications() {
 }
 
 export async function enableExtension() {
-  await browser.url(getExtensionPageURL('onboarding'));
+  if (enableExtension.done) return;
+
+  await browser.url('ghostery:onboarding');
 
   if (await getExtensionElement('view:success').isDisplayed()) {
     return;
   }
 
-  const enableButton = await getExtensionElement('button:enable');
-  await enableButton.click();
-
-  if (argv.flags.includes(FLAG_MODES)) {
-    await expect(getExtensionElement('view:filtering-mode')).toBeDisplayed();
-    await getExtensionElement('button:filtering-mode:ghostery').click();
-  }
+  await getExtensionElement('button:enable').click();
+  await getExtensionElement('button:filtering-mode:ghostery').click();
 
   await expect(getExtensionElement('view:success')).toBeDisplayed();
   await waitForIdleBackgroundTasks();
 
   await dismissNotifications();
+
+  enableExtension.done = true;
 }

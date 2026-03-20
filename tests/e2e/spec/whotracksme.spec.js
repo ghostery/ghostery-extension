@@ -35,7 +35,7 @@ describe('WhoTracksMe', function () {
       await getExtensionElement('button:disable').click();
       await getExtensionElement('button:confirm').click();
 
-      await browser.url(getExtensionPageURL('settings'));
+      await browser.url('ghostery:settings');
       await getExtensionElement('button:whotracksme').click();
 
       const toggleValue = await getExtensionElement('toggle:wtmSerpReport').getProperty('value');

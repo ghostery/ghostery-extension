@@ -22,21 +22,13 @@
 import path from 'node:path';
 import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import { $ } from '@wdio/globals';
-import { FLAGS } from '@ghostery/config';
+import { $, $$ } from '@wdio/globals';
 
 import { setupTestPage } from './page/server.js';
 
-import {
-  getExtensionPageURL,
-  setConfigFlags,
-  setExtensionBaseUrl,
-  PAGE_PORT,
-  PAGE_URL,
-} from './utils.js';
+import { getExtensionPageURL, setExtensionBaseUrl, PAGE_PORT, PAGE_URL } from './utils.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
-
 export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
@@ -57,7 +49,6 @@ export const argv = process.argv.slice(2).reduce(
     target: ['firefox', 'chrome'],
     clean: false,
     debug: false,
-    flags: FLAGS,
   },
 );
 
@@ -77,7 +68,7 @@ export function buildForFirefox() {
 
 export function buildForChrome() {
   if (!existsSync(CHROME_PATH)) {
-    execSyncNode('npm run build -- --silent --debug --clean');
+    execSyncNode('npm run build -- chromium --silent --debug --clean');
     rmSync(CHROME_PATH, { recursive: true, force: true });
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
@@ -110,9 +101,9 @@ export const config = {
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
-    retries: 4,
+    retries: 2,
   },
-  maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
+  maxInstances: 1,
   capabilities: [
     {
       browserName: 'firefox',
@@ -202,12 +193,19 @@ export const config = {
         await browser.pause(2000);
       }
 
-      // Modify browser.url
       const SETTINGS_PAGE_URL = getExtensionPageURL('settings');
+
+      // Modify browser.url
       browser.overwriteCommand('url', async function (fn, ...args) {
+        // Generate the target url for extension pages using `ghostery:` protocol
+        if (args[0].startsWith('ghostery:')) {
+          const pageArgs = args[0].split(':').slice(1);
+          args[0] = getExtensionPageURL(...pageArgs);
+        }
+
         const targetUrl = args[0];
 
-        // Force full navigation when navigating:
+        // Force full reload when navigating to:
         // * PAGE_URL - testing page for clearing cached version of page
         // * SETTINGS_PAGE_URL - to reload the page completely so it loads the main privacy section
         if (targetUrl === PAGE_URL || targetUrl === SETTINGS_PAGE_URL) {
@@ -217,14 +215,23 @@ export const config = {
         // Load the target url
         const result = await fn.call(this, ...args);
 
-        // Add a small pause to allow client-side views to load and CSS injection
-        // to be applied before the tests start interacting with the page.
-        await browser.pause(100);
+        // Wait until body contents is not empty
+        if (targetUrl !== 'about:blank') {
+          // At first add a small pause to ensure that the navigation has started
+          // and the previous page is unloaded
+          await browser.pause(100);
+
+          // Then wait until the page is fully loaded by checking
+          // if body has any child elements
+          await browser.waitUntil(async () => (await $$('body > *').getElements()).length > 0, {
+            timeout: 10000,
+            timeoutMsg: `Page did not load: ${targetUrl}`,
+            interval: 200,
+          });
+        }
 
         return result;
       });
-
-      await setConfigFlags(argv.flags);
     } catch (e) {
       console.error('Error while setting up test environment', e);
 
