@@ -14,6 +14,8 @@ export default [
         ...globals.webextensions,
         __CHROMIUM__: 'readonly',
         __FIREFOX__: 'readonly',
+        __DEBUG__: 'readonly',
+        __STAGING__: 'readonly',
       },
 
       ecmaVersion: 'latest',

@@ -69,20 +69,11 @@ const manifest = JSON.parse(
   readFileSync(resolve(options.srcDir, `manifest.${argv.target}.json`), 'utf8'),
 );
 
-// --- Add flags ---
-
-if (argv.debug) {
-  manifest.debug = true;
-}
-
+// Force re-download of resources to be sure we have the latest version
+// when building with staging CDN
 if (argv.staging) {
-  // Force re-download of resources to be sure we have the latest version
-  // when building with staging CDN
   argv.clean = true;
-
-  manifest.staging = true;
 }
-
 // --- Download rule resources ---
 
 if (argv.clean) {
@@ -180,8 +171,12 @@ const config = {
     preserveSymlinks: true,
   },
   define: {
+    // platforms
     __CHROMIUM__: JSON.stringify(argv.target === 'chromium'),
     __FIREFOX__: JSON.stringify(argv.target === 'firefox'),
+    // dev tools
+    __DEBUG__: JSON.stringify(argv.debug),
+    __STAGING__: JSON.stringify(argv.staging),
   },
   build: {
     outDir: options.outDir,

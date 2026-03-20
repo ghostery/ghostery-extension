@@ -13,7 +13,6 @@ import { store } from 'hybrids';
 
 import Options from '/store/options.js';
 import Config from '/store/config.js';
-import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { getStorage, saveStorage } from '/utils/telemetry.js';
@@ -33,7 +32,7 @@ const setup = asyncSetup('telemetry', [
     }
 
     runner = new Metrics({
-      METRICS_BASE_URL: debugMode ? 'https://staging-d.ghostery.com' : 'https://d.ghostery.com',
+      METRICS_BASE_URL: __DEBUG__ ? 'https://staging-d.ghostery.com' : 'https://d.ghostery.com',
       EXTENSION_VERSION: version,
       storage: metrics,
       saveStorage,

@@ -14,7 +14,6 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
-  openPanel,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
   switchFrame,
@@ -141,7 +140,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('anti-tracking', false);
       await browser.url(PAGE_URL);
 
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -154,7 +153,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('anti-tracking', true);
       await browser.url(PAGE_URL);
 
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -214,7 +213,7 @@ describe('Main Features', function () {
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
 
       // Pause the website
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:pause').click();
       await waitForIdleBackgroundTasks();
 
@@ -225,7 +224,7 @@ describe('Main Features', function () {
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
 
       // Resume the website
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:resume').click();
       await waitForIdleBackgroundTasks();
 

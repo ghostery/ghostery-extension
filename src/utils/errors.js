@@ -16,7 +16,6 @@ import Errors from '/store/errors.js';
 import Options from '/store/options.js';
 
 import getBrowserInfo from './browser-info.js';
-import debug, { debugMode } from './debug.js';
 
 const SAMPLE_RATE = 0.3; // Sampling rate for non-critical errors in production
 const TAG_CRITICAL = 'critical'; // Tag to identify critical errors that should always be sent
@@ -28,8 +27,8 @@ const config = {
   tunnel: 'https://crashreporting.ghostery.net/',
   dsn: 'https://05c74f55666649f0b6d671b9c37f6da1@o475874.ingest.sentry.io/6447378',
   release: `ghostery-extension@${version}`,
-  debug: debugMode,
-  environment: debugMode ? 'development' : 'production',
+  debug: __DEBUG__,
+  environment: __DEBUG__ ? 'development' : 'production',
   // We use Sentry to track critical errors only.
   // That means we want to prevent default configuration from
   // sending additional messages like session logs, activity pings, etc
@@ -42,7 +41,7 @@ const config = {
       return event;
     }
 
-    if (!debugMode && Math.random() > SAMPLE_RATE) {
+    if (!__DEBUG__ && Math.random() > SAMPLE_RATE) {
       return null;
     }
 
@@ -96,4 +95,6 @@ export async function captureException(error, { critical = false, once = false }
   });
 }
 
-debug.errors = { captureException };
+if (__DEBUG__) {
+  (globalThis.ghostery ??= {}).errors = { captureException };
+}

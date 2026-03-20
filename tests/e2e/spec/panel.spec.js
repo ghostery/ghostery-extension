@@ -9,13 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect, $ } from '@wdio/globals';
-import { enableExtension, getExtensionElement, openPanel } from '../utils.js';
+import { enableExtension, getExtensionElement } from '../utils.js';
 
 describe('Panel', function () {
   before(enableExtension);
 
   it('opens licenses page', async function () {
-    await openPanel();
+    await browser.url('ghostery:panel');
 
     await getExtensionElement('button:menu').click();
     const url = await getExtensionElement('button:licenses').getProperty('href');

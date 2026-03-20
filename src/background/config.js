@@ -10,15 +10,14 @@
  */
 
 import { store } from 'hybrids';
+import { FLAGS } from '@ghostery/config';
 
 import Config from '/store/config.js';
 
 import { filter } from '/utils/config.js';
 import { CDN_URL } from '/utils/urls.js';
-import { debugMode } from '/utils/debug.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
-
 const HALF_HOUR_IN_MS = 1000 * 60 * 30;
 
 export default async function syncConfig() {
@@ -87,7 +86,15 @@ export default async function syncConfig() {
   }
 }
 
-if (!debugMode) {
+if (__DEBUG__) {
+  // Enable all available flags
+  store.set(Config, {
+    flags: FLAGS.reduce((acc, flag) => {
+      acc[flag] = { enabled: true };
+      return acc;
+    }, {}),
+  });
+} else {
   // Sync on SW startup and when config updatedAt is reset
   store.observe(Config, (_, config, lastConfig) => {
     if (!lastConfig || config.updatedAt === 0) syncConfig();

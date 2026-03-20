@@ -13,7 +13,6 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
-  openPanel,
   setCustomFilters,
   disableCustomFilters,
   switchFrame,
@@ -41,7 +40,7 @@ describe('Custom Filters', function () {
     await browser.url(PAGE_URL);
     await expect($('#custom-filter')).toBeDisplayed();
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
@@ -52,7 +51,7 @@ describe('Custom Filters', function () {
   it('supports custom network filter', async function () {
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement(`icon:tracker:facebook_connect:blocked`)).not.toBeDisplayed();
@@ -62,7 +61,7 @@ describe('Custom Filters', function () {
   it('supports regex filter', async function () {
     await browser.url(PAGE_URL);
 
-    await openPanel();
+    await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
 
     await expect(getExtensionElement(`icon:tracker:www.example.com:blocked`)).toBeDisplayed();

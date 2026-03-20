@@ -14,13 +14,7 @@ import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import {
-  getExtensionElement,
-  getExtensionPageURL,
-  setConfigFlags,
-  waitForIdleBackgroundTasks,
-  PAGE_PORT,
-} from './utils.js';
+import { getExtensionElement, waitForIdleBackgroundTasks, PAGE_PORT } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 import { setupTestPage } from './page/server.js';
@@ -114,7 +108,7 @@ export const config = {
 
     try {
       // Enable the extension
-      await browser.url(getExtensionPageURL('onboarding'));
+      await browser.url('ghostery:onboarding');
       await getExtensionElement('button:enable').click();
 
       // Reload extension with the source
@@ -153,11 +147,9 @@ export const config = {
 
       await browser.pause(5000);
 
-      await browser.url(getExtensionPageURL('settings'));
+      await browser.url('ghostery:settings');
       await expect(getExtensionElement('page:settings')).toBeDisplayed();
       await waitForIdleBackgroundTasks();
-
-      await setConfigFlags(wdio.argv.flags);
 
       console.log('Extension updated...');
     } catch (e) {
