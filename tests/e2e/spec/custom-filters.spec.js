@@ -15,7 +15,6 @@ import {
   setPrivacyToggle,
   openPanel,
   setCustomFilters,
-  getCustomFilterRulesResponse,
   disableCustomFilters,
   switchFrame,
   PAGE_DOMAIN,
@@ -31,6 +30,12 @@ describe('Custom Filters', function () {
       `/.*example.com/`,
       `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
       `${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:noop.js)`,
+      `!#if env_chromium
+      ||example.net^
+      !#endif`,
+      `!#if env_firefox
+      ||example.org^
+      !#endif`,
     ]);
   });
 
@@ -96,6 +101,19 @@ describe('Custom Filters', function () {
     await expect($('#war')).toHaveText('(function(){"use strict"})();');
   });
 
+  it('applies preprocessor to the network filter', async function () {
+    await browser.url(PAGE_URL);
+
+    await openPanel();
+    await getExtensionElement('button:detailed-view').click();
+
+    if (browser.isFirefox) {
+      await expect(getExtensionElement(`icon:tracker:www.example.net:blocked`)).toBeDisplayed();
+    } else if (browser.isChromium) {
+      await expect(getExtensionElement(`icon:tracker:www.example.org:blocked`)).toBeDisplayed();
+    }
+  });
+
   // Scope for Firefox webRequest API tests
   if (browser.isFirefox) {
     it('supports $replace network filter', async function () {
@@ -116,12 +134,6 @@ describe('Custom Filters', function () {
 
       const text = await errors.getText();
       await expect(text).toContain('Syntax error');
-    });
-
-    it('shows the available preprocessed custom DNR filter', async function () {
-      await setCustomFilters(['!#if false', '||foo.com^', '!#endif', '||bar.com^']);
-      const rules = await getCustomFilterRulesResponse();
-      await expect(rules[0].condition.urlFilter).toContain('bar.com');
     });
   }
 });

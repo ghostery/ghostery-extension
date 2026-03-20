@@ -75,6 +75,24 @@
       <div id="custom-filter" style="background: blue"></div>
     </section>
 
+    <script
+      src="https://www.example.net/fp.js"
+      onerror="document.getElementById('preprocessor-chromium').style.display = 'none'"
+    ></script>
+    <section>
+      Chromium-specific preprocessor
+      <div id="preprocessor-chromium" style="background: mediumslateblue"></div>
+    </section>
+
+    <script
+      src="https://www.example.org/fp.js"
+      onerror="document.getElementById('preprocessor-firefox').style.display = 'none'"
+    ></script>
+    <section>
+      Firefox-specific preprocessor
+      <div id="preprocessor-firefox" style="background: crimson"></div>
+    </section>
+
     <h2>Dynamic Scriptlet Injection</h2>
 
     <!-- Scriptlets with web accessible resources -->
