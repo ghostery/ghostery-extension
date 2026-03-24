@@ -79,6 +79,7 @@ export function getRedirectProtectionRules(rules) {
           redirect: {
             extensionPath: '/pages/redirect-protection/index.html',
           },
+          resourceTypes: ['main_frame'],
         },
       });
     }
