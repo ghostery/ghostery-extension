@@ -95,6 +95,9 @@
     "message": "音訊/視訊播放器",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "已自動調整"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "自動暫停以防止廣告攔截器失效"
   },
@@ -378,9 +381,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需幾個簡單步驟，即可將 Ghostery 廣告攔截功能擴展到搜尋引擎。"
   },
-  "experimental_filters": {
-    "message": "實驗性過濾器"
-  },
   "export_to_file": {
     "message": "匯出到檔案"
   },
@@ -484,9 +484,6 @@
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "幫助 Ghostery 更快修復損壞的頁面。通過啟用，您可以測試實驗性過濾器並通過反饋支持我們。請發送郵件至 support@ghostery.com，描述啟用後您的體驗有何改變。您的反饋對我們非常重要，能夠幫助我們改進服務，提供更好的用戶體驗。感謝您的支持和參與！"
-  },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜歡使用 Ghostery 並願意鼓勵我們的工作嗎？"
   },
@@ -583,6 +580,9 @@
   },
   "manifest_short_description": {
     "message": "快速、私密、無廣告，值得您信賴的瀏覽體驗！"
+  },
+  "manually_adjusted": {
+    "message": "手動調整"
   },
   "menu": {
     "message": "選單"
@@ -694,6 +694,9 @@
   },
   "paused": {
     "message": "暫停"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "Ghostery 瀏覽助理已自動暫停，以防止廣告阻擋器失效。"
   },
   "paused_by_browsing_assistant": {
     "message": "瀏覽助理已暫停"
@@ -1102,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "您在使用的網站上阻擋廣告。只要阻擋一次，每次造訪時，這些網站都會保持無廣告狀態。"
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "您可以在<a href=\"$${0}\">WhoTracks.Me 設定</a>中停用它。"
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "您即將刪除由 $${0} 儲存的所有 Cookie。"

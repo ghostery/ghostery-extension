@@ -18,12 +18,11 @@ import Notification from '/store/notification.js';
 import Options from '/store/options.js';
 
 import { getOS, isOpera, isWebkit } from '/utils/browser-info.js';
-import { debugMode } from '/utils/debug.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
 import { checkStorage } from '/utils/storage.js';
+import * as telemetry from '/utils/telemetry.js';
 
-import * as telemetry from './telemetry/index.js';
 import { SURVEY_URL } from './onboarding.js';
 
 export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
@@ -61,7 +60,7 @@ export async function openNotification({ id, tabId, shownLimit = 0, delay, param
       action: notifications.MOUNT_ACTION,
       url,
       position,
-      debug: debugMode,
+      debug: __DEBUG__,
     });
 
     // Update notification stats if mounted successfully
@@ -147,7 +146,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   const config = await store.resolve(Config);
   if (!config.hasFlag(FLAG_NOTIFICATION_REVIEW)) return;
 
-  if (debugMode || Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
+  if (__DEBUG__ || Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
     openNotification({
       id: 'review',
       tabId: details.tabId,

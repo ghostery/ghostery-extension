@@ -108,20 +108,18 @@ export default {
               </ui-button>
             `}
           </div>
-          <ui-line layout="margin:0:-1.5"></ui-line>
+          <ui-line layout="margin:0:-1.5:0:-1.5"></ui-line>
         `}
         ${(store.ready(tracker.organization) || wtmUrl) &&
         html`
           <div layout="column gap:0.5">
             ${store.ready(tracker.organization) &&
             tracker.organization.description &&
-            html`
-              <ui-text type="body-s"> ${cleanUp(tracker.organization?.description)} </ui-text>
-            `}
+            html`<ui-text type="body-s">${cleanUp(tracker.organization?.description)}</ui-text>`}
             ${wtmUrl &&
             html`
               <ui-text type="label-xs" color="brand-primary" underline>
-                <a href="${wtmUrl}" onclick="${openTabWithUrl}"> Read more on WhoTracks.Me </a>
+                <a href="${wtmUrl}" onclick="${openTabWithUrl}">Read more on WhoTracks.Me</a>
               </ui-text>
             `}
           </div>
@@ -138,15 +136,11 @@ export default {
             <ui-icon name="block-s" color="danger-primary"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">URLs blocked</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsBlocked.map(
-                    ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
-                    `,
-                  )}
-                </div>
-              </div>
+              ${tracker.requestsBlocked.map(
+                ({ url }) => html`
+                  <panel-copy oncopy="${showCopyNotification}">${url}</panel-copy>
+                `,
+              )}
             </div>
           `}
           ${tracker.requestsModified.length > 0 &&
@@ -154,15 +148,11 @@ export default {
             <ui-icon name="eye" color="brand-primary"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">URLs modified</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsModified.map(
-                    ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
-                    `,
-                  )}
-                </div>
-              </div>
+              ${tracker.requestsModified.map(
+                ({ url }) => html`
+                  <panel-copy oncopy="${showCopyNotification}">${url}</panel-copy>
+                `,
+              )}
             </div>
           `}
           ${tracker.requestsObserved.length > 0 &&
@@ -170,15 +160,11 @@ export default {
             <ui-icon name="shield"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">URLs observed</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsObserved.map(
-                    ({ url }) => html`
-                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
-                    `,
-                  )}
-                </div>
-              </div>
+              ${tracker.requestsObserved.map(
+                ({ url }) => html`
+                  <panel-copy oncopy="${showCopyNotification}">${url}</panel-copy>
+                `,
+              )}
             </div>
           `}
           ${store.ready(tracker.organization) &&

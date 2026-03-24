@@ -95,6 +95,9 @@
     "message": "Trình phát âm thanh/video",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "Tự động điều chỉnh"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "Tự động tạm dừng để ngăn chặn sự cố với trình chặn quảng cáo"
   },
@@ -378,9 +381,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Mở rộng tính năng chặn quảng cáo Ghostery cho các công cụ tìm kiếm chỉ bằng một vài bước đơn giản."
   },
-  "experimental_filters": {
-    "message": "Experimental Filters"
-  },
   "export_to_file": {
     "message": "Xuất ra tệp"
   },
@@ -484,9 +484,6 @@
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Hãy giúp Ghostery đấu tranh cho một trang web nơi quyền riêng tư là quyền cơ bản của con người."
   },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
-  },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Này, bạn có thích Ghostery và muốn hỗ trợ công việc của chúng tôi không?"
   },
@@ -579,10 +576,13 @@
     "message": "Load more"
   },
   "manifest_name": {
-    "message": "Ghostery Privacy Ad Blocker"
+    "message": "Ghostery Privacy AdBlocker"
   },
   "manifest_short_description": {
     "message": "Duyệt web nhanh, riêng tư và không quảng cáo mà bạn có thể tin cậy!"
+  },
+  "manually_adjusted": {
+    "message": "Điều chỉnh thủ công"
   },
   "menu": {
     "message": "Menu"
@@ -619,7 +619,7 @@
     "message": "Điều hướng đến một trang web để xem Ghostery hoạt động."
   },
   "need_more_help_": {
-    "message": "Need more help?"
+    "message": "Cần thêm trợ giúp?"
   },
   "network_filters__@_0_": {
     "message": "Network filters: $${0}"
@@ -674,7 +674,7 @@
     "message": "Organization's website"
   },
   "organizations": {
-    "message": "Organizations"
+    "message": "Tổ chức"
   },
   "other": {
     "message": "Khá",
@@ -694,6 +694,9 @@
   },
   "paused": {
     "message": "Đã tạm dừng"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "Tự động tạm dừng bởi Trợ lý duyệt web của Ghostery để ngăn chặn lỗi trình chặn quảng cáo."
   },
   "paused_by_browsing_assistant": {
     "message": "Tạm dừng bởi Trợ lý Duyệt web"
@@ -780,7 +783,7 @@
     "message": "Chọn lại"
   },
   "resume": {
-    "message": "Resume"
+    "message": "Tiếp tục"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Tiết lộ những gì ẩn dưới bề mặt internet. Với WhoTracks.Me, bạn có thể khám phá danh tính đằng sau mọi trình theo dõi."
@@ -1102,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "Bạn chặn quảng cáo trên các trang web bạn sử dụng. Chặn một lần. Các trang web sẽ không có quảng cáo mỗi khi bạn truy cập."
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "Bạn có thể tắt tính năng này trong <a href=\"$${0}\">cài đặt WhoTracks.Me</a>."
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Bạn sắp xóa tất cả cookie được lưu trữ bởi $${0}."

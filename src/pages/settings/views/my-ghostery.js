@@ -38,6 +38,13 @@ async function importSettings(host, event) {
   }
 }
 
+function updateMode(value) {
+  return async (host) => {
+    await store.set(host.options, { mode: value });
+    chrome.runtime.sendMessage({ action: 'telemetry:modeTouched' });
+  };
+}
+
 export default {
   options: store(Options),
   config: store(Config),
@@ -77,7 +84,7 @@ export default {
                       name="filtering-mode"
                       value="${MODE_DEFAULT}"
                       checked="${options.mode === MODE_DEFAULT}"
-                      onchange="${html.set(options, 'mode')}"
+                      onchange="${updateMode(MODE_DEFAULT)}"
                       data-qa="input:filtering-mode:ghostery"
                     />
                     <ui-lottie
@@ -105,7 +112,7 @@ export default {
                       name="filtering-mode"
                       value="${MODE_ZAP}"
                       checked="${options.mode === MODE_ZAP}"
-                      onchange="${html.set(options, 'mode')}"
+                      onchange="${updateMode(MODE_ZAP)}"
                       data-qa="input:filtering-mode:zap"
                     />
                     <ui-lottie

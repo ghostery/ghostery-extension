@@ -10,9 +10,8 @@
  */
 
 import { isSafari } from './browser-info.js';
-import { debugMode, stagingMode } from './debug.js';
 
-export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';
+export const GHOSTERY_DOMAIN = __DEBUG__ ? 'ghosterystage.com' : 'ghostery.com';
 
 export const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 export const HOME_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/`;
@@ -29,9 +28,9 @@ export const BECOME_A_CONTRIBUTOR_PAGE_URL =
     ? 'ghosteryapp://www.ghostery.com'
     : 'https://www.ghostery.com/become-a-contributor';
 
-export const ENGINE_CONFIGS_ROOT_URL = `https://${stagingMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
+export const ENGINE_CONFIGS_ROOT_URL = `https://${__STAGING__ ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
 
-export const CDN_URL = stagingMode
+export const CDN_URL = __STAGING__
   ? 'https://staging-cdn.ghostery.com/'
   : 'https://cdn.ghostery.com/';
 

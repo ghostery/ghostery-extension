@@ -12,9 +12,35 @@
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { filter } from '../../src/utils/config.js';
+import { filter, compareVersions } from '../../src/utils/config.js';
 
 describe('Remote config', () => {
+  describe('compareVersions()', () => {
+    it('should return 0 for equal versions', () => {
+      assert.deepEqual(compareVersions('1.0.0', '1.0.0'), 0);
+      assert.deepEqual(compareVersions('2.3.4', '2.3.4'), 0);
+    });
+
+    it('should return 1 when first version is greater', () => {
+      assert.deepEqual(compareVersions('2.0.0', '1.0.0'), 1);
+      assert.deepEqual(compareVersions('1.1.0', '1.0.0'), 1);
+      assert.deepEqual(compareVersions('1.0.1', '1.0.0'), 1);
+    });
+
+    it('should return -1 when first version is lower', () => {
+      assert.deepEqual(compareVersions('1.0.0', '2.0.0'), -1);
+      assert.deepEqual(compareVersions('1.0.0', '1.1.0'), -1);
+      assert.deepEqual(compareVersions('1.0.0', '1.0.1'), -1);
+    });
+
+    it('should handle versions with different part counts', () => {
+      assert.deepEqual(compareVersions('1.0', '1.0.0'), 0);
+      assert.deepEqual(compareVersions('1.0.0', '1.0'), 0);
+      assert.deepEqual(compareVersions('1.0', '1.0.1'), -1);
+      assert.deepEqual(compareVersions('1.0.1', '1.0'), 1);
+    });
+  });
+
   describe('filter()', () => {
     beforeEach(() => {
       global.__CHROMIUM__ = true;
@@ -74,51 +100,80 @@ describe('Remote config', () => {
       assert.deepEqual(filter({ filter: { browser: 'chrome' } }), false);
     });
 
-    it('should return true if version matches exactly', () => {
+    it('should return true if minVersion matches exactly', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0' } }), true);
+    });
+
+    it('should return true if current version is above minVersion', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '2.1.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0' } }), true);
+    });
+
+    it('should return false if current version is below minVersion', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '1.9.9' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0' } }), false);
+    });
+
+    it('should return true if legacy version filter matches', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
       assert.deepEqual(filter({ filter: { version: '2.0.0' } }), true);
     });
 
-    it('should return true if current version is higher', () => {
-      global.chrome.runtime.getManifest = () => ({ version: '2.1.0' });
-      assert.deepEqual(filter({ filter: { version: '2.0.0' } }), true);
-    });
-
-    it('should return false if current version is lower', () => {
+    it('should return false if legacy version filter does not match', () => {
       global.chrome.runtime.getManifest = () => ({ version: '1.9.9' });
       assert.deepEqual(filter({ filter: { version: '2.0.0' } }), false);
     });
-
-    it('should handle multi-part versions correctly', () => {
+    it('should return true if maxVersion matches exactly', () => {
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
-      assert.deepEqual(filter({ filter: { version: '1.5.0' } }), true); // 2 > 1
-      assert.deepEqual(filter({ filter: { version: '2.0.1' } }), false); // 0 < 1
+      assert.deepEqual(filter({ filter: { maxVersion: '2.0.0' } }), true);
     });
 
-    it('should combine version and platform checks', () => {
-      global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
-
-      // Both match
-      assert.deepEqual(filter({ filter: { version: '1.0.0', platform: ['chromium'] } }), true);
-
-      // Version mismatch
-      assert.deepEqual(filter({ filter: { version: '3.0.0', platform: ['chromium'] } }), false);
-
-      // Platform mismatch
-      assert.deepEqual(filter({ filter: { version: '1.0.0', platform: ['firefox'] } }), false);
+    it('should return true if current version is below maxVersion', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '1.9.0' });
+      assert.deepEqual(filter({ filter: { maxVersion: '2.0.0' } }), true);
     });
 
-    it('should combine version and browser checks', () => {
+    it('should return false if current version is above maxVersion', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '3.0.0' });
+      assert.deepEqual(filter({ filter: { maxVersion: '2.0.0' } }), false);
+    });
+
+    it('should support minVersion and maxVersion together (version range)', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '2.5.0' });
+
+      // Within range
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0' } }), true);
+
+      // At lower bound
       global.chrome.runtime.getManifest = () => ({ version: '2.0.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0' } }), true);
 
-      // Both match
-      assert.deepEqual(filter({ filter: { version: '1.0.0', browser: 'chrome' } }), true);
+      // At upper bound
+      global.chrome.runtime.getManifest = () => ({ version: '3.0.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0' } }), true);
 
-      // Version mismatch
-      assert.deepEqual(filter({ filter: { version: '3.0.0', browser: 'chrome' } }), false);
+      // Below range
+      global.chrome.runtime.getManifest = () => ({ version: '1.9.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0' } }), false);
 
-      // Browser mismatch
-      assert.deepEqual(filter({ filter: { version: '1.0.0', browser: 'firefox' } }), false);
+      // Above range
+      global.chrome.runtime.getManifest = () => ({ version: '3.1.0' });
+      assert.deepEqual(filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0' } }), false);
+    });
+
+    it('should combine minVersion/maxVersion with platform checks', () => {
+      global.chrome.runtime.getManifest = () => ({ version: '2.5.0' });
+
+      assert.deepEqual(
+        filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0', platform: ['chromium'] } }),
+        true,
+      );
+
+      assert.deepEqual(
+        filter({ filter: { minVersion: '2.0.0', maxVersion: '3.0.0', platform: ['firefox'] } }),
+        false,
+      );
     });
   });
 });

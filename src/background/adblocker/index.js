@@ -29,8 +29,10 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import Request, { parseWithCache } from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
+import { updateDNRRulesForExceptions } from '../exceptions.js';
 import { tabStats, updateTabStats } from '../stats.js';
 import { getRedirectProtectionUrl } from '../redirect-protection.js';
+
 import { FramesHierarchy } from './ancestors.js';
 
 let options = Options;
@@ -165,7 +167,13 @@ export async function updateEngines({ cache = true } = {}) {
 
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
-      await engines.update(engines.TRACKERDB_ENGINE, { cache });
+      const trackerdbUpdated = await engines.update(engines.TRACKERDB_ENGINE, { cache });
+
+      if (__CHROMIUM__ && trackerdbUpdated) {
+        // We need to reload DNR rules for exceptions if TrackerDB engine is updated,
+        // as rules rely on TrackerDB metadata
+        await updateDNRRulesForExceptions();
+      }
 
       // Update timestamp after the engines are updated
       await store.set(Options, { filtersUpdatedAt: Date.now() });
@@ -202,14 +210,6 @@ export const setup = asyncSetup('adblocker', [
     // * when engines changed, so there might be re-enabled engines with outdated filters
     // * when filters are outdated (older than 1 hour)
     if (enginesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
-      await updateEngines();
-    }
-  }),
-  OptionsObserver.addListener('experimentalFilters', async (value, lastValue) => {
-    engines.setEnv('env_experimental', value);
-
-    // Experimental filters changed to enabled
-    if (lastValue !== undefined && value) {
       await updateEngines();
     }
   }),

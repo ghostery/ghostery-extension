@@ -10,7 +10,6 @@
  */
 
 import * as notifications from '/utils/notifications.js';
-import { debugMode } from '/utils/debug.js';
 
 const SELECTORS = [
   // Based on https://github.com/AdguardTeam/AdguardFilters/blob/e5ae8e3194f8d18bdcc660d4c42282e4a96ca5b9/AnnoyancesFilter/Popups/sections/antiadblock.txt#L2044
@@ -21,7 +20,7 @@ const SELECTORS = [
 ];
 
 // DEBUG: Add the app selector to test the wall
-if (debugMode) SELECTORS.push('ytd-app');
+if (__DEBUG__) SELECTORS.push('ytd-app');
 
 function detectWall(cb) {
   let timeout = null;
@@ -68,6 +67,7 @@ async function isFeatureDisabled() {
     // IMPORTANT: to avoid referencing the file, the `GLOBAL_PAUSE_ID`
     // is used as is, instead from the `/store/options.js` file
     !!options.paused['<all_urls>'] ||
+    !!options.paused['www.youtube.com'] ||
     !!options.paused['youtube.com']
   ) {
     return true;

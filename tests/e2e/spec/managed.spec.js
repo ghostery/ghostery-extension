@@ -13,53 +13,45 @@ import { browser, expect, $ } from '@wdio/globals';
 
 import {
   enableExtension,
-  openPanel,
   getExtensionElement,
-  getExtensionPageURL,
+  sendMessage,
   reloadExtension,
   PAGE_DOMAIN,
   PAGE_URL,
+  SUBPAGE_DOMAIN,
+  SUBPAGE_URL,
+  TRACKER_IDS,
 } from '../utils.js';
 
-async function setManagedConfig(config) {
-  await browser.url(getExtensionPageURL('panel'));
+async function setManagedConfig(config = {}) {
+  await browser.url('ghostery:panel');
+  await sendMessage({ action: 'e2e:managedConfig', config });
 
-  await browser.execute(
-    function (managedConfigStr) {
-      const managedConfig = managedConfigStr ? JSON.parse(managedConfigStr) : null;
-      if (managedConfig) {
-        chrome.storage.local.set({ managedConfig });
-      } else {
-        chrome.storage.local.remove('managedConfig');
-      }
-    },
-    config ? JSON.stringify(config) : 'null',
-  );
-
-  // Reload extension to pick up managed config changes
   await reloadExtension();
-}
-
-async function cleanManagedConfig() {
-  await setManagedConfig();
 }
 
 describe('Managed Configuration', function () {
   before(enableExtension);
-  after(cleanManagedConfig);
+  before(() =>
+    setManagedConfig({
+      disableUserControl: true,
+      trustedDomains: [SUBPAGE_DOMAIN],
+      customFilters: [`${PAGE_DOMAIN}###custom-filter`],
+    }),
+  );
+
+  after(() => setManagedConfig());
+
+  it('hides menu in panel when `disableUserControl` is enabled', async function () {
+    await browser.url('ghostery:panel');
+    await expect(getExtensionElement('button:menu')).not.toBeDisplayed();
+  });
 
   it('pauses domains added to `trustedDomains`', async function () {
-    const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
+    await browser.url(SUBPAGE_URL);
+    await browser.url('ghostery:panel');
 
-    await setManagedConfig({ trustedDomains: [PAGE_DOMAIN] });
-
-    await browser.url(PAGE_URL);
-
-    await openPanel();
-
-    const pauseButton = await getExtensionElement('button:pause');
-    await expect(pauseButton).toBeDisplayed();
-
+    await expect(getExtensionElement('button:pause')).not.toBeDisplayed();
     await expect(getExtensionElement('button:resume')).not.toBeDisplayed();
 
     await getExtensionElement('button:detailed-view').click();
@@ -68,42 +60,10 @@ describe('Managed Configuration', function () {
       await expect(getExtensionElement(`icon:tracker:${trackerId}:blocked`)).not.toBeDisplayed();
       await expect(getExtensionElement(`icon:tracker:${trackerId}:modified`)).not.toBeDisplayed();
     }
-
-    await setManagedConfig({ trustedDomains: [] });
-
-    await browser.url(PAGE_URL);
-
-    await openPanel();
-
-    await expect(getExtensionElement('button:pause-type')).toBeDisplayed();
-  });
-
-  it('hides menu in panel when `disableUserControl` is enabled', async function () {
-    await openPanel();
-    await expect(getExtensionElement('button:menu')).toBeDisplayed();
-
-    await setManagedConfig({ disableUserControl: true });
-
-    await openPanel();
-    await expect(getExtensionElement('button:menu')).not.toBeDisplayed();
   });
 
   it('applies custom filters added to `customFilters`', async function () {
     await browser.url(PAGE_URL);
-    await expect($('#custom-filter')).toBeDisplayed();
-
-    await setManagedConfig({
-      customFilters: [`${PAGE_DOMAIN}###custom-filter`],
-    });
-
-    await browser.url(PAGE_URL);
     await expect($('#custom-filter')).not.toBeDisplayed();
-
-    await setManagedConfig({
-      customFilters: [],
-    });
-
-    await browser.url(PAGE_URL);
-    await expect($('#custom-filter')).toBeDisplayed();
   });
 });

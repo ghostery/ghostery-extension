@@ -95,6 +95,9 @@
     "message": "Lecteur audio/vidéo ",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "Ajusté automatiquement"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "Mis en pause automatiquement pour éviter les dysfonctionnements liés au bloqueur de publicités."
   },
@@ -378,9 +381,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Étendez le blocage des publicités de Ghostery aux moteurs de recherche en quelques étapes simples."
   },
-  "experimental_filters": {
-    "message": "Filtres expérimentaux"
-  },
   "export_to_file": {
     "message": "Exporter vers un fichier"
   },
@@ -484,9 +484,6 @@
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Aidez Ghostery à lutter pour un Web où la vie privée est un droit humain fondamental."
   },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Aide Ghostery à réparer les pages défectueuses plus rapidement. En activant, vous pouvez tester des filtres expérimentaux et nous soutenir avec vos retours. Veuillez envoyer un message à support@ghostery.com décrivant comment votre expérience a changé après l'activation."
-  },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Vous appréciez Ghostery et souhaitez soutenir notre travail ?"
   },
@@ -583,6 +580,9 @@
   },
   "manifest_short_description": {
     "message": "Navigation rapide, privée et sans publicité, en toute confiance !"
+  },
+  "manually_adjusted": {
+    "message": "Ajusté manuellement"
   },
   "menu": {
     "message": "Menu"
@@ -694,6 +694,9 @@
   },
   "paused": {
     "message": "En pause"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "Mis en pause automatiquement par l'Assistant de navigation de Ghostery pour éviter les dysfonctionnements du bloqueur de publicités."
   },
   "paused_by_browsing_assistant": {
     "message": "Suspendu par l'assistant de navigation"
@@ -1102,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "Vous bloquez les publicités sur les sites que vous utilisez. Bloquez-les une fois. Ils resteront sans publicité à chaque visite."
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "Vous pouvez le désactiver dans les <a href=\"$${0}\">paramètres de WhoTracks.Me</a>."
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Vous êtes sur le point de supprimer tous les cookies enregistrés par $${0}."

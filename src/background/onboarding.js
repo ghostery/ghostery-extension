@@ -15,7 +15,6 @@ import Config from '/store/config.js';
 import Options from '/store/options.js';
 
 import { isBrave } from '/utils/browser-info.js';
-import { debugMode } from '/utils/debug';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 export const SURVEY_URL =
@@ -27,7 +26,7 @@ OptionsObserver.addListener('onboarding', async (onboarding) => {
 
   // The onboarding page should not be shown in debug mode especially for the e2e tests
   // which fails if after initializing the extension additional tabs are opened
-  if (debugMode) return;
+  if (__DEBUG__) return;
 
   const tab = await chrome.tabs.create({
     url: chrome.runtime.getURL('/pages/onboarding/index.html'),

@@ -95,6 +95,9 @@
     "message": "Аудио/видео проигрыватель",
     "description": "Tracker category name"
   },
+  "automatically_adjusted": {
+    "message": "Автоматически скорректировано"
+  },
   "automatically_paused_to_prevent_adblocker_breakage": {
     "message": "Автоматически приостановлено, чтобы предотвратить сбой блокировщика рекламы"
   },
@@ -378,9 +381,6 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Настройте блокировку рекламы от Ghostery для поисковых систем в несколько простых шагов."
   },
-  "experimental_filters": {
-    "message": "Экспериментальные фильтры"
-  },
   "export_to_file": {
     "message": "Экспорт в файл"
   },
@@ -484,9 +484,6 @@
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Помогите Ghostery в борьбе за конфиденциальность как за основное право человека."
   },
-  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Помогает Ghostery быстрее исправлять неработающие страницы. Активировав, вы можете тестировать экспериментальные фильтры и поддерживать нас обратной связью. Пожалуйста, отправьте сообщение на support@ghostery.com, описав, как изменился ваш опыт после включения."
-  },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Если вам нравится Ghostery, можете поддержать нашу работу."
   },
@@ -583,6 +580,9 @@
   },
   "manifest_short_description": {
     "message": "Быстрый, приватный и свободный от рекламы просмотр, которому можно доверять!"
+  },
+  "manually_adjusted": {
+    "message": "Вручную настроено"
   },
   "menu": {
     "message": "Меню"
@@ -694,6 +694,9 @@
   },
   "paused": {
     "message": "Приостановлено"
+  },
+  "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
+    "message": "Автоматически приостановлено Browsing Assistant от Ghostery для предотвращения сбоев блокировщика рекламы."
   },
   "paused_by_browsing_assistant": {
     "message": "Приостановлено помощником по просмотру"
@@ -1102,6 +1105,9 @@
   },
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "Вы блокируете рекламу на сайтах, которые используете. Заблокируйте один раз, и они останутся без рекламы при каждом посещении."
+  },
+  "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
+    "message": "Вы можете отключить его в <a href=\"$${0}\">настройках WhoTracks.Me</a>."
   },
   "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
     "message": "Вы собираетесь удалить все файлы cookie, сохраненные $${0}."

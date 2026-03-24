@@ -25,14 +25,14 @@ mount(document.body, {
   platformName: { value: getOS(), reflect: true },
   render: ({ stack }) => html`
     <template layout="row">
-      <div id="alert-container" layout="fixed inset:1 top:0.5 bottom:auto layer:500"></div>
+      <div id="alert-container" layout="fixed inset:1 top:1 bottom:auto layer:500"></div>
       ${stack}
     </template>
   `,
 });
 
 // Ping telemetry on panel open
-chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
+chrome.runtime.sendMessage({ action: 'telemetry:ping', event: 'engaged' });
 
 // Sync options with background
 chrome.runtime.sendMessage({ action: 'syncOptions' });

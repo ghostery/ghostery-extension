@@ -9,9 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export default globalThis.ghostery = {};
+export async function getStorage() {
+  const { metrics } = await chrome.storage.local.get(['metrics']);
+  return metrics || {};
+}
 
-const manifest = chrome.runtime.getManifest();
-
-export const debugMode = !!manifest.debug;
-export const stagingMode = !!manifest.staging;
+export async function saveStorage(metrics) {
+  await chrome.storage.local.set({ metrics });
+}

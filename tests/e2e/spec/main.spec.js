@@ -14,7 +14,6 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
-  openPanel,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
   switchFrame,
@@ -128,10 +127,8 @@ describe('Main Features', function () {
         document.body.appendChild(adSlot);
       }, DYNAMIC_SELECTOR);
 
-      if (browser.isFirefox) {
-        // In Firefox the dynamic element might be blocked after a delay
-        await browser.pause(100);
-      }
+      // The dynamic element might be blocked after a delay
+      await browser.pause(100);
 
       await expect($(DYNAMIC_SELECTOR)).toExist();
       await expect($(DYNAMIC_SELECTOR)).not.toBeDisplayed();
@@ -143,7 +140,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('anti-tracking', false);
       await browser.url(PAGE_URL);
 
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -156,7 +153,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('anti-tracking', true);
       await browser.url(PAGE_URL);
 
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -196,15 +193,11 @@ describe('Main Features', function () {
   });
 
   describe('Global Pause', function () {
-    it('blocks trackers when is disabled', async function () {
-      await setPrivacyToggle('global-pause', false);
-      await browser.url(PAGE_URL);
-
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
-    });
-
-    it("doesn't block trackers when is enabled", async function () {
+    it("doesn't block ads when is enabled", async function () {
       await setPrivacyToggle('global-pause', true);
+
+      // Reload twice the page to ensure it is not loaded from cache
+      await browser.url(PAGE_URL);
       await browser.url(PAGE_URL);
 
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
@@ -220,16 +213,18 @@ describe('Main Features', function () {
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).not.toBeDisplayed();
 
       // Pause the website
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:pause').click();
       await waitForIdleBackgroundTasks();
 
-      // Reload and check ads are displayed
+      // Reload twice the page to ensure it is not loaded from cache
       await browser.url(PAGE_URL);
+      await browser.url(PAGE_URL);
+
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
 
       // Resume the website
-      await openPanel();
+      await browser.url('ghostery:panel');
       await getExtensionElement('button:resume').click();
       await waitForIdleBackgroundTasks();
 
