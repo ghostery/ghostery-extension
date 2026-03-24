@@ -51,13 +51,13 @@ export default {
               layout="grid"
               data-qa="button:filtering-mode:ghostery"
             >
-              <ui-mode-radio id="mode-option-default" checked>
+              <ui-mode-radio checked>
                 <input type="radio" name="filtering-mode" checked />
                 <ui-lottie
                   src="${modeGhosteryScreenshotUrl}"
                   layout="ratio:83/45 width:220px"
                   layout@768px="width:100%"
-                  play-on-hover="mode-option-default"
+                  autoplay
                 ></ui-lottie>
                 <ui-icon
                   name="logo-in-box"
@@ -89,12 +89,12 @@ export default {
               layout="grid"
               data-qa="button:filtering-mode:zap"
             >
-              <ui-mode-radio id="mode-option-zap">
+              <ui-mode-radio>
                 <ui-lottie
                   src="${modeZapScreenshotUrl}"
                   layout="ratio:83/45 width:220px"
                   layout@768px="width:100%"
-                  play-on-hover="mode-option-zap"
+                  autoplay
                 ></ui-lottie>
                 <ui-icon name="logo-zap" layout="width:83px" layout@768px="width:116px"></ui-icon>
                 ${lang === 'en'
