@@ -61,6 +61,7 @@ describe('getRedirectProtectionRules', () => {
           },
           condition: {
             urlFilter: '||foo.com^',
+            resourceTypes: ['main_frame'],
           },
         },
       ],
