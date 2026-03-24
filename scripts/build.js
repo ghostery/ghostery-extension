@@ -168,7 +168,7 @@ const config = {
   configFile: false,
   root: options.srcDir,
   resolve: {
-    preserveSymlinks: true,
+    mainFields: ['module', 'browser', 'jsnext:main', 'jsnext'],
   },
   define: {
     // platforms
@@ -352,28 +352,31 @@ const buildPromise = build({
   build: {
     ...config.build,
     target: 'esnext',
-    rollupOptions: {
+    rolldownOptions: {
       input: mapPaths(source),
-      // Prevent from loading re2-wasm dependency of the @ghostery/urlfilter2dnr package
-      // as it is used only in node environment
-      external: ['@adguard/re2-wasm'],
-      preserveEntrySignatures: 'exports-only',
+      external: [
+        // Prevents from processing re2-wasm deep dependency of the @ghostery/urlfilter2dnr package
+        // The library is not used in the final code
+        '@adguard/re2-wasm',
+        // Prevents from loading canvas dependency of linkedom
+        'canvas',
+      ],
       output: {
-        banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
+        banner: argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : undefined,
         dir: options.outDir,
-        manualChunks: false,
         preserveModules: true,
         preserveModulesRoot: 'src',
+        virtualDirname: 'virtual',
         minifyInternalExports: false,
-        entryFileNames: (chunk) => `${chunk.name.replace(/\.(png|jpg|jpeg|gif|svg|webp)$/, '')}.js`,
+        entryFileNames: (chunk) =>
+          `${chunk.name.replace(/\.(png|jpg|jpeg|gif|svg|webp)$/, '').replace(/\?[^.]*$/, '')}.js`,
 
         assetFileNames: 'assets/[name]-[hash].[ext]',
         sanitizeFileName: (name) => {
           name = name
             .replace(/[\0?*]+/g, '_')
             .replace(/["<>:|]/g, '_')
-            .replace('node_modules', 'npm')
-            .replace('_virtual', 'virtual');
+            .replace(/node_modules/g, 'npm');
 
           const path = name.replace(pwd, '');
           if (path.length > 110 && !argv['no-filename-limit']) {
@@ -407,10 +410,27 @@ const buildPromise = build({
       },
     },
 
-    // This custom plugin cleans ups chunks imports of the `.html` inputs
-    // to only include CSS files. This is necessary because Vite generates
-    // every imported JS file as script tag in the resulting HTML file.
-    // It is related to our custom usage, where we don't bundle JS into single files.
+    // Fix circular CJS dependencies (e.g. cssom) broken by preserveModules.
+    // Rolldown emits `export default require_X()` which eagerly evaluates CJS
+    // wrappers during module init, triggering circular calls. The named export
+    // `require_X` (the lazy wrapper function) is sufficient for all consumers.
+    {
+      name: 'fix-circular-cjs',
+      generateBundle(options, bundle) {
+        for (const chunk of Object.values(bundle)) {
+          if (chunk.type !== 'chunk') continue;
+          if (!chunk.code.includes('__commonJSMin')) continue;
+          // Remove `export default require_X();` — keep only the named export
+          chunk.code = chunk.code.replace(/^export default require_\w+\(\);\n?/m, '');
+        }
+      },
+    },
+
+    // This custom plugin cleans up chunk imports of the `.html` inputs
+    // to prevent Vite from adding <script> tags for every transitive JS module.
+    // It collects CSS from the full import tree first, then strips JS imports
+    // and annotates the entry chunk with the collected CSS so Vite still adds <link> tags.
+    // It also removes `.css.js` imports from all chunks since CSS is handled via <link> tags.
     {
       name: 'clean-up-html-imports',
       enforce: 'pre',
@@ -419,11 +439,34 @@ const buildPromise = build({
           if (chunk.fileName.endsWith('.html.js')) {
             for (const name of chunk.imports) {
               const importChunk = bundle[name];
-              if (importChunk.type === 'chunk') {
-                // Imports of the single chunk generated from HTML should only include CSS files
+              if (importChunk?.type === 'chunk') {
+                // Collect all CSS from the full transitive import tree
+                const allCss = new Set();
+                const visited = new Set();
+                const walk = (chunkName) => {
+                  if (visited.has(chunkName)) return;
+                  visited.add(chunkName);
+                  const c = bundle[chunkName];
+                  if (!c || c.type !== 'chunk') return;
+                  if (c.viteMetadata?.importedCss) {
+                    for (const css of c.viteMetadata.importedCss) {
+                      allCss.add(css);
+                    }
+                  }
+                  for (const imp of c.imports) {
+                    walk(imp);
+                  }
+                };
+                walk(name);
+
                 importChunk.imports = importChunk.imports.filter((name) =>
                   name.endsWith('.css.js'),
                 );
+
+                // Preserve collected CSS on this chunk so Vite adds <link> tags
+                if (allCss.size > 0 && importChunk.viteMetadata) {
+                  importChunk.viteMetadata.importedCss = allCss;
+                }
               }
             }
           }
@@ -449,10 +492,11 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
       build: {
         ...config.build,
         target: 'esnext',
-        rollupOptions: {
+        rolldownOptions: {
           input: { [id]: path },
           output: {
-            banner: argv.target === 'firefox' && 'globalThis.chrome = globalThis.browser;\n',
+            banner:
+              argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : undefined,
             format: 'iife',
             dir: options.outDir,
             entryFileNames: '[name].js',
