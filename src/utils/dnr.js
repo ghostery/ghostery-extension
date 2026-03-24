@@ -69,8 +69,7 @@ export function getRedirectProtectionRules(rules) {
       rule.action?.type === 'block' &&
       rule.condition?.domainType !== 'thirdParty' &&
       !rule.condition?.excludedResourceTypes?.includes('main_frame') &&
-      (rule.condition?.resourceTypes?.length === 0 ||
-        rule.condition?.resourceTypes?.includes('main_frame'))
+      (!rule.condition?.resourceTypes || rule.condition?.resourceTypes?.includes('main_frame'))
     ) {
       result.push({
         ...rule,
@@ -80,10 +79,6 @@ export function getRedirectProtectionRules(rules) {
           redirect: {
             extensionPath: '/pages/redirect-protection/index.html',
           },
-        },
-        condition: {
-          ...rule.condition,
-          resourceTypes: ['main_frame'],
         },
       });
     }
