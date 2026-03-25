@@ -144,14 +144,10 @@ if (__CHROMIUM__) {
                 )
                 .then(filterMaxPriorityRules),
             );
-            const metadata = new Set(
-              await fetch(list.dnr.metadataUrl)
-                .then((res) =>
-                  res.ok
-                    ? res.json()
-                    : Promise.reject(new Error(`Failed to fetch DNR metadata: ${res.statusText}`)),
-                )
-                .then(filterMaxPriorityRules),
+            const metadata = await fetch(list.dnr.metadataUrl).then((res) =>
+              res.ok
+                ? res.json()
+                : Promise.reject(new Error(`Failed to fetch DNR metadata: ${res.statusText}`)),
             );
 
             for (const rule of rules) {
