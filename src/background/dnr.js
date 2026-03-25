@@ -43,7 +43,7 @@ if (__CHROMIUM__) {
       })
       .catch(function (e) {
         console.debug(`[dnr] DNR metadata for the ruleset id "${rulesetId}" was not found: ${e}`);
-        return [];
+        return {};
       });
     if (!metadata) {
       return [];
@@ -149,11 +149,12 @@ if (__CHROMIUM__) {
                 )
                 .then(filterMaxPriorityRules),
             );
-            const metadata = await fetch(list.dnr.metadataUrl).then((res) =>
-              res.ok
-                ? res.json()
-                : Promise.reject(new Error(`Failed to fetch DNR metadata: ${res.statusText}`)),
-            );
+            const metadata = await fetch(list.dnr.metadataUrl)
+              .then((res) => res.json())
+              .catch((error) => {
+                console.error(`Failed to fetch DNR metadata: "${list.dnr.metadataUrl}": ${error}`);
+                return {};
+              });
 
             for (const rule of rules) {
               if (rule.condition.regexFilter) {
