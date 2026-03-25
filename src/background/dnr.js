@@ -17,7 +17,7 @@ import Resources from '/store/resources.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
-import { evaluatePreprocessorCondition } from '/utils/engines.js';
+import { isFilterConditionAccepted } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/index.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
@@ -53,7 +53,7 @@ if (__CHROMIUM__) {
       disabledRuleIds,
       [ruleId, constraints],
     ) {
-      if (!evaluatePreprocessorCondition(constraints.preprocessor)) {
+      if (!isFilterConditionAccepted(constraints.preprocessor)) {
         disabledRuleIds.push(Number(ruleId));
       }
       return disabledRuleIds;
@@ -173,7 +173,7 @@ if (__CHROMIUM__) {
                 .filter(
                   (rule) =>
                     !metadata[rule.id]?.preprocessor ||
-                    evaluatePreprocessorCondition(metadata[rule.id].preprocessor),
+                    isFilterConditionAccepted(metadata[rule.id].preprocessor),
                 )
                 .map((rule, index) => ({
                   ...rule,

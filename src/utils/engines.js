@@ -78,7 +78,7 @@ function deserializeEngine(engineBytes) {
   return engine;
 }
 
-export function evaluatePreprocessorCondition(condition) {
+export function isFilterConditionAccepted(condition) {
   return evaluatePreprocessor(condition, ENV);
 }
 
