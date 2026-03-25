@@ -151,7 +151,7 @@ async function normalizeFilters(text = '', { trustedScriptlets }) {
     .networkFilters.filter(function (filter) {
       const condition = getPreprocessorCondition(adblocker, filter);
       // Filter by preprocessor condition.
-      if (typeof condition !== 'undefined' && !engines.evaluatePreprocessorCondition(condition)) {
+      if (typeof condition !== 'undefined' && !engines.isFilterConditionAccepted(condition)) {
         return false;
       }
       // Filter by uniqueness.
