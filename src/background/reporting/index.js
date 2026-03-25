@@ -65,16 +65,15 @@ OptionsObserver.addListener('terms', async function reporting(terms) {
   }
 });
 
-if (__DEBUG__) {
-  (globalThis.ghostery ??= {}).WTM = {
-    communication,
-    urlReporter,
-    config,
-    webRequestReporter,
-    extensionStartedAt: new Date(),
-    logging: {
-      setLogLevel,
-      describeLoggers,
-    },
-  };
-}
+// Debug tools
+(globalThis.ghostery ??= {}).WTM = {
+  communication,
+  urlReporter,
+  config,
+  webRequestReporter,
+  extensionStartedAt: new Date(),
+  logging: {
+    setLogLevel,
+    describeLoggers,
+  },
+};

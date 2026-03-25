@@ -95,6 +95,5 @@ export async function captureException(error, { critical = false, once = false }
   });
 }
 
-if (__DEBUG__) {
-  (globalThis.ghostery ??= {}).errors = { captureException };
-}
+// Debug tools
+(globalThis.ghostery ??= {}).errors = { captureException };
