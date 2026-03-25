@@ -43,6 +43,7 @@ if (__CHROMIUM__) {
     if (!metadata) {
       return [];
     }
+
     const disableRuleIds = Object.entries(metadata).reduce(function (
       disabledRuleIds,
       [ruleId, constraints],
@@ -52,14 +53,11 @@ if (__CHROMIUM__) {
       }
       return disabledRuleIds;
     }, []);
-    try {
-      await chrome.declarativeNetRequest.updateStaticRules({
-        rulesetId: rulesetId,
-        disableRuleIds,
-      });
-    } catch (e) {
-      console.error(`[dnr] Failed to apply preprocessors:`, e);
-    }
+    await chrome.declarativeNetRequest.updateStaticRules({
+      rulesetId: rulesetId,
+      disableRuleIds,
+    });
+
     console.info(
       `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds)}`,
     );
