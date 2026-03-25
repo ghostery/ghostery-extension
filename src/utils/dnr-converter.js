@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import convertWithAdguard from '@ghostery/urlfilter2dnr/adguard';
+import { convertWithAdguard } from '@ghostery/urlfilter2dnr';
 
 const DOCUMENT_PATH = 'pages/dnr-converter/index.html';
 
