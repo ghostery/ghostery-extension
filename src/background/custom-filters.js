@@ -76,7 +76,7 @@ function getPreprocessorCondition(engine, filter) {
 /**
  * @returns {Record<'cosmeticFilters' | 'networkFilters' | 'errors', string[]>}
  */
-function normalizeFilters(text = '', { trustedScriptlets }) {
+async function normalizeFilters(text = '', { trustedScriptlets }) {
   const lines = text.split('\n');
   const uniqueFilterIds = new Set();
   const cosmeticFilters = [];
@@ -141,17 +141,9 @@ function normalizeFilters(text = '', { trustedScriptlets }) {
     cosmeticFilters.push(filter.toString());
   }
 
+  const engine = await engines.get(engines.MAIN_ENGINE);
   const adblocker = FiltersEngine.parse(text, {
-    loadNetworkFilters: true,
-    loadCosmeticFilters: false,
-    loadPreprocessors: true,
-    // The filters will be dropped later in case of unsupported
-    // platform.
-    enableHtmlFiltering: true,
-    // Disable unnecessary internals since this engine is only
-    // for the validation.
-    enableOptimizations: false,
-    enableCompression: false,
+    ...engine.config,
     debug: true,
   });
   const networkFilters = adblocker
@@ -226,7 +218,7 @@ export async function updateCustomFilters(input, options) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
-  const { networkFilters, cosmeticFilters, errors } = normalizeFilters(input, options);
+  const { networkFilters, cosmeticFilters, errors } = await normalizeFilters(input, options);
   const result = await updateEngine([...networkFilters, ...cosmeticFilters].join('\n'));
 
   result.errors = errors;
