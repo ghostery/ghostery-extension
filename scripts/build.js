@@ -230,9 +230,15 @@ if (manifest.declarative_net_request?.rule_resources) {
     const sourcePath = resolve(options.srcDir, path);
     const destPath = resolve(options.outDir, dir);
     const outputPath = resolve(destPath, file);
+    const metaSourcePath = sourcePath.replace('.json', '.metadata.json');
+    const metaOutputPath = outputPath.replace('.json', '.metadata.json');
 
     mkdirSync(destPath, { recursive: true });
     cpSync(sourcePath, outputPath);
+
+    if (existsSync(metaSourcePath)) {
+      cpSync(metaSourcePath, metaOutputPath);
+    }
   });
 }
 
