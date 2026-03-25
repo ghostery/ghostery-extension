@@ -28,10 +28,6 @@ if (__CHROMIUM__) {
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
     .map(({ id }) => id);
-  const DNR_METADATA = import.meta.glob('/rule_resources/*.metadata.json', {
-    eager: true,
-    import: 'default',
-  });
   const DNR_FIXES_KEY = 'dnr-fixes';
 
   /**
@@ -39,7 +35,16 @@ if (__CHROMIUM__) {
    * @returns {Promise<number[]>}
    */
   async function disableExcludedRulesByPreprocessor(rulesetId) {
-    const metadata = DNR_METADATA[`/rule_resources/dnr-${rulesetId}.metadata.json`];
+    const metadata = await fetch(
+      chrome.runtime.getURL(`/rule_resources/dnr-${rulesetId}.metadata.json`),
+    )
+      .then(function (res) {
+        return res.json();
+      })
+      .catch(function (e) {
+        console.debug(`[dnr] DNR metadata for the ruleset id "${rulesetId}" was not found: ${e}`);
+        return [];
+      });
     if (!metadata) {
       return [];
     }
