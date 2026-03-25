@@ -59,7 +59,7 @@ if (__CHROMIUM__) {
       return disabledRuleIds;
     }, []);
     await chrome.declarativeNetRequest.updateStaticRules({
-      rulesetId: rulesetId,
+      rulesetId,
       disableRuleIds,
     });
 
