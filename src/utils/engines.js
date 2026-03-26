@@ -460,6 +460,5 @@ export function remove(name) {
   });
 }
 
-if (__DEBUG__) {
-  (globalThis.ghostery ??= {}).engines = { get };
-}
+// Debug tools
+(globalThis.ghostery ??= {}).engines = { get };
