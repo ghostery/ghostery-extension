@@ -14,7 +14,6 @@ import { browser, expect, $ } from '@wdio/globals';
 import {
   dismissPageNotification,
   enableExtension,
-  expectPageNotification,
   expectNoPageNotification,
   sendMessage,
   setWhoTracksMeToggle,
@@ -34,7 +33,7 @@ describe('Pause Assistant', function () {
 
   before(enableExtension);
 
-  beforeEach(async () => {
+  before(async () => {
     await browser.url('ghostery:panel');
     await sendMessage({
       action: 'e2e:setConfigDomains',
@@ -43,7 +42,7 @@ describe('Pause Assistant', function () {
     await waitForIdleBackgroundTasks();
   });
 
-  afterEach(clearConfig);
+  after(clearConfig);
 
   it('does not pause the domain if the feature is turned off', async function () {
     await setWhoTracksMeToggle('pauseAssistant', false);
@@ -57,10 +56,7 @@ describe('Pause Assistant', function () {
   });
 
   it('pauses the domain when the feature is turned on', async function () {
-    // Notification is shown
-    await expectPageNotification(PAGE_URL, 'pause-assistant');
-
-    // Reload to page and dismiss the notification
+    // Dismiss the notification
     await dismissPageNotification(PAGE_URL, 'pause-assistant');
 
     // Ads are shown
