@@ -115,7 +115,11 @@ if (
   getOS() !== 'android' // Edge on Android (and possibly other browsers)
 ) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
-    if (details.frameId !== 0 || (await chrome.action.getUserSettings()).isOnToolbar) {
+    if (
+      !details.url.startsWith('http') ||
+      details.frameId !== 0 ||
+      (await chrome.action.getUserSettings()).isOnToolbar
+    ) {
       return;
     }
 
@@ -138,7 +142,7 @@ if (
 const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
-  if (details.frameId !== 0) return;
+  if (!details.url.startsWith('http') || details.frameId !== 0) return;
 
   const { installDate } = await telemetry.getStorage();
   if (!installDate) return;
@@ -165,7 +169,8 @@ if (__CHROMIUM__ && isOpera()) {
   const NOTIFICATION_SHOW_LIMIT = 4;
 
   chrome.webNavigation.onCompleted.addListener(async (details) => {
-    if (details.frameId !== 0 || (await isSerpSupported())) return;
+    if (!details.url.startsWith('http') || details.frameId !== 0 || (await isSerpSupported()))
+      return;
 
     openNotification({
       id: 'opera-serp',

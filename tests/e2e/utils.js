@@ -50,20 +50,15 @@ export async function sendMessage(msg) {
   // to receive messages after the extension page is loaded or reloaded.
   await browser.pause(100);
 
-  const result = await browser.execute(
-    browser.isChromium
-      ? function (msg) {
-          return chrome.runtime.sendMessage(JSON.parse(msg));
-        }
-      : function (msg) {
-          return browser.runtime.sendMessage(JSON.parse(msg));
-        },
-    JSON.stringify(msg),
-  );
+  await browser.execute(async function (msg) {
+    console.log('[e2e] Sending message to background:', msg);
+    const result = await (window.chrome || window.browser).runtime.sendMessage(JSON.parse(msg));
+    console.log('[e2e] Received response from background:', result);
 
-  if (result !== 'done') {
-    throw new Error(`Background tasks did not respond with "done": ${result}`);
-  }
+    if (result !== 'done') {
+      throw new Error(`Background tasks did not respond with "done": ${result}`);
+    }
+  }, JSON.stringify(msg));
 }
 
 export async function waitForIdleBackgroundTasks() {
@@ -71,25 +66,44 @@ export async function waitForIdleBackgroundTasks() {
 }
 
 export async function reloadExtension() {
+  if (browser.isChromium) {
+    await browser.url('chrome://extensions');
+
+    const reloadButton = await $('>>>#dev-reload-button');
+    await reloadButton.click();
+
+    // After clicking reload, the extension toggle loses its checked state
+    // and regains it once the extension is fully reloaded.
+    const enableToggle = await $('>>>#enableToggle');
+
+    await browser.waitUntil(async () => !(await enableToggle.getProperty('checked')), {
+      timeout: 5000,
+      timeoutMsg: 'Extension did not start reloading',
+    });
+
+    await browser.waitUntil(async () => await enableToggle.getProperty('checked'), {
+      timeout: 10000,
+      timeoutMsg: 'Extension did not finish reloading in chrome://extensions',
+    });
+  } else if (browser.isFirefox) {
+    await browser.url('about:debugging#/runtime/this-firefox');
+
+    const reloadButton = await $('.qa-temporary-extension-reload-button');
+    await reloadButton.click();
+
+    await expect($('.extension-backgroundscript__status')).toHaveElementClass(
+      expect.stringContaining('extension-backgroundscript__status--stopped'),
+      { wait: 5000 },
+    );
+
+    // Wait until the background script status shows it is running again
+    await expect($('.extension-backgroundscript__status')).toHaveElementClass(
+      expect.stringContaining('extension-backgroundscript__status--running'),
+      { wait: 10000 },
+    );
+  }
+
   await browser.url('ghostery:panel');
-  await sendMessage({ action: 'e2e:reloadExtension' });
-
-  await browser.url('about:blank');
-  await browser.pause(5000);
-
-  await browser.waitUntil(
-    async () => {
-      const title = await browser.getTitle();
-      if (title !== 'Ghostery panel') {
-        await browser.url('ghostery:panel');
-        return false;
-      }
-
-      return true;
-    },
-    { timeout: 10000, timeoutMsg: 'Panel did not load' },
-  );
-
   await waitForIdleBackgroundTasks();
 }
 
@@ -190,8 +204,6 @@ export async function expectPageNotification(url, notificationId) {
     timeout: 5000,
     timeoutMsg: `Notification iframe for ${notificationId} did not appear on ${url}`,
   });
-
-  return getNotificationIframe(notificationId);
 }
 
 export async function expectNoPageNotification(url, notificationId) {
@@ -204,23 +216,31 @@ export async function expectNoPageNotification(url, notificationId) {
 }
 
 export async function dismissPageNotification(page, id, action = 'button:dismiss') {
-  const iframe = await expectPageNotification(page, id);
+  await expectPageNotification(page, id);
+  const iframe = await getNotificationIframe(id);
 
   await switchFrame(iframe);
-
-  await browser.waitUntil(async () => await getExtensionElement(action).isExisting(), {
-    timeout: 5000,
-    timeoutMsg: `Dismiss button for ${id} notification did not appear`,
-  });
 
   // FYI: Firefox has a bug where clicking a button in an iframe
   // that is inside a Shadow DOM does not work by using `el.click()`,
   // but works when using `browser.execute()` to click the button.
   // For the consistency and to avoid switching between different
   // methods of clicking, we use `browser.execute()` in both browsers.
-  await browser.execute(function (action) {
-    document.querySelector(`[data-qa="${action}"]`).click();
-  }, action);
+  if (action === 'dialog:close') {
+    await browser.execute(function () {
+      const dialog = document.querySelector('ui-notification-dialog');
+      dialog.shadowRoot.querySelector('button').click();
+    });
+  } else {
+    await browser.waitUntil(async () => await getExtensionElement(action).isExisting(), {
+      timeout: 5000,
+      timeoutMsg: `Dismiss button for ${id} notification did not appear`,
+    });
+
+    await browser.execute(function (action) {
+      document.querySelector(`[data-qa="${action}"]`).click();
+    }, action);
+  }
 
   // Allow to complete the dismiss action in the background process and remove the iframe
   await browser.pause(1000);
@@ -237,13 +257,13 @@ async function dismissNotifications() {
   // The "pin-it" notification is only available in Chromium-based browsers
   // and it is displayed just after enabling the extension on the first visited page.
   if (browser.isChromium) {
-    await expectPageNotification(PAGE_URL, 'pin-it');
+    await dismissPageNotification(PAGE_URL, 'pin-it', 'dialog:close');
   }
 
   // The "review" notification is displayed after 30 days of usage,
   // but in debug mode it is shown immediately. As the code in background
   // runs after the "pin-it" notification, it will be shown after it.
-  await expectPageNotification(PAGE_URL, 'review');
+  await dismissPageNotification(PAGE_URL, 'review', 'dialog:close');
 
   // After pin-it and review notifications have been displayed,
   // no further notification should be shown
