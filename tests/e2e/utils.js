@@ -46,20 +46,30 @@ export async function sendMessage(msg) {
     throw new Error('Message can only be sent from the extension context');
   }
 
-  // Wait for a short time to ensure that the background process is ready
-  // to receive messages after the extension page is loaded or reloaded.
-  await browser.pause(100);
+  let result;
+  for (let i = 0; i < 5; i++) {
+    // Wait for a short time to ensure that the background process is ready
+    // to receive messages after the extension page is loaded or reloaded.
+    await browser.pause(100);
 
-  const result = await browser.execute(
-    browser.isChromium
-      ? function (msg) {
-          return chrome.runtime.sendMessage(JSON.parse(msg));
-        }
-      : function (msg) {
-          return browser.runtime.sendMessage(JSON.parse(msg));
-        },
-    JSON.stringify(msg),
-  );
+    try {
+      result = await browser.execute(
+        browser.isChromium
+          ? function (msg) {
+              return chrome.runtime.sendMessage(JSON.parse(msg));
+            }
+          : function (msg) {
+              return browser.runtime.sendMessage(JSON.parse(msg));
+            },
+        JSON.stringify(msg),
+      );
+      break;
+    } catch (error) {
+      if (!String(error).includes('unknown error')) {
+        break;
+      }
+    }
+  }
 
   if (result !== 'done') {
     throw new Error(`Background tasks did not respond with "done": ${result}`);
