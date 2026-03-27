@@ -179,6 +179,17 @@ const config = {
     __STAGING__: JSON.stringify(argv.staging),
   },
   build: {
+    rolldownOptions: {
+      ...(argv.watch && {
+        onLog(level, log, handler) {
+          // Suppress FILE_NAME_CONFLICT warnings caused by the watch mode
+          // when files overrite each other during the sequential builds.
+          if (log.code === 'FILE_NAME_CONFLICT') return;
+
+          handler(level, log);
+        },
+      }),
+    },
     outDir: options.outDir,
     assetsDir: '',
     emptyOutDir: false,
@@ -186,7 +197,13 @@ const config = {
     modulePreload: {
       polyfill: false,
     },
-    watch: argv.watch ? {} : null,
+    watch: argv.watch
+      ? {
+          // VS Code editor can trigger multiple save events,
+          // so we add a small delay to prevent multiple builds in a row
+          buildDelay: 200,
+        }
+      : null,
   },
 };
 
@@ -359,6 +376,7 @@ const buildPromise = build({
     ...config.build,
     target: 'esnext',
     rolldownOptions: {
+      ...config.build.rolldownOptions,
       input: mapPaths(source),
       external: [
         // Prevents from processing re2-wasm deep dependency of the @ghostery/urlfilter2dnr package
@@ -499,6 +517,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
         ...config.build,
         target: 'esnext',
         rolldownOptions: {
+          ...config.build.rolldownOptions,
           input: { [id]: path },
           output: {
             banner:
