@@ -63,13 +63,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'updateEngines':
       updateEngines({ cache: false }).then(() => {
         sendResponse();
-        console.info('[helpers] "updateEngines" response...');
+        console.info('[helpers] "updateEngines" finished');
       });
       return true;
     case 'idle':
       OptionsObserver.waitForIdle().then(() => {
-        sendResponse('done');
-        console.info('[helpers] "idleOptionsObservers" response...');
+        sendResponse();
+        console.info('[helpers] "idleOptionsObservers" finished');
       });
       return true;
 
@@ -78,8 +78,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'e2e:idleOptionsObservers':
       OptionsObserver.waitForIdle().then(() => {
         sendResponse('done');
-        console.info('[helpers] "idleOptionsObservers" response...');
-      });
+        console.info('[helpers] "idleOptionsObservers" finished');
+      }, sendResponse);
       return true;
 
     case 'e2e:setConfigDomains':
@@ -93,19 +93,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         Object.assign(domains, msg.domains);
 
         await store.set(Config, { domains });
-        sendResponse('done');
-      });
-      return true;
 
-    case 'e2e:reloadExtension':
-      setTimeout(() => chrome.runtime.reload(), 2000);
-      sendResponse('done');
-      break;
+        console.info('[helpers] "setConfigDomains" finished');
+        sendResponse('done');
+      }, sendResponse);
+      return true;
 
     case 'e2e:managedConfig':
       chrome.storage.local.set({ managedConfig: msg.config }).then(() => {
+        console.info('[helpers] "managedConfig" finished');
         sendResponse('done');
-      });
+      }, sendResponse);
       return true;
   }
 
