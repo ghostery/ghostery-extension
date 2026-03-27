@@ -17,6 +17,7 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Resources,
+  evaluatePreprocessor,
 } from '@ghostery/adblocker';
 
 import ResourcesModel from '/store/resources.js';
@@ -34,11 +35,14 @@ export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
 
-const ENV = new Map([
+export const ENV = new Map([
   ['ext_ghostery', true],
+  ['ext_ublock', true],
+  ['ext_ubol', checkUserAgent('Firefox')],
   ['cap_html_filtering', checkUserAgent('Firefox')],
   // TODO: Can be removed once $replace support is sufficiently distributed
   ['cap_replace_modifier', checkUserAgent('Firefox')],
+  ['cap_user_stylesheet', true],
   ['env_firefox', checkUserAgent('Firefox')],
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
@@ -72,6 +76,10 @@ function deserializeEngine(engineBytes) {
   engine.updateEnv(ENV);
 
   return engine;
+}
+
+export function isFilterConditionAccepted(condition) {
+  return evaluatePreprocessor(condition, ENV);
 }
 
 function loadFromMemory(name) {
