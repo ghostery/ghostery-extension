@@ -108,7 +108,10 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
       return true;
     }
 
-    if (isTrustedScriptInject(filter.selector.slice(0, filter.selector.indexOf(',')))) {
+    const scriptNameIndex = filter.selector.indexOf(',');
+    const scriptName =
+      scriptNameIndex === -1 ? filter.selector : filter.selector.slice(0, scriptNameIndex);
+    if (isTrustedScriptInject(scriptName)) {
       errors.push(
         `Trusted scriptlets are not allowed (${findLineNumber(filter.rawLine)}): ${filter.rawLine}`,
       );
@@ -169,7 +172,7 @@ export async function updateCustomFilters(input, options) {
   const dnrRules = await updateDNRRules(converted.rules);
 
   if (errors?.length) {
-    errors.push(...errors);
+    errors.push(...converted.errors);
   }
 
   return {
