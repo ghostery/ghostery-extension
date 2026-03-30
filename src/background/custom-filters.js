@@ -95,11 +95,12 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
     return state;
   }, new Set());
 
-  const errors = notSupportedFilters.reduce(function (state, notSupportedFilter) {
-    if (notSupportedFilter.filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
-      state.push(
-        `Filter not supported (${notSupportedFilter.lineNumber}): ${notSupportedFilter.filter}`,
-      );
+  const errors = notSupportedFilters.reduce(function (state, { filter, filterType, lineNumber }) {
+    if (
+      filterType !== FilterType.NOT_SUPPORTED_EMPTY &&
+      filterType !== FilterType.NOT_SUPPORTED_COMMENT
+    ) {
+      state.push(`Filter not supported (${lineNumber + 1}): ${filter}`);
     }
     return state;
   }, []);
@@ -115,7 +116,6 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
       errors.push(
         `Trusted scriptlets are not allowed (${findLineNumber(text, filter.rawLine)}): ${filter.rawLine}`,
       );
-
       return false;
     }
 
