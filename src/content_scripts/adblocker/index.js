@@ -13,14 +13,22 @@ import { DOMMonitor } from '@ghostery/adblocker-content';
 
 import { delayedUpdateExtended } from './extended-selectors.js';
 
-// Initial injection
-chrome.runtime.sendMessage({ action: 'injectCosmetics', bootstrap: true });
+const DOMContentLoaded = new Promise((resolve) => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resolve, { once: true, passive: true });
+  } else {
+    resolve();
+  }
+});
 
-// Monitor DOM changes
-document.addEventListener(
-  'DOMContentLoaded',
-  () => {
-    const DOM_MONITOR = new DOMMonitor((update) => {
+// Initial injection
+chrome.runtime.sendMessage({ action: 'injectCosmetics', bootstrap: true }).then((result) => {
+  // If the `injectCosmetics` action returns explicitly `false`, it means that the injection
+  // is disabled for this page, so we should not start the DOM monitor.
+  if (result === false) return;
+
+  DOMContentLoaded.then(() => {
+    const monitor = new DOMMonitor((update) => {
       if (update.type === 'elements') {
         if (update.elements.length !== 0) {
           delayedUpdateExtended(update.elements);
@@ -33,9 +41,7 @@ document.addEventListener(
       }
     });
 
-    DOM_MONITOR.queryAll(window);
-
-    DOM_MONITOR.start(window);
-  },
-  { once: true, passive: true },
-);
+    monitor.queryAll(window);
+    monitor.start(window);
+  });
+});

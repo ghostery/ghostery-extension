@@ -15,6 +15,7 @@ import {
   getExtensionElement,
   waitForIdleBackgroundTasks,
   setCustomFilters,
+  setPrivacyToggle,
   disableCustomFilters,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -96,6 +97,16 @@ describe('Redirect Protection', function () {
 
     // Re-enable for next tests
     await setRedirectProtectionToggle(true);
+  });
+
+  it("doesn't redirect when custom filters are disabled (keeping the content)", async function () {
+    await setPrivacyToggle('custom-filters', false);
+
+    await browser.url(PAGE_URL);
+    await expectOnWarningPage(false);
+
+    // Re-enable for next tests
+    await setPrivacyToggle('custom-filters', true);
   });
 
   describe('Proceed with exception', function () {
