@@ -146,12 +146,12 @@ export async function updateCustomFilters(input, options) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
-  const { networkFilters, cosmeticFilters, errors } = await collectFilters(input, {
+  const { networkFilters, cosmeticFilters, preprocessors, errors } = await collectFilters(input, {
     isTrustedScriptInjectAllowed: options.trustedScriptlets,
   });
 
   // Update custom filters engine
-  await updateEngine(input);
+  await updateEngine({ networkFilters, cosmeticFilters, preprocessors });
 
   // Update main engine with custom filters
   await reloadMainEngine();
