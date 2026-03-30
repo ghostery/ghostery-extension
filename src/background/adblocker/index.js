@@ -312,7 +312,11 @@ if (__CHROMIUM__) {
   framesHierarchy.handleWebWorkerStart();
   framesHierarchy.handleWebextensionEvents();
 }
-
+/*
+ * returns `false` if the injection should be blocked for the given hostname
+ * otherwise returns `undefined` and performs necessary preparations for the injection
+ * (like registering content scripts for scriptlet filters on Firefox)
+ */
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
@@ -333,11 +337,15 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  if (getPausedDetails(options, hostname)) return;
+  // Checking the request url hostname
+  if (getPausedDetails(options, hostname)) {
+    return false;
+  }
 
+  // Checking the tab hostname to cover local iframes without a proper URL (about:blank, data:, etc.)
   const tabHostname = tabStats.get(tabId)?.hostname;
   if (tabHostname && getPausedDetails(options, tabHostname)) {
-    return;
+    return false;
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);
@@ -458,7 +466,7 @@ chrome.webNavigation.onCommitted.addListener(
 
 // Listen for requests from content scripts to inject
 // dynamic cosmetics (All platforms supported)
-chrome.runtime.onMessage.addListener((msg, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
     // Generate details object for the sender argument
 
@@ -473,7 +481,9 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       documentId: sender.documentId,
     };
 
-    injectCosmetics(details, msg);
+    injectCosmetics(details, msg).then(sendResponse);
+
+    return true;
   }
 });
 
