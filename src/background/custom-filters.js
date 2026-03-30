@@ -113,7 +113,7 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
       scriptNameIndex === -1 ? filter.selector : filter.selector.slice(0, scriptNameIndex);
     if (isTrustedScriptInject(scriptName)) {
       errors.push(
-        `Trusted scriptlets are not allowed (${findLineNumber(filter.rawLine)}): ${filter.rawLine}`,
+        `Trusted scriptlets are not allowed (${findLineNumber(text, filter.rawLine)}): ${filter.rawLine}`,
       );
 
       return false;
