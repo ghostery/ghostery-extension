@@ -77,11 +77,11 @@ function findLineNumber(text, line) {
 }
 
 async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
-  const baseEngine = await engines.init(engines.FIXES_ENGINE);
+  const config = await engines.getConfig();
   const { networkFilters, cosmeticFilters, preprocessors, notSupportedFilters } = parseFilters(
     text,
     {
-      ...baseEngine.config,
+      ...config,
       debug: true,
     },
   );
