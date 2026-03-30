@@ -159,28 +159,23 @@ export async function updateCustomFilters(input, options) {
   // Update main engine with custom filters
   await reloadMainEngine();
 
-  if (!__CHROMIUM__) {
-    return {
-      networkFilters: networkFilters.length,
-      cosmeticFilters: cosmeticFilters.length,
-      errors,
-    };
-  }
-
-  // Update DNR rules for Chromium and Safari
-  const converted = await convert(networkFilters.map((f) => f.toString()));
-  const dnrRules = await updateDNRRules(converted.rules);
-
-  if (errors?.length) {
-    errors.push(...converted.errors);
-  }
-
-  return {
+  const result = {
     networkFilters: networkFilters.length,
     cosmeticFilters: cosmeticFilters.length,
     errors,
-    dnrRules,
   };
+
+  // Update DNR rules for Chromium and Safari
+  if (__CHROMIUM__) {
+    const { rules, errors } = await convert(networkFilters.map((f) => f.toString()));
+    result.dnrRules = await updateDNRRules(rules);
+
+    if (errors?.length) {
+      result.errors.push(...errors);
+    }
+  }
+
+  return result;
 }
 
 OptionsObserver.addListener('customFilters', async (value, lastValue) => {
