@@ -192,6 +192,11 @@ async function updateDNRRules(dnrRules) {
     console.info(`[custom filters] DNR updated with rules: ${dnrRules.length}`);
   }
 
+  if (removeRuleIds.length || dnrRules.length) {
+    // Reload redirect protection rules to include custom filters changes
+    await updateRedirectProtectionRules(await store.resolve(Options));
+  }
+
   return dnrRules;
 }
 
@@ -235,9 +240,6 @@ export async function updateCustomFilters(input, options) {
     }
 
     result.dnrRules = await updateDNRRules(rules);
-
-    // Reload redirect protection rules to include custom filters changes
-    await updateRedirectProtectionRules(await store.resolve(Options));
   }
 
   return result;
