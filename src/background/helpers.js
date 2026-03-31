@@ -60,25 +60,31 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         },
       );
       break;
+
     case 'updateEngines':
       updateEngines({ cache: false }).then(() => {
         sendResponse();
-        console.info('[helpers] "updateEngines" finished');
+        console.debug('[helpers] "updateEngines" finished');
       });
       return true;
+
     case 'idle':
       OptionsObserver.waitForIdle().then(() => {
         sendResponse();
-        console.info('[helpers] "idleOptionsObservers" finished');
+        console.debug('[helpers] "idleOptionsObservers" finished');
       });
       return true;
+
+    case 'keepAlive':
+      console.debug('[helpers] Received "keepAlive" message');
+      break;
 
     // Messages for e2e tests
 
     case 'e2e:idleOptionsObservers':
       OptionsObserver.waitForIdle().then(() => {
         sendResponse('done');
-        console.info('[helpers] "idleOptionsObservers" finished');
+        console.debug('[helpers] "idleOptionsObservers" finished');
       }, sendResponse);
       return true;
 
@@ -94,15 +100,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
         await store.set(Config, { domains });
 
-        console.info('[helpers] "setConfigDomains" finished');
         sendResponse('done');
+        console.debug('[helpers] "setConfigDomains" finished');
       }, sendResponse);
       return true;
 
     case 'e2e:managedConfig':
       chrome.storage.local.set({ managedConfig: msg.config }).then(() => {
-        console.info('[helpers] "managedConfig" finished');
         sendResponse('done');
+        console.debug('[helpers] "managedConfig" finished');
       }, sendResponse);
       return true;
   }
