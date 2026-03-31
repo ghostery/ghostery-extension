@@ -407,19 +407,14 @@ export async function init(name) {
   );
 }
 
-export async function getConfig() {
+export async function create(name, options = null) {
   const baseEngine = await init(FIXES_ENGINE);
 
-  return baseEngine.config;
-}
-
-export async function create(name, options = null) {
   options = {
     ...options,
-    config: await getConfig(),
+    config: baseEngine.config,
   };
 
-  const baseEngine = await init(FIXES_ENGINE);
   const engine = new FiltersEngine({ ...options });
 
   engine.resources = Resources.copy(baseEngine.resources);
