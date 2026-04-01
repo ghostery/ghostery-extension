@@ -15,7 +15,7 @@ import Options, { GLOBAL_PAUSE_ID, MODE_DEFAULT } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
 
-import { getDynamicRulesIds, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
+import { getDynamicRules, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
@@ -64,36 +64,59 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       // Filtering mode has changed
       (lastOptions && options.mode !== lastOptions.mode) ||
       // Managed mode can update the rules at any time - so we need to update
-      // the rules even if the paused state hasn't changed
-      (await store.resolve(ManagedConfig)).trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID)
+      // the rules on SW restart even if the paused state hasn't changed
+      (!lastOptions &&
+        (await store.resolve(ManagedConfig)).trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID))
   ) {
-    const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
+    const currentRules = await getDynamicRules(PAUSED_ID_RANGE);
     const hostnames = Object.keys(options.paused);
 
-    let globalPause = false;
-    if (hostnames.includes(GLOBAL_PAUSE_ID)) {
-      globalPause = true;
-    }
-
     if (hostnames.length) {
+      const requestDomains = hostnames.includes(GLOBAL_PAUSE_ID)
+        ? // All hostnames, so the requestDomains should be `undefined` to match all domains
+          undefined
+        : // Sorted hostnames
+          hostnames.sort();
+
+      // Skip update if the existing rule already matches the desired state
+      try {
+        if (currentRules.length) {
+          const currentRequestDomains = currentRules[0].condition.requestDomains;
+
+          // Both are undefined (match all)
+          if (requestDomains === undefined && currentRequestDomains === undefined) {
+            return;
+          }
+
+          // Both have the same domains
+          if (
+            requestDomains &&
+            currentRequestDomains &&
+            currentRequestDomains.sort().join(',') === requestDomains.join(',')
+          ) {
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('[paused] Failed to compare current rules with desired state', error);
+        // Continue with updating the rules to ensure the correct state is applied
+      }
+
       await chrome.declarativeNetRequest.updateDynamicRules({
         addRules: [
           {
             id: 1,
             priority: PAUSED_RULE_PRIORITY,
             action: { type: 'allowAllRequests' },
-            condition: {
-              requestDomains: globalPause ? undefined : hostnames,
-              resourceTypes: ['main_frame'],
-            },
+            condition: { requestDomains, resourceTypes: ['main_frame'] },
           },
         ],
-        removeRuleIds,
+        removeRuleIds: currentRules.map((rule) => rule.id),
       });
       console.log('[paused] Pause rules updated:', hostnames.join(', '));
-    } else if (removeRuleIds.length) {
+    } else if (currentRules.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds,
+        removeRuleIds: currentRules.map((rule) => rule.id),
       });
       console.log('[paused] Pause rules cleared');
     }
