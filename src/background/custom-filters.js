@@ -77,23 +77,14 @@ function findLineNumber(text, line) {
 }
 
 async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
-  const baseEngine = await engines.init(engines.FIXES_ENGINE);
+  const baseConfig = await engines.getConfig();
   const { networkFilters, cosmeticFilters, preprocessors, notSupportedFilters } = parseFilters(
     text,
     {
-      ...baseEngine.config,
+      ...baseConfig,
       debug: true,
     },
   );
-
-  const disabledNetworkFilterIds = preprocessors.reduce(function (state, preprocessor) {
-    if (engines.isFilterConditionAccepted(preprocessor.condition) === false) {
-      for (const filterId of preprocessor.filterIDs) {
-        state.add(filterId);
-      }
-    }
-    return state;
-  }, new Set());
 
   const errors = notSupportedFilters.reduce(function (state, { filter, filterType, lineNumber }) {
     if (
@@ -121,12 +112,18 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
 
     return true;
   });
-  const acceptedNetworkFilters = networkFilters.filter(function (filter) {
-    return disabledNetworkFilterIds.has(filter.getId()) === false;
-  });
+
+  /**
+   * @type {Map<number, string>}
+   */
+  const filterIdToRawLine = new Map();
+  for (const filter of networkFilters) {
+    filterIdToRawLine.set(filter.getId(), filter.rawLine);
+  }
 
   return {
-    networkFilters: acceptedNetworkFilters,
+    networkFilters,
+    filterIdToRawLine,
     cosmeticFilters: acceptedCosmeticFilters,
     preprocessors,
     errors,
@@ -134,7 +131,7 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
 }
 
 async function updateEngine({ networkFilters, cosmeticFilters, preprocessors }) {
-  await engines.create(engines.CUSTOM_ENGINE, {
+  const engine = await engines.create(engines.CUSTOM_ENGINE, {
     networkFilters,
     cosmeticFilters,
     preprocessors,
@@ -143,18 +140,21 @@ async function updateEngine({ networkFilters, cosmeticFilters, preprocessors }) 
   console.info(
     `[custom filters] Engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
   );
+
+  return engine;
 }
 
 export async function updateCustomFilters(input, options) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
-  const { networkFilters, cosmeticFilters, preprocessors, errors } = await collectFilters(input, {
-    isTrustedScriptInjectAllowed: options.trustedScriptlets,
-  });
+  const { networkFilters, cosmeticFilters, preprocessors, errors, filterIdToRawLine } =
+    await collectFilters(input, {
+      isTrustedScriptInjectAllowed: options.trustedScriptlets,
+    });
 
   // Update custom filters engine
-  await updateEngine({ networkFilters, cosmeticFilters, preprocessors });
+  const engine = await updateEngine({ networkFilters, cosmeticFilters, preprocessors });
 
   // Update main engine with custom filters
   await reloadMainEngine();
@@ -167,7 +167,15 @@ export async function updateCustomFilters(input, options) {
 
   // Update DNR rules for Chromium and Safari
   if (__CHROMIUM__) {
-    const { rules, errors } = await convert(networkFilters.map((f) => f.toString()));
+    const acceptedNetworkFilters = engine
+      .getFilters()
+      .networkFilters.filter(function (filter) {
+        return engine.preprocessors.isFilterExcluded(filter.getId()) === false;
+      })
+      .map(function (filter) {
+        return filterIdToRawLine.get(filter.getId());
+      });
+    const { rules, errors } = await convert(acceptedNetworkFilters);
     result.dnrRules = await updateDNRRules(rules);
 
     if (errors?.length) {

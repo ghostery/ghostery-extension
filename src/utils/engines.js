@@ -460,5 +460,10 @@ export function remove(name) {
   });
 }
 
+export async function getConfig() {
+  const baseEngine = await init(FIXES_ENGINE);
+  return baseEngine.config;
+}
+
 // Debug tools
 (globalThis.ghostery ??= {}).engines = { get };
