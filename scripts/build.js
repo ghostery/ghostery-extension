@@ -489,7 +489,9 @@ const buildPromise = build({
 
                 // Preserve collected CSS on this chunk so Vite adds <link> tags
                 if (allCss.size > 0 && importChunk.viteMetadata) {
-                  importChunk.viteMetadata.importedCss = allCss;
+                  // The chunk imports array is sorted alphabetically, so we reverse the collected CSS to ensure
+                  // the correct order in the final HTML (the global /ui/styles.css is added last).
+                  importChunk.viteMetadata.importedCss = new Set([...allCss].reverse());
                 }
               }
             }
