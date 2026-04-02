@@ -116,9 +116,12 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
   /**
    * @type {Map<number, string>}
    */
-  const filterIdToRawLine = new Map();
-  for (const filter of networkFilters) {
-    filterIdToRawLine.set(filter.getId(), filter.rawLine);
+  let filterIdToRawLine = null;
+  if (__CHROMIUM__) {
+    filterIdToRawLine = new Map();
+    for (const filter of networkFilters) {
+      filterIdToRawLine.set(filter.getId(), filter.rawLine);
+    }
   }
 
   return {
@@ -170,7 +173,7 @@ export async function updateCustomFilters(input, options) {
     const acceptedNetworkFilters = engine
       .getFilters()
       .networkFilters.filter(function (filter) {
-        return engine.preprocessors.isFilterExcluded(filter.getId()) === false;
+        return engine.preprocessors.isFilterExcluded(filter) === false;
       })
       .map(function (filter) {
         return filterIdToRawLine.get(filter.getId());
