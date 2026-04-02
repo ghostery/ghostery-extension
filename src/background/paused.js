@@ -20,10 +20,18 @@ import { getDynamicRules, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/d
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
 
+// Remove paused hostname from options when alarm is triggered
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name.startsWith(PAUSED_ALARM_PREFIX)) {
+    const id = alarm.name.slice(PAUSED_ALARM_PREFIX.length + 1);
+    store.set(Options, { paused: { [id]: null } });
+  }
+});
+
 OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
   if (options.mode !== MODE_DEFAULT) {
     // Filtering mode has changed - clean up alarms
-    if (lastOptions && options.mode !== lastOptions?.mode) {
+    if (lastOptions && options.mode !== lastOptions.mode) {
       (await chrome.alarms.getAll()).forEach(({ name }) => {
         if (name.startsWith(PAUSED_ALARM_PREFIX)) {
           chrome.alarms.clear(name);
@@ -31,32 +39,38 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       });
     }
 
+    // In non-default mode, the paused state is not applied,
+    // so we can skip the rest of the logic
     return;
   }
 
-  const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
-    name.startsWith(PAUSED_ALARM_PREFIX),
-  );
-  const revokeHostnames = Object.entries(options.paused).filter(([, { revokeAt }]) => revokeAt);
+  // Update alarms for time-based paused hostnames when a user changes the paused state
+  if (lastOptions && !OptionsObserver.isOptionEqual(options.paused, lastOptions.paused)) {
+    const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
+      name.startsWith(PAUSED_ALARM_PREFIX),
+    );
+    const revokeHostnames = Object.entries(options.paused).filter(([, { revokeAt }]) => revokeAt);
 
-  // Clear alarms for removed hostnames
-  alarms.forEach(({ name }) => {
-    if (!revokeHostnames.find(([id]) => name === `${PAUSED_ALARM_PREFIX}:${id}`)) {
-      chrome.alarms.clear(name);
-    }
-  });
+    // Clear alarms for removed hostnames
+    alarms.forEach(({ name }) => {
+      if (!revokeHostnames.find(([id]) => name === `${PAUSED_ALARM_PREFIX}:${id}`)) {
+        chrome.alarms.clear(name);
+      }
+    });
 
-  // Add alarms for new hostnames
-  if (revokeHostnames.length) {
-    revokeHostnames
-      .filter(([id]) => !alarms.some(({ name }) => name === id))
-      .forEach(([id, { revokeAt }]) => {
-        chrome.alarms.create(`${PAUSED_ALARM_PREFIX}:${id}`, {
-          when: revokeAt,
+    // Add alarms for new hostnames
+    if (revokeHostnames.length) {
+      revokeHostnames
+        .filter(([id]) => !alarms.some(({ name }) => name === `${PAUSED_ALARM_PREFIX}:${id}`))
+        .forEach(([id, { revokeAt }]) => {
+          chrome.alarms.create(`${PAUSED_ALARM_PREFIX}:${id}`, {
+            when: revokeAt,
+          });
         });
-      });
+    }
   }
 
+  // Reload DNR rules for paused hostnames on Chromium
   if (
     __CHROMIUM__ &&
     // Paused state has changed by the user interaction
@@ -120,13 +134,5 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       });
       console.log('[paused] Pause rules cleared');
     }
-  }
-});
-
-// Remove paused hostname from options when alarm is triggered
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name.startsWith(PAUSED_ALARM_PREFIX)) {
-    const id = alarm.name.slice(PAUSED_ALARM_PREFIX.length + 1);
-    store.set(Options, { paused: { [id]: null } });
   }
 });
