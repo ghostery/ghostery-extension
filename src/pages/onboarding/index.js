@@ -44,5 +44,11 @@ Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
         </template>
       `,
     });
+
+    // This code keeps the services worker alive while the onboarding is open to ensure that
+    //  the website triggers an update keeping the old value of the option.
+    // If the SW would be restarts because of the option change, the options observers
+    // run as it would be a cold start.
+    setInterval(() => chrome.runtime.sendMessage({ action: 'keepAlive' }), 15000);
   },
 );
