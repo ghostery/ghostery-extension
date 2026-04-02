@@ -27,7 +27,7 @@ describe('Main Features', function () {
   before(enableExtension);
 
   describe('Never-consent', function () {
-    const WEBSITE_URL = 'https://stackoverflow.com/';
+    const WEBSITE_URL = 'https://www.onetrust.com/';
     const SELECTOR = '#onetrust-consent-sdk';
 
     it('displays consent popup', async function () {
