@@ -10,13 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import {
-  parseFilters,
-  detectFilterType,
-  FilterType,
-  FiltersEngine,
-  parseFilter,
-} from '@ghostery/adblocker';
+import { parseFilters, FilterType } from '@ghostery/adblocker';
 
 import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
@@ -34,142 +28,6 @@ function isTrustedScriptInject(scriptName) {
   return (
     scriptName === 'rpnt' || scriptName === 'replace-node-text' || scriptName.startsWith('trusted-')
   );
-}
-
-/**
- * @param {import('@ghostery/adblocker').CosmeticFilter} filter
- * @param {string[]} args
- */
-function encodeScriptInject(filter, args) {
-  // Cosmetic filter saves the whole script inject arguments in
-  // `filter.selector`: e.g. `script, arg1, arg2, ...`
-  const frontIndex = filter.selector.indexOf(',');
-  // If the delim was not found, it doesn't have any args.
-  if (frontIndex !== -1) {
-    filter.selector =
-      // Make the range comma-inclusive
-      filter.selector.slice(0, frontIndex + 1) +
-      args.map((arg) => encodeURIComponent(arg)).join(',');
-    // Update the raw line as we will grab this value before
-    // passing to the actual engine.
-    filter.rawLine = filter.rawLine.split('+js(')[0] + '+js(' + filter.selector + ')';
-  }
-}
-
-function getPreprocessorCondition(engine, filter) {
-  const conditions = [];
-  for (const preprocessor of engine.preprocessors.preprocessors) {
-    if (!preprocessor.filterIDs.has(filter.getId())) {
-      continue;
-    }
-    conditions.push(preprocessor.condition);
-  }
-  if (conditions.length === 0) {
-    return undefined;
-  }
-  if (conditions.length === 1) {
-    return conditions[0];
-  }
-  return conditions.map((condition) => `(${condition})`).join('&&');
-}
-
-/**
- * @returns {Promise<Record<'cosmeticFilters' | 'networkFilters' | 'errors', string[]>>}
- */
-async function normalizeFilters(text = '', { trustedScriptlets }) {
-  const lines = text.split('\n');
-  const uniqueFilterIds = new Set();
-  const cosmeticFilters = [];
-  const errors = [];
-
-  // Try to iterate for each line (regardless of the filter type)
-  // to collect errors.
-  for (let index = 0; index < lines.length; index++) {
-    const line = lines[index];
-    const filterType = detectFilterType(line, { extendedNonSupportedTypes: true });
-
-    // Skip errors that we don't want to report.
-    if (
-      filterType === FilterType.NOT_SUPPORTED_EMPTY ||
-      filterType === FilterType.NOT_SUPPORTED_COMMENT
-    ) {
-      continue;
-    }
-
-    // Detect the possible errors from `detectFilterType`.
-    if (filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
-      errors.push(`Filter not supported (${index + 1}): ${line}`);
-      continue;
-    }
-
-    // Detect if the syntax is invalid from the parse phase. All
-    // error detections outside of the syntax should be processed
-    // before here.
-    const filter = parseFilter(line);
-    if (filter === null) {
-      errors.push(`Syntax error (${index + 1}): ${line}`);
-      continue;
-    }
-
-    // We will only stringify the cosmetic filters here. Network
-    // filters collection depend on full list parsing with
-    // preprocessors.
-    if (!filter.isCosmeticFilter()) {
-      continue;
-    }
-
-    // Filter out duplicates. We share `uniqueFilterIds` with the
-    // network filters below, so we only want to add cosmetic
-    // filter id here.
-    if (uniqueFilterIds.has(filter.getId())) {
-      continue;
-    } else {
-      uniqueFilterIds.add(filter.getId());
-    }
-
-    if (filter.isScriptInject()) {
-      // In case of script inject filter, `parseScript` always
-      // returns a value.
-      const script = filter.parseScript();
-      if (!trustedScriptlets && isTrustedScriptInject(script.name)) {
-        errors.push(`Trusted scriptlets are not allowed (${index + 1}): ${line}`);
-        continue;
-      }
-      encodeScriptInject(filter, script.args);
-    }
-
-    cosmeticFilters.push(filter.toString());
-  }
-
-  const engine = await engines.init(engines.FIXES_ENGINE);
-  const adblocker = FiltersEngine.parse(text, {
-    ...engine.config,
-    debug: true,
-  });
-  const networkFilters = adblocker
-    .getFilters()
-    .networkFilters.filter(function (filter) {
-      const condition = getPreprocessorCondition(adblocker, filter);
-      // Filter by preprocessor condition.
-      if (typeof condition !== 'undefined' && !engines.isFilterConditionAccepted(condition)) {
-        return false;
-      }
-      // Filter by uniqueness.
-      if (uniqueFilterIds.has(filter.getId())) {
-        return false;
-      }
-      uniqueFilterIds.add(filter.getId());
-      return true;
-    })
-    .map(function (filter) {
-      return filter.toString();
-    });
-
-  return {
-    networkFilters,
-    cosmeticFilters,
-    errors,
-  };
 }
 
 async function updateDNRRules(dnrRules) {
@@ -200,12 +58,85 @@ async function updateDNRRules(dnrRules) {
   return dnrRules;
 }
 
-async function updateEngine(text) {
-  const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(text);
+function findLineNumber(text, line) {
+  const index = text.indexOf(line);
+  if (index === -1) {
+    return -1;
+  }
+  if (index === 0) {
+    return 1;
+  }
+  let lines = 1;
+  for (let i = 0; i < index; i++) {
+    // Detect new lines: \n or \r
+    if (text.charCodeAt(i) === 10 || text.charCodeAt(i) === 13) {
+      lines++;
+    }
+  }
+  return lines;
+}
 
-  await engines.create(engines.CUSTOM_ENGINE, {
-    cosmeticFilters,
+async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
+  const baseConfig = await engines.getConfig();
+  const { networkFilters, cosmeticFilters, preprocessors, notSupportedFilters } = parseFilters(
+    text,
+    {
+      ...baseConfig,
+      debug: true,
+    },
+  );
+
+  const errors = notSupportedFilters.reduce(function (state, { filter, filterType, lineNumber }) {
+    if (
+      filterType !== FilterType.NOT_SUPPORTED_EMPTY &&
+      filterType !== FilterType.NOT_SUPPORTED_COMMENT
+    ) {
+      state.push(`Filter not supported (${lineNumber + 1}): ${filter}`);
+    }
+    return state;
+  }, []);
+  const acceptedCosmeticFilters = cosmeticFilters.filter(function (filter) {
+    if (filter.isScriptInject() === false || isTrustedScriptInjectAllowed === true) {
+      return true;
+    }
+
+    const scriptNameIndex = filter.selector.indexOf(',');
+    const scriptName =
+      scriptNameIndex === -1 ? filter.selector : filter.selector.slice(0, scriptNameIndex);
+    if (isTrustedScriptInject(scriptName)) {
+      errors.push(
+        `Trusted scriptlets are not allowed (${findLineNumber(text, filter.rawLine)}): ${filter.rawLine}`,
+      );
+      return false;
+    }
+
+    return true;
+  });
+
+  /**
+   * @type {Map<number, string>}
+   */
+  let filterIdToRawLine = null;
+  if (__CHROMIUM__) {
+    filterIdToRawLine = new Map();
+    for (const filter of networkFilters) {
+      filterIdToRawLine.set(filter.getId(), filter.rawLine);
+    }
+  }
+
+  return {
     networkFilters,
+    filterIdToRawLine,
+    cosmeticFilters: acceptedCosmeticFilters,
+    preprocessors,
+    errors,
+  };
+}
+
+async function updateEngine({ networkFilters, cosmeticFilters, preprocessors }) {
+  const engine = await engines.create(engines.CUSTOM_ENGINE, {
+    networkFilters,
+    cosmeticFilters,
     preprocessors,
   });
 
@@ -213,33 +144,46 @@ async function updateEngine(text) {
     `[custom filters] Engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
   );
 
-  return {
-    networkFilters: networkFilters.length,
-    cosmeticFilters: cosmeticFilters.length,
-  };
+  return engine;
 }
 
 export async function updateCustomFilters(input, options) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
-  const { networkFilters, cosmeticFilters, errors } = await normalizeFilters(input, options);
-  const result = await updateEngine([...networkFilters, ...cosmeticFilters].join('\n'));
+  const { networkFilters, cosmeticFilters, preprocessors, errors, filterIdToRawLine } =
+    await collectFilters(input, {
+      isTrustedScriptInjectAllowed: options.trustedScriptlets,
+    });
 
-  result.errors = errors;
+  // Update custom filters engine
+  const engine = await updateEngine({ networkFilters, cosmeticFilters, preprocessors });
 
   // Update main engine with custom filters
   await reloadMainEngine();
 
+  const result = {
+    networkFilters: networkFilters.length,
+    cosmeticFilters: cosmeticFilters.length,
+    errors,
+  };
+
   // Update DNR rules for Chromium and Safari
   if (__CHROMIUM__) {
-    const { rules, errors } = await convert([...networkFilters].map((f) => f.toString()));
+    const acceptedNetworkFilters = engine
+      .getFilters()
+      .networkFilters.filter(function (filter) {
+        return engine.preprocessors.isFilterExcluded(filter) === false;
+      })
+      .map(function (filter) {
+        return filterIdToRawLine.get(filter.getId());
+      });
+    const { rules, errors } = await convert(acceptedNetworkFilters);
+    result.dnrRules = await updateDNRRules(rules);
 
     if (errors?.length) {
       result.errors.push(...errors);
     }
-
-    result.dnrRules = await updateDNRRules(rules);
   }
 
   return result;

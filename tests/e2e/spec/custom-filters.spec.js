@@ -134,7 +134,7 @@ describe('Custom Filters', function () {
       const errors = await getExtensionElement('component:custom-filters:errors');
 
       const text = await errors.getText();
-      await expect(text).toContain('Syntax error');
+      await expect(text).toContain('Filter not supported');
     });
   }
 });
