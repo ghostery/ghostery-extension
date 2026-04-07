@@ -44,7 +44,7 @@ const NOTIFICATIONS = {
     img: edgeMobileQrCodeImage,
     type: 'image',
     text: msg`Android and iPhone just got a new Edge. Ghostery included.`,
-    url: 'https://edgemobileapp.microsoft.com/?adjustId=1rdtsg4d_1rzcoul8',
+    url: 'https://www.ghostery.com/download/edge-mobile?utm_source=gbe&utm_campaign=panel',
     action: msg`Scan and take Ghostery from desktop to mobile`,
   },
   review: {
