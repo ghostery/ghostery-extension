@@ -745,6 +745,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/ci_scripts/build.sh",
 			);
 			name = "Build Source";
 			outputFileListPaths = (
@@ -753,7 +754,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build -- --clean\n";
+			shellScript = "\"$SRCROOT/ci_scripts/build.sh\"\n";
 		};
 		B48C697F2B4D84600005A820 /* Build Source */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -764,6 +765,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/ci_scripts/build.sh",
 			);
 			name = "Build Source";
 			outputFileListPaths = (
@@ -772,7 +774,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build -- --clean\n";
+			shellScript = "\"$SRCROOT/ci_scripts/build.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
