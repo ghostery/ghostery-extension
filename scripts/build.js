@@ -90,6 +90,11 @@ if (argv.target === 'chromium') {
   execSync('node scripts/build-redirect-protection-rules.js', {
     stdio: silent ? '' : 'inherit',
   });
+
+  // Apply uBO-style minimization to all DNR rulesets (in-place, idempotent)
+  execSync('node scripts/minimize-dnr-rulesets.js', {
+    stdio: silent ? '' : 'inherit',
+  });
 }
 
 execSync('node scripts/download-redirect-resources.js' + (argv.staging ? ' --staging' : ''), {
