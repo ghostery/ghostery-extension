@@ -14,11 +14,9 @@
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
 
-export const storage = chrome.storage.session || chrome.storage.local;
-
 export default class AutoSyncingMap {
   static async get(storageKey, key) {
-    const data = await storage.get([storageKey]);
+    const data = await chrome.storage.session.get([storageKey]);
     return data[storageKey]?.entries[key];
   }
 
@@ -77,7 +75,7 @@ export default class AutoSyncingMap {
     // and log it. A potential improvement could be to treat the
     // in-memory map as the source of truth in that scenario.)
     this._pending = new Promise((resolve, reject) => {
-      storage.get([this.storageKey], (result) => {
+      chrome.storage.session.get([this.storageKey], (result) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
@@ -142,7 +140,7 @@ export default class AutoSyncingMap {
 
     this._scheduleAction(
       new Promise((resolve, reject) => {
-        storage.remove(this.storageKey, () => {
+        chrome.storage.session.remove(this.storageKey, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
@@ -225,7 +223,7 @@ export default class AutoSyncingMap {
           entries: Object.fromEntries(this.inMemoryMap),
           ttl: Object.fromEntries(this._ttlMap),
         };
-        storage.set({ [this.storageKey]: serialized }, () => {
+        chrome.storage.session.set({ [this.storageKey]: serialized }, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
