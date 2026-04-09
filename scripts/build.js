@@ -91,7 +91,7 @@ if (argv.target === 'chromium') {
     stdio: silent ? '' : 'inherit',
   });
 
-  // Apply uBO-style minimization to all DNR rulesets (in-place, idempotent)
+  // Merge bare-domain urlFilter rules into requestDomains arrays (in-place, idempotent)
   execSync('node scripts/minimize-dnr-rulesets.js', {
     stdio: silent ? '' : 'inherit',
   });

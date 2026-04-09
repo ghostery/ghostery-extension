@@ -13,7 +13,45 @@ import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { RESOURCES_PATH } from './utils/urls.js';
-import { minimizeRuleset } from './utils/ubo-minimize.js';
+
+// Matches bare domain urlFilter patterns like ||example.com^
+// Excludes IP addresses and single-label domains.
+const BARE_DOMAIN = /^\|\|([a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)\^$/;
+
+function minimizeRuleset(rules) {
+  const groups = new Map();
+  const out = [];
+
+  for (const rule of rules) {
+    const match = rule.condition?.urlFilter && BARE_DOMAIN.exec(rule.condition.urlFilter);
+    if (!match) {
+      out.push(rule);
+      continue;
+    }
+
+    const domain = match[1];
+    const condRest = { ...rule.condition };
+    delete condRest.urlFilter;
+    const key = JSON.stringify({ action: rule.action, priority: rule.priority, condRest });
+
+    if (!groups.has(key)) {
+      groups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [] });
+    }
+    groups.get(key).domains.push(domain);
+  }
+
+  let nextId = out.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
+  for (const { action, priority, condRest, domains } of groups.values()) {
+    out.push({
+      id: nextId++,
+      action,
+      condition: { ...condRest, requestDomains: domains.sort() },
+      priority,
+    });
+  }
+
+  return out;
+}
 
 function formatBytes(bytes) {
   if (bytes < 1024) return `${bytes} B`;
@@ -38,7 +76,6 @@ for (const file of files) {
   const filePath = join(RESOURCES_PATH, file);
   const original = readFileSync(filePath, 'utf-8');
 
-  // Compact JSON (no leading newline) means we already minimized this file.
   if (!original.startsWith('[\n')) continue;
 
   let rules;
@@ -54,23 +91,20 @@ for (const file of files) {
     continue;
   }
 
-  const beforeBytes = Buffer.byteLength(original, 'utf-8');
   const beforeCount = rules.length;
-
   const minimized = minimizeRuleset(rules);
   const minimizedJson = JSON.stringify(minimized);
   writeFileSync(filePath, minimizedJson);
 
+  const beforeBytes = Buffer.byteLength(original, 'utf-8');
   const afterBytes = Buffer.byteLength(minimizedJson, 'utf-8');
-  const afterCount = minimized.length;
-
   totalBefore += beforeBytes;
   totalAfter += afterBytes;
   processedCount += 1;
 
   const sizePct = ((1 - afterBytes / beforeBytes) * 100).toFixed(1);
   console.log(
-    `  ${file}: ${beforeCount} → ${afterCount} rules, ${formatBytes(beforeBytes)} → ${formatBytes(afterBytes)} (-${sizePct}%)`,
+    `  ${file}: ${beforeCount} → ${minimized.length} rules, ${formatBytes(beforeBytes)} → ${formatBytes(afterBytes)} (-${sizePct}%)`,
   );
 }
 
