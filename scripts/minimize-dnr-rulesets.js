@@ -18,6 +18,12 @@ import { RESOURCES_PATH } from './utils/urls.js';
 // Excludes IP addresses and single-label domains.
 const BARE_DOMAIN = /^\|\|([a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)\^$/;
 
+// Safari/WebKit expands each requestDomains entry into a separate content
+// blocker rule internally, and enforces a 150k compiled-rule hard limit.
+// Chunking keeps individual rules at a predictable size and avoids hitting
+// any undocumented per-array caps across browsers.
+const MAX_DOMAINS_PER_RULE = 5000;
+
 function minimizeRuleset(rules) {
   const groups = new Map();
   const out = [];
@@ -42,12 +48,15 @@ function minimizeRuleset(rules) {
 
   let nextId = out.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
   for (const { action, priority, condRest, domains } of groups.values()) {
-    out.push({
-      id: nextId++,
-      action,
-      condition: { ...condRest, requestDomains: domains.sort() },
-      priority,
-    });
+    domains.sort();
+    for (let i = 0; i < domains.length; i += MAX_DOMAINS_PER_RULE) {
+      out.push({
+        id: nextId++,
+        action,
+        condition: { ...condRest, requestDomains: domains.slice(i, i + MAX_DOMAINS_PER_RULE) },
+        priority,
+      });
+    }
   }
 
   return out;
