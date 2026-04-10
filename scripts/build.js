@@ -246,6 +246,33 @@ if (manifest.declarative_net_request?.rule_resources) {
     });
   });
 
+  // Expand split rulesets: if dnr-X.json was split into dnr-X-0.json,
+  // dnr-X-domains.json, etc., replace the original manifest entry.
+  manifest.declarative_net_request.rule_resources =
+    manifest.declarative_net_request.rule_resources.flatMap((entry) => {
+      const srcPath = resolve(options.srcDir, entry.path);
+      if (existsSync(srcPath)) return [entry];
+
+      const dir = resolve(options.srcDir, dirname(entry.path));
+      const base = basename(entry.path, '.json');
+      const splits = readdirSync(dir)
+        .filter(
+          (f) =>
+            f.startsWith(base + '-') &&
+            f.endsWith('.json') &&
+            !f.endsWith('.metadata.json'),
+        )
+        .sort();
+
+      if (splits.length === 0) return [entry];
+
+      return splits.map((f) => ({
+        id: basename(f, '.json').replace('dnr-', ''),
+        enabled: entry.enabled,
+        path: `rule_resources/${f}`,
+      }));
+    });
+
   manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
     const dir = dirname(path);
     const file = basename(path);

@@ -72,7 +72,11 @@ if (__CHROMIUM__) {
     if (!options.terms || isGloballyPaused(options)) return [];
 
     const ids = ENGINES.reduce((acc, { name, key }) => {
-      if (options[key] && DNR_RESOURCES.includes(name)) acc.push(name);
+      if (options[key]) {
+        acc.push(
+          ...DNR_RESOURCES.filter((id) => id === name || id.startsWith(name + '-')),
+        );
+      }
       return acc;
     }, []);
 
