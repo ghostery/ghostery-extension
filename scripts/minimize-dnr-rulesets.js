@@ -157,7 +157,7 @@ function minimizeRuleset(rules) {
     groups.get(key).originalRules.push(rule);
   }
 
-  let nextId = out.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
+  let nextId = rules.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
   for (const { action, priority, condRest, domains, originalRules } of groups.values()) {
     if (domains.length === 1) {
       out.push(originalRules[0]);
