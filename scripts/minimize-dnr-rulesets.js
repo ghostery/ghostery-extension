@@ -25,7 +25,10 @@ import { RESOURCES_PATH } from './utils/urls.js';
 const BARE_DOMAIN = /^\|\|([a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+)\^$/;
 
 const MAX_DOMAINS_PER_RULE = 1000;
-const RULES_PER_CHUNK = 10000;
+const RULES_PER_CHUNK = 5000;
+// Safari expands each requestDomains entry into a content blocker rule,
+// so cap domains-per-file to keep per-ruleset compilation fast.
+const MAX_DOMAINS_PER_FILE = 10000;
 const SPLIT_RULESETS = new Set(['dnr-ads']);
 
 function loadMetadata(basePath) {
@@ -111,11 +114,33 @@ function splitRuleset(filePath, baseName, rules, metadata) {
   let totalRules = 0;
   let totalBytes = 0;
 
-  const domainsPath = join(dir, `${baseName}-domains.json`);
-  writeFileSync(domainsPath, JSON.stringify(domainRules));
-  totalRules += domainRules.length;
-  totalBytes += Buffer.byteLength(JSON.stringify(domainRules), 'utf-8');
-  console.log(`    ${baseName}-domains.json: ${domainRules.length} rules (${domainRules.reduce((s, r) => s + (r.condition.requestDomains?.length || 0), 0)} domains)`);
+  let domainFileIndex = 0;
+  let domainBatch = [];
+  let domainBatchCount = 0;
+
+  function flushDomainBatch() {
+    if (domainBatch.length === 0) return;
+    const renumbered = domainBatch.map((r, i) => ({ ...r, id: i + 1 }));
+    const name = `${baseName}-domains-${domainFileIndex}.json`;
+    const filePath = join(dir, name);
+    writeFileSync(filePath, JSON.stringify(renumbered));
+    totalRules += renumbered.length;
+    totalBytes += Buffer.byteLength(JSON.stringify(renumbered), 'utf-8');
+    console.log(`    ${name}: ${renumbered.length} rules (${domainBatchCount} domains)`);
+    domainFileIndex++;
+    domainBatch = [];
+    domainBatchCount = 0;
+  }
+
+  for (const rule of domainRules) {
+    const count = rule.condition.requestDomains?.length || 0;
+    if (domainBatchCount > 0 && domainBatchCount + count > MAX_DOMAINS_PER_FILE) {
+      flushDomainBatch();
+    }
+    domainBatch.push(rule);
+    domainBatchCount += count;
+  }
+  flushDomainBatch();
 
   for (let i = 0; i < otherRules.length; i += RULES_PER_CHUNK) {
     const chunk = otherRules.slice(i, i + RULES_PER_CHUNK);
