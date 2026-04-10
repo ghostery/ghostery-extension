@@ -29,7 +29,7 @@ const RULES_PER_CHUNK = 5000;
 // Safari expands each requestDomains entry into a content blocker rule,
 // so cap domains-per-file to keep per-ruleset compilation fast.
 const MAX_DOMAINS_PER_FILE = 10000;
-const SPLIT_RULESETS = new Set(['dnr-ads']);
+const SPLIT_RULESETS = new Set(['dnr-ads', 'dnr-tracking']);
 
 function loadMetadata(basePath) {
   const metaPath = basePath.replace('.json', '.metadata.json');
