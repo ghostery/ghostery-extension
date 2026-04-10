@@ -58,7 +58,7 @@
     "hybrids": "^9.1.22",
     "idb": "^8.0.2",
     "lottie-web": "^5.13.0",
-    "plotly.js-basic-dist": "^3.4.0",
+    "plotly.js-basic-dist": "^3.5.0",
     "tldts-experimental": "^7.0.27"
   },
   "dataDependencies": {
