@@ -83,21 +83,17 @@ function splitRuleset(filePath, baseName, rules, metadata) {
     const key = JSON.stringify({ action: rule.action, priority: rule.priority, condRest });
 
     if (!domainGroups.has(key)) {
-      domainGroups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [] });
+      domainGroups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [], originalRules: [] });
     }
     domainGroups.get(key).domains.push(domain);
+    domainGroups.get(key).originalRules.push(rule);
   }
 
   const domainRules = [];
   let nextId = 1;
-  for (const { action, priority, condRest, domains } of domainGroups.values()) {
+  for (const { action, priority, condRest, domains, originalRules } of domainGroups.values()) {
     if (domains.length === 1) {
-      otherRules.push({
-        id: 0,
-        action,
-        condition: { ...condRest, urlFilter: `||${domains[0]}^` },
-        priority,
-      });
+      otherRules.push(originalRules[0]);
       continue;
     }
     domains.sort();
@@ -155,20 +151,16 @@ function minimizeRuleset(rules) {
     const key = JSON.stringify({ action: rule.action, priority: rule.priority, condRest });
 
     if (!groups.has(key)) {
-      groups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [] });
+      groups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [], originalRules: [] });
     }
     groups.get(key).domains.push(domain);
+    groups.get(key).originalRules.push(rule);
   }
 
   let nextId = out.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
-  for (const { action, priority, condRest, domains } of groups.values()) {
+  for (const { action, priority, condRest, domains, originalRules } of groups.values()) {
     if (domains.length === 1) {
-      out.push({
-        id: nextId++,
-        action,
-        condition: { ...condRest, urlFilter: `||${domains[0]}^` },
-        priority,
-      });
+      out.push(originalRules[0]);
       continue;
     }
     domains.sort();
