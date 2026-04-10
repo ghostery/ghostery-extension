@@ -91,6 +91,15 @@ function splitRuleset(filePath, baseName, rules, metadata) {
   const domainRules = [];
   let nextId = 1;
   for (const { action, priority, condRest, domains } of domainGroups.values()) {
+    if (domains.length === 1) {
+      otherRules.push({
+        id: 0,
+        action,
+        condition: { ...condRest, urlFilter: `||${domains[0]}^` },
+        priority,
+      });
+      continue;
+    }
     domains.sort();
     for (let i = 0; i < domains.length; i += MAX_DOMAINS_PER_RULE) {
       domainRules.push({
@@ -153,6 +162,15 @@ function minimizeRuleset(rules) {
 
   let nextId = out.reduce((max, r) => Math.max(max, r.id || 0), 0) + 1;
   for (const { action, priority, condRest, domains } of groups.values()) {
+    if (domains.length === 1) {
+      out.push({
+        id: nextId++,
+        action,
+        condition: { ...condRest, urlFilter: `||${domains[0]}^` },
+        priority,
+      });
+      continue;
+    }
     domains.sort();
     for (let i = 0; i < domains.length; i += MAX_DOMAINS_PER_RULE) {
       out.push({
