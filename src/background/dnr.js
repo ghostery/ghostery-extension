@@ -35,6 +35,9 @@ if (__CHROMIUM__) {
    * @returns {Promise<number[]>}
    */
   async function disableExcludedRulesByPreprocessor(rulesetId) {
+    // TODO: Remove this check when the support of `updateStaticRules` is added to Safari
+    if (!chrome.declarativeNetRequest.updateStaticRules) return;
+
     const metadata = await fetch(
       chrome.runtime.getURL(`/rule_resources/dnr-${rulesetId}.metadata.json`),
     )
@@ -43,11 +46,9 @@ if (__CHROMIUM__) {
       })
       .catch(function (e) {
         console.debug(`[dnr] DNR metadata for the ruleset id "${rulesetId}" was not found: ${e}`);
-        return {};
+        return null;
       });
-    if (!metadata) {
-      return [];
-    }
+    if (!metadata) return;
 
     const disableRuleIds = Object.entries(metadata).reduce(function (
       disabledRuleIds,
@@ -58,6 +59,7 @@ if (__CHROMIUM__) {
       }
       return disabledRuleIds;
     }, []);
+
     await chrome.declarativeNetRequest.updateStaticRules({
       rulesetId,
       disableRuleIds,
@@ -249,11 +251,7 @@ if (__CHROMIUM__) {
 
       // The below will run when the extension is installed as
       // well with the change of `options.terms`.
-      await Promise.all(
-        enabledRulesetIds.map(async function (id) {
-          return disableExcludedRulesByPreprocessor(id);
-        }),
-      );
+      await Promise.all(enabledRulesetIds.map((id) => disableExcludedRulesByPreprocessor(id)));
     }
   });
 }
