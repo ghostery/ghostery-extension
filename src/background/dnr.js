@@ -73,9 +73,7 @@ if (__CHROMIUM__) {
 
     const ids = ENGINES.reduce((acc, { name, key }) => {
       if (options[key]) {
-        acc.push(
-          ...DNR_RESOURCES.filter((id) => id === name || id.startsWith(name + '-')),
-        );
+        acc.push(...DNR_RESOURCES.filter((id) => id === name || id.startsWith(name + '-')));
       }
       return acc;
     }, []);

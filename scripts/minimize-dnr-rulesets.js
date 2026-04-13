@@ -9,13 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-  unlinkSync,
-  existsSync,
-} from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { RESOURCES_PATH } from './utils/urls.js';
@@ -86,7 +80,13 @@ function splitRuleset(filePath, baseName, rules, metadata) {
     const key = JSON.stringify({ action: rule.action, priority: rule.priority, condRest });
 
     if (!domainGroups.has(key)) {
-      domainGroups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [], originalRules: [] });
+      domainGroups.set(key, {
+        action: rule.action,
+        priority: rule.priority,
+        condRest,
+        domains: [],
+        originalRules: [],
+      });
     }
     domainGroups.get(key).domains.push(domain);
     domainGroups.get(key).originalRules.push(rule);
@@ -176,7 +176,13 @@ function minimizeRuleset(rules) {
     const key = JSON.stringify({ action: rule.action, priority: rule.priority, condRest });
 
     if (!groups.has(key)) {
-      groups.set(key, { action: rule.action, priority: rule.priority, condRest, domains: [], originalRules: [] });
+      groups.set(key, {
+        action: rule.action,
+        priority: rule.priority,
+        condRest,
+        domains: [],
+        originalRules: [],
+      });
     }
     groups.get(key).domains.push(domain);
     groups.get(key).originalRules.push(rule);
@@ -252,7 +258,9 @@ for (const file of files) {
     totalAfter += totalBytes;
     processedCount += 1;
     const sizePct = ((1 - totalBytes / beforeBytes) * 100).toFixed(1);
-    console.log(`  ${file}: ${beforeCount} → ${totalRules} rules, ${formatBytes(beforeBytes)} → ${formatBytes(totalBytes)} (-${sizePct}%)`);
+    console.log(
+      `  ${file}: ${beforeCount} → ${totalRules} rules, ${formatBytes(beforeBytes)} → ${formatBytes(totalBytes)} (-${sizePct}%)`,
+    );
   } else {
     const minimized = minimizeRuleset(rules);
     const minimizedJson = JSON.stringify(minimized);

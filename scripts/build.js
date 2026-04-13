@@ -257,10 +257,7 @@ if (manifest.declarative_net_request?.rule_resources) {
       const base = basename(entry.path, '.json');
       const splits = readdirSync(dir)
         .filter(
-          (f) =>
-            f.startsWith(base + '-') &&
-            f.endsWith('.json') &&
-            !f.endsWith('.metadata.json'),
+          (f) => f.startsWith(base + '-') && f.endsWith('.json') && !f.endsWith('.metadata.json'),
         )
         .sort();
 
