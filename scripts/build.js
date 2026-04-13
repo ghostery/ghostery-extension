@@ -205,6 +205,23 @@ const config = {
         }
       : null,
   },
+  plugins:
+    argv.target === 'firefox'
+      ? [
+          // Add Firefox polyfill banner to entry point files
+          {
+            name: 'firefox-entry-banner',
+            enforce: 'post',
+            generateBundle(_, bundle) {
+              for (const chunk of Object.values(bundle)) {
+                if (chunk.type === 'chunk' && (chunk.isEntry || chunk.isDynamicEntry)) {
+                  chunk.code = 'globalThis.chrome = globalThis.browser;\n\n' + chunk.code;
+                }
+              }
+            },
+          },
+        ]
+      : [],
 };
 
 // --- Generate dist structure ---
@@ -386,7 +403,6 @@ const buildPromise = build({
         'canvas',
       ],
       output: {
-        banner: argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : undefined,
         dir: options.outDir,
         preserveModules: true,
         preserveModulesRoot: 'src',
@@ -415,6 +431,8 @@ const buildPromise = build({
     },
   },
   plugins: [
+    ...config.plugins,
+
     // Keep offscreen documents from @whotracksme/reporting
     {
       name: 'copy-reporting-assets',
@@ -522,8 +540,6 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
           ...config.build.rolldownOptions,
           input: { [id]: path },
           output: {
-            banner:
-              argv.target === 'firefox' ? 'globalThis.chrome = globalThis.browser;\n' : undefined,
             format: 'iife',
             dir: options.outDir,
             entryFileNames: '[name].js',
