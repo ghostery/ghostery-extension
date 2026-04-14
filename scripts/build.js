@@ -276,6 +276,11 @@ if (manifest.declarative_net_request?.rule_resources) {
   });
 }
 
+// optimise declarative net request lists
+execSync('node scripts/group-dnr-rulesets.js', {
+  stdio: silent ? '' : 'inherit',
+});
+
 // copy whotracksme configuration files
 mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
 cpSync(
