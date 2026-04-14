@@ -12,7 +12,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const PATTERN = /^\|\|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\^$/;
+const DOMAIN_BLOCKING_PATTERN = /^\|\|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\^$/;
 
 const dist = join(import.meta.dirname, '../dist/rule_resources');
 const source = join(import.meta.dirname, '../src/rule_resources');
@@ -49,7 +49,7 @@ function getRulesetIds() {
 }
 
 function groupRuleset(ruleset, metadata) {
-  const hostnames = [];
+  const hostnames = new Set();
   const result = [];
   for (const rule of ruleset) {
     if (
@@ -59,10 +59,10 @@ function groupRuleset(ruleset, metadata) {
       rule.action.type === 'block' &&
       // Pick the simplest condition only with urlFilter satisfying PATTERN
       Object.keys(rule.condition).length === 1 &&
-      rule.condition?.urlFilter?.match(PATTERN)
+      rule.condition?.urlFilter?.match(DOMAIN_BLOCKING_PATTERN)
     ) {
       // Exact from ||acme.com^ pattern
-      hostnames.push(rule.condition.urlFilter.slice(2, -1));
+      hostnames.add(rule.condition.urlFilter.slice(2, -1));
     } else {
       result.push(rule);
     }
@@ -74,7 +74,7 @@ function groupRuleset(ruleset, metadata) {
     action: {
       type: 'block',
     },
-    requestDomains: hostnames,
+    requestDomains: Array.from(hostnames),
   });
 
   return result;
