@@ -18,10 +18,7 @@ const dist = join(import.meta.dirname, '../dist/rule_resources');
 const source = join(import.meta.dirname, '../src/rule_resources');
 
 function cutPuncBy100(n) {
-  n *= 100;
-  n |= 0;
-  n /= 100;
-  return n;
+  return Math.trunc(n * 100) / 100;
 }
 
 function getRulesetIds() {
