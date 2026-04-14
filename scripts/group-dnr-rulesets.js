@@ -18,10 +18,7 @@ const dist = join(import.meta.dirname, '../dist/rule_resources');
 const source = join(import.meta.dirname, '../src/rule_resources');
 
 function cutPuncBy100(n) {
-  n *= 100;
-  n |= 0;
-  n /= 100;
-  return n;
+  return Math.trunc(n * 100) / 100;
 }
 
 function getRulesetIds() {
@@ -61,7 +58,7 @@ function groupRuleset(ruleset, metadata) {
       Object.keys(rule.condition).length === 1 &&
       rule.condition?.urlFilter?.match(DOMAIN_BLOCKING_PATTERN)
     ) {
-      // Exact from ||acme.com^ pattern
+      // Extract host from ||example.com^ pattern
       hostnames.add(rule.condition.urlFilter.slice(2, -1));
     } else {
       result.push(rule);
