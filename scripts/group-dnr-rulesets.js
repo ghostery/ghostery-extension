@@ -58,7 +58,7 @@ function groupRuleset(ruleset, metadata) {
       Object.keys(rule.condition).length === 1 &&
       rule.condition?.urlFilter?.match(PATTERN)
     ) {
-      // Exact from ||acme.com^ pattern
+      // Extract host from ||example.com^ pattern
       hostnames.push(rule.condition.urlFilter.slice(2, -1));
     } else {
       result.push(rule);
