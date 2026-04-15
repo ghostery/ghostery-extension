@@ -33,11 +33,6 @@ export default {
       opacity: 0.5;
     }
 
-    :host([responsive]) div ::slotted(*) {
-      border: 1px solid var(--border-primary);
-      border-radius: 8px;
-    }
-
     header {
       background: var(--background-secondary);
       border-radius: 8px;
@@ -48,6 +43,15 @@ export default {
       border-bottom: 1px solid var(--border-primary);
     }
 
+    div ::slotted(*:last-child) {
+      border-bottom: none;
+    }
+
+    :host([responsive]) div ::slotted(*) {
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+    }
+
     @media screen and (min-width: 768px) {
       div ::slotted(*),
       :host([responsive]) div ::slotted(*) {
@@ -55,6 +59,10 @@ export default {
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--border-primary);
+      }
+
+      :host([responsive]) div ::slotted(*:last-child) {
+        border-bottom: none;
       }
     }
   `,

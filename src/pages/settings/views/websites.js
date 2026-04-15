@@ -155,7 +155,7 @@ export default {
               <a href="${router.url(WebsitesAdd)}">Add</a>
             </ui-button>
           </div>
-          <div layout="column gap:7">
+          <div layout="column gap">
             ${!websites.length &&
             !query &&
             html`
@@ -165,10 +165,10 @@ export default {
             `}
             ${userWebsites.length > 0 &&
             html`
-              <div layout="column gap:2">
-                <ui-text type="headline-s">Manually Adjusted</ui-text>
-                <settings-table responsive>
-                  <div slot="header" layout="column" layout@768px="grid:3fr|3fr|1fr|60px gap:4">
+              <settings-option>
+                Manually Adjusted
+                <settings-table responsive slot="card-footer">
+                  <div slot="header" layout="column" layout@768px="grid:3fr|4fr|1fr|50px gap:2">
                     <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
                     <ui-text type="label-m" layout="hidden" layout@768px="block">
                       Protection status
@@ -185,7 +185,7 @@ export default {
                             domain: item.id,
                           })}"
                           layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
-                          layout@768px="grid:3fr|3fr|1fr|60px gap:4"
+                          layout@768px="grid:3fr|4fr|1fr|50px gap:2"
                         >
                           <ui-text type="label-l" ellipsis> ${item.id} </ui-text>
                           ${!item.managed &&
@@ -217,22 +217,21 @@ export default {
                     `,
                   )}
                 </settings-table>
-              </div>
+              </settings-option>
             `}
             ${assistWebsites.length > 0 &&
             html`
-              <div layout="column gap:2">
-                <div layout="column gap:0.5">
-                  <ui-text type="headline-s">Automatically Adjusted</ui-text>
-                  <ui-text color="tertiary">
-                    Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker
-                    breakage.
-                  </ui-text>
-                  <ui-text color="tertiary" underline>
-                    ${msg.html`You can disable it in <a href="${router.url(Whotracksme)}">WhoTracks.Me settings</a>.`}
-                  </ui-text>
-                </div>
-                <settings-table responsive>
+              <settings-option>
+                Automatically Adjusted
+                <span slot="description">
+                  Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker
+                  breakage.
+                </span>
+                <ui-text slot="footer" color="tertiary" underline>
+                  ${msg.html`You can disable it in <a href="${router.url(Whotracksme)}">WhoTracks.Me settings</a>.`}
+                </ui-text>
+
+                <settings-table responsive slot="card-footer">
                   <div slot="header" layout="column" layout@768px="grid:3fr|60px gap:4">
                     <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
                   </div>
@@ -261,7 +260,7 @@ export default {
                     `,
                   )}
                 </settings-table>
-              </div>
+              </settings-option>
             `}
           </div>
         </section>

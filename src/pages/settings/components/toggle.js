@@ -9,39 +9,49 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { dispatch, html } from 'hybrids';
 
 export default {
   icon: '',
-  render: ({ icon }) => html`
-    <template layout="block">
-      <settings-card static layout="padding:0">
-        <div id="content" layout="row gap:2 grow self:stretch padding:2">
-          ${icon
-            ? html`
-                <div id="icon" layout="row center padding self:start">
-                  <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
-                </div>
-              `
-            : html`<slot name="icon"></slot>`}
+  value: {
+    value: false,
+    observe: (host, value, lastValue) => {
+      if (lastValue !== undefined) dispatch(host, 'change', { value });
+    },
+  },
+  render: ({ icon, value }) => html`
+    <template layout="grid">
+      <settings-card layout="padding:0">
+        <ui-toggle value="${value}" onchange="${html.set('value')}" layout="grow">
+          <div id="content" layout="row gap:2 grow self:stretch">
+            ${icon
+              ? html`
+                  <div id="icon" layout="row center padding self:start">
+                    <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                  </div>
+                `
+              : html`<slot name="icon"></slot>`}
 
-          <div layout="column gap items:start grow" layout@768px="row gap:2">
-            <div layout="column gap:0.5 grow items:start grow self:center">
+            <div layout="column gap:0.5 grow items:start">
               <ui-text id="name" type="headline-s"><slot></slot></ui-text>
               <ui-text id="description" color="tertiary">
                 <slot name="description"></slot>
               </ui-text>
               <slot name="footer"></slot>
             </div>
-            <slot name="action"></slot>
           </div>
-        </div>
+        </ui-toggle>
         <slot name="card-footer"></slot>
       </settings-card>
     </template>
   `.css`
     settings-card {
       container-type: inline-size;
+    }
+
+    ui-toggle::part(container) {
+      padding: 16px;
+      margin: 0;
     }
 
     #icon {
@@ -63,12 +73,23 @@ export default {
     @container (width < 500px) {
       #content {
         flex-direction: column;
+        margin-right: -100px;
+      }
+
+      ui-toggle::part(toggle) {
+        margin-top: 6px;
       }
     }
 
     @container (width < 750px) {
       slot[name='card-footer']::slotted(*) {
         padding: 16px;
+      }
+    }
+
+    @media (hover: hover) {
+      :host(:hover) #name {
+        text-decoration: underline;
       }
     }
   `,

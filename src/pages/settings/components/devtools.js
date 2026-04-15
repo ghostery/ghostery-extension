@@ -104,7 +104,7 @@ export default {
           <ui-text type="headline-s">Experimental features</ui-text>
           <div layout="column gap:2">
             <div layout="grid:1fr|max gap">
-              <settings-option static>
+              <settings-option>
                 Never-Consent Automatic Action Type
                 <span slot="description">
                   Chooses the default behavior for cookie consent notices.

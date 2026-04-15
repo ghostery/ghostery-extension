@@ -527,18 +527,22 @@ export default {
               layout="block margin:1.5:1.5:0.5"
               layout.last="margin:bottom:1.5"
             >
-              <panel-options-item icon="ads" enabled="${options.blockAds}" terms="${options.terms}">
+              <panel-options-item
+                icon="block-ads"
+                enabled="${options.blockAds}"
+                terms="${options.terms}"
+              >
                 Ad-Blocking
               </panel-options-item>
               <panel-options-item
-                icon="tracking"
+                icon="anti-tracking"
                 enabled="${options.blockTrackers}"
                 terms="${options.terms}"
               >
                 Anti-Tracking
               </panel-options-item>
               <panel-options-item
-                icon="autoconsent"
+                icon="never-consent"
                 enabled="${options.blockAnnoyances}"
                 terms="${options.terms}"
               >

@@ -13,31 +13,64 @@ import { html } from 'hybrids';
 
 export default {
   href: '',
-  render: ({ href }) => html`
-    <template layout="block">
+  icon: '',
+  render: ({ href, icon }) => html`
+    <template layout="contents">
       <ui-action>
-        <a href="${href}" layout="row items:center">
-          <slot></slot>
+        <a href="${href}" layout="block">
+          <settings-card>
+            <div id="content" layout="row gap:2 items:center">
+              ${icon &&
+              html`
+                <div id="icon" layout="row center padding self:start">
+                  <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                </div>
+              `}
+              <div id="description" layout="column gap:2px grow">
+                <ui-text type="headline-xs" color="primary">
+                  <slot></slot>
+                </ui-text>
+                <slot name="footer"></slot>
+              </div>
+              <div id="chevron" layout="row center size:4">
+                <ui-icon name="chevron-right" color="onbrand" layout="size:2"></ui-icon>
+              </div>
+            </div>
+          </settings-card>
         </a>
       </ui-action>
     </template>
   `.css`
+    a {
+      container-type: inline-size;
+    }
+
+    #icon {
+      background: var(--background-brand-primary);
+      border-radius: 12px;
+    }
+
+    #chevron {
+      border-radius: 100px;
+      background: var(--background-brand-solid);
+    }
+
     @media (hover: hover) {
-      :host(:hover) ::slotted(ui-text) {
+      a:hover ui-text {
         text-decoration: underline;
-      }
-
-      ::slotted(*:last-child) {
-        transition: margin-left 0.1s ease-out;
-      }
-
-      :host(:hover) ::slotted(*:last-child) {
-        margin-left: 4px;
       }
     }
 
-    ::slotted(ui-text) {
-      color: var(--color-primary);
+    @container (width < 500px) {
+      #content {
+        display: grid;
+        grid-template-columns: 1fr min-content;
+        justify-items: stretch;
+      }
+
+      #description {
+        grid-area: 2 / 1 / 3 / 3;
+      }
     }
   `,
 };

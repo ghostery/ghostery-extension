@@ -83,28 +83,27 @@ export default {
             My Ghostery
           </a>
           <settings-card
+            static
             layout="hidden"
-            layout@992px="
-              area::6/7 self:end:stretch
-              margin:top:2 padding:2 gap
-              column items:center
-            "
+            layout@992px="block area::6/7 self:end:stretch margin:top:2 padding:2"
             slot="nav"
           >
-            <img src="${assets.hands}" layout="size:12" alt="Contribution" slot="picture" />
-            <div layout="column gap:0.5">
-              <ui-text type="label-l" layout="block:center"> Become a Contributor </ui-text>
-              <ui-text type="body-s" color="secondary" layout="block:center">
-                Help Ghostery fight for a web where privacy is a basic human right.
-              </ui-text>
-              <ui-button type="primary" layout="margin:top">
-                <a
-                  href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=settings-becomeacontributor"
-                  target="_blank"
-                >
-                  Become a Contributor
-                </a>
-              </ui-button>
+            <div layout="column items:center gap">
+              <img src="${assets.hands}" layout="size:12" alt="Contribution" slot="picture" />
+              <div layout="column gap:0.5">
+                <ui-text type="label-l" layout="block:center"> Become a Contributor </ui-text>
+                <ui-text type="body-s" color="secondary" layout="block:center">
+                  Help Ghostery fight for a web where privacy is a basic human right.
+                </ui-text>
+                <ui-button type="primary" layout="margin:top">
+                  <a
+                    href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=settings-becomeacontributor"
+                    target="_blank"
+                  >
+                    Become a Contributor
+                  </a>
+                </ui-button>
+              </div>
             </div>
           </settings-card>
           <div layout="column grow height::0 view:main layer">${stack}</div>

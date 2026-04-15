@@ -12,6 +12,12 @@
 import { html } from 'hybrids';
 import { themeToggle } from '../theme.js';
 
+// The `change` and `input` events are stopped from propagating,
+// to prevent them from triggering parent handlers
+function stopPropagation(host, event) {
+  event.stopPropagation();
+}
+
 export default {
   icon: { value: '', reflect: true },
   error: { value: '', reflect: true },
@@ -24,7 +30,9 @@ export default {
             <ui-icon name="${icon}" color="tertiary" layout="size:3"></ui-icon>
           </div>
         `}
-        <slot></slot>
+        <div layout="contents" onchange="${stopPropagation}" oninput="${stopPropagation}">
+          <slot></slot>
+        </div>
         ${error && html` <ui-text color="danger-secondary" type="body-s">${error}</ui-text> `}
       </template>
     `.css`

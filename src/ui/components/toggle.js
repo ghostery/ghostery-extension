@@ -37,11 +37,12 @@ export default {
           onclick="${toggle}"
           layout="row items:start gap:2 padding:0.5 margin:-0.5"
           inert="${disabled}"
+          part="container"
         >
           <div layout="self:stretch grow row items:center" onclick="${stopForAnchors}">
             <slot></slot>
           </div>
-          <div id="button" layout="row items:center gap padding:0.5 margin:0">
+          <div id="button" part="toggle" layout="row items:center gap padding:0.5 margin:0">
             <div id="toggle" layout="block relative size:36px:20px">
               <span layout="block size:2 absolute top left margin:2px"></span>
             </div>

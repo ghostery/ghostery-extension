@@ -100,10 +100,7 @@ export default {
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
-          <settings-link href="${router.backUrl()}" data-qa="button:back" layout="self:start">
-            <ui-icon name="chevron-left" color="primary"></ui-icon>
-            <ui-text type="headline-s" layout="row gap items:center"> Back </ui-text>
-          </settings-link>
+          <settings-back-button></settings-back-button>
           <ui-text type="headline-l" style="word-break:break-word"> ${domain} </ui-text>
 
           ${paused.revokeAt !== undefined &&
@@ -134,7 +131,7 @@ export default {
             <settings-card type="pause-assistant" layout="self:stretch">
               <div layout="column gap:2" layout@768px="row gap:2 items:center">
                 <div layout="grow">
-                  <ui-text type="label-m" color="onbrand"> Paused by Browsing Assistant </ui-text>
+                  <ui-text type="label-m" color="onbrand">Paused by Browsing Assistant</ui-text>
                   <ui-text type="body-s" color="onbrand">
                     Automatically paused to prevent adblocker breakage
                   </ui-text>
@@ -149,7 +146,7 @@ export default {
                           layout="padding:0"
                         >
                           <ui-icon name="doc-m" color="onbrand" layout="size:2"></ui-icon>
-                          <ui-text type="label-s" color="onbrand"> Broken page report </ui-text>
+                          <ui-text type="label-s" color="onbrand">Broken page report</ui-text>
                         </a>
                       </ui-button>
                     `}
@@ -160,7 +157,7 @@ export default {
                         layout="padding:0"
                       >
                         <ui-icon name="info" color="onbrand" layout="size:2"></ui-icon>
-                        <ui-text type="label-s" color="onbrand"> Learn more </ui-text>
+                        <ui-text type="label-s" color="onbrand">Learn more</ui-text>
                       </a>
                     </ui-button>
                   </div>
@@ -175,109 +172,108 @@ export default {
             </settings-card>
           `}
         </div>
-        <div
-          layout="column gap:2"
-          style="${paused.revokeAt !== undefined
-            ? {
-                opacity: 0.5,
-                pointerEvents: 'none',
-              }
-            : {}}"
-        >
-          <div layout="column gap:0.5 grow">
-            <ui-text type="label-l">Protection exceptions</ui-text>
-          </div>
-          <settings-table>
-            <div slot="header" layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
-              <ui-text type="label-m" mobile-type="label-s">Name</ui-text>
-              <ui-text type="label-m" layout="hidden" layout@768px="block"> Category </ui-text>
-              <ui-text type="label-m" mobile-type="label-s"> Protection status </ui-text>
-            </div>
-            ${!trackers.length &&
-            html`
-              <div layout="column center gap padding:5:0">
-                <ui-icon name="block-m" layout="size:4" color="tertiary"></ui-icon>
-                <ui-text layout="block:center width:::180px">
-                  No protection exceptions added yet
-                </ui-text>
-              </div>
-            `}
-            ${trackers.map(
-              (tracker) =>
-                !store.pending(tracker) &&
-                html`
-                  <div layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
-                    ${store.ready(tracker) &&
-                    html`<ui-action>
-                      <a
-                        href="${router.url(TrackerDetails, {
-                          tracker: tracker.id,
-                        })}"
-                        layout="column gap:0.5"
-                      >
-                        <ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>
-                        ${tracker.organization &&
-                        html`
-                          <ui-text type="body-s" color="secondary">
-                            ${tracker.organization.name}
-                          </ui-text>
-                        `}
-                      </a>
-                    </ui-action>`}
-                    ${!store.ready(tracker) &&
-                    html`<ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>`}
-                    <ui-text type="label-m" layout="hidden" layout@768px="row items:center">
-                      ${labels.categories[tracker.category]}
-                    </ui-text>
-                    <div layout="row gap items:center content:space-between">
-                      <settings-badge> <ui-icon name="trust-s"></ui-icon> Trusted </settings-badge>
-                      <ui-action>
-                        <button layout@768px="order:1">
-                          <ui-icon
-                            name="trash"
-                            layout="size:3"
-                            color="tertiary"
-                            onclick="${removeDomain(tracker)}"
-                          ></ui-icon>
-                        </button>
-                      </ui-action>
-                    </div>
-                  </div>
-                `,
-            )}
-          </settings-table>
-        </div>
-        <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
-          <settings-option static icon="hide-element">
-            Blocked elements on this site
+        <div layout="column gap">
+          <settings-option icon="shield">
+            Protection exceptions
             <span slot="description">
-              Displays all content blocks manually hidden on this site. You can remove them
-              individually or clear the entire list.
+              Manage the list of trackers that are allowed to load on this site.
             </span>
+            <settings-table slot="card-footer">
+              <div slot="header" layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
+                <ui-text type="label-m" mobile-type="label-s">Name</ui-text>
+                <ui-text type="label-m" layout="hidden" layout@768px="block"> Category </ui-text>
+                <ui-text type="label-m" mobile-type="label-s"> Protection status </ui-text>
+              </div>
+              ${!trackers.length &&
+              html`
+                <div layout="column center gap padding:3:0">
+                  <ui-icon name="block-m" color="tertiary" layout="size:3"></ui-icon>
+                  <ui-text color="tertiary" layout="block:center width:::180px">
+                    No exceptions added yet
+                  </ui-text>
+                </div>
+              `}
+              ${trackers.map(
+                (tracker) =>
+                  !store.pending(tracker) &&
+                  html`
+                    <div layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
+                      ${store.ready(tracker) &&
+                      html`<ui-action>
+                        <a
+                          href="${router.url(TrackerDetails, {
+                            tracker: tracker.id,
+                          })}"
+                          layout="column gap:0.5"
+                        >
+                          <ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>
+                          ${tracker.organization &&
+                          html`
+                            <ui-text type="body-s" color="secondary">
+                              ${tracker.organization.name}
+                            </ui-text>
+                          `}
+                        </a>
+                      </ui-action>`}
+                      ${!store.ready(tracker) &&
+                      html`<ui-text type="label-m" mobile-type="label-s">
+                        ${tracker.name}
+                      </ui-text>`}
+                      <ui-text type="label-m" layout="hidden" layout@768px="row items:center">
+                        ${labels.categories[tracker.category]}
+                      </ui-text>
+                      <div layout="row gap items:center content:space-between">
+                        <settings-badge>
+                          <ui-icon name="trust-s"></ui-icon> Trusted
+                        </settings-badge>
+                        <ui-action>
+                          <button layout@768px="order:1">
+                            <ui-icon
+                              name="trash"
+                              layout="size:3"
+                              color="tertiary"
+                              onclick="${removeDomain(tracker)}"
+                            ></ui-icon>
+                          </button>
+                        </ui-action>
+                      </div>
+                    </div>
+                  `,
+              )}
+            </settings-table>
           </settings-option>
-          <ui-input>
-            <textarea
-              name="selectors"
-              rows="8"
-              value="${selectors}"
-              spellcheck="false"
-              autocorrect="off"
-              oninput="${enableElementPickerSelectors}"
-              style="white-space:pre"
-            ></textarea>
-          </ui-input>
-          <div layout="row gap:2">
-            <ui-button id="save-custom-content-blocks" type="success" disabled>
-              <button type="submit">Save</button>
-            </ui-button>
-            <ui-button onclick="${clearElementPickerSelectors}">
-              <button type="button">Clear</button>
-            </ui-button>
-          </div>
-        </form>
+          <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
+            <settings-option icon="hide-element">
+              Blocked elements on this site
+              <span slot="description">
+                Displays all content blocks manually hidden on this site. You can remove them
+                individually or clear the entire list.
+              </span>
+              <div slot="card-footer" layout="column gap:2">
+                <ui-input>
+                  <textarea
+                    name="selectors"
+                    rows="8"
+                    value="${selectors}"
+                    spellcheck="false"
+                    autocorrect="off"
+                    oninput="${enableElementPickerSelectors}"
+                    style="white-space:pre"
+                  ></textarea>
+                </ui-input>
+                <div layout="row gap:2">
+                  <ui-button id="save-custom-content-blocks" type="success" disabled>
+                    <button type="submit">Save</button>
+                  </ui-button>
+                  <ui-button onclick="${clearElementPickerSelectors}">
+                    <button type="button">Clear</button>
+                  </ui-button>
+                </div>
+              </div>
+            </settings-option>
+          </form>
 
-        <div layout="row gap:5">
-          <settings-option static icon="cookie">
+          <settings-option icon="cookie">
             Clear Cookies
             <span slot="description">
               Remove all cookies stored by this site to protect your privacy and reset your browsing
@@ -289,17 +285,19 @@ export default {
                 Cookies successfully cleared
               </ui-text>
             `}
+            <ui-button slot="footer" disabled="${clearedCookies}" size="s" layout="margin:top">
+              <a
+                href="${router.url(WebsiteClearCookies, { domain })}"
+                data-qa="button:clear-cookies"
+              >
+                Clear Cookies
+              </a>
+            </ui-button>
           </settings-option>
-          <ui-button disabled="${clearedCookies}">
-            <a href="${router.url(WebsiteClearCookies, { domain })}" data-qa="button:clear-cookies">
-              Clear Cookies
-            </a>
-          </ui-button>
         </div>
-
         ${hasWTMStats(topLevelDomain) &&
         html`
-          <div layout="margin:3:0">
+          <div layout="margin:1:0">
             <ui-action>
               <a href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}" target="_blank">
                 <settings-wtm-link> WhoTracks.Me Statistical Report </settings-wtm-link>
