@@ -43,8 +43,8 @@
   "dependencies": {
     "@duckduckgo/autoconsent": "^14.69.0",
     "@ghostery/adblocker": "^2.14.1",
-    "@ghostery/adblocker-content": "^2.13.3",
-    "@ghostery/adblocker-extended-selectors": "^2.13.3",
+    "@ghostery/adblocker-content": "^2.14.1",
+    "@ghostery/adblocker-extended-selectors": "^2.14.1",
     "@ghostery/adblocker-webextension": "^2.14.1",
     "@ghostery/config": "^0.0.10",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
