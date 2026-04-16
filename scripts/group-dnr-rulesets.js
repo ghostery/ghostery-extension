@@ -56,7 +56,9 @@ function groupRuleset(ruleset, metadata) {
       rule.action.type === 'block' &&
       // Pick the simplest condition only with urlFilter satisfying PATTERN
       Object.keys(rule.condition).length === 1 &&
-      rule.condition?.urlFilter?.match(DOMAIN_BLOCKING_PATTERN)
+      rule.condition?.urlFilter?.match(DOMAIN_BLOCKING_PATTERN) &&
+      // Pick the rule with priority of 1
+      rule.priority === 1
     ) {
       // Extract host from ||example.com^ pattern
       hostnames.add(rule.condition.urlFilter.slice(2, -1));
@@ -70,6 +72,7 @@ function groupRuleset(ruleset, metadata) {
     result.push({
       // The rule id starts with 1, we top up 2
       id: ruleset.length + 2,
+      priority: 1,
       action: {
         type: 'block',
       },
