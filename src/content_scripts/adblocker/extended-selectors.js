@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { querySelectorAll } from '@ghostery/adblocker-extended-selectors';
+import { handlePseudoDirective, querySelectorAll } from '@ghostery/adblocker-extended-selectors';
 
 let UPDATE_EXTENDED_TIMEOUT = null;
 const PENDING = new Set();
@@ -56,9 +56,8 @@ function updateExtended() {
   for (const root of roots) {
     for (const selector of EXTENDED.values()) {
       for (const element of cachedQuerySelector(root, selector, cache)) {
-        if (selector.remove === true) {
-          element.textContent = '';
-          element.remove();
+        if (selector.directive !== undefined) {
+          handlePseudoDirective(element, selector.directive);
         } else if (selector.attribute !== undefined && HIDDEN.has(element) === false) {
           elementsToHide.set(element, { selector, root });
         }
