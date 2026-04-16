@@ -98,7 +98,7 @@ export default {
             <panel-menu-item
               href="https://www.ghostery.com/submit-a-tracker?utm_source=gbe&utm_campaign=menu-submittracker"
               icon="send"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
             >
               Submit a new tracker
             </panel-menu-item>
@@ -106,7 +106,7 @@ export default {
             <panel-menu-item
               href="https://www.ghostery.com/support?utm_source=gbe&utm_campaign=menu-contact"
               icon="help"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
             >
               Contact support
             </panel-menu-item>
@@ -120,7 +120,7 @@ export default {
             <panel-menu-item
               href="https://www.ghostery.com/?utm_source=gbe&utm_campaign=menu-website"
               icon="ghosty-m"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
             >
               Website
             </panel-menu-item>
@@ -130,7 +130,7 @@ export default {
                 ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
                 : 'https://www.ghostery.com/privacy-policy?utm_source=gbe&utm_campaign=menu-privacypolicy'}"
               icon="privacy-m"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
             >
               Privacy Policy
             </panel-menu-item>
@@ -138,7 +138,7 @@ export default {
             <panel-menu-item
               href="https://www.ghostery.com/privacy/ghostery-terms-and-conditions/?utm_source=gbe&utm_campaign=menu-terms"
               icon="doc-m"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
             >
               Terms & Conditions
             </panel-menu-item>
@@ -146,7 +146,7 @@ export default {
             <panel-menu-item
               href="https://www.ghostery.com/privacy/imprint?utm_source=gbe&utm_campaign=menu-imprint"
               icon="imprint-m"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
               translate="no"
             >
               Imprint
@@ -155,7 +155,7 @@ export default {
             <panel-menu-item
               href="${chrome.runtime.getURL('/static_pages/licenses.html')}"
               icon="license-m"
-              suffix-icon="link-external-m"
+              suffix-icon="external-link"
               data-qa="button:licenses"
             >
               Software Licenses

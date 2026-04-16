@@ -274,7 +274,7 @@ export default {
                 >
                   <panel-actions-icon name="settings"></panel-actions-icon>
                   Open website settings
-                  <ui-icon name="link-external-m" color="tertiary" layout="size:2"></ui-icon>
+                  <ui-icon name="external-link" color="tertiary" layout="size:2"></ui-icon>
                 </a>
               </panel-actions-button>
             </panel-actions>

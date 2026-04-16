@@ -61,7 +61,7 @@ export default {
             ${config.hasFlag(FLAG_MODES) &&
             !managedConfig.disableModes &&
             html`
-              <settings-option>
+              <settings-option icon="ghosty-m">
                 Filtering Mode
                 <span slot="description">
                   Because no two people surf alike, we're giving you the power to pick how you want
@@ -135,7 +135,11 @@ export default {
               <div layout="column gap">
                 ${(__FIREFOX__ || (!isOpera() && !isWebkit())) &&
                 html`
-                  <settings-toggle value="${options.sync}" onchange="${html.set(options, 'sync')}">
+                  <settings-toggle
+                    icon="globe"
+                    value="${options.sync}"
+                    onchange="${html.set(options, 'sync')}"
+                  >
                     Settings Sync
                     <span slot="description">
                       Saves and synchronizes your custom settings between different devices.
@@ -143,7 +147,7 @@ export default {
                   </settings-toggle>
                 `}
 
-                <settings-option>
+                <settings-option icon="external-link">
                   Settings Backup
                   <span slot="description">
                     Save your custom settings to a file, or restore them from a file.
@@ -179,6 +183,7 @@ export default {
             `}
             <div layout="column gap">
               <settings-toggle
+                icon="info"
                 value="${options.panel.notifications}"
                 onchange="${html.set(options, 'panel.notifications')}"
               >
@@ -188,7 +193,7 @@ export default {
                 </span>
               </settings-toggle>
 
-              <settings-option>
+              <settings-option icon="websites">
                 Theme
                 <span slot="description">Changes application color theme.</span>
                 <ui-input slot="action">

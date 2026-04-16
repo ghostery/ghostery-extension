@@ -35,7 +35,7 @@ export default {
             slot="nav"
             data-qa="button:privacy-protection"
           >
-            <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
+            <ui-icon name="shield-menu" color="inherit" layout="size:3"></ui-icon>
             Privacy protection
           </a>
           <a
@@ -48,7 +48,7 @@ export default {
             slot="nav"
             data-qa="button:websites"
           >
-            <ui-icon name="websites" color="nav" layout="size:3"></ui-icon>
+            <ui-icon name="websites" color="inherit" layout="size:3"></ui-icon>
             Websites
           </a>
           <a
@@ -59,7 +59,7 @@ export default {
             slot="nav"
             data-qa="button:trackers"
           >
-            <ui-icon name="block-m" color="nav" layout="size:3"></ui-icon>
+            <ui-icon name="block-m" color="inherit" layout="size:3"></ui-icon>
             Trackers
           </a>
           <a
@@ -69,7 +69,7 @@ export default {
             translate="no"
             data-qa="button:whotracksme"
           >
-            <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
+            <ui-icon name="wtm" color="inherit" layout="size:3"></ui-icon>
             WhoTracks.Me
           </a>
 
@@ -79,7 +79,7 @@ export default {
             slot="nav"
             data-qa="button:my-ghostery"
           >
-            <ui-icon name="user" color="nav"></ui-icon>
+            <ui-icon name="user" color="inherit" layout="size:3"></ui-icon>
             My Ghostery
           </a>
           <settings-card

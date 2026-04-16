@@ -149,22 +149,23 @@ export default {
                 </settings-toggle>
               `}
             </div>
-
-            <settings-option>
-              <settings-help-image slot="icon">
-                <img src="${assets.wtm_privacy_report}" alt="WTM Privacy Report" />
-              </settings-help-image>
-              Your Browser Privacy Report
-              <span slot="description">
-                Generates a global transparency report on web tracking in your Ghostery-protected
-                browser.
-              </span>
-              <ui-button slot="footer" size="s" layout="margin:top">
-                <a href="${chrome.runtime.getURL('/pages/whotracksme/index.html')}" target="_blank">
-                  View Report
-                </a>
-              </ui-button>
-            </settings-option>
+            <ui-action>
+              <a href="${chrome.runtime.getURL('/pages/whotracksme/index.html')}" target="_blank">
+                <settings-option>
+                  <settings-help-image slot="icon">
+                    <img src="${assets.wtm_privacy_report}" alt="WTM Privacy Report" />
+                  </settings-help-image>
+                  Your Browser Privacy Report
+                  <span slot="description">
+                    Generates a global transparency report on web tracking in your
+                    Ghostery-protected browser.
+                  </span>
+                  <ui-button slot="footer" size="s" layout="margin:top">
+                    <button>View Report</button>
+                  </ui-button>
+                </settings-option>
+              </a>
+            </ui-action>
           </section>
         `}
       </settings-page-layout>

@@ -70,7 +70,7 @@ export default {
                           affiliation, categories, and presence across the site.
                         </ui-text>
                       </div>
-                      <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
+                      <ui-icon name="external-link" color="quaternary" layout="size:2"></ui-icon>
                     </a>
                   </ui-action>
                 `,

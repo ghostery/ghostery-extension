@@ -15,7 +15,7 @@ export default {
   href: '',
   icon: '',
   render: ({ href, icon }) => html`
-    <template layout="contents">
+    <template layout="block">
       <ui-action>
         <a href="${href}" layout="block">
           <settings-card>

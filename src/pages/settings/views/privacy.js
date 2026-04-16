@@ -147,7 +147,7 @@ export default {
 
                 <settings-link
                   href="${router.url(AdditionalFilters)}"
-                  data-qa="button:custom-filters"
+                  data-qa="button:additional-filters"
                   icon="detailed-view"
                 >
                   Additional Filters

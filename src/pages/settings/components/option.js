@@ -16,7 +16,7 @@ export default {
   render: ({ icon }) => html`
     <template layout="block">
       <settings-card static layout="padding:0">
-        <div id="content" layout="row gap:2 grow self:stretch padding:2">
+        <div id="content" layout="column gap:2 grow self:stretch padding:2">
           ${icon
             ? html`
                 <div id="icon" layout="row center padding self:start">
@@ -25,12 +25,10 @@ export default {
               `
             : html`<slot name="icon"></slot>`}
 
-          <div layout="column gap items:start grow" layout@768px="row gap:2">
+          <div layout="row gap:2 items:start grow">
             <div layout="column gap:0.5 grow items:start grow self:center">
               <ui-text id="name" type="headline-s"><slot></slot></ui-text>
-              <ui-text id="description" color="tertiary">
-                <slot name="description"></slot>
-              </ui-text>
+              <slot name="description"></slot>
               <slot name="footer"></slot>
             </div>
             <slot name="action"></slot>
@@ -49,26 +47,20 @@ export default {
       border-radius: 12px;
     }
 
-    #description slot::slotted(a) {
-      font: var(--font-label-m);
-      color: var(--color-primary);
-      text-decoration: underline;
+    slot[name='description']::slotted(*) {
+      display: block;
+      color: var(--color-tertiary);
+      font: var(--font-body-m);
     }
 
     slot[name='card-footer']::slotted(*) {
-      padding: 20px 32px;
+      padding: 16px;
       border-top: 1px solid var(--border-primary);
     }
 
-    @container (width < 500px) {
+    @container (width > 500px) {
       #content {
-        flex-direction: column;
-      }
-    }
-
-    @container (width < 750px) {
-      slot[name='card-footer']::slotted(*) {
-        padding: 16px;
+        flex-direction: row;
       }
     }
   `,

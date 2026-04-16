@@ -23,7 +23,7 @@ export default {
     <template layout="grid">
       <settings-card layout="padding:0">
         <ui-toggle value="${value}" onchange="${html.set('value')}" layout="grow">
-          <div id="content" layout="row gap:2 grow self:stretch">
+          <div id="content" layout="column gap:2 grow self:stretch margin:right:-100px">
             ${icon
               ? html`
                   <div id="icon" layout="row center padding self:start">
@@ -32,11 +32,9 @@ export default {
                 `
               : html`<slot name="icon"></slot>`}
 
-            <div layout="column gap:0.5 grow items:start">
+            <div layout="column gap:0.5 grow items:start self:center">
               <ui-text id="name" type="headline-s"><slot></slot></ui-text>
-              <ui-text id="description" color="tertiary">
-                <slot name="description"></slot>
-              </ui-text>
+              <slot name="description"></slot>
               <slot name="footer"></slot>
             </div>
           </div>
@@ -54,36 +52,34 @@ export default {
       margin: 0;
     }
 
+    ui-toggle::part(toggle) {
+      margin-top: 6px;
+    }
+
     #icon {
       background: var(--background-brand-primary);
       border-radius: 12px;
     }
 
-    #description slot::slotted(a) {
-      font: var(--font-label-m);
-      color: var(--color-primary);
-      text-decoration: underline;
+    slot[name='description']::slotted(*) {
+      display: block;
+      color: var(--color-tertiary);
+      font: var(--font-body-m);
     }
 
     slot[name='card-footer']::slotted(*) {
-      padding: 20px 32px;
+      padding: 16px;
       border-top: 1px solid var(--border-primary);
     }
 
-    @container (width < 500px) {
+    @container (width > 500px) {
       #content {
-        flex-direction: column;
-        margin-right: -100px;
+        flex-direction: row;
+        margin-right: 0px;
       }
 
       ui-toggle::part(toggle) {
-        margin-top: 6px;
-      }
-    }
-
-    @container (width < 750px) {
-      slot[name='card-footer']::slotted(*) {
-        padding: 16px;
+        margin-top: 0px;
       }
     }
 

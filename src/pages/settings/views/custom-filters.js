@@ -42,6 +42,7 @@ export default {
         value="${options.customFilters.enabled}"
         onchange="${html.set(options, 'customFilters.enabled')}"
         icon="detailed-view"
+        data-qa="toggle:custom-filters"
       >
         Custom Filters
         <span slot="description">
