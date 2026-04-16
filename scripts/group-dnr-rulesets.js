@@ -65,14 +65,19 @@ function groupRuleset(ruleset, metadata) {
     }
   }
 
-  result.push({
-    // The rule id starts with 1, we top up 2
-    id: ruleset.length + 2,
-    action: {
-      type: 'block',
-    },
-    requestDomains: Array.from(hostnames),
-  });
+  // Empty `requestDomains` is not allowed by the format.
+  if (hostnames.size > 0) {
+    result.push({
+      // The rule id starts with 1, we top up 2
+      id: ruleset.length + 2,
+      action: {
+        type: 'block',
+      },
+      condition: {
+        requestDomains: Array.from(hostnames),
+      },
+    });
+  }
 
   return result;
 }
