@@ -15,11 +15,6 @@ import { registerDatabase } from '/utils/indexeddb.js';
 /**
  * Provides a similar interface then Storage, but is based on IndexedDB.
  * See the comments in Storage to understand the pros and cons.
- *
- * TODO: Maybe implement a transparent fallback to an in-memory version instead
- * if IndexedDB is not working. Maybe configurable with an option in the
- * constructor. Even though an in-memory version is almost useless with
- * Manifest V3, it might be still better then throwing.
  */
 class IndexedDBKeyValueStore {
   constructor(dbName, { version = 1, objectStore = 'default' } = {}) {
@@ -84,6 +79,30 @@ class IndexedDBKeyValueStore {
   }
 
   /**
+   * Example:
+   *
+   * db.transaction({ readonly: false}, async (tx) => {
+   *   let cursor = await tx.scan();
+   *   while (cursor) {
+   *     const { key, value } = cursor;
+   *     cursor = await cursor.next();
+   *   }
+   *   const old = await tx.get('foo');
+   *   await tx.set('foo', old + 1);
+   * });
+   */
+  async transaction({ readonly }, cb) {
+    if (readonly !== true && readonly !== false) {
+      throw new Error('Usage: { readonly: false/true }');
+    }
+    await this.open();
+    const tx = this._db.transaction(this._objectStore, readonly ? 'readonly' : 'readwrite');
+    const wrappedTx = this._wrapTransaction(tx, { readonly });
+    await cb(wrappedTx);
+    await tx.done;
+  }
+
+  /**
    * Debug function (to workaround limitations in the devtools).
    * Do not use this function for production code! If you need to
    * iterate over a database, there are more efficient ways.
@@ -91,6 +110,41 @@ class IndexedDBKeyValueStore {
   async _dumpToMap() {
     const keys = await this.keys();
     return new Map(await Promise.all(keys.sort().map(async (key) => [key, await this.get(key)])));
+  }
+
+  _wrapTransaction(tx, { readonly }) {
+    const wrapper = {};
+
+    // read operations:
+    wrapper.get = (key) => tx.store.get(key);
+    wrapper.scan = async () => this._wrapCursor(await tx.store.openCursor());
+
+    // write operations:
+    if (!readonly) {
+      wrapper.set = (key, value) => tx.store.put(value, key);
+      wrapper.remove = (key) => tx.store.delete(key);
+      wrapper.clear = () => tx.store.clear();
+    }
+
+    return wrapper;
+  }
+
+  // Usage:
+  //
+  // let cursor = await tx.scan();
+  // while (cursor) {
+  //   const { key, value } = cursor.get();
+  //   cursor = await cursor.next();
+  // }
+  _wrapCursor(cursor) {
+    if (!cursor) {
+      return null;
+    }
+    return {
+      key: cursor.key,
+      value: cursor.value,
+      next: async () => this._wrapCursor(await cursor.continue()),
+    };
   }
 }
 
