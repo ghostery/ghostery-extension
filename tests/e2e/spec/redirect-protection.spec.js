@@ -13,9 +13,9 @@ import { browser, expect } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
-  waitForIdleBackgroundTasks,
   setCustomFilters,
-  setPrivacyToggle,
+  setAdditionalFiltersToggle,
+  setToggle,
   disableCustomFilters,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -24,17 +24,12 @@ import {
 
 async function openRedirectSettings() {
   await browser.url('ghostery:settings');
-
   await getExtensionElement('button:redirect-protection').click();
 }
 
 async function setRedirectProtectionToggle(value) {
   await openRedirectSettings();
-  const toggle = await getExtensionElement('toggle:redirect-protection');
-  if ((await toggle.getProperty('value')) !== value) {
-    await toggle.click();
-    await waitForIdleBackgroundTasks();
-  }
+  await setToggle('redirect-protection', value);
 }
 
 async function expectOnWarningPage(expected) {
@@ -51,16 +46,9 @@ async function waitForNavigation() {
 
 describe('Redirect Protection', function () {
   before(enableExtension);
+  before(() => setCustomFilters([`||${PAGE_DOMAIN}^$document`]));
 
-  before(async () => {
-    await setRedirectProtectionToggle(true);
-    await setCustomFilters([`||${PAGE_DOMAIN}^$document`]);
-  });
-
-  after(async () => {
-    await setRedirectProtectionToggle(false);
-    await disableCustomFilters();
-  });
+  after(() => disableCustomFilters());
 
   it('is enabled by default', async function () {
     await openRedirectSettings();
@@ -100,13 +88,13 @@ describe('Redirect Protection', function () {
   });
 
   it("doesn't redirect when custom filters are disabled (keeping the content)", async function () {
-    await setPrivacyToggle('custom-filters', false);
+    await setAdditionalFiltersToggle('custom-filters', false);
 
     await browser.url(PAGE_URL);
     await expectOnWarningPage(false);
 
     // Re-enable for next tests
-    await setPrivacyToggle('custom-filters', true);
+    await setAdditionalFiltersToggle('custom-filters', true);
   });
 
   describe('Proceed with exception', function () {

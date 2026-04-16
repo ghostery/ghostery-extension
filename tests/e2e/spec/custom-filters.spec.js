@@ -12,7 +12,7 @@ import { browser, expect, $ } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
-  setPrivacyToggle,
+  setAdditionalFiltersToggle,
   setCustomFilters,
   disableCustomFilters,
   switchFrame,
@@ -41,7 +41,7 @@ describe('Custom Filters', function () {
   after(disableCustomFilters);
 
   it('disables custom filters by toggle', async function () {
-    await setPrivacyToggle('custom-filters', false);
+    await setAdditionalFiltersToggle('custom-filters', false);
 
     await browser.url(PAGE_URL);
     await expect($('#custom-filter')).toBeDisplayed();
@@ -51,7 +51,7 @@ describe('Custom Filters', function () {
 
     await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
 
-    await setPrivacyToggle('custom-filters', true);
+    await setAdditionalFiltersToggle('custom-filters', true);
   });
 
   it('supports custom network filter', async function () {
