@@ -40,11 +40,8 @@ const Notification = {
   },
 };
 
-export default Notification;
-
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes['notifications']) {
-    console.log('Clearing Notification store cache due to storage change');
-    store.clear(Notification, false);
-  }
+  if (changes['notifications']) store.clear(Notification, false);
 });
+
+export default Notification;
