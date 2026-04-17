@@ -111,7 +111,13 @@ export async function setToggle(name, value) {
   const toggle = await getExtensionElement(`toggle:${name}`);
 
   if ((await toggle.getProperty('value')) !== value) {
-    await toggle.click();
+    const desc = await toggle.$('span');
+
+    if (await desc.isExisting()) {
+      await desc.click();
+    } else {
+      await toggle.click();
+    }
 
     // Allow background process to update the settings
     await waitForIdleBackgroundTasks();
@@ -122,6 +128,13 @@ export async function setToggle(name, value) {
 
 export async function setPrivacyToggle(name, value) {
   await browser.url('ghostery:settings');
+
+  await setToggle(name, value);
+}
+
+export async function setAdditionalFiltersToggle(name, value) {
+  await browser.url('ghostery:settings');
+  await getExtensionElement('button:additional-filters').click();
 
   await setToggle(name, value);
 }
@@ -145,8 +158,7 @@ export async function expectAdsBlocked() {
 }
 
 export async function setCustomFilters(filters) {
-  await setPrivacyToggle('custom-filters', true);
-  await getExtensionElement('button:custom-filters').click();
+  await setAdditionalFiltersToggle('custom-filters', true);
 
   const checkbox = await getExtensionElement('checkbox:custom-filters:trusted-scriptlets');
 
@@ -166,7 +178,7 @@ export async function setCustomFilters(filters) {
 
 export async function disableCustomFilters() {
   await setCustomFilters([]);
-  await setPrivacyToggle('custom-filters', false);
+  await setAdditionalFiltersToggle('custom-filters', false);
 }
 
 export async function switchFrame(frameElement) {

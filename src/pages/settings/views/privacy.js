@@ -15,7 +15,6 @@ import { FLAG_REDIRECT_PROTECTION } from '@ghostery/config';
 import { longDateFormatter } from '/ui/labels.js';
 
 import Config from '/store/config.js';
-import ManagedConfig from '/store/managed-config.js';
 import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
@@ -23,10 +22,8 @@ import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 import { asyncAction } from '../utils/actions.js';
 import assets from '../assets/index.js';
 
-import RegionalFilters from './regional-filters.js';
-import CustomFilters from './custom-filters.js';
-import Serp from './serp.js';
-import RedirectProtection from './redirect-protection.js';
+import AdditionalFilters, { getAdditionalFiltersLabel } from './additional-filters.js';
+import RedirectProtection, { getRedirectProtectionLabel } from './redirect-protection.js';
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
@@ -50,11 +47,10 @@ function updateEngines(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [RegionalFilters, CustomFilters, Serp, RedirectProtection],
+    stack: [AdditionalFilters, RedirectProtection],
   },
   options: store(Options),
   config: store(Config),
-  managedConfig: store(ManagedConfig),
   devMode: __DEBUG__,
   globalPause: {
     value: false,
@@ -66,7 +62,7 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({ options, config, managedConfig, devMode, globalPause, globalPauseRevokeAt }) => html`
+  render: ({ options, config, devMode, globalPause, globalPauseRevokeAt }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -79,153 +75,86 @@ export default {
                 collection including ads, trackers, and cookie pop-ups.
               </ui-text>
             </div>
-            <ui-toggle
+            <settings-toggle
+              icon="pause"
               value="${globalPause}"
               onchange="${html.set('globalPause')}"
               data-qa="toggle:global-pause"
+              layout@768px="margin:bottom:-3"
             >
-              <settings-option icon="pause">
-                Pause Ghostery
-                <span slot="description"> Suspends privacy protection globally for 1 day. </span>
-                ${globalPauseRevokeAt &&
-                html`
-                  <ui-text type="body-s" color="secondary" slot="footer">
-                    <ui-revoke-at revokeAt="${globalPauseRevokeAt}"></ui-revoke-at>
-                  </ui-text>
-                `}
-              </settings-option>
-            </ui-toggle>
-            <ui-line></ui-line>
+              Pause Ghostery
+              <span slot="description">Suspends privacy protection globally for 1 day.</span>
+              ${globalPauseRevokeAt &&
+              html`
+                <ui-text type="body-s" color="secondary" slot="footer">
+                  <ui-revoke-at revokeAt="${globalPauseRevokeAt}"></ui-revoke-at>
+                </ui-text>
+              `}
+            </settings-toggle>
             <div
-              layout="column gap:4"
+              layout="column gap:5"
               style="${{ opacity: globalPause ? 0.5 : undefined }}"
               inert="${globalPause}"
             >
-              <div layout="column gap:3">
-                <ui-toggle
+              <div layout="column gap" layout@768px="grid:3">
+                <settings-toggle
+                  icon="block-ads"
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
                   data-qa="toggle:ad-blocking"
                 >
-                  <settings-option icon="ads">
-                    Ad-Blocking
-                    <span slot="description">
-                      Eliminates ads on websites for safe and fast browsing.
-                    </span>
-                  </settings-option>
-                </ui-toggle>
-                <ui-toggle
+                  Ad-Blocking
+                  <span slot="description">
+                    Eliminates ads on websites for safe and fast browsing.
+                  </span>
+                </settings-toggle>
+                <settings-toggle
+                  icon="anti-tracking"
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
                   data-qa="toggle:anti-tracking"
                 >
-                  <settings-option icon="tracking">
-                    Anti-Tracking
-                    <span slot="description">
-                      Prevents various tracking techniques using AI-driven technology.
-                    </span>
-                  </settings-option>
-                </ui-toggle>
-                <ui-toggle
+                  Anti-Tracking
+                  <span slot="description">
+                    Prevents various tracking techniques using AI-driven technology.
+                  </span>
+                </settings-toggle>
+                <settings-toggle
+                  icon="never-consent"
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
                   data-qa="toggle:never-consent"
                 >
-                  <settings-option icon="autoconsent">
-                    Never-Consent
-                    <span slot="description"> Automatically rejects cookie consent notices. </span>
-                  </settings-option>
-                </ui-toggle>
+                  Never-Consent
+                  <span slot="description">Automatically rejects cookie consent notices.</span>
+                </settings-toggle>
               </div>
-              <ui-line></ui-line>
-              <div layout="column gap:3">
-                <div layout="grid:1|max content:center gap">
-                  <settings-link href="${router.url(Serp)}">
-                    <ui-icon
-                      name="search"
-                      color="quaternary"
-                      layout="size:3 margin:right"
-                    ></ui-icon>
-                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
-                      Search Engine Redirect Protection </ui-text
-                    ><ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
-                  </settings-link>
-                  <ui-toggle
-                    value="${options.serpTrackingPrevention}"
-                    onchange="${html.set(options, 'serpTrackingPrevention')}"
-                  >
-                  </ui-toggle>
-                </div>
-                <div layout="grid:1|max content:center gap">
-                  <settings-link
-                    href="${router.url(RegionalFilters)}"
-                    data-qa="button:regional-filters"
-                  >
-                    <ui-icon name="pin" color="quaternary" layout="size:3 margin:right"></ui-icon>
-                    <ui-text type="headline-xs" layout="row gap:0.5 items:center">
-                      Regional Filters
-                    </ui-text>
-                    <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
-                  </settings-link>
-                  <ui-toggle
-                    value="${options.regionalFilters.enabled}"
-                    onchange="${html.set(options, 'regionalFilters.enabled')}"
-                    data-qa="toggle:regional-filters"
-                  >
-                  </ui-toggle>
-                </div>
-                <settings-managed value="${managedConfig.customFilters.enabled}">
-                  <div layout="grid:1|max content:center gap">
-                    <settings-link
-                      href="${!managedConfig.customFilters.enabled
-                        ? router.url(CustomFilters)
-                        : ''}"
-                      data-qa="button:custom-filters"
-                    >
-                      <ui-icon
-                        name="detailed-view"
-                        color="quaternary"
-                        layout="size:3 margin:right"
-                      ></ui-icon>
-                      <ui-text type="headline-xs" layout="row gap:0.5 items:center">
-                        Custom Filters
-                      </ui-text>
-                      <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
-                    </settings-link>
-                    <ui-toggle
-                      value="${options.customFilters.enabled}"
-                      onchange="${html.set(options, 'customFilters.enabled')}"
-                      data-qa="toggle:custom-filters"
-                    >
-                    </ui-toggle>
-                  </div>
-                </settings-managed>
+              <div layout="column gap">
                 ${config.hasFlag(FLAG_REDIRECT_PROTECTION) &&
                 options.mode !== MODE_ZAP &&
                 html`
-                  <div layout="grid:1|max content:center gap">
-                    <settings-link
-                      href="${router.url(RedirectProtection)}"
-                      data-qa="button:redirect-protection"
-                    >
-                      <ui-icon
-                        name="globe-lock"
-                        color="quaternary"
-                        layout="size:3 margin:right"
-                      ></ui-icon>
-                      <ui-text type="headline-xs" layout="row gap:0.5 items:center">
-                        Redirect Protection
-                      </ui-text>
-                      <ui-icon name="chevron-right" color="primary" layout="size:2"></ui-icon>
-                    </settings-link>
-                    <ui-toggle
-                      value="${options.redirectProtection.enabled}"
-                      onchange="${html.set(options, 'redirectProtection.enabled')}"
-                      data-qa="toggle:redirect-protection"
-                    >
-                    </ui-toggle>
-                  </div>
+                  <settings-link
+                    href="${router.url(RedirectProtection)}"
+                    icon="redirect-protection"
+                    data-qa="button:redirect-protection"
+                  >
+                    Redirect Protection
+                    <ui-text slot="footer" color="tertiary">
+                      ${getRedirectProtectionLabel(options)}
+                    </ui-text>
+                  </settings-link>
                 `}
+
+                <settings-link
+                  href="${router.url(AdditionalFilters)}"
+                  data-qa="button:additional-filters"
+                  icon="detailed-view"
+                >
+                  Additional Filters
+                  <ui-text slot="footer" color="tertiary">
+                    ${getAdditionalFiltersLabel(options)}
+                  </ui-text>
+                </settings-link>
               </div>
             </div>
           </section>
@@ -255,26 +184,28 @@ export default {
           </div>
         `}
         <section layout="grid:1/1 grow items:end:stretch padding:0" layout@992px="hidden">
-          <settings-card layout="column items:center gap" layout@768px="row gap:5">
-            <img src="${assets['hands']}" layout="size:12" alt="Contribution" slot="picture" />
-            <div
-              layout="block:center column gap:0.5"
-              layout@768px="block:left row grow gap:5 content:space-between"
-            >
-              <div layout="column gap:0.5">
-                <ui-text type="label-l" layout=""> Become a Contributor </ui-text>
-                <ui-text type="body-s" color="secondary">
-                  Help Ghostery fight for a web where privacy is a basic human right.
-                </ui-text>
+          <settings-card static>
+            <div layout="column items:center gap padding:2" layout@768px="row gap:5">
+              <img src="${assets['hands']}" layout="size:12" alt="Contribution" />
+              <div
+                layout="block:center column gap:0.5"
+                layout@768px="block:left row grow gap:5 content:space-between"
+              >
+                <div layout="column gap:0.5">
+                  <ui-text type="label-l" layout=""> Become a Contributor </ui-text>
+                  <ui-text type="body-s" color="secondary">
+                    Help Ghostery fight for a web where privacy is a basic human right.
+                  </ui-text>
+                </div>
+                <ui-button type="primary" layout="grow margin:top">
+                  <a
+                    href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
+                    target="_blank"
+                  >
+                    Become a Contributor
+                  </a>
+                </ui-button>
               </div>
-              <ui-button type="primary" layout="grow margin:top">
-                <a
-                  href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
-                  target="_blank"
-                >
-                  Become a Contributor
-                </a>
-              </ui-button>
             </div>
           </settings-card>
         </section>

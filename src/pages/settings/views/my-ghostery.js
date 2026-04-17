@@ -61,20 +61,13 @@ export default {
             ${config.hasFlag(FLAG_MODES) &&
             !managedConfig.disableModes &&
             html`
-              <settings-card
-                type="content"
-                layout="contents"
-                layout@768px="block padding:2 gap:2"
-                layout@1280px="padding:5 gap:4"
-              >
-                <settings-option static>
-                  Filtering Mode
-                  <span slot="description">
-                    Because no two people surf alike, we're giving you the power to pick how you
-                    want to experience the web.
-                  </span>
-                </settings-option>
-                <div layout="column gap" layout@768px="grid:2">
+              <settings-option icon="ghosty-m">
+                Filtering Mode
+                <span slot="description">
+                  Because no two people surf alike, we're giving you the power to pick how you want
+                  to experience the web.
+                </span>
+                <div slot="card-footer" layout="column gap" layout@768px="grid:2">
                   <ui-mode-radio
                     checked="${options.mode === MODE_DEFAULT}"
                     id="mode-option-default"
@@ -135,24 +128,26 @@ export default {
                     </ui-text>
                   </ui-mode-radio>
                 </div>
-              </settings-card>
+              </settings-option>
             `}
             ${!managedConfig.disableUserAccount &&
             html`
-              ${(__FIREFOX__ || (!isOpera() && !isWebkit())) &&
-              html`
-                <ui-toggle value="${options.sync}" onchange="${html.set(options, 'sync')}">
-                  <settings-option>
+              <div layout="column gap">
+                ${(__FIREFOX__ || (!isOpera() && !isWebkit())) &&
+                html`
+                  <settings-toggle
+                    icon="globe"
+                    value="${options.sync}"
+                    onchange="${html.set(options, 'sync')}"
+                  >
                     Settings Sync
                     <span slot="description">
                       Saves and synchronizes your custom settings between different devices.
                     </span>
-                  </settings-option>
-                </ui-toggle>
-              `}
+                  </settings-toggle>
+                `}
 
-              <div layout="column gap:2" layout@768px="row">
-                <settings-option static>
+                <settings-option icon="external-link">
                   Settings Backup
                   <span slot="description">
                     Save your custom settings to a file, or restore them from a file.
@@ -167,51 +162,48 @@ export default {
                       ${importStatus.msg}
                     </ui-text>
                   `}
+                  <div slot="action" layout="row:wrap gap" layout@768px="content:end">
+                    <ui-button size="s" onclick="${backup.exportToFile}">
+                      <button><ui-icon name="arrow-square-up"></ui-icon> Export to file</button>
+                    </ui-button>
+                    <ui-button size="s">
+                      <label for="import-settings-input">
+                        <ui-icon name="arrow-square-down"></ui-icon> Import from file
+                      </label>
+                      <input
+                        id="import-settings-input"
+                        type="file"
+                        accept=".json,.txt"
+                        onchange="${importSettings}"
+                      />
+                    </ui-button>
+                  </div>
                 </settings-option>
-                <div layout="row:wrap gap" layout@768px="content:end">
-                  <ui-button size="s" onclick="${backup.exportToFile}">
-                    <button><ui-icon name="arrow-square-up"></ui-icon> Export to file</button>
-                  </ui-button>
-                  <ui-button size="s">
-                    <label for="import-settings-input">
-                      <ui-icon name="arrow-square-down"></ui-icon> Import from file
-                    </label>
-                    <input
-                      id="import-settings-input"
-                      type="file"
-                      accept=".json,.txt"
-                      onchange="${importSettings}"
-                    />
-                  </ui-button>
-                </div>
               </div>
-              <ui-line></ui-line>
             `}
-
-            <ui-toggle
-              value="${options.panel.notifications}"
-              onchange="${html.set(options, 'panel.notifications')}"
-            >
-              <settings-option>
+            <div layout="column gap">
+              <settings-toggle
+                icon="info"
+                value="${options.panel.notifications}"
+                onchange="${html.set(options, 'panel.notifications')}"
+              >
                 In-Panel Notifications
                 <span slot="description">
                   Turns Ghostery notifications displayed in the panel on or off.
                 </span>
-              </settings-option>
-            </ui-toggle>
+              </settings-toggle>
 
-            <div layout="row gap:2">
-              <settings-option static>
+              <settings-option icon="websites">
                 Theme
-                <span slot="description"> Changes application color theme. </span>
+                <span slot="description">Changes application color theme.</span>
+                <ui-input slot="action">
+                  <select value="${options.theme}" onchange="${html.set(options, 'theme')}">
+                    <option value="">Default</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </ui-input>
               </settings-option>
-              <ui-input>
-                <select value="${options.theme}" onchange="${html.set(options, 'theme')}">
-                  <option value="">Default</option>
-                  <option value="light">Light</option>
-                  <option value="dark">Dark</option>
-                </select>
-              </ui-input>
             </div>
           </div>
         </section>

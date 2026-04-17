@@ -13,23 +13,54 @@ import { html } from 'hybrids';
 
 export default {
   icon: '',
-  static: { value: false, reflect: true },
   render: ({ icon }) => html`
-    <template layout="row gap grow">
-      ${icon && html`<ui-icon name="${icon}" color="quaternary" layout="size:3"></ui-icon>`}
+    <template layout="block">
+      <settings-card static layout="padding:0">
+        <div id="content" layout="column gap:2 grow self:stretch padding:2">
+          ${icon
+            ? html`
+                <div id="icon" layout="row center padding self:start">
+                  <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                </div>
+              `
+            : html`<slot name="icon"></slot>`}
 
-      <div layout="column gap:0.5 grow">
-        <ui-text id="name" type="headline-xs"><slot></slot></ui-text>
-        <ui-text type="body-m" mobile-type="body-s" color="secondary">
-          <slot name="description"></slot>
-        </ui-text>
-        <slot name="footer"></slot>
-      </div>
+          <div layout="row gap:2 items:start grow">
+            <div layout="column gap:0.5 grow items:start grow self:center">
+              <ui-text id="name" type="headline-s"><slot></slot></ui-text>
+              <slot name="description"></slot>
+              <slot name="footer"></slot>
+            </div>
+            <slot name="action"></slot>
+          </div>
+        </div>
+        <slot name="card-footer"></slot>
+      </settings-card>
     </template>
   `.css`
-    @media (hover: hover) {
-      :host(:hover:not([static])) #name {
-        text-decoration: underline;
+    settings-card {
+      container-type: inline-size;
+    }
+
+    #icon {
+      background: var(--background-brand-primary);
+      border-radius: 12px;
+    }
+
+    slot[name='description']::slotted(*) {
+      display: block;
+      color: var(--color-tertiary);
+      font: var(--font-body-m);
+    }
+
+    slot[name='card-footer']::slotted(*) {
+      padding: 16px;
+      border-top: 1px solid var(--border-primary);
+    }
+
+    @container (width > 500px) {
+      #content {
+        flex-direction: row;
       }
     }
   `,

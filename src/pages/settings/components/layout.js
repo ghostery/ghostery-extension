@@ -68,14 +68,12 @@ export default {
       border-radius: 6px;
       padding: 6px 4px 4px;
       text-align: center;
-      --color-nav: currentColor;
       transition: color 0.2s, opacity 0.2s;
     }
 
     @media (hover: hover) {
       nav ::slotted(a:hover) {
         color: var(--color-brand-primary);
-        --color-nav: currentColor;
       }
     }
 
@@ -108,16 +106,11 @@ export default {
         flex-flow: row;
         max-width: none;
         text-align: left;
-        --color-nav: var(--color-secondary);
       }
 
       nav ::slotted(a:focus-visible) {
         outline: 2px solid var(--color-brand-primary);
         outline-offset: 2px;
-      }
-
-      nav ::slotted(a.active) {
-        --color-nav: var(--color-brand-primary);
       }
 
       nav ::slotted(a.bottom) {

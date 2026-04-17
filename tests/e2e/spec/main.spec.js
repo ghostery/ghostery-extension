@@ -14,6 +14,7 @@ import {
   enableExtension,
   getExtensionElement,
   setPrivacyToggle,
+  setAdditionalFiltersToggle,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
   switchFrame,
@@ -167,15 +168,16 @@ describe('Main Features', function () {
     const SELECTOR = '.a-re';
 
     it('shows the ads on the page', async function () {
-      await setPrivacyToggle('regional-filters', false);
+      await setAdditionalFiltersToggle('regional-filters', false);
+
       await browser.url(WEBSITE_URL);
       await expect($(SELECTOR)).toBeDisplayed();
+
+      await setAdditionalFiltersToggle('regional-filters', true);
     });
 
     it('hides the ads on the page', async function () {
-      await setPrivacyToggle('regional-filters', true);
-      await getExtensionElement('button:regional-filters').click();
-
+      await setAdditionalFiltersToggle('regional-filters', true);
       const checkbox = await getExtensionElement('checkbox:regional-filters:pl');
 
       if (!(await checkbox.getProperty('checked'))) {
@@ -188,7 +190,6 @@ describe('Main Features', function () {
 
       await browser.url(WEBSITE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();
-      await setPrivacyToggle('regional-filters', false);
     });
   });
 

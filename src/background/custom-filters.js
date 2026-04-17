@@ -226,6 +226,9 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
       const { text } = await store.resolve(CustomFilters);
       await updateCustomFilters(text, value);
     } else {
+      // Update main engine without custom filters
+      await reloadMainEngine();
+
       // When disabling custom filters, we need to remove all DNR rules
       // as they are not removed automatically
       // TODO: Save DNR rules after converting to avoid re-converting when enabling

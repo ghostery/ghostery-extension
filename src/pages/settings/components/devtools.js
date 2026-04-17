@@ -96,21 +96,18 @@ export default {
   notifications: store([Notification]),
   resources: store(Resources),
   render: ({ visible, counter, options, config, notifications, resources }) => html`
-    <template layout="column gap:3">
+    <template layout="column gap:3 margin:top:2">
       ${(visible || counter > 5) &&
       html`
-        <ui-line></ui-line>
-        <section layout="column gap:3" translate="no">
-          <ui-text type="headline-s">Experimental features</ui-text>
+        <section layout="column gap:4" translate="no">
           <div layout="column gap:2">
-            <div layout="grid:1fr|max gap">
-              <settings-option static>
-                Never-Consent Automatic Action Type
-                <span slot="description">
-                  Chooses the default behavior for cookie consent notices.
-                </span>
-              </settings-option>
-              <ui-input>
+            <ui-text type="headline-m">Experimental features</ui-text>
+            <settings-option>
+              Never-Consent Automatic Action Type
+              <span slot="description">
+                Chooses the default behavior for cookie consent notices.
+              </span>
+              <ui-input slot="action">
                 <select
                   value="${options.autoconsent.autoAction}"
                   onchange="${html.set(options, 'autoconsent.autoAction')}"
@@ -120,186 +117,186 @@ export default {
                   <option value="">None</option>
                 </select>
               </ui-input>
-            </div>
+            </settings-option>
           </div>
-          <ui-line></ui-line>
-          <ui-text type="headline-s">Developer tools</ui-text>
-          ${html`
-            <div layout="column gap" translate="no">
-              <ui-toggle
+          <div layout="column gap:3" translate="no">
+            <ui-text type="headline-m">Developer tools</ui-text>
+            <div layout="column gap">
+              <settings-toggle value="${config.enabled}" onchange="${html.set(config, 'enabled')}">
+                Remote Configuration
+                <ui-text type="body-s" color="tertiary" slot="footer">
+                  Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
+                </ui-text>
+                ${config.enabled &&
+                html`
+                  <div layout="column gap:3" slot="card-footer" translate="no">
+                    <div layout="column gap">
+                      <ui-text type="label-m">Flags</ui-text>
+                      <div layout="row:wrap gap:2:1">
+                        ${FLAGS.map(
+                          (name) => html`
+                            <label layout="row items:center gap">
+                              <ui-input>
+                                <input
+                                  type="checkbox"
+                                  checked="${config.hasFlag(name)}"
+                                  onchange="${toggleFlag(name)}"
+                                />
+                              </ui-input>
+                              <ui-text type="body-xs" color="tertiary"> ${name} </ui-text>
+                            </label>
+                          `,
+                        )}
+                      </div>
+                    </div>
+                    <div layout="column gap">
+                      <ui-text type="label-m">Domains</ui-text>
+                      <div layout="row:wrap gap">
+                        ${Object.entries(config.domains)
+                          .filter(([, d]) => d.actions.length)
+                          .map(
+                            ([name, d]) =>
+                              html`<ui-text
+                                color="secondary"
+                                onclick="${createClearConfigDomain(name)}"
+                                style="cursor: pointer;"
+                              >
+                                ${name} (${d.actions.join(', ')})
+                              </ui-text>`,
+                          ) || 'none'}
+                      </div>
+                    </div>
+                    <div layout="row gap">
+                      <ui-button
+                        onclick="${forceConfigSync}"
+                        layout="shrink:0 self:start"
+                        size="s"
+                        slot="footer"
+                      >
+                        <button>
+                          <ui-icon name="refresh" layout="size:2"></ui-icon>
+                          Force sync
+                        </button>
+                      </ui-button>
+                      <ui-button
+                        layout="shrink:0 self:start"
+                        onclick="${testConfigDomain}"
+                        size="s"
+                      >
+                        <button>Add domain</button>
+                      </ui-button>
+                    </div>
+                  </div>
+                `}
+              </settings-toggle>
+              <settings-toggle
                 value="${options.fixesFilters}"
                 onchange="${html.set(options, 'fixesFilters')}"
                 data-qa="toggle:fixes-filters"
               >
-                <div layout="column">
-                  <ui-text type="headline-s">Ghostery specific fixes</ui-text>
-                </div>
-              </ui-toggle>
+                Ghostery specific fixes
+              </settings-toggle>
             </div>
-          `}
-          <div layout="column gap:2">
-            <div layout="column gap">
-              <ui-toggle value="${config.enabled}" onchange="${html.set(config, 'enabled')}">
-                <div layout="column">
-                  <ui-text type="headline-s">Remote Configuration</ui-text>
-                  <ui-text type="body-xs" color="tertiary">
-                    Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
-                  </ui-text>
+            <settings-card static layout="column gap:3">
+              ${store.ready(notifications) &&
+              html`
+                <div layout="column gap items:start" translate="no">
+                  <ui-text type="headline-s">Notifications</ui-text>
+                  <div layout="row:wrap gap">
+                    ${notifications.length === 0 &&
+                    html`
+                      <ui-text type="body-m" color="secondary" translate="no">
+                        No notifications shown yet
+                      </ui-text>
+                    `}
+                    ${notifications.map(
+                      ({ id, shown, lastShownAt }) => html`
+                        <ui-text type="body-m" color="secondary">
+                          <ui-text type="label-m">${id}:</ui-text>
+                          ${shown}
+                          ${!!lastShownAt && `(${longDateFormatter.format(new Date(lastShownAt))})`}
+                        </ui-text>
+                      `,
+                    )}
+                  </div>
                 </div>
-              </ui-toggle>
-              <div layout="row">
-                <ui-button onclick="${forceConfigSync}" layout="shrink:0 self:start" size="s">
+              `}
+              ${html.resolve(
+                telemetry.getStorage().then(
+                  (storage) => html`
+                    <div layout="column gap items:start" translate="no">
+                      <ui-text type="headline-s">Attribution</ui-text>
+                      <div layout="column gap:0.5">
+                        <ui-text type="body-m" color="secondary">
+                          <ui-text type="label-m">Install date:</ui-text>
+                          <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
+                        </ui-text>
+                        <ui-text type="body-m" color="secondary">
+                          <ui-text type="label-m">Source:</ui-text>
+                          <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
+                        </ui-text>
+                        <ui-text type="body-m" color="secondary">
+                          <ui-text type="label-m">Campaign:</ui-text>
+                          <span data-qa="text:utm-campaign">${storage.utm_campaign || 'N/A'}</span>
+                        </ui-text>
+                      </div>
+                    </div>
+                  `,
+                ),
+              )}
+              ${__CHROMIUM__ &&
+              html`
+                <div layout="column gap items:start" translate="no">
+                  <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+                  <ui-text type="body-xs" color="tertiary">
+                    The below list is not reactive to changes made in the extension - use refresh
+                    button
+                  </ui-text>
+                  <div layout="block:left">
+                    ${html.resolve(
+                      chrome.declarativeNetRequest
+                        .getEnabledRulesets()
+                        .then((rules) => html`${rules.join(', ') || 'No rulesets enabled...'}`),
+                    )}
+                  </div>
+                  <ui-button onclick="${refresh}" layout="shrink:0" size="s">
+                    <button>Refresh</button>
+                  </ui-button>
+                </div>
+              `}
+              ${store.ready(resources) &&
+              html`
+                <div layout="column gap" translate="no">
+                  <ui-text type="headline-s">Resource Checksums</ui-text>
+                  <div>
+                    ${Object.entries(resources.checksums).map(
+                      ([key, value]) => html`
+                        <ui-text type="body-m" color="secondary" style="word-break: break-all;">
+                          ${key}: ${value}
+                        </ui-text>
+                      `,
+                    )}
+                  </div>
+                </div>
+              `}
+            </settings-card>
+            <settings-card static layout="column gap:2">
+              <ui-text type="headline-s">Actions</ui-text>
+              <div layout="row gap items:start">
+                <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
                   <button>
-                    <ui-icon name="refresh" layout="size:2"></ui-icon>
-                    Force sync
+                    <ui-icon name="trash" layout="size:2"></ui-icon>
+                    Clear storage
                   </button>
                 </ui-button>
               </div>
-            </div>
-            <div layout="column gap">
-              <ui-text type="label-m">Flags</ui-text>
-              <div layout="row:wrap gap:2:1">
-                ${FLAGS.map(
-                  (name) => html`
-                    <label layout="row items:center gap">
-                      <ui-input>
-                        <input
-                          type="checkbox"
-                          checked="${config.hasFlag(name)}"
-                          onchange="${toggleFlag(name)}"
-                        />
-                      </ui-input>
-                      <ui-text type="body-xs" color="tertiary"> ${name} </ui-text>
-                    </label>
-                  `,
-                )}
-              </div>
-            </div>
-            <div layout="column gap">
-              <ui-text type="label-m">Domains</ui-text>
-              <div layout="row:wrap gap">
-                ${Object.entries(config.domains)
-                  .filter(([, d]) => d.actions.length)
-                  .map(
-                    ([name, d]) =>
-                      html`<ui-text
-                        color="secondary"
-                        onclick="${createClearConfigDomain(name)}"
-                        style="cursor: pointer;"
-                      >
-                        ${name} (${d.actions.join(', ')})
-                      </ui-text>`,
-                  ) || 'none'}
-              </div>
-              <ui-button layout="shrink:0 self:start" onclick="${testConfigDomain}" size="s">
-                <button>Add domain</button>
-              </ui-button>
-            </div>
+            </settings-card>
           </div>
-          ${store.ready(notifications) &&
-          html`
-            <div layout="column gap items:start" translate="no">
-              <ui-text type="headline-s">Notifications</ui-text>
-              <div layout="row:wrap gap">
-                ${notifications.length === 0 &&
-                html`
-                  <ui-text type="body-m" color="secondary" translate="no">
-                    No notifications shown yet
-                  </ui-text>
-                `}
-                ${notifications.map(
-                  ({ id, shown, lastShownAt }) => html`
-                    <ui-text type="body-m" color="secondary">
-                      <ui-text type="label-m">${id}:</ui-text>
-                      ${shown}
-                      ${!!lastShownAt && `(${longDateFormatter.format(new Date(lastShownAt))})`}
-                    </ui-text>
-                  `,
-                )}
-              </div>
-            </div>
-          `}
-          ${html.resolve(
-            telemetry.getStorage().then(
-              (storage) => html`
-                <div layout="column gap items:start" translate="no">
-                  <ui-text type="headline-s">Attribution</ui-text>
-                  <div layout="column gap:0.5">
-                    <ui-text type="body-m" color="secondary">
-                      <ui-text type="label-m">Install date:</ui-text>
-                      <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
-                    </ui-text>
-                    <ui-text type="body-m" color="secondary">
-                      <ui-text type="label-m">Source:</ui-text>
-                      <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
-                    </ui-text>
-                    <ui-text type="body-m" color="secondary">
-                      <ui-text type="label-m">Campaign:</ui-text>
-                      <span data-qa="text:utm-campaign">${storage.utm_campaign || 'N/A'}</span>
-                    </ui-text>
-                  </div>
-                </div>
-              `,
-            ),
-          )}
-          ${__CHROMIUM__ &&
-          html`
-            <div layout="column gap items:start" translate="no">
-              <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-              <ui-text type="body-xs" color="tertiary">
-                The below list is not reactive to changes made in the extension - use refresh button
-              </ui-text>
-              <div layout="row gap">
-                ${html.resolve(
-                  chrome.declarativeNetRequest
-                    .getEnabledRulesets()
-                    .then(
-                      (rules) => html`
-                        ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
-                        ${!rules.length &&
-                        html`<ui-text translate="no"> No rulesets enabled... </ui-text>`}
-                      `,
-                    ),
-                )}
-              </div>
-              <ui-button onclick="${refresh}" layout="shrink:0" size="s">
-                <button>Refresh</button>
-              </ui-button>
-            </div>
-          `}
-          ${store.ready(resources) &&
-          html`
-            <div layout="column gap" translate="no">
-              <ui-text type="headline-s">Resource Checksums</ui-text>
-              <div>
-                ${Object.entries(resources.checksums).map(
-                  ([key, value]) => html`
-                    <ui-text type="body-m" color="secondary"> ${key}: ${value} </ui-text>
-                  `,
-                )}
-              </div>
-            </div>
-          `}
-
-          <div layout="column gap">
-            <ui-text type="headline-s">Actions</ui-text>
-            <div layout="row gap items:start">
-              <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
-                <button>
-                  <ui-icon name="trash" layout="size:2"></ui-icon>
-                  Clear storage
-                </button>
-              </ui-button>
-            </div>
-          </div>
-          <ui-line></ui-line>
         </section>
       `}
-      <div layout="column">
+      <div layout="column" translate="no">
         <div onclick="${refresh}">
-          <ui-text type="body-m" color="tertiary" translate="no" style="user-select: none;">
-            v${VERSION}
-          </ui-text>
+          <ui-text type="body-m" color="tertiary" style="user-select: none;"> v${VERSION} </ui-text>
         </div>
       </div>
     </template>

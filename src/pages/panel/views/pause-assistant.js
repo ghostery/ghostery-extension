@@ -42,7 +42,7 @@ export default {
                     issue.
                   </ui-text>
                 </div>
-                <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
+                <ui-icon name="external-link" color="quaternary" layout="size:2"></ui-icon>
               </a>
             </ui-action>
           `}
@@ -59,7 +59,7 @@ export default {
                   Learn how Ghostery is automatically paused to avoid breakage.
                 </ui-text>
               </div>
-              <ui-icon name="link-external-m" color="quaternary" layout="size:2"></ui-icon>
+              <ui-icon name="external-link" color="quaternary" layout="size:2"></ui-icon>
             </a>
           </ui-action>
         </div>

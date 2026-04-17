@@ -12,24 +12,19 @@ import { html } from 'hybrids';
 
 export default {
   type: { value: '', reflect: true },
-  render: () => html`
-    <template layout="block padding:2">
-      <slot name="picture"></slot>
-      <div layout="column gap:2 grow"><slot></slot></div>
-    </template>
-  `.css`
+  static: { value: false, reflect: true },
+  render: () => html`<template layout="block padding:2"><slot></slot></template>`.css`
     :host {
       background: var(--background-primary);
       border: 1px solid var(--border-primary);
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px var(--shadow-card);
+      border-radius: 12px;
     }
 
-    :host([type="content"]) {
-      background: var(--background-secondary);
-      border: none;
-      border-radius: 12px;
-      box-shadow: none;
+    @media (hover: hover) {
+      :host(:not([static]):hover) {
+        border-color: var(--border-secondary);
+        box-shadow: 0px 4px 12px var(--shadow-card);
+      }
     }
 
     @keyframes pause-assistant-rotate {
@@ -58,8 +53,13 @@ export default {
       animation: pause-assistant-rotate 20s linear infinite;
     }
 
-    :host([type="pause-assistant"]) div {
+    :host([type="pause-assistant"]) ::slotted(*) {
       position: relative;
+    }
+
+    ::slotted(ui-toggle) {
+      padding: 16px;
+      margin: -16px;
     }
   `,
 };
