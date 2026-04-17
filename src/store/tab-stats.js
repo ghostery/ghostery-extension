@@ -93,10 +93,8 @@ const TabStats = {
   },
 };
 
-export default TabStats;
-
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes['tabStats:v1']) {
-    store.clear(TabStats, false);
-  }
+  if (changes['tabStats:v1']) store.clear(TabStats, false);
 });
+
+export default TabStats;
