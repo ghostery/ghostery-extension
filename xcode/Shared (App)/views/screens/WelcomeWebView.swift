@@ -90,7 +90,7 @@ class WebViewHelper: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("""
             localize({
-                'Privacy Ad Blocker': '\(String(localized: "Privacy Ad Blocker"))',
+                'AdBlocker for Privacy': '\(String(localized: "AdBlocker for Privacy"))',
                 'is a Safari Extension': '\(String(localized: "is a Safari Extension"))',
                 'To enable privacy protection, go to:': '\(String(localized: "To enable privacy protection, go to:"))',
                 'Settings': '\(String(localized: "Settings"))',
