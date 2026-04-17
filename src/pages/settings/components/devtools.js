@@ -124,9 +124,9 @@ export default {
             <div layout="column gap">
               <settings-toggle value="${config.enabled}" onchange="${html.set(config, 'enabled')}">
                 Remote Configuration
-                <span slot="description">
+                <ui-text type="body-s" color="tertiary" slot="footer">
                   Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
-                </span>
+                </ui-text>
                 ${config.enabled &&
                 html`
                   <div layout="column gap:3" slot="card-footer" translate="no">
@@ -195,13 +195,9 @@ export default {
                 data-qa="toggle:fixes-filters"
               >
                 Ghostery specific fixes
-                <span slot="description">
-                  Controls whether Ghostery applies specific fixes for certain websites to improve
-                  compatibility.
-                </span>
               </settings-toggle>
             </div>
-            <settings-card static layout="column gap:2">
+            <settings-card static layout="column gap:3">
               ${store.ready(notifications) &&
               html`
                 <div layout="column gap items:start" translate="no">
@@ -256,17 +252,11 @@ export default {
                     The below list is not reactive to changes made in the extension - use refresh
                     button
                   </ui-text>
-                  <div layout="row gap">
+                  <div layout="block:left">
                     ${html.resolve(
                       chrome.declarativeNetRequest
                         .getEnabledRulesets()
-                        .then(
-                          (rules) => html`
-                            ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
-                            ${!rules.length &&
-                            html`<ui-text translate="no"> No rulesets enabled... </ui-text>`}
-                          `,
-                        ),
+                        .then((rules) => html`${rules.join(', ') || 'No rulesets enabled...'}`),
                     )}
                   </div>
                   <ui-button onclick="${refresh}" layout="shrink:0" size="s">
@@ -281,7 +271,9 @@ export default {
                   <div>
                     ${Object.entries(resources.checksums).map(
                       ([key, value]) => html`
-                        <ui-text type="body-m" color="secondary"> ${key}: ${value} </ui-text>
+                        <ui-text type="body-m" color="secondary" style="word-break: break-all;">
+                          ${key}: ${value}
+                        </ui-text>
                       `,
                     )}
                   </div>

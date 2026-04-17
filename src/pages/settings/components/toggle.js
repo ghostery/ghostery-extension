@@ -12,7 +12,7 @@
 import { dispatch, html } from 'hybrids';
 
 export default {
-  icon: '',
+  icon: { value: '', reflect: true },
   value: {
     value: false,
     observe: (host, value, lastValue) => {
@@ -32,7 +32,7 @@ export default {
                 `
               : html`<slot name="icon"></slot>`}
 
-            <div layout="column gap:0.5 grow items:start self:center">
+            <div layout="column gap:0.5 grow items:start content:center">
               <ui-text id="name" type="headline-s"><slot></slot></ui-text>
               <slot name="description"></slot>
               <slot name="footer"></slot>
@@ -52,7 +52,7 @@ export default {
       margin: 0;
     }
 
-    ui-toggle::part(toggle) {
+    :host([icon]) ui-toggle::part(toggle) {
       margin-top: 6px;
     }
 
@@ -75,6 +75,7 @@ export default {
     @container (width > 500px) {
       #content {
         flex-direction: row;
+        align-items: center;
         margin-right: 0px;
       }
 
