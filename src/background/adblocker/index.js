@@ -12,11 +12,7 @@
 import { store } from 'hybrids';
 import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblocker-webextension';
 import scriptlets from '@ghostery/scriptlets';
-import {
-  FLAG_INJECTION_TARGET_DOCUMENT_ID,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_SUBFRAME_SCRIPTING,
-} from '@ghostery/config';
+import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
 import Options, { ENGINES, getPausedDetails } from '/store/options.js';
@@ -215,12 +211,10 @@ export const setup = asyncSetup('adblocker', [
   }),
 ]);
 
-const INJECTION_TARGET_DOCUMENT_ID = resolveFlag(FLAG_INJECTION_TARGET_DOCUMENT_ID);
-
 function resolveInjectionTarget(details) {
   const target = { tabId: details.tabId };
 
-  if (__CHROMIUM__ && INJECTION_TARGET_DOCUMENT_ID.enabled && details.documentId) {
+  if (__CHROMIUM__ && details.documentId) {
     target.documentIds = [details.documentId];
   } else {
     target.frameIds = [details.frameId];
@@ -501,14 +495,8 @@ if (__FIREFOX__) {
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
 } else {
-  let INJECT_COSMETICS_ON_RESPONSE_STARTED = resolveFlag(
-    FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  );
-
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
-      if (!INJECT_COSMETICS_ON_RESPONSE_STARTED.enabled) return;
-
       if (details.tabId === -1) return;
       if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
 
