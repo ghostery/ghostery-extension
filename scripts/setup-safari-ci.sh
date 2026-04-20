@@ -25,6 +25,17 @@ defaults write com.apple.Safari.SandboxBroker AllowUnsignedWebExtensions -bool t
 
 sudo safaridriver --enable
 
+# Set a known password on the runner user so the SecurityAgent prompt
+# triggered by 'Allow Unsigned Extensions' can be answered via AppleScript.
+# GitHub's hosted macOS runners are ephemeral so this is safe.
+if [ "$(id -un)" = "runner" ]; then
+  echo "==> setting known password on runner user"
+  # Try the two common ways; sysadminctl is the preferred Apple CLI.
+  sudo sysadminctl -resetPasswordFor runner -newPassword wdio-safari -adminUser runner -adminPassword "" \
+    || sudo dscl . -passwd /Users/runner wdio-safari \
+    || true
+fi
+
 echo "==> granting Accessibility to /usr/bin/osascript via system TCC db"
 sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" \
   "INSERT OR REPLACE INTO access \
@@ -99,7 +110,7 @@ tell application "System Events"
         tell process "SecurityAgent"
           if exists window 1 then
             set frontmost to true
-            keystroke "runner"
+            keystroke "wdio-safari"
             delay 0.3
             keystroke return
             exit repeat
