@@ -9,15 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { RequestReporter } from '@whotracksme/reporting/reporting';
 import { store } from 'hybrids';
+import { RequestReporter } from '@whotracksme/reporting/reporting';
 import { ACTION_DISABLE_ANTITRACKING_MODIFICATION } from '@ghostery/config';
 
-import { getPausedDetails } from '/store/options.js';
+import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 
 import Request from '/utils/request.js';
-import * as OptionsObserver from '/utils/options-observer.js';
 
 import { updateTabStats } from '../stats.js';
 
@@ -28,11 +27,6 @@ import urlReporter from './url-reporter.js';
 let webRequestReporter = null;
 
 if (chrome.webRequest) {
-  let options = {};
-  OptionsObserver.addListener(function webRequestReporting(value) {
-    options = value;
-  });
-
   let remoteConfig;
   store.resolve(Config).then((remote) => {
     remoteConfig = remote;
@@ -44,7 +38,9 @@ if (chrome.webRequest) {
       countryProvider: urlReporter.countryProvider,
       trustedClock: communication.trustedClock,
       isRequestAllowed: (state) => {
+        const options = store.get(Options);
         const hostname = state.tabUrlParts.hostname;
+
         return (
           !options.blockTrackers ||
           !!getPausedDetails(options, hostname) ||
