@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "新增網站例外"
   },
+  "additional_filters": {
+    "message": "額外篩選條件"
+  },
   "adjusted___tracker": {
     "message": "已調整",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "瀏覽器：供應商、版本、語言、作業系統供應商"
+  },
+  "browser_redirect_protection": {
+    "message": "瀏覽器重新導向保護"
   },
   "browsing_assistant": {
     "message": "瀏覽助理"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "已啟用"
   },
+  "enabled__@_0_": {
+    "message": "已啟用：$${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "確保您的點擊直接導向您選擇的頁面，避免不必要的追蹤繞道。"
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "輸入您想允許重定向的網站 URL。Ghostery 將不會對此網域顯示警告頁面。"
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "匯出到檔案"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "透過區域和自訂篩選條件，擴展您的防護以實現進階控制。"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "擴充功能：版本、安裝日期、隨機安裝號碼（從1到100）、基本設定、貢獻狀態"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "載入更多"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "管理此網站允許載入的追蹤器清單。"
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "管理允許載入此追蹤器的網站清單。"
+  },
   "manifest_name": {
     "message": "Ghostery 隱私廣告攔截器"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "尚未添加例外"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "尚未添加任何防護例外。"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "尚未新增網站例外"
+  "no_options_are_currently_enabled": {
+    "message": "目前沒有啟用任何選項"
   },
   "observed_activities": {
     "message": "已觀察的活動"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "使用 AI 科技防止各種追蹤技術。"
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "防止網站通過追蹤服務或未知目的地重定向，可能會危害您的隱私或安全。"
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "防止網站將您的點擊透過追蹤網址重新導向，然後才載入目標頁面。"
   },
   "print_to_pdf": {
     "message": "列印為 PDF"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "重定向保護"
   },
-  "regional_filters": {
-    "message": "區域過濾器"
+  "regional_block_lists": {
+    "message": "區域封鎖清單"
   },
   "reload_to_see_changes": {
     "message": "重新載入以觀看變化。"

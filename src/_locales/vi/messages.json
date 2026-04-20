@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "Add website exception"
   },
+  "additional_filters": {
+    "message": "Bộ lọc bổ sung"
+  },
   "adjusted___tracker": {
     "message": "adjusted",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "browser: vendor, version, language, operating system vendor"
+  },
+  "browser_redirect_protection": {
+    "message": "Bảo vệ chuyển hướng trình duyệt"
   },
   "browsing_assistant": {
     "message": "Trợ lý Duyệt web"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "Đã kích hoạt"
   },
+  "enabled__@_0_": {
+    "message": "Đã bật: $${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "Đảm bảo các cú nhấp chuột của bạn đi thẳng đến các trang bạn chọn, không có các đường vòng theo dõi không cần thiết."
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "Nhập URL của trang web mà bạn muốn cho phép chuyển hướng. Ghostery sẽ không hiển thị trang cảnh báo cho miền này."
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "Xuất ra tệp"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "Mở rộng khả năng bảo vệ của bạn với các bộ lọc theo khu vực và tùy chỉnh để kiểm soát nâng cao."
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "extension: version, installation date, random install number (from 1 to 100), basic settings, contribution status"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "Load more"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "Quản lý danh sách trình theo dõi được phép tải trên trang web này."
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "Quản lý danh sách các trang web được phép tải trình theo dõi này."
+  },
   "manifest_name": {
     "message": "Ghostery AdBlocker for Privacy"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "Chưa có ngoại lệ nào được thêm vào"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "No websites exceptions added yet"
+  "no_options_are_currently_enabled": {
+    "message": "Hiện chưa có tùy chọn nào được bật"
   },
   "observed_activities": {
     "message": "Observed activities"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Ngăn chặn các kỹ thuật theo dõi khác nhau bằng công nghệ điều khiển AI."
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "Ngăn chặn các trang web chuyển hướng bạn qua các dịch vụ theo dõi hoặc đến các điểm đến không rõ có thể làm tổn hại đến quyền riêng tư hoặc bảo mật của bạn."
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "Ngăn các trang web chuyển hướng nhấp chuột của bạn qua các URL theo dõi trước khi tải các trang đích."
   },
   "print_to_pdf": {
     "message": "In ra PDF"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "Bảo Vệ Chuyển Hướng"
   },
-  "regional_filters": {
-    "message": "Regional Filters"
+  "regional_block_lists": {
+    "message": "Danh sách chặn theo khu vực"
   },
   "reload_to_see_changes": {
     "message": "Tải lại để xem các thay đổi"

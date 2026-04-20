@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "웹 사이트 예외 추가"
   },
+  "additional_filters": {
+    "message": "추가 필터"
+  },
   "adjusted___tracker": {
     "message": "변경됨",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
+  },
+  "browser_redirect_protection": {
+    "message": "브라우저 리디렉션 보호"
   },
   "browsing_assistant": {
     "message": "브라우징 도우미"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "사용 중"
   },
+  "enabled__@_0_": {
+    "message": "활성화됨: $${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "불필요한 추적 우회 없이 클릭이 선택한 페이지로 직접 이동하도록 보장합니다."
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "리디렉션을 허용할 웹사이트 URL을 입력하세요. Ghostery는 이 도메인에 대해 경고 페이지를 표시하지 않습니다."
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "파일로 내보내기"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "고급 제어를 위한 지역 및 맞춤형 필터로 보호 기능을 확장하세요."
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "확장 프로그램: 버전, 설치 날짜, 무작위 설치 번호 (1에서 100까지), 기본 설정, 기여 상태"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "더 보기"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "이 사이트에서 로드하도록 허용된 트래커 목록을 관리합니다."
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "이 트래커를 로드하도록 허용된 웹사이트 목록을 관리합니다."
+  },
   "manifest_name": {
     "message": "Ghostery 개인정보 보호용 광고 차단기"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "예외가 아직 추가되지 않았습니다."
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "아직 예외가 추가되지 않았습니다"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "아직 웹 사이트 예외가 추가되지 않았습니다"
+  "no_options_are_currently_enabled": {
+    "message": "현재 활성화된 옵션이 없습니다"
   },
   "observed_activities": {
     "message": "감지된 활동"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술을 사용하여 여러 추적 기술을 방지합니다."
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "웹사이트가 사용자의 개인정보나 보안을 위협할 수 있는 추적 서비스나 알 수 없는 목적지로 리디렉션하는 것을 방지합니다."
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "웹사이트가 목적 페이지를 로드하기 전에 추적 URL을 통해 클릭을 리디렉션하는 것을 방지합니다."
   },
   "print_to_pdf": {
     "message": "PDF로 인쇄"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "리디렉션 보호"
   },
-  "regional_filters": {
-    "message": "지역 필터"
+  "regional_block_lists": {
+    "message": "지역 차단 목록"
   },
   "reload_to_see_changes": {
     "message": "변경 내용을 보려면 다시 로드하십시오."
