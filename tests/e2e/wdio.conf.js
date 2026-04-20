@@ -114,10 +114,13 @@ async function findSafariDriverLog(minMtimeMs, timeoutMs = 10000) {
 
 async function safariDriverRequest(browser, method, segment, body) {
   const url = `http://localhost:${SAFARIDRIVER_PORT}/session/${browser.sessionId}${segment}`;
+  // undici's default headersTimeout is 5min; extension install on CI can
+  // legitimately take longer while Safari registers the unpacked extension.
   const res = await fetch(url, {
     method,
     headers: body ? { 'Content-Type': 'application/json' } : undefined,
     body: body ? JSON.stringify(body) : undefined,
+    signal: AbortSignal.timeout(10 * 60 * 1000),
   });
   const json = await res.json();
   if (json.value?.error) {
@@ -322,10 +325,46 @@ export const config = {
       }
 
       if (capabilities.browserName === 'safari') {
-        await safariDriverRequest(browser, 'POST', '/webextension', {
-          type: 'path',
-          path: SAFARI_PATH,
-        });
+        // Run a watchdog that dismisses any system-wide confirmation dialog
+        // (Safari "Install this extension?", SecurityAgent prompts, etc.)
+        // that may appear during the install call and block it indefinitely.
+        const watchdog = spawn(
+          'osascript',
+          [
+            '-e',
+            `repeat 60 times
+               tell application "System Events"
+                 repeat with p in application processes
+                   try
+                     repeat with w in (windows of p)
+                       try
+                         repeat with btn in (buttons of w)
+                           try
+                             set bn to name of btn as text
+                             if bn is in {"Allow", "Enable", "Trust", "OK", "Continue"} then
+                               click btn
+                             end if
+                           end try
+                         end repeat
+                       end try
+                     end repeat
+                   end try
+                 end repeat
+               end tell
+               delay 1
+             end repeat`,
+          ],
+          { stdio: 'ignore', detached: true },
+        );
+
+        try {
+          await safariDriverRequest(browser, 'POST', '/webextension', {
+            type: 'path',
+            path: SAFARI_PATH,
+          });
+        } finally {
+          watchdog.kill();
+        }
 
         // Trigger the extension on a real page so Safari prompts for permission.
         await browser.navigateTo(PAGE_URL);
