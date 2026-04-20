@@ -198,24 +198,29 @@ tell application "System Events"
   tell process "Safari"
     set frontmost to true
     delay 0.5
-    -- Poll for the Develop menu to appear (toggling the Settings checkbox is
-    -- not instantaneous, especially after a Safari restart).
-    set hasDevelop to false
-    repeat 40 times
+    -- Open the Develop menu so its items populate (lazy on recent macOS),
+    -- then close it again via Escape before introspecting.
+    try
+      click menu bar item "Develop" of menu bar 1
+      delay 0.5
+      log "Develop items: " & (name of every menu item of menu 1 of menu bar item "Develop" of menu bar 1)
+      key code 53
+    end try
+    -- Match the menu item loosely in case Apple renamed it.
+    set theItem to missing value
+    repeat with mi in (menu items of menu 1 of menu bar item "Develop" of menu bar 1)
       try
-        set _ to menu bar item "Develop" of menu bar 1
-        set hasDevelop to true
-        exit repeat
-      on error
-        delay 0.5
+        if name of mi contains "Remote Automation" then
+          set theItem to contents of mi
+          exit repeat
+        end if
       end try
     end repeat
-    if not hasDevelop then
-      error "Develop menu never appeared — Show Develop checkbox toggle did not persist. Menu bar items: " & (name of every menu bar item of menu bar 1)
+    if theItem is missing value then
+      error "Could not find 'Allow Remote Automation' in Develop menu"
     end if
-    set automationItem to menu item "Allow Remote Automation" of menu 1 of menu bar item "Develop" of menu bar 1
-    if value of attribute "AXMenuItemMarkChar" of automationItem is not "✓" then
-      click automationItem
+    if value of attribute "AXMenuItemMarkChar" of theItem is not "✓" then
+      click theItem
     end if
   end tell
 end tell
