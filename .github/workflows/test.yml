@@ -82,3 +82,18 @@ jobs:
         run: npm ci
       - name: Run tests after updating the extension
         run: npm run wdio:update -- --target=firefox
+
+  e2e-safari:
+    runs-on: macos-15
+    needs: unit
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
+      - name: Install dependencies
+        run: npm ci
+      - name: Configure Safari automation
+        run: ./scripts/setup-safari-ci.sh
+      - name: Run tests with flags
+        run: npm run wdio -- --target=safari

@@ -11,17 +11,27 @@
 
 /*
  * Usage:
- *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--debug] [--clean]
+ *   wdio tests/wdio.conf.js [--target=firefox,chrome,safari] [--debug] [--clean]
  *
  * Options:
  *   --target: comma separated list of browsers to run the tests on (default: firefox,chrome)
+ *             safari requires macOS with `safaridriver --enable` and "Allow Unsigned Extensions"
  *   --debug: run the tests in debug mode (default: false)
  *   --clean: clean the build artifacts before running the tests (default: false)
  */
 
+import os from 'node:os';
 import path from 'node:path';
-import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
-import { execSync } from 'node:child_process';
+import {
+  readFileSync,
+  writeFileSync,
+  cpSync,
+  existsSync,
+  rmSync,
+  readdirSync,
+  statSync,
+} from 'node:fs';
+import { execSync, execFileSync, spawn } from 'node:child_process';
 import { $, $$ } from '@wdio/globals';
 
 import { setupTestPage } from './page/server.js';
@@ -31,6 +41,7 @@ import { getExtensionPageURL, setExtensionBaseUrl, PAGE_PORT, PAGE_URL } from '.
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
+export const SAFARI_PATH = path.join(WEB_EXT_PATH, 'ghostery-safari');
 
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
@@ -73,6 +84,94 @@ export function buildForChrome() {
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
     });
+  }
+}
+
+const SAFARIDRIVER_PORT = 4321;
+const SAFARIDRIVER_LOG_DIR = path.join(os.homedir(), 'Library/Logs/com.apple.WebDriver');
+let safariDriverProcess = null;
+
+async function findSafariDriverLog(minMtimeMs, timeoutMs = 10000) {
+  // safaridriver forks, so the log filename's pid doesn't match spawn's pid.
+  // Take the most recently modified log file created after we launched it.
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (existsSync(SAFARIDRIVER_LOG_DIR)) {
+      const candidates = readdirSync(SAFARIDRIVER_LOG_DIR)
+        .filter((name) => name.startsWith('safaridriver.') && name.endsWith('.txt'))
+        .map((name) => {
+          const full = path.join(SAFARIDRIVER_LOG_DIR, name);
+          return { full, mtime: statSync(full).mtimeMs };
+        })
+        .filter(({ mtime }) => mtime >= minMtimeMs)
+        .sort((a, b) => b.mtime - a.mtime);
+      if (candidates.length) return candidates[0].full;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  return null;
+}
+
+async function safariDriverRequest(browser, method, segment, body) {
+  const url = `http://localhost:${SAFARIDRIVER_PORT}/session/${browser.sessionId}${segment}`;
+  const res = await fetch(url, {
+    method,
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const json = await res.json();
+  if (json.value?.error) {
+    throw new Error(`safaridriver ${method} ${segment} failed: ${JSON.stringify(json.value)}`);
+  }
+  return json.value;
+}
+
+function allowSafariExtensionPermission() {
+  // Safari shows a per-site permission sheet the first time an extension runs
+  // on a page. The buttons render as direct children of the Safari window
+  // (not a sheet) and can be reached via System Events UI automation. If no
+  // prompt appears the script returns "skipped" instead of failing.
+  execFileSync('osascript', [
+    '-e',
+    `tell application "System Events"
+       tell process "Safari"
+         set w to window 1
+         repeat 30 times
+           if exists button "Always Allow" of w then
+             if exists checkbox "Remember for other websites" of w then
+               click checkbox "Remember for other websites" of w
+             end if
+             click button "Always Allow" of w
+             return "clicked"
+           end if
+           delay 0.2
+         end repeat
+         return "skipped"
+       end tell
+     end tell`,
+  ]);
+}
+
+export function buildForSafari() {
+  if (!existsSync(SAFARI_PATH)) {
+    execSyncNode('npm run build -- chromium --silent --debug --clean');
+    rmSync(SAFARI_PATH, { recursive: true, force: true });
+    cpSync(path.join(process.cwd(), 'dist'), SAFARI_PATH, {
+      recursive: true,
+    });
+
+    // Safari does not support background.service_worker; use scripts instead.
+    // Mirrors xcode/ci_scripts/build.sh
+    const manifestPath = path.join(SAFARI_PATH, 'manifest.json');
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    if (manifest.background?.service_worker) {
+      manifest.background = {
+        scripts: [manifest.background.service_worker],
+        type: 'module',
+        persistent: false,
+      };
+      writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    }
   }
 }
 
@@ -133,6 +232,12 @@ export const config = {
         ]),
       },
     },
+    {
+      browserName: 'safari',
+      webSocketUrl: true,
+      'safari:experimentalWebSocketUrl': true,
+      'safari:automaticInspection': false,
+    },
   ].filter((capability) => argv.target.includes(capability.browserName)),
   onPrepare: async (config, capabilities) => {
     if (argv.clean) {
@@ -150,13 +255,36 @@ export const config = {
             buildForChrome();
             break;
           }
+          case 'safari': {
+            buildForSafari();
+            break;
+          }
         }
+      }
+
+      // Safari 26's safaridriver does not implement the BiDi webExtension module,
+      // so we use the classic POST /session/<id>/webextension endpoint. The driver
+      // never exposes the safari-web-extension://<UUID> origin in session state,
+      // so run it with --diagnose and parse the log for the origin after install.
+      if (argv.target.includes('safari')) {
+        process.env.WDIO_SKIP_DRIVER_SETUP = '1';
+        process.env.SAFARIDRIVER_START_MS = String(Date.now());
+        safariDriverProcess = spawn('safaridriver', [`--port=${SAFARIDRIVER_PORT}`, '--diagnose'], {
+          stdio: 'ignore',
+        });
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
 
       setupTestPage(PAGE_PORT);
     } catch (e) {
       console.error('Error while preparing test environment', e);
       process.exit(1);
+    }
+  },
+  onComplete: () => {
+    if (safariDriverProcess) {
+      safariDriverProcess.kill();
+      safariDriverProcess = null;
     }
   },
   before: async (capabilities, specs, browser) => {
@@ -191,6 +319,37 @@ export const config = {
         // Enable developer mode for reloading extension
         await $('>>>#devMode').click();
         await browser.pause(2000);
+      }
+
+      if (capabilities.browserName === 'safari') {
+        await safariDriverRequest(browser, 'POST', '/webextension', {
+          type: 'path',
+          path: SAFARI_PATH,
+        });
+
+        // Trigger the extension on a real page so Safari prompts for permission.
+        await browser.navigateTo(PAGE_URL);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        allowSafariExtensionPermission();
+
+        // Reload so the content script runs and safaridriver logs the
+        // safari-web-extension://<UUID> origin we need for extension pages.
+        await browser.navigateTo(PAGE_URL);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const startMs = Number(process.env.SAFARIDRIVER_START_MS) || 0;
+        const logPath = await findSafariDriverLog(startMs);
+        if (!logPath) {
+          throw new Error('safaridriver diagnose log not found');
+        }
+
+        const log = readFileSync(logPath, 'utf8');
+        const match = log.match(/safari-web-extension:\/\/([0-9a-f-]+)/i);
+        if (!match) {
+          throw new Error('Could not discover safari-web-extension UUID from diagnose log');
+        }
+
+        setExtensionBaseUrl(`safari-web-extension://${match[1]}/pages`);
       }
 
       const SETTINGS_PAGE_URL = getExtensionPageURL('settings');
