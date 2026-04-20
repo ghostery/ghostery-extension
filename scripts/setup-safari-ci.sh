@@ -39,6 +39,17 @@ osascript -e 'tell application "System Events" to get name of every process' >/d
   exit 1
 }
 
+echo "==> shotgunning Safari defaults (some keys silently ignored on newer macOS)"
+for domain in com.apple.Safari com.apple.SafariTechnologyPreview; do
+  defaults write "$domain" IncludeDevelopMenu -bool true 2>/dev/null || true
+  defaults write "$domain" IncludeInternalDebugMenu -bool true 2>/dev/null || true
+  defaults write "$domain" ShowDevelopMenu -bool true 2>/dev/null || true
+  defaults write "$domain" WebKitDeveloperExtras -bool true 2>/dev/null || true
+  defaults write "$domain" WebKitDeveloperExtrasEnabledPreferenceKey -bool true 2>/dev/null || true
+  defaults write "$domain" AllowRemoteAutomation -bool true 2>/dev/null || true
+  defaults write "$domain" AllowUnsignedWebExtensions -bool true 2>/dev/null || true
+done
+
 echo "==> opening Safari to attach settings toggles"
 open -a Safari
 sleep 3
@@ -61,13 +72,16 @@ on findAndClickCheckbox(root, needles)
           if elementName contains n then
             if value of root is 0 then
               click root
-              delay 0.3
+              delay 0.5
               if value of root is 0 then
                 -- `click` sometimes no-ops on recent macOS; fall back to AXPress.
                 try
                   perform action "AXPress" of root
-                  delay 0.3
+                  delay 0.5
                 end try
+              end if
+              if value of root is 0 then
+                error ("Failed to toggle checkbox '" & elementName & "' (still 0 after click + AXPress)")
               end if
             end if
             return true
@@ -184,12 +198,15 @@ on findAndClickCheckbox(root, needles)
           if elementName contains n then
             if value of root is 0 then
               click root
-              delay 0.3
+              delay 0.5
               if value of root is 0 then
                 try
                   perform action "AXPress" of root
-                  delay 0.3
+                  delay 0.5
                 end try
+              end if
+              if value of root is 0 then
+                error ("Failed to toggle checkbox '" & elementName & "' (still 0 after click + AXPress)")
               end if
             end if
             return true
