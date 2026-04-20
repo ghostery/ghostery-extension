@@ -13,7 +13,6 @@ import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
-import { filterMaxPriorityRules } from '../src/utils/dnr.js';
 
 if (!existsSync(RESOURCES_PATH)) {
   mkdirSync(RESOURCES_PATH, { recursive: true });
@@ -58,9 +57,7 @@ for (const [name, target] of Object.entries(RULESETS)) {
   /* DNR rules */
 
   if (list.dnr) {
-    const dnr = await fetch(list.dnr.url || list.dnr.network)
-      .then(handleResponse)
-      .then(filterMaxPriorityRules);
+    const dnr = await fetch(list.dnr.url || list.dnr.network).then(handleResponse);
 
     writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
 
