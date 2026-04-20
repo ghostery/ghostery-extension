@@ -14,6 +14,15 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write -g WebKitDeveloperExtras -bool true
+
+# Shotgun 'allow unsigned extensions' variants — at least one of these reliably
+# prevents Safari from rejecting safaridriver's classic install endpoint.
+defaults write com.apple.Safari AllowUnsignedExtensions -bool true
+defaults write com.apple.Safari AllowUnsignedWebExtensions -bool true
+defaults write com.apple.Safari WebKitAllowUnsignedExtensions -bool true
+defaults write com.apple.Safari.SandboxBroker AllowUnsignedExtensions -bool true
+defaults write com.apple.Safari.SandboxBroker AllowUnsignedWebExtensions -bool true
+
 sudo safaridriver --enable
 
 echo "==> granting Accessibility to /usr/bin/osascript via system TCC db"
@@ -29,19 +38,78 @@ osascript -e 'tell application "System Events" to get name of every process' >/d
   exit 1
 }
 
-echo "==> toggling 'Allow Unsigned Extensions' via Develop menu"
+echo "==> toggling 'Allow Unsigned Extensions' in Settings > Developer"
+# On macOS 15+ this toggle lives in Safari Settings > Developer, not the
+# Develop menu. Clicking it triggers a SecurityAgent password prompt; we
+# try typing "runner" (the GitHub Actions macOS runner user's password).
 osascript 2>&1 <<'APPLESCRIPT'
-tell application "Safari" to activate
+on findAndClickCheckbox(root, needles)
+  using terms from application "System Events"
+    set elementName to ""
+    try
+      set elementName to name of root as text
+    end try
+    set elementRole to ""
+    try
+      set elementRole to role of root as text
+    end try
+    if elementRole is "AXCheckBox" then
+      repeat with n in needles
+        if elementName contains n then
+          if value of root is 0 then click root
+          return true
+        end if
+      end repeat
+    end if
+    try
+      repeat with child in (UI elements of root)
+        if my findAndClickCheckbox(child, needles) then return true
+      end repeat
+    end try
+    return false
+  end using terms from
+end findAndClickCheckbox
+
+tell application "Safari"
+  activate
+  try
+    make new document
+  end try
+end tell
 delay 1
 tell application "System Events"
   tell process "Safari"
     set frontmost to true
-    click menu item "Allow Unsigned Extensions" of menu "Develop" of menu bar 1
+    click menu item "Settings…" of menu 1 of menu bar item "Safari" of menu bar 1
+    delay 1.5
+    try
+      click button "Developer" of toolbar 1 of window 1
+    on error
+      try
+        click radio button "Developer" of toolbar 1 of window 1
+      end try
+    end try
     delay 1
-    -- Admin auth sheet appears
-    keystroke "runner"
-    delay 0.3
-    keystroke return
+    my findAndClickCheckbox(window 1, {"Remote Automation"})
+    my findAndClickCheckbox(window 1, {"unsigned"})
+    delay 1
+    -- Answer the SecurityAgent password sheet, if any.
+    repeat 20 times
+      try
+        tell process "SecurityAgent"
+          if exists window 1 then
+            set frontmost to true
+            keystroke "runner"
+            delay 0.3
+            keystroke return
+            exit repeat
+          end if
+        end tell
+      end try
+      delay 0.3
+    end repeat
+    delay 1
+    keystroke "w" using command down
   end tell
 end tell
 APPLESCRIPT
