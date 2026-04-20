@@ -31,8 +31,6 @@ import { getRedirectProtectionUrl } from '../redirect-protection.js';
 
 import { FramesHierarchy } from './ancestors.js';
 
-let options = Options;
-
 const contentScripts = (() => {
   const map = new Map();
   return {
@@ -108,7 +106,9 @@ export async function reloadMainEngine() {
   // Delay the reload to avoid UI freezes in Firefox and Safari
   if (__FIREFOX__ || isWebkit()) await pause(1000);
 
+  const options = await store.resolve(Options);
   const enabledEngines = getEnabledEngines(options);
+
   const resolvedEngines = (
     await Promise.all(
       enabledEngines.map((id) =>
@@ -148,6 +148,8 @@ export async function updateEngines({ cache = true } = {}) {
 
   try {
     updating = true;
+
+    const options = await store.resolve(Options);
     const enabledEngines = getEnabledEngines(options);
 
     if (enabledEngines.length) {
@@ -183,11 +185,9 @@ export async function updateEngines({ cache = true } = {}) {
 
 export const UPDATE_ENGINES_DELAY = 60 * 60 * 1000; // 1 hour
 export const setup = asyncSetup('adblocker', [
-  OptionsObserver.addListener(async function adblockerEngines(value, lastValue) {
-    options = value;
-
-    const enabledEngines = getEnabledEngines(value);
-    const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
+  OptionsObserver.addListener(async function adblockerEngines(options, lastOptions) {
+    const enabledEngines = getEnabledEngines(options);
+    const lastEnabledEngines = lastOptions && getEnabledEngines(lastOptions);
 
     // Enabled engines changed (they might contain outdated filters)
     const enginesChanged =
@@ -331,6 +331,7 @@ async function injectCosmetics(details, config) {
     return;
   }
 
+  const options = store.get(Options);
   // Checking the request url hostname
   if (getPausedDetails(options, hostname)) {
     return false;
@@ -512,25 +513,27 @@ if (__FIREFOX__) {
  * Network requests blocking - Firefox only
  */
 
-function isTrusted(request, type) {
-  // The request is from a tab that is paused
-  if (getPausedDetails(options, request.sourceHostname)) {
-    return true;
-  }
-
-  if (type === 'main_frame') {
-    return false;
-  }
-
-  return exceptions.getStatus(
-    options,
-    // Get exception for known tracker (metadata id) or by the request hostname (unidentified tracker)
-    trackerdb.getMetadata(request)?.id || request.hostname,
-    request.sourceHostname,
-  ).trusted;
-}
-
 if (__FIREFOX__) {
+  function isTrusted(request, type) {
+    const options = store.get(Options);
+
+    // The request is from a tab that is paused
+    if (getPausedDetails(options, request.sourceHostname)) {
+      return true;
+    }
+
+    if (type === 'main_frame') {
+      return false;
+    }
+
+    return exceptions.getStatus(
+      options,
+      // Get exception for known tracker (metadata id) or by the request hostname (unidentified tracker)
+      trackerdb.getMetadata(request)?.id || request.hostname,
+      request.sourceHostname,
+    ).trusted;
+  }
+
   function isMatchableRequest(details, request) {
     // Extension context request
     if (
@@ -565,7 +568,9 @@ if (__FIREFOX__) {
         const { redirect, match } = engine.match(request);
 
         if (match === true && details.type === 'main_frame') {
+          const options = store.get(Options);
           const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+
           return { redirectUrl };
         } else if (redirect !== undefined) {
           request.blocked = true;
