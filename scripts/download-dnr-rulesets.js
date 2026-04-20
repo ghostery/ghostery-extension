@@ -69,8 +69,10 @@ async function downloadRuleset(name, outputPath, metadataPath) {
   return name;
 }
 
+const isTTY = process.stdout.isTTY && typeof process.stdout.cursorTo === 'function';
+
 function clearLine() {
-  if (process.stdout.isTTY === false) return;
+  if (!isTTY) return;
 
   process.stdout.cursorTo(0);
   process.stdout.clearLine(0);
@@ -98,7 +100,7 @@ function createProgress() {
         success += 1;
       }
 
-      if (process.stdout.isTTY === false || success + error >= total) {
+      if (!isTTY || success + error >= total) {
         return;
       }
 
@@ -137,7 +139,7 @@ const prems = Object.entries(RULESETS).reduce(function (prems, [name, target]) {
 
 progress.setTotal(prems.length);
 
-if (process.stdout.isTTY) {
+if (isTTY) {
   process.stdout.write(`Downloading ${prems.length} DNR rulesets...`);
 } else {
   console.log(`Downloading ${prems.length} DNR rulesets...`);
