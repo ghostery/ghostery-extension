@@ -313,8 +313,14 @@ tell application "System Events"
     log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
     set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
     if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
-    set ok2 to my findAndClickCheckbox(window 1, {"unsigned"})
-    if not ok2 then error "Could not find 'Allow unsigned extensions' in Developer pane"
+    -- "Allow unsigned extensions" toggle is best-effort: on hosted runners it
+    -- may trigger a SecurityAgent admin prompt we can't answer. safaridriver's
+    -- classic extension-install endpoint appears to work without it anyway.
+    try
+      my findAndClickCheckbox(window 1, {"unsigned"})
+    on error errMsg
+      log "WARN: could not toggle 'Allow unsigned extensions': " & errMsg
+    end try
     keystroke "w" using command down
   end tell
 end tell
