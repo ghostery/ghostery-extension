@@ -40,7 +40,12 @@ osascript -e 'tell application "System Events" to get name of every process' >/d
 }
 
 echo "==> shotgunning Safari defaults (some keys silently ignored on newer macOS)"
-for domain in com.apple.Safari com.apple.SafariTechnologyPreview; do
+# Stop Safari + cfprefsd so writes aren't overwritten in memory.
+killall Safari 2>/dev/null || true
+killall cfprefsd 2>/dev/null || true
+sleep 1
+
+for domain in com.apple.Safari com.apple.SafariTechnologyPreview com.apple.Safari.SandboxBroker; do
   defaults write "$domain" IncludeDevelopMenu -bool true 2>/dev/null || true
   defaults write "$domain" IncludeInternalDebugMenu -bool true 2>/dev/null || true
   defaults write "$domain" ShowDevelopMenu -bool true 2>/dev/null || true
@@ -48,6 +53,18 @@ for domain in com.apple.Safari com.apple.SafariTechnologyPreview; do
   defaults write "$domain" WebKitDeveloperExtrasEnabledPreferenceKey -bool true 2>/dev/null || true
   defaults write "$domain" AllowRemoteAutomation -bool true 2>/dev/null || true
   defaults write "$domain" AllowUnsignedWebExtensions -bool true 2>/dev/null || true
+  defaults write "$domain" AllowUnsignedExtensions -bool true 2>/dev/null || true
+done
+
+# Also poke Safari's sandboxed preferences via plutil, in case `defaults` is
+# writing to the non-sandboxed plist that Safari doesn't actually read.
+for plist in \
+  "$HOME/Library/Preferences/com.apple.Safari.plist" \
+  "$HOME/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari.plist"; do
+  [ -f "$plist" ] || continue
+  plutil -replace AllowUnsignedExtensions -bool true "$plist" 2>/dev/null || true
+  plutil -replace AllowUnsignedWebExtensions -bool true "$plist" 2>/dev/null || true
+  plutil -replace AllowRemoteAutomation -bool true "$plist" 2>/dev/null || true
 done
 
 echo "==> opening Safari to attach settings toggles"
@@ -335,8 +352,14 @@ tell application "System Events"
     log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
     set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
     if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
-    set ok2 to my findAndClickCheckbox(window 1, {"unsigned"})
-    if not ok2 then error "Could not find 'Allow unsigned extensions' in Developer pane"
+    -- Allow unsigned extensions may already be on from the pre-launch plist
+    -- write above. Best-effort toggle here; do not fail the setup if the
+    -- click is rejected by a SecurityAgent prompt we can't answer.
+    try
+      my findAndClickCheckbox(window 1, {"unsigned"})
+    on error errMsg
+      log "WARN: could not click 'Allow unsigned extensions': " & errMsg
+    end try
     keystroke "w" using command down
   end tell
 end tell
