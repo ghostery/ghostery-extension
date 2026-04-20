@@ -146,8 +146,6 @@ end tell
 
 tell application "System Events"
   tell process "Safari"
-    -- Print the Advanced pane so we know the element names we're targeting.
-    log my dumpTree(window 1, "")
     set ok to my findAndClickCheckbox(window 1, {"features for web developers", "Show Develop"})
     if not ok then error "No matching checkbox found for 'Show Develop' in Advanced pane"
     keystroke "w" using command down
@@ -155,6 +153,13 @@ tell application "System Events"
   end tell
 end tell
 APPLESCRIPT
+
+echo "==> restarting Safari so the new menu bar takes effect"
+osascript -e 'tell application "Safari" to quit' 2>/dev/null || true
+killall Safari 2>/dev/null || true
+sleep 2
+open -a Safari
+sleep 3
 
 echo "==> enabling Allow Remote Automation"
 osascript 2>&1 <<'APPLESCRIPT'
