@@ -59,7 +59,17 @@ on findAndClickCheckbox(root, needles)
       if elementRole is "AXCheckBox" then
         repeat with n in needles
           if elementName contains n then
-            if value of root is 0 then click root
+            if value of root is 0 then
+              click root
+              delay 0.3
+              if value of root is 0 then
+                -- `click` sometimes no-ops on recent macOS; fall back to AXPress.
+                try
+                  perform action "AXPress" of root
+                  delay 0.3
+                end try
+              end if
+            end if
             return true
           end if
         end repeat
@@ -133,11 +143,21 @@ end tell
 APPLESCRIPT
 
 echo "==> enabling Allow Remote Automation"
-osascript <<'APPLESCRIPT'
+osascript 2>&1 <<'APPLESCRIPT'
 tell application "Safari" to activate
-delay 0.5
+delay 2
 tell application "System Events"
   tell process "Safari"
+    -- Poll for the Develop menu to appear (toggling the Settings checkbox is
+    -- not instantaneous).
+    repeat 25 times
+      try
+        set _ to menu bar item "Develop" of menu bar 1
+        exit repeat
+      on error
+        delay 0.4
+      end try
+    end repeat
     set automationItem to menu item "Allow Remote Automation" of menu 1 of menu bar item "Develop" of menu bar 1
     if value of attribute "AXMenuItemMarkChar" of automationItem is not "✓" then
       click automationItem
@@ -147,18 +167,54 @@ end tell
 APPLESCRIPT
 
 echo "==> enabling Allow unsigned extensions"
-osascript <<'APPLESCRIPT'
+osascript 2>&1 <<'APPLESCRIPT'
+on findAndClickCheckbox(root, needles)
+  using terms from application "System Events"
+    try
+      set elementName to ""
+      try
+        set elementName to name of root as text
+      end try
+      set elementRole to ""
+      try
+        set elementRole to role of root as text
+      end try
+      if elementRole is "AXCheckBox" then
+        repeat with n in needles
+          if elementName contains n then
+            if value of root is 0 then
+              click root
+              delay 0.3
+              if value of root is 0 then
+                try
+                  perform action "AXPress" of root
+                  delay 0.3
+                end try
+              end if
+            end if
+            return true
+          end if
+        end repeat
+      end if
+      try
+        set children to UI elements of root
+        repeat with child in children
+          if my findAndClickCheckbox(child, needles) then return true
+        end repeat
+      end try
+    end try
+    return false
+  end using terms from
+end findAndClickCheckbox
+
 tell application "Safari" to activate
-delay 0.5
+delay 1
 tell application "System Events"
   tell process "Safari"
     click menu item "Developer Settings…" of menu 1 of menu bar item "Develop" of menu bar 1
-    delay 1
-    tell window 1
-      repeat with cb in (checkboxes whose name contains "unsigned")
-        if value of cb is 0 then click cb
-      end repeat
-    end tell
+    delay 1.5
+    set ok to my findAndClickCheckbox(window 1, {"unsigned"})
+    if not ok then error "No 'Allow unsigned extensions' checkbox found"
     keystroke "w" using command down
   end tell
 end tell
