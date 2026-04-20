@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
 
-import { FIXES_ID_RANGE, getDynamicRulesIds, filterMaxPriorityRules } from '/utils/dnr.js';
+import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 import { isFilterConditionAccepted } from '/utils/engines.js';
@@ -143,13 +143,11 @@ if (__CHROMIUM__) {
 
           if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
             const rules = new Set(
-              await fetch(list.dnr.url)
-                .then((res) =>
-                  res.ok
-                    ? res.json()
-                    : Promise.reject(new Error(`Failed to fetch DNR rules: ${res.statusText}`)),
-                )
-                .then(filterMaxPriorityRules),
+              await fetch(list.dnr.url).then((res) =>
+                res.ok
+                  ? res.json()
+                  : Promise.reject(new Error(`Failed to fetch DNR rules: ${res.statusText}`)),
+              ),
             );
             const metadata = await fetch(list.dnr.metadataUrl)
               .then((res) => res.json())
