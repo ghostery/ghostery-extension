@@ -161,22 +161,58 @@ sleep 2
 open -a Safari
 sleep 3
 
-echo "==> enabling Allow Remote Automation"
+echo "==> diagnosing Safari state after restart"
 osascript 2>&1 <<'APPLESCRIPT'
-tell application "Safari" to activate
+tell application "Safari"
+  activate
+  try
+    make new document
+  end try
+end tell
 delay 2
 tell application "System Events"
   tell process "Safari"
-    -- Poll for the Develop menu to appear (toggling the Settings checkbox is
-    -- not instantaneous).
-    repeat 25 times
+    set frontmost to true
+    delay 0.5
+    log "menu bar items: " & (name of every menu bar item of menu bar 1)
+    log "window count: " & (count of windows)
+    repeat with w in windows
       try
-        set _ to menu bar item "Develop" of menu bar 1
-        exit repeat
-      on error
-        delay 0.4
+        log "window: " & (name of w)
       end try
     end repeat
+  end tell
+end tell
+APPLESCRIPT
+
+echo "==> enabling Allow Remote Automation"
+osascript 2>&1 <<'APPLESCRIPT'
+tell application "Safari"
+  activate
+  try
+    make new document
+  end try
+end tell
+delay 2
+tell application "System Events"
+  tell process "Safari"
+    set frontmost to true
+    delay 0.5
+    -- Poll for the Develop menu to appear (toggling the Settings checkbox is
+    -- not instantaneous, especially after a Safari restart).
+    set hasDevelop to false
+    repeat 40 times
+      try
+        set _ to menu bar item "Develop" of menu bar 1
+        set hasDevelop to true
+        exit repeat
+      on error
+        delay 0.5
+      end try
+    end repeat
+    if not hasDevelop then
+      error "Develop menu never appeared — Show Develop checkbox toggle did not persist. Menu bar items: " & (name of every menu bar item of menu bar 1)
+    end if
     set automationItem to menu item "Allow Remote Automation" of menu 1 of menu bar item "Develop" of menu bar 1
     if value of attribute "AXMenuItemMarkChar" of automationItem is not "✓" then
       click automationItem
