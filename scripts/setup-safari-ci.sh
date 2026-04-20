@@ -58,42 +58,38 @@ echo "==> enabling Show Develop menu"
 osascript 2>&1 <<'APPLESCRIPT'
 on findAndClickCheckbox(root, needles)
   using terms from application "System Events"
+    set elementName to ""
     try
-      set elementName to ""
-      try
-        set elementName to name of root as text
-      end try
-      set elementRole to ""
-      try
-        set elementRole to role of root as text
-      end try
-      if elementRole is "AXCheckBox" then
-        repeat with n in needles
-          if elementName contains n then
+      set elementName to name of root as text
+    end try
+    set elementRole to ""
+    try
+      set elementRole to role of root as text
+    end try
+    if elementRole is "AXCheckBox" then
+      repeat with n in needles
+        if elementName contains n then
+          if value of root is 0 then
+            click root
+            delay 0.5
             if value of root is 0 then
-              click root
-              delay 0.5
-              if value of root is 0 then
-                -- `click` sometimes no-ops on recent macOS; fall back to AXPress.
-                try
-                  perform action "AXPress" of root
-                  delay 0.5
-                end try
-              end if
-              if value of root is 0 then
-                error ("Failed to toggle checkbox '" & elementName & "' (still 0 after click + AXPress)")
-              end if
+              try
+                perform action "AXPress" of root
+                delay 0.5
+              end try
             end if
-            return true
+            if value of root is 0 then
+              error ("Failed to toggle checkbox '" & elementName & "' (still 0 after click + AXPress)")
+            end if
           end if
-        end repeat
-      end if
-      try
-        set children to UI elements of root
-        repeat with child in children
-          if my findAndClickCheckbox(child, needles) then return true
-        end repeat
-      end try
+          return true
+        end if
+      end repeat
+    end if
+    try
+      repeat with child in (UI elements of root)
+        if my findAndClickCheckbox(child, needles) then return true
+      end repeat
     end try
     return false
   end using terms from
@@ -189,42 +185,73 @@ echo "==> enabling Allow Remote Automation + Allow unsigned extensions (Develope
 # On macOS Sequoia+ these moved from the Develop menu into Safari Settings →
 # Developer. Open that pane and toggle the checkboxes there.
 osascript 2>&1 <<'APPLESCRIPT'
+on confirmAnyConfirmationSheet()
+  using terms from application "System Events"
+    -- Some checkboxes (Allow unsigned extensions) pop a confirmation sheet
+    -- after click. Approve anything that looks like "Allow"/"Enable"/"OK".
+    tell process "Safari"
+      repeat 10 times
+        try
+          if (count of sheets of window 1) > 0 then
+            set s to sheet 1 of window 1
+            set clicked to false
+            repeat with btn in (buttons of s)
+              try
+                set bn to name of btn as text
+                if bn is in {"Allow", "Enable", "Continue", "OK"} then
+                  click btn
+                  set clicked to true
+                  exit repeat
+                end if
+              end try
+            end repeat
+            if clicked then exit repeat
+          end if
+        end try
+        delay 0.3
+      end repeat
+    end tell
+  end using terms from
+end confirmAnyConfirmationSheet
+
 on findAndClickCheckbox(root, needles)
   using terms from application "System Events"
+    set elementName to ""
     try
-      set elementName to ""
-      try
-        set elementName to name of root as text
-      end try
-      set elementRole to ""
-      try
-        set elementRole to role of root as text
-      end try
-      if elementRole is "AXCheckBox" then
-        repeat with n in needles
-          if elementName contains n then
+      set elementName to name of root as text
+    end try
+    set elementRole to ""
+    try
+      set elementRole to role of root as text
+    end try
+    if elementRole is "AXCheckBox" then
+      repeat with n in needles
+        if elementName contains n then
+          if value of root is 0 then
+            click root
+            delay 0.3
+            my confirmAnyConfirmationSheet()
+            delay 0.5
             if value of root is 0 then
-              click root
-              delay 0.5
-              if value of root is 0 then
-                try
-                  perform action "AXPress" of root
-                  delay 0.5
-                end try
-              end if
-              if value of root is 0 then
-                error ("Failed to toggle checkbox '" & elementName & "'")
-              end if
+              try
+                perform action "AXPress" of root
+                delay 0.3
+                my confirmAnyConfirmationSheet()
+                delay 0.5
+              end try
             end if
-            return true
+            if value of root is 0 then
+              error ("Failed to toggle checkbox '" & elementName & "' after click + sheet-confirm")
+            end if
           end if
-        end repeat
-      end if
-      try
-        repeat with child in (UI elements of root)
-          if my findAndClickCheckbox(child, needles) then return true
-        end repeat
-      end try
+          return true
+        end if
+      end repeat
+    end if
+    try
+      repeat with child in (UI elements of root)
+        if my findAndClickCheckbox(child, needles) then return true
+      end repeat
     end try
     return false
   end using terms from
