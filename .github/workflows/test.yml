@@ -83,9 +83,16 @@ jobs:
       - name: Run tests after updating the extension
         run: npm run wdio:update -- --target=firefox
 
+  # Safari e2e. Currently best-effort on hosted runners: toggling
+  # "Show Develop menu" / "Allow Remote Automation" / "Allow Unsigned
+  # Extensions" via AppleScript is fragile on GitHub's macOS images, so the
+  # job is marked continue-on-error until a self-hosted runner with the
+  # right permissions pre-granted (or a signed-extension install path) is
+  # available.
   e2e-safari:
     runs-on: macos-15
     needs: unit
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
