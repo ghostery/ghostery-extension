@@ -185,48 +185,9 @@ tell application "System Events"
 end tell
 APPLESCRIPT
 
-echo "==> enabling Allow Remote Automation"
-osascript 2>&1 <<'APPLESCRIPT'
-tell application "Safari"
-  activate
-  try
-    make new document
-  end try
-end tell
-delay 2
-tell application "System Events"
-  tell process "Safari"
-    set frontmost to true
-    delay 0.5
-    -- Open the Develop menu so its items populate (lazy on recent macOS),
-    -- then close it again via Escape before introspecting.
-    try
-      click menu bar item "Develop" of menu bar 1
-      delay 0.5
-      log "Develop items: " & (name of every menu item of menu 1 of menu bar item "Develop" of menu bar 1)
-      key code 53
-    end try
-    -- Match the menu item loosely in case Apple renamed it.
-    set theItem to missing value
-    repeat with mi in (menu items of menu 1 of menu bar item "Develop" of menu bar 1)
-      try
-        if name of mi contains "Remote Automation" then
-          set theItem to contents of mi
-          exit repeat
-        end if
-      end try
-    end repeat
-    if theItem is missing value then
-      error "Could not find 'Allow Remote Automation' in Develop menu"
-    end if
-    if value of attribute "AXMenuItemMarkChar" of theItem is not "✓" then
-      click theItem
-    end if
-  end tell
-end tell
-APPLESCRIPT
-
-echo "==> enabling Allow unsigned extensions"
+echo "==> enabling Allow Remote Automation + Allow unsigned extensions (Developer tab)"
+# On macOS Sequoia+ these moved from the Develop menu into Safari Settings →
+# Developer. Open that pane and toggle the checkboxes there.
 osascript 2>&1 <<'APPLESCRIPT'
 on findAndClickCheckbox(root, needles)
   using terms from application "System Events"
@@ -252,7 +213,7 @@ on findAndClickCheckbox(root, needles)
                 end try
               end if
               if value of root is 0 then
-                error ("Failed to toggle checkbox '" & elementName & "' (still 0 after click + AXPress)")
+                error ("Failed to toggle checkbox '" & elementName & "'")
               end if
             end if
             return true
@@ -260,8 +221,7 @@ on findAndClickCheckbox(root, needles)
         end repeat
       end if
       try
-        set children to UI elements of root
-        repeat with child in children
+        repeat with child in (UI elements of root)
           if my findAndClickCheckbox(child, needles) then return true
         end repeat
       end try
@@ -270,14 +230,64 @@ on findAndClickCheckbox(root, needles)
   end using terms from
 end findAndClickCheckbox
 
-tell application "Safari" to activate
+on dumpCheckboxes(root, indent)
+  using terms from application "System Events"
+    set output to ""
+    try
+      set elementRole to ""
+      try
+        set elementRole to role of root as text
+      end try
+      if elementRole is "AXCheckBox" then
+        set n to ""
+        try
+          set n to name of root as text
+        end try
+        set v to ""
+        try
+          set v to value of root as text
+        end try
+        set output to output & indent & "checkbox name=" & n & " value=" & v & linefeed
+      end if
+      try
+        repeat with child in (UI elements of root)
+          set output to output & my dumpCheckboxes(child, indent & "  ")
+        end repeat
+      end try
+    end try
+    return output
+  end using terms from
+end dumpCheckboxes
+
+tell application "Safari"
+  activate
+  try
+    make new document
+  end try
+end tell
 delay 1
 tell application "System Events"
   tell process "Safari"
-    click menu item "Developer Settings…" of menu 1 of menu bar item "Develop" of menu bar 1
+    set frontmost to true
+    click menu item "Settings…" of menu 1 of menu bar item "Safari" of menu bar 1
     delay 1.5
-    set ok to my findAndClickCheckbox(window 1, {"unsigned"})
-    if not ok then error "No 'Allow unsigned extensions' checkbox found"
+    -- Developer tab only appears after "Show features for web developers"
+    -- was enabled in the Advanced pane (done in the previous step).
+    try
+      click button "Developer" of toolbar 1 of window 1
+    on error
+      try
+        click radio button "Developer" of toolbar 1 of window 1
+      on error
+        error "No Developer tab in Safari Settings toolbar — 'Show features for web developers' was not persisted"
+      end try
+    end try
+    delay 1
+    log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
+    set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
+    if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
+    set ok2 to my findAndClickCheckbox(window 1, {"unsigned"})
+    if not ok2 then error "Could not find 'Allow unsigned extensions' in Developer pane"
     keystroke "w" using command down
   end tell
 end tell
