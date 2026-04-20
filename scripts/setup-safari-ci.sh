@@ -228,10 +228,14 @@ on findAndClickCheckbox(root, needles)
       repeat with n in needles
         if elementName contains n then
           if value of root is 0 then
-            click root
-            delay 0.3
-            my confirmAnyConfirmationSheet()
-            delay 0.5
+            -- Try click, AXPress, focus+space, and setting value. Different
+            -- Safari controls accept different mechanisms on recent macOS.
+            try
+              click root
+              delay 0.3
+              my confirmAnyConfirmationSheet()
+              delay 0.5
+            end try
             if value of root is 0 then
               try
                 perform action "AXPress" of root
@@ -241,7 +245,25 @@ on findAndClickCheckbox(root, needles)
               end try
             end if
             if value of root is 0 then
-              error ("Failed to toggle checkbox '" & elementName & "' after click + sheet-confirm")
+              try
+                set focused of root to true
+                delay 0.2
+                keystroke space
+                delay 0.3
+                my confirmAnyConfirmationSheet()
+                delay 0.5
+              end try
+            end if
+            if value of root is 0 then
+              try
+                set value of root to 1
+                delay 0.3
+                my confirmAnyConfirmationSheet()
+                delay 0.5
+              end try
+            end if
+            if value of root is 0 then
+              error ("Failed to toggle checkbox '" & elementName & "' after click + AXPress + space + set value")
             end if
           end if
           return true
@@ -313,14 +335,8 @@ tell application "System Events"
     log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
     set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
     if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
-    -- "Allow unsigned extensions" toggle is best-effort: on hosted runners it
-    -- may trigger a SecurityAgent admin prompt we can't answer. safaridriver's
-    -- classic extension-install endpoint appears to work without it anyway.
-    try
-      my findAndClickCheckbox(window 1, {"unsigned"})
-    on error errMsg
-      log "WARN: could not toggle 'Allow unsigned extensions': " & errMsg
-    end try
+    set ok2 to my findAndClickCheckbox(window 1, {"unsigned"})
+    if not ok2 then error "Could not find 'Allow unsigned extensions' in Developer pane"
     keystroke "w" using command down
   end tell
 end tell
