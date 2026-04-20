@@ -51,17 +51,33 @@ tell application "System Events"
   tell process "Safari"
     set frontmost to true
     click menu item "Settings…" of menu 1 of menu bar item "Safari" of menu bar 1
-    delay 1
+    delay 1.5
     tell window 1
+      -- Advanced tab may be a button or radio button depending on macOS version.
       try
         click button "Advanced" of toolbar 1
       on error
-        click radio button "Advanced" of toolbar 1
+        try
+          click radio button "Advanced" of toolbar 1
+        end try
       end try
-      delay 0.5
-      repeat with cb in (checkboxes of group 1 whose name contains "Develop" or name contains "features for web developers")
-        if value of cb is 0 then click cb
+      delay 1
+      -- Dump for debugging, then click any checkbox whose name hints at Develop.
+      log "Advanced tab UI:"
+      log (entire contents)
+      set toggled to false
+      repeat with cb in (checkboxes of entire contents)
+        set n to ""
+        try
+          set n to name of cb as text
+        end try
+        if n contains "features for web developers" or n contains "Show Develop" then
+          if value of cb is 0 then click cb
+          set toggled to true
+          exit repeat
+        end if
       end repeat
+      if not toggled then error "Could not find 'Show Develop' checkbox in Advanced pane"
     end tell
     keystroke "w" using command down
     delay 0.5
