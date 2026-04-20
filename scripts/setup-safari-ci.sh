@@ -18,6 +18,18 @@ fi
 echo "==> enabling safaridriver"
 sudo safaridriver --enable
 
+# SecurityAgent password prompts (e.g. the one "Allow unsigned extensions"
+# triggers on macOS 15+) need an actual password. Set one we control so the
+# AppleScript toggler can type it. Safe on ephemeral GitHub Actions runners.
+if [ -n "${GITHUB_ACTIONS:-}" ] && [ "$(id -un)" = "runner" ]; then
+  echo "==> setting runner password for SecurityAgent prompts"
+  # `sysadminctl` is the modern Directory Services CLI. The old value is empty
+  # on GitHub runners; pass -oldPassword "" so we don't get rejected.
+  sudo sysadminctl -resetPasswordFor runner -newPassword wdio-safari -adminUser runner -adminPassword "" 2>/dev/null || \
+    sudo dscl . -passwd /Users/runner wdio-safari 2>/dev/null || true
+  export SAFARI_ADMIN_PASSWORD=wdio-safari
+fi
+
 echo "==> granting Accessibility to /usr/bin/osascript via user TCC db"
 TCC_USER_DB="$HOME/Library/Application Support/com.apple.TCC/TCC.db"
 TCC_SYSTEM_DB="/Library/Application Support/com.apple.TCC/TCC.db"
@@ -352,14 +364,33 @@ tell application "System Events"
     log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
     set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
     if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
-    -- Allow unsigned extensions may already be on from the pre-launch plist
-    -- write above. Best-effort toggle here; do not fail the setup if the
-    -- click is rejected by a SecurityAgent prompt we can't answer.
+    -- Click "Allow unsigned extensions" and answer the SecurityAgent password
+    -- prompt it triggers on macOS 15+.
+    set pw to ""
+    try
+      set pw to system attribute "SAFARI_ADMIN_PASSWORD"
+    end try
     try
       my findAndClickCheckbox(window 1, {"unsigned"})
-    on error errMsg
-      log "WARN: could not click 'Allow unsigned extensions': " & errMsg
     end try
+    if pw is not "" then
+      delay 1
+      repeat 30 times
+        try
+          tell process "SecurityAgent"
+            if exists window 1 then
+              set frontmost to true
+              keystroke pw
+              delay 0.3
+              keystroke return
+              exit repeat
+            end if
+          end tell
+        end try
+        delay 0.3
+      end repeat
+      delay 1
+    end if
     keystroke "w" using command down
   end tell
 end tell

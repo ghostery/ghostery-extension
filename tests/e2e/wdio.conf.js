@@ -325,18 +325,18 @@ export const config = {
       }
 
       if (capabilities.browserName === 'safari') {
-        // Run a watchdog that dismisses any system-wide confirmation dialog
-        // (Safari "Install this extension?", SecurityAgent prompts, etc.)
-        // that may appear during the install call and block it indefinitely.
+        // Run a watchdog that dismisses system-level confirmation prompts
+        // (SecurityAgent, UserNotificationCenter) that can block safaridriver's
+        // extension-install call indefinitely on fresh macOS installs.
         const watchdog = spawn(
           'osascript',
           [
             '-e',
             `repeat 60 times
-               tell application "System Events"
-                 repeat with p in application processes
-                   try
-                     repeat with w in (windows of p)
+               repeat with procName in {"SecurityAgent", "UserNotificationCenter", "CoreServicesUIAgent"}
+                 try
+                   tell application "System Events" to tell process procName
+                     repeat with w in windows
                        try
                          repeat with btn in (buttons of w)
                            try
@@ -348,9 +348,9 @@ export const config = {
                          end repeat
                        end try
                      end repeat
-                   end try
-                 end repeat
-               end tell
+                   end tell
+                 end try
+               end repeat
                delay 1
              end repeat`,
           ],
