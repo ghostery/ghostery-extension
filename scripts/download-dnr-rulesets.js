@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
@@ -39,36 +39,118 @@ function handleResponse(res) {
   return res.json();
 }
 
-for (const [name, target] of Object.entries(RULESETS)) {
-  const outputPath = `${RESOURCES_PATH}/dnr-${target}.json`;
-  const metadataPath = `${RESOURCES_PATH}/dnr-${target}.metadata.json`;
-
-  if (existsSync(outputPath)) {
-    continue;
-  }
-
-  if (process.stdout.isTTY) process.stdout.clearLine(1);
-  process.stdout.write(`Downloading DNR ruleset for "${name}"...`);
-
+async function downloadRuleset(name, outputPath, metadataPath) {
   const list = await fetch(
     `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
   ).then(handleResponse);
 
-  /* DNR rules */
-
+  const prems = [];
   if (list.dnr) {
-    const dnr = await fetch(list.dnr.url || list.dnr.network).then(handleResponse);
+    prems.push(fetch(list.dnr.url || list.dnr.network).then(handleResponse));
 
-    writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
-
+    // Only download metadata when the ruleset is available
     if (list.dnr.metadataUrl) {
-      const metadata = await fetch(list.dnr.metadataUrl).then(handleResponse);
-
-      if (Object.keys(metadata).length !== 0) {
-        writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-      }
+      prems.push(fetch(list.dnr.metadataUrl).then(handleResponse));
     }
-
-    process.stdout.write(' done\n');
   }
+
+  const [dnr, metadata] = await Promise.all(prems);
+
+  if (dnr) {
+    writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
+  }
+
+  if (metadata && Object.keys(metadata).length !== 0) {
+    writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+  } else if (existsSync(metadataPath)) {
+    rmSync(metadataPath);
+  }
+
+  return name;
 }
+
+function clearLine() {
+  if (process.stdout.isTTY === false) return;
+
+  process.stdout.cursorTo(0);
+  process.stdout.clearLine(0);
+}
+
+function createProgress() {
+  let total = 0;
+  let success = 0;
+  let error = 0;
+
+  return {
+    getResult() {
+      return {
+        success,
+        error,
+      };
+    },
+    setTotal(count) {
+      total = count;
+    },
+    tick(isError) {
+      if (isError) {
+        error += 1;
+      } else {
+        success += 1;
+      }
+
+      if (process.stdout.isTTY === false || success + error >= total) {
+        return;
+      }
+
+      clearLine();
+      process.stdout.write(`Downloading ${total - (success + error)} DNR rulesets...`);
+    },
+  };
+}
+
+const progress = createProgress();
+const prems = Object.entries(RULESETS).reduce(function (prems, [name, target]) {
+  const outputPath = `${RESOURCES_PATH}/dnr-${target}.json`;
+  const metadataPath = `${RESOURCES_PATH}/dnr-${target}.metadata.json`;
+
+  if (existsSync(outputPath)) {
+    return prems;
+  }
+
+  prems.push(
+    downloadRuleset(name, outputPath, metadataPath)
+      .then(function () {
+        clearLine();
+        console.log(`Downloaded DNR ruleset for "${name}"`);
+        progress.tick();
+      })
+      .catch(function (e) {
+        clearLine();
+        console.error(`Error: Failed to DNR ruleset for "${name}"!`, e);
+        progress.tick(true);
+        return e;
+      }),
+  );
+
+  return prems;
+}, []);
+
+progress.setTotal(prems.length);
+
+if (process.stdout.isTTY) {
+  process.stdout.write(`Downloading ${prems.length} DNR rulesets...`);
+} else {
+  console.log(`Downloading ${prems.length} DNR rulesets...`);
+}
+
+Promise.all(prems).then(function () {
+  clearLine();
+
+  const { success, error } = progress.getResult();
+  if (error > 0) {
+    console.log(`Downloaded ${success} DNR rulesets with ${error} errors!`);
+    process.exit(1);
+  }
+
+  console.log(`Downloaded ${success} DNR rulesets`);
+});
