@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "Добавить сайт в качестве исключения"
   },
+  "additional_filters": {
+    "message": "Дополнительные фильтры"
+  },
   "adjusted___tracker": {
     "message": "изменено",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "браузер: производитель, версия, язык, производитель операционной системы"
+  },
+  "browser_redirect_protection": {
+    "message": "Защита от перенаправления в браузере"
   },
   "browsing_assistant": {
     "message": "Помощник по просмотру"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "Включено"
   },
+  "enabled__@_0_": {
+    "message": "Включено: $${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "Гарантирует, что ваши клики переходят непосредственно на выбранные вами страницы, без ненужных обходных путей отслеживания."
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "Введите URL-адрес веб-сайта, с которого вы хотите разрешить перенаправления. Ghostery не будет показывать страницу предупреждения для этого домена."
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "Экспорт в файл"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "Расширьте свою защиту с помощью региональных и пользовательских фильтров для расширенного контроля."
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "расширение: версия, дата установки, случайный номер установки (от 1 до 100), основные настройки, статус вклада"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "Показать еще"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "Управляйте списком трекеров, которым разрешено загружаться на этом сайте."
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "Управление списком веб-сайтов, которым разрешено загружать этот трекер."
+  },
   "manifest_name": {
     "message": "Ghostery Антибаннер"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "Пока исключений нет"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "Исключения для защиты еще не добавлены"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "Сайтов, добавленных в исключения, пока нет"
+  "no_options_are_currently_enabled": {
+    "message": "Никакие параметры в настоящее время не включены"
   },
   "observed_activities": {
     "message": "Отслеживаемые действия"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Использует ИИ для блокировки различных способов сбора данных."
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "Предотвращает перенаправление вас с веб-сайтов через сервисы отслеживания или на неизвестные ресурсы, которые могут поставить под угрозу вашу конфиденциальность или безопасность."
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "Предотвращает перенаправление ваших кликов веб-сайтами через отслеживающие URL-адреса перед загрузкой целевых страниц."
   },
   "print_to_pdf": {
     "message": "Печать в PDF"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "Защита от перенаправлений"
   },
-  "regional_filters": {
-    "message": "Региональные фильтры"
+  "regional_block_lists": {
+    "message": "Региональные списки блокировки"
   },
   "reload_to_see_changes": {
     "message": "Перезагрузите, чтобы увидеть изменения"
