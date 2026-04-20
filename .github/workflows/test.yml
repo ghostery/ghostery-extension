@@ -100,6 +100,16 @@ jobs:
           node-version-file: '.tool-versions'
       - name: Install dependencies
         run: npm ci
+      - name: Cache Safari configuration
+        uses: actions/cache@v4
+        with:
+          # setup-safari-ci.sh writes these; caching them short-circuits the
+          # AppleScript toggles on subsequent runs.
+          path: |
+            ~/Library/Preferences/com.apple.Safari.plist
+            ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari.plist
+            ~/Library/Application Support/com.apple.TCC/TCC.db
+          key: safari-config-${{ runner.os }}-${{ hashFiles('scripts/setup-safari-ci.sh') }}
       - name: Configure Safari automation
         run: ./scripts/setup-safari-ci.sh
       - name: Run tests with flags

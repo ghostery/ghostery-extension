@@ -175,6 +175,15 @@ export function buildForSafari() {
       };
       writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
     }
+
+    // Ad-hoc codesign the unpacked extension so Safari's classic install
+    // endpoint accepts it without "Allow Unsigned Extensions" being enabled
+    // (which requires an admin password prompt we can't answer on CI).
+    if (process.platform === 'darwin') {
+      execSync(`codesign --sign - --deep --force "${SAFARI_PATH}"`, {
+        stdio: 'inherit',
+      });
+    }
   }
 }
 

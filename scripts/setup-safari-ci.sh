@@ -18,18 +18,6 @@ fi
 echo "==> enabling safaridriver"
 sudo safaridriver --enable
 
-# SecurityAgent password prompts (e.g. the one "Allow unsigned extensions"
-# triggers on macOS 15+) need an actual password. Set one we control so the
-# AppleScript toggler can type it. Safe on ephemeral GitHub Actions runners.
-if [ -n "${GITHUB_ACTIONS:-}" ] && [ "$(id -un)" = "runner" ]; then
-  echo "==> setting runner password for SecurityAgent prompts"
-  # `sysadminctl` is the modern Directory Services CLI. The old value is empty
-  # on GitHub runners; pass -oldPassword "" so we don't get rejected.
-  sudo sysadminctl -resetPasswordFor runner -newPassword wdio-safari -adminUser runner -adminPassword "" 2>/dev/null || \
-    sudo dscl . -passwd /Users/runner wdio-safari 2>/dev/null || true
-  export SAFARI_ADMIN_PASSWORD=wdio-safari
-fi
-
 echo "==> granting Accessibility to /usr/bin/osascript via user TCC db"
 TCC_USER_DB="$HOME/Library/Application Support/com.apple.TCC/TCC.db"
 TCC_SYSTEM_DB="/Library/Application Support/com.apple.TCC/TCC.db"
@@ -124,33 +112,6 @@ on findAndClickCheckbox(root, needles)
   end using terms from
 end findAndClickCheckbox
 
-on dumpTree(root, indent)
-  using terms from application "System Events"
-    set output to ""
-    try
-      set r to ""
-      try
-        set r to role of root as text
-      end try
-      set n to ""
-      try
-        set n to name of root as text
-      end try
-      set v to ""
-      try
-        set v to value of root as text
-      end try
-      set output to output & indent & r & " name=" & n & " value=" & v & linefeed
-      try
-        repeat with child in (UI elements of root)
-          set output to output & my dumpTree(child, indent & "  ")
-        end repeat
-      end try
-    end try
-    return output
-  end using terms from
-end dumpTree
-
 tell application "Safari" to activate
 delay 1
 tell application "System Events"
@@ -186,31 +147,7 @@ sleep 2
 open -a Safari
 sleep 3
 
-echo "==> diagnosing Safari state after restart"
-osascript 2>&1 <<'APPLESCRIPT'
-tell application "Safari"
-  activate
-  try
-    make new document
-  end try
-end tell
-delay 2
-tell application "System Events"
-  tell process "Safari"
-    set frontmost to true
-    delay 0.5
-    log "menu bar items: " & (name of every menu bar item of menu bar 1)
-    log "window count: " & (count of windows)
-    repeat with w in windows
-      try
-        log "window: " & (name of w)
-      end try
-    end repeat
-  end tell
-end tell
-APPLESCRIPT
-
-echo "==> enabling Allow Remote Automation + Allow unsigned extensions (Developer tab)"
+echo "==> enabling Allow Remote Automation (Developer tab)"
 # On macOS Sequoia+ these moved from the Develop menu into Safari Settings →
 # Developer. Open that pane and toggle the checkboxes there.
 osascript 2>&1 <<'APPLESCRIPT'
@@ -308,35 +245,6 @@ on findAndClickCheckbox(root, needles)
   end using terms from
 end findAndClickCheckbox
 
-on dumpCheckboxes(root, indent)
-  using terms from application "System Events"
-    set output to ""
-    try
-      set elementRole to ""
-      try
-        set elementRole to role of root as text
-      end try
-      if elementRole is "AXCheckBox" then
-        set n to ""
-        try
-          set n to name of root as text
-        end try
-        set v to ""
-        try
-          set v to value of root as text
-        end try
-        set output to output & indent & "checkbox name=" & n & " value=" & v & linefeed
-      end if
-      try
-        repeat with child in (UI elements of root)
-          set output to output & my dumpCheckboxes(child, indent & "  ")
-        end repeat
-      end try
-    end try
-    return output
-  end using terms from
-end dumpCheckboxes
-
 tell application "Safari"
   activate
   try
@@ -361,36 +269,11 @@ tell application "System Events"
       end try
     end try
     delay 1
-    log "Developer pane checkboxes:" & linefeed & my dumpCheckboxes(window 1, "")
     set ok1 to my findAndClickCheckbox(window 1, {"Remote Automation"})
     if not ok1 then error "Could not find 'Allow Remote Automation' in Developer pane"
-    -- Click "Allow unsigned extensions" and answer the SecurityAgent password
-    -- prompt it triggers on macOS 15+.
-    set pw to ""
-    try
-      set pw to system attribute "SAFARI_ADMIN_PASSWORD"
-    end try
-    try
-      my findAndClickCheckbox(window 1, {"unsigned"})
-    end try
-    if pw is not "" then
-      delay 1
-      repeat 30 times
-        try
-          tell process "SecurityAgent"
-            if exists window 1 then
-              set frontmost to true
-              keystroke pw
-              delay 0.3
-              keystroke return
-              exit repeat
-            end if
-          end tell
-        end try
-        delay 0.3
-      end repeat
-      delay 1
-    end if
+    -- Don't toggle "Allow unsigned extensions" here: it requires admin auth we
+    -- can't provide on hosted runners. Extensions are ad-hoc codesigned at
+    -- build time so Safari accepts them without that toggle.
     keystroke "w" using command down
   end tell
 end tell
