@@ -44,7 +44,64 @@ open -a Safari
 sleep 3
 
 echo "==> enabling Show Develop menu"
-osascript <<'APPLESCRIPT'
+osascript 2>&1 <<'APPLESCRIPT'
+on findAndClickCheckbox(root, needles)
+  using terms from application "System Events"
+    try
+      set elementName to ""
+      try
+        set elementName to name of root as text
+      end try
+      set elementRole to ""
+      try
+        set elementRole to role of root as text
+      end try
+      if elementRole is "AXCheckBox" then
+        repeat with n in needles
+          if elementName contains n then
+            if value of root is 0 then click root
+            return true
+          end if
+        end repeat
+      end if
+      try
+        set children to UI elements of root
+        repeat with child in children
+          if my findAndClickCheckbox(child, needles) then return true
+        end repeat
+      end try
+    end try
+    return false
+  end using terms from
+end findAndClickCheckbox
+
+on dumpTree(root, indent)
+  using terms from application "System Events"
+    set output to ""
+    try
+      set r to ""
+      try
+        set r to role of root as text
+      end try
+      set n to ""
+      try
+        set n to name of root as text
+      end try
+      set v to ""
+      try
+        set v to value of root as text
+      end try
+      set output to output & indent & r & " name=" & n & " value=" & v & linefeed
+      try
+        repeat with child in (UI elements of root)
+          set output to output & my dumpTree(child, indent & "  ")
+        end repeat
+      end try
+    end try
+    return output
+  end using terms from
+end dumpTree
+
 tell application "Safari" to activate
 delay 1
 tell application "System Events"
@@ -52,33 +109,23 @@ tell application "System Events"
     set frontmost to true
     click menu item "Settings…" of menu 1 of menu bar item "Safari" of menu bar 1
     delay 1.5
-    tell window 1
-      -- Advanced tab may be a button or radio button depending on macOS version.
+    try
+      click button "Advanced" of toolbar 1 of window 1
+    on error
       try
-        click button "Advanced" of toolbar 1
-      on error
-        try
-          click radio button "Advanced" of toolbar 1
-        end try
+        click radio button "Advanced" of toolbar 1 of window 1
       end try
-      delay 1
-      -- Dump for debugging, then click any checkbox whose name hints at Develop.
-      log "Advanced tab UI:"
-      log (entire contents)
-      set toggled to false
-      repeat with cb in (checkboxes of entire contents)
-        set n to ""
-        try
-          set n to name of cb as text
-        end try
-        if n contains "features for web developers" or n contains "Show Develop" then
-          if value of cb is 0 then click cb
-          set toggled to true
-          exit repeat
-        end if
-      end repeat
-      if not toggled then error "Could not find 'Show Develop' checkbox in Advanced pane"
-    end tell
+    end try
+    delay 1
+  end tell
+end tell
+
+tell application "System Events"
+  tell process "Safari"
+    -- Print the Advanced pane so we know the element names we're targeting.
+    log my dumpTree(window 1, "")
+    set ok to my findAndClickCheckbox(window 1, {"features for web developers", "Show Develop"})
+    if not ok then error "No matching checkbox found for 'Show Develop' in Advanced pane"
     keystroke "w" using command down
     delay 0.5
   end tell
