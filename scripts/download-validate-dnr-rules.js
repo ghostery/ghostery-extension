@@ -35,15 +35,15 @@ if (existsSync(binPath)) {
 
 const url = `https://github.com/ghostery/WebKit/releases/latest/download/validate-dnr-rules-${suffix}`;
 
+console.log(`[validate-dnr-rules] Downloading ${url}`);
+
 try {
-  console.log(`[validate-dnr-rules] Downloading ${url}`);
-  const res = await fetch(url, { redirect: 'follow' });
+  const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} ${res.statusText}`);
   }
-  const buf = Buffer.from(await res.arrayBuffer());
   mkdirSync(binDir, { recursive: true });
-  writeFileSync(binPath, buf);
+  writeFileSync(binPath, new Uint8Array(await res.arrayBuffer()));
   chmodSync(binPath, 0o755);
   console.log(`[validate-dnr-rules] Saved to ${binPath}`);
 } catch (err) {

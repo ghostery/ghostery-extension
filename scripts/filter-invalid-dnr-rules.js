@@ -10,7 +10,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const binPath = resolve(import.meta.dirname, 'bin', 'validate-dnr-rules');
@@ -71,9 +71,8 @@ for (const file of files) {
   writeFileSync(file, JSON.stringify(filtered));
   totalRemoved += removed;
 
-  const rel = file.replace(process.cwd() + '/', '');
   console.log(
-    `[filter-invalid-dnr-rules] ${rel}: removed ${removed}/${rules.length} invalid rule(s)`,
+    `[filter-invalid-dnr-rules] ${relative(process.cwd(), file)}: removed ${removed}/${rules.length} invalid rule(s)`,
   );
 }
 
