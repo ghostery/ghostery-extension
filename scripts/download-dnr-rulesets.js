@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
