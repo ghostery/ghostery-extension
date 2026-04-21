@@ -82,6 +82,8 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
     text,
     {
       ...baseConfig,
+      // Safari doesn't support "loadExtendedSelectors" with the baseConfig.
+      loadExtendedSelectors: true,
       debug: true,
     },
   );
