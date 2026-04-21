@@ -360,7 +360,7 @@
     "message": "Aktiviert: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
-    "message": "Stellt sicher, dass Ihre Klicks direkt zu den von Ihnen ausgewählten Seiten führen, ohne unnötige Tracking-Umwege."
+    "message": "Stellt sicher, dass deine Klicks direkt zu den von dir ausgewählten Seiten führen, ohne unnötige Tracking-Umwege."
   },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "Gib die Website-URL ein, von der du Weiterleitungen zulassen möchtest. Ghostery zeigt für diese Domain künftig keine Warnseite mehr an."
@@ -397,7 +397,7 @@
     "message": "In Datei exportieren"
   },
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
-    "message": "Erweitern Sie Ihren Schutz mit regionalen und benutzerdefinierten Filtern für erweiterte Kontrolle."
+    "message": "Erweitere deinen Schutz mit regionalen und benutzerdefinierten Filtern für mehr Kontrolle."
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "Erweiterung: Version, Installationsdatum, zufällige Installationsnummer (von 1 bis 100), Grundeinstellungen, Fördererstatus"
@@ -591,10 +591,10 @@
     "message": "Mehr laden"
   },
   "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
-    "message": "Verwalten Sie die Liste der Tracker, die auf dieser Website geladen werden dürfen."
+    "message": "Verwalte die Liste der Tracker, die auf dieser Webseite geladen werden dürfen."
   },
   "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
-    "message": "Verwalten Sie die Liste der Websites, denen das Laden dieses Trackers erlaubt ist."
+    "message": "Verwalte die Liste der Webseiten, denen das Laden dieses Trackers erlaubt ist."
   },
   "manifest_name": {
     "message": "Ghostery Werbeblocker & Datenschutz"
@@ -747,7 +747,7 @@
     "message": "Nutzt KI-basierte Technologie, um verschiedene Tracking-Techniken zu verhindern."
   },
   "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
-    "message": "Verhindert, dass Websites Ihre Klicks über Tracking-URLs umleiten, bevor die Zielseiten geladen werden."
+    "message": "Verhindert, dass Webseiten ihre Klicks über Tracking-URLs umleiten, bevor die Zielseiten geladen werden."
   },
   "print_to_pdf": {
     "message": "Als PDF speichern"
@@ -780,7 +780,7 @@
     "message": "Umleitungsschutz"
   },
   "regional_block_lists": {
-    "message": "Regionale Blockierlisten"
+    "message": "Regionale Blocklisten"
   },
   "reload_to_see_changes": {
     "message": "Neu laden, um Änderungen zu sehen"
