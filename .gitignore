@@ -29,6 +29,9 @@ npm-debug.log
 src/rule_resources
 src/static_pages
 
+# Downloaded binaries
+scripts/bin/
+
 # Build
 dist/
 web-ext-artifacts/
