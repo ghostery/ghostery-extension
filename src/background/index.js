@@ -37,3 +37,4 @@ import './reporting/index.js';
 import './telemetry/index.js';
 
 import './devtools.js';
+import './storage.js';

@@ -24,6 +24,19 @@ export async function checkStorage() {
   }
 }
 
+export async function checkSessionStorage() {
+  try {
+    await chrome.storage.session.set({ [STORAGE_TEST_KEY]: 'test' });
+    const result = await chrome.storage.session.get(STORAGE_TEST_KEY);
+    await chrome.storage.session.remove(STORAGE_TEST_KEY);
+
+    return result[STORAGE_TEST_KEY] === 'test';
+  } catch (e) {
+    console.error('[storage] Session storage check failed:', e);
+    throw e;
+  }
+}
+
 export function getLocalStorageItem(key) {
   try {
     return globalThis.localStorage.getItem(key);
