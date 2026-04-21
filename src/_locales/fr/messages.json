@@ -360,7 +360,7 @@
     "message": "Activé : $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
-    "message": "Garantit que vos clics se dirigent directement vers les pages que vous sélectionnez, sans détours de suivi inutiles."
+    "message": "Garantit que vos clics mènent directement aux pages choisies, sans détours de suivi inutiles."
   },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "Saisissez l’URL du site Web depuis lequel vous souhaitez autoriser les redirections. Ghostery n’affichera plus la page d’avertissement pour ce domaine."
@@ -591,10 +591,10 @@
     "message": "Charger plus"
   },
   "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
-    "message": "Gérer la liste des trackers autorisés à se charger sur ce site."
+    "message": "Gérez la liste des trackers autorisés à se charger sur ce site."
   },
   "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
-    "message": "Gérer la liste des sites web autorisés à charger ce tracker."
+    "message": "Gérez la liste des sites web autorisés à charger ce tracker."
   },
   "manifest_name": {
     "message": "Ghostery Bloqueur Pub & Anti-Tracking"
@@ -655,7 +655,7 @@
     "message": "Aucune exception ajoutée pour le moment"
   },
   "no_options_are_currently_enabled": {
-    "message": "Aucune option n'est actuellement activée"
+    "message": "Aucune option n’est actuellement activée."
   },
   "observed_activities": {
     "message": "Activités observées"
