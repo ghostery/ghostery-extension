@@ -46,8 +46,7 @@ export default {
               <ui-text type="headline-m">Additional Filters</ui-text>
               <div layout="column gap:0.5">
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                  Extend your protection with regional, experimental, and custom filters for
-                  advanced control.
+                  Extend your protection with regional and custom filters for advanced control.
                 </ui-text>
               </div>
             </div>

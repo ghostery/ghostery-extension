@@ -207,7 +207,8 @@ export default class Metrics {
             : conf.options.mode === 'zap'
               ? '1'
               : '0',
-      );
+      ) +
+      buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0');
 
     if (type !== 'uninstall') {
       metrics_url +=

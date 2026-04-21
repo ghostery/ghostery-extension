@@ -10,11 +10,9 @@
  */
 
 import { html, router, store } from 'hybrids';
-import { FLAG_REDIRECT_PROTECTION } from '@ghostery/config';
 
 import { longDateFormatter } from '/ui/labels.js';
 
-import Config from '/store/config.js';
 import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
@@ -50,7 +48,6 @@ export default {
     stack: [AdditionalFilters, RedirectProtection],
   },
   options: store(Options),
-  config: store(Config),
   devMode: __DEBUG__,
   globalPause: {
     value: false,
@@ -62,7 +59,7 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({ options, config, devMode, globalPause, globalPauseRevokeAt }) => html`
+  render: ({ options, devMode, globalPause, globalPauseRevokeAt }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -130,8 +127,7 @@ export default {
                 </settings-toggle>
               </div>
               <div layout="column gap">
-                ${config.hasFlag(FLAG_REDIRECT_PROTECTION) &&
-                options.mode !== MODE_ZAP &&
+                ${options.mode !== MODE_ZAP &&
                 html`
                   <settings-link
                     href="${router.url(RedirectProtection)}"

@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "Añadir excepción de sitio web"
   },
+  "additional_filters": {
+    "message": "Filtros Adicionales"
+  },
   "adjusted___tracker": {
     "message": "ajustado",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "navegador: proveedor, versión, idioma, proveedor del sistema operativo"
+  },
+  "browser_redirect_protection": {
+    "message": "Protección contra Redirecciones del Navegador"
   },
   "browsing_assistant": {
     "message": "Asistente de Navegación"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "Habilitado"
   },
+  "enabled__@_0_": {
+    "message": "Activado: $${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "Garantiza que tus clics vayan directamente a las páginas que seleccionas, sin desvíos de seguimiento innecesarios."
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "Introduce la URL del sitio web desde el que deseas permitir redirecciones. Ghostery no mostrará la página de advertencia para este dominio."
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "Exportar a archivo"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "Amplía tu protección con filtros regionales y personalizados para un control avanzado."
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "extensión: versión, fecha de instalación, número de instalación aleatorio (del 1 al 100), configuraciones básicas, estado de contribución"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "Cargar más"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "Gestiona la lista de rastreadores que tienen permitido cargarse en este sitio."
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "Gestiona la lista de sitios web a los que se les permite cargar este rastreador."
+  },
   "manifest_name": {
     "message": "Ghostery Bloqueador de Anuncios"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "Aún no se han añadido excepciones"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "No se han añadido excepciones de protección todavía."
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "No se ha añadido aún ninguna excepción"
+  "no_options_are_currently_enabled": {
+    "message": "No hay opciones habilitadas actualmente"
   },
   "observed_activities": {
     "message": "Actividades observadas"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Previene diversas técnicas de rastreo con tecnología de inteligencia artificial."
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "Impide que los sitios web te redirijan a través de servicios de seguimiento o destinos desconocidos que puedan comprometer tu privacidad o seguridad."
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "Evita que los sitios web redirijan tus clics a través de URL de seguimiento antes de cargar las páginas de destino."
   },
   "print_to_pdf": {
     "message": "Imprimir a PDF"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "Protección contra redirecciones"
   },
-  "regional_filters": {
-    "message": "Filtros Regionales"
+  "regional_block_lists": {
+    "message": "Listas de bloqueo regionales"
   },
   "reload_to_see_changes": {
     "message": "Actualiza para ver los cambios"

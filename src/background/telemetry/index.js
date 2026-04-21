@@ -40,6 +40,7 @@ const setup = asyncSetup('telemetry', [
         options: await store.resolve(Options),
         config: await store.resolve(Config),
         userSettings: __CHROMIUM__ ? await chrome.action?.getUserSettings?.() : undefined,
+        isAllowedIncognitoAccess: await chrome.extension.isAllowedIncognitoAccess(),
       }),
       log: console.debug.bind(console, '[telemetry]'),
     });

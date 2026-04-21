@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "ウェブサイトの例外を追加"
   },
+  "additional_filters": {
+    "message": "追加フィルター"
+  },
   "adjusted___tracker": {
     "message": "調整済み",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "ブラウザ：ベンダー、バージョン、言語、オペレーティングシステムベンダー"
+  },
+  "browser_redirect_protection": {
+    "message": "ブラウザリダイレクト保護"
   },
   "browsing_assistant": {
     "message": "ブラウジングアシスタント"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "有効になっています"
   },
+  "enabled__@_0_": {
+    "message": "有効: $${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "クリックが不要な追跡の回り道をすることなく、選択したページに直接移動するようにします。"
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "リダイレクトを許可したいウェブサイトのURLを入力してください。このドメインに対してGhosteryは警告ページを表示しません。"
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "ファイルにエクスポート"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "地域別およびカスタムフィルターで保護を強化し、高度な制御を実現します。"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "拡張機能: バージョン、インストール日、ランダムインストール番号 (1から100まで)、基本設定、貢献状況"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "さらに読み込む"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "このサイトで読み込みを許可するトラッカーのリストを管理します。"
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "このトラッカーの読み込みを許可するウェブサイトのリストを管理します。"
+  },
   "manifest_name": {
     "message": "Ghostery プライバシー広告ブロッカー"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "まだ例外は追加されていません"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "まだ保護例外は追加されていません"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "ウェブサイトの例外はまだ追加されていません"
+  "no_options_are_currently_enabled": {
+    "message": "現在、オプションは有効になっていません"
   },
   "observed_activities": {
     "message": "観察済みのアクティビティ"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AIを活用した技術で様々な追跡手法を防止します。"
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "ウェブサイトがトラッキングサービスやプライバシーやセキュリティを損なう可能性のある未知の目的地にリダイレクトするのを防ぎます。"
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "ウェブサイトが、目的のページを読み込む前にトラッキングURLを介してクリックをリダイレクトするのを防ぎます。"
   },
   "print_to_pdf": {
     "message": "PDFに印刷"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "リダイレクト保護"
   },
-  "regional_filters": {
-    "message": "地域フィルター"
+  "regional_block_lists": {
+    "message": "地域別ブロックリスト"
   },
   "reload_to_see_changes": {
     "message": "変更を確認するには、リロードしてください。"

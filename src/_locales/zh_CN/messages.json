@@ -48,6 +48,9 @@
   "add_website_exception": {
     "message": "添加网站异常"
   },
+  "additional_filters": {
+    "message": "附加筛选器"
+  },
   "adjusted___tracker": {
     "message": "已调整",
     "description": "Singular form - tracker has been adjusted"
@@ -167,6 +170,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "浏览器：供应商、版本、语言、操作系统供应商"
+  },
+  "browser_redirect_protection": {
+    "message": "浏览器重定向保护"
   },
   "browsing_assistant": {
     "message": "浏览助手"
@@ -350,6 +356,12 @@
   "enabled": {
     "message": "已启用"
   },
+  "enabled__@_0_": {
+    "message": "已启用：$${0}"
+  },
+  "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
+    "message": "确保您的点击直接跳转到您选择的页面，避免不必要的跟踪绕行。"
+  },
   "enter_the_website_url_you_want_to_allow_redirects_from__ghostery_will_not_show_the_warning_page_for_this_domain_": {
     "message": "输入您想允许重定向的网站URL。Ghostery将不会为此域名显示警告页面。"
   },
@@ -383,6 +395,9 @@
   },
   "export_to_file": {
     "message": "导出到文件"
+  },
+  "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
+    "message": "通过区域和自定义过滤器扩展您的保护，实现高级控制。"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "扩展：版本，安装日期，随机安装编号（从1到100），基本设置，贡献状态"
@@ -575,6 +590,12 @@
   "load_more": {
     "message": "加载更多"
   },
+  "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
+    "message": "管理允许在此网站上加载的跟踪器列表。"
+  },
+  "manage_the_list_of_websites_that_are_allowed_to_load_this_tracker_": {
+    "message": "管理允许加载此跟踪器的网站列表。"
+  },
   "manifest_name": {
     "message": "Ghostery 隐私广告拦截工具"
   },
@@ -633,11 +654,8 @@
   "no_exceptions_added_yet": {
     "message": "尚未添加例外"
   },
-  "no_protection_exceptions_added_yet": {
-    "message": "尚未添加任何保护例外。"
-  },
-  "no_websites_exceptions_added_yet": {
-    "message": "还未添加网站异常"
+  "no_options_are_currently_enabled": {
+    "message": "当前未启用任何选项"
   },
   "observed_activities": {
     "message": "已观察过的活动"
@@ -728,8 +746,8 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
-  "prevents_websites_from_redirecting_you_through_tracking_services_or_unknown_destinations_that_may_compromise_your_privacy_or_security_": {
-    "message": "防止网站通过跟踪服务或未知目的地重定向您，从而可能危害您的隐私或安全。"
+  "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
+    "message": "阻止网站在加载目标页面之前，通过跟踪URL重定向您的点击。"
   },
   "print_to_pdf": {
     "message": "打印为 PDF"
@@ -761,8 +779,8 @@
   "redirect_protection": {
     "message": "重定向保护"
   },
-  "regional_filters": {
-    "message": "区域过滤器"
+  "regional_block_lists": {
+    "message": "区域阻止列表"
   },
   "reload_to_see_changes": {
     "message": "重新加载以查看更改。"
