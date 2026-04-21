@@ -59,11 +59,8 @@ async function downloadRuleset(name, outputPath, metadataPath) {
   if (dnr) {
     writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
   }
-
   if (metadata && Object.keys(metadata).length !== 0) {
     writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-  } else if (existsSync(metadataPath)) {
-    rmSync(metadataPath);
   }
 
   return name;
