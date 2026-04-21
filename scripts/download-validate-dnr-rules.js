@@ -10,8 +10,7 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync, chmodSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 const PLATFORM_MAP = {
   'darwin-arm64': 'macos-arm64',
@@ -19,8 +18,7 @@ const PLATFORM_MAP = {
   'linux-x64': 'linux-x64',
 };
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const binDir = resolve(__dirname, 'bin');
+const binDir = resolve(import.meta.dirname, 'bin');
 const binPath = resolve(binDir, 'validate-dnr-rules');
 
 const key = `${process.platform}-${process.arch}`;
