@@ -20,7 +20,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
-import { setup, reloadMainEngine } from './adblocker/index.js';
+import { setup, reloadMainEngine } from './adblocker/engines.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
 import ManagedConfig from '/store/managed-config.js';
 

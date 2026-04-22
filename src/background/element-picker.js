@@ -15,7 +15,7 @@ import { parseFilters } from '@ghostery/adblocker';
 import * as engines from '/utils/engines.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
-import { setup, reloadMainEngine } from './adblocker/index.js';
+import { setup, reloadMainEngine } from './adblocker/engines.js';
 
 // Observe element picker selectors to update the adblocker engine
 store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
