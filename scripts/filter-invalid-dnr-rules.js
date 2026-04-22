@@ -9,19 +9,46 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import {
+  chmodSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-const binPath = resolve(import.meta.dirname, 'bin', 'validate-dnr-rules');
+const PLATFORM_MAP = {
+  'darwin-arm64': 'macos-arm64',
+  'darwin-x64': 'macos-arm64',
+  'linux-x64': 'linux-x64',
+};
+
+const binDir = resolve(import.meta.dirname, 'bin');
+const binPath = resolve(binDir, 'validate-dnr-rules');
 const rulesDir = resolve(process.cwd(), 'dist', 'rule_resources');
 
 if (!existsSync(binPath)) {
-  console.error(
-    `[filter-invalid-dnr-rules] Validator binary not found at ${binPath}.\n` +
-      `Run 'npm install' to download it from https://github.com/ghostery/WebKit/releases.`,
-  );
-  process.exit(1);
+  const key = `${process.platform}-${process.arch}`;
+  const suffix = PLATFORM_MAP[key];
+
+  if (!suffix) {
+    console.error(`[filter-invalid-dnr-rules] No validator binary available for ${key}.`);
+    process.exit(1);
+  }
+
+  const url = `https://github.com/ghostery/WebKit/releases/latest/download/validate-dnr-rules-${suffix}`;
+  console.log(`[filter-invalid-dnr-rules] Downloading ${url}`);
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Failed to download validator: ${res.status} ${res.statusText}`);
+  }
+  mkdirSync(binDir, { recursive: true });
+  writeFileSync(binPath, new Uint8Array(await res.arrayBuffer()));
+  chmodSync(binPath, 0o755);
 }
 
 if (!existsSync(rulesDir)) {
