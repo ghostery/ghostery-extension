@@ -194,6 +194,7 @@ const config = {
     assetsDir: '',
     emptyOutDir: false,
     minify: false,
+    reportCompressedSize: false,
     modulePreload: {
       polyfill: false,
     },
