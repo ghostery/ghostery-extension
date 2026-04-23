@@ -10,7 +10,7 @@
  */
 
 import { html } from 'hybrids';
-import lottie from 'lottie-web';
+import lottie from 'lottie-web/build/player/esm/lottie_light.min.js';
 
 export default {
   src: '',
