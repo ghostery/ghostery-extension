@@ -13,6 +13,7 @@ import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
+import { groupRulesetFile } from './group-dnr-rulesets.js';
 
 if (!existsSync(RESOURCES_PATH)) {
   mkdirSync(RESOURCES_PATH, { recursive: true });
@@ -68,6 +69,10 @@ for (const [name, target] of Object.entries(RULESETS)) {
         writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
       }
     }
+
+    // Group the freshly downloaded ruleset in place so the optimization
+    // is persisted in src/rule_resources and does not need to run on every build.
+    groupRulesetFile(outputPath);
 
     process.stdout.write(' done\n');
   }
