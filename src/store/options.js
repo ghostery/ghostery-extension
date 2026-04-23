@@ -69,7 +69,7 @@ const Options = {
   },
 
   // Experimental features
-  autoconsent: { autoAction: 'optOut' },
+  autoconsent: { autoAction: 'optOut', gpc: true },
   fixesFilters: true,
 
   // SERP protection

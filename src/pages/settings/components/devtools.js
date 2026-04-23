@@ -13,6 +13,7 @@ import { html, store, dispatch } from 'hybrids';
 import {
   ACTION_DISABLE_AUTOCONSENT,
   ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+  ACTION_DISABLE_GPC,
   ACTION_PAUSE_ASSISTANT,
   FLAGS,
 } from '@ghostery/config';
@@ -50,6 +51,7 @@ async function testConfigDomain() {
     [
       ACTION_DISABLE_AUTOCONSENT,
       ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+      ACTION_DISABLE_GPC,
       ACTION_PAUSE_ASSISTANT,
     ].join(', '),
   );
@@ -100,25 +102,6 @@ export default {
       ${(visible || counter > 5) &&
       html`
         <section layout="column gap:4" translate="no">
-          <div layout="column gap:2">
-            <ui-text type="headline-m">Experimental features</ui-text>
-            <settings-option>
-              Never-Consent Automatic Action Type
-              <span slot="description">
-                Chooses the default behavior for cookie consent notices.
-              </span>
-              <ui-input slot="action">
-                <select
-                  value="${options.autoconsent.autoAction}"
-                  onchange="${html.set(options, 'autoconsent.autoAction')}"
-                >
-                  <option value="optOut">Opt out</option>
-                  <option value="optIn">Opt in</option>
-                  <option value="">None</option>
-                </select>
-              </ui-input>
-            </settings-option>
-          </div>
           <div layout="column gap:3" translate="no">
             <ui-text type="headline-m">Developer tools</ui-text>
             <div layout="column gap">

@@ -20,6 +20,7 @@ import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 import { asyncAction } from '../utils/actions.js';
 import assets from '../assets/index.js';
 
+import Autoconsent from './autoconsent.js';
 import AdditionalFilters, { getAdditionalFiltersLabel } from './additional-filters.js';
 import RedirectProtection, { getRedirectProtectionLabel } from './redirect-protection.js';
 
@@ -45,7 +46,7 @@ function updateEngines(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [AdditionalFilters, RedirectProtection],
+    stack: [Autoconsent, AdditionalFilters, RedirectProtection],
   },
   options: store(Options),
   devMode: __DEBUG__,
@@ -124,6 +125,23 @@ export default {
                 >
                   Never-Consent
                   <span slot="description">Automatically rejects cookie consent notices.</span>
+
+                  <ui-text
+                    type="label-m"
+                    color="primary"
+                    slot="footer"
+                    inert="${!options.blockAnnoyances}"
+                    style="${{ opacity: !options.blockAnnoyances ? 0.5 : undefined }}"
+                    layout="margin:top"
+                  >
+                    <a
+                      href="${options.blockAnnoyances ? router.url(Autoconsent) : ''}"
+                      layout="row items:center gap:2px margin:-1 padding:1"
+                    >
+                      Extended settings
+                      <ui-icon name="chevron-right-s"></ui-icon>
+                    </a>
+                  </ui-text>
                 </settings-toggle>
               </div>
               <div layout="column gap">
