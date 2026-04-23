@@ -9,40 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const DOMAIN_BLOCKING_PATTERN = /^\|\|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\^$/;
 
-const dist = join(import.meta.dirname, '../dist/rule_resources');
-const source = join(import.meta.dirname, '../src/rule_resources');
-
 function cutPuncBy100(n) {
   return Math.trunc(n * 100) / 100;
-}
-
-function getRulesetIds() {
-  if (existsSync(dist) === false) {
-    console.warn(
-      'The destination directory is not available! Please try again after building the extension.',
-    );
-    process.exit(0);
-  }
-
-  return readdirSync(dist, { withFileTypes: true }).reduce(function (ids, descriptor) {
-    if (
-      descriptor.isFile() &&
-      // Is a JSON file
-      descriptor.name.endsWith('.json') &&
-      // Not a metadata file
-      descriptor.name.endsWith('.metadata.json') === false &&
-      // Not a redirect-protection (this won't have any rules targeted by "groupRuleset" but for safety)
-      descriptor.name.includes('redirect-protection') === false
-    ) {
-      ids.push(descriptor.name);
-    }
-    return ids;
-  }, []);
 }
 
 function groupRuleset(ruleset, metadata) {
@@ -85,31 +57,29 @@ function groupRuleset(ruleset, metadata) {
   return result;
 }
 
-const grandTotal = {
-  ruleset: 0,
-  newRuleset: 0,
-};
-
-for (const id of getRulesetIds()) {
-  const rulesetPath = join(source, id);
-  const metadataPath = join(source, id.replace('.json', '.metadata.json'));
-  const distPath = join(dist, id);
+/**
+ * Groups a single DNR ruleset file in place. Safe to call repeatedly:
+ * once a ruleset is grouped, its combined rule uses `requestDomains` instead
+ * of `urlFilter` and is no longer matched by the grouping pattern.
+ *
+ * @param {string} rulesetPath Absolute path to the ruleset JSON file.
+ * @returns {{ before: number, after: number }}
+ */
+export function groupRulesetFile(rulesetPath) {
+  const metadataPath = rulesetPath.replace(/\.json$/, '.metadata.json');
 
   const ruleset = JSON.parse(readFileSync(rulesetPath, 'utf8'));
   const metadata = existsSync(metadataPath) ? JSON.parse(readFileSync(metadataPath, 'utf8')) : {};
 
   const newRuleset = groupRuleset(ruleset, metadata);
 
-  grandTotal.ruleset += ruleset.length;
-  grandTotal.newRuleset += newRuleset.length;
-  const ratio = cutPuncBy100(newRuleset.length / ruleset.length);
+  writeFileSync(rulesetPath, JSON.stringify(newRuleset), 'utf8');
 
-  console.log(`id="${id}" before=${ruleset.length} after=${newRuleset.length} ratio=${ratio}`);
+  const before = ruleset.length;
+  const after = newRuleset.length;
+  const ratio = cutPuncBy100(after / before);
 
-  writeFileSync(distPath, JSON.stringify(newRuleset), 'utf8');
+  process.stdout.write(` grouping: ${before} -> ${after} (${ratio})...`);
+
+  return { before, after };
 }
-
-const grandTotalRatio = cutPuncBy100(grandTotal.newRuleset / grandTotal.ruleset);
-console.log(
-  `Reduced ${grandTotal.ruleset} rules into ${grandTotal.newRuleset} rules with ratio of ${grandTotalRatio}`,
-);
