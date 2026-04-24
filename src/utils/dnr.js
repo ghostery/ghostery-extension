@@ -24,6 +24,9 @@ export const REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE = {
   end: 6_000_000,
 };
 
+export const GPC_RULE_ID = 6_000_000;
+export const GPC_RULE_PRIORITY = 40_000;
+
 export const REDIRECT_PROTECTION_SESSION_OFFSET = 100_000;
 
 export const PAUSED_RULE_PRIORITY = 10_000_000;
@@ -51,6 +54,10 @@ export async function getDynamicRules(type) {
   return (await chrome.declarativeNetRequest.getDynamicRules()).filter(
     (rule) => rule.id >= type.start && rule.id < type.end,
   );
+}
+
+export function getDynamicRulesByIds(ruleIds) {
+  return chrome.declarativeNetRequest.getDynamicRules({ ruleIds });
 }
 
 export async function getDynamicRulesIds(type) {

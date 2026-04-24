@@ -21,7 +21,7 @@ export default {
   },
   render: ({ icon, value }) => html`
     <template layout="grid">
-      <settings-card layout="padding:0">
+      <settings-card layout="column padding:0">
         <ui-toggle value="${value}" onchange="${html.set('value')}" layout="grow">
           <div id="content" layout="column gap:2 grow self:stretch margin:right:-100px">
             ${icon

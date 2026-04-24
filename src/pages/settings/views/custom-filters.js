@@ -49,12 +49,12 @@ export default {
           Facilitates the creation of your own ad-blocking rules to customize your Ghostery
           experience.
         </span>
-        <ui-text type="label-m" color="primary" underline slot="footer">
+        <ui-text type="label-m" color="primary" slot="footer">
           <a
             href="https://github.com/ghostery/adblocker/wiki/Compatibility-Matrix"
             target="_blank"
             rel="noreferrer"
-            layout="row gap:2px"
+            layout="row items:center gap:2px"
           >
             Learn more on supported syntax
             <ui-icon name="chevron-right-s"></ui-icon>
