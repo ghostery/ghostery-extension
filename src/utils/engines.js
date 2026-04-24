@@ -134,7 +134,7 @@ async function loadFromStorage(name) {
         // https://github.com/ghostery/ghostery-extension/pull/1928
         // The above PR introduced full engines to all platforms,
         // so the old engines are obsolete and should be reloaded
-        throw TypeError(`Engine "${name}" is obsolete and must be reloaded`);
+        throw TypeError(`[engines] Engine "${name}" is obsolete and must be reloaded`);
       }
 
       saveToMemory(name, engine);
@@ -189,9 +189,10 @@ async function saveToStorage(name, checksum) {
 }
 
 async function loadFromCDN(name) {
-  console.log(`[engines] Loading engine "${name}" from CDN...`);
+  console.info(`[engines] Loading engine "${name}" from CDN...`);
   await update(name, { force: true });
-  return await loadFromStorage(name);
+
+  return loadFromMemory(name);
 }
 
 function check(response) {
@@ -282,7 +283,7 @@ export async function update(name, { force = false, cache = true } = {}) {
       saveToMemory(name, engine);
       saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
-      console.info(`Engine "${name}" reloaded:`, data.engines[ENGINE_VERSION].checksum);
+      console.info(`[engines] Engine "${name}" reloaded:`, data.engines[ENGINE_VERSION].checksum);
 
       return true;
     }
