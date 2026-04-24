@@ -11,10 +11,8 @@
 
 import { store } from 'hybrids';
 import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblocker-webextension';
-import { ACTION_DISABLE_GPC } from '@ghostery/config';
 
-import Options, { getPausedDetails, isGloballyPaused } from '/store/options.js';
-import Config from '/store/config.js';
+import Options, { getPausedDetails } from '/store/options.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
@@ -137,42 +135,5 @@ if (__FIREFOX__) {
     },
     { urls: ['http://*/*', 'https://*/*'] },
     ['blocking', 'responseHeaders'],
-  );
-
-  /*
-   * Never-Consent GPC signal for Firefox
-   */
-
-  chrome.webRequest.onBeforeSendHeaders.addListener(
-    (details) => {
-      const options = store.get(Options);
-      if (
-        !store.ready(options) ||
-        !options.terms ||
-        !options.blockAnnoyances ||
-        !options.autoconsent.gpc ||
-        isGloballyPaused(options)
-      ) {
-        return;
-      }
-
-      const request = Request.fromRequestDetails(details);
-      const config = store.get(Config);
-      const configReady = store.ready(config);
-
-      // Mirror DNR's `excludedInitiatorDomains` + `excludedRequestDomains`:
-      // skip if either the initiator (page) or the request hostname is paused
-      // or has the disable action set.
-      for (const hostname of [request.sourceHostname, request.hostname]) {
-        if (!hostname) continue;
-        if (getPausedDetails(options, hostname)) return;
-        if (configReady && config.hasAction(hostname, ACTION_DISABLE_GPC)) return;
-      }
-
-      details.requestHeaders.push({ name: 'Sec-GPC', value: '1' });
-      return { requestHeaders: details.requestHeaders };
-    },
-    { urls: ['http://*/*', 'https://*/*'] },
-    ['blocking', 'requestHeaders'],
   );
 }
