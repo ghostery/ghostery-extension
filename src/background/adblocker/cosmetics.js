@@ -109,7 +109,27 @@ function injectStyles(styles, details) {
       origin: 'USER',
       target: resolveInjectionTarget(details),
     })
-    .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
+    .catch(async (e) => {
+      // On Firefox, "Missing host permission for the tab or frames" is produced
+      // whenever the target frame is destroyed before the browser completes the
+      // CSS injection, regardless of how the injection was triggered.
+      if (__FIREFOX__ && e?.message?.startsWith('Missing host permission')) return;
+
+      // Only log a warning if the frame still exists, otherwise it means that
+      // the frame is destroyed before the CSS is injected.
+      const frame = await chrome.webNavigation
+        .getFrame({ tabId: details.tabId, frameId: details.frameId })
+        .catch(() => null);
+
+      if (!frame) return;
+
+      // On Chromium, when documentId is used as the injection target, verify the
+      // frame's current document matches. If it differs, the frame navigated to a
+      // new document after onCommitted fired but before insertCSS ran (benign race).
+      if (__CHROMIUM__ && details.documentId && frame.documentId !== details.documentId) return;
+
+      console.warn('[adblocker] failed to inject CSS', e);
+    });
 }
 
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
@@ -239,11 +259,10 @@ async function injectCosmetics(details, config) {
     }
 
     if (extended && extended.length > 0) {
-      chrome.tabs.sendMessage(
-        tabId,
-        { action: 'evaluateExtendedSelectors', extended },
-        { frameId },
-      );
+      chrome.tabs
+        .sendMessage(tabId, { action: 'evaluateExtendedSelectors', extended }, { frameId })
+        // In case the frame is destroyed before the message is delivered, we can get an error
+        .catch(() => {});
     }
   }
 
