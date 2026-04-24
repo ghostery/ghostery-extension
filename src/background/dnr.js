@@ -243,7 +243,7 @@ if (__CHROMIUM__) {
           nextRulesetIds.length ? nextRulesetIds.join(', ') : 'none',
         );
 
-        // Disable excluded rules by preprocessor only for added rulesets
+        // Disable rules excluded by preprocessors in added rulesets
         if (enableRulesetIds.length > 0) {
           await Promise.all(enableRulesetIds.map((id) => disableExcludedRulesByPreprocessor(id)));
         }
