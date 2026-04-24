@@ -51,7 +51,7 @@
     "@ghostery/urlfilter2dnr": "^2.0.4",
     "@github/relative-time-element": "^5.0.0",
     "@sentry/browser": "^10.50.0",
-    "@whotracksme/reporting": "^8.0.0",
+    "@whotracksme/reporting": "^8.0.1",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.14.1",
     "csv-stringify": "^6.7.0",
