@@ -66,7 +66,7 @@ if (__CHROMIUM__) {
     });
 
     console.info(
-      `[dnr] Disabled rules in static ruleset: ${rulesetId}: ${JSON.stringify(disableRuleIds)}`,
+      `[dnr] Disabled rules in "${rulesetId}" by preprocessor: ${disableRuleIds.length}`,
     );
   }
 
@@ -102,24 +102,22 @@ if (__CHROMIUM__) {
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
   OptionsObserver.addListener(async function dnr(options, lastOptions) {
-    const ids = getIds(options);
+    const nextRulesetIds = getIds(options);
 
     if (
       lastOptions &&
       lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
       lastOptions.fixesFilters === options.fixesFilters &&
-      String(ids) === String(getIds(lastOptions))
+      String(nextRulesetIds) === String(getIds(lastOptions))
     ) {
       // No changes in options triggering an update, skip updating rules
       return;
     }
 
-    const enabledRulesetIds = (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
-
     // Add latest fixes rules
     const resources = await store.resolve(Resources);
 
-    if (options.fixesFilters && ids.length) {
+    if (options.fixesFilters && nextRulesetIds.length) {
       if (
         !resources.checksums[DNR_FIXES_KEY] ||
         lastOptions?.filtersUpdatedAt < options.filtersUpdatedAt
@@ -127,8 +125,6 @@ if (__CHROMIUM__) {
         const removeRuleIds = await getDynamicRulesIds(FIXES_ID_RANGE);
 
         try {
-          console.info('[dnr] Updating dynamic fixes rules...');
-
           const list = await fetch(`${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`, {
             // Force no caching if update was triggered by the user ("Update now" action)
             cache:
@@ -142,6 +138,8 @@ if (__CHROMIUM__) {
           );
 
           if (list.dnr.checksum !== resources.checksums[DNR_FIXES_KEY]) {
+            console.info('[dnr] Updating dynamic fixes rules...');
+
             const rules = new Set(
               await fetch(list.dnr.url).then((res) =>
                 res.ok
@@ -197,7 +195,7 @@ if (__CHROMIUM__) {
           // As a fallback we need to add static fixes rules.
           if (!removeRuleIds.length) {
             console.warn('[dnr] Falling back to static fixes rules');
-            ids.push('fixes');
+            nextRulesetIds.push('fixes');
 
             await store.set(Resources, {
               checksums: { [DNR_FIXES_KEY]: 'filesystem' },
@@ -212,7 +210,7 @@ if (__CHROMIUM__) {
         await chrome.declarativeNetRequest.updateDynamicRules({
           removeRuleIds,
         });
-        await store.set(resources, {
+        await store.set(Resources, {
           checksums: { [DNR_FIXES_KEY]: null },
         });
 
@@ -220,36 +218,39 @@ if (__CHROMIUM__) {
       }
     }
 
+    const currentRulesetIds = await chrome.declarativeNetRequest.getEnabledRulesets();
+
     const enableRulesetIds = [];
+    for (const id of nextRulesetIds) {
+      if (!currentRulesetIds.includes(id)) enableRulesetIds.push(id);
+    }
+
     const disableRulesetIds = [];
-
-    for (const id of ids) {
-      if (!enabledRulesetIds.includes(id)) {
-        enableRulesetIds.push(id);
-      }
+    for (const id of currentRulesetIds) {
+      if (!nextRulesetIds.includes(id)) disableRulesetIds.push(id);
     }
 
-    for (const id of enabledRulesetIds) {
-      if (!ids.includes(id)) {
-        disableRulesetIds.push(id);
-      }
-    }
-
+    // Update static rulesets
     if (enableRulesetIds.length || disableRulesetIds.length) {
       try {
         await chrome.declarativeNetRequest.updateEnabledRulesets({
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info('[dnr] Updated static rulesets:', ids.length ? ids.join(', ') : 'none');
+
+        console.info(
+          '[dnr] Updated static rulesets:',
+          nextRulesetIds.length ? nextRulesetIds.join(', ') : 'none',
+        );
+
+        // Disable excluded rules by preprocessor only for added rulesets
+        if (enableRulesetIds.length > 0) {
+          await Promise.all(enableRulesetIds.map((id) => disableExcludedRulesByPreprocessor(id)));
+        }
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
         captureException(e, { critical: true, once: true });
       }
-
-      // The below will run when the extension is installed as
-      // well with the change of `options.terms`.
-      await Promise.all(enabledRulesetIds.map((id) => disableExcludedRulesByPreprocessor(id)));
     }
   });
 }
