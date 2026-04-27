@@ -208,7 +208,10 @@ export default class Metrics {
               ? '1'
               : '0',
       ) +
-      buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0');
+      // Allowed Incognito Access
+      buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0') +
+      // Onboarding complete
+      buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0');
 
     if (type !== 'uninstall') {
       metrics_url +=
