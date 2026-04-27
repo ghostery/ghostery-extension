@@ -98,6 +98,9 @@
     "message": "Trình phát âm thanh/video",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "Loại hành động tự động"
+  },
   "automatically_adjusted": {
     "message": "Tự động điều chỉnh"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "Chọn danh mục"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "Chọn hành vi mặc định cho các thông báo yêu cầu chấp thuận cookie."
   },
   "clear": {
     "message": "Xóa"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "Mở rộng khả năng bảo vệ của bạn với các bộ lọc theo khu vực và tùy chỉnh để kiểm soát nâng cao."
   },
+  "extended_settings": {
+    "message": "Cài đặt mở rộng"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "Cài đặt mở rộng để tự động từ chối thông báo yêu cầu chấp thuận cookie."
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "extension: version, installation date, random install number (from 1 to 100), basic settings, contribution status"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery sử dụng thông tin này để cung cấp các tính năng bảo mật dựa trên cộng đồng của mình, đảm bảo rằng thông tin cá nhân—chẳng hạn như mật khẩu, lịch sử duyệt web và nội dung trang—không bao giờ bị thu thập."
+  },
+  "global_privacy_control": {
+    "message": "Kiểm soát Quyền riêng tư Toàn cầu"
   },
   "gone_": {
     "message": "Biến mất!"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "Hiện chưa có tùy chọn nào được bật"
   },
+  "none": {
+    "message": "Không"
+  },
   "observed_activities": {
     "message": "Observed activities"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "Mở YouTube trong cửa sổ riêng tư"
+  },
+  "opt_in": {
+    "message": "Chọn tham gia"
+  },
+  "opt_out": {
+    "message": "Từ chối"
   },
   "or": {
     "message": "hoặc",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Có gì mới trong Ghostery"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "Khi được bật, trình duyệt của bạn sẽ gửi tín hiệu đến các trang web yêu cầu họ không bán hoặc chia sẻ dữ liệu cá nhân của bạn cho mục đích quảng cáo, phù hợp với luật bảo mật như ở California và EU."
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, được điều hành bởi Ghostery, là một nền tảng quan trọng trong công nghệ chống theo dõi AI của Ghostery, đóng vai trò then chốt trong việc cung cấp bảo vệ quyền riêng tư theo thời gian thực cho cộng đồng Ghostery. Đây là một nguồn tài nguyên toàn cầu toàn diện về các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."

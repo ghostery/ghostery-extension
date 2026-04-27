@@ -98,6 +98,9 @@
     "message": "Аудио/видео проигрыватель",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "Тип автоматического действия"
+  },
   "automatically_adjusted": {
     "message": "Автоматически скорректировано"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "Выберите категорию"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "Выбирает поведение по умолчанию для уведомлений о согласии на использование файлов cookie."
   },
   "clear": {
     "message": "Очистить"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "Расширьте свою защиту с помощью региональных и пользовательских фильтров для расширенного контроля."
   },
+  "extended_settings": {
+    "message": "Расширенные настройки"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "Расширенные настройки для автоматического отклонения уведомлений о согласии на использование файлов cookie."
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "расширение: версия, дата установки, случайный номер установки (от 1 до 100), основные настройки, статус вклада"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery использует эту информацию для предоставления функций конфиденциальности, основанных на сообществе, гарантируя, что личная информация, такая как пароли, история просмотров и содержимое страниц, никогда не собирается."
+  },
+  "global_privacy_control": {
+    "message": "Глобальный контроль конфиденциальности"
   },
   "gone_": {
     "message": "Пропало!"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "Никакие параметры в настоящее время не включены"
   },
+  "none": {
+    "message": "Нет"
+  },
   "observed_activities": {
     "message": "Отслеживаемые действия"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "Открой YouTube в закрытом окне"
+  },
+  "opt_in": {
+    "message": "Согласиться"
+  },
+  "opt_out": {
+    "message": "Отказаться"
   },
   "or": {
     "message": "или",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Что нового в Ghostery"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "При включении ваш браузер отправляет веб-сайтам сигнал с просьбой не продавать и не передавать ваши персональные данные для рекламы в соответствии с законами о конфиденциальности, такими как законы Калифорнии и ЕС."
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, управляемый Ghostery, является важнейшим элементом технологии Ghostery по борьбе с отслеживанием на основе ИИ, играя ключевую роль в обеспечении защиты конфиденциальности в реальном времени для сообщества Ghostery. Это всеобъемлющий глобальный ресурс о трекерах, обеспечивающий прозрачность веб-отслеживания."
