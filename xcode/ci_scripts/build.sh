@@ -12,6 +12,9 @@ test -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asd
 # run build script
 npm run build -- --clean
 
+# strip DNR rules that WebKit's URL filter parser cannot compile
+node scripts/filter-invalid-dnr-rules.js
+
 # rewrite manifest background.service_worker into background.scripts/persistent
 node -e '
 const fs = require("fs");
