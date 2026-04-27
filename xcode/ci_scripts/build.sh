@@ -5,9 +5,12 @@ set -e
 # go to the repo root (xcode/ci_scripts -> repo root)
 cd "$(dirname "$0")/../.."
 
-# setup tool-versions managers
-test -f /opt/homebrew/bin/mise && export PATH="/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH"
-test -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh
+# Xcode runs build phases in a clean non-login shell, so recreate the toolchain PATH.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.local/share/mise/shims:$HOME/.mise/shims:$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+command -v npm >/dev/null 2>&1 || {
+  echo "npm: command not found after initializing asdf from .tool-versions" >&2
+  exit 127
+}
 
 # run build script
 npm run build -- --clean
