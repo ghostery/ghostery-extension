@@ -98,6 +98,9 @@
     "message": "음악/동영상 플레이어",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "자동 작업 유형"
+  },
   "automatically_adjusted": {
     "message": "자동으로 조정됨"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "카테고리 선택"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "쿠키 동의 알림의 기본 동작을 선택합니다."
   },
   "clear": {
     "message": "지우기"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "고급 제어를 위한 지역 및 맞춤형 필터로 보호 기능을 확장하세요."
   },
+  "extended_settings": {
+    "message": "확장 설정"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "쿠키 동의 알림 자동 거부를 위한 확장 설정"
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "확장 프로그램: 버전, 설치 날짜, 무작위 설치 번호 (1에서 100까지), 기본 설정, 기여 상태"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
+  },
+  "global_privacy_control": {
+    "message": "글로벌 개인 정보 보호 제어"
   },
   "gone_": {
     "message": "제거되었습니다!"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "현재 활성화된 옵션이 없습니다"
   },
+  "none": {
+    "message": "없음"
+  },
   "observed_activities": {
     "message": "감지된 활동"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "시크릿 탭에서 YouTube 열기"
+  },
+  "opt_in": {
+    "message": "동의"
+  },
+  "opt_out": {
+    "message": "선택 해제"
   },
   "or": {
     "message": "또는",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Ghostery의 새로운 기능"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "이 기능을 활성화하면 브라우저가 웹사이트에 광고 목적으로 개인 데이터를 판매하거나 공유하지 말 것을 요청하는 신호를 보냅니다. 이는 캘리포니아 및 EU와 같은 개인 정보 보호법에 따른 것입니다."
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me는 Ghostery가 운영하는 서비스로, Ghostery의 AI 기반 추적 방지 기술의 중요한 초석이며, Ghostery 커뮤니티에 실시간 개인정보 보호를 제공하는 데 중요한 역할을 합니다. 이 서비스는 전 세계의 추적기에 대한 포괄적인 자료로, 웹 추적의 투명성을 제공합니다."

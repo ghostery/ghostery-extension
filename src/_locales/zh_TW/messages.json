@@ -98,6 +98,9 @@
     "message": "音訊/視訊播放器",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "自動動作類型"
+  },
   "automatically_adjusted": {
     "message": "已自動調整"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "選擇類別"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "選擇 Cookie 同意通知的預設行為。"
   },
   "clear": {
     "message": "清除"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "透過區域和自訂篩選條件，擴展您的防護以實現進階控制。"
   },
+  "extended_settings": {
+    "message": "進階設定"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "自動拒絕 Cookie 同意通知的進階設定。"
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "擴充功能：版本、安裝日期、隨機安裝號碼（從1到100）、基本設定、貢獻狀態"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery 使用這些資訊來提供其社群驅動的隱私功能，確保不會收集個人資訊，例如密碼、瀏覽歷史和頁面內容。"
+  },
+  "global_privacy_control": {
+    "message": "全球隱私權控制"
   },
   "gone_": {
     "message": "不见了！"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "目前沒有啟用任何選項"
   },
+  "none": {
+    "message": "無"
+  },
   "observed_activities": {
     "message": "已觀察的活動"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "在私人視窗中開啟 YouTube"
+  },
+  "opt_in": {
+    "message": "選擇加入"
+  },
+  "opt_out": {
+    "message": "退出"
   },
   "or": {
     "message": "或",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Ghostery 的最新動態"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "啟用後，您的瀏覽器會向網站發送訊號，要求他們不要將您的個人資料用於廣告目的而出售或分享，這符合加州和歐盟等地的隱私法規。"
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me由Ghostery運營，是Ghostery人工智慧反追蹤技術的重要基石，在為Ghostery社群提供即時隱私保護方面發揮了關鍵作用。它是一個關於追蹤器的全面全球資源，為網路追蹤帶來透明度。"

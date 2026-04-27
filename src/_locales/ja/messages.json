@@ -98,6 +98,9 @@
     "message": "オーディオ/ビデオ・プレーヤー",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "自動アクションタイプ"
+  },
   "automatically_adjusted": {
     "message": "自動調整済み"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "カテゴリを選択"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "Cookieの同意通知に対する既定の動作を選択します。"
   },
   "clear": {
     "message": "クリア"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "地域別およびカスタムフィルターで保護を強化し、高度な制御を実現します。"
   },
+  "extended_settings": {
+    "message": "詳細設定"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "Cookie同意通知を自動的に拒否するための拡張設定。"
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "拡張機能: バージョン、インストール日、ランダムインストール番号 (1から100まで)、基本設定、貢献状況"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghosteryは、この情報を利用してコミュニティ主導のプライバシー機能を提供し、パスワード、閲覧履歴、ページ内容などの個人情報が収集されないようにしています。"
+  },
+  "global_privacy_control": {
+    "message": "グローバルプライバシーコントロール"
   },
   "gone_": {
     "message": "消えました！"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "現在、オプションは有効になっていません"
   },
+  "none": {
+    "message": "なし"
+  },
   "observed_activities": {
     "message": "観察済みのアクティビティ"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "YouTubeをプライベートウィンドウで開く"
+  },
+  "opt_in": {
+    "message": "オプトイン"
+  },
+  "opt_out": {
+    "message": "オプトアウト"
   },
   "or": {
     "message": "または",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Ghosteryの新機能"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "この機能を有効にすると、カリフォルニア州やEUなどのプライバシー法に準拠し、広告目的で個人データを販売または共有しないよう、ブラウザからウェブサイトに信号が送信されます。"
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Meは、Ghosteryによって運営されており、GhosteryのAIアンチトラッキング技術の重要な基盤であり、Ghosteryコミュニティにリアルタイムのプライバシー保護を提供する上で重要な役割を果たしています。これは、トラッカーに関する包括的なグローバルリソースであり、ウェブトラッキングに透明性をもたらします。"
