@@ -90,11 +90,7 @@ if (__FIREFOX__) {
           // a resource type — we mirror that here.
           if (match === true && !filter?.fromAny()) {
             const options = store.get(Options);
-            const redirectUrl = getRedirectProtectionUrl(
-              details.url,
-              request.hostname,
-              options,
-            );
+            const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
 
             return { redirectUrl };
           }
