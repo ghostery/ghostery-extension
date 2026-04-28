@@ -17,40 +17,20 @@ globalThis.__CHROMIUM__ ??= false;
 
 const { ENV } = await import('../../src/utils/preprocessors.js');
 
-const SUPPORTED_ENVS = [...ENV.keys()];
-const IDENTIFIER_RE = /[a-zA-Z0-9_]+/g;
-
-function extractSupportedIdentifiers(expression) {
-  const ids = expression.match(IDENTIFIER_RE) || [];
-  return [...new Set(ids.filter((id) => SUPPORTED_ENVS.includes(id)))];
-}
-
-/**
- * Returns true if the preprocessor expression can yield different results
- * depending on the value of supported envs. If the result is constant
- * regardless of the environment (always true or always false), returns false.
- */
-function dependsOnSupportedEnvs(expression) {
-  const ids = extractSupportedIdentifiers(expression);
-  if (ids.length === 0) {
-    return false;
+function isConditionAlwaysTrue(condition, target) {
+  // If the condition doesn't include target, it means we don't have any
+  // other factors to judge the condition.
+  if (condition.includes(target) === false) {
+    return evaluatePreprocessor(condition, ENV);
   }
 
-  const combinations = 1 << ids.length;
-  let firstResult;
-  for (let mask = 0; mask < combinations; mask++) {
-    const env = new Map();
-    ids.forEach((key, i) => {
-      env.set(key, !!(mask & (1 << i)));
-    });
-    const result = evaluatePreprocessor(expression, env);
-    if (mask === 0) {
-      firstResult = result;
-    } else if (result !== firstResult) {
-      return true;
-    }
-  }
-  return false;
+  // Do negative test against target, so we can know it actually affects
+  // the resulting logical gate.
+  const re = new RegExp(`(env_)?${target}[a-z_]*`, 'gi');
+  return (
+    evaluatePreprocessor(condition.replace(re, 'true'), ENV) === false &&
+    evaluatePreprocessor(condition, ENV) === true
+  );
 }
 
 /**
@@ -63,12 +43,12 @@ function dependsOnSupportedEnvs(expression) {
  * @returns {Record<string, { preprocessor?: string }>}
  */
 export function filterMetadata(metadata) {
-  const filtered = {};
-  for (const [id, entry] of Object.entries(metadata)) {
-    if (entry.preprocessor && !dependsOnSupportedEnvs(entry.preprocessor)) {
-      continue;
-    }
-    filtered[id] = entry;
-  }
-  return filtered;
+  return Object.fromEntries(
+    Object.entries(metadata).filter(function ([, { preprocessor }]) {
+      return (
+        !isConditionAlwaysTrue(preprocessor, 'adguard') &&
+        !isConditionAlwaysTrue(preprocessor, 'firefox')
+      );
+    }),
+  );
 }
