@@ -12,8 +12,10 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 
 import REGIONS from '../src/utils/regions.js';
+
+import { filterMetadata } from './utils/filter-metadata.js';
+import { groupRulesetFile } from './utils/group-dnr-rulesets.js';
 import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
-import { groupRulesetFile } from './group-dnr-rulesets.js';
 
 if (!existsSync(RESOURCES_PATH)) {
   mkdirSync(RESOURCES_PATH, { recursive: true });
@@ -61,7 +63,12 @@ async function downloadRuleset(name, outputPath, metadataPath) {
     writeFileSync(outputPath, JSON.stringify(dnr, null, 2));
   }
   if (metadata && Object.keys(metadata).length !== 0) {
-    writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+    // Drop entries whose preprocessor references envs the extension does not
+    // support; their result is constant and the runtime cannot act on them.
+    const filtered = filterMetadata(metadata);
+    if (Object.keys(filtered).length !== 0) {
+      writeFileSync(metadataPath, JSON.stringify(filtered, null, 2));
+    }
   }
 
   // Group the freshly downloaded ruleset in place so the optimization
