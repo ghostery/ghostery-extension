@@ -22,16 +22,22 @@ function checkUserAgent(pattern) {
  */
 export const ENV = new Map([
   ['ext_ghostery', true],
-  ['ext_ublock', true],
-  ['env_mv3', __CHROMIUM__],
-  ['ext_ubol', __FIREFOX__],
-  ['cap_html_filtering', __FIREFOX__],
-  // TODO: Can be removed once $replace support is sufficiently distributed
-  ['cap_replace_modifier', __FIREFOX__],
-  ['cap_user_stylesheet', true],
+
+  // Browser related envs
   ['env_firefox', __FIREFOX__],
   ['env_chromium', __CHROMIUM__],
   ['env_edge', __CHROMIUM__ && isEdge()],
   ['env_safari', __CHROMIUM__ && isSafari()],
   ['env_mobile', checkUserAgent('Mobile')],
+
+  // Product related envs
+  ['env_mv3', __CHROMIUM__],
+  ['ext_ublock', __FIREFOX__],
+  ['ext_ubol', __CHROMIUM__],
+
+  // Capability related envs
+  ['cap_html_filtering', __FIREFOX__],
+  // TODO: Can be removed once $replace support is sufficiently distributed
+  ['cap_replace_modifier', __FIREFOX__],
+  ['cap_user_stylesheet', true],
 ]);
