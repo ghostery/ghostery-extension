@@ -25,12 +25,16 @@ describe('Preprocessor', () => {
         chromiumAndNotChromium: { preprocessor: 'env_chromium&&!env_chromium' },
         chromiumOrNotChromium: { preprocessor: 'env_chromium||!env_chromium' },
         chromiumAndGhostery: { preprocessor: 'env_chromium&&ext_ghostery' },
+        notEdge: { preprocessor: '!env_edge' },
+        notAdguardAndNotEdge: { preprocessor: '!adguard&&!env_edge' },
       };
 
       assert.deepEqual(filterMetadata(metadata), {
         adguard: { preprocessor: 'adguard' },
         adguardOrSafari: { preprocessor: 'adguard||ext_safari' },
         chromiumAndNotChromium: { preprocessor: 'env_chromium&&!env_chromium' },
+        notEdge: { preprocessor: '!env_edge' },
+        notAdguardAndNotEdge: { preprocessor: '!adguard&&!env_edge' },
       });
     });
   });

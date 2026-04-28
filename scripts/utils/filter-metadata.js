@@ -11,26 +11,36 @@
 
 import { evaluatePreprocessor } from '@ghostery/adblocker';
 
-// Set globals for `utils/preprocessors.js`
-globalThis.__FIREFOX__ ??= true;
-globalThis.__CHROMIUM__ ??= false;
+const truthyIdentifiers = [
+  'ext_ghostery',
+  'ext_ublock',
+  'env_mv3',
+  'ext_ubol',
+  'cap_user_stylesheet',
+  'env_chromium',
+  'adguard_ext_chromium',
+  'adguard_ext_opera',
+];
+const staleIdentifiers = ['env_edge', 'env_safari', 'env_mobile'];
 
-const { ENV } = await import('../../src/utils/preprocessors.js');
+const env = new Map(
+  truthyIdentifiers.map(function (identifier) {
+    return [identifier, true];
+  }),
+);
 
-function isConditionAlwaysTrue(condition, target) {
-  // If the condition doesn't include target, it means we don't have any
-  // other factors to judge the condition.
-  if (condition.includes(target) === false) {
-    return evaluatePreprocessor(condition, ENV);
+function isConditionAlwaysTrue(condition) {
+  for (let i = 0; i < 1 << staleIdentifiers.length; i++) {
+    for (let k = 0; k < staleIdentifiers.length; k++) {
+      env.set(staleIdentifiers[k], !!(i & (1 << k)));
+    }
+
+    if (evaluatePreprocessor(condition, env) === false) {
+      return false;
+    }
   }
 
-  // Do negative test against target, so we can know it actually affects
-  // the resulting logical gate.
-  const re = new RegExp(`(env_)?${target}[a-z_]*`, 'gi');
-  return (
-    evaluatePreprocessor(condition.replace(re, 'true'), ENV) === false &&
-    evaluatePreprocessor(condition, ENV) === true
-  );
+  return true;
 }
 
 /**
@@ -45,10 +55,7 @@ function isConditionAlwaysTrue(condition, target) {
 export function filterMetadata(metadata) {
   return Object.fromEntries(
     Object.entries(metadata).filter(function ([, { preprocessor }]) {
-      return (
-        !isConditionAlwaysTrue(preprocessor, 'adguard') &&
-        !isConditionAlwaysTrue(preprocessor, 'firefox')
-      );
+      return isConditionAlwaysTrue(preprocessor) === false;
     }),
   );
 }
