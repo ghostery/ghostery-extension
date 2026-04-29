@@ -32,7 +32,6 @@ export const ENGINES = [
 ];
 
 const LOCAL_OPTIONS = [
-  'autoconsent',
   'terms',
   'feedback',
   'onboarding',
