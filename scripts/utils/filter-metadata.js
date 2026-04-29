@@ -26,38 +26,35 @@ function extractSupportedIdentifiers(expression) {
 }
 
 /**
- * Returns true if the preprocessor expression can yield different results
- * depending on the value of supported envs. If the result is constant
- * regardless of the environment (always true or always false), returns false.
+ * Returns true if the preprocessor expression always evaluates to `true`
+ * across every combination of supported envs. Expressions that depend on
+ * supported envs (yielding both true and false) or that are constantly
+ * false return `false`.
  */
-function dependsOnSupportedEnvs(expression) {
+function alwaysTrueForSupportedEnvs(expression) {
   const ids = extractSupportedIdentifiers(expression);
   if (ids.length === 0) {
-    return false;
+    return evaluatePreprocessor(expression, new Map()) === true;
   }
 
   const combinations = 1 << ids.length;
-  let firstResult;
   for (let mask = 0; mask < combinations; mask++) {
     const env = new Map();
     ids.forEach((key, i) => {
       env.set(key, !!(mask & (1 << i)));
     });
-    const result = evaluatePreprocessor(expression, env);
-    if (mask === 0) {
-      firstResult = result;
-    } else if (result !== firstResult) {
-      return true;
+    if (evaluatePreprocessor(expression, env) !== true) {
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 /**
- * Filters out metadata entries whose preprocessor references unsupported
- * envs in a way that makes the result constant. Such entries cannot be
- * meaningfully evaluated at runtime, so the rules they describe will always
- * either apply or never apply regardless of the environment.
+ * Filters out metadata entries whose preprocessor always resolves to `true`
+ * regardless of the value of supported envs. Such preprocessors are
+ * redundant because the rules they describe will always apply, so the
+ * metadata entry carries no useful runtime information.
  *
  * @param {Record<string, { preprocessor?: string }>} metadata
  * @returns {Record<string, { preprocessor?: string }>}
@@ -65,7 +62,7 @@ function dependsOnSupportedEnvs(expression) {
 export function filterMetadata(metadata) {
   const filtered = {};
   for (const [id, entry] of Object.entries(metadata)) {
-    if (entry.preprocessor && !dependsOnSupportedEnvs(entry.preprocessor)) {
+    if (entry.preprocessor && alwaysTrueForSupportedEnvs(entry.preprocessor)) {
       continue;
     }
     filtered[id] = entry;
