@@ -98,6 +98,9 @@
     "message": "Audio/Video-Player",
     "description": "Tracker category name"
   },
+  "automatic_action_type": {
+    "message": "Automatische Aktion"
+  },
   "automatically_adjusted": {
     "message": "Automatisch angepasst"
   },
@@ -198,6 +201,9 @@
   },
   "choose_category": {
     "message": "Wähle die Kategorie"
+  },
+  "chooses_the_default_behavior_for_cookie_consent_notices_": {
+    "message": "Legt das Standardverhalten für Cookie-Einwilligungsbanner fest."
   },
   "clear": {
     "message": "Löschen"
@@ -399,6 +405,12 @@
   "extend_your_protection_with_regional_and_custom_filters_for_advanced_control_": {
     "message": "Erweitere deinen Schutz mit regionalen und benutzerdefinierten Filtern für mehr Kontrolle."
   },
+  "extended_settings": {
+    "message": "Erweiterte Einstellungen"
+  },
+  "extended_settings_for_automatically_rejecting_cookie_consent_notices_": {
+    "message": "Erweiterte Einstellungen zum automatischen Ablehnen von Cookie-Einwilligungsanfragen."
+  },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "Erweiterung: Version, Installationsdatum, zufällige Installationsnummer (von 1 bis 100), Grundeinstellungen, Fördererstatus"
   },
@@ -489,6 +501,9 @@
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
+  },
+  "global_privacy_control": {
+    "message": "Global Privacy Control"
   },
   "gone_": {
     "message": "Weg!"
@@ -657,6 +672,9 @@
   "no_options_are_currently_enabled": {
     "message": "Derzeit sind keine Optionen aktiviert"
   },
+  "none": {
+    "message": "Keine"
+  },
   "observed_activities": {
     "message": "Beobachtete Aktivitäten"
   },
@@ -680,6 +698,12 @@
   },
   "open_youtube_in_a_private_window": {
     "message": "YouTube in einem privaten Fenster öffnen"
+  },
+  "opt_in": {
+    "message": "Zustimmen"
+  },
+  "opt_out": {
+    "message": "Ablehnen"
   },
   "or": {
     "message": "oder",
@@ -1102,6 +1126,9 @@
   },
   "what_s_new_in_ghostery": {
     "message": "Neu bei Ghostery"
+  },
+  "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
+    "message": "Wenn diese Funktion aktiviert ist, sendet dein Browser ein Signal an Webseiten mit der Aufforderung, deine persönlichen Daten nicht für Werbezwecke zu verkaufen oder weiterzugeben – im Einklang mit Datenschutzgesetzen in der EU und in Kalifornien."
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, betrieben von Ghostery, ist eine wesentliche Komponente der KI-gestützten Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die gesamte Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern und schafft Transparenz im Bereich des Web-Trackings."
