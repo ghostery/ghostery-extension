@@ -83,12 +83,10 @@ if (__FIREFOX__) {
         const { redirect, match, filter } = engine.match(request);
 
         if (details.type === 'main_frame') {
-          // For main_frame, only consider matches from filters with an
-          // explicit $document modifier. Type-less filters match main_frame
-          // via @ghostery/adblocker's FROM_ANY mask, but Chrome MV3 DNR's
-          // safety default excludes main_frame for filters that don't specify
-          // a resource type — we mirror that here.
-          if (match === true && !filter?.fromAny()) {
+          // Skip type-less filters whose mask is FROM_ANY: Chrome MV3 DNR's
+          // safety default excludes main_frame for filters without an
+          // explicit resource type, and we mirror that here.
+          if (match === true && filter?.fromDocument() && !filter.fromAny()) {
             const options = store.get(Options);
             const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
 
