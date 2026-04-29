@@ -39,11 +39,11 @@ describe('Main Features', function () {
       // so we only check if the CMP is visible if the element exists
       const cmp = await $(SELECTOR);
       if (await cmp.isExisting()) await expect(cmp).toBeDisplayed();
+
+      await setPrivacyToggle('never-consent', true);
     });
 
     it('closes the consent popup', async function () {
-      await setPrivacyToggle('never-consent', true);
-
       await browser.url(WEBSITE_URL);
       // Let the never-consent take effect
       await browser.pause(2000);
@@ -55,6 +55,30 @@ describe('Main Features', function () {
       // so we only check if the CMP is visible if the element exists
       const cmp = await $(SELECTOR);
       if (await cmp.isExisting()) await expect(cmp).toHaveText('');
+    });
+
+    it('sets the Sec-GPC request header', async function () {
+      await browser.url(PAGE_URL);
+
+      const headers = await browser.execute(async () => {
+        const response = await fetch('/headers', { cache: 'no-store' });
+        return response.json();
+      });
+
+      expect(headers['sec-gpc']).toBe('1');
+
+      await setPrivacyToggle('never-consent', false);
+
+      await browser.url(PAGE_URL);
+
+      const headersAfter = await browser.execute(async () => {
+        const response = await fetch('/headers', { cache: 'no-store' });
+        return response.json();
+      });
+
+      expect(headersAfter['sec-gpc']).toBeUndefined();
+
+      await setPrivacyToggle('never-consent', true);
     });
   });
 
