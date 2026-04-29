@@ -31,17 +31,11 @@ jobs:
       - name: Check for locale updates
         id: changes
         run: |
-          changed=false
-
-          if [ -f src/_locales/en/messages.json ] && ! git diff --quiet -- src/_locales/en/messages.json; then
-            changed=true
+          if ! git diff --quiet -- src/_locales/en/messages.json; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
-
-          if [ "$changed" = false ] && [ -f src/locales/en/messages.json ] && ! git diff --quiet -- src/locales/en/messages.json; then
-            changed=true
-          fi
-
-          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
       - name: Create or update translations PR
         if: steps.changes.outputs.changed == 'true'
