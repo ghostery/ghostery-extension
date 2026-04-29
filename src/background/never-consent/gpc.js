@@ -22,11 +22,10 @@ import {
   ALL_RESOURCE_TYPES,
   getDynamicRulesByIds,
 } from '/utils/dnr.js';
+import Request from '/utils/request.js';
 
 if (__CHROMIUM__) {
   async function updateGPCRule(options) {
-    const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
-
     // Disabled GPC
     if (
       !options.terms ||
@@ -34,6 +33,7 @@ if (__CHROMIUM__) {
       !options.autoconsent.gpc ||
       isGloballyPaused(options)
     ) {
+      const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
       // Clear the GPC rule if it exists
       if (existingRules.length) {
         await chrome.declarativeNetRequest.updateDynamicRules({
@@ -57,6 +57,7 @@ if (__CHROMIUM__) {
       ]),
     ];
 
+    const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
     if (existingRules.length) {
       const existingDomains = existingRules[0].condition.excludedInitiatorDomains || [];
 

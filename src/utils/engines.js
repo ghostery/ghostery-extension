@@ -22,6 +22,7 @@ import {
 
 import ResourcesModel from '/store/resources.js';
 
+import { ENV } from './preprocessors.js';
 import { registerDatabase } from './indexeddb.js';
 import { CDN_URL } from './urls.js';
 
@@ -34,22 +35,6 @@ export const CUSTOM_ENGINE = 'custom-filters';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
-
-export const ENV = new Map([
-  ['ext_ghostery', true],
-  ['ext_ublock', true],
-  ['ext_ubol', checkUserAgent('Firefox')],
-  ['cap_html_filtering', checkUserAgent('Firefox')],
-  // TODO: Can be removed once $replace support is sufficiently distributed
-  ['cap_replace_modifier', checkUserAgent('Firefox')],
-  ['cap_user_stylesheet', true],
-  ['env_firefox', checkUserAgent('Firefox')],
-  ['env_chromium', checkUserAgent('Chrome')],
-  ['env_edge', checkUserAgent('Edg')],
-  ['env_mobile', checkUserAgent('Mobile')],
-  // TODO: Can be removed after clean up of the experimental filters is sufficiently distributed
-  ['env_experimental', false],
-]);
 
 export function isPersistentEngine(name) {
   return name !== ELEMENT_PICKER_ENGINE && name !== CUSTOM_ENGINE && name !== MAIN_ENGINE;
@@ -65,10 +50,6 @@ export function setEnv(key, value) {
   } else {
     throw Error(`Unknown environment variable: ${key}`);
   }
-}
-
-function checkUserAgent(pattern) {
-  return navigator.userAgent.indexOf(pattern) !== -1;
 }
 
 function deserializeEngine(engineBytes) {
