@@ -45,6 +45,16 @@ export function setupTestPage(port = 6789) {
     const filePath = path.resolve(__dirname, fileName);
 
     try {
+      // Echo request headers as JSON, used to verify request modifications
+      // (e.g. the Sec-GPC header set by the Never-Consent feature).
+      if (req.url === '/headers') {
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        });
+        res.end(JSON.stringify(req.headers));
+        return;
+      }
       // Handle dynamic asset requests for adblocker library testing page
       if (filePath.startsWith('/adblocker/gen/') && filePath.endsWith('.js')) {
         res.writeHead(200, { 'Content-Type': 'application/javascript' });
