@@ -190,3 +190,38 @@ describe('Redirect Protection', function () {
     });
   });
 });
+
+// Type-less filters (no $document modifier) must NOT redirect main_frame on
+// either platform. Chrome MV3 DNR enforces this by default (omitting
+// resourceTypes excludes main_frame). Firefox previously matched main_frame
+// for type-less filters via @ghostery/adblocker's FROM_ANY mask; we now skip
+// those matches in src/background/adblocker/network.js.
+describe('Type-less filter does not affect main_frame', function () {
+  before(enableExtension);
+  before(() => setCustomFilters([`||${PAGE_DOMAIN}^`]));
+  after(() => disableCustomFilters());
+
+  it('does not redirect when redirect protection is enabled', async function () {
+    await browser.url('ghostery:settings');
+    await getExtensionElement('button:redirect-protection').click();
+    await setToggle('redirect-protection', true);
+
+    await browser.url(PAGE_URL);
+    expect((await browser.getUrl()).includes('pages/redirect-protection')).toBe(false);
+    expect(await browser.getTitle()).toBe('E2E Test Page');
+  });
+
+  it('does not block when redirect protection is disabled', async function () {
+    await browser.url('ghostery:settings');
+    await getExtensionElement('button:redirect-protection').click();
+    await setToggle('redirect-protection', false);
+
+    await browser.url(PAGE_URL);
+    expect((await browser.getUrl()).includes('pages/redirect-protection')).toBe(false);
+    expect(await browser.getTitle()).toBe('E2E Test Page');
+
+    await browser.url('ghostery:settings');
+    await getExtensionElement('button:redirect-protection').click();
+    await setToggle('redirect-protection', true);
+  });
+});
