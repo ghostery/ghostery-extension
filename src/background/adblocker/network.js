@@ -80,13 +80,18 @@ if (__FIREFOX__) {
 
       if (isMatchableRequest(details, request)) {
         const engine = engines.get(engines.MAIN_ENGINE);
-        const { redirect, match } = engine.match(request);
+        const { redirect, match, filter } = engine.match(request);
 
-        if (match === true && details.type === 'main_frame') {
-          const options = store.get(Options);
-          const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+        if (details.type === 'main_frame') {
+          // Skip type-less filters whose mask is FROM_ANY: Chrome MV3 DNR's
+          // safety default excludes main_frame for filters without an
+          // explicit resource type, and we mirror that here.
+          if (match === true && filter?.fromDocument() && !filter.fromAny()) {
+            const options = store.get(Options);
+            const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
 
-          return { redirectUrl };
+            return { redirectUrl };
+          }
         } else if (redirect !== undefined) {
           request.blocked = true;
           // There's a possibility that redirecting to file URL can expose
