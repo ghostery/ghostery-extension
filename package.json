@@ -51,7 +51,7 @@
     "@ghostery/urlfilter2dnr": "^2.0.4",
     "@github/relative-time-element": "^5.0.0",
     "@sentry/browser": "^10.50.0",
-    "@whotracksme/reporting": "^8.0.2",
+    "@whotracksme/reporting": "^9.0.1",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.14.1",
     "csv-stringify": "^6.7.0",
@@ -59,7 +59,7 @@
     "idb": "^8.0.3",
     "lottie-web": "^5.13.0",
     "plotly.js-basic-dist": "^3.5.0",
-    "tldts-experimental": "^7.0.28"
+    "tldts-experimental": "^7.0.29"
   },
   "dataDependencies": {
     "redirect-resources": "220b5c885c08c9674c6dbb039194795f8d898544e1e35784ca5c76786050b55e",
