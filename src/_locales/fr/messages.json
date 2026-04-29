@@ -99,7 +99,7 @@
     "description": "Tracker category name"
   },
   "automatic_action_type": {
-    "message": "Type d'action automatique"
+    "message": "Action automatique"
   },
   "automatically_adjusted": {
     "message": "Ajusté automatiquement"
@@ -1128,7 +1128,7 @@
     "message": "Nouveautés dans Ghostery"
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
-    "message": "Lorsque cette option est activée, votre navigateur envoie un signal aux sites web leur demandant de ne pas vendre ou partager vos données personnelles à des fins de publicité, conformément aux lois sur la confidentialité comme celles de Californie et de l'UE."
+    "message": "Lorsque cette option est activée, votre navigateur envoie un signal aux sites web leur demandant de ne pas vendre ou partager vos données personnelles à des fins publicitaires, conformément aux lois sur la confidentialité en vigueur dans l’UE et en Californie."
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, exploité par Ghostery, est un pilier essentiel de la technologie anti-suivi basée sur l'IA de Ghostery, jouant un rôle crucial dans la fourniture d'une protection de la vie privée en temps réel pour la communauté Ghostery. C'est une ressource mondiale complète sur les trackers, apportant de la transparence au suivi sur le web."
