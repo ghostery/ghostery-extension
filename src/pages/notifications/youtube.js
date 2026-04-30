@@ -16,8 +16,8 @@ import * as notifications from '/utils/notifications.js';
 
 const close = notifications.setupNotificationPage(420);
 
-function dontAsk() {
-  chrome.storage.local.set({ youtubeDontAsk: true });
+async function dontAsk() {
+  await chrome.storage.local.set({ youtubeDontAsk: true });
   close();
 }
 
