@@ -48,28 +48,24 @@ const setup = asyncSetup('telemetry', [
 ]);
 
 let enabled = false;
-OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
+OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOptions) {
+  // Update enabled state on every change
   enabled = terms && feedback;
+
+  // Skip the rest of the logic for sequential runs after the first one
+  // as the `terms` option can only by enabled once
+  if (lastOptions && lastOptions.terms) return;
 
   if (terms) {
     setup.pending && (await setup.pending);
 
     if (runner.isJustInstalled()) {
-      try {
-        const attribution = await detectAttribution();
-        runner.storage.utm_source = attribution.utm_source || '';
-        runner.storage.utm_campaign = attribution.utm_campaign || '';
-        await saveStorage(runner.storage);
-      } catch (error) {
-        console.error('[telemetry] Error detecting attribution:', error);
-      }
-
+      await runner.setUTMs(await detectAttribution());
       runner.ping('install');
     }
 
-    if (feedback) runner.ping('active');
-
     runner.setUninstallUrl();
+    if (feedback) runner.ping('active');
   } else {
     chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }

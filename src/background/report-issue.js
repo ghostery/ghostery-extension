@@ -17,7 +17,7 @@ import Resources from '/store/resources.js';
 
 import getBrowserInfo from '/utils/browser-info.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
-import { isOptionEqual } from '/utils/options-observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
 
 import { tabStats } from './stats.js';
@@ -32,7 +32,7 @@ async function getMetadata(tab) {
       .filter(([key]) => REPORT_OPTIONS.includes(key))
       .reduce((acc, [key, value]) => {
         // Skip options that are equal to the default value
-        if (key !== 'regionalFilters' && isOptionEqual(Options[key], value)) {
+        if (key !== 'regionalFilters' && OptionsObserver.isOptionEqual(Options[key], value)) {
           return acc;
         }
 

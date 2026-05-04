@@ -200,7 +200,7 @@ export async function update(name, { force = false, cache = true } = {}) {
     const urlName = name === 'trackerdb' ? 'trackerdbMv3' : `dnr-${name}-v2`;
     const listURL = CDN_URL + `adblocker/configs/${urlName}/allowed-lists.json`;
 
-    console.info(`[engines] Updating engine "${name}"...`);
+    if (!force) console.info(`[engines] Updating engine "${name}"...`);
 
     const data = await fetch(listURL, {
       cache: cache ? 'default' : 'no-store',

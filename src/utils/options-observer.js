@@ -46,7 +46,7 @@ export function addListener(...args) {
       const value = getValue(options);
       const lastValue = getLastValue(lastOptions);
 
-      if (isOptionEqual(value, lastValue)) return;
+      if (property && isOptionEqual(value, lastValue)) return;
 
       try {
         console.debug(`[options] Executing "${fn.name || property}" observer`);
