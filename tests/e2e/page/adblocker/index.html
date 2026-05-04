@@ -137,13 +137,23 @@
           l++;
           const iframe = document.createElement("iframe");
           iframe.addEventListener("load", function () {
-            if (
-              iframe.contentWindow.subdocument === true
-              && window.subdocument !== true
-            ) {
-              results["subdocument"] = true;
+            // On Chromium, scriptlet injection via chrome.scripting.executeScript
+            // is triggered asynchronously from webNavigation.onCommitted in the
+            // background service worker. For a tiny document like subdocument.html,
+            // the load event in the parent can fire before the scriptlet runs.
+            // Poll with retries to account for this race condition.
+            var retries = 10;
+            function check() {
+              if (iframe.contentWindow.subdocument === true && window.subdocument !== true) {
+                results["subdocument"] = true;
+                done();
+              } else if (--retries > 0) {
+                setTimeout(check, 50);
+              } else {
+                done();
+              }
             }
-            done();
+            check();
           }, { once: true });
           iframe.setAttribute("src", "./subdocument.html");
           iframe.style.width = "1px";
