@@ -31,8 +31,8 @@ export const ENV = new Map([
   ['env_mobile', checkUserAgent('Mobile')],
 
   // Product related envs
+  ['ext_ublock', true],
   ['env_mv3', __CHROMIUM__],
-  ['ext_ublock', __FIREFOX__],
   ['ext_ubol', __CHROMIUM__],
 
   // Capability related envs
