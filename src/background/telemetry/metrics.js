@@ -121,6 +121,12 @@ export default class Metrics {
     return !this.storage.install_all;
   }
 
+  async setUTMs({ utm_source = '', utm_campaign = '' }) {
+    this.storage.utm_source = utm_source;
+    this.storage.utm_campaign = utm_campaign;
+    await this.saveStorage(this.storage);
+  }
+
   /**
    * Prepare data and send telemetry pings.
    * @param {string} type    type of the telemetry ping

@@ -88,8 +88,13 @@ async function getAttributionFromUTMs() {
 }
 
 export default async function detectAttribution() {
-  const cookieAttribution = await getAttributionFromCookies();
-  if (cookieAttribution) return cookieAttribution;
+  try {
+    const cookieAttribution = await getAttributionFromCookies();
+    if (cookieAttribution) return cookieAttribution;
 
-  return getAttributionFromUTMs();
+    return getAttributionFromUTMs();
+  } catch (error) {
+    console.error('[telemetry] Error detecting attribution:', error);
+    return {};
+  }
 }
