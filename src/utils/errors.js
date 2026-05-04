@@ -37,6 +37,8 @@ const config = {
   // Sampling is handled in beforeSend to allow per-event control
   sampleRate: 1.0,
   beforeSend(event) {
+    if (!event.tags?.ua) return null;
+
     if (event.tags?.[TAG_CRITICAL]) {
       return event;
     }
