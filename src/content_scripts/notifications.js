@@ -125,17 +125,25 @@ function mount(url, position = 'right', debug = false) {
 
     if (type === notifications.CLOSE_WINDOW_EVENT) {
       if (e.data.clear) {
-        // Send clearIframe message to other pages
-        chrome.runtime.sendMessage({
-          action: notifications.CLEAR_ACTION,
-          id: new URL(url).pathname.split('/').pop(),
-        });
+        // Notify sibling iframes. Guarded because an invalidated extension
+        // context throws synchronously and would abort the close routine.
+        try {
+          chrome.runtime.sendMessage({
+            action: notifications.CLEAR_ACTION,
+            id: new URL(url).pathname.split('/').pop(),
+          });
+        } catch (err) {
+          console.warn('[notifications] Failed to broadcast CLEAR_ACTION:', err);
+        }
       }
 
-      wrapper.addEventListener('transitionend', () => {
+      // Wait slightly longer than the 0.2s CSS transition before removing the
+      // wrapper. Using a timer instead of transitionend ensures cleanup also
+      // happens when the transition is skipped (reduced motion, hidden tab).
+      setTimeout(() => {
         wrapper.remove();
         if (e.data.reload) window.location.reload();
-      });
+      }, 500);
 
       wrapper.classList.remove('active');
     }
