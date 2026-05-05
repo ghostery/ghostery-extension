@@ -134,22 +134,23 @@
         // subdocument
         results["subdocument"] = false;
         if (document.readyState !== "loading") {
-          l++;
-          const iframe = document.createElement("iframe");
-          iframe.addEventListener("load", function () {
-            if (
-              iframe.contentWindow.subdocument === true
-              && window.subdocument !== true
-            ) {
-              results["subdocument"] = true;
-            }
-            done();
-          }, { once: true });
-          iframe.setAttribute("src", "./subdocument.html");
-          iframe.style.width = "1px";
-          iframe.style.height = "1px";
-          iframe.style.opacity = 0;
-          document.body.appendChild(iframe);
+          let iframe = window.__checkadb__subdocument;
+          if (typeof iframe === "undefined") {
+            iframe = document.createElement("iframe");
+            iframe.setAttribute("src", "./subdocument.html");
+            iframe.style.width = "1px";
+            iframe.style.height = "1px";
+            iframe.style.opacity = 0;
+            document.body.appendChild(iframe);
+            window.__checkadb__subdocument = iframe;
+          }
+
+          if (
+            iframe.contentWindow.subdocument === true
+            && window.subdocument !== true
+          ) {
+            results["subdocument"] = true;
+          }
         }
 
         // scriptletGlobals.safeSelf /w json-prune
