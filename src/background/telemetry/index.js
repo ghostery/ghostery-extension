@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import Options from '/store/options.js';
 import Config from '/store/config.js';
+import DailyStats from '/store/daily-stats.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { getStorage, saveStorage } from '/utils/telemetry.js';
@@ -36,12 +37,24 @@ const setup = asyncSetup('telemetry', [
       EXTENSION_VERSION: version,
       storage: metrics,
       saveStorage,
-      getConf: async () => ({
-        options: await store.resolve(Options),
-        config: await store.resolve(Config),
-        userSettings: __CHROMIUM__ ? await chrome.action?.getUserSettings?.() : undefined,
-        isAllowedIncognitoAccess: await chrome.extension.isAllowedIncognitoAccess(),
-      }),
+      getConf: async () => {
+        const yesterdayId = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+        const [options, config, dailyStats] = await Promise.all([
+          store.resolve(Options),
+          store.resolve(Config),
+          store.resolve(DailyStats, yesterdayId),
+        ]);
+
+        return {
+          options,
+          config,
+          // Use the previous full UTC day so the bucket doesn't depend on
+          // the time-of-day at which the ping fires.
+          yesterdayPages: dailyStats.pages,
+          userSettings: __CHROMIUM__ ? await chrome.action?.getUserSettings?.() : undefined,
+          isAllowedIncognitoAccess: await chrome.extension.isAllowedIncognitoAccess(),
+        };
+      },
       log: console.debug.bind(console, '[telemetry]'),
     });
   })(),
@@ -70,6 +83,13 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
     chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
+
+export async function recordSerpVisit() {
+  setup.pending && (await setup.pending);
+  if (!runner) return;
+
+  await runner.recordSerpVisit();
+}
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action.startsWith('telemetry:')) {
