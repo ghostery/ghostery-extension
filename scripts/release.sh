@@ -47,8 +47,9 @@ lastTag=$(git describe --tags --abbrev=0 --match "v*" origin/main)
 prBody=$(git log --oneline "$lastTag"..origin/main)
 
 # Create or update the PR
-if gh pr view release >/dev/null 2>&1; then
-  gh pr edit release --title "Release v$version" --body "$prBody"
+prNumber=$(gh pr list --head release --state open --json number --jq '.[0].number')
+if [ -n "$prNumber" ]; then
+  gh pr edit "$prNumber" --title "Release v$version" --body "$prBody"
 else
   gh pr create --base main --head release --title "Release v$version" --body "$prBody"
 fi
