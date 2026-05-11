@@ -17,6 +17,15 @@ import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import { setup, reloadMainEngine } from './adblocker/engines.js';
 
+export async function openElementPicker(tabId) {
+  await chrome.scripting.executeScript({
+    injectImmediately: true,
+    world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
+    target: { tabId },
+    files: ['/content_scripts/element-picker.js'],
+  });
+}
+
 // Observe element picker selectors to update the adblocker engine
 store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   let entries = Object.entries(model.hostnames);
