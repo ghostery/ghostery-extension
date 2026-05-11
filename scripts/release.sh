@@ -39,5 +39,19 @@ buildVersion=$(cat ./xcode/Ghostery.xcodeproj/project.pbxproj | sed -n -e 's/^.*
 git add .
 git commit -m "Release v$version-$buildVersion"
 
+# Push the release branch
+git push -u origin release --force
+
+# Build PR description from commits since the last version tag (excluding this branch's commit)
+lastTag=$(git describe --tags --abbrev=0 --match "v*" origin/main)
+prBody=$(git log --oneline "$lastTag"..origin/main)
+
+# Create or update the PR
+if gh pr view release >/dev/null 2>&1; then
+  gh pr edit release --title "Release v$version" --body "$prBody"
+else
+  gh pr create --base main --head release --title "Release v$version" --body "$prBody"
+fi
+
 # Open Xcode
 xed xcode
