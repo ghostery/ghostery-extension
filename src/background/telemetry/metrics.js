@@ -217,7 +217,11 @@ export default class Metrics {
       // Allowed Incognito Access
       buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0') +
       // Onboarding complete
-      buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0');
+      buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0') +
+      // Page views yesterday (0=none, 1=<10, 2=>=10)
+      buildQueryPair('pv', conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
+      // SERP visits yesterday (0=none, 1=<10, 2=>=10)
+      buildQueryPair('se', this._getSearchSignal());
 
     if (type !== 'uninstall') {
       metrics_url +=
@@ -415,6 +419,47 @@ export default class Metrics {
     const engaged_daily_velocity = this.storage.engaged_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
     return engaged_daily_velocity.filter((el) => el > today - 7).length;
+  }
+
+  /**
+   * Get the SERP visit signal for the previous full UTC day.
+   * Using yesterday avoids bias from the time-of-day at which the
+   * ping fires, since today's counter is mid-aggregation.
+   * @private
+   * @return {string} '0' = no visits, '1' = less than 10, '2' = 10 or more
+   */
+  _getSearchSignal() {
+    const yesterday = Math.floor(Date.now() / 86400000) - 1;
+    let count = 0;
+
+    if (this.storage.serpCountPrevDay === yesterday) {
+      count = this.storage.serpCountPrev || 0;
+    } else if (this.storage.serpCountDay === yesterday) {
+      // No SERP visit happened today yet, so yesterday's total is still
+      // sitting in the current-day counter.
+      count = this.storage.serpCount || 0;
+    }
+
+    return count >= 10 ? '2' : count > 0 ? '1' : '0';
+  }
+
+  /**
+   * Count a SERP visit for today. Rolls the current day's counter
+   * into `serpCountPrev` when the UTC day changes.
+   */
+  async recordSerpVisit() {
+    const today = Math.floor(Date.now() / 86400000);
+
+    if (this.storage.serpCountDay !== today) {
+      this.storage.serpCountPrev = this.storage.serpCount || 0;
+      this.storage.serpCountPrevDay = this.storage.serpCountDay;
+      this.storage.serpCountDay = today;
+      this.storage.serpCount = 1;
+    } else {
+      this.storage.serpCount = (this.storage.serpCount || 0) + 1;
+    }
+
+    await this.saveStorage(this.storage);
   }
 
   /**
