@@ -116,7 +116,9 @@ async function pauseSite(tab, id) {
   await store.set(options, { paused: { [hostname]: { revokeAt } } });
   await chrome.tabs.reload(tab.id);
 
-  console.debug(`[context-menu] Paused ${hostname} until ${new Date(revokeAt).toLocaleString()}`);
+  console.debug(
+    `[context-menu] Paused ${hostname} until ${revokeAt ? new Date(revokeAt).toLocaleString() : 'always'}`,
+  );
 }
 
 async function openSettings() {
@@ -139,14 +141,17 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     case ID_PAUSE_HOUR:
     case ID_PAUSE_DAY:
     case ID_PAUSE_ALWAYS:
-      return pauseSite(tab, info.menuItemId);
+      pauseSite(tab, info.menuItemId).catch(console.error);
+      break;
     case ID_ELEMENT_PICKER:
-      return openElementPicker(tab.id);
+      openElementPicker(tab.id).catch(console.error);
+      break;
     case ID_SETTINGS:
-      return openSettings();
+      openSettings().catch(console.error);
+      break;
   }
 });
 
 OptionsObserver.addListener('terms', (terms) => {
-  chrome.contextMenus.update(ID_PARENT, { enabled: terms });
+  chrome.contextMenus.update(ID_PARENT, { enabled: terms }).catch(console.error);
 });
