@@ -2,7 +2,6 @@
 
 set -e
 
-# verify dist/ is a Chromium MV3 build before patching
 node -e '
 const fs = require("fs");
 const p = "dist/manifest.json";
@@ -17,10 +16,8 @@ if (m.manifest_version !== 3) {
 }
 '
 
-# strip DNR rules that WebKit's URL filter parser cannot compile
 node scripts/filter-invalid-dnr-rules.js
 
-# rewrite manifest background.service_worker into background.scripts/persistent
 node -e '
 const fs = require("fs");
 const p = "dist/manifest.json";

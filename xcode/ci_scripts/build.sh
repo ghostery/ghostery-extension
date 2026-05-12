@@ -2,7 +2,6 @@
 
 set -e
 
-# go to the repo root (xcode/ci_scripts -> repo root)
 cd "$(dirname "$0")/../.."
 
 # Xcode runs build phases in a clean non-login shell, so recreate the toolchain PATH.
@@ -12,8 +11,6 @@ command -v npm >/dev/null 2>&1 || {
   exit 127
 }
 
-# run build script
 npm run build -- --clean
 
-# apply Safari-specific patches to dist/
 sh scripts/patch-safari.sh
