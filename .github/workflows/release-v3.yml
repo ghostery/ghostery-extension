@@ -30,6 +30,11 @@ jobs:
       - name: Build packages
         run: npm run package -- --simple
 
+      - name: Build Safari package
+        run: |
+          sh scripts/patch-safari.sh
+          (cd dist && zip -rq ../web-ext-artifacts/ghostery-safari.zip .)
+
       - name: Upload Firefox build
         uses: actions/upload-release-asset@v1
         env:
@@ -48,6 +53,16 @@ jobs:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: web-ext-artifacts/ghostery-chromium.zip
           asset_name: ghostery-chromium-${{ env.VERSION }}.zip
+          asset_content_type: application/gzip
+
+      - name: Upload Safari build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: web-ext-artifacts/ghostery-safari.zip
+          asset_name: ghostery-safari-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
       - name: Download source code archives
