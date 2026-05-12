@@ -11,7 +11,7 @@
 
 import { store, msg } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, { MODE_ZAP } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { tabStats } from './stats.js';
 import { openElementPicker } from './element-picker.js';
@@ -20,6 +20,9 @@ const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 
 const ID_PARENT = 'ghostery';
 const ID_PAUSE = 'ghostery:pause';
+const ID_RESUME = 'ghostery:resume';
+const ID_ZAP_ENABLE = 'ghostery:zap-enable';
+const ID_ZAP_DISABLE = 'ghostery:zap-disable';
 const ID_PAUSE_HOUR = 'ghostery:pause-hour';
 const ID_PAUSE_DAY = 'ghostery:pause-day';
 const ID_PAUSE_ALWAYS = 'ghostery:pause-always';
@@ -69,6 +72,33 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 
     chrome.contextMenus.create({
+      id: ID_RESUME,
+      parentId: ID_PARENT,
+      title: msg`Resume`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    chrome.contextMenus.create({
+      id: ID_ZAP_ENABLE,
+      parentId: ID_PARENT,
+      title: msg`Block ads`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    chrome.contextMenus.create({
+      id: ID_ZAP_DISABLE,
+      parentId: ID_PARENT,
+      title: msg`Show ads`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    chrome.contextMenus.create({
       id: ID_SEPARATOR,
       parentId: ID_PARENT,
       type: 'separator',
@@ -95,6 +125,39 @@ chrome.runtime.onInstalled.addListener(() => {
     console.debug('[context-menu] Context menu created...');
   });
 });
+
+async function resumeSite(tab) {
+  const hostname = tabStats.get(tab.id)?.hostname;
+  if (!hostname) return;
+
+  const options = await store.resolve(Options);
+  await store.set(options, { paused: { [hostname]: null } });
+  await chrome.tabs.reload(tab.id);
+
+  console.debug(`[context-menu] Resumed ${hostname}`);
+}
+
+async function zapSite(tab) {
+  const hostname = tabStats.get(tab.id)?.hostname;
+  if (!hostname) return;
+
+  const options = await store.resolve(Options);
+  await store.set(options, { zapped: { [hostname]: true } });
+  await chrome.tabs.reload(tab.id);
+
+  console.debug(`[context-menu] Zapped ${hostname}`);
+}
+
+async function unzapSite(tab) {
+  const hostname = tabStats.get(tab.id)?.hostname;
+  if (!hostname) return;
+
+  const options = await store.resolve(Options);
+  await store.set(options, { zapped: { [hostname]: null } });
+  await chrome.tabs.reload(tab.id);
+
+  console.debug(`[context-menu] Unzapped ${hostname}`);
+}
 
 async function pauseSite(tab, id) {
   const hostname = tabStats.get(tab.id)?.hostname;
@@ -138,6 +201,15 @@ async function openSettings() {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
+    case ID_RESUME:
+      resumeSite(tab).catch(console.error);
+      break;
+    case ID_ZAP_ENABLE:
+      zapSite(tab).catch(console.error);
+      break;
+    case ID_ZAP_DISABLE:
+      unzapSite(tab).catch(console.error);
+      break;
     case ID_PAUSE_HOUR:
     case ID_PAUSE_DAY:
     case ID_PAUSE_ALWAYS:
@@ -149,6 +221,45 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     case ID_SETTINGS:
       openSettings().catch(console.error);
       break;
+  }
+});
+
+async function updateVisibility(tabId) {
+  if (tabId === undefined) return;
+
+  const hostname = tabStats.get(tabId)?.hostname;
+  const options = await store.resolve(Options);
+  const isZapMode = options.mode === MODE_ZAP;
+
+  let isPaused = false;
+  let isZapped = false;
+
+  if (hostname) {
+    if (isZapMode) {
+      isZapped = !!options.zapped?.[hostname];
+    } else {
+      const entry = options.paused?.[hostname];
+      isPaused = !!entry && (entry.revokeAt === 0 || entry.revokeAt > Date.now());
+    }
+  }
+
+  chrome.contextMenus.update(ID_PAUSE, { visible: !isZapMode && !isPaused }).catch(console.error);
+  chrome.contextMenus.update(ID_RESUME, { visible: !isZapMode && isPaused }).catch(console.error);
+  chrome.contextMenus
+    .update(ID_ZAP_ENABLE, { visible: isZapMode && !isZapped })
+    .catch(console.error);
+  chrome.contextMenus
+    .update(ID_ZAP_DISABLE, { visible: isZapMode && isZapped })
+    .catch(console.error);
+}
+
+chrome.tabs.onActivated.addListener(({ tabId }) => {
+  updateVisibility(tabId).catch(console.error);
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === 'complete') {
+    updateVisibility(tabId).catch(console.error);
   }
 });
 
