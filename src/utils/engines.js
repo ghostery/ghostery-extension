@@ -418,7 +418,6 @@ export function replace(name, engineOrEngines) {
   if (engines.length > 1) {
     engine = FiltersEngine.merge(engines, {
       skipResources: true,
-      overrideConfig: { enableCompression: false },
       useBinaryMerge: true,
       hashFunc: xxh32d64,
     });
