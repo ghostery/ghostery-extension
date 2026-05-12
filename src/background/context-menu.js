@@ -29,6 +29,7 @@ const ID_PAUSE_ALWAYS = 'ghostery:pause-always';
 const ID_ELEMENT_PICKER = 'ghostery:element-picker';
 const ID_SEPARATOR = 'ghostery:separator';
 const ID_SETTINGS = 'ghostery:settings';
+const ID_WEBSITE_SETTINGS = 'ghostery:website-settings';
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.removeAll(() => {
@@ -99,7 +100,7 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 
     chrome.contextMenus.create({
-      id: ID_SEPARATOR,
+      id: `${ID_SEPARATOR}-1`,
       parentId: ID_PARENT,
       type: 'separator',
       contexts: ['all'],
@@ -115,13 +116,28 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 
     chrome.contextMenus.create({
+      id: ID_WEBSITE_SETTINGS,
+      parentId: ID_PARENT,
+      title: `${msg`Open website settings`}...`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    chrome.contextMenus.create({
+      id: `${ID_SEPARATOR}-2`,
+      parentId: ID_PARENT,
+      type: 'separator',
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    chrome.contextMenus.create({
       id: ID_SETTINGS,
       parentId: ID_PARENT,
       title: `${msg`Open settings`}...`,
       contexts: ['all'],
       documentUrlPatterns: ['http://*/*', 'https://*/*'],
     });
-
     console.debug('[context-menu] Context menu created...');
   });
 });
@@ -199,6 +215,15 @@ async function openSettings() {
   console.debug('[context-menu] Opened settings page...');
 }
 
+async function openWebsiteSettings(tab) {
+  const hostname = tabStats.get(tab.id)?.hostname;
+  const url = SETTINGS_URL + '#@settings-website-details?domain=' + (hostname || '');
+
+  await chrome.tabs.create({ url });
+
+  console.debug(`[context-menu] Opened website settings for ${hostname}...`);
+}
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
     case ID_RESUME:
@@ -220,6 +245,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       break;
     case ID_SETTINGS:
       openSettings().catch(console.error);
+      break;
+    case ID_WEBSITE_SETTINGS:
+      openWebsiteSettings(tab).catch(console.error);
       break;
   }
 });
