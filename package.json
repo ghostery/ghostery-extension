@@ -58,6 +58,7 @@
     "hybrids": "^9.1.22",
     "idb": "^8.0.3",
     "lottie-web": "^5.13.0",
+    "minixxh": "^0.3.1",
     "plotly.js-basic-dist": "^3.5.1",
     "tldts-experimental": "^7.0.30"
   },

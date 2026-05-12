@@ -19,6 +19,7 @@ import {
   Resources,
   evaluatePreprocessor,
 } from '@ghostery/adblocker';
+import { xxh32d64 } from 'minixxh/xxh32d64';
 
 import ResourcesModel from '/store/resources.js';
 
@@ -417,7 +418,8 @@ export function replace(name, engineOrEngines) {
   if (engines.length > 1) {
     engine = FiltersEngine.merge(engines, {
       skipResources: true,
-      overrideConfig: { enableCompression: false },
+      useBinaryMerge: true,
+      hashFunc: xxh32d64,
     });
     engine.resources = Resources.copy(engines[0].resources);
   } else {
