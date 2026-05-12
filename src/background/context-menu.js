@@ -251,6 +251,9 @@ async function updateVisibility(tabId) {
   chrome.contextMenus
     .update(ID_ZAP_DISABLE, { visible: isZapMode && isZapped })
     .catch(console.error);
+  chrome.contextMenus
+    .update(ID_ELEMENT_PICKER, { enabled: !isPaused && !isZapped })
+    .catch(console.error);
 }
 
 chrome.tabs.onActivated.addListener(({ tabId }) => {
