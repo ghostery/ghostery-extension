@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "開啟網站"
   },
+  "open_settings": {
+    "message": "開啟設定"
+  },
   "open_video": {
     "message": "打開視頻"
   },
