@@ -144,7 +144,7 @@
     "message": "Zablokowany"
   },
   "blocked___tracker_list": {
-    "message": "Zablokowane",
+    "message": "Zablokowany",
     "description": "Plural form - list of blocked trackers"
   },
   "blocked_elements_on_this_site": {
@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "Otwórz stronę"
   },
+  "open_settings": {
+    "message": "Otwórz ustawienia"
+  },
   "open_video": {
     "message": "Otwórz wideo"
   },
@@ -1032,7 +1035,7 @@
     "message": "Zaufany"
   },
   "trusted___tracker_list": {
-    "message": "Zaufane",
+    "message": "Zaufany",
     "description": "Plural form - list of trusted trackers"
   },
   "trusted_on_all_websites": {
