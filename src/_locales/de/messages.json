@@ -512,7 +512,7 @@
     "message": "Hashes von potenziell eindeutigen Identifikatoren in Anfrageparametern"
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
+    "message": "Hilf Ghostery dabei, für ein Web zu kämpfen, in dem Privatsphäre online ein grundlegendes Menschenrecht ist."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Gefällt Ihnen Ghostery? Möchten Sie unsere Arbeit unterstützen?"
@@ -689,6 +689,9 @@
   },
   "open_a_site": {
     "message": "Öffne eine Seite"
+  },
+  "open_settings": {
+    "message": "Einstellungen öffnen"
   },
   "open_video": {
     "message": "Video öffnen"
@@ -936,7 +939,7 @@
     "message": "Sag uns, was auf dieser Seite schiefgelaufen ist, und wir kümmern uns darum."
   },
   "terms___conditions": {
-    "message": "Konditionen"
+    "message": "Allgemeine Geschäftsbedingungen"
   },
   "thank_you_for_your_report_": {
     "message": "Danke für deine Meldung!"
@@ -1116,7 +1119,7 @@
     "message": "Website-Statistikbericht"
   },
   "websites": {
-    "message": "Websites"
+    "message": "Webseiten"
   },
   "weekly": {
     "message": "Wöchentlich"
