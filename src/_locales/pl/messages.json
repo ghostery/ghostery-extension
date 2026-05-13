@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "Otwórz stronę"
   },
+  "open_settings": {
+    "message": "Otwórz ustawienia"
+  },
   "open_video": {
     "message": "Otwórz wideo"
   },

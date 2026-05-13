@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "사이트 열기"
   },
+  "open_settings": {
+    "message": "설정 열기"
+  },
   "open_video": {
     "message": "동영상 보기"
   },

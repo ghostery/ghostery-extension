@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "Откройте сайт"
   },
+  "open_settings": {
+    "message": "Открыть настройки"
+  },
   "open_video": {
     "message": "Открытое видео"
   },
