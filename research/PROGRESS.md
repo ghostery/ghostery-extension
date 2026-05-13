@@ -48,68 +48,52 @@ Per-page run time: ~4 s vanilla, ~9 s ghostery (warmup is adaptive — ~3-5 s wa
 - `SETTLE_AFTER_LOAD_MS = 1500` — enough for most pages.
 - Ghostery warmup is now a real handshake against `chrome-extension://<id>/pages/status/index.html` — see problem #9. Replaces a 4-second `setTimeout` that was sometimes too short, producing bimodal Ghostery samples on espn.
 
-## Headline data — first complete run (8 pages, 2026-05-13) — **STALE, re-run pending**
+## Headline data — first complete run (8 pages, 2026-05-13, median of 5)
 
-> ⚠️  This table is from `runId = 2026-05-13T15-02-36-304Z`, which was captured **before** the harness fixes in problems #2 (espn extract race) and #9 (warmup readiness). The espn row reports `innerText = 0` for ghostery — which we now know was a BiDi snapshot artifact, not real. The aggregate numbers are therefore biased. **Action: rerun `node src/run.js --repeat 5 --ext-dir ../dist` and replace this table with the median-of-5 numbers.** This is the "do this first" item for the next session — see "Next session — priorities" below.
+Run id: `2026-05-13T16-40-06-574Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn. Each `(page, variant)` was sampled 5× back-to-back; cells below are the **median**, p25/p75 in each `<variant>.metrics.json` under `.stats`. Every ghostery sample verified `ghosteryStatus.ready === true` (40/40).
 
-Run id: `2026-05-13T15-02-36-304Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn.
-
-Aggregate (sum across all 8):
+Aggregate (sum of medians across all 8 pages):
 
 | Metric | Vanilla | Ghostery | Δ |
 |---|---:|---:|---:|
-| innerText tokens | 12.7 k | 11.1 k | **−12.2 %** |
-| HTML tokens | 3.75 M | 3.50 M | −6.8 % |
-| A11y tree tokens | 973 k | 1020 k | +4.8 % (Ghostery reveals content vanilla left under banners) |
+| innerText tokens | 12.6 k | 12.6 k | **+0.5 %** (≈ neutral — see per-page split) |
+| HTML tokens | 3.76 M | 3.57 M | **−5.0 %** |
+| A11y tree tokens | 966 k | 930 k | **−3.7 %** (flipped sign from previous run — was +4.8 %) |
 | Viewport image tokens | 9.0 k | 9.0 k | 0 % (fixed dimensions) |
-| Estimated full-page image tokens | 5.9 k | 6.5 k | +10.8 % |
-| Network bytes | 62 MB | 69 MB | +10.8 % (autoconsent triggers more secondary loads) |
+| Estimated full-page image tokens | 5.7 k | 5.7 k | +1.7 % |
+| Network bytes | 64 MB | 69 MB | +8.2 % (autoconsent + ghostery content scripts pull secondary loads) |
 
 Per-load $ (Sonnet 4.6 input, $3/MTok):
 
 | Mode | Vanilla | Ghostery | Saved | per 1k loads |
 |---|---:|---:|---:|---:|
-| innerText + viewport screenshot | $0.0081 | $0.0075 | $0.00058 | $0.58 |
-| A11y tree + viewport screenshot | $0.368 | $0.386 | −$0.017 | −$17.43 |
-| Full HTML + viewport screenshot | $1.41 | $1.32 | $0.095 | $95 |
-| innerText + full-page screenshot | $0.0070 | $0.0066 | $0.00034 | $0.34 |
+| innerText + viewport screenshot | $0.0081 | $0.0081 | −$0.00002 | −$0.02 |
+| A11y tree + viewport screenshot | $0.366 | $0.352 | $0.013 | **$13.36** |
+| Full HTML + viewport screenshot | $1.41 | $1.34 | $0.070 | **$69.84** |
+| innerText + full-page screenshot | $0.0068 | $0.0069 | −$0.00006 | −$0.06 |
 
-**With consent-dismiss overhead modeled** (3 agent loops × 5 k tokens per banner Ghostery dismissed; only 1/8 pages currently flagged because the detector is too lax — see open problem #1):
-
-| Mode | Vanilla (incl. dismiss) | Ghostery | Saved | per 1k loads |
-|---|---:|---:|---:|---:|
-| innerText + viewport screenshot | $0.0138 | $0.0075 | $0.0062 | **$6.21** |
-| innerText + full-page screenshot | $0.0126 | $0.0066 | $0.0060 | **$5.97** |
-
-So even with a one-banner-out-of-eight count the consent-dismiss overhead is the dominant savings driver.
+**Consent-dismiss overhead is currently $0/1k in this dataset.** The detector flagged a banner on both runs for all 8 pages (0 cases where Ghostery dismissed but vanilla did not), so the model adds no overhead to vanilla. This is a regression vs the previous "1/8 detected" run — the detector is now matching cookie-policy text in footers on every page. Real autoconsent activity is visible in per-page text deltas (cnn +20 %, nypost +31 %, foodnetwork +44 %) but the headline savings number stays at $0 until problem #1 ships. See "Next session — priorities" below.
 
 ### Notable per-page observations
 
-- **dailymail**, **allrecipes**: vanilla rendered ~70 innerText tokens — page was a near-empty consent wall. Ghostery rendered 67 / 71 innerText tokens — autoconsent did **not** dismiss, page still mostly empty. (Possibly the consent dialog is rendered before Ghostery's content scripts attach.)
-- **foodnetwork**: vanilla 988 innerText tokens, ghostery 1421 — Ghostery actually unblocked content here (recipe rendered). Earlier flaky run showed vanilla = 0 tokens, ghostery = 1421 — confirms variance.
-- **cnn**, **nypost**: Ghostery's autoconsent revealed *more* content than vanilla. innerText went *up* (+21 % cnn, +29 % nypost). This is a real "agent gets useful content sooner" win, but it's not a token *reduction*.
-- **foxnews**: nearly identical between variants (no consent wall, not many native ads in DOM).
-- **weather.com**: BIDI `browsingContext.getTree` timeout fired in the background (now caught by our `unhandledRejection` handler so it doesn't kill the run).
-- **espn**: Ghostery run produced **0 innerText tokens** vs 2.7 k vanilla — looks like Ghostery broke the page (anti-adblock detection? cosmetic filter too aggressive?). Worth investigating.
+- **espn**: Ghostery is the largest single-page win — text **−43.2 %** (2.6 k → 1.5 k), HTML **−72.5 %** (264 k → 73 k), A11y **−44.8 %** (209 k → 116 k). iframeCount drops 6 → 1. The previous "0 innerText" failure (problem #2) is fully fixed — every sample now extracts real content. One leftover wrinkle: s1 of the 5 samples landed at html=154 k / iframes=0 while s2-s5 stabilised at ~73 k / iframes=1. Median picks 73 k; worth keeping an eye on whether s1 is an early-extract race or a real bimodal mode.
+- **cnn**, **nypost**, **foodnetwork**: text tokens go **up** under Ghostery (+20.5 %, +30.6 %, +43.8 %) because autoconsent dismisses the cookie wall and the article body renders. Same story as before — a real "agent gets useful content sooner" win, but token cost goes up, not down.
+- **dailymail**, **allrecipes**: still both stuck at ~70 text tokens in both variants — consent wall renders before Ghostery's content scripts attach. HTML token count goes *up* under Ghostery (105 → 1.5 k, 187 → 1.6 k) because Ghostery's autoconsent script body itself is in the DOM. Net bytes also spike (798 B → 1.85 MB, 1.3 KB → 1.85 MB) — that's autoconsent worker scripts loading even though they fail to find a matching dialog.
+- **foxnews**: nearly identical (no consent wall, modest difference in iframes / requests).
+- **weather**: modest reduction across the board (text −5.6 %, html −0.5 %, a11y −5.5 %). `browsingContext.getTree` timeouts still fire in the background, harmless (caught by `unhandledRejection`).
+- **Network bytes go up under Ghostery on most pages.** MV3 declarative blocking happens at the network layer, but autoconsent + Ghostery's own content scripts + the pin-it iframe + (on dailymail/allrecipes) Ghostery's request bundles all add load. The +8.2 % aggregate is consistent with the previous run's +10.8 %.
 
 ## Next session — priorities
 
-If you only have time for one thing, do **(1)**. It unblocks every other claim in this doc.
+Headline rerun is done (see table above). The two pieces of the story that the rerun made more important, not less:
 
-1. **Re-run the headline** (≈10 min compute, ≈30 min to write up). Cheapest, highest-credibility win. Steps:
-   ```bash
-   # from repo root
-   npm run build chromium
-   scripts/patch-automation.sh dist
-   (cd research && node src/run.js --repeat 5 --ext-dir ../dist)
-   ```
-   Then replace the "Headline data" table above with the median-of-5 numbers from `results/<latest>/report.md`. Spot-check the per-sample `stats` in each `ghostery.metrics.json` to make sure every sample has `ghosteryStatus.ready === true` — if any don't, log it and either bump `GHOSTERY_READY_TIMEOUT_MS` or investigate.
+1. **Tighter consent detection** (problem #1 below, ≈ one session) — **promoted to #1** because the previous run had 1/8 detected and gave us $6/1k savings; the new run has 0/8 detected and gives $0/1k. The "Ghostery dismisses banners so you don't pay agent loops to do it" story is the single biggest savings claim and is currently invisible in the headline. Concretely: cnn, nypost, and foodnetwork all show large positive text deltas under Ghostery (+20 / +31 / +44 %) which is exactly the "banner went away, body rendered" signal we want the detector to flag, and it doesn't. Either adopt `@duckduckgo/autoconsent`'s detector or hand-roll the position/area/z-index heuristic in problem #1.
 
-2. **A11y filtering** (problem #4 below, ≈ half a day). The "A11y tree + viewport screenshot" row currently shows Ghostery making cost *worse* (+4.8 % aggregate, −$17 / 1 k loads). That's the row a skeptic will quote against us. Capture both raw + filtered AX trees; report filtered as primary. Likely flips the sign.
+2. **A11y filtering** (problem #4 below, ≈ half a day). The aggregate flipped from +4.8 % (Ghostery makes it worse) to −3.7 % (Ghostery saves $13/1k), but only because espn alone dropped 209 k → 116 k A11y tokens. The other 7 pages are still mixed. A filtered tree ("interestingOnly: true"-style) is what real agents actually consume, so capture both and report filtered as primary — that's the row a skeptic will quote.
 
-3. **Tighter consent detection** (problem #1 below, ≈ one session). The "with consent-dismiss overhead" row is doing the bulk of the savings story ($6/1k) on the strength of 1-of-8 pages currently detected. False-negative rate matters a lot here. Adopt `@duckduckgo/autoconsent`'s detector or hand-roll a position/area/z-index heuristic.
+3. **Investigate the espn s1 outlier.** Out of 5 ghostery samples, s1 was 154 k html / 0 iframes while s2-s5 were ~73 k / 1 iframe. Median is fine for the headline but a 2× swing on the first sample suggests there's still a state leak between the warmup window and the first navigation. Cheap experiment: capture per-sample request timing for the first ad slot's blocking decision and see if it lands before vs after extract.
 
-Then in priority order: #7 (agent simulation, the actual deliverable), #5 (cross-region), #8 (report polish — quick wins like the "first-launch warmup waits 25 s" line in the report that's a year out of date), #6 (BiDi `webExtension.install`, low value).
+Then in priority order: #7 (agent simulation, the actual deliverable), #5 (cross-region), #8 (report polish — remaining items: "verdict" column, per-page $ delta column), #6 (BiDi `webExtension.install`, low value).
 
 ## Open problems (one per future session)
 
@@ -181,7 +165,7 @@ The current cost model is artifact-based: it costs out a single page consumption
 
 ### 8. Report polish
 
-- Drop the misleading "Notes" line that still says "first-launch warmup waits 25s" (now 4 s).
+- ~~Drop the misleading "Notes" line that still says "first-launch warmup waits 25s" (now 4 s).~~ — done in `src/report.js`; now says "adaptive handshake against the extension status page; typically ~3-5s".
 - Add a "verdict" column in the per-page table that combines consent + content-rendered + cosmetic-filter signals.
 - Per-page $ delta column, not just aggregate.
 

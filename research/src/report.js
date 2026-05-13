@@ -241,7 +241,7 @@ export function renderReport(rows, { runId } = {}) {
   out.push('- "Viewport img tok" is the Anthropic-formula token cost for a 1280×800 PNG (≈1366 tokens).');
   out.push('  Differences between vanilla and Ghostery here only appear if the screenshot dimensions change.');
   out.push('  (They will differ on full-page screenshots because page height changes when ads are gone.)');
-  out.push('- Ghostery first-launch warmup waits 25s to let adblocker engines load.');
+  out.push('- Ghostery warmup is an adaptive handshake against the extension status page (`pages/status/index.html`); typically ~3-5s. Falls back to a 4s sleep when the loaded extension predates the status page.');
   out.push('- Both runs use the same viewport, navigation timeout, and settle delay.');
 
   return out.join('\n');
