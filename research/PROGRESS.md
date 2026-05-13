@@ -163,11 +163,35 @@ The current cost model is artifact-based: it costs out a single page consumption
 - Add a "verdict" column in the per-page table that combines consent + content-rendered + cosmetic-filter signals.
 - Per-page $ delta column, not just aggregate.
 
-### 9. MV3 adblocker engine warmup is sometimes incomplete at first navigation
+### 9. ~~MV3 adblocker engine warmup is sometimes incomplete~~ — done (status page readiness probe)
 
-Surfaced by problem #3's `--repeat`. On espn the *first* ghostery sample of a fresh chromedriver session often has iframeCount=3 and html ≈ 263 k (vanilla-ish), while later samples land at iframeCount=1 and html ≈ 71 k. `GHOSTERY_WARMUP_SETTLE_MS = 4000` after the warmup navigation isn't always enough for the MV3 service worker + DNR ruleset + cosmetic-filter engines to be fully active by the time we navigate to the target.
+Replaced the fixed `setTimeout(4000)` warmup with a real handshake against the extension. The extension now ships an automation-friendly page at `pages/status/index.html` that asks the background `{action: 'status:get'}`; the background `src/background/status.js` awaits the adblocker `setup.pending` promise and replies with `{ ready, adblocker: {ready, error}, version, id }`. The page surfaces the reply as `window.__ghosteryStatus` (and renders it for humans). The harness opens that URL during warmup and polls `Runtime.evaluate('window.__ghosteryStatus')` every 100 ms until `ready === true` (timeout 30 s, fallback to the old `example.com` + 4 s sleep).
 
-Next step: replace the fixed 4 s sleep with a readiness probe. Either (a) hit `chrome-extension://<id>/pages/onboarding/index.html` or a similar extension page and poll for a known-loaded signal (`window.engineReady` exposed by the background page, or a DOM marker), or (b) bump the constant to 8–10 s as a quick mitigation and re-run `--repeat 5` to confirm. (a) is the right fix; (b) is acceptable for the next benchmark round.
+**Knock-on changes:**
+
+- `research/src/setup.js` now also computes the unpacked-extension ID from the absolute load path (SHA-256, first 32 hex chars, each translated `0-9a-f` → `a-p`). This is the same algorithm Chromium uses for `--load-extension` builds without a manifest `key`. Verified against the chromedriver-log-observed `fgekihmljbkakakddhjdhggfibalefhd` for the legacy extract dir, and `nlfgkmbfnnhmblhdlfecpaomkbpnohok` for the new `dist/` path.
+- `research/src/run.js --ext-dir PATH` (or `GHOSTERY_EXT_DIR=PATH` env) points at any pre-built unpacked extension instead of extracting `ghostery-automation-chromium.zip`. Default behaviour with no flag/env is unchanged.
+- The per-sample metrics now carries `ghosteryStatus: {ready, adblocker, id, version}` so we can post-hoc check whether each sample saw a fully-loaded extension.
+- New `scripts/patch-automation.sh` rewrites a freshly built `dist/`: renames `manifest.json` `name`/`short_name` to "Ghostery (Automation)" and flips `store/options.js` `terms`/`onboarding` defaults to `true` so the first-run UI is skipped. Run after every `npm run build chromium`.
+
+**Workflow:**
+
+```bash
+# from repo root
+npm run build chromium
+scripts/patch-automation.sh dist
+(cd research && node src/run.js --pages espn --repeat 5 --ext-dir ../dist)
+```
+
+**Verification (espn, `--repeat 3`, `--ext-dir ../dist`):**
+
+| Metric | Before (`web-ext-artifacts/*.zip`, fixed 4 s warmup) | After (status-page poll) |
+|---|---|---|
+| Ghostery html token samples | 262 641 / 263 550 / 71 888 (3.7× swing) | 70 485 / 70 796 / 151 463 |
+| iframeCount samples | 3 / 3 / 1 | 1 / 1 / 1 |
+| Warmup phase | always 4 000 ms | 2 879 / 2 987 / 3 780 ms (adaptive) |
+
+The bimodal "engine-not-loaded vs engine-loaded" pattern is gone — every sample now reports `ghosteryStatus.ready === true` and `iframeCount = 1` (the persistent ad slot that espn renders even with blocking). Residual variance (70 k vs 151 k html) is real page-content variance, not a Ghostery state issue.
 
 ## How to run
 

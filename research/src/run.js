@@ -15,13 +15,14 @@ const RESEARCH_ROOT = join(__dirname, '..');
 const RESULTS_ROOT = join(RESEARCH_ROOT, 'results');
 
 function parseArgs(argv) {
-  const out = { pages: null, headless: true, debug: false, capturePages: false, repeat: 1 };
+  const out = { pages: null, headless: true, debug: false, capturePages: false, repeat: 1, extDir: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--pages') out.pages = (argv[++i] || '').split(',').filter(Boolean);
     else if (a === '--headed') out.headless = false;
     else if (a === '--debug') out.debug = true;
     else if (a === '--fullpage') out.capturePages = true;
+    else if (a === '--ext-dir') out.extDir = argv[++i];
     else if (a === '--repeat') {
       const n = Number(argv[++i]);
       if (!Number.isInteger(n) || n < 1) {
@@ -31,12 +32,14 @@ function parseArgs(argv) {
       out.repeat = n;
     } else if (a === '--help' || a === '-h') {
       console.log(
-        'Usage: node src/run.js [--pages id1,id2] [--headed] [--debug] [--fullpage] [--repeat N]\n' +
+        'Usage: node src/run.js [--pages id1,id2] [--headed] [--debug] [--fullpage] [--repeat N] [--ext-dir PATH]\n' +
           '  --pages     restrict to these page ids from pages.json\n' +
           '  --headed    run with visible browser window\n' +
           '  --debug     write chromedriver + wdio debug logs to results/<run>/<page>/\n' +
           '  --fullpage  also capture the full-page screenshot (slow: ~25s per run)\n' +
-          '  --repeat N  run each (page, variant) N times and report medians (default 1)\n',
+          '  --repeat N  run each (page, variant) N times and report medians (default 1)\n' +
+          '  --ext-dir   use this unpacked extension dir (e.g. ../dist after patch-automation.sh).\n' +
+          '              GHOSTERY_EXT_DIR env var has the same effect.\n',
       );
       process.exit(0);
     }
@@ -83,6 +86,7 @@ for (const p of selected) {
           headless: args.headless,
           debug: args.debug,
           capturePages: args.capturePages,
+          extDir: args.extDir,
         });
         r.id = p.id;
         samples.push(r);

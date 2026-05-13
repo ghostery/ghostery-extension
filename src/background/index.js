@@ -38,3 +38,4 @@ import './telemetry/index.js';
 
 import './devtools.js';
 import './storage.js';
+import './status.js';

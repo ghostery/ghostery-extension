@@ -6,7 +6,7 @@ import { remote } from 'webdriverio';
 
 import { countTokens } from './tokenize.js';
 import { imageTokens } from './cost-model.js';
-import { ensureExtensionExtracted } from './setup.js';
+import { ensureExtensionExtracted, extensionIdForPath } from './setup.js';
 
 async function chromedriverCdp(port, sessionId, method, params = {}) {
   const url = `http://localhost:${port}/session/${sessionId}/goog/cdp/execute`;
@@ -102,7 +102,8 @@ const EXT_ZIP = join(REPO_ROOT, 'web-ext-artifacts/ghostery-automation-chromium.
 const VIEWPORT = { width: 1280, height: 800 };
 const NAV_TIMEOUT_MS = 30_000;
 const SETTLE_AFTER_LOAD_MS = 1_500;
-const GHOSTERY_WARMUP_SETTLE_MS = 4_000;
+const GHOSTERY_WARMUP_FALLBACK_MS = 4_000;
+const GHOSTERY_READY_TIMEOUT_MS = 30_000;
 const WARMUP_URL = 'https://example.com/';
 
 function pngDimensions(buffer) {
@@ -149,7 +150,44 @@ async function installGhosteryViaBidi(browser) {
   throw new Error('webdriverio does not expose webExtension.install — check version');
 }
 
-export async function measure(url, { withGhostery, outDir, label, headless = true, debug = false, capturePages = false }) {
+async function waitForGhosteryReady(port, sessionId, extId, label) {
+  const url = `chrome-extension://${extId}/pages/status/index.html`;
+  const expression = '(() => window.__ghosteryStatus ?? null)()';
+  const deadline = Date.now() + GHOSTERY_READY_TIMEOUT_MS;
+  let navOk = false;
+  try {
+    await chromedriverCdp(port, sessionId, 'Page.navigate', { url });
+    navOk = true;
+  } catch (e) {
+    console.warn(`[${label}] could not open status page (${e.message}); falling back to fixed warmup sleep`);
+  }
+  if (!navOk) {
+    await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_FALLBACK_MS));
+    return { fallback: true };
+  }
+  while (Date.now() < deadline) {
+    try {
+      const res = await chromedriverCdp(port, sessionId, 'Runtime.evaluate', {
+        expression,
+        returnByValue: true,
+      });
+      const v = res?.result?.value;
+      if (v && v.ready === true) return v;
+      if (v && v.error) {
+        console.warn(`[${label}] status page reported error: ${v.error}; falling back to fixed warmup sleep`);
+        await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_FALLBACK_MS));
+        return { fallback: true, error: v.error };
+      }
+    } catch {
+      /* page may not have finished loading yet — keep polling */
+    }
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  console.warn(`[${label}] Ghostery readiness timed out after ${GHOSTERY_READY_TIMEOUT_MS}ms`);
+  return { timeout: true };
+}
+
+export async function measure(url, { withGhostery, outDir, label, headless = true, debug = false, capturePages = false, extDir = null }) {
   const timings = {};
   const mark = (k, t0) => {
     timings[k] = Date.now() - t0;
@@ -172,11 +210,13 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
   ];
   if (headless) chromeArgs.push('--headless=new');
 
-  let extDir;
+  let extPath;
+  let extId;
   if (withGhostery) {
-    extDir = ensureExtensionExtracted();
-    chromeArgs.push(`--disable-extensions-except=${extDir}`);
-    chromeArgs.push(`--load-extension=${extDir}`);
+    extPath = ensureExtensionExtracted({ dir: extDir });
+    extId = extensionIdForPath(extPath);
+    chromeArgs.push(`--disable-extensions-except=${extPath}`);
+    chromeArgs.push(`--load-extension=${extPath}`);
   }
 
   let browser;
@@ -202,12 +242,15 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     });
     mark('session', t);
 
+    let ghosteryStatus = null;
     if (withGhostery) {
       t = Date.now();
-      try {
-        await browser.url(WARMUP_URL);
-      } catch {}
-      await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_SETTLE_MS));
+      ghosteryStatus = await waitForGhosteryReady(port, browser.sessionId, extId, label);
+      if (ghosteryStatus?.fallback || ghosteryStatus?.timeout) {
+        try {
+          await browser.url(WARMUP_URL);
+        } catch {}
+      }
       mark('warmup', t);
     }
 
@@ -323,6 +366,7 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
       url,
       label,
       withGhostery,
+      ghosteryStatus,
       navError,
       loadTimeMs,
       timings,
