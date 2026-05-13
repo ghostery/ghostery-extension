@@ -95,9 +95,36 @@ So even with a one-banner-out-of-eight count the consent-dismiss overhead is the
 
 Current detector matches a broad regex on `document.body.innerText` plus a long list of `[id*="onetrust" i]`-style selectors. Both fire false positives (cookie text in privacy-policy footers ⇒ false ⚠️ on cnn / nypost / weather) and false negatives (dailymail / allrecipes vanilla are clearly blocked but flagged "no banner"). Replace with: walk `document.querySelectorAll('*')`, keep elements whose computed `position` is `fixed`/`sticky`, area > 30 % of viewport, z-index > 100, and whose text contains specific button strings ("accept all cookies" / "reject all" / "manage preferences"). Optionally adopt `@duckduckgo/autoconsent`'s detection helper directly.
 
-### 2. Investigate espn Ghostery breakage
+### 2. ~~Investigate espn Ghostery breakage~~ — fixed (harness bug, not Ghostery)
 
-Re-run espn headed with `--debug`, capture chromedriver log + screenshot. Hypotheses to test: (a) anti-adblock script blanks the page when Ghostery is present, (b) a Ghostery cosmetic filter rule hides the main content container, (c) MV3 DNR rule blocks an essential script. Next step: `node src/run.js --pages espn --headed --debug` then diff `vanilla.html` vs `ghostery.html`.
+**Fix shipped** in `src/measure.js`: extract now goes through CDP `Runtime.evaluate` (via the existing `chromedriverCdp` helper used for a11y + screenshots) instead of webdriverio's `browser.execute()` → BiDi `script.callFunction`. One retry on either error or stale-snapshot signal (`innerText.length < 100 && scrollHeight <= viewport.height`).
+
+Verification: 10/10 espn runs succeeded, vs. ~30% failure rate pre-fix. Extract timings 16–289 ms (no retries fired), down from ~556 ms via BiDi.
+
+Original diagnosis kept below for context.
+
+---
+
+
+Root cause is in the **harness**, not Ghostery. The "broken" 15-02-36 capture (ghostery `innerText=0`, body literally `<body ...>\n\t\t</body>`) was contradicted by the viewport screenshot from the same run, which shows espn **fully rendered** (NBA scoreboard, LeBron headline, autoconsent had dismissed the Disney privacy modal). So Ghostery did its job; what we wrote to disk was a bad snapshot.
+
+In 5 repeat runs + 1 headed + the original, two distinct failure modes appeared (~3/7 total):
+
+1. **Outright `script.callFunction` error**: `WebDriver Bidi command "script.callFunction" failed with error: unknown error - Cannot find context with specified id`. `measure()` catches this only as a thrown error and writes a minimal `{error: ...}` metrics file; html/text/a11y/screenshot are skipped.
+2. **Silent stale snapshot**: `script.callFunction` returns the document's outerHTML with an empty `<body>` (matches the raw server-side HTML's `<body class="...prod  ">` pre-hydration state) even though the DOM has fully painted by the time the screenshot is taken ~150 ms later.
+
+Chromedriver log (`results/2026-05-13T15-20-11-961Z/espn/ghostery.chromedriver.log`) shows the BiDi-mapper CDP send `Runtime.callFunctionOn(executionContextId: 1, sessionId: 3F44C03F…)` issued at t=623.970 returning `Cannot find context` at t=624.520 — a 550 ms window during which the main frame's children went through an iframe storm: `__tcfapiLocator` attaches, Adobe AccessEnabler, Ghostery's `pages/notifications/pin-it.html` (the "pin the extension" notification, injected as a child iframe of espn by `chrome-extension://.../store/options.js`), repeated `about:blank` placeholders, and four `executionContextCreated`/`executionContextDestroyed` pairs. Ghostery's pin-it iframe is **additive load** on top of espn's already-busy frame tree and pushes the BiDi mapper's realm bookkeeping over the edge. (We can confirm by disabling pin-it: set the Ghostery "pin notification dismissed" pref or filter the iframe, then repeat the 5-run test.)
+
+espn is the only page where this fires currently because (a) it sets up an unusual number of short-lived iframes during init, and (b) the consent flow is one of the slower ones we hit. cnn and weather have fewer iframes; nypost / foxnews don't trigger it in any observed run.
+
+**Fixes in priority order:**
+
+- (a) Switch `extract` from BiDi `browser.execute()` to direct CDP `Runtime.evaluate` (we already use CDP for a11y + screenshots — same pattern). That sidesteps the mapper entirely for the high-value call. The wdio `browser.execute` is convenient but adds a layer that races during iframe churn.
+- (b) Add retry-with-backoff around the extract call (1 retry after 500 ms is probably enough). Cheap, low-risk; doesn't fix the silent-stale-snapshot case though.
+- (c) Add a sanity check: if `pageData.scrollHeight < 200` or `body.children.length === 0` but the screenshot dimensions imply a real page, retry. This catches the silent case.
+- (d) Optional: bump `SETTLE_AFTER_LOAD_MS` for ghostery runs to 3 s. Probably masks the bug without fixing it.
+
+Once (a)+(c) ship, re-run espn 10× and confirm 0/10 failures.
 
 ### 3. Add `--repeat N` for stability
 

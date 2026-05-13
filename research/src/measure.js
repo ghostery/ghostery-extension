@@ -20,6 +20,71 @@ async function chromedriverCdp(port, sessionId, method, params = {}) {
   return data.value;
 }
 
+function pageExtractScript() {
+  const fn = () => {
+    const text = document.body ? document.body.innerText : '';
+    const iframes = document.querySelectorAll('iframe');
+    const iframeSrcs = [];
+    let emptyIframes = 0;
+    for (const f of iframes) {
+      const src = f.src || f.getAttribute('data-src') || '';
+      iframeSrcs.push(src);
+      try {
+        if (!f.contentDocument || !f.contentDocument.body || !f.contentDocument.body.innerHTML) {
+          emptyIframes++;
+        }
+      } catch {
+        /* cross-origin */
+      }
+    }
+    const consentSelectors = [
+      '[id*="onetrust" i]', '[class*="onetrust" i]',
+      '[id*="cookiebot" i]', '[class*="cookiebot" i]',
+      '#sp_message_container_', '[id^="sp_message_container"]',
+      '.qc-cmp2-container', '[class*="qc-cmp" i]',
+      '[id*="usercentrics" i]', '[class*="uc-banner" i]',
+      '[aria-label*="consent" i]', '[aria-label*="cookie" i]',
+      '[id*="cmp" i][class*="banner" i]',
+      '[id*="gdpr" i]', '[class*="gdpr" i]',
+      '[id*="truste" i]', '[class*="truste" i]',
+      '[id*="didomi" i]', '[class*="didomi" i]',
+    ];
+    const consentMatches = [];
+    for (const sel of consentSelectors) {
+      try {
+        if (document.querySelector(sel)) consentMatches.push(sel);
+      } catch { /* invalid selector in some browsers */ }
+    }
+    const consentText = /accept all cookies|manage cookies|reject all|we use cookies|cookie consent|consent to|privacy preference|allow cookies|tracking technologies/i.test(text);
+    return {
+      html: document.documentElement.outerHTML,
+      innerText: text,
+      iframeCount: iframes.length,
+      iframeSrcs,
+      emptyIframes,
+      title: document.title,
+      scrollHeight: document.documentElement.scrollHeight,
+      consentBannerDetected: consentMatches.length > 0 || consentText,
+      consentBannerSelectors: consentMatches,
+      mostlyEmpty: text.length < 200,
+    };
+  };
+  return `(${fn.toString()})()`;
+}
+
+async function extractPageDataViaCdp(port, sessionId) {
+  const res = await chromedriverCdp(port, sessionId, 'Runtime.evaluate', {
+    expression: pageExtractScript(),
+    returnByValue: true,
+    awaitPromise: false,
+  });
+  if (res && res.exceptionDetails) {
+    const ed = res.exceptionDetails;
+    throw new Error(`Runtime.evaluate exception: ${ed.text || ed.exception?.description || 'unknown'}`);
+  }
+  return res?.result?.value;
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const RESEARCH_ROOT = join(__dirname, '..');
 const REPO_ROOT = join(RESEARCH_ROOT, '..');
@@ -187,54 +252,25 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     const loadTimeMs = Date.now() - t0;
 
     t = Date.now();
-    const pageData = await browser.execute(() => {
-      const text = document.body ? document.body.innerText : '';
-      const iframes = document.querySelectorAll('iframe');
-      const iframeSrcs = [];
-      let emptyIframes = 0;
-      for (const f of iframes) {
-        const src = f.src || f.getAttribute('data-src') || '';
-        iframeSrcs.push(src);
-        try {
-          if (!f.contentDocument || !f.contentDocument.body || !f.contentDocument.body.innerHTML) {
-            emptyIframes++;
-          }
-        } catch {
-          /* cross-origin */
+    let pageData;
+    let extractErr;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) await new Promise((r) => setTimeout(r, 500));
+      try {
+        const data = await extractPageDataViaCdp(port, browser.sessionId);
+        const stale = data && data.innerText.length < 100 && data.scrollHeight <= VIEWPORT.height;
+        if (!stale || attempt > 0) {
+          pageData = data;
+          extractErr = null;
+          break;
         }
+        console.warn(`[${label}] extract returned empty body (innerText=${data.innerText.length}, scrollHeight=${data.scrollHeight}), retrying`);
+      } catch (e) {
+        extractErr = e;
+        console.warn(`[${label}] extract failed (${e.message})${attempt === 0 ? ', retrying' : ''}`);
       }
-      const consentSelectors = [
-        '[id*="onetrust" i]', '[class*="onetrust" i]',
-        '[id*="cookiebot" i]', '[class*="cookiebot" i]',
-        '#sp_message_container_', '[id^="sp_message_container"]',
-        '.qc-cmp2-container', '[class*="qc-cmp" i]',
-        '[id*="usercentrics" i]', '[class*="uc-banner" i]',
-        '[aria-label*="consent" i]', '[aria-label*="cookie" i]',
-        '[id*="cmp" i][class*="banner" i]',
-        '[id*="gdpr" i]', '[class*="gdpr" i]',
-        '[id*="truste" i]', '[class*="truste" i]',
-        '[id*="didomi" i]', '[class*="didomi" i]',
-      ];
-      const consentMatches = [];
-      for (const sel of consentSelectors) {
-        try {
-          if (document.querySelector(sel)) consentMatches.push(sel);
-        } catch { /* invalid selector in some browsers */ }
-      }
-      const consentText = /accept all cookies|manage cookies|reject all|we use cookies|cookie consent|consent to|privacy preference|allow cookies|tracking technologies/i.test(text);
-      return {
-        html: document.documentElement.outerHTML,
-        innerText: text,
-        iframeCount: iframes.length,
-        iframeSrcs,
-        emptyIframes,
-        title: document.title,
-        scrollHeight: document.documentElement.scrollHeight,
-        consentBannerDetected: consentMatches.length > 0 || consentText,
-        consentBannerSelectors: consentMatches,
-        mostlyEmpty: text.length < 200,
-      };
-    });
+    }
+    if (!pageData) throw extractErr ?? new Error('extract failed');
     const html = pageData.html;
     const innerText = pageData.innerText;
     mark('extract', t);
