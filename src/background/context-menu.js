@@ -35,7 +35,7 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({
       id: ID_PARENT,
-      title: msg`Ghostery`,
+      title: 'Ghostery',
       contexts: ['all'],
       documentUrlPatterns: ['http://*/*', 'https://*/*'],
     });
