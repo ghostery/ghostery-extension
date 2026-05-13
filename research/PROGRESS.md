@@ -126,9 +126,20 @@ espn is the only page where this fires currently because (a) it sets up an unusu
 
 Once (a)+(c) ship, re-run espn 10× and confirm 0/10 failures.
 
-### 3. Add `--repeat N` for stability
+### 3. ~~Add `--repeat N` for stability~~ — done (`--repeat N`, default 1)
 
-Pages have rotating ads, breaking news, and lazy loads. Single-run numbers swing 30 %+ between runs (already observed on foodnetwork: 0 → 988 innerText tokens between two runs). Add a runner that does N back-to-back runs of each (page, variant), aggregates median/p25/p75 into the report.
+`node src/run.js --repeat 5` now runs each `(page, variant)` N times back to back and aggregates the samples. The default of `1` keeps single-shot behaviour identical to before (same artifact filenames, same metrics-row shape passed to the report).
+
+**Design choices and rationale:**
+
+- **Sample loop scope = inside `(page, variant)`.** Page A's vanilla repeats are adjacent in time, then page A's ghostery, then page B. We do *not* permute the whole page list per repeat. Rationale: keeps ad rotation + cache state similar across the N samples of one cell so the noise we measure is page-level noise, not cross-page drift. Also lets us keep one `runId` directory and one `runDir` output even for large N. We can change to interleaved later if cell-level drift turns out to be the more interesting noise source.
+- **Aggregator = `src/aggregate.js`.** For every numeric leaf in the metrics tree (e.g. `html.tokens`, `network.bytes`, `timings.extract`) we record `{median, p25, p75, min, max, samples}` in a separate `stats` map and place the **median** at the original path. Non-numeric leaves (`title`, `consentBannerDetected`, `iframeSrcs`, …) get the **mode** (most common value). Rationale: the report consumes `r.html.tokens` etc. directly — we don't want to rewrite that path. By burying the variance under `.stats` we get a strict superset of the N=1 metrics shape, and the existing report code keeps working unchanged.
+- **Median over mean.** Pages occasionally produce one wildly different sample (Ghostery's adblock engine not fully loaded → unblocked ads bump html tokens ~3×; verified in the espn `--repeat 3` test). Median ignores that outlier; mean would let it dominate. p25/p75 in `.stats` lets a reader spot the bimodal cases. We're not doing N=2 specially — with two samples, median = mean, so it doesn't matter.
+- **Per-sample artifacts on disk when N > 1.** Each sample writes `<variant>.s{i}.{html,text.txt,a11y.json,viewport.png}`; the consolidated `<variant>.metrics.json` carries `.samples[]` + `.stats`. When N=1 the suffix is dropped to keep the file layout identical to pre-repeat. Disk cost is bounded (~5 MB per sample), so we save everything rather than just sample 1 — useful for debugging why one sample diverged.
+- **Report shows medians + a header note.** The per-page table is unchanged; we add one line at the top: "Samples: up to **N per (page, variant)** — cells show the median." Anyone wanting the spread reads `stats` in the JSON. We can add a p25–p75 column to the table later if it earns its keep.
+- **Error handling.** If any one sample throws, that sample's entry in `samples[]` carries `{error: ...}` and the aggregator surfaces the first error on the returned row. The report's existing "ERROR: …" handling for failed rows then catches it. With N>1 a partial failure currently nukes the whole cell — we could relax that to "aggregate over successful samples only" if it becomes a problem.
+
+First observation already: even with the espn flakiness fix, `--repeat 3` on espn showed Ghostery HTML tokens swinging between 71 k and 263 k across the three samples. The big-html samples have iframeCount=3, the small-html sample has iframeCount=1 — the MV3 adblocker engine isn't always fully loaded by the time the first navigation extracts. The current 4 s warmup is sometimes too short. **Action: bump `GHOSTERY_WARMUP_SETTLE_MS` or add a content-script readiness probe.** Tracking as problem #9 below.
 
 ### 4. A11y mode realism — capture filtered tree, not full
 
@@ -151,6 +162,12 @@ The current cost model is artifact-based: it costs out a single page consumption
 - Drop the misleading "Notes" line that still says "first-launch warmup waits 25s" (now 4 s).
 - Add a "verdict" column in the per-page table that combines consent + content-rendered + cosmetic-filter signals.
 - Per-page $ delta column, not just aggregate.
+
+### 9. MV3 adblocker engine warmup is sometimes incomplete at first navigation
+
+Surfaced by problem #3's `--repeat`. On espn the *first* ghostery sample of a fresh chromedriver session often has iframeCount=3 and html ≈ 263 k (vanilla-ish), while later samples land at iframeCount=1 and html ≈ 71 k. `GHOSTERY_WARMUP_SETTLE_MS = 4000` after the warmup navigation isn't always enough for the MV3 service worker + DNR ruleset + cosmetic-filter engines to be fully active by the time we navigate to the target.
+
+Next step: replace the fixed 4 s sleep with a readiness probe. Either (a) hit `chrome-extension://<id>/pages/onboarding/index.html` or a similar extension page and poll for a known-loaded signal (`window.engineReady` exposed by the background page, or a DOM marker), or (b) bump the constant to 8–10 s as a quick mitigation and re-run `--repeat 5` to confirm. (a) is the right fix; (b) is acceptable for the next benchmark round.
 
 ## How to run
 

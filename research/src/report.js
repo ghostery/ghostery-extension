@@ -41,6 +41,9 @@ export function renderReport(rows, { runId } = {}) {
     byId.get(r.id)[r.label] = r;
   }
 
+  const sampleCounts = rows.map((r) => r.sampleCount).filter((n) => typeof n === 'number');
+  const maxSamples = sampleCounts.length ? Math.max(...sampleCounts) : 1;
+
   const out = [];
   out.push('# Ghostery cost-savings benchmark');
   out.push('');
@@ -48,6 +51,10 @@ export function renderReport(rows, { runId } = {}) {
   out.push(`Model assumed for $: **${MODEL}** (input @ $${PRICING_USD_PER_MTOK[MODEL]}/MTok)  `);
   out.push(`Viewport: 1280×800. Image tokens: Anthropic formula (resize to 1568px long edge, `);
   out.push(`then ⌈w·h/750⌉). Text tokens: cl100k_base BPE (close approximation).`);
+  if (maxSamples > 1) {
+    out.push('');
+    out.push(`Samples: up to **${maxSamples} per (page, variant)** — cells show the median. Per-sample values + p25/p75/min/max are in each \`<variant>.metrics.json\` under \`.stats\`.`);
+  }
   out.push('');
 
   out.push('## Consent / blocking summary');
