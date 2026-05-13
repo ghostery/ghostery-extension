@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "サイトを開く"
   },
+  "open_settings": {
+    "message": "設定を開く"
+  },
   "open_video": {
     "message": "ビデオを開く"
   },
