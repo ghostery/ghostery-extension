@@ -7,6 +7,7 @@ import { remote } from 'webdriverio';
 import { countTokens } from './tokenize.js';
 import { imageTokens } from './cost-model.js';
 import { ensureExtensionExtracted } from './setup.js';
+import { detectConsentBanners } from './detect-consent.js';
 
 async function chromedriverCdp(port, sessionId, method, params = {}) {
   const url = `http://localhost:${port}/session/${sessionId}/goog/cdp/execute`;
@@ -21,7 +22,7 @@ async function chromedriverCdp(port, sessionId, method, params = {}) {
 }
 
 function pageExtractScript() {
-  const fn = () => {
+  const extractFn = () => {
     const text = document.body ? document.body.innerText : '';
     const iframes = document.querySelectorAll('iframe');
     const iframeSrcs = [];
@@ -37,25 +38,7 @@ function pageExtractScript() {
         /* cross-origin */
       }
     }
-    const consentSelectors = [
-      '[id*="onetrust" i]', '[class*="onetrust" i]',
-      '[id*="cookiebot" i]', '[class*="cookiebot" i]',
-      '#sp_message_container_', '[id^="sp_message_container"]',
-      '.qc-cmp2-container', '[class*="qc-cmp" i]',
-      '[id*="usercentrics" i]', '[class*="uc-banner" i]',
-      '[aria-label*="consent" i]', '[aria-label*="cookie" i]',
-      '[id*="cmp" i][class*="banner" i]',
-      '[id*="gdpr" i]', '[class*="gdpr" i]',
-      '[id*="truste" i]', '[class*="truste" i]',
-      '[id*="didomi" i]', '[class*="didomi" i]',
-    ];
-    const consentMatches = [];
-    for (const sel of consentSelectors) {
-      try {
-        if (document.querySelector(sel)) consentMatches.push(sel);
-      } catch { /* invalid selector in some browsers */ }
-    }
-    const consentText = /accept all cookies|manage cookies|reject all|we use cookies|cookie consent|consent to|privacy preference|allow cookies|tracking technologies/i.test(text);
+    const consent = detectConsentBanners();
     return {
       html: document.documentElement.outerHTML,
       innerText: text,
@@ -64,12 +47,15 @@ function pageExtractScript() {
       emptyIframes,
       title: document.title,
       scrollHeight: document.documentElement.scrollHeight,
-      consentBannerDetected: consentMatches.length > 0 || consentText,
-      consentBannerSelectors: consentMatches,
+      consentBannerDetected: consent.detected,
+      consentBannerCandidates: consent.candidates,
       mostlyEmpty: text.length < 200,
     };
   };
-  return `(${fn.toString()})()`;
+  return `(() => {
+    const detectConsentBanners = ${detectConsentBanners.toString()};
+    return (${extractFn.toString()})();
+  })()`;
 }
 
 async function extractPageDataViaCdp(port, sessionId) {
@@ -101,7 +87,7 @@ const EXT_ZIP = join(REPO_ROOT, 'web-ext-artifacts/ghostery-automation-chromium.
 
 const VIEWPORT = { width: 1280, height: 800 };
 const NAV_TIMEOUT_MS = 30_000;
-const SETTLE_AFTER_LOAD_MS = 1_500;
+const SETTLE_AFTER_LOAD_MS = 2_500;
 const GHOSTERY_WARMUP_FALLBACK_MS = 4_000;
 const GHOSTERY_READY_TIMEOUT_MS = 30_000;
 const WARMUP_URL = 'https://example.com/';
@@ -386,7 +372,7 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
       emptyIframes: pageData.emptyIframes,
       iframeSrcs: pageData.iframeSrcs,
       consentBannerDetected: pageData.consentBannerDetected,
-      consentBannerSelectors: pageData.consentBannerSelectors,
+      consentBannerCandidates: pageData.consentBannerCandidates,
       mostlyEmpty: pageData.mostlyEmpty,
       network: {
         requests: networkRequests,
