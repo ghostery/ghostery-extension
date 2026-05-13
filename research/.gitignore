@@ -1,0 +1,6 @@
+node_modules/
+.ghostery-extension/
+.browsers/
+results/*
+!results/.gitkeep
+

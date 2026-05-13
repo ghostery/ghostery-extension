@@ -1,0 +1,19 @@
+{
+  "name": "ghostery-ai-cost-research",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Measure how Ghostery affects DOM/screenshot token cost for AI agent browsing.",
+  "scripts": {
+    "setup": "node src/setup.js",
+    "run": "node src/run.js",
+    "run:single": "node src/run.js --pages",
+    "report": "node src/report-cli.js"
+  },
+  "dependencies": {
+    "@puppeteer/browsers": "^2.13.2",
+    "gpt-tokenizer": "^3.0.1",
+    "playwright": "^1.56.0",
+    "webdriverio": "^9.27.1"
+  }
+}
