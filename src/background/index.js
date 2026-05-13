@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import '/ui/localize.js';
+
 import './onboarding.js';
 import './config.js';
 
@@ -20,6 +22,7 @@ import './element-picker.js';
 import './dnr.js';
 import './redirect-protection.js';
 import './exceptions.js';
+import './context-menu.js';
 import './paused.js';
 import './zapped.js';
 import './stats.js';

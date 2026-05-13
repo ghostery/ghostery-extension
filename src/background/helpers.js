@@ -16,6 +16,7 @@ import Config from '/store/config.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
 import { updateEngines } from './adblocker/engines.js';
+import { openElementPicker } from './element-picker.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -44,21 +45,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
 
     case 'openElementPicker':
-      chrome.scripting.executeScript(
-        {
-          injectImmediately: true,
-          world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
-          target: {
-            tabId: msg.tabId,
-          },
-          files: ['/content_scripts/element-picker.js'],
-        },
-        () => {
-          if (chrome.runtime.lastError) {
-            console.error(chrome.runtime.lastError);
-          }
-        },
-      );
+      openElementPicker(msg.tabId).catch(console.error);
       break;
 
     case 'updateEngines':

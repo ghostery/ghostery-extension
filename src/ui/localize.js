@@ -10,8 +10,10 @@
  */
 import { localize } from 'hybrids';
 
-// Set the document language attribute based on the browser's UI language
-document.documentElement.setAttribute('lang', chrome.i18n.getUILanguage());
-
 // Localize wrapper for chrome.i18n
 localize(chrome.i18n.getMessage.bind(chrome.i18n), { format: 'chrome.i18n' });
+
+// Set the document language attribute based on the browser's UI language
+if (typeof document !== 'undefined') {
+  document.documentElement.setAttribute('lang', chrome.i18n.getUILanguage());
+}
