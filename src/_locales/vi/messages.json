@@ -690,6 +690,9 @@
   "open_a_site": {
     "message": "Mở một trang web"
   },
+  "open_settings": {
+    "message": "Mở cài đặt"
+  },
   "open_video": {
     "message": "Mở video"
   },
