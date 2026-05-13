@@ -169,7 +169,7 @@ Replaced the fixed `setTimeout(4000)` warmup with a real handshake against the e
 
 **Knock-on changes:**
 
-- `research/src/setup.js` now also computes the unpacked-extension ID from the absolute load path (SHA-256, first 32 hex chars, each translated `0-9a-f` → `a-p`). This is the same algorithm Chromium uses for `--load-extension` builds without a manifest `key`. Verified against the chromedriver-log-observed `fgekihmljbkakakddhjdhggfibalefhd` for the legacy extract dir, and `nlfgkmbfnnhmblhdlfecpaomkbpnohok` for the new `dist/` path.
+- `research/src/measure.js` discovers the loaded extension's ID at runtime by navigating to `chrome://extensions` and reading `$('>>>extensions-item').getAttribute('id')` — the same trick `tests/e2e/wdio.conf.js` uses. Works regardless of whether the extension was loaded by path, by archive, or with a manifest `key`, and the project already maintains the deep selector.
 - `research/src/run.js --ext-dir PATH` (or `GHOSTERY_EXT_DIR=PATH` env) points at any pre-built unpacked extension instead of extracting `ghostery-automation-chromium.zip`. Default behaviour with no flag/env is unchanged.
 - The per-sample metrics now carries `ghosteryStatus: {ready, adblocker, id, version}` so we can post-hoc check whether each sample saw a fully-loaded extension.
 - New `scripts/patch-automation.sh` rewrites a freshly built `dist/`: renames `manifest.json` `name`/`short_name` to "Ghostery (Automation)" and flips `store/options.js` `terms`/`onboarding` defaults to `true` so the first-run UI is skipped. Run after every `npm run build chromium`.

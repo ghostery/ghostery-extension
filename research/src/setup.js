@@ -1,6 +1,5 @@
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -10,21 +9,6 @@ const REPO_ROOT = join(RESEARCH_ROOT, '..');
 
 const ZIP = join(REPO_ROOT, 'web-ext-artifacts', 'ghostery-automation-chromium.zip');
 const EXTRACT_DIR = join(RESEARCH_ROOT, '.ghostery-extension');
-
-// Chromium derives the ID of an unpacked extension from SHA-256 of its
-// absolute load path, taking the first 32 hex chars and translating
-// '0'-'9','a'-'f' to 'a'-'p'. Reproduced here so the harness knows the
-// chrome-extension:// URL of an extension it just --load-extension'd.
-export function extensionIdForPath(absPath) {
-  const hash = createHash('sha256').update(absPath).digest();
-  let id = '';
-  for (let i = 0; i < 16; i++) {
-    const b = hash[i];
-    id += String.fromCharCode('a'.charCodeAt(0) + (b >> 4));
-    id += String.fromCharCode('a'.charCodeAt(0) + (b & 0xf));
-  }
-  return id;
-}
 
 // Resolve the directory we should hand to --load-extension. Priority:
 // 1. explicit `dir` arg (from --ext-dir / `extDir` option)
@@ -60,5 +44,4 @@ export function ensureExtensionExtracted({ force = false, dir } = {}) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const dir = ensureExtensionExtracted({ force: !process.env.GHOSTERY_EXT_DIR });
   console.log(`Ghostery extension dir: ${dir}`);
-  console.log(`Computed extension id:  ${extensionIdForPath(dir)}`);
 }

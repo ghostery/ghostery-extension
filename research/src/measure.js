@@ -6,7 +6,7 @@ import { remote } from 'webdriverio';
 
 import { countTokens } from './tokenize.js';
 import { imageTokens } from './cost-model.js';
-import { ensureExtensionExtracted, extensionIdForPath } from './setup.js';
+import { ensureExtensionExtracted } from './setup.js';
 
 async function chromedriverCdp(port, sessionId, method, params = {}) {
   const url = `http://localhost:${port}/session/${sessionId}/goog/cdp/execute`;
@@ -150,20 +150,33 @@ async function installGhosteryViaBidi(browser) {
   throw new Error('webdriverio does not expose webExtension.install — check version');
 }
 
-async function waitForGhosteryReady(port, sessionId, extId, label) {
+async function discoverLoadedExtensionId(browser, label) {
+  try {
+    await browser.url('chrome://extensions');
+    const item = await browser.$('>>>extensions-item');
+    const id = await item.getAttribute('id');
+    if (id) return id;
+  } catch (e) {
+    console.warn(`[${label}] could not read extension id from chrome://extensions: ${e.message}`);
+  }
+  return null;
+}
+
+async function waitForGhosteryReady(browser, port, sessionId, label) {
+  const extId = await discoverLoadedExtensionId(browser, label);
+  if (!extId) {
+    await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_FALLBACK_MS));
+    return { fallback: true, reason: 'no-extension-id' };
+  }
   const url = `chrome-extension://${extId}/pages/status/index.html`;
   const expression = '(() => window.__ghosteryStatus ?? null)()';
   const deadline = Date.now() + GHOSTERY_READY_TIMEOUT_MS;
-  let navOk = false;
   try {
     await chromedriverCdp(port, sessionId, 'Page.navigate', { url });
-    navOk = true;
   } catch (e) {
     console.warn(`[${label}] could not open status page (${e.message}); falling back to fixed warmup sleep`);
-  }
-  if (!navOk) {
     await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_FALLBACK_MS));
-    return { fallback: true };
+    return { fallback: true, reason: 'nav-failed', error: e.message };
   }
   while (Date.now() < deadline) {
     try {
@@ -176,7 +189,7 @@ async function waitForGhosteryReady(port, sessionId, extId, label) {
       if (v && v.error) {
         console.warn(`[${label}] status page reported error: ${v.error}; falling back to fixed warmup sleep`);
         await new Promise((r) => setTimeout(r, GHOSTERY_WARMUP_FALLBACK_MS));
-        return { fallback: true, error: v.error };
+        return { fallback: true, reason: 'page-error', error: v.error };
       }
     } catch {
       /* page may not have finished loading yet — keep polling */
@@ -211,10 +224,8 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
   if (headless) chromeArgs.push('--headless=new');
 
   let extPath;
-  let extId;
   if (withGhostery) {
     extPath = ensureExtensionExtracted({ dir: extDir });
-    extId = extensionIdForPath(extPath);
     chromeArgs.push(`--disable-extensions-except=${extPath}`);
     chromeArgs.push(`--load-extension=${extPath}`);
   }
@@ -245,7 +256,7 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     let ghosteryStatus = null;
     if (withGhostery) {
       t = Date.now();
-      ghosteryStatus = await waitForGhosteryReady(port, browser.sessionId, extId, label);
+      ghosteryStatus = await waitForGhosteryReady(browser, port, browser.sessionId, label);
       if (ghosteryStatus?.fallback || ghosteryStatus?.timeout) {
         try {
           await browser.url(WARMUP_URL);
