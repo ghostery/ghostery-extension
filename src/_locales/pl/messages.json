@@ -144,7 +144,7 @@
     "message": "Zablokowany"
   },
   "blocked___tracker_list": {
-    "message": "Zablokowany",
+    "message": "Zablokowane",
     "description": "Plural form - list of blocked trackers"
   },
   "blocked_elements_on_this_site": {
@@ -1035,7 +1035,7 @@
     "message": "Zaufany"
   },
   "trusted___tracker_list": {
-    "message": "Zaufany",
+    "message": "Zaufane",
     "description": "Plural form - list of trusted trackers"
   },
   "trusted_on_all_websites": {
