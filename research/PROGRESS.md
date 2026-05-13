@@ -9,18 +9,19 @@ Quantify whether running Ghostery in a headless/automated browser reduces the in
 Stack:
 - **Chrome for Testing 148** + matching **chromedriver 148** (installed via `@puppeteer/browsers` into `research/.browsers/`).
 - **webdriverio v9** over WebDriver BIDI (`webSocketUrl: true`).
-- Extension loaded **unpacked** (the zip is extracted once into `research/.ghostery-extension/`).
-- HTML/innerText/iframes captured with `browser.execute()`.
-- A11y tree captured via ChromeDriver classic CDP-forwarding (`POST /session/:sid/goog/cdp/execute` → `Accessibility.getFullAXTree`) — BIDI has no AX command yet.
+- Extension loaded **unpacked**: either from the prebuilt `ghostery-automation-chromium.zip` (legacy default) or from a freshly built `dist/` via `--ext-dir ../dist` / `GHOSTERY_EXT_DIR=PATH` after running `scripts/patch-automation.sh dist`.
+- HTML/innerText/iframes captured via CDP `Runtime.evaluate` (chromedriver-forwarded) — was BIDI `browser.execute()` until we hit the iframe-storm race on espn (problem #2).
+- A11y tree captured via the same CDP endpoint (`POST /session/:sid/goog/cdp/execute` → `Accessibility.getFullAXTree`) — BIDI has no AX command yet.
 - Screenshots via the same CDP endpoint (`Page.captureScreenshot`) — the BIDI viewport screenshot was waiting ~17 s for paint stability and the BIDI full-page screenshot was scrolling/stitching for ~25 s.
 - Network requests/bytes via BIDI events (`network.beforeRequestSent`, `network.responseCompleted`, `network.fetchError`).
 - Anthropic image-token formula: resize to 1568 px on long edge then `⌈w·h/750⌉`.
 - Text tokens via `gpt-tokenizer` (cl100k_base — close enough for relative comparisons; use Anthropic's `count_tokens` API for exact numbers).
 - Per-page: vanilla and ghostery runs each in fresh chromedriver session + fresh temp profile.
 - Per-phase timings logged on the console (`session / warmup / navigate / settle / extract / a11y / screenshots`).
-- Outputs: `results/<run-id>/<page>/{vanilla,ghostery}.{html,text.txt,a11y.json,viewport.png,metrics.json}`, plus `summary.json`, `summary.csv`, `report.md`.
+- Repeat support: `--repeat N` does N back-to-back samples of each `(page, variant)` and reports the median. Per-sample metrics, p25/p75/min/max under `.stats` in `<variant>.metrics.json`. See problem #3 for the design rationale.
+- Outputs: `results/<run-id>/<page>/{vanilla,ghostery}.{html,text.txt,a11y.json,viewport.png,metrics.json}` (with `.s{i}` suffix per sample when N>1), plus `summary.json`, `summary.csv`, `report.md`.
 
-Per-page run time: ~6–12 s vanilla, ~9–13 s ghostery (extra ~4 s for warmup nav). Full 8-page suite finishes in ~2.5 minutes.
+Per-page run time: ~4 s vanilla, ~9 s ghostery (warmup is adaptive — ~3-5 s waiting on the Ghostery status page to report `ready`). Full 8-page suite at `--repeat 1` finishes in ~2 minutes; `--repeat 5` in ~10.
 
 ## Key technical findings
 
@@ -45,9 +46,11 @@ Per-page run time: ~6–12 s vanilla, ~9–13 s ghostery (extra ~4 s for warmup 
 
 - `pageLoadStrategy: 'eager'` — return on `interactive`, not `complete`. Cuts navigate phase from 30 s+ to <2 s on ad-heavy pages that never reach `complete`.
 - `SETTLE_AFTER_LOAD_MS = 1500` — enough for most pages.
-- `GHOSTERY_WARMUP_SETTLE_MS = 4000` after a productive `browser.url('https://example.com/')` — gives the MV3 service worker time to boot and load adblocker engines. Pure `setTimeout` without a real navigation didn't initialize the extension at all.
+- Ghostery warmup is now a real handshake against `chrome-extension://<id>/pages/status/index.html` — see problem #9. Replaces a 4-second `setTimeout` that was sometimes too short, producing bimodal Ghostery samples on espn.
 
-## Headline data — first complete run (8 pages, 2026-05-13)
+## Headline data — first complete run (8 pages, 2026-05-13) — **STALE, re-run pending**
+
+> ⚠️  This table is from `runId = 2026-05-13T15-02-36-304Z`, which was captured **before** the harness fixes in problems #2 (espn extract race) and #9 (warmup readiness). The espn row reports `innerText = 0` for ghostery — which we now know was a BiDi snapshot artifact, not real. The aggregate numbers are therefore biased. **Action: rerun `node src/run.js --repeat 5 --ext-dir ../dist` and replace this table with the median-of-5 numbers.** This is the "do this first" item for the next session — see "Next session — priorities" below.
 
 Run id: `2026-05-13T15-02-36-304Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn.
 
@@ -88,6 +91,25 @@ So even with a one-banner-out-of-eight count the consent-dismiss overhead is the
 - **foxnews**: nearly identical between variants (no consent wall, not many native ads in DOM).
 - **weather.com**: BIDI `browsingContext.getTree` timeout fired in the background (now caught by our `unhandledRejection` handler so it doesn't kill the run).
 - **espn**: Ghostery run produced **0 innerText tokens** vs 2.7 k vanilla — looks like Ghostery broke the page (anti-adblock detection? cosmetic filter too aggressive?). Worth investigating.
+
+## Next session — priorities
+
+If you only have time for one thing, do **(1)**. It unblocks every other claim in this doc.
+
+1. **Re-run the headline** (≈10 min compute, ≈30 min to write up). Cheapest, highest-credibility win. Steps:
+   ```bash
+   # from repo root
+   npm run build chromium
+   scripts/patch-automation.sh dist
+   (cd research && node src/run.js --repeat 5 --ext-dir ../dist)
+   ```
+   Then replace the "Headline data" table above with the median-of-5 numbers from `results/<latest>/report.md`. Spot-check the per-sample `stats` in each `ghostery.metrics.json` to make sure every sample has `ghosteryStatus.ready === true` — if any don't, log it and either bump `GHOSTERY_READY_TIMEOUT_MS` or investigate.
+
+2. **A11y filtering** (problem #4 below, ≈ half a day). The "A11y tree + viewport screenshot" row currently shows Ghostery making cost *worse* (+4.8 % aggregate, −$17 / 1 k loads). That's the row a skeptic will quote against us. Capture both raw + filtered AX trees; report filtered as primary. Likely flips the sign.
+
+3. **Tighter consent detection** (problem #1 below, ≈ one session). The "with consent-dismiss overhead" row is doing the bulk of the savings story ($6/1k) on the strength of 1-of-8 pages currently detected. False-negative rate matters a lot here. Adopt `@duckduckgo/autoconsent`'s detector or hand-roll a position/area/z-index heuristic.
+
+Then in priority order: #7 (agent simulation, the actual deliverable), #5 (cross-region), #8 (report polish — quick wins like the "first-launch warmup waits 25 s" line in the report that's a year out of date), #6 (BiDi `webExtension.install`, low value).
 
 ## Open problems (one per future session)
 
@@ -195,19 +217,46 @@ The bimodal "engine-not-loaded vs engine-loaded" pattern is gone — every sampl
 
 ## How to run
 
+### One-time setup
+
 ```bash
 cd research
 npm install
-npx playwright install chromium             # only needed if you want to compare vs Playwright
 npx @puppeteer/browsers install chrome@stable --path .browsers
 npx @puppeteer/browsers install chromedriver@stable --path .browsers
-node src/setup.js                            # extracts the Ghostery zip
-
-node src/run.js                              # all pages, headless
-node src/run.js --pages cnn,espn             # subset
-node src/run.js --headed                     # visible browser
-node src/run.js --debug                      # writes wdio + chromedriver logs
-node src/run.js --fullpage                   # also captures full-page PNG (slow: ~25 s/run)
-
-node src/report-cli.js                       # re-render latest report.md
+npx playwright install chromium             # only needed if you want to compare vs Playwright
 ```
+
+### Per-session: build a fresh extension and run the harness against it
+
+```bash
+# from repo root: rebuild Ghostery from source and apply the automation patches
+npm run build chromium
+scripts/patch-automation.sh dist
+
+# from research/: point the harness at the freshly built dist
+cd research
+node src/run.js --repeat 5 --ext-dir ../dist                # full suite, median of 5
+node src/run.js --pages cnn,espn --ext-dir ../dist          # subset
+node src/run.js --headed --ext-dir ../dist                  # visible browser
+node src/run.js --debug  --ext-dir ../dist                  # wdio + chromedriver logs
+node src/run.js --fullpage --ext-dir ../dist                # also captures full-page PNG (slow)
+node src/report-cli.js                                      # re-render latest report.md
+```
+
+`GHOSTERY_EXT_DIR=PATH` is equivalent to `--ext-dir PATH`.
+
+### Legacy path (no rebuild)
+
+If you don't want to rebuild Ghostery, the harness still falls back to extracting
+`web-ext-artifacts/ghostery-automation-chromium.zip` into `.ghostery-extension/`:
+
+```bash
+cd research
+node src/setup.js     # extracts the zip
+node src/run.js       # no --ext-dir → uses the extracted zip
+```
+
+That path also skips the status-page readiness probe (older zip predates the
+status page) and falls back to a 4-second sleep, which can produce the bimodal
+samples described in problem #9.
