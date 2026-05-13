@@ -35,6 +35,12 @@ jobs:
           sh scripts/patch-safari.sh
           (cd dist && zip -rq ../web-ext-artifacts/ghostery-safari.zip .)
 
+      - name: Build Automation packages
+        run: |
+          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-firefox.zip web-ext-artifacts/ghostery-automation-firefox.zip
+          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-chromium.zip web-ext-artifacts/ghostery-automation-chromium.zip
+          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-safari.zip web-ext-artifacts/ghostery-automation-safari.zip
+
       - name: Upload Firefox build
         uses: actions/upload-release-asset@v1
         env:
@@ -63,6 +69,36 @@ jobs:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: web-ext-artifacts/ghostery-safari.zip
           asset_name: ghostery-safari-${{ env.VERSION }}.zip
+          asset_content_type: application/gzip
+
+      - name: Upload Automation Firefox build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: web-ext-artifacts/ghostery-automation-firefox.zip
+          asset_name: ghostery-automation-firefox-${{ env.VERSION }}.zip
+          asset_content_type: application/gzip
+
+      - name: Upload Automation Chromium build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: web-ext-artifacts/ghostery-automation-chromium.zip
+          asset_name: ghostery-automation-chromium-${{ env.VERSION }}.zip
+          asset_content_type: application/gzip
+
+      - name: Upload Automation Safari build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: web-ext-artifacts/ghostery-automation-safari.zip
+          asset_name: ghostery-automation-safari-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
       - name: Download source code archives
