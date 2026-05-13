@@ -8,6 +8,7 @@ import { countTokens } from './tokenize.js';
 import { imageTokens } from './cost-model.js';
 import { ensureExtensionExtracted } from './setup.js';
 import { detectConsentBanners } from './detect-consent.js';
+import { detectViaAutoconsent } from './autoconsent-oracle.js';
 
 async function chromedriverCdp(port, sessionId, method, params = {}) {
   const url = `http://localhost:${port}/session/${sessionId}/goog/cdp/execute`;
@@ -358,6 +359,15 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     writeFileSync(join(outDir, `${label}.text.txt`), innerText);
     writeFileSync(join(outDir, `${label}.a11y.json`), a11yJson);
 
+    t = Date.now();
+    let autoconsent;
+    try {
+      autoconsent = await detectViaAutoconsent(chromedriverCdp, port, browser.sessionId);
+    } catch (e) {
+      autoconsent = { error: e.message, detected: false, cmp: null, lifecycle: 'error' };
+    }
+    mark('autoconsent', t);
+
     timings.total = Date.now() - tStart;
     return {
       url,
@@ -373,6 +383,7 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
       iframeSrcs: pageData.iframeSrcs,
       consentBannerDetected: pageData.consentBannerDetected,
       consentBannerCandidates: pageData.consentBannerCandidates,
+      autoconsent,
       mostlyEmpty: pageData.mostlyEmpty,
       network: {
         requests: networkRequests,

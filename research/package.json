@@ -11,6 +11,7 @@
     "report": "node src/report-cli.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
     "@puppeteer/browsers": "^2.13.2",
     "gpt-tokenizer": "^3.0.1",
     "playwright": "^1.56.0",
