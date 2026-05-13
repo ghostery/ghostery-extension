@@ -75,16 +75,31 @@ Per-load $ (Sonnet 4.6 input, $3/MTok), **without** modelling banner-dismiss age
 | Full HTML + viewport screenshot | $1.42 | $1.39 | $0.024 | **$23.90** |
 | innerText + full-page screenshot | $0.0069 | $0.0074 | −$0.00053 | −$0.53 |
 
-**With consent-dismiss overhead modeled** — 3 agent loops × 5 k tokens for each of the 4 dismissed banners:
+**With consent-dismiss overhead modeled** — extra agent turns × **measured** per-turn input tokens for each of the 4 dismissed banners (cnn, nypost, weather, espn):
 
-| Mode | Vanilla (incl. dismiss) | Ghostery | Saved | per 1k loads |
-|---|---:|---:|---:|---:|
-| innerText + viewport screenshot | $0.0306 | $0.0085 | $0.0221 | **$22.11** |
-| A11y tree + viewport screenshot | $0.394 | $0.391 | $0.0030 | $3.04 |
-| Full HTML + viewport screenshot | $1.44 | $1.39 | $0.046 | **$46.40** |
-| innerText + full-page screenshot | $0.0294 | $0.0074 | $0.0220 | **$21.97** |
+The 5-k-tokens-per-turn assumption from earlier is now replaced with measured Anthropic `count_tokens` calls on the captured (screenshot + innerText) for each (page, variant). See `<runDir>/consent-tax.json`. Per-turn input-token cost for an agent prompt that includes the viewport screenshot, the system instruction, and ~8 k chars of `innerText`:
 
-Story: Ghostery does **not** make page payloads smaller — in this 8-page set the text/HTML/A11y artifact sizes are flat-to-slightly-bigger because autoconsent reveals body content that vanilla hides under banners. The savings come from the agent **not having to dismiss the banner itself**. With a conservative 15 k-token estimate per banner (3 loops × 5 k), at 50 % banner prevalence (4 of 8 pages) the savings dwarf any artifact-size delta in the realistic innerText + screenshot scenarios.
+| Banner page | Per-turn vanilla | Per-turn ghostery |
+|---|---:|---:|
+| cnn | 3 401 | 3 401 (text truncated equally) |
+| nypost | 2 443 | 2 864 |
+| weather | 2 316 | 2 189 |
+| espn | 4 207 | 4 070 |
+
+Average per-turn vanilla on banner pages: **3 092 tokens**. (Compare to the previous synthetic 5 000.)
+
+Multiplier: a banner-bearing turn-sequence is "see banner → decide → click → re-read." We assume **2 extra turns** (conservative) or **3 extra turns** (aggressive) of vanilla overhead beyond the single read-and-extract turn Ghostery requires. Layer 3 (real Anthropic computer-use trajectories on 2-3 banner pages) is the next-session item that turns this assumption into a measurement.
+
+Per 1 k page loads, assuming 4/8 = 50 % banner prevalence (every other load hits a banner page) and ~3 100 tokens per banner-page agent turn:
+
+| Extra-turns assumption | Banner-page tax | Per 1 k loads | Saved (Sonnet 4.6 input) |
+|---|---:|---:|---:|
+| 2 extra turns / banner | 6 200 t / banner page | 3.10 M tokens / 1 k loads | **$9.28 / 1 k** |
+| 3 extra turns / banner | 9 300 t / banner page | 4.64 M tokens / 1 k loads | **$13.93 / 1 k** |
+
+The previous synthetic model used 3 loops × 5 k = 15 k tokens / banner → $22.50 / 1 k, ~60–150 % higher than the measured range. Still material; story unchanged, just defensible numbers now.
+
+Story: Ghostery does **not** make page payloads smaller — in this 8-page set the text/HTML/A11y artifact sizes are flat-to-slightly-bigger because autoconsent reveals body content that vanilla hides under banners. The savings come from the agent **not having to dismiss the banner itself**. The per-turn tax is the boilerplate (~200 t) + viewport screenshot (~1 366 t) + truncated text (~1 500 t) the agent re-pays for each turn vanilla spends locating and clicking the dismiss button.
 
 ### Notable per-page observations
 
@@ -99,15 +114,17 @@ Story: Ghostery does **not** make page payloads smaller — in this 8-page set t
 
 ## Next session — priorities
 
-Detector + headline are done. The remaining gaps:
+Layers 1 + 2 of the consent-tax measurement stack landed this session. The remaining gaps, in order:
 
-1. **Replace dailymail + allrecipes with reproducible test pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine. They contribute nothing to the consent / blocking story and inflate the network-bytes "+17.9 %" number because Ghostery's autoconsent worker scripts still load against a 403. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article — all show consent walls in the EEA without anti-bot blocking.
+1. **Layer 3 — real Anthropic computer-use trajectory on 2-3 banner pages.** Replaces the "2-3 extra turns" assumption with a measurement. For each of cnn, weather, espn: drive Anthropic's computer-use tool to "extract the article's first paragraph," both variants, 3 trials each, capturing total input tokens consumed. Use those trajectory totals as the "per-banner agent tax" in the headline. ~1 day.
 
-2. **A11y filtering** (problem #4 below, ≈ half a day). The new detector run shows A11y aggregate **+5.3 %** under Ghostery — worse than the previous run's −3.7 %. The realistic-agent answer is filtered AX trees (`interestingOnly: true` style); capture both raw + filtered and report filtered as primary. That's the row a skeptic will quote against the headline.
+2. **Replace dailymail + allrecipes with reproducible test pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine. They contribute nothing to the consent / blocking story and inflate the network-bytes "+17.9 %" number because Ghostery's autoconsent worker scripts still load against a 403. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article.
 
-3. **Honest end-to-end agent simulation** (problem #7). The consent-dismiss-cost number ($22/1k loads for innerText + viewport) is a model with two assumptions baked in: 3 loops × 5 k tokens each. The actual number depends on banner length + agent prompt. A real loop run on cnn / nypost / weather / espn with both variants, instrumented against Anthropic's `count_tokens`, gives a defensible number to replace 15 k with.
+3. **A11y filtering** (problem #4 below, ≈ half a day). The new detector run shows A11y aggregate **+5.3 %** under Ghostery — worse than the previous run's −3.7 %. The realistic-agent answer is filtered AX trees (`interestingOnly: true` style); capture both raw + filtered and report filtered as primary. That's the row a skeptic will quote against the headline.
 
-Then in priority order: #5 (cross-region — the EEA-vs-US flip is currently un-tested), #8 (report polish — remaining items: "verdict" column, per-page $ delta column), #6 (BiDi `webExtension.install`, low value).
+4. **Fix the autoconsent oracle's iframe-blind spot.** Currently the oracle injects only into the main frame, so Sourcepoint TCF v2 / Quantcast / other iframe-CMP banners come back `lifecycle: "started"` (inconclusive). Fix by enumerating frames via CDP `Target.getTargets` and injecting into each. Improves the auxiliary "X / Y banners with a production-CMP rule" number.
+
+Then in priority order: #5 (cross-region — the EEA-vs-US flip is currently un-tested), coverage extrapolation (Tranco top-1k EEA + autoconsent rule presence → $/million-loads headline), #8 (remaining report polish), #6 (BiDi `webExtension.install`, low value).
 
 ## Open problems (one per future session)
 
@@ -126,6 +143,17 @@ Per-candidate diagnostics (tag, id, class, w, h, z-index, areaPct, role, ariaMod
 Knock-on changes: `SETTLE_AFTER_LOAD_MS` bumped from 1500 → 2500 to give Sourcepoint enough time to inject its iframe and OneTrust enough time to complete its autoconsent dismissal fade.
 
 **Verification (8-page, `--repeat 5`, 40/40 ghostery samples `ready=true`):** detected vanilla=TRUE on cnn / nypost / weather / espn, ghostery=FALSE on all of them. Detector decisions are 5-of-5 stable per cell. Banner-dismissed-by-autoconsent count: **4 / 8** (was 0 / 8 with the previous detector, was 1 / 8 with the original one).
+
+**Corroboration via autoconsent oracle (Layer 1):** `src/autoconsent-oracle.js` injects `@duckduckgo/autoconsent`'s production rulebase into the main frame after artifacts are captured, with `autoAction: null` so it only detects, never acts. Captured per sample as `metrics.autoconsent.{detected, cmp, lifecycle, inconclusive, durationMs}`. On the 4-page subset (cnn / foxnews / weather / espn):
+
+| Page | Vanilla viz | Vanilla oracle | Ghostery viz | Ghostery oracle |
+|---|:-:|---|:-:|---|
+| cnn | ✓ | OneTrust, `openPopupDetected` (204 ms) | – | OneTrust, `cmpDetected` (532 ms — rule still in DOM, popup not open) |
+| foxnews | – | inconclusive (`started`, 8.0 s) | – | inconclusive (`started`, 8.0 s) |
+| weather | ✓ | inconclusive (`started`, 8.2 s) | – | inconclusive (`started`, 8.2 s) |
+| espn | ✓ | OneTrust, `openPopupDetected` (203 ms) | – | inconclusive (`started`, 8.2 s) |
+
+Confirms the visibility detector on OneTrust pages (cnn, espn) with the bonus of identifying the CMP family. The `inconclusive` cases are a known limitation: our oracle injects into the main frame only, so Sourcepoint TCF v2 (weather) and other iframe-CMP banners stall in `findCmp()`. The real Ghostery extension injects into every frame and handles these fine — that's why ghostery dismisses weather's banner in practice. Fix tracked as next-session item #4.
 
 ### 2. ~~Investigate espn Ghostery breakage~~ — fixed (harness bug, not Ghostery)
 
@@ -255,6 +283,25 @@ node src/report-cli.js                                      # re-render latest r
 ```
 
 `GHOSTERY_EXT_DIR=PATH` is equivalent to `--ext-dir PATH`.
+
+### Layer 2 — per-turn agent token cost via Anthropic count_tokens
+
+Reads the screenshots + innerText from a completed run and calls Anthropic's `count_tokens` for each (page, variant) with a realistic agent prompt. Output goes to `<runDir>/consent-tax.json`.
+
+```bash
+# one-time: API key (placed in .env at repo root or research/.env)
+echo 'ANTHROPIC_API_KEY=sk-ant-...' >> .env
+
+# one-time install
+cd research && npm install @anthropic-ai/sdk
+
+# run against latest run dir (default) or a specific one
+node src/measure-consent-tax.js
+node src/measure-consent-tax.js 2026-05-13T18-58-19-691Z
+node src/measure-consent-tax.js <runId> claude-opus-4-7   # different model
+```
+
+Per-turn cost = boilerplate + 1 viewport image (1366 t) + truncated innerText (8 000 chars). Multiply by the assumed extra turns to get the consent-dismiss tax. See the headline table for the model.
 
 ### Legacy path (no rebuild)
 
