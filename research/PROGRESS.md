@@ -45,61 +45,87 @@ Per-page run time: ~4 s vanilla, ~9 s ghostery (warmup is adaptive — ~3-5 s wa
 ### Useful tunings
 
 - `pageLoadStrategy: 'eager'` — return on `interactive`, not `complete`. Cuts navigate phase from 30 s+ to <2 s on ad-heavy pages that never reach `complete`.
-- `SETTLE_AFTER_LOAD_MS = 1500` — enough for most pages.
+- `SETTLE_AFTER_LOAD_MS = 2500` — covers Sourcepoint's iframe injection (~1.5-2 s) and OneTrust's autoconsent dismissal fade. 1.5 s was sometimes too short — weather's consent iframe wasn't in the captured DOM, cnn's OneTrust preference panel was mid-dismissal.
 - Ghostery warmup is now a real handshake against `chrome-extension://<id>/pages/status/index.html` — see problem #9. Replaces a 4-second `setTimeout` that was sometimes too short, producing bimodal Ghostery samples on espn.
+- Consent-banner detector lives in `src/detect-consent.js`. Walks `body *`, keeps fixed/sticky elements that pass `Element.checkVisibility`, intersect the viewport, cover ≥ 15 % of viewport area, and either contain a consent-button phrase ("accept all" / "reject all" / "manage preferences" etc.) or wrap an iframe pointing at a known CMP CDN (Sourcepoint, Cookiebot, Didomi, TrustArc, …). See problem #1.
 
-## Headline data — first complete run (8 pages, 2026-05-13, median of 5)
+## Headline data — 8 pages, median of 5, new detector (2026-05-13)
 
-Run id: `2026-05-13T16-40-06-574Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn. Each `(page, variant)` was sampled 5× back-to-back; cells below are the **median**, p25/p75 in each `<variant>.metrics.json` under `.stats`. Every ghostery sample verified `ghosteryStatus.ready === true` (40/40).
+Run id: `2026-05-13T18-58-19-691Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn. Each `(page, variant)` sampled 5× back-to-back; cells below are the **median**, p25/p75 in each `<variant>.metrics.json` under `.stats`. Every ghostery sample verified `ghosteryStatus.ready === true` (40/40). Consent flags are 5-of-5 stable per cell (no flakes).
+
+**Consent banner detected:** vanilla TRUE on cnn / nypost / weather / espn (4/8); ghostery TRUE on none → **4 pages where ghostery's autoconsent saved the agent a banner-dismiss loop**.
 
 Aggregate (sum of medians across all 8 pages):
 
 | Metric | Vanilla | Ghostery | Δ |
 |---|---:|---:|---:|
-| innerText tokens | 12.6 k | 12.6 k | **+0.5 %** (≈ neutral — see per-page split) |
-| HTML tokens | 3.76 M | 3.57 M | **−5.0 %** |
-| A11y tree tokens | 966 k | 930 k | **−3.7 %** (flipped sign from previous run — was +4.8 %) |
+| innerText tokens | 12.7 k | 13.7 k | **+8.1 %** (Ghostery surfaces more body content via autoconsent) |
+| HTML tokens | 3.77 M | 3.71 M | **−1.7 %** |
+| A11y tree tokens | 983 k | 1 034 k | +5.3 % (Ghostery reveals more interactive nodes once banners go) |
 | Viewport image tokens | 9.0 k | 9.0 k | 0 % (fixed dimensions) |
-| Estimated full-page image tokens | 5.7 k | 5.7 k | +1.7 % |
-| Network bytes | 64 MB | 69 MB | +8.2 % (autoconsent + ghostery content scripts pull secondary loads) |
+| Estimated full-page image tokens | 5.7 k | 6.1 k | +6.8 % |
+| Network bytes | 61 MB | 72 MB | +17.9 % (autoconsent + ghostery content scripts pull secondary loads) |
 
-Per-load $ (Sonnet 4.6 input, $3/MTok):
+Per-load $ (Sonnet 4.6 input, $3/MTok), **without** modelling banner-dismiss agent cost:
 
 | Mode | Vanilla | Ghostery | Saved | per 1k loads |
 |---|---:|---:|---:|---:|
-| innerText + viewport screenshot | $0.0081 | $0.0081 | −$0.00002 | −$0.02 |
-| A11y tree + viewport screenshot | $0.366 | $0.352 | $0.013 | **$13.36** |
-| Full HTML + viewport screenshot | $1.41 | $1.34 | $0.070 | **$69.84** |
-| innerText + full-page screenshot | $0.0068 | $0.0069 | −$0.00006 | −$0.06 |
+| innerText + viewport screenshot | $0.0081 | $0.0085 | −$0.00039 | −$0.39 |
+| A11y tree + viewport screenshot | $0.372 | $0.391 | −$0.019 | −$19.46 |
+| Full HTML + viewport screenshot | $1.42 | $1.39 | $0.024 | **$23.90** |
+| innerText + full-page screenshot | $0.0069 | $0.0074 | −$0.00053 | −$0.53 |
 
-**Consent-dismiss overhead is currently $0/1k in this dataset.** The detector flagged a banner on both runs for all 8 pages (0 cases where Ghostery dismissed but vanilla did not), so the model adds no overhead to vanilla. This is a regression vs the previous "1/8 detected" run — the detector is now matching cookie-policy text in footers on every page. Real autoconsent activity is visible in per-page text deltas (cnn +20 %, nypost +31 %, foodnetwork +44 %) but the headline savings number stays at $0 until problem #1 ships. See "Next session — priorities" below.
+**With consent-dismiss overhead modeled** — 3 agent loops × 5 k tokens for each of the 4 dismissed banners:
+
+| Mode | Vanilla (incl. dismiss) | Ghostery | Saved | per 1k loads |
+|---|---:|---:|---:|---:|
+| innerText + viewport screenshot | $0.0306 | $0.0085 | $0.0221 | **$22.11** |
+| A11y tree + viewport screenshot | $0.394 | $0.391 | $0.0030 | $3.04 |
+| Full HTML + viewport screenshot | $1.44 | $1.39 | $0.046 | **$46.40** |
+| innerText + full-page screenshot | $0.0294 | $0.0074 | $0.0220 | **$21.97** |
+
+Story: Ghostery does **not** make page payloads smaller — in this 8-page set the text/HTML/A11y artifact sizes are flat-to-slightly-bigger because autoconsent reveals body content that vanilla hides under banners. The savings come from the agent **not having to dismiss the banner itself**. With a conservative 15 k-token estimate per banner (3 loops × 5 k), at 50 % banner prevalence (4 of 8 pages) the savings dwarf any artifact-size delta in the realistic innerText + screenshot scenarios.
 
 ### Notable per-page observations
 
-- **espn**: Ghostery is the largest single-page win — text **−43.2 %** (2.6 k → 1.5 k), HTML **−72.5 %** (264 k → 73 k), A11y **−44.8 %** (209 k → 116 k). iframeCount drops 6 → 1. The previous "0 innerText" failure (problem #2) is fully fixed — every sample now extracts real content. One leftover wrinkle: s1 of the 5 samples landed at html=154 k / iframes=0 while s2-s5 stabilised at ~73 k / iframes=1. Median picks 73 k; worth keeping an eye on whether s1 is an early-extract race or a real bimodal mode.
-- **cnn**, **nypost**, **foodnetwork**: text tokens go **up** under Ghostery (+20.5 %, +30.6 %, +43.8 %) because autoconsent dismisses the cookie wall and the article body renders. Same story as before — a real "agent gets useful content sooner" win, but token cost goes up, not down.
-- **dailymail**, **allrecipes**: still both stuck at ~70 text tokens in both variants — consent wall renders before Ghostery's content scripts attach. HTML token count goes *up* under Ghostery (105 → 1.5 k, 187 → 1.6 k) because Ghostery's autoconsent script body itself is in the DOM. Net bytes also spike (798 B → 1.85 MB, 1.3 KB → 1.85 MB) — that's autoconsent worker scripts loading even though they fail to find a matching dialog.
-- **foxnews**: nearly identical (no consent wall, modest difference in iframes / requests).
-- **weather**: modest reduction across the board (text −5.6 %, html −0.5 %, a11y −5.5 %). `browsingContext.getTree` timeouts still fire in the background, harmless (caught by `unhandledRejection`).
-- **Network bytes go up under Ghostery on most pages.** MV3 declarative blocking happens at the network layer, but autoconsent + Ghostery's own content scripts + the pin-it iframe + (on dailymail/allrecipes) Ghostery's request bundles all add load. The +8.2 % aggregate is consistent with the previous run's +10.8 %.
+- **cnn**: vanilla banner detected (OneTrust, `[id="onetrust-banner-sdk"]`, 36 % of viewport). Under Ghostery, autoconsent dismisses; text goes from 2.3 k → 2.7 k (+20.5 %, more article body) and the panel is no longer flagged.
+- **nypost**: vanilla banner detected (also OneTrust-style). Text 1.0 k → 1.4 k (+37.4 %). Largest text delta in the set.
+- **weather**: vanilla banner detected via the **iframe-cmp** path — a fixed wrapper containing `cdn.privacy-mgmt.com/index.html` (Sourcepoint TCF v2). Cross-origin so its innerText is empty, but the URL pattern catches it. Ghostery dismisses; text 917 → 792.
+- **espn**: vanilla banner detected (Disney privacy modal — same code path as OneTrust). text 2.6 k → 2.5 k. Note this run's median is iframes 6 → 3 / html flat, whereas the 2026-05-13 16:40 run showed iframes 6 → 1 / html −72.5 %. Real page variance — espn's ad slot count depends on which inventory wins. Median over 5 samples picks the stable mode.
+- **foodnetwork**: vanilla no banner detected — page is regionally redirected (test machine in EEA) to a WBD landing page that doesn't show a consent UI. Under Ghostery, text more than doubles (988 → 1421) because the recipe page is allowed to render. The detector being false on vanilla is **correct** here: there really isn't a banner to dismiss; what's happening is Ghostery enables a different (better) page state.
+- **foxnews**: no banner in either variant, near-identical metrics.
+- **dailymail** and **allrecipes** vanilla pages now look like full-on **anti-bot blocks** ("Access Denied" / "If you are a reader experiencing an access issue, please contact …"). No consent UI is shown, so the detector correctly returns false for both variants. Both pages are essentially unusable for the agent in both modes — they shouldn't be informing the headline. Action item: pick replacement pages with reproducible content access from a residential IP.
+- **Network bytes up 17.9 % aggregate.** Same root cause as before — Ghostery's autoconsent + content scripts + (on dailymail/allrecipes) Ghostery's own request bundles. Ad blocking still happens at MV3-DNR level but the additive load outweighs it on this set.
 
 ## Next session — priorities
 
-Headline rerun is done (see table above). The two pieces of the story that the rerun made more important, not less:
+Detector + headline are done. The remaining gaps:
 
-1. **Tighter consent detection** (problem #1 below, ≈ one session) — **promoted to #1** because the previous run had 1/8 detected and gave us $6/1k savings; the new run has 0/8 detected and gives $0/1k. The "Ghostery dismisses banners so you don't pay agent loops to do it" story is the single biggest savings claim and is currently invisible in the headline. Concretely: cnn, nypost, and foodnetwork all show large positive text deltas under Ghostery (+20 / +31 / +44 %) which is exactly the "banner went away, body rendered" signal we want the detector to flag, and it doesn't. Either adopt `@duckduckgo/autoconsent`'s detector or hand-roll the position/area/z-index heuristic in problem #1.
+1. **Replace dailymail + allrecipes with reproducible test pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine. They contribute nothing to the consent / blocking story and inflate the network-bytes "+17.9 %" number because Ghostery's autoconsent worker scripts still load against a 403. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article — all show consent walls in the EEA without anti-bot blocking.
 
-2. **A11y filtering** (problem #4 below, ≈ half a day). The aggregate flipped from +4.8 % (Ghostery makes it worse) to −3.7 % (Ghostery saves $13/1k), but only because espn alone dropped 209 k → 116 k A11y tokens. The other 7 pages are still mixed. A filtered tree ("interestingOnly: true"-style) is what real agents actually consume, so capture both and report filtered as primary — that's the row a skeptic will quote.
+2. **A11y filtering** (problem #4 below, ≈ half a day). The new detector run shows A11y aggregate **+5.3 %** under Ghostery — worse than the previous run's −3.7 %. The realistic-agent answer is filtered AX trees (`interestingOnly: true` style); capture both raw + filtered and report filtered as primary. That's the row a skeptic will quote against the headline.
 
-3. **Investigate the espn s1 outlier.** Out of 5 ghostery samples, s1 was 154 k html / 0 iframes while s2-s5 were ~73 k / 1 iframe. Median is fine for the headline but a 2× swing on the first sample suggests there's still a state leak between the warmup window and the first navigation. Cheap experiment: capture per-sample request timing for the first ad slot's blocking decision and see if it lands before vs after extract.
+3. **Honest end-to-end agent simulation** (problem #7). The consent-dismiss-cost number ($22/1k loads for innerText + viewport) is a model with two assumptions baked in: 3 loops × 5 k tokens each. The actual number depends on banner length + agent prompt. A real loop run on cnn / nypost / weather / espn with both variants, instrumented against Anthropic's `count_tokens`, gives a defensible number to replace 15 k with.
 
-Then in priority order: #7 (agent simulation, the actual deliverable), #5 (cross-region), #8 (report polish — remaining items: "verdict" column, per-page $ delta column), #6 (BiDi `webExtension.install`, low value).
+Then in priority order: #5 (cross-region — the EEA-vs-US flip is currently un-tested), #8 (report polish — remaining items: "verdict" column, per-page $ delta column), #6 (BiDi `webExtension.install`, low value).
 
 ## Open problems (one per future session)
 
-### 1. Tighten consent-banner detection
+### 1. ~~Tighten consent-banner detection~~ — done (structural detector in `src/detect-consent.js`)
 
-Current detector matches a broad regex on `document.body.innerText` plus a long list of `[id*="onetrust" i]`-style selectors. Both fire false positives (cookie text in privacy-policy footers ⇒ false ⚠️ on cnn / nypost / weather) and false negatives (dailymail / allrecipes vanilla are clearly blocked but flagged "no banner"). Replace with: walk `document.querySelectorAll('*')`, keep elements whose computed `position` is `fixed`/`sticky`, area > 30 % of viewport, z-index > 100, and whose text contains specific button strings ("accept all cookies" / "reject all" / "manage preferences"). Optionally adopt `@duckduckgo/autoconsent`'s detection helper directly.
+The old broad-regex + branded-selector detector was replaced with a structural walk. Gate conditions, in order of evaluation:
+
+1. Position is `fixed` or `sticky`.
+2. `Element.checkVisibility({ checkOpacity, checkVisibilityCSS, contentVisibilityAuto })` returns `true` — catches `display:none`, `visibility:hidden`, `opacity:0`, `content-visibility:hidden`, and clipped/transformed-out states that the previous detector missed.
+3. The element's `getBoundingClientRect` intersects the viewport. (The OneTrust preference panel on cnn was being false-positive flagged because its bounding rect existed at a real on-screen position even after autoconsent dismissed — `checkVisibility` plus the viewport-intersection check fixes that.)
+4. Area ≥ 15 % of viewport.
+5. **Either** `innerText` matches a consent-button-action regex (`accept all` / `reject all` / `manage preferences` / `save preferences` / `accept (&|and) continue` / `do not sell` / `customize my (choices|preferences)` / `agree (&|and) (continue|proceed)`), **or** the element wraps an `<iframe>` whose `src` matches a known CMP CDN (`cdn.privacy-mgmt.com`, `cookielaw.org`, `cookiebot.com`, `usercentrics.eu`, `consentmanager.net`, `consent-pref.trustarc.com`, `didomi.io`, `consensu.org`, etc.). The iframe path is required for Sourcepoint / TCF v2 banners whose buttons render cross-origin.
+
+Per-candidate diagnostics (tag, id, class, w, h, z-index, areaPct, role, ariaModal, `matchedBy`, `cmpIframeSrc`, `textSample`) are kept in `consentBannerCandidates`.
+
+Knock-on changes: `SETTLE_AFTER_LOAD_MS` bumped from 1500 → 2500 to give Sourcepoint enough time to inject its iframe and OneTrust enough time to complete its autoconsent dismissal fade.
+
+**Verification (8-page, `--repeat 5`, 40/40 ghostery samples `ready=true`):** detected vanilla=TRUE on cnn / nypost / weather / espn, ghostery=FALSE on all of them. Detector decisions are 5-of-5 stable per cell. Banner-dismissed-by-autoconsent count: **4 / 8** (was 0 / 8 with the previous detector, was 1 / 8 with the original one).
 
 ### 2. ~~Investigate espn Ghostery breakage~~ — fixed (harness bug, not Ghostery)
 
