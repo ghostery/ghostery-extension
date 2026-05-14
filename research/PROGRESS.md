@@ -4,6 +4,19 @@
 
 Quantify whether running Ghostery in a headless/automated browser reduces the input-token cost an AI agent (Claude, GPT, etc.) pays when consuming web pages. Hypothesis: ads inflate DOM/text tokens and screenshot tokens; blocking them (and dismissing cookie banners via autoconsent) saves money.
 
+## Status (as of 2026-05-14)
+
+What's wired up:
+
+- **Harness** (`src/run.js`, `src/measure.js`): per-page vanilla + Ghostery, fresh chromedriver session each, median of `--repeat N`, ready-handshake-verified extension load.
+- **Visibility consent detector** (`src/detect-consent.js`): fixed/sticky + `checkVisibility` + viewport-intersection + area + (button-text OR known-CMP-iframe). Primary "is there a banner?" signal. 4/8 pages flagged dismissed under Ghostery in the latest 8-page run.
+- **Autoconsent oracle** (`src/autoconsent-oracle.js`): injects `@duckduckgo/autoconsent`'s production rulebase in detection-only mode and reports the matched CMP. Corroborates the visibility detector on OneTrust-class banners; inconclusive on Sourcepoint TCF v2 because we only inject into the main frame (next-session item #4).
+- **Measured per-turn agent cost** (`src/measure-consent-tax.js`): calls Anthropic `count_tokens` for a realistic agent prompt over each (page, variant) and writes `consent-tax.json`. Replaces the previously-synthetic 5 k-per-loop assumption in the savings model.
+
+Latest headline (run `2026-05-13T18-58-19-691Z`, see §"Headline data"): the dominant savings is **not** artifact size — text/HTML/A11y are flat-to-slightly-larger under Ghostery because autoconsent reveals more body content. The savings come from the agent not having to dismiss the banner. Measured per-turn cost is ~3.1 k tokens on banner pages; with a 2-3 extra-turn assumption this is **$9-14 per 1 000 page loads** at Sonnet 4.6 input pricing.
+
+What's next (in priority order): **Layer 3** — drive Anthropic computer-use on 2-3 banner pages and measure the extra-turn count for real. See §"Next session — priorities" for the full stack.
+
 ## Harness — what works
 
 Stack:
