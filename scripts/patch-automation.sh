@@ -2,8 +2,12 @@
 #
 # Patch a freshly built dist/ for use by automation harnesses
 # (research/, end-to-end tests). Renames the extension to make it
-# distinguishable from the released build, and accepts terms +
-# onboarding so it skips the first-run UI.
+# distinguishable from the released build, and flips the
+# `disableOnboarding` managed-config default to `true` so the
+# extension skips first-run UI, auto-accepts terms, and suppresses
+# notifications (incl. the "pin Ghostery" popup) without touching
+# `src/`. See `src/store/managed-config.js` and `src/store/options.js`
+# (`manage()`) for the flag's semantics.
 #
 # Usage: scripts/patch-automation.sh [dist-dir]
 # Default dist-dir is ./dist relative to the repo root.
@@ -17,8 +21,8 @@ if [[ ! -f "$DIST/manifest.json" ]]; then
   exit 1
 fi
 
-if [[ ! -f "$DIST/store/options.js" ]]; then
-  echo "error: $DIST/store/options.js not found — unexpected build layout" >&2
+if [[ ! -f "$DIST/store/managed-config.js" ]]; then
+  echo "error: $DIST/store/managed-config.js not found — unexpected build layout" >&2
   exit 1
 fi
 
@@ -35,19 +39,23 @@ with open(path, 'w') as f:
     f.write('\n')
 PY
 
-# Pre-accept terms + onboarding in the built options defaults so the
-# extension does not show first-run UI under automation.
-python3 - "$DIST/store/options.js" <<'PY'
+# Flip the disableOnboarding managed-config default from false → true.
+# This triggers options.js `manage()` to set options.terms = true and
+# options.onboarding = true on every load, which:
+#   - lets autoconsent initialize (gated on options.terms),
+#   - flips the computed `disableNotifications` to true (suppresses pin-it),
+#   - short-circuits the onboarding view's redirect guard.
+python3 - "$DIST/store/managed-config.js" <<'PY'
 import re, sys
 path = sys.argv[1]
 with open(path) as f:
     src = f.read()
-new = re.sub(r'(\bterms:\s*)false', r'\1true', src, count=1)
-new = re.sub(r'(\bonboarding:\s*)false', r'\1true', new, count=1)
-if new == src:
-    sys.stderr.write(f'warning: did not find terms/onboarding defaults to patch in {path}\n')
+new, n = re.subn(r'(disableOnboarding:\s*)false', r'\1true', src, count=1)
+if n == 0:
+    sys.stderr.write(f'error: did not find `disableOnboarding: false` to patch in {path}\n')
+    sys.exit(1)
 with open(path, 'w') as f:
     f.write(new)
 PY
 
-echo "patched $DIST for automation use"
+echo "patched $DIST for automation use (managed-config disableOnboarding → true)"
