@@ -172,7 +172,7 @@ The visibility detector now matches consent-button phrasing in EN / PL / DE / FR
 
 Chrome for Testing 148 + chromedriver 148 over WebDriver BiDi (`webdriverio` v9). Each `(page, variant)` runs in a fresh chromedriver session with a fresh temp profile, sampled `--repeat 5`; reported cells are the median. **Anti-bot suppression**: chromedriver launched with `excludeSwitches: ['enable-automation']` + `useAutomationExtension: false` and chrome with `--disable-blink-features=AutomationControlled`, so `navigator.webdriver === false` and `window.cdc_*` markers are absent. Vanilla = no extensions. Ghostery = same chromium with `--load-extension=<dist>` after `scripts/patch-automation.sh dist`, which flips `disableOnboarding: true` in the built `managed-config.js` (auto-accepts terms, skips onboarding, suppresses the pin-it notification). Before each Ghostery sample, the harness polls `chrome-extension://<id>/pages/status/index.html` for `window.__ghosteryStatus.ready` so we never measure with a half-loaded adblocker. Artifacts captured per sample: full DOM, `document.body.innerText`, `Accessibility.getFullAXTree` (raw + filtered), 1280 × 800 viewport PNG, BiDi network counters, the two consent signals, and (post-hoc) the Anthropic `count_tokens` per-turn cost and per-screenshot VLM inventory cost.
 
-Full per-page artifacts and statistics live in `results/2026-05-14T12-50-26-498Z/`; see `PROGRESS.md` for the session log and `README.md` for harness setup / commands.
+Full per-page artifacts and statistics live in `results/2026-05-14T12-50-26-498Z/`; see `JOURNAL.md` for the research log and `README.md` for harness setup / commands.
 
 ## Bottom line
 

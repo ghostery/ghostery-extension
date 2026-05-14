@@ -1,356 +1,72 @@
-# Ghostery / AI-agent cost research — progress log
+# Research journal
 
-## Goal
+A running log of what we tried, what we found, the decisions behind those findings, and what's still open. For *how to run the benchmark* and *what is measured*, see [README.md](./README.md).
 
-Quantify whether running Ghostery in a headless/automated browser reduces the input-token cost an AI agent (Claude, GPT, etc.) pays when consuming web pages. Hypothesis: ads inflate DOM/text tokens and screenshot tokens; blocking them (and dismissing cookie banners via autoconsent) saves money.
+## Where we are (May 2026)
 
-## Status (as of 2026-05-14)
+We can now put a defensible number on the question: *how much does an AI agent save when it runs the browser with Ghostery instead of without?*
 
-What's wired up:
+On a 6-page set of Polish news sites, an agent given the task "find the top headline on this page" pays:
 
-- **Harness** (`src/run.js`, `src/measure.js`): per-page vanilla + Ghostery, fresh chromedriver session each, median of `--repeat N`, ready-handshake-verified extension load. **Anti-bot suppression** (2026-05-14): chrome launched with `--disable-blink-features=AutomationControlled` + chromedriver capabilities `excludeSwitches: ['enable-automation']` and `useAutomationExtension: false`, so `navigator.webdriver === false` and the `cdc_*` markers are absent. Without these, several CMPs (Wirtualna Polska, used by pudelek; some other Polish/EU CMPs) detect bots and refuse to render their consent dialog — every measurement before this fix was bot-lite and under-counts real-user cost.
-- **`--page-set` / `--region` / `run-meta.json`** (2026-05-14): `node src/run.js --page-set pages-eu.json --region eu` selects an alternative page-list file and tags the run with a region label in `<runDir>/run-meta.json`. `pages-eu.json` ships with 6 Polish publishers (onet / wp / interia / gazeta / pudelek / kwestiasmaku); planned next: `pages-us.json` for a US-IP run.
-- **Automation patch via managed-config** (2026-05-14, `scripts/patch-automation.sh`): now flips `disableOnboarding: true` in the built `dist/store/managed-config.js` instead of patching `dist/store/options.js` defaults. `disableOnboarding: true` triggers `manage()` (see `src/store/options.js:245-248`) to set `options.terms = true` + `options.onboarding = true`, which (a) lets autoconsent initialize, (b) skips the onboarding view, and (c) flips the computed `disableNotifications` to true — suppressing the **"Pin Ghostery — Take back control"** notification iframe that was contaminating Ghostery viewport screenshots in prior runs.
-- **Visibility consent detector** (`src/detect-consent.js`): fixed/sticky + `checkVisibility` + viewport-intersection + area + (multilingual button-text OR known-CMP-iframe). Primary "is there a banner?" signal. Button-text regex covers EN + PL + DE + FR + ES + IT + PT phrasings. CMP-iframe regex includes the major TCF-rule families (Sourcepoint / OneTrust / Cookiebot / Usercentrics / TrustArc / Didomi / consensu.org) plus `csr.onet.pl` and a generic `/cmp` path catch-all. 5/9 pages flagged dismissed under Ghostery in the latest 9-page run (cnn / nypost / weather / espn / onet).
-- **Autoconsent oracle** (`src/autoconsent-oracle.js`): injects `@duckduckgo/autoconsent`'s production rulebase in detection-only mode and reports the matched CMP. Corroborates the visibility detector on OneTrust-class banners; inconclusive on Sourcepoint TCF v2 because we only inject into the main frame (next-session item #4).
-- **Measured per-turn agent cost** (`src/measure-consent-tax.js`): calls Anthropic `count_tokens` for a realistic agent prompt over each (page, variant) and writes `consent-tax.json`. Replaces the previously-synthetic 5 k-per-loop assumption in the savings model.
-- **Filtered accessibility tree** (`src/filter-ax.js`): aggressive filter that drops `generic`/`StaticText`/`LineBreak`/`Iframe`/`LabelText`/`Figcaption`/`InlineTextBox`/`none`/`presentation` and minimizes the remaining nodes to `role` + `name` + `value` + `description` + interactive-state properties. Mimics what production agents like browser-use consume. Reduces the tree to ~14 % of the raw `getFullAXTree`; flips the A11y cost row from "Ghostery slightly costlier" to **12 – 18 % cheaper** once the measured consent tax is added. Captured per-sample as `<variant>.a11y-filtered.json`; metrics under `a11yFiltered.{bytes,tokens}`. Backfill script `src/backfill-filtered-ax.js` retro-processes existing runs.
-- **Layer 3 measured trajectory tax** (`src/measure-trajectory.js`): drives Anthropic computer-use (`computer_20250124` tool on `claude-sonnet-4-5-20250929` — note: Sonnet 4.6 / Opus 4.7 do not ship computer-use yet, so trajectory uses 4.5; pricing is identical to 4.6 at $3/MTok input). CDP-backed action dispatchers for screenshot / left_click / scroll / key / type / wait, with `--dry-run` mode. Task: "identify the top headline on this page" against cnn / weather / espn / onet homepages, 3 trials each per variant. Per-trial JSON cached on disk; `--force` to override. `--run RUN_ID` to direct output into a specific run dir. **Headline measurement**: vanilla avg 4.3 turns / 23,793 input tokens, ghostery avg 2.3 turns / 9,077 input tokens — **Ghostery saves 14,716 tokens per banner page on average** (cnn 13.1k, weather 21.0k, espn 5.7k, onet 19.1k). At Sonnet 4.5/4.6 input pricing on a 50%-banner workload: **$22.07 / 1k loads** — replaces the synthetic `{2, 3} × 3,092` model ($9.28–$13.93 / 1k). Vanilla varies 3–6 turns trial-to-trial; ghostery is 2 turns on EN pages, 3 turns on onet. Artifacts: `<runDir>/trajectory/<page>/<variant>.t{1,2,3}.{initial.png,trajectory.json}` + aggregated `<runDir>/trajectory-tax.json`.
+- About **35,000 fewer input tokens per page** on average when Ghostery is on
+- Around **70% less** in total bill if it works from screenshots + plain text
+- Around **40% less** if it works from a structured accessibility view of the page
+- Around **20% less** if it scrapes the full HTML
 
-Latest **EU-native** headline (run `2026-05-14T12-50-26-498Z`, 6 Polish pages on PL IP, **anti-bot suppression on**, methodology refresh): aggregate artifact tokens are now negative across the board under Ghostery — HTML −13.6 %, `innerText` −14.6 %, filtered A11y −5.2 %, raw A11y −5.0 %, network bytes −2.5 %. Combined with Layer-2 per-turn cost (avg 4,357 tok/turn vanilla on banner pages) × {2, 3} extra turns: total bill savings are **57 % for innerText+screenshot agents**, **26 % for filtered-A11y agents**, and **17 % for full-HTML scrapers** (up from 3 – 4 % on the prior cross-region set — native Polish ad load is real). 6/6 pages banner-bearing once `navigator.webdriver` is suppressed.
+The biggest single page is wp.pl: roughly **100,000 tokens saved per page**. Its consent dialog actively resists automated dismissal, so the agent scrolls around for 11 turns before it can read the headline. With Ghostery, the same task takes 2 turns.
 
-Separate ad-burden finding (Layer 4, this session): when a VLM is asked to inventory a viewport screenshot (same 1,326 input tokens both variants), vanilla cells emit **2.05× more output tokens** on the Polish set (4,670 vs 2,273 total) — and 2/6 vanilla viewports (onet, gazeta) were so cluttered the model failed JSON output entirely. `src/measure-ad-burden.js`, written to `<runDir>/ad-burden.json`.
+These numbers are noticeably higher than an earlier US-page measurement (about 14,000 tokens saved per page). Two things explain the gap:
 
-Prior **cross-region** headline (run `2026-05-14T10-18-40-218Z`, 9 pages US-on-EEA-IP) is now known to be **bot-lite** — captured before `navigator.webdriver` suppression. Numbers were 70 % innerText / 26 % filtered-A11y / 3 % full-HTML savings = $22 / 1k loads, which under-counts what a real-user agent pays. Re-run pending.
+1. We made the test browser look less like a bot. Before that change, several Polish publishers were detecting the automation framework and *not showing* their consent dialogs to it — making the "vanilla" baseline artificially cheap.
+2. Polish ad density on the same publishers is genuinely heavier than US ad density.
 
-## Harness — what works
+## How the cost adds up
 
-Stack:
-- **Chrome for Testing 148** + matching **chromedriver 148** (installed via `@puppeteer/browsers` into `research/.browsers/`).
-- **webdriverio v9** over WebDriver BIDI (`webSocketUrl: true`).
-- Extension loaded **unpacked**: either from the prebuilt `ghostery-automation-chromium.zip` (legacy default) or from a freshly built `dist/` via `--ext-dir ../dist` / `GHOSTERY_EXT_DIR=PATH` after running `scripts/patch-automation.sh dist`.
-- HTML/innerText/iframes captured via CDP `Runtime.evaluate` (chromedriver-forwarded) — was BIDI `browser.execute()` until we hit the iframe-storm race on espn (problem #2).
-- A11y tree captured via the same CDP endpoint (`POST /session/:sid/goog/cdp/execute` → `Accessibility.getFullAXTree`) — BIDI has no AX command yet.
-- Screenshots via the same CDP endpoint (`Page.captureScreenshot`) — the BIDI viewport screenshot was waiting ~17 s for paint stability and the BIDI full-page screenshot was scrolling/stitching for ~25 s.
-- Network requests/bytes via BIDI events (`network.beforeRequestSent`, `network.responseCompleted`, `network.fetchError`).
-- Anthropic image-token formula: resize to 1568 px on long edge then `⌈w·h/750⌉`.
-- Text tokens via `gpt-tokenizer` (cl100k_base — close enough for relative comparisons; use Anthropic's `count_tokens` API for exact numbers).
-- Per-page: vanilla and ghostery runs each in fresh chromedriver session + fresh temp profile.
-- Per-phase timings logged on the console (`session / warmup / navigate / settle / extract / a11y / screenshots`).
-- Repeat support: `--repeat N` does N back-to-back samples of each `(page, variant)` and reports the median. Per-sample metrics, p25/p75/min/max under `.stats` in `<variant>.metrics.json`. See problem #3 for the design rationale.
-- Outputs: `results/<run-id>/<page>/{vanilla,ghostery}.{html,text.txt,a11y.json,viewport.png,metrics.json}` (with `.s{i}` suffix per sample when N>1), plus `summary.json`, `summary.csv`, `report.md`.
+Most of the savings come from *agent turns*, not from artifact size.
 
-Per-page run time: ~4 s vanilla, ~9 s ghostery (warmup is adaptive — ~3-5 s waiting on the Ghostery status page to report `ready`). Full 8-page suite at `--repeat 1` finishes in ~2 minutes; `--repeat 5` in ~10.
+When a consent banner blocks the page, the agent has to take a screenshot to see the banner, decide which button to click, click it, wait for the page to reveal, then take another screenshot to read the actual content. Every one of those turns re-sends the whole prior conversation back to the model — every earlier screenshot included. So a 5-turn run costs roughly five times what a 2-turn run costs, even though the *content* the agent walks away with is the same.
 
-## Key technical findings
+The page payload itself (HTML, accessibility view, screenshot bytes) only changes by single-digit percentages between vanilla and Ghostery. Sometimes Ghostery's version is *larger*: once a banner is dismissed, more of the article body becomes visible, which is more text to read.
 
-### BIDI `webExtension.install` is gated off in chromedriver 148
+## Decisions worth recording
 
-- The BIDI `webExtension.install` command **is** wired up by `chromium-bidi` and accepts `extensionData.type === 'path'`. (`archivePath` and `base64` return `"Archived and Base64 extensions are not supported"`.)
-- For `type: 'path'`, the BIDI mapper internally invokes CDP **`Extensions.loadUnpacked`**. Chrome 148 launched by chromedriver replies **`"Method not available"`** — `--test-type=webdriver` (the chromedriver-injected automation flag) gates the Extensions CDP domain off.
-- Workaround in this harness: pass `--load-extension=<unpacked-dir>` in `goog:chromeOptions.args`. Chrome for Testing still honors that flag (regular Chrome 137+ does not). The BIDI install attempt is left in the code as a diagnostic; revisit when chromedriver/Chrome opens the CDP gate.
+### Measure with a real model, not a formula
 
-### Playwright headless-shell cannot run extensions
+The first cost model was a static one: *assume two or three extra turns, multiply by a per-turn token estimate*. That gave a ballpark but understated reality by roughly 50%. Real agent trajectories grow per-turn cost as conversation history accumulates — every turn re-sends every prior screenshot — so the static model can't capture the compounding. Running the actual agent on each page replaces the assumption with a measurement.
 
-`npx playwright install chromium` downloads both `chromium-headless-shell` and the full `chromium`; default headless picks the shell, which strips out extensions. Setting `channel: 'chromium'` (or moving off Playwright entirely, as we did) is required.
+### Make the test browser look like a real user
 
-### `Page.captureScreenshot` (CDP) is dramatically faster than BIDI
+Early measurements were quiet because the publisher saw a bot and skipped the consent flow entirely. Suppressing the automation fingerprints (so the page can't tell whether a human or a script is driving) brought the dialogs back, and pushed measured savings from a few percent to around 70% on the same set of pages. Any measurement taken without this is a lower bound, not a realistic number.
 
-- BIDI `browsingContext.captureScreenshot` with `origin: 'viewport'` waited for paint stability (~17 s/page).
-- BIDI with `origin: 'document'` (full-page) scrolled & stitched (~25 s/page).
-- CDP `Page.captureScreenshot` returns immediately — viewport in <100 ms.
-- Default in this harness: viewport-only screenshot. Full-page is opt-in via `--fullpage` (uses `captureBeyondViewport: true`). Full-page token cost is *estimated* from `document.documentElement.scrollHeight × viewport_width`, applied to the Anthropic resize formula — no actual capture needed for the cost number.
+### Use the page view a real agent would use, not the raw one
 
-### Useful tunings
+Production agents that read structured page representations (browser-use, Selenium-AI, similar) don't feed the model the unfiltered accessibility tree — they strip out layout-only nodes and keep only what's interactive. Using the unfiltered tree had hidden Ghostery's savings under a wall of noise that didn't change between vanilla and Ghostery. Switching to the filtered version (about 14% of the raw size) flipped the comparison from "Ghostery slightly more expensive" to a real saving.
 
-- `pageLoadStrategy: 'eager'` — return on `interactive`, not `complete`. Cuts navigate phase from 30 s+ to <2 s on ad-heavy pages that never reach `complete`.
-- `SETTLE_AFTER_LOAD_MS = 2500` — covers Sourcepoint's iframe injection (~1.5-2 s) and OneTrust's autoconsent dismissal fade. 1.5 s was sometimes too short — weather's consent iframe wasn't in the captured DOM, cnn's OneTrust preference panel was mid-dismissal.
-- Ghostery warmup is now a real handshake against `chrome-extension://<id>/pages/status/index.html` — see problem #9. Replaces a 4-second `setTimeout` that was sometimes too short, producing bimodal Ghostery samples on espn.
-- Consent-banner detector lives in `src/detect-consent.js`. Walks `body *`, keeps fixed/sticky elements that pass `Element.checkVisibility`, intersect the viewport, cover ≥ 15 % of viewport area, and either contain a consent-button phrase ("accept all" / "reject all" / "manage preferences" etc.) or wrap an iframe pointing at a known CMP CDN (Sourcepoint, Cookiebot, Didomi, TrustArc, …). See problem #1.
+### Five samples per cell, take the median
 
-## Headline data — 8 pages, median of 5, new detector (2026-05-13)
+Each page varies between samples — ad rotation, slow content scripts, occasional state where the adblocker isn't fully ready yet. A single sample is too noisy. Five samples plus median picks a stable reading and discards the occasional outlier. Mean would let one bad sample dominate; we saw it happen with an adblocker-warmup race that briefly let ads through.
 
-Run id: `2026-05-13T18-58-19-691Z`. Pages: cnn, foxnews, dailymail, nypost, allrecipes, foodnetwork, weather, espn. Each `(page, variant)` sampled 5× back-to-back; cells below are the **median**, p25/p75 in each `<variant>.metrics.json` under `.stats`. Every ghostery sample verified `ghosteryStatus.ready === true` (40/40). Consent flags are 5-of-5 stable per cell (no flakes).
+### Dismiss banners only with the production rulebase
 
-**Consent banner detected:** vanilla TRUE on cnn / nypost / weather / espn (4/8); ghostery TRUE on none → **4 pages where ghostery's autoconsent saved the agent a banner-dismiss loop**.
+The savings come from the same consent-dismissal rules that ship to end users — no test-only shortcuts, no hand-coded selectors. If a publisher's consent dialog isn't covered by the production rulebase, we don't claim a saving on it.
 
-Aggregate (sum of medians across all 8 pages):
+### Tag every run with a region
 
-| Metric | Vanilla | Ghostery | Δ |
-|---|---:|---:|---:|
-| innerText tokens | 12.7 k | 13.7 k | **+8.1 %** (Ghostery surfaces more body content via autoconsent) |
-| HTML tokens | 3.77 M | 3.71 M | **−1.7 %** |
-| A11y tree tokens | 983 k | 1 034 k | +5.3 % (Ghostery reveals more interactive nodes once banners go) |
-| Viewport image tokens | 9.0 k | 9.0 k | 0 % (fixed dimensions) |
-| Estimated full-page image tokens | 5.7 k | 6.1 k | +6.8 % |
-| Network bytes | 61 MB | 72 MB | +17.9 % (autoconsent + ghostery content scripts pull secondary loads) |
+EEA-traffic and US-traffic versions of the same publisher serve different ad packs and trigger different consent flows. Numbers from one region can't be compared cleanly to the other. Each run records which region it came from so the headline isn't muddled.
 
-Per-load $ (Sonnet 4.6 input, $3/MTok), **without** modelling banner-dismiss agent cost:
+## Open questions
 
-| Mode | Vanilla | Ghostery | Saved | per 1k loads |
-|---|---:|---:|---:|---:|
-| innerText + viewport screenshot | $0.0081 | $0.0085 | −$0.00039 | −$0.39 |
-| A11y tree + viewport screenshot | $0.372 | $0.391 | −$0.019 | −$19.46 |
-| Full HTML + viewport screenshot | $1.42 | $1.39 | $0.024 | **$23.90** |
-| innerText + full-page screenshot | $0.0069 | $0.0074 | −$0.00053 | −$0.53 |
+1. **US-native traffic.** Polish publishers serve a heavier ad load to EEA visitors than to US visitors. A run from a US IP against US publishers should isolate the "no consent banner, but more ads in the body" case. The expected shape: smaller per-turn savings, larger artifact savings.
 
-**With consent-dismiss overhead modeled** — extra agent turns × **measured** per-turn input tokens for each of the 4 dismissed banners (cnn, nypost, weather, espn):
+2. **Cross-region re-run with realistic browser fingerprints.** The earlier US-on-EEA-IP run predates the anti-bot work, so it under-counts. Re-running it gives a defensible cross-region comparison.
 
-The 5-k-tokens-per-turn assumption from earlier is now replaced with measured Anthropic `count_tokens` calls on the captured (screenshot + innerText) for each (page, variant). See `<runDir>/consent-tax.json`. Per-turn input-token cost for an agent prompt that includes the viewport screenshot, the system instruction, and ~8 k chars of `innerText`:
+3. **Page selection.** A couple of the original US pages now return anti-bot blocks rather than content. They tell us nothing about consent or ad load and should be replaced with pages a real user would want.
 
-| Banner page | Per-turn vanilla | Per-turn ghostery |
-|---|---:|---:|
-| cnn | 3 401 | 3 401 (text truncated equally) |
-| nypost | 2 443 | 2 864 |
-| weather | 2 316 | 2 189 |
-| espn | 4 207 | 4 070 |
+4. **Coverage.** Six pages can't support a per-million-loads industry-wide claim. Projecting from the consent-rule database (which dialogs are covered) against a top-N list of EEA sites would let us do that.
 
-Average per-turn vanilla on banner pages: **3 092 tokens**. (Compare to the previous synthetic 5 000.)
+## What we tried that didn't work
 
-Multiplier: a banner-bearing turn-sequence is "see banner → decide → click → re-read." We assume **2 extra turns** (conservative) or **3 extra turns** (aggressive) of vanilla overhead beyond the single read-and-extract turn Ghostery requires. Layer 3 (real Anthropic computer-use trajectories on 2-3 banner pages) is the next-session item that turns this assumption into a measurement.
-
-Per 1 k page loads, assuming 4/8 = 50 % banner prevalence (every other load hits a banner page):
-
-| Model | Banner-page tax | Per 1 k loads | Saved (Sonnet 4.5/4.6 input) |
-|---|---:|---:|---:|
-| Synthetic, 2 extra turns × Layer-2 ~3.1 k tok/turn | 6 200 t | 3.10 M tokens / 1 k loads | $9.28 / 1 k |
-| Synthetic, 3 extra turns × Layer-2 ~3.1 k tok/turn | 9 300 t | 4.64 M tokens / 1 k loads | $13.93 / 1 k |
-| **Layer 3 measurement** (cnn / weather / espn, n=3 each) | **13 258 t** | **6.63 M tokens / 1 k loads** | **$19.89 / 1 k** |
-
-The Layer 3 measurement is higher than the static model because each extra agent turn re-sends the message history (every prior screenshot), so the per-turn cost compounds. The Layer-2 `count_tokens` measurement (~3.1 k tok / turn) underestimates the real cost; the real trajectory averages ~5.2 k input tokens per turn after history bloat. The earlier 5 k × 3-loops synthetic ($22.50 / 1 k) was actually quite close to the measured value — by accident.
-
-Story: Ghostery does **not** make page payloads smaller — in this 8-page set the text/HTML/A11y artifact sizes are flat-to-slightly-bigger because autoconsent reveals body content that vanilla hides under banners. The savings come from the agent **not having to dismiss the banner itself**. The per-turn tax is the boilerplate (~200 t) + viewport screenshot (~1 366 t) + truncated text (~1 500 t) the agent re-pays for each turn vanilla spends locating and clicking the dismiss button.
-
-### Notable per-page observations
-
-- **cnn**: vanilla banner detected (OneTrust, `[id="onetrust-banner-sdk"]`, 36 % of viewport). Under Ghostery, autoconsent dismisses; text goes from 2.3 k → 2.7 k (+20.5 %, more article body) and the panel is no longer flagged.
-- **nypost**: vanilla banner detected (also OneTrust-style). Text 1.0 k → 1.4 k (+37.4 %). Largest text delta in the set.
-- **weather**: vanilla banner detected via the **iframe-cmp** path — a fixed wrapper containing `cdn.privacy-mgmt.com/index.html` (Sourcepoint TCF v2). Cross-origin so its innerText is empty, but the URL pattern catches it. Ghostery dismisses; text 917 → 792.
-- **espn**: vanilla banner detected (Disney privacy modal — same code path as OneTrust). text 2.6 k → 2.5 k. Note this run's median is iframes 6 → 3 / html flat, whereas the 2026-05-13 16:40 run showed iframes 6 → 1 / html −72.5 %. Real page variance — espn's ad slot count depends on which inventory wins. Median over 5 samples picks the stable mode.
-- **foodnetwork**: vanilla no banner detected — page is regionally redirected (test machine in EEA) to a WBD landing page that doesn't show a consent UI. Under Ghostery, text more than doubles (988 → 1421) because the recipe page is allowed to render. The detector being false on vanilla is **correct** here: there really isn't a banner to dismiss; what's happening is Ghostery enables a different (better) page state.
-- **foxnews**: no banner in either variant, near-identical metrics.
-- **dailymail** and **allrecipes** vanilla pages now look like full-on **anti-bot blocks** ("Access Denied" / "If you are a reader experiencing an access issue, please contact …"). No consent UI is shown, so the detector correctly returns false for both variants. Both pages are essentially unusable for the agent in both modes — they shouldn't be informing the headline. Action item: pick replacement pages with reproducible content access from a residential IP.
-- **Network bytes up 17.9 % aggregate.** Same root cause as before — Ghostery's autoconsent + content scripts + (on dailymail/allrecipes) Ghostery's own request bundles. Ad blocking still happens at MV3-DNR level but the additive load outweighs it on this set.
-
-## Next session — priorities
-
-Layers 1 + 2 + 3 of the consent-tax measurement stack are landed, plus filtered-A11y, multilingual consent detection, anti-bot suppression, region-tagged runs, and the ad-burden (Layer 4) measurement. The remaining gaps, in order:
-
-1. **Layer 3 (trajectory) on the EU run.** `2026-05-14T12-50-26-498Z` has Layer 1 + 2 + ad-burden but no real computer-use trajectory yet. With per-turn cost now at ~4,357 tok/turn on Polish pages (vs ~3,100 tok/turn on US-on-EEA), the measured trajectory tax should land in the **$60–$100 / 1k** range — materially bigger than the current headline implies. Estimated cost: ~$0.50–$1 of Sonnet 4.5 spend. Run: `node src/measure-trajectory.js --run 2026-05-14T12-50-26-498Z --page-set pages-eu.json --trials 3 --ext-dir ../dist`.
-2. **Cross-region re-run with anti-bot suppression.** Prior 9-page US-on-EEA headline (`2026-05-14T10-18-40-218Z`, $22 / 1k) was bot-lite. Re-run with the new `measure.js` flags + multilingual detector to get a defensible cross-region number. ~10 min, no API.
-3. **US-native run** when VPN to US IP is available. New `pages-us.json` (subset of current EN pages + maybe a Reuters / WaPo article). Should isolate the "native US ad load" effect that EEA IPs don't see.
-4. **Replace dailymail + allrecipes pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine and contribute nothing to the consent / blocking story. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article.
-
-2. **Replace dailymail + allrecipes with reproducible test pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine. They contribute nothing to the consent / blocking story and inflate the network-bytes "+17.9 %" number because Ghostery's autoconsent worker scripts still load against a 403. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article.
-
-3. **Fix the autoconsent oracle's iframe-blind spot.** Currently the oracle injects only into the main frame, so Sourcepoint TCF v2 / Quantcast / other iframe-CMP banners come back `lifecycle: "started"` (inconclusive). Fix by enumerating frames via CDP `Target.getTargets` and injecting into each. Improves the auxiliary "X / Y banners with a production-CMP rule" number.
-
-Then in priority order: cross-region (the EEA-vs-US flip is currently un-tested), coverage extrapolation (Tranco top-1k EEA + autoconsent rule presence → $/million-loads headline), remaining report polish, BiDi `webExtension.install` (low value).
-
-## Open problems (one per future session)
-
-### 1. ~~Tighten consent-banner detection~~ — done (structural detector in `src/detect-consent.js`)
-
-The old broad-regex + branded-selector detector was replaced with a structural walk. Gate conditions, in order of evaluation:
-
-1. Position is `fixed` or `sticky`.
-2. `Element.checkVisibility({ checkOpacity, checkVisibilityCSS, contentVisibilityAuto })` returns `true` — catches `display:none`, `visibility:hidden`, `opacity:0`, `content-visibility:hidden`, and clipped/transformed-out states that the previous detector missed.
-3. The element's `getBoundingClientRect` intersects the viewport. (The OneTrust preference panel on cnn was being false-positive flagged because its bounding rect existed at a real on-screen position even after autoconsent dismissed — `checkVisibility` plus the viewport-intersection check fixes that.)
-4. Area ≥ 15 % of viewport.
-5. **Either** `innerText` matches a consent-button-action regex (`accept all` / `reject all` / `manage preferences` / `save preferences` / `accept (&|and) continue` / `do not sell` / `customize my (choices|preferences)` / `agree (&|and) (continue|proceed)`), **or** the element wraps an `<iframe>` whose `src` matches a known CMP CDN (`cdn.privacy-mgmt.com`, `cookielaw.org`, `cookiebot.com`, `usercentrics.eu`, `consentmanager.net`, `consent-pref.trustarc.com`, `didomi.io`, `consensu.org`, etc.). The iframe path is required for Sourcepoint / TCF v2 banners whose buttons render cross-origin.
-
-Per-candidate diagnostics (tag, id, class, w, h, z-index, areaPct, role, ariaModal, `matchedBy`, `cmpIframeSrc`, `textSample`) are kept in `consentBannerCandidates`.
-
-Knock-on changes: `SETTLE_AFTER_LOAD_MS` bumped from 1500 → 2500 to give Sourcepoint enough time to inject its iframe and OneTrust enough time to complete its autoconsent dismissal fade.
-
-**Verification (8-page, `--repeat 5`, 40/40 ghostery samples `ready=true`):** detected vanilla=TRUE on cnn / nypost / weather / espn, ghostery=FALSE on all of them. Detector decisions are 5-of-5 stable per cell. Banner-dismissed-by-autoconsent count: **4 / 8** (was 0 / 8 with the previous detector, was 1 / 8 with the original one).
-
-**Corroboration via autoconsent oracle (Layer 1):** `src/autoconsent-oracle.js` injects `@duckduckgo/autoconsent`'s production rulebase into the main frame after artifacts are captured, with `autoAction: null` so it only detects, never acts. Captured per sample as `metrics.autoconsent.{detected, cmp, lifecycle, inconclusive, durationMs}`. On the 4-page subset (cnn / foxnews / weather / espn):
-
-| Page | Vanilla viz | Vanilla oracle | Ghostery viz | Ghostery oracle |
-|---|:-:|---|:-:|---|
-| cnn | ✓ | OneTrust, `openPopupDetected` (204 ms) | – | OneTrust, `cmpDetected` (532 ms — rule still in DOM, popup not open) |
-| foxnews | – | inconclusive (`started`, 8.0 s) | – | inconclusive (`started`, 8.0 s) |
-| weather | ✓ | inconclusive (`started`, 8.2 s) | – | inconclusive (`started`, 8.2 s) |
-| espn | ✓ | OneTrust, `openPopupDetected` (203 ms) | – | inconclusive (`started`, 8.2 s) |
-
-Confirms the visibility detector on OneTrust pages (cnn, espn) with the bonus of identifying the CMP family. The `inconclusive` cases are a known limitation: our oracle injects into the main frame only, so Sourcepoint TCF v2 (weather) and other iframe-CMP banners stall in `findCmp()`. The real Ghostery extension injects into every frame and handles these fine — that's why ghostery dismisses weather's banner in practice. Fix tracked as next-session item #4.
-
-### 2. ~~Investigate espn Ghostery breakage~~ — fixed (harness bug, not Ghostery)
-
-**Fix shipped** in `src/measure.js`: extract now goes through CDP `Runtime.evaluate` (via the existing `chromedriverCdp` helper used for a11y + screenshots) instead of webdriverio's `browser.execute()` → BiDi `script.callFunction`. One retry on either error or stale-snapshot signal (`innerText.length < 100 && scrollHeight <= viewport.height`).
-
-Verification: 10/10 espn runs succeeded, vs. ~30% failure rate pre-fix. Extract timings 16–289 ms (no retries fired), down from ~556 ms via BiDi.
-
-Original diagnosis kept below for context.
-
----
-
-
-Root cause is in the **harness**, not Ghostery. The "broken" 15-02-36 capture (ghostery `innerText=0`, body literally `<body ...>\n\t\t</body>`) was contradicted by the viewport screenshot from the same run, which shows espn **fully rendered** (NBA scoreboard, LeBron headline, autoconsent had dismissed the Disney privacy modal). So Ghostery did its job; what we wrote to disk was a bad snapshot.
-
-In 5 repeat runs + 1 headed + the original, two distinct failure modes appeared (~3/7 total):
-
-1. **Outright `script.callFunction` error**: `WebDriver Bidi command "script.callFunction" failed with error: unknown error - Cannot find context with specified id`. `measure()` catches this only as a thrown error and writes a minimal `{error: ...}` metrics file; html/text/a11y/screenshot are skipped.
-2. **Silent stale snapshot**: `script.callFunction` returns the document's outerHTML with an empty `<body>` (matches the raw server-side HTML's `<body class="...prod  ">` pre-hydration state) even though the DOM has fully painted by the time the screenshot is taken ~150 ms later.
-
-Chromedriver log (`results/2026-05-13T15-20-11-961Z/espn/ghostery.chromedriver.log`) shows the BiDi-mapper CDP send `Runtime.callFunctionOn(executionContextId: 1, sessionId: 3F44C03F…)` issued at t=623.970 returning `Cannot find context` at t=624.520 — a 550 ms window during which the main frame's children went through an iframe storm: `__tcfapiLocator` attaches, Adobe AccessEnabler, Ghostery's `pages/notifications/pin-it.html` (the "pin the extension" notification, injected as a child iframe of espn by `chrome-extension://.../store/options.js`), repeated `about:blank` placeholders, and four `executionContextCreated`/`executionContextDestroyed` pairs. Ghostery's pin-it iframe is **additive load** on top of espn's already-busy frame tree and pushes the BiDi mapper's realm bookkeeping over the edge. (We can confirm by disabling pin-it: set the Ghostery "pin notification dismissed" pref or filter the iframe, then repeat the 5-run test.)
-
-espn is the only page where this fires currently because (a) it sets up an unusual number of short-lived iframes during init, and (b) the consent flow is one of the slower ones we hit. cnn and weather have fewer iframes; nypost / foxnews don't trigger it in any observed run.
-
-**Fixes in priority order:**
-
-- (a) Switch `extract` from BiDi `browser.execute()` to direct CDP `Runtime.evaluate` (we already use CDP for a11y + screenshots — same pattern). That sidesteps the mapper entirely for the high-value call. The wdio `browser.execute` is convenient but adds a layer that races during iframe churn.
-- (b) Add retry-with-backoff around the extract call (1 retry after 500 ms is probably enough). Cheap, low-risk; doesn't fix the silent-stale-snapshot case though.
-- (c) Add a sanity check: if `pageData.scrollHeight < 200` or `body.children.length === 0` but the screenshot dimensions imply a real page, retry. This catches the silent case.
-- (d) Optional: bump `SETTLE_AFTER_LOAD_MS` for ghostery runs to 3 s. Probably masks the bug without fixing it.
-
-Once (a)+(c) ship, re-run espn 10× and confirm 0/10 failures.
-
-### 3. ~~Add `--repeat N` for stability~~ — done (`--repeat N`, default 1)
-
-`node src/run.js --repeat 5` now runs each `(page, variant)` N times back to back and aggregates the samples. The default of `1` keeps single-shot behaviour identical to before (same artifact filenames, same metrics-row shape passed to the report).
-
-**Design choices and rationale:**
-
-- **Sample loop scope = inside `(page, variant)`.** Page A's vanilla repeats are adjacent in time, then page A's ghostery, then page B. We do *not* permute the whole page list per repeat. Rationale: keeps ad rotation + cache state similar across the N samples of one cell so the noise we measure is page-level noise, not cross-page drift. Also lets us keep one `runId` directory and one `runDir` output even for large N. We can change to interleaved later if cell-level drift turns out to be the more interesting noise source.
-- **Aggregator = `src/aggregate.js`.** For every numeric leaf in the metrics tree (e.g. `html.tokens`, `network.bytes`, `timings.extract`) we record `{median, p25, p75, min, max, samples}` in a separate `stats` map and place the **median** at the original path. Non-numeric leaves (`title`, `consentBannerDetected`, `iframeSrcs`, …) get the **mode** (most common value). Rationale: the report consumes `r.html.tokens` etc. directly — we don't want to rewrite that path. By burying the variance under `.stats` we get a strict superset of the N=1 metrics shape, and the existing report code keeps working unchanged.
-- **Median over mean.** Pages occasionally produce one wildly different sample (Ghostery's adblock engine not fully loaded → unblocked ads bump html tokens ~3×; verified in the espn `--repeat 3` test). Median ignores that outlier; mean would let it dominate. p25/p75 in `.stats` lets a reader spot the bimodal cases. We're not doing N=2 specially — with two samples, median = mean, so it doesn't matter.
-- **Per-sample artifacts on disk when N > 1.** Each sample writes `<variant>.s{i}.{html,text.txt,a11y.json,viewport.png}`; the consolidated `<variant>.metrics.json` carries `.samples[]` + `.stats`. When N=1 the suffix is dropped to keep the file layout identical to pre-repeat. Disk cost is bounded (~5 MB per sample), so we save everything rather than just sample 1 — useful for debugging why one sample diverged.
-- **Report shows medians + a header note.** The per-page table is unchanged; we add one line at the top: "Samples: up to **N per (page, variant)** — cells show the median." Anyone wanting the spread reads `stats` in the JSON. We can add a p25–p75 column to the table later if it earns its keep.
-- **Error handling.** If any one sample throws, that sample's entry in `samples[]` carries `{error: ...}` and the aggregator surfaces the first error on the returned row. The report's existing "ERROR: …" handling for failed rows then catches it. With N>1 a partial failure currently nukes the whole cell — we could relax that to "aggregate over successful samples only" if it becomes a problem.
-
-First observation already: even with the espn flakiness fix, `--repeat 3` on espn showed Ghostery HTML tokens swinging between 71 k and 263 k across the three samples. The big-html samples have iframeCount=3, the small-html sample has iframeCount=1 — the MV3 adblocker engine isn't always fully loaded by the time the first navigation extracts. The current 4 s warmup is sometimes too short. **Action: bump `GHOSTERY_WARMUP_SETTLE_MS` or add a content-script readiness probe.** Tracking as problem #9 below.
-
-### 4. ~~A11y mode realism — capture filtered tree, not full~~ — done (`src/filter-ax.js`)
-
-Filter rule lives in `src/filter-ax.js`:
-
-- Drop nodes whose role is in `{generic, none, presentation, InlineTextBox, LineBreak, StaticText, Iframe, LabelText, Figcaption}`.
-- For surviving nodes, serialize only `{nodeId, role, name.value, value.value, description.value, childIds, parentId, properties (focused/focusable/expanded/checked/disabled/pressed/selected/required/invalid/level only)}`. Drop `chromeRole`, `name.sources`, `backendDOMNodeId`, `frameId`, `ignored`, empty `properties`.
-
-Captured per-sample as `<variant>.a11y-filtered.json` alongside the existing `<variant>.a11y.json`. Metrics: `a11yFiltered.{bytes,tokens}`. Backfill for existing runs: `node src/backfill-filtered-ax.js [runId]`.
-
-**Effect on the headline (run `2026-05-13T18-58-19-691Z`):**
-
-| Aggregate | Raw `getFullAXTree` | Filtered |
-|---|---:|---:|
-| Vanilla total tokens | 982.5 k | 136.1 k |
-| Ghostery total tokens | 1 034.4 k | 141.3 k |
-| Δ (Ghostery − Vanilla) | +5.3 % | +3.8 % |
-| Cost row (artifact + measured consent tax, 2-3 extra turns): | −1.4 % to −2.7 % | **+11.5 % to +17.5 % savings** |
-
-The filter cuts the tree to ~14 % of raw size, and once the measured consent tax is added on top, the A11y row flips from "Ghostery costlier" to a real savings — the row a skeptic would have quoted now goes the other way.
-
-### 5. Cross-region consent-wall reproducibility
-
-The consent walls we saw (cnn, dailymail, allrecipes) only appear because the test machine's IP is in the EEA. For US-only or fully-public pages the picture changes. Either (a) tag pages with expected jurisdiction in `pages.json` and report broken-out results, or (b) add a way to route the browser through a US/EU IP to A/B test that effect.
-
-### 6. BIDI `webExtension.install` revisit
-
-When chromedriver / Chrome lifts the `Extensions.loadUnpacked` gate (or chromium-bidi switches to a different CDP method), drop the `--load-extension` arg and use BIDI cleanly. Track via the chromium-bidi GitHub issues; the current diagnostic logs (`*.chromedriver.log`) contain the exact failing call so we'll know when it starts succeeding.
-
-### 7. Honest end-to-end agent simulation
-
-The current cost model is artifact-based: it costs out a single page consumption. A real agent loop is multi-turn (read, decide, click, read, …). Sim a fixed task ("find and read the article body") with both variants, count actual model turns + total tokens. That's the number worth quoting publicly.
-
-### 8. Report polish
-
-- ~~Drop the misleading "Notes" line that still says "first-launch warmup waits 25s" (now 4 s).~~ — done in `src/report.js`; now says "adaptive handshake against the extension status page; typically ~3-5s".
-- Add a "verdict" column in the per-page table that combines consent + content-rendered + cosmetic-filter signals.
-- Per-page $ delta column, not just aggregate.
-
-### 9. ~~MV3 adblocker engine warmup is sometimes incomplete~~ — done (status page readiness probe)
-
-Replaced the fixed `setTimeout(4000)` warmup with a real handshake against the extension. The extension now ships an automation-friendly page at `pages/status/index.html` that asks the background `{action: 'status:get'}`; the background `src/background/status.js` awaits the adblocker `setup.pending` promise and replies with `{ ready, adblocker: {ready, error}, version, id }`. The page surfaces the reply as `window.__ghosteryStatus` (and renders it for humans). The harness opens that URL during warmup and polls `Runtime.evaluate('window.__ghosteryStatus')` every 100 ms until `ready === true` (timeout 30 s, fallback to the old `example.com` + 4 s sleep).
-
-**Knock-on changes:**
-
-- `research/src/measure.js` discovers the loaded extension's ID at runtime by navigating to `chrome://extensions` and reading `$('>>>extensions-item').getAttribute('id')` — the same trick `tests/e2e/wdio.conf.js` uses. Works regardless of whether the extension was loaded by path, by archive, or with a manifest `key`, and the project already maintains the deep selector.
-- `research/src/run.js --ext-dir PATH` (or `GHOSTERY_EXT_DIR=PATH` env) points at any pre-built unpacked extension instead of extracting `ghostery-automation-chromium.zip`. Default behaviour with no flag/env is unchanged.
-- The per-sample metrics now carries `ghosteryStatus: {ready, adblocker, id, version}` so we can post-hoc check whether each sample saw a fully-loaded extension.
-- New `scripts/patch-automation.sh` rewrites a freshly built `dist/`: renames `manifest.json` `name`/`short_name` to "Ghostery (Automation)" and flips `store/options.js` `terms`/`onboarding` defaults to `true` so the first-run UI is skipped. Run after every `npm run build chromium`.
-
-**Workflow:**
-
-```bash
-# from repo root
-npm run build chromium
-scripts/patch-automation.sh dist
-(cd research && node src/run.js --pages espn --repeat 5 --ext-dir ../dist)
-```
-
-**Verification (espn, `--repeat 3`, `--ext-dir ../dist`):**
-
-| Metric | Before (`web-ext-artifacts/*.zip`, fixed 4 s warmup) | After (status-page poll) |
-|---|---|---|
-| Ghostery html token samples | 262 641 / 263 550 / 71 888 (3.7× swing) | 70 485 / 70 796 / 151 463 |
-| iframeCount samples | 3 / 3 / 1 | 1 / 1 / 1 |
-| Warmup phase | always 4 000 ms | 2 879 / 2 987 / 3 780 ms (adaptive) |
-
-The bimodal "engine-not-loaded vs engine-loaded" pattern is gone — every sample now reports `ghosteryStatus.ready === true` and `iframeCount = 1` (the persistent ad slot that espn renders even with blocking). Residual variance (70 k vs 151 k html) is real page-content variance, not a Ghostery state issue.
-
-## How to run
-
-### One-time setup
-
-```bash
-cd research
-npm install
-npx @puppeteer/browsers install chrome@stable --path .browsers
-npx @puppeteer/browsers install chromedriver@stable --path .browsers
-npx playwright install chromium             # only needed if you want to compare vs Playwright
-```
-
-### Per-session: build a fresh extension and run the harness against it
-
-```bash
-# from repo root: rebuild Ghostery from source and apply the automation patches
-npm run build chromium
-scripts/patch-automation.sh dist
-
-# from research/: point the harness at the freshly built dist
-cd research
-node src/run.js --repeat 5 --ext-dir ../dist                # full suite, median of 5
-node src/run.js --pages cnn,espn --ext-dir ../dist          # subset
-node src/run.js --headed --ext-dir ../dist                  # visible browser
-node src/run.js --debug  --ext-dir ../dist                  # wdio + chromedriver logs
-node src/run.js --fullpage --ext-dir ../dist                # also captures full-page PNG (slow)
-node src/report-cli.js                                      # re-render latest report.md
-```
-
-`GHOSTERY_EXT_DIR=PATH` is equivalent to `--ext-dir PATH`.
-
-### Layer 2 — per-turn agent token cost via Anthropic count_tokens
-
-Reads the screenshots + innerText from a completed run and calls Anthropic's `count_tokens` for each (page, variant) with a realistic agent prompt. Output goes to `<runDir>/consent-tax.json`.
-
-```bash
-# one-time: API key (placed in .env at repo root or research/.env)
-echo 'ANTHROPIC_API_KEY=sk-ant-...' >> .env
-
-# one-time install
-cd research && npm install @anthropic-ai/sdk
-
-# run against latest run dir (default) or a specific one
-node src/measure-consent-tax.js
-node src/measure-consent-tax.js 2026-05-13T18-58-19-691Z
-node src/measure-consent-tax.js <runId> claude-opus-4-7   # different model
-```
-
-Per-turn cost = boilerplate + 1 viewport image (1366 t) + truncated innerText (8 000 chars). Multiply by the assumed extra turns to get the consent-dismiss tax. See the headline table for the model.
-
-### Legacy path (no rebuild)
-
-If you don't want to rebuild Ghostery, the harness still falls back to extracting
-`web-ext-artifacts/ghostery-automation-chromium.zip` into `.ghostery-extension/`:
-
-```bash
-cd research
-node src/setup.js     # extracts the zip
-node src/run.js       # no --ext-dir → uses the extracted zip
-```
-
-That path also skips the status-page readiness probe (older zip predates the
-status page) and falls back to a 4-second sleep, which can produce the bimodal
-samples described in problem #9.
+- **A static "extra turns × tokens per turn" formula.** Off by ~50% because conversation history compounds.
+- **Letting the browser advertise itself as an automation client.** Several consent dialogs hid themselves, which made vanilla look artificially cheap.
+- **The raw accessibility view.** Buried Ghostery's savings under nodes no real agent reads.
+- **One-shot samples.** Too noisy — single outlier swings the headline. Median of five is the practical floor.

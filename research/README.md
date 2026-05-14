@@ -9,7 +9,7 @@ Ads, trackers, and consent dialogs raise an AI agent's input-token cost in two w
 1. **Larger artifacts.** DOM / `innerText` / accessibility tree / screenshots are bigger when ads and cookie banners are in the page.
 2. **Extra agent turns.** When a consent banner blocks the content, the agent has to look at the banner, decide which button to click, click it, and re-read the page. Every extra turn re-pays the system prompt + screenshot + text-context cost.
 
-In our latest 8-page run (see [`PROGRESS.md`](./PROGRESS.md)), the artifact-size delta is **small or even negative** — Ghostery actually *reveals* more body content once autoconsent dismisses banners on the 4 of 8 pages that show one. The dominant savings is the extra-turns cost: at Sonnet 4.6 input pricing, **$9-14 per 1 000 page loads** just from skipping consent dismissal, with the range coming from a 2-vs-3 extra-turns assumption.
+In our latest 6-page Polish run (see [`JOURNAL.md`](./JOURNAL.md)), the artifact-size delta is **small or even negative** — Ghostery actually *reveals* more body content once autoconsent dismisses banners. The dominant savings is the extra-turns cost: a real Anthropic computer-use agent driven through "find the top headline" pays about **35,000 fewer input tokens per page** with Ghostery on, which translates to **70% less total bill** for screenshot+text agents and **40% less** for accessibility-tree agents.
 
 That is the story this research is set up to tell, so the harness focuses on consent detection + per-turn agent cost rather than just byte counts.
 
@@ -41,7 +41,7 @@ Each `(page, variant)` is sampled `--repeat N` times in fresh chromedriver sessi
 
 1. **Chrome for Testing 148** + matching **chromedriver 148**, installed via `@puppeteer/browsers` into `research/.browsers/`.
 2. **Vanilla** = Chrome for Testing 148 with no extensions.
-3. **Ghostery** = same chromium with `--load-extension=<unpacked dist>` (the BiDi `webExtension.install` path is gated off by chromedriver — see PROGRESS for details). The extension is either the prebuilt automation zip or — preferred — a freshly built `dist/` after `scripts/patch-automation.sh dist`.
+3. **Ghostery** = same chromium with `--load-extension=<unpacked dist>`. The extension is either the prebuilt automation zip or — preferred — a freshly built `dist/` after `scripts/patch-automation.sh dist`.
 4. **Warmup.** Before each Ghostery run, the harness opens `chrome-extension://<id>/pages/status/index.html` and polls `window.__ghosteryStatus.ready` so we never measure with a half-loaded adblocker. Falls back to a 4 s sleep on older builds that don't ship the status page.
 5. **Fresh, isolated profile per run.** No shared cookies, no carry-over state between vanilla and Ghostery, no carry-over between samples.
 6. Each run writes raw artifacts (html, innerText, a11y json, viewport png, full-page png if `--fullpage`) so anything can be re-tokenized after the fact without re-running the browser.
@@ -133,8 +133,8 @@ node src/setup.js     # extracts the zip
 node src/run.js       # no --ext-dir → uses the extracted zip
 ```
 
-That path skips the status-page readiness probe (older zip predates it) and falls back to a 4-second sleep, which can produce bimodal samples on ad-heavy pages — see PROGRESS problem #9.
+That path skips the adblocker-ready handshake (older zip predates it) and falls back to a 4-second sleep, which can produce bimodal samples on ad-heavy pages.
 
 ## More
 
-[`PROGRESS.md`](./PROGRESS.md) is the running session log — what's been tried, what works, the headline data of the latest run, open problems, and the "Next session — priorities" stack.
+[`JOURNAL.md`](./JOURNAL.md) is the running research log — latest findings, the decisions behind them, open questions, and things that didn't pan out.
