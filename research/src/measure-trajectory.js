@@ -33,9 +33,10 @@ const COMPUTER_TOOL_BETA = 'computer-use-2025-01-24';
 const SYSTEM_PROMPT =
   'You are an autonomous web-browsing agent driving a 1280x800 browser viewport. ' +
   'Your goal: identify the single top headline visible on this page and call the `finish` tool with that headline as `headline`. ' +
-  'If a consent / cookie / privacy banner is blocking the page, dismiss it FIRST by clicking the appropriate button (prefer "Reject all" / "Reject non-essential" if present, otherwise "Accept all"). ' +
+  'If a consent / cookie / privacy banner is blocking the page, dismiss it FIRST by clicking the appropriate button. ' +
+  'Banner button labels can be in any language: prefer reject ("Reject all" / "Odrzuć wszystkie" / "Ablehnen" / "Refuser tout"), otherwise accept ("Accept all" / "Zaakceptuj wszystkie" / "Przejdź do serwisu" / "Zgadzam się" / "Akzeptieren" / "Tout accepter"). ' +
   'Use the `computer` tool to take screenshots and click. You should not need to scroll — the top headline is at the top of the page once any banner is dismissed. ' +
-  'Do not narrate or explain — issue tool calls. Call `finish` as soon as you can read a headline. ' +
+  'Do not narrate or explain — issue tool calls. Call `finish` as soon as you can read a headline (in its original language is fine). ' +
   'If no headline is visible after dismissing any banner, call `finish` with an empty string.';
 
 const USER_TASK =
@@ -246,7 +247,6 @@ async function runTrial({ client, model, url, withGhostery, maxTurns, dryRun, ex
         browserName: 'chrome',
         'goog:chromeOptions': { binary: CHROME_BIN, args: chromeArgs },
         pageLoadStrategy: 'eager',
-        webSocketUrl: true,
       },
       logLevel: 'error',
       connectionRetryCount: 1,
@@ -386,14 +386,16 @@ function parseArgs(argv) {
     else if (a === '--force') out.force = true;
     else if (a === '--help' || a === '-h') {
       console.log(
-        'Usage: node src/measure-trajectory.js [--pages cnn,weather,espn] [--trials 3] [--max-turns 15] [--model claude-sonnet-4-6] [--ext-dir ../dist] [--run RUN_ID] [--dry-run]\n\n' +
-          '  --pages     comma-separated page ids from pages.json (default: pages with consent banners)\n' +
+        'Usage: node src/measure-trajectory.js [--pages cnn,weather,espn] [--page-set pages-eu.json] [--trials 3] [--max-turns 15] [--model claude-sonnet-4-5-20250929] [--ext-dir ../dist] [--run RUN_ID] [--dry-run] [--force]\n\n' +
+          '  --pages     comma-separated page ids from the page set (default: pages with consent banners detected in the run\'s vanilla metrics)\n' +
+          '  --page-set  path (relative to research/) to a pages JSON file (default: pages-trajectory.json if present, else pages.json)\n' +
           '  --trials    trajectories per (page, variant) (default 3)\n' +
           '  --max-turns hard cap on agent turns per trajectory (default 15)\n' +
-          '  --model     Anthropic model id (default claude-sonnet-4-6)\n' +
+          '  --model     Anthropic model id (default claude-sonnet-4-5-20250929; Sonnet 4.6 / Opus 4.7 do not ship computer-use yet)\n' +
           '  --ext-dir   unpacked Ghostery dir (default: extract web-ext-artifacts zip)\n' +
           '  --run       reuse an existing results/<run-id> dir to write trajectory-tax.json into\n' +
-          '  --dry-run   skip API calls; just navigate and capture initial state\n',
+          '  --dry-run   skip API calls; just navigate and capture initial state\n' +
+          '  --force     re-run trials even if a cached trajectory.json already exists\n',
       );
       process.exit(0);
     }
@@ -616,6 +618,14 @@ function summarize(results, args) {
     },
   };
 }
+
+process.on('unhandledRejection', (reason) => {
+  const msg = reason instanceof Error ? reason.message : String(reason);
+  console.warn(`[unhandledRejection ignored] ${msg}`);
+});
+process.on('uncaughtException', (err) => {
+  console.warn(`[uncaughtException ignored] ${err?.message ?? err}`);
+});
 
 main().catch((e) => {
   console.error(e?.stack || e);
