@@ -9,6 +9,7 @@ import { imageTokens } from './cost-model.js';
 import { ensureExtensionExtracted } from './setup.js';
 import { detectConsentBanners } from './detect-consent.js';
 import { detectViaAutoconsent } from './autoconsent-oracle.js';
+import { filterAxNodes } from './filter-ax.js';
 
 async function chromedriverCdp(port, sessionId, method, params = {}) {
   const url = `http://localhost:${port}/session/${sessionId}/goog/cdp/execute`;
@@ -206,6 +207,11 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     '--no-first-run',
     '--no-default-browser-check',
     '--disable-features=Translate',
+    // Suppress navigator.webdriver / window.cdc_* signals that some CMPs (Wirtualna Polska,
+    // a few US/EU networks) detect and use to skip serving the consent dialog or full ad
+    // pack. Without these the harness measures a "bot-lite" experience that materially
+    // undercounts real-user consent + ad load. See pudelek/wp investigation 2026-05-14.
+    '--disable-blink-features=AutomationControlled',
     `--window-size=${VIEWPORT.width},${VIEWPORT.height}`,
   ];
   if (headless) chromeArgs.push('--headless=new');
@@ -230,6 +236,8 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
         'goog:chromeOptions': {
           binary: CHROME_BIN,
           args: chromeArgs,
+          excludeSwitches: ['enable-automation'],
+          useAutomationExtension: false,
         },
         'pageLoadStrategy': 'eager',
         webSocketUrl: true,
@@ -318,16 +326,20 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
 
     t = Date.now();
     let a11yJson = '';
+    let a11yFilteredJson = '';
     try {
       await chromedriverCdp(port, browser.sessionId, 'Accessibility.enable', {});
       const res = await chromedriverCdp(port, browser.sessionId, 'Accessibility.getFullAXTree', {});
-      const nodes = (res?.nodes ?? []).filter((n) => {
+      const allNodes = res?.nodes ?? [];
+      const fullNodes = allNodes.filter((n) => {
         const role = n.role?.value;
         return role && role !== 'none' && role !== 'presentation' && role !== 'InlineTextBox';
       });
-      a11yJson = JSON.stringify(nodes);
+      a11yJson = JSON.stringify(fullNodes);
+      a11yFilteredJson = JSON.stringify(filterAxNodes(allNodes));
     } catch (e) {
       a11yJson = JSON.stringify({ error: e.message });
+      a11yFilteredJson = JSON.stringify({ error: e.message });
     }
     mark('a11y', t);
 
@@ -358,6 +370,7 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
     writeFileSync(join(outDir, `${label}.html`), html);
     writeFileSync(join(outDir, `${label}.text.txt`), innerText);
     writeFileSync(join(outDir, `${label}.a11y.json`), a11yJson);
+    writeFileSync(join(outDir, `${label}.a11y-filtered.json`), a11yFilteredJson);
 
     t = Date.now();
     let autoconsent;
@@ -401,6 +414,10 @@ export async function measure(url, { withGhostery, outDir, label, headless = tru
       a11y: {
         bytes: Buffer.byteLength(a11yJson, 'utf8'),
         tokens: countTokens(a11yJson),
+      },
+      a11yFiltered: {
+        bytes: Buffer.byteLength(a11yFilteredJson, 'utf8'),
+        tokens: countTokens(a11yFilteredJson),
       },
       screenshot: {
         viewport: {

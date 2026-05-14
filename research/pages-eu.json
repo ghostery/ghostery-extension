@@ -1,0 +1,8 @@
+[
+  { "id": "onet", "url": "https://www.onet.pl/", "notes": "Onet — general news (RAS/Springer CMP)" },
+  { "id": "wp", "url": "https://www.wp.pl/", "notes": "Wirtualna Polska — general news portal" },
+  { "id": "interia", "url": "https://www.interia.pl/", "notes": "Interia — general news (Bauer Media)" },
+  { "id": "gazeta", "url": "https://www.gazeta.pl/0,0.html", "notes": "Gazeta.pl — general news (Agora)" },
+  { "id": "pudelek", "url": "https://www.pudelek.pl/", "notes": "Pudelek — Polish tabloid (Wirtualna Polska Holding)" },
+  { "id": "kwestiasmaku", "url": "https://www.kwestiasmaku.com/", "notes": "Kwestia Smaku — recipes" }
+]

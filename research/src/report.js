@@ -1,4 +1,12 @@
-import { costUsd, PRICING_USD_PER_MTOK, consentDismissOverheadTokens, CONSENT_DISMISS_AGENT_LOOPS, TOKENS_PER_AGENT_LOOP } from './cost-model.js';
+import {
+  costUsd,
+  PRICING_USD_PER_MTOK,
+  consentDismissOverheadTokens,
+  CONSENT_DISMISS_AGENT_LOOPS,
+  TOKENS_PER_AGENT_LOOP,
+  CONSENT_DISMISS_EXTRA_TURNS_LOW,
+  CONSENT_DISMISS_EXTRA_TURNS_HIGH,
+} from './cost-model.js';
 
 const MODEL = 'sonnet-4.6';
 
@@ -34,7 +42,7 @@ function totalAgentTokens(r, mode) {
   return text + r.screenshot.viewport.tokens;
 }
 
-export function renderReport(rows, { runId } = {}) {
+export function renderReport(rows, { runId, consentTax, trajectoryTax, adBurden, meta } = {}) {
   const byId = new Map();
   for (const r of rows) {
     if (!byId.has(r.id)) byId.set(r.id, {});
@@ -48,6 +56,8 @@ export function renderReport(rows, { runId } = {}) {
   out.push('# Ghostery cost-savings benchmark');
   out.push('');
   if (runId) out.push(`Run: \`${runId}\`  `);
+  if (meta?.region) out.push(`Region: **${String(meta.region).toUpperCase()}**  `);
+  if (meta?.pageSet && meta.pageSet !== 'pages.json') out.push(`Page set: \`${meta.pageSet}\`  `);
   out.push(`Model assumed for $: **${MODEL}** (input @ $${PRICING_USD_PER_MTOK[MODEL]}/MTok)  `);
   out.push(`Viewport: 1280×800. Image tokens: Anthropic formula (resize to 1568px long edge, `);
   out.push(`then ⌈w·h/750⌉). Text tokens: cl100k_base BPE (close approximation).`);
@@ -82,14 +92,14 @@ export function renderReport(rows, { runId } = {}) {
   out.push('## Per-page comparison');
   out.push('');
   out.push('Each token column is what the agent would pay if it consumed that artifact once.');
-  out.push('`Text` = `document.body.innerText` (what the agent "reads"). `A11y` = Chromium accessibility tree.');
+  out.push('`Text` = `document.body.innerText`. `A11y(filt)` = filtered accessibility tree (drops `generic` / `StaticText` / `LineBreak` / layout-only nodes; serializes role+name+value+state — what production agents like browser-use consume). `A11y(full)` = lightly-filtered tree captured for comparison.');
   out.push('Cross-origin ad iframes are opaque to text/HTML but visible in screenshots — so screenshot tokens are the most honest signal for visual cost.');
   out.push('');
   out.push(
-    '| Page | Variant | HTML tok | Text tok | A11y tok | VP img tok | Full img tok | Iframes | Net req | Net bytes | Load (ms) |',
+    '| Page | Variant | HTML tok | Text tok | A11y(filt) tok | A11y(full) tok | VP img tok | Full img tok | Iframes | Net req | Net bytes | Load (ms) |',
   );
   out.push(
-    '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|',
+    '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|',
   );
 
   let totalVanillaHtml = 0,
@@ -98,6 +108,8 @@ export function renderReport(rows, { runId } = {}) {
     totalGhosteryText = 0,
     totalVanillaA11y = 0,
     totalGhosteryA11y = 0,
+    totalVanillaA11yF = 0,
+    totalGhosteryA11yF = 0,
     totalVanillaVp = 0,
     totalGhosteryVp = 0,
     totalVanillaFp = 0,
@@ -115,7 +127,7 @@ export function renderReport(rows, { runId } = {}) {
     ]) {
       if (!r) continue;
       if (r.error) {
-        out.push(`| ${id} | ${label} | ERROR: ${r.error} | | | | | | | | |`);
+        out.push(`| ${id} | ${label} | ERROR: ${r.error} | | | | | | | | | |`);
         continue;
       }
       out.push(
@@ -124,6 +136,7 @@ export function renderReport(rows, { runId } = {}) {
           label,
           fmtTokens(r.html.tokens),
           fmtTokens(r.innerText?.tokens ?? 0),
+          fmtTokens(r.a11yFiltered?.tokens ?? 0),
           fmtTokens(r.a11y.tokens),
           fmtTokens(r.screenshot.viewport.tokens),
           fmtTokens(r.screenshot.fullPage.tokens),
@@ -146,6 +159,7 @@ export function renderReport(rows, { runId } = {}) {
           '**Δ savings**',
           pct(g.html.tokens, v.html.tokens),
           pct(g.innerText?.tokens ?? 0, v.innerText?.tokens ?? 0),
+          pct(g.a11yFiltered?.tokens ?? 0, v.a11yFiltered?.tokens ?? 0),
           pct(g.a11y.tokens, v.a11y.tokens),
           pct(g.screenshot.viewport.tokens, v.screenshot.viewport.tokens),
           pct(g.screenshot.fullPage.tokens, v.screenshot.fullPage.tokens),
@@ -166,6 +180,8 @@ export function renderReport(rows, { runId } = {}) {
       totalGhosteryText += g.innerText?.tokens ?? 0;
       totalVanillaA11y += v.a11y.tokens;
       totalGhosteryA11y += g.a11y.tokens;
+      totalVanillaA11yF += v.a11yFiltered?.tokens ?? 0;
+      totalGhosteryA11yF += g.a11yFiltered?.tokens ?? 0;
       totalVanillaVp += v.screenshot.viewport.tokens;
       totalGhosteryVp += g.screenshot.viewport.tokens;
       totalVanillaFp += v.screenshot.fullPage.tokens;
@@ -182,7 +198,8 @@ export function renderReport(rows, { runId } = {}) {
   out.push('|---|---:|---:|---:|');
   out.push(`| HTML tokens | ${fmtTokens(totalVanillaHtml)} | ${fmtTokens(totalGhosteryHtml)} | ${pct(totalGhosteryHtml, totalVanillaHtml)} |`);
   out.push(`| Text tokens | ${fmtTokens(totalVanillaText)} | ${fmtTokens(totalGhosteryText)} | ${pct(totalGhosteryText, totalVanillaText)} |`);
-  out.push(`| A11y tokens | ${fmtTokens(totalVanillaA11y)} | ${fmtTokens(totalGhosteryA11y)} | ${pct(totalGhosteryA11y, totalVanillaA11y)} |`);
+  out.push(`| A11y(filtered) tokens | ${fmtTokens(totalVanillaA11yF)} | ${fmtTokens(totalGhosteryA11yF)} | ${pct(totalGhosteryA11yF, totalVanillaA11yF)} |`);
+  out.push(`| A11y(full) tokens | ${fmtTokens(totalVanillaA11y)} | ${fmtTokens(totalGhosteryA11y)} | ${pct(totalGhosteryA11y, totalVanillaA11y)} |`);
   out.push(`| Viewport image tokens | ${fmtTokens(totalVanillaVp)} | ${fmtTokens(totalGhosteryVp)} | ${pct(totalGhosteryVp, totalVanillaVp)} |`);
   out.push(`| Full-page image tokens | ${fmtTokens(totalVanillaFp)} | ${fmtTokens(totalGhosteryFp)} | ${pct(totalGhosteryFp, totalVanillaFp)} |`);
   out.push(`| Network bytes | ${fmtBytes(totalVanillaBytes)} | ${fmtBytes(totalGhosteryBytes)} | ${pct(totalGhosteryBytes, totalVanillaBytes)} |`);
@@ -207,7 +224,8 @@ export function renderReport(rows, { runId } = {}) {
 
   const modes = [
     { label: 'innerText + viewport screenshot', v: totalVanillaText + totalVanillaVp, g: totalGhosteryText + totalGhosteryVp },
-    { label: 'A11y tree + viewport screenshot', v: totalVanillaA11y + totalVanillaVp, g: totalGhosteryA11y + totalGhosteryVp },
+    { label: 'A11y(filtered) + viewport screenshot', v: totalVanillaA11yF + totalVanillaVp, g: totalGhosteryA11yF + totalGhosteryVp },
+    { label: 'A11y(full) + viewport screenshot', v: totalVanillaA11y + totalVanillaVp, g: totalGhosteryA11y + totalGhosteryVp },
     { label: 'Full HTML + viewport screenshot', v: totalVanillaHtml + totalVanillaVp, g: totalGhosteryHtml + totalGhosteryVp },
     { label: 'innerText + full-page screenshot', v: totalVanillaText + totalVanillaFp, g: totalGhosteryText + totalGhosteryFp },
   ];
@@ -220,18 +238,169 @@ export function renderReport(rows, { runId } = {}) {
   out.push('');
   out.push(`### + hidden cost of dismissing consent banners`);
   out.push('');
-  out.push(`Assumption: an agent needs **${CONSENT_DISMISS_AGENT_LOOPS} extra loops × ${TOKENS_PER_AGENT_LOOP.toLocaleString()} tokens each** to read a consent dialog, decide on a button, and click it. That cost is paid by vanilla but skipped by Ghostery's autoconsent.`);
-  out.push('');
-  out.push('| Mode | Vanilla $/load (incl. consent dismiss) | Ghostery $/load | Saved $/load | Saved $/1k loads |');
-  out.push('|---|---:|---:|---:|---:|');
-  for (const m of modes) {
-    const vUsd = costUsd((m.v + consentOverheadVanilla) / numPages, MODEL);
-    const gUsd = costUsd((m.g + consentOverheadGhostery) / numPages, MODEL);
-    const saved = vUsd - gUsd;
-    out.push(`| ${m.label} | ${fmtUsd(vUsd)} | ${fmtUsd(gUsd)} | ${fmtUsd(saved)} | ${fmtUsd(saved * 1000)} |`);
+
+  const bannerPageIds = [];
+  for (const [id, b] of byId) {
+    if (b.vanilla && b.ghostery && !b.vanilla.error && !b.ghostery.error
+        && b.vanilla.consentBannerDetected && !b.ghostery.consentBannerDetected) {
+      bannerPageIds.push(id);
+    }
   }
-  out.push('');
-  out.push(`Pages where Ghostery dismissed a banner that vanilla still showed: ${consentOverheadVanilla / consentDismissOverheadTokens()} / ${numPages}`);
+  const numBannerPages = bannerPageIds.length;
+
+  let measuredAvgPerTurn = null;
+  if (consentTax && Array.isArray(consentTax.perPage) && numBannerPages > 0) {
+    const taxByPage = new Map(consentTax.perPage.map((r) => [r.page, r.vanillaInputTokens]));
+    const turnTokens = bannerPageIds
+      .map((id) => taxByPage.get(id))
+      .filter((n) => typeof n === 'number');
+    if (turnTokens.length) {
+      measuredAvgPerTurn = Math.round(turnTokens.reduce((a, b) => a + b, 0) / turnTokens.length);
+    }
+  }
+
+  if (measuredAvgPerTurn != null) {
+    out.push(
+      `Measured per-turn agent cost on the ${numBannerPages} banner page${numBannerPages === 1 ? '' : 's'} ` +
+      `(Anthropic \`messages.countTokens\` over system + viewport screenshot + 8 kB \`innerText\`): ` +
+      `**${measuredAvgPerTurn.toLocaleString()} input tokens / turn** (average vanilla). ` +
+      `An agent that has to dismiss the banner pays this for **${CONSENT_DISMISS_EXTRA_TURNS_LOW}–${CONSENT_DISMISS_EXTRA_TURNS_HIGH} extra turns**; Ghostery's autoconsent skips it entirely.`,
+    );
+    out.push('');
+    const scenarios = [
+      { turns: CONSENT_DISMISS_EXTRA_TURNS_LOW, note: 'conservative' },
+      { turns: CONSENT_DISMISS_EXTRA_TURNS_HIGH, note: 'typical' },
+    ];
+    for (const { turns, note } of scenarios) {
+      const overheadVanilla = measuredAvgPerTurn * turns * numBannerPages;
+      out.push(`**${turns} extra turns / banner (${note}) — ${numBannerPages}/${numPages} pages dismiss:**`);
+      out.push('');
+      out.push('| Mode | Vanilla $/load (artifact + tax) | Ghostery $/load | Saved $/load | Saved $/1k loads | Saved % |');
+      out.push('|---|---:|---:|---:|---:|---:|');
+      for (const m of modes) {
+        const vUsd = costUsd((m.v + overheadVanilla) / numPages, MODEL);
+        const gUsd = costUsd(m.g / numPages, MODEL);
+        const saved = vUsd - gUsd;
+        const savedPct = vUsd > 0 ? `${(100 * saved / vUsd).toFixed(1)}%` : '–';
+        out.push(`| ${m.label} | ${fmtUsd(vUsd)} | ${fmtUsd(gUsd)} | ${fmtUsd(saved)} | ${fmtUsd(saved * 1000)} | ${savedPct} |`);
+      }
+      out.push('');
+    }
+    out.push(`Pages where Ghostery dismissed a banner that vanilla still showed: ${numBannerPages} / ${numPages}`);
+
+    if (trajectoryTax && Array.isArray(trajectoryTax.perPage) && trajectoryTax.perPage.length) {
+      out.push('');
+      out.push('### Layer 3 — measured trajectory tokens (per banner page)');
+      out.push('');
+      const trialCounts = new Set();
+      for (const row of trajectoryTax.perPage) {
+        trialCounts.add(row.vanilla?.n ?? 0);
+        trialCounts.add(row.ghostery?.n ?? 0);
+      }
+      const trialNote = trialCounts.size === 1 ? `${[...trialCounts][0]} trial${[...trialCounts][0] === 1 ? '' : 's'} per (page, variant)` : `${Math.min(...trialCounts)}-${Math.max(...trialCounts)} trials per (page, variant)`;
+      out.push(
+        `Anthropic computer-use (${trajectoryTax.model ?? 'sonnet-4.5'}) was driven through "identify the top headline" — ${trialNote}. Numbers are averages across trials; total input tokens include every API turn (every screenshot the agent re-saw counts again).`,
+      );
+      out.push('');
+      out.push('| Page | Vanilla turns | Vanilla input tok | Ghostery turns | Ghostery input tok | Δ turns | Δ input tok |');
+      out.push('|---|---:|---:|---:|---:|---:|---:|');
+      let sumDeltaTok = 0;
+      let nTraj = 0;
+      for (const row of trajectoryTax.perPage) {
+        const vt = row.vanilla?.avgTurns ?? 0;
+        const vin = Math.round(row.vanilla?.avgInputTokens ?? 0);
+        const gt = row.ghostery?.avgTurns ?? 0;
+        const gin = Math.round(row.ghostery?.avgInputTokens ?? 0);
+        out.push(`| ${row.page} | ${vt.toFixed(1)} | ${vin.toLocaleString()} | ${gt.toFixed(1)} | ${gin.toLocaleString()} | ${(vt - gt).toFixed(1)} | ${(vin - gin).toLocaleString()} |`);
+        sumDeltaTok += vin - gin;
+        nTraj++;
+      }
+      if (nTraj > 0) {
+        const avgDelta = Math.round(sumDeltaTok / nTraj);
+        const measuredTax1k = costUsd(avgDelta * 0.5 * 1000, MODEL);
+        out.push('');
+        out.push(
+          `**Average measured Ghostery saving on banner pages: ${avgDelta.toLocaleString()} input tokens per page-task.** ` +
+          `At 50 % banner prevalence and Sonnet 4.5 input ($3/MTok), that's **${fmtUsd(measuredTax1k)} / 1k loads** — replaces the {2, 3}-extra-turn assumption above with a real measurement.`,
+        );
+        out.push('');
+        out.push(`Headline cost-translation table with the measured tax (per-page artifact + measured banner cost at 50% prevalence):`);
+        out.push('');
+        out.push('| Mode | Vanilla $/1k (artifact + measured tax) | Ghostery $/1k | Saved $/1k | Saved % |');
+        out.push('|---|---:|---:|---:|---:|');
+        for (const m of modes) {
+          const vUsd1k = costUsd(m.v / numPages, MODEL) * 1000 + measuredTax1k;
+          const gUsd1k = costUsd(m.g / numPages, MODEL) * 1000;
+          const saved = vUsd1k - gUsd1k;
+          const pctStr = vUsd1k > 0 ? `${(100 * saved / vUsd1k).toFixed(1)}%` : '–';
+          out.push(`| ${m.label} | ${fmtUsd(vUsd1k)} | ${fmtUsd(gUsd1k)} | ${fmtUsd(saved)} | ${pctStr} |`);
+        }
+      }
+    }
+  } else {
+    out.push(
+      `Assumption: an agent needs **${CONSENT_DISMISS_AGENT_LOOPS} extra loops × ${TOKENS_PER_AGENT_LOOP.toLocaleString()} tokens each** to read a consent dialog, decide on a button, and click it. That cost is paid by vanilla but skipped by Ghostery's autoconsent. (Run \`src/measure-consent-tax.js\` to replace this with the measured per-turn cost.)`,
+    );
+    out.push('');
+    out.push('| Mode | Vanilla $/load (incl. consent dismiss) | Ghostery $/load | Saved $/load | Saved $/1k loads |');
+    out.push('|---|---:|---:|---:|---:|');
+    for (const m of modes) {
+      const vUsd = costUsd((m.v + consentOverheadVanilla) / numPages, MODEL);
+      const gUsd = costUsd((m.g + consentOverheadGhostery) / numPages, MODEL);
+      const saved = vUsd - gUsd;
+      out.push(`| ${m.label} | ${fmtUsd(vUsd)} | ${fmtUsd(gUsd)} | ${fmtUsd(saved)} | ${fmtUsd(saved * 1000)} |`);
+    }
+    out.push('');
+    out.push(`Pages where Ghostery dismissed a banner that vanilla still showed: ${consentOverheadVanilla / consentDismissOverheadTokens()} / ${numPages}`);
+  }
+
+  if (adBurden && Array.isArray(adBurden.rows) && adBurden.rows.length) {
+    out.push('');
+    out.push('## Ad burden — VLM inventory per viewport screenshot');
+    out.push('');
+    out.push(
+      `Each viewport PNG was fed to ${adBurden.model ?? 'sonnet-4.5'} with the prompt "inventory what is visible on this page; split into articles / ads / navigation / other as JSON." Counts below are how many distinct items the VLM identified per category. The signal: with the same input-token cost (a fixed-size screenshot), the model extracts *more articles and fewer ads/cookie-banner items* under Ghostery.`,
+    );
+    out.push('');
+    out.push('| Page | Variant | articles | ads | nav | other | VLM input tok | VLM output tok |');
+    out.push('|---|---|---:|---:|---:|---:|---:|---:|');
+    const byPage = new Map();
+    for (const r of adBurden.rows) {
+      if (!r) continue;
+      if (!byPage.has(r.page)) byPage.set(r.page, {});
+      byPage.get(r.page)[r.variant] = r;
+    }
+    let sumDeltaArticles = 0, sumDeltaAds = 0, sumDeltaOut = 0, deltaPages = 0;
+    for (const [page, byVariant] of byPage) {
+      for (const variant of ['vanilla', 'ghostery']) {
+        const r = byVariant[variant];
+        if (!r) continue;
+        const c = r.counts ?? {};
+        out.push(`| ${page} | ${variant} | ${c.articles ?? 'NA'} | ${c.ads ?? 'NA'} | ${c.navigation ?? 'NA'} | ${c.other ?? 'NA'} | ${r.usage?.input_tokens ?? 'NA'} | ${r.usage?.output_tokens ?? 'NA'} |`);
+      }
+      const v = byVariant.vanilla;
+      const g = byVariant.ghostery;
+      if (v?.counts && g?.counts) {
+        const dA = (g.counts.articles ?? 0) - (v.counts.articles ?? 0);
+        const dAd = (g.counts.ads ?? 0) - (v.counts.ads ?? 0);
+        const dOut = (g.usage?.output_tokens ?? 0) - (v.usage?.output_tokens ?? 0);
+        out.push(`| ${page} | **Δ** | ${dA >= 0 ? '+' : ''}${dA} | ${dAd >= 0 ? '+' : ''}${dAd} | – | – | – | ${dOut >= 0 ? '+' : ''}${dOut} |`);
+        sumDeltaArticles += dA;
+        sumDeltaAds += dAd;
+        sumDeltaOut += dOut;
+        deltaPages++;
+      }
+    }
+    if (deltaPages > 0) {
+      out.push('');
+      out.push(
+        `Aggregate over ${deltaPages} page${deltaPages === 1 ? '' : 's'} with both variants: ` +
+        `**${sumDeltaArticles >= 0 ? '+' : ''}${sumDeltaArticles} articles** identified per viewport under Ghostery, ` +
+        `**${sumDeltaAds >= 0 ? '+' : ''}${sumDeltaAds} ads**, ` +
+        `VLM output **${sumDeltaOut >= 0 ? '+' : ''}${sumDeltaOut} tokens** vs vanilla.`,
+      );
+    }
+  }
 
   out.push('');
   out.push('## Notes');
@@ -265,6 +434,8 @@ export function renderCsv(rows) {
     'innerText.tokens',
     'a11y.bytes',
     'a11y.tokens',
+    'a11yFiltered.bytes',
+    'a11yFiltered.tokens',
     'screenshot.viewport.width',
     'screenshot.viewport.height',
     'screenshot.viewport.bytes',

@@ -6,5 +6,6 @@
   { "id": "allrecipes", "url": "https://www.allrecipes.com/recipe/213268/easy-italian-spaghetti-sauce-with-meatballs/" },
   { "id": "foodnetwork", "url": "https://www.foodnetwork.com/recipes/food-network-kitchen/the-best-chocolate-chip-cookies-recipe-2120680" },
   { "id": "weather", "url": "https://weather.com/" },
-  { "id": "espn", "url": "https://www.espn.com/" }
+  { "id": "espn", "url": "https://www.espn.com/" },
+  { "id": "onet", "url": "https://www.onet.pl/" }
 ]

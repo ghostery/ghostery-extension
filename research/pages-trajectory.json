@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cnn",
+    "url": "https://www.cnn.com/",
+    "notes": "CNN homepage. EEA → OneTrust banner. Top headline visible above the fold once dismissed."
+  },
+  {
+    "id": "weather",
+    "url": "https://weather.com/",
+    "notes": "weather.com homepage. EEA → Sourcepoint TCF v2 banner. 'Top headline' = lead weather story or location prompt."
+  },
+  {
+    "id": "espn",
+    "url": "https://www.espn.com/",
+    "notes": "ESPN homepage. EEA → Disney privacy modal. Top headline = lead story."
+  },
+  {
+    "id": "onet",
+    "url": "https://www.onet.pl/",
+    "notes": "Onet.pl homepage (Polish news portal). EEA → IAB TCF v2 banner (likely Onet's own CMP)."
+  }
+]

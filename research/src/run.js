@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,10 +15,12 @@ const RESEARCH_ROOT = join(__dirname, '..');
 const RESULTS_ROOT = join(RESEARCH_ROOT, 'results');
 
 function parseArgs(argv) {
-  const out = { pages: null, headless: true, debug: false, capturePages: false, repeat: 1, extDir: null };
+  const out = { pages: null, headless: true, debug: false, capturePages: false, repeat: 1, extDir: null, pageSet: 'pages.json', region: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--pages') out.pages = (argv[++i] || '').split(',').filter(Boolean);
+    else if (a === '--page-set') out.pageSet = argv[++i];
+    else if (a === '--region') out.region = argv[++i];
     else if (a === '--headed') out.headless = false;
     else if (a === '--debug') out.debug = true;
     else if (a === '--fullpage') out.capturePages = true;
@@ -32,8 +34,10 @@ function parseArgs(argv) {
       out.repeat = n;
     } else if (a === '--help' || a === '-h') {
       console.log(
-        'Usage: node src/run.js [--pages id1,id2] [--headed] [--debug] [--fullpage] [--repeat N] [--ext-dir PATH]\n' +
-          '  --pages     restrict to these page ids from pages.json\n' +
+        'Usage: node src/run.js [--pages id1,id2] [--page-set FILE] [--region NAME] [--headed] [--debug] [--fullpage] [--repeat N] [--ext-dir PATH]\n' +
+          '  --pages     restrict to these page ids from the page-set file\n' +
+          '  --page-set  pages JSON file (default: pages.json). Try pages-eu.json or pages-us.json.\n' +
+          '  --region    tag for this run (e.g. "eu", "us"). Stored in run-meta.json and report header.\n' +
           '  --headed    run with visible browser window\n' +
           '  --debug     write chromedriver + wdio debug logs to results/<run>/<page>/\n' +
           '  --fullpage  also capture the full-page screenshot (slow: ~25s per run)\n' +
@@ -48,7 +52,7 @@ function parseArgs(argv) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const pages = JSON.parse(readFileSync(join(RESEARCH_ROOT, 'pages.json'), 'utf8'));
+const pages = JSON.parse(readFileSync(join(RESEARCH_ROOT, args.pageSet), 'utf8'));
 const selected = args.pages ? pages.filter((p) => args.pages.includes(p.id)) : pages;
 if (selected.length === 0) {
   console.error('No pages selected. Available ids:', pages.map((p) => p.id).join(', '));
@@ -59,7 +63,18 @@ const runId = new Date().toISOString().replace(/[:.]/g, '-');
 const runDir = join(RESULTS_ROOT, runId);
 mkdirSync(runDir, { recursive: true });
 
+const meta = {
+  runId,
+  pageSet: args.pageSet,
+  region: args.region,
+  repeat: args.repeat,
+  pages: selected.map((p) => p.id),
+  createdAt: new Date().toISOString(),
+};
+writeFileSync(join(runDir, 'run-meta.json'), JSON.stringify(meta, null, 2));
+
 console.log(`Run: ${runId}`);
+console.log(`Page set: ${args.pageSet}${args.region ? ` (region=${args.region})` : ''}`);
 console.log(`Pages: ${selected.map((p) => p.id).join(', ')}`);
 console.log(`Headless: ${args.headless}`);
 console.log(`Repeat: ${args.repeat}`);
@@ -128,9 +143,24 @@ const summaryPath = join(runDir, 'summary.json');
 const csvPath = join(runDir, 'summary.csv');
 const reportPath = join(runDir, 'report.md');
 
+const consentTaxPath = join(runDir, 'consent-tax.json');
+const consentTax = existsSync(consentTaxPath)
+  ? JSON.parse(readFileSync(consentTaxPath, 'utf8'))
+  : null;
+
+const trajectoryTaxPath = join(runDir, 'trajectory-tax.json');
+const trajectoryTax = existsSync(trajectoryTaxPath)
+  ? JSON.parse(readFileSync(trajectoryTaxPath, 'utf8'))
+  : null;
+
+const adBurdenPath = join(runDir, 'ad-burden.json');
+const adBurden = existsSync(adBurdenPath)
+  ? JSON.parse(readFileSync(adBurdenPath, 'utf8'))
+  : null;
+
 writeFileSync(summaryPath, JSON.stringify(rows, null, 2));
 writeFileSync(csvPath, renderCsv(rows));
-writeFileSync(reportPath, renderReport(rows, { runId }));
+writeFileSync(reportPath, renderReport(rows, { runId, consentTax, trajectoryTax, adBurden, meta }));
 
 console.log(`Wrote ${summaryPath}`);
 console.log(`Wrote ${csvPath}`);

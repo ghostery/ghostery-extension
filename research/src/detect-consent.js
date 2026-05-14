@@ -3,8 +3,8 @@ export function detectConsentBanners() {
   const vh = window.innerHeight || document.documentElement.clientHeight || 0;
   const viewportArea = vw * vh;
   const MIN_AREA_RATIO = 0.15;
-  const BUTTON_RX = /\b(?:accept all|reject all|accept (?:&|and) continue|accept cookies|reject cookies|manage (?:cookies|preferences|consent|options|choices)|save (?:preferences|choices|my choices)|do not sell|customize my (?:choices|preferences)|agree (?:&|and) (?:continue|proceed))\b/i;
-  const CMP_IFRAME_RX = /\b(?:cdn\.privacy-mgmt\.com|sourcepoint\.com|cookielaw\.org|cookiebot\.com|consentcdn\.cookiebot\.com|usercentrics\.eu|app\.usercentrics\.eu|api\.consentmanager\.net|delivery\.consentmanager\.net|cdn\.consentmanager\.net|consent-pref\.trustarc\.com|sdk\.privacy-center\.org|sdk-eu\.didomi\.io|sdk\.privacy\.tools|consent\.faithlife\.com|consensu\.org)/i;
+  const BUTTON_RX = /\b(?:accept all|reject all|accept (?:&|and) continue|accept cookies|reject cookies|manage (?:cookies|preferences|consent|options|choices)|save (?:preferences|choices|my choices)|do not sell|customize my (?:choices|preferences)|agree (?:&|and) (?:continue|proceed)|akceptuj[eę]?(?: wszystkie)?|odrzu[ćc] wszystkie|zaakceptuj|przejd[zź] do serwisu|zarz[aą]dzaj (?:zgodami|preferencjami|ustawieniami)|alle akzeptieren|alle ablehnen|einstellungen verwalten|tout accepter|tout refuser|g[eé]rer mes choix|aceptar todo|rechazar todo|gestionar preferencias|accetta tutto|rifiuta tutto|gestisci preferenze|aceitar tudo|rejeitar tudo)\b/i;
+  const CMP_IFRAME_RX = /(?:cdn\.privacy-mgmt\.com|sourcepoint\.com|cookielaw\.org|cookiebot\.com|consentcdn\.cookiebot\.com|usercentrics\.eu|app\.usercentrics\.eu|api\.consentmanager\.net|delivery\.consentmanager\.net|cdn\.consentmanager\.net|consent-pref\.trustarc\.com|sdk\.privacy-center\.org|sdk-eu\.didomi\.io|sdk\.privacy\.tools|consent\.faithlife\.com|consensu\.org|csr\.onet\.pl|\/cmp(?:[?\/]|$))/i;
   const candidates = [];
   const all = document.querySelectorAll('body *');
   for (let i = 0; i < all.length; i++) {

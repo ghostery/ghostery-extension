@@ -27,6 +27,13 @@ export function costUsd(tokens, model = 'sonnet-4.6') {
 export const CONSENT_DISMISS_AGENT_LOOPS = 3;
 export const TOKENS_PER_AGENT_LOOP = 5000;
 
+export const CONSENT_DISMISS_EXTRA_TURNS_LOW = 2;
+export const CONSENT_DISMISS_EXTRA_TURNS_HIGH = 3;
+
 export function consentDismissOverheadTokens() {
   return CONSENT_DISMISS_AGENT_LOOPS * TOKENS_PER_AGENT_LOOP;
+}
+
+export function measuredConsentTaxTokens(perTurnTokens, extraTurns) {
+  return perTurnTokens * extraTurns;
 }

@@ -21,7 +21,8 @@ Each `(page, variant)` is sampled `--repeat N` times in fresh chromedriver sessi
 |---|---|---|
 | Raw DOM | `*.html` | Agents that scrape full HTML |
 | Visible text | `*.text.txt` (`document.body.innerText`) | Most text-only agents |
-| Accessibility tree | `*.a11y.json` (Chromium `Accessibility.getFullAXTree`) | browser-use, Selenium-AI, AX-aware agents |
+| Accessibility tree, raw | `*.a11y.json` (Chromium `Accessibility.getFullAXTree`, lightly filtered) | Adversarial baseline — no production agent eats this directly |
+| Accessibility tree, filtered | `*.a11y-filtered.json` (drops `generic`/`StaticText`/layout-only nodes; keeps `role`+`name`+`value`+interactive state — see `src/filter-ax.js`) | browser-use / Selenium-AI / AX-aware agents (the realistic shape) |
 | Viewport screenshot | `*.viewport.png` (1280 × 800 PNG) | Vision agents (default frame) |
 | Full-page screenshot | `*.full.png` (page-height PNG, opt-in `--fullpage`) | Vision agents that scroll/stitch |
 | Network | `metrics.network.{requests,bytes}` from BiDi events | Cost of running the browser side |
@@ -47,9 +48,13 @@ Each `(page, variant)` is sampled `--repeat N` times in fresh chromedriver sessi
 
 ### Known caveats
 
-- The 8-page set is small and EEA-IP biased. `dailymail` and `allrecipes` currently return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP"), not consent walls — they should be replaced with reproducibly-accessible pages.
+- The 9-page set is small and **EEA-IP biased**. The current numbers are an EEA-traffic profile and conflate two distinct effects:
+  - **Consent banners** (which Ghostery's autoconsent dismisses) — only present because the EEA IP triggers GDPR consent flows. Numerous to the point of dominating the headline ($22 / 1k loads measured).
+  - **Ad inventory in the body** (which Ghostery's MV3 blocking removes) — this is *also* cut back when the publisher sees an EEA IP, so the ad-clutter effect is currently muted on US-traffic sites (`foxnews` shows essentially the same content/ad mix in vanilla vs Ghostery in EEA — a clear sign the US ad pack isn't being served). On a US IP this is expected to flip: most sites won't show a consent banner, but vanilla will get the full US ad inventory, so the ad-burden component should rise sharply. A side-by-side EEA vs US comparison is on the next-session list. Tag any new run with the originating region in `report.md`.
+- `dailymail` and `allrecipes` currently return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP"), not consent walls — they should be replaced with reproducibly-accessible pages (or kept as "anti-bot baseline" cells).
 - Vanilla browsers hit consent dialogs that Ghostery's autoconsent dismisses. That's a real difference in agent cost, not a bug — the whole point of the benchmark.
-- `gpt-tokenizer` is within ~10 % of Anthropic's tokenizer on English HTML. Use `measure-consent-tax.js` for exact numbers.
+- The consent-banner detector currently matches button text in EN / PL / DE / FR / ES / IT / PT plus a list of known CMP iframe CDNs; non-listed languages or bespoke CMPs are still possible blind spots. Cross-check with the autoconsent oracle (`metrics.autoconsent`) when adding new pages.
+- `gpt-tokenizer` is within ~10 % of Anthropic's tokenizer on English HTML. Use `measure-consent-tax.js` (Layer 2) and `measure-trajectory.js` (Layer 3) for exact numbers against the actual Anthropic tokenizer / a real computer-use agent.
 - Page content varies hour-to-hour (rotating ads, breaking news). `--repeat 5` and median picks a stable reading.
 - Failures are recorded as `navError` in the metrics, not silently dropped.
 
@@ -95,11 +100,25 @@ After a run, measure the per-turn agent cost (Layer 2) and re-render the report:
 node src/measure-consent-tax.js                        # latest run, default model
 node src/measure-consent-tax.js <runId> claude-opus-4-7
 node src/report-cli.js                                 # re-render report.md
+node src/backfill-filtered-ax.js                       # retro-add filtered A11y to an existing run
 ```
+
+Layer 3 — drive a real Anthropic computer-use agent and measure the trajectory token cost (replaces the 2-3-extra-turns assumption with a measurement):
+
+```bash
+# dry-run: navigate and capture initial state, but skip API calls
+node src/measure-trajectory.js --pages cnn,weather,espn --dry-run --ext-dir ../dist
+
+# real run (requires ANTHROPIC_API_KEY in .env). Defaults to banner pages from the latest run.
+node src/measure-trajectory.js --trials 3 --max-turns 15 --ext-dir ../dist
+node src/measure-trajectory.js --pages cnn --trials 1 --model claude-opus-4-7 --ext-dir ../dist
+```
+
+Writes `<runDir>/trajectory-tax.json` (per-page averages + totals) and `<runDir>/trajectory/<page>/<variant>.t<n>.{initial.png,trajectory.json}` per trial.
 
 Output goes to `results/<run-id>/`:
 
-- `<page>/{vanilla,ghostery}.{html,text.txt,a11y.json,viewport.png,metrics.json}` per sample (`.s{i}` suffix when `--repeat N > 1`)
+- `<page>/{vanilla,ghostery}.{html,text.txt,a11y.json,a11y-filtered.json,viewport.png,metrics.json}` per sample (`.s{i}` suffix when `--repeat N > 1`)
 - `summary.json` + `summary.csv` — machine-readable per-page metrics
 - `report.md` — human-readable comparison + $ translation
 - `consent-tax.json` — per-turn agent cost from Anthropic `count_tokens` (after Layer 2 runs)

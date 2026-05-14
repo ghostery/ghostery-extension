@@ -8,14 +8,20 @@ Quantify whether running Ghostery in a headless/automated browser reduces the in
 
 What's wired up:
 
-- **Harness** (`src/run.js`, `src/measure.js`): per-page vanilla + Ghostery, fresh chromedriver session each, median of `--repeat N`, ready-handshake-verified extension load.
-- **Visibility consent detector** (`src/detect-consent.js`): fixed/sticky + `checkVisibility` + viewport-intersection + area + (button-text OR known-CMP-iframe). Primary "is there a banner?" signal. 4/8 pages flagged dismissed under Ghostery in the latest 8-page run.
+- **Harness** (`src/run.js`, `src/measure.js`): per-page vanilla + Ghostery, fresh chromedriver session each, median of `--repeat N`, ready-handshake-verified extension load. **Anti-bot suppression** (2026-05-14): chrome launched with `--disable-blink-features=AutomationControlled` + chromedriver capabilities `excludeSwitches: ['enable-automation']` and `useAutomationExtension: false`, so `navigator.webdriver === false` and the `cdc_*` markers are absent. Without these, several CMPs (Wirtualna Polska, used by pudelek; some other Polish/EU CMPs) detect bots and refuse to render their consent dialog — every measurement before this fix was bot-lite and under-counts real-user cost.
+- **`--page-set` / `--region` / `run-meta.json`** (2026-05-14): `node src/run.js --page-set pages-eu.json --region eu` selects an alternative page-list file and tags the run with a region label in `<runDir>/run-meta.json`. `pages-eu.json` ships with 6 Polish publishers (onet / wp / interia / gazeta / pudelek / kwestiasmaku); planned next: `pages-us.json` for a US-IP run.
+- **Automation patch via managed-config** (2026-05-14, `scripts/patch-automation.sh`): now flips `disableOnboarding: true` in the built `dist/store/managed-config.js` instead of patching `dist/store/options.js` defaults. `disableOnboarding: true` triggers `manage()` (see `src/store/options.js:245-248`) to set `options.terms = true` + `options.onboarding = true`, which (a) lets autoconsent initialize, (b) skips the onboarding view, and (c) flips the computed `disableNotifications` to true — suppressing the **"Pin Ghostery — Take back control"** notification iframe that was contaminating Ghostery viewport screenshots in prior runs.
+- **Visibility consent detector** (`src/detect-consent.js`): fixed/sticky + `checkVisibility` + viewport-intersection + area + (multilingual button-text OR known-CMP-iframe). Primary "is there a banner?" signal. Button-text regex covers EN + PL + DE + FR + ES + IT + PT phrasings. CMP-iframe regex includes the major TCF-rule families (Sourcepoint / OneTrust / Cookiebot / Usercentrics / TrustArc / Didomi / consensu.org) plus `csr.onet.pl` and a generic `/cmp` path catch-all. 5/9 pages flagged dismissed under Ghostery in the latest 9-page run (cnn / nypost / weather / espn / onet).
 - **Autoconsent oracle** (`src/autoconsent-oracle.js`): injects `@duckduckgo/autoconsent`'s production rulebase in detection-only mode and reports the matched CMP. Corroborates the visibility detector on OneTrust-class banners; inconclusive on Sourcepoint TCF v2 because we only inject into the main frame (next-session item #4).
 - **Measured per-turn agent cost** (`src/measure-consent-tax.js`): calls Anthropic `count_tokens` for a realistic agent prompt over each (page, variant) and writes `consent-tax.json`. Replaces the previously-synthetic 5 k-per-loop assumption in the savings model.
+- **Filtered accessibility tree** (`src/filter-ax.js`): aggressive filter that drops `generic`/`StaticText`/`LineBreak`/`Iframe`/`LabelText`/`Figcaption`/`InlineTextBox`/`none`/`presentation` and minimizes the remaining nodes to `role` + `name` + `value` + `description` + interactive-state properties. Mimics what production agents like browser-use consume. Reduces the tree to ~14 % of the raw `getFullAXTree`; flips the A11y cost row from "Ghostery slightly costlier" to **12 – 18 % cheaper** once the measured consent tax is added. Captured per-sample as `<variant>.a11y-filtered.json`; metrics under `a11yFiltered.{bytes,tokens}`. Backfill script `src/backfill-filtered-ax.js` retro-processes existing runs.
+- **Layer 3 measured trajectory tax** (`src/measure-trajectory.js`): drives Anthropic computer-use (`computer_20250124` tool on `claude-sonnet-4-5-20250929` — note: Sonnet 4.6 / Opus 4.7 do not ship computer-use yet, so trajectory uses 4.5; pricing is identical to 4.6 at $3/MTok input). CDP-backed action dispatchers for screenshot / left_click / scroll / key / type / wait, with `--dry-run` mode. Task: "identify the top headline on this page" against cnn / weather / espn / onet homepages, 3 trials each per variant. Per-trial JSON cached on disk; `--force` to override. `--run RUN_ID` to direct output into a specific run dir. **Headline measurement**: vanilla avg 4.3 turns / 23,793 input tokens, ghostery avg 2.3 turns / 9,077 input tokens — **Ghostery saves 14,716 tokens per banner page on average** (cnn 13.1k, weather 21.0k, espn 5.7k, onet 19.1k). At Sonnet 4.5/4.6 input pricing on a 50%-banner workload: **$22.07 / 1k loads** — replaces the synthetic `{2, 3} × 3,092` model ($9.28–$13.93 / 1k). Vanilla varies 3–6 turns trial-to-trial; ghostery is 2 turns on EN pages, 3 turns on onet. Artifacts: `<runDir>/trajectory/<page>/<variant>.t{1,2,3}.{initial.png,trajectory.json}` + aggregated `<runDir>/trajectory-tax.json`.
 
-Latest headline (run `2026-05-13T18-58-19-691Z`, see §"Headline data"): the dominant savings is **not** artifact size — text/HTML/A11y are flat-to-slightly-larger under Ghostery because autoconsent reveals more body content. The savings come from the agent not having to dismiss the banner. Measured per-turn cost is ~3.1 k tokens on banner pages; with a 2-3 extra-turn assumption this is **$9-14 per 1 000 page loads** at Sonnet 4.6 input pricing.
+Latest **EU-native** headline (run `2026-05-14T12-50-26-498Z`, 6 Polish pages on PL IP, **anti-bot suppression on**, methodology refresh): aggregate artifact tokens are now negative across the board under Ghostery — HTML −13.6 %, `innerText` −14.6 %, filtered A11y −5.2 %, raw A11y −5.0 %, network bytes −2.5 %. Combined with Layer-2 per-turn cost (avg 4,357 tok/turn vanilla on banner pages) × {2, 3} extra turns: total bill savings are **57 % for innerText+screenshot agents**, **26 % for filtered-A11y agents**, and **17 % for full-HTML scrapers** (up from 3 – 4 % on the prior cross-region set — native Polish ad load is real). 6/6 pages banner-bearing once `navigator.webdriver` is suppressed.
 
-What's next (in priority order): **Layer 3** — drive Anthropic computer-use on 2-3 banner pages and measure the extra-turn count for real. See §"Next session — priorities" for the full stack.
+Separate ad-burden finding (Layer 4, this session): when a VLM is asked to inventory a viewport screenshot (same 1,326 input tokens both variants), vanilla cells emit **2.05× more output tokens** on the Polish set (4,670 vs 2,273 total) — and 2/6 vanilla viewports (onet, gazeta) were so cluttered the model failed JSON output entirely. `src/measure-ad-burden.js`, written to `<runDir>/ad-burden.json`.
+
+Prior **cross-region** headline (run `2026-05-14T10-18-40-218Z`, 9 pages US-on-EEA-IP) is now known to be **bot-lite** — captured before `navigator.webdriver` suppression. Numbers were 70 % innerText / 26 % filtered-A11y / 3 % full-HTML savings = $22 / 1k loads, which under-counts what a real-user agent pays. Re-run pending.
 
 ## Harness — what works
 
@@ -103,14 +109,15 @@ Average per-turn vanilla on banner pages: **3 092 tokens**. (Compare to the prev
 
 Multiplier: a banner-bearing turn-sequence is "see banner → decide → click → re-read." We assume **2 extra turns** (conservative) or **3 extra turns** (aggressive) of vanilla overhead beyond the single read-and-extract turn Ghostery requires. Layer 3 (real Anthropic computer-use trajectories on 2-3 banner pages) is the next-session item that turns this assumption into a measurement.
 
-Per 1 k page loads, assuming 4/8 = 50 % banner prevalence (every other load hits a banner page) and ~3 100 tokens per banner-page agent turn:
+Per 1 k page loads, assuming 4/8 = 50 % banner prevalence (every other load hits a banner page):
 
-| Extra-turns assumption | Banner-page tax | Per 1 k loads | Saved (Sonnet 4.6 input) |
+| Model | Banner-page tax | Per 1 k loads | Saved (Sonnet 4.5/4.6 input) |
 |---|---:|---:|---:|
-| 2 extra turns / banner | 6 200 t / banner page | 3.10 M tokens / 1 k loads | **$9.28 / 1 k** |
-| 3 extra turns / banner | 9 300 t / banner page | 4.64 M tokens / 1 k loads | **$13.93 / 1 k** |
+| Synthetic, 2 extra turns × Layer-2 ~3.1 k tok/turn | 6 200 t | 3.10 M tokens / 1 k loads | $9.28 / 1 k |
+| Synthetic, 3 extra turns × Layer-2 ~3.1 k tok/turn | 9 300 t | 4.64 M tokens / 1 k loads | $13.93 / 1 k |
+| **Layer 3 measurement** (cnn / weather / espn, n=3 each) | **13 258 t** | **6.63 M tokens / 1 k loads** | **$19.89 / 1 k** |
 
-The previous synthetic model used 3 loops × 5 k = 15 k tokens / banner → $22.50 / 1 k, ~60–150 % higher than the measured range. Still material; story unchanged, just defensible numbers now.
+The Layer 3 measurement is higher than the static model because each extra agent turn re-sends the message history (every prior screenshot), so the per-turn cost compounds. The Layer-2 `count_tokens` measurement (~3.1 k tok / turn) underestimates the real cost; the real trajectory averages ~5.2 k input tokens per turn after history bloat. The earlier 5 k × 3-loops synthetic ($22.50 / 1 k) was actually quite close to the measured value — by accident.
 
 Story: Ghostery does **not** make page payloads smaller — in this 8-page set the text/HTML/A11y artifact sizes are flat-to-slightly-bigger because autoconsent reveals body content that vanilla hides under banners. The savings come from the agent **not having to dismiss the banner itself**. The per-turn tax is the boilerplate (~200 t) + viewport screenshot (~1 366 t) + truncated text (~1 500 t) the agent re-pays for each turn vanilla spends locating and clicking the dismiss button.
 
@@ -127,17 +134,18 @@ Story: Ghostery does **not** make page payloads smaller — in this 8-page set t
 
 ## Next session — priorities
 
-Layers 1 + 2 of the consent-tax measurement stack landed this session. The remaining gaps, in order:
+Layers 1 + 2 + 3 of the consent-tax measurement stack are landed, plus filtered-A11y, multilingual consent detection, anti-bot suppression, region-tagged runs, and the ad-burden (Layer 4) measurement. The remaining gaps, in order:
 
-1. **Layer 3 — real Anthropic computer-use trajectory on 2-3 banner pages.** Replaces the "2-3 extra turns" assumption with a measurement. For each of cnn, weather, espn: drive Anthropic's computer-use tool to "extract the article's first paragraph," both variants, 3 trials each, capturing total input tokens consumed. Use those trajectory totals as the "per-banner agent tax" in the headline. ~1 day.
+1. **Layer 3 (trajectory) on the EU run.** `2026-05-14T12-50-26-498Z` has Layer 1 + 2 + ad-burden but no real computer-use trajectory yet. With per-turn cost now at ~4,357 tok/turn on Polish pages (vs ~3,100 tok/turn on US-on-EEA), the measured trajectory tax should land in the **$60–$100 / 1k** range — materially bigger than the current headline implies. Estimated cost: ~$0.50–$1 of Sonnet 4.5 spend. Run: `node src/measure-trajectory.js --run 2026-05-14T12-50-26-498Z --page-set pages-eu.json --trials 3 --ext-dir ../dist`.
+2. **Cross-region re-run with anti-bot suppression.** Prior 9-page US-on-EEA headline (`2026-05-14T10-18-40-218Z`, $22 / 1k) was bot-lite. Re-run with the new `measure.js` flags + multilingual detector to get a defensible cross-region number. ~10 min, no API.
+3. **US-native run** when VPN to US IP is available. New `pages-us.json` (subset of current EN pages + maybe a Reuters / WaPo article). Should isolate the "native US ad load" effect that EEA IPs don't see.
+4. **Replace dailymail + allrecipes pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine and contribute nothing to the consent / blocking story. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article.
 
 2. **Replace dailymail + allrecipes with reproducible test pages.** Both return anti-bot blocks (Edgesuite "Access Denied" / People Inc. "blocked your IP") from the current machine. They contribute nothing to the consent / blocking story and inflate the network-bytes "+17.9 %" number because Ghostery's autoconsent worker scripts still load against a 403. Pick two pages where (a) the agent would realistically want the content, (b) a consent banner is present in EEA, (c) the IP doesn't get blocked. Candidates: an Independent article, a Reuters piece, a Wired article.
 
-3. **A11y filtering** (problem #4 below, ≈ half a day). The new detector run shows A11y aggregate **+5.3 %** under Ghostery — worse than the previous run's −3.7 %. The realistic-agent answer is filtered AX trees (`interestingOnly: true` style); capture both raw + filtered and report filtered as primary. That's the row a skeptic will quote against the headline.
+3. **Fix the autoconsent oracle's iframe-blind spot.** Currently the oracle injects only into the main frame, so Sourcepoint TCF v2 / Quantcast / other iframe-CMP banners come back `lifecycle: "started"` (inconclusive). Fix by enumerating frames via CDP `Target.getTargets` and injecting into each. Improves the auxiliary "X / Y banners with a production-CMP rule" number.
 
-4. **Fix the autoconsent oracle's iframe-blind spot.** Currently the oracle injects only into the main frame, so Sourcepoint TCF v2 / Quantcast / other iframe-CMP banners come back `lifecycle: "started"` (inconclusive). Fix by enumerating frames via CDP `Target.getTargets` and injecting into each. Improves the auxiliary "X / Y banners with a production-CMP rule" number.
-
-Then in priority order: #5 (cross-region — the EEA-vs-US flip is currently un-tested), coverage extrapolation (Tranco top-1k EEA + autoconsent rule presence → $/million-loads headline), #8 (remaining report polish), #6 (BiDi `webExtension.install`, low value).
+Then in priority order: cross-region (the EEA-vs-US flip is currently un-tested), coverage extrapolation (Tranco top-1k EEA + autoconsent rule presence → $/million-loads headline), remaining report polish, BiDi `webExtension.install` (low value).
 
 ## Open problems (one per future session)
 
@@ -214,9 +222,25 @@ Once (a)+(c) ship, re-run espn 10× and confirm 0/10 failures.
 
 First observation already: even with the espn flakiness fix, `--repeat 3` on espn showed Ghostery HTML tokens swinging between 71 k and 263 k across the three samples. The big-html samples have iframeCount=3, the small-html sample has iframeCount=1 — the MV3 adblocker engine isn't always fully loaded by the time the first navigation extracts. The current 4 s warmup is sometimes too short. **Action: bump `GHOSTERY_WARMUP_SETTLE_MS` or add a content-script readiness probe.** Tracking as problem #9 below.
 
-### 4. A11y mode realism — capture filtered tree, not full
+### 4. ~~A11y mode realism — capture filtered tree, not full~~ — done (`src/filter-ax.js`)
 
-`Accessibility.getFullAXTree` returns 190 k+ tokens for cnn — huge and not what real agents consume. Real agents use `interestingOnly: true`-style filtering or `aria-snapshot`. Capture both a "raw" full tree (current) and a "filtered" tree (drop nodes whose role is `none` / `presentation` / `InlineTextBox` / `text` if no name; drop nodes with no name and no children). Report the filtered cost as primary.
+Filter rule lives in `src/filter-ax.js`:
+
+- Drop nodes whose role is in `{generic, none, presentation, InlineTextBox, LineBreak, StaticText, Iframe, LabelText, Figcaption}`.
+- For surviving nodes, serialize only `{nodeId, role, name.value, value.value, description.value, childIds, parentId, properties (focused/focusable/expanded/checked/disabled/pressed/selected/required/invalid/level only)}`. Drop `chromeRole`, `name.sources`, `backendDOMNodeId`, `frameId`, `ignored`, empty `properties`.
+
+Captured per-sample as `<variant>.a11y-filtered.json` alongside the existing `<variant>.a11y.json`. Metrics: `a11yFiltered.{bytes,tokens}`. Backfill for existing runs: `node src/backfill-filtered-ax.js [runId]`.
+
+**Effect on the headline (run `2026-05-13T18-58-19-691Z`):**
+
+| Aggregate | Raw `getFullAXTree` | Filtered |
+|---|---:|---:|
+| Vanilla total tokens | 982.5 k | 136.1 k |
+| Ghostery total tokens | 1 034.4 k | 141.3 k |
+| Δ (Ghostery − Vanilla) | +5.3 % | +3.8 % |
+| Cost row (artifact + measured consent tax, 2-3 extra turns): | −1.4 % to −2.7 % | **+11.5 % to +17.5 % savings** |
+
+The filter cuts the tree to ~14 % of raw size, and once the measured consent tax is added on top, the A11y row flips from "Ghostery costlier" to a real savings — the row a skeptic would have quoted now goes the other way.
 
 ### 5. Cross-region consent-wall reproducibility
 
