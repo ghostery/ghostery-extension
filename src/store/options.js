@@ -67,6 +67,12 @@ const Options = {
     trustedScriptlets: false,
   },
 
+  // Distractions
+  distractions: {
+    google: false,
+    reddit: false,
+  },
+
   // Experimental features
   autoconsent: { autoAction: 'optOut', gpc: true },
   fixesFilters: true,

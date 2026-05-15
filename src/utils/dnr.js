@@ -27,6 +27,8 @@ export const REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE = {
 export const GPC_RULE_ID = 6_000_000;
 export const GPC_RULE_PRIORITY = 40_000;
 
+export const DISTRACTIONS_ID_RANGE = { start: 6_000_001, end: 7_000_000 };
+
 export const REDIRECT_PROTECTION_SESSION_OFFSET = 100_000;
 
 export const PAUSED_RULE_PRIORITY = 10_000_000;
