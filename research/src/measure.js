@@ -89,7 +89,7 @@ const EXT_ZIP = join(REPO_ROOT, 'web-ext-artifacts/ghostery-automation-chromium.
 
 const VIEWPORT = { width: 1280, height: 800 };
 const NAV_TIMEOUT_MS = 30_000;
-const SETTLE_AFTER_LOAD_MS = 2_500;
+const SETTLE_AFTER_LOAD_MS = 5_000;
 const GHOSTERY_WARMUP_FALLBACK_MS = 4_000;
 const GHOSTERY_READY_TIMEOUT_MS = 30_000;
 const WARMUP_URL = 'https://example.com/';

@@ -1,0 +1,6 @@
+[
+  { "id": "cnn", "url": "https://www.cnn.com/", "notes": "CCPA Agree-modal (visibility detector)" },
+  { "id": "forbes", "url": "https://www.forbes.com/", "notes": "Ketch CMP (oracle, shadow DOM) — modal renders probabilistically" },
+  { "id": "theverge", "url": "https://www.theverge.com/", "notes": "OneTrust CMP (oracle, shadow DOM)" },
+  { "id": "theguardian", "url": "https://www.theguardian.com/us", "notes": "Guardian CCPA \"Do not sell\" modal — visible in screenshot, shadow DOM (neither signal catches yet)" }
+]
