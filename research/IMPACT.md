@@ -29,15 +29,21 @@ EU numbers are *measured* end-to-end (Layer 1 artifact tokens + Layer 3 real Ant
 
 For a 50 / 50 cross-region traffic mix, an innerText-and-screenshot agent (the most common modern agent shape — browser-use, Selenium-AI, Skyvern) saves **~48 – 56 %**.
 
-## What we found
+## Where the cost actually comes from
 
-In both regions, Ghostery cuts cost through three effects, in decreasing magnitude:
+Picture one page — wp.pl. The agent's job: "find the top headline." The bill breaks into four pieces.
 
-1. **Skipped banner-dismissal turns.** When a consent dialog blocks the page, the agent has to take a screenshot, decide which button, click, wait, re-screenshot. Each of those turns re-sends every prior screenshot back to the model. A 5-turn run costs roughly 5× a 2-turn run, even though the *content* the agent walks away with is the same. Ghostery's autoconsent dismisses the banner before the agent ever sees it — vanilla burns those turns, Ghostery doesn't.
-2. **Cleaner viewport for vision models.** When a vision model inventories the page, a cluttered vanilla viewport generates more output tokens and on the worst pages causes the model to fail JSON output entirely (2 / 6 Polish vanilla pages did). A clean Ghostery viewport saves output tokens on cluttered pages (~50 % less output on EU) but actually generates *more* output on US / CA — because cleaner pages surface +69 % articles for the model to itemize.
-3. **Page-payload size.** HTML, text and accessibility-tree sizes barely move (±5 % either way). Ghostery does not make pages smaller; it makes them less *expensive to act on*.
+**1. The size of one look.** Every time the agent looks at the page, *something* gets sent to the model — the HTML, just the visible text, an accessibility outline, or a screenshot. Different agents use different things, so we measure all four. Sizes range from a few hundred tokens (plain text) to over a million (raw HTML).
 
-The total saving is dominated by effect (1). Effects (2) and (3) are real but smaller.
+**2. The overhead of one look.** A single round-trip to the model: send the page, get back the next action. Around 3 000 – 5 000 tokens once you add the system prompt, the image, and a slice of page text.
+
+**3. How many looks the task takes.** This is the killer. The model has no memory between calls — every new turn re-sends *everything* from earlier turns. A 5-look task isn't 5 × a 1-look task; it's closer to **15 ×**, because turn 5 re-reads turns 1, 2, 3, and 4. When a consent banner blocks the page, the agent burns 4 extra looks finding and clicking dismiss, each one re-paying for every prior look. **Almost all of Ghostery's saving comes from here** — autoconsent dismisses the banner before the agent ever sees it.
+
+**4. What the model writes back.** If the agent asks the model to *describe* what's on screen (e.g. "list articles, ads, buttons"), a cluttered page produces more output. A clean Ghostery page produces less, usually — though on US sites it sometimes produces *more* output because the clean page surfaces more articles for the model to list. Small effect either way.
+
+**How they combine.** Bill per page-load ≈ (size of one look) × (how many looks) + (whatever the model writes back). Ghostery does almost nothing to *size* — pages don't shrink. It dramatically cuts *how many looks* by eliminating the banner-dismissal loop. That's the whole story; everything else is a rounding effect.
+
+The four pieces are called Layer 1 / 2 / 3 / 4 throughout the codebase and per-run reports — same concepts, shorter names.
 
 ## Per-region detail
 
