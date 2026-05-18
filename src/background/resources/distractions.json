@@ -1,0 +1,15 @@
+{
+  "google": [
+    "||accounts.google.com/gsi/client$script,3p",
+    "||accounts.google.com/gsi/button$subdocument,3p",
+    "##[id=\"credential_picker_container\"]",
+    "##[id=\"credential_picker_iframe\"]"
+  ],
+  "reddit": [
+    "reddit.com##xpromo-blocking-modal",
+    "reddit.com##xpromo-nsfw-blocking-modal",
+    "reddit.com##[bundlename=\"mweb_xpromo\"]",
+    "reddit.com##div[class*=\"XPromoPopup\"]",
+    "reddit.com##div[class*=\"XPromoBottomBar\"]"
+  ]
+}

@@ -14,43 +14,28 @@ import { parseFilters } from '@ghostery/adblocker';
 import { xxh32 } from 'minixxh/xxh32';
 
 import Options from '/store/options.js';
+
 import { DISTRACTIONS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import { reloadMainEngine } from './adblocker/engines.js';
 
-const DISTRACTION_FILTERS = {
-  // Block the GSI client script on third-party pages (prevents both in-page One Tap
-  // overlay and the native FedCM browser prompt from initializing)
-  google:
-    // Block the GSI client script on third-party pages (prevents One Tap and FedCM prompts)
-    '||accounts.google.com/gsi/client$script,3p\n' +
-    // Block the Sign-In button iframe
-    '||accounts.google.com/gsi/button$subdocument,3p\n' +
-    // Hide the in-page One Tap overlay container and iframe as a fallback
-    '##[id="credential_picker_container"]\n' +
-    '##[id="credential_picker_iframe"]',
-  // Hide the "Open in app" / "Continue in app" interstitials and bottom bars on
-  // mobile reddit.com so the web version stays usable.
-  reddit:
-    'reddit.com##xpromo-blocking-modal\n' +
-    'reddit.com##xpromo-nsfw-blocking-modal\n' +
-    'reddit.com##[bundlename="mweb_xpromo"]\n' +
-    'reddit.com##div[class*="XPromoPopup"]\n' +
-    'reddit.com##div[class*="XPromoBottomBar"]',
-};
+import { reloadMainEngine } from './adblocker/engines.js';
+import filters from './resources/distractions.json';
 
 function getFiltersChecksum() {
-  const bytes = new TextEncoder().encode(Object.values(DISTRACTION_FILTERS).join('\n'));
+  const bytes = new TextEncoder().encode(
+    Object.values(filters)
+      .map((filters) => filters.join('\n'))
+      .join('\n'),
+  );
   return xxh32(bytes, 0, bytes.length).toString(16);
 }
 
 async function updateDistractions(distractions) {
   const enabledFilters = Object.entries(distractions)
     .filter(([, enabled]) => enabled)
-    .map(([id]) => DISTRACTION_FILTERS[id])
-    .filter(Boolean);
+    .flatMap(([id]) => filters[id] || []);
 
   if (enabledFilters.length === 0) {
     engines.remove(engines.DISTRACTIONS_ENGINE);

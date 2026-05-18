@@ -68,10 +68,7 @@ const Options = {
   },
 
   // Distractions
-  distractions: {
-    google: false,
-    reddit: false,
-  },
+  distractions: store.record(false),
 
   // Experimental features
   autoconsent: { autoAction: 'optOut', gpc: true },
