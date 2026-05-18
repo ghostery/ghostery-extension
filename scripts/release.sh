@@ -51,7 +51,7 @@ prNumber=$(gh pr list --head release --state open --json number --jq '.[0].numbe
 if [ -n "$prNumber" ]; then
   gh pr edit "$prNumber" --title "Release v$version" --body "$prBody"
 else
-  gh pr create --base main --head release --title "Release v$version" --body "$prBody"
+  gh pr create --base main --head release --title "Release v$version" --body "$prBody" --label "package" --reviewer "AdamGhst"
 fi
 
 # Open Xcode
