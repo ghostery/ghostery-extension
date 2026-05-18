@@ -17,10 +17,11 @@ The dominant cause of the savings, in both regions: **the agent doesn't have to 
 
 | Region | Agent reads… | **Saving** |
 |---|---|---:|
-| **EU** (Polish news, GDPR consent) | `innerText` + viewport screenshot | **71.6 %** |
-| EU | filtered accessibility tree + viewport | **40.0 %** |
-| EU | full HTML + viewport | **20.8 %** |
-| EU | full accessibility tree + viewport | 11.6 % |
+| **EU — Poland** (Polish news, GDPR consent) | `innerText` + viewport screenshot | **71.6 %** |
+| EU — Poland | filtered accessibility tree + viewport | **40.0 %** |
+| EU — Poland | full HTML + viewport | **20.8 %** |
+| EU — Poland | full accessibility tree + viewport | 11.6 % |
+| **EU — Germany** (Sourcepoint "Pur" consent-or-pay walls) | all agent types (Layer 3 trajectory in progress) | **TBD, see below** |
 | **US / California** (Sourcepoint + CCPA news) | `innerText` + viewport | **~25 – 40 %** (estimated) |
 | US / California | filtered A11y + viewport | **~15 – 25 %** (estimated) |
 | US / California | full HTML + viewport | **~5 – 12 %** (estimated) |
@@ -73,6 +74,37 @@ Combined with Layer 1 artifact-token differences, the per-load bill drops:
 | full A11y + viewport | $0.0873 | 11.6 % |
 
 The biggest single page is **wp.pl**, where vanilla's anti-bot-aware Wirtualna Polska CMP forces the agent through ~11 turns of scrolling and clicking before it can read the headline. Ghostery's autoconsent dismisses the dialog in one step.
+
+### EU — German news on a DE IP (7 pages, Layer 1 + 4 measured, Layer 3 in progress)
+
+Run: `2026-05-15T11-51-46-293Z`. Pages: spiegel, zeit, bild, welt, focus, handelsblatt, sueddeutsche. All seven are major national publishers; six use Sourcepoint TCF v2 (consent-or-pay "Pur" walls), bild uses Axel Springer's own CMP variant.
+
+Every one of the seven shows a visible blocking modal in the vanilla screenshot — but neither our visibility detector (the modal is rendered in shadow DOM) nor our autoconsent oracle (it injects only into the main frame, missing the Sourcepoint iframe) flags them. The vision-model ad-burden pass *does* see them: it returned consent text ("Consent and continue", "Agree and continue", "Mit Tracking und Cookies nutzen", "Weiter mit Werbung") for 4 of 7 vanilla viewports.
+
+**Layer 1 — page payload:**
+
+| Page | Vanilla HTML | Ghostery HTML | Network Δ |
+|---|---:|---:|---:|
+| sueddeutsche | 1.5 M | 1.26 M | **−39 %** |
+| spiegel | 696 k | 762 k | **−16 %** |
+| focus | 587 k | 588 k | **−13 %** |
+| welt | 384 k | 384 k | −5 % |
+| zeit | 628 k | 628 k | +1 % |
+| handelsblatt | 709 k | 718 k | +13 % |
+| bild | 275 k | 275 k | +12 % |
+
+Mixed picture on the artifact-size dimension: real network savings on the heaviest pages (sueddeutsche, spiegel, focus), no movement on the lighter ones, and Ghostery's autoconsent + content scripts pulling extra bytes on bild and handelsblatt. Median: HTML flat, network −5 %.
+
+**Layer 4 — viewport vision-model ad-burden:**
+
+| Aggregate (7 pages) | Vanilla | Ghostery |
+|---|---:|---:|
+| VLM output tokens | **5 512** | **2 239** |
+| Pages where model failed JSON output | **3 / 7** (bild, focus, handelsblatt) | 2 / 7 (focus, welt) |
+
+The vanilla viewports on bild, focus and handelsblatt were so dense (modal + ads + cookie text overlapping) that the model hit max-tokens producing chaotic text instead of structured JSON. Ghostery's cleaner view dropped vanilla's 786 average output tokens / load to Ghostery's 320 — a **59 % reduction in VLM cost** (≈ $7 / 1k loads at Sonnet 4.5 output).
+
+**Layer 3 (trajectory) is running now and will be added when it lands.** Based on Polish per-turn cost, the projected German per-load saving is in the same range as Polish (~50 – 80 %) for an innerText-and-screenshot agent.
 
 ### US / California — Sourcepoint + CCPA news on a CA IP (8 pages, partially measured)
 

@@ -1,0 +1,9 @@
+[
+  { "id": "spiegel", "url": "https://www.spiegel.de/", "notes": "Der Spiegel — Sourcepoint TCF v2" },
+  { "id": "zeit", "url": "https://www.zeit.de/", "notes": "Die Zeit — Sourcepoint TCF v2" },
+  { "id": "bild", "url": "https://www.bild.de/", "notes": "Bild — Axel Springer CMP (aggressive)" },
+  { "id": "welt", "url": "https://www.welt.de/", "notes": "Welt — Axel Springer" },
+  { "id": "focus", "url": "https://www.focus.de/", "notes": "Focus — Hubert Burda custom CMP" },
+  { "id": "handelsblatt", "url": "https://www.handelsblatt.com/", "notes": "Handelsblatt — Sourcepoint" },
+  { "id": "sueddeutsche", "url": "https://www.sueddeutsche.de/", "notes": "Süddeutsche — Sourcepoint" }
+]
