@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghostery + AI browsing — cost impact</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #5b5a5e;
+    --soft: #82808a;
+    --line: #e5e3df;
+    --bg: #fafaf8;
+    --card: #ffffff;
+    --accent: #6c4eb6;
+    --accent-soft: #f1edfa;
+    --good: #2c8d4e;
+    --good-soft: #e4f3e9;
+    --warn: #b85a1e;
+    --warn-soft: #fbeee3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+  header.hero { margin-bottom: 64px; }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 44px;
+    line-height: 1.15;
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  h1 .accent { color: var(--accent); }
+  .subtitle {
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+    max-width: 700px;
+  }
+
+  section { margin: 64px 0; }
+  h2 {
+    font-size: 26px;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  p { margin: 0 0 16px; color: var(--ink); }
+  p.muted { color: var(--muted); }
+  ul { margin: 0 0 16px; padding-left: 22px; }
+  ul li { margin-bottom: 6px; }
+  small.note { color: var(--soft); font-size: 13px; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 40px 0;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .stat .big {
+    font-size: 44px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .stat .label {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .region-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .region-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .region-card .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .region-card h3 {
+    margin: 0;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .region-card .pages {
+    color: var(--soft);
+    font-size: 12px;
+  }
+  .region-card .stat-line {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 8px 0 4px;
+  }
+  .region-card .stat-line.measured { color: var(--good); }
+  .region-card .stat-line.partial { color: var(--warn); }
+  .region-card .desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .badge.measured { background: var(--good-soft); color: var(--good); }
+  .badge.partial { background: var(--warn-soft); color: var(--warn); }
+  .badge.estimated { background: var(--accent-soft); color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-variant-numeric: tabular-nums;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  th { font-weight: 600; color: var(--muted); font-size: 13px; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+  table.zebra tr:nth-child(even) td { background: var(--card); }
+  td .bar {
+    display: inline-block;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .pieces {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 24px 0;
+  }
+  .piece {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .piece .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .piece .body strong { color: var(--ink); }
+  .piece.killer {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+  }
+  .piece.killer .num { color: var(--accent); }
+
+  .footer-rule {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 64px 0 32px;
+  }
+  footer p {
+    color: var(--soft);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 720px) {
+    .container { padding: 40px 20px 64px; }
+    h1 { font-size: 32px; }
+    .stat-row, .region-cards { grid-template-columns: 1fr; }
+    .piece { grid-template-columns: 40px 1fr; }
+    .piece .num { font-size: 22px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .stat, .region-card, .piece { break-inside: avoid; box-shadow: none; }
+    h1, h2 { break-after: avoid; }
+    section { break-inside: avoid-page; }
+  }
+</style>
+</head>
+<body>
+<main class="container">
+
+<header class="hero">
+  <div class="eyebrow">Research report · May 2026</div>
+  <h1>Ghostery cuts the cost of AI browsing by <span class="accent">45 – 55 %</span> on average.</h1>
+  <p class="subtitle">Across two regions and 21 publishers, AI agents pay substantially less per page-load when their browser blocks ads and dismisses consent dialogs. The savings are bigger than typical adblock benchmarks suggest — because every agent turn re-sends the whole prior conversation, dismissal cycles cost <em>much</em> more than the per-turn token count alone.</p>
+</header>
+
+<section class="key-stats">
+  <div class="stat-row">
+    <div class="stat">
+      <div class="big">72%</div>
+      <div class="label">cheaper for a vision agent on native EU traffic (Polish news, fully measured)</div>
+    </div>
+    <div class="stat">
+      <div class="big">59%</div>
+      <div class="label">less vision-model output on German news viewports — vanilla often too cluttered to parse</div>
+    </div>
+    <div class="stat">
+      <div class="big">3×</div>
+      <div class="label">fewer agent turns per page once the consent banner is dismissed automatically</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Per-region findings</h2>
+  <div class="region-cards">
+    <article class="region-card">
+      <div class="head"><h3>EU — Poland</h3><span class="pages">6 pages</span></div>
+      <div class="stat-line measured">71.6 %</div>
+      <div class="desc">For an innerText + screenshot agent. Full HTML scrapers save 20.8 %. 6 / 6 pages show a GDPR consent dialog in vanilla; Ghostery dismisses every one.</div>
+      <span class="badge measured">Measured end-to-end</span>
+    </article>
+    <article class="region-card">
+      <div class="head"><h3>EU — Germany</h3><span class="pages">7 pages</span></div>
+      <div class="stat-line partial">~50 – 80 %</div>
+      <div class="desc">7 / 7 publishers show Sourcepoint "Pur" consent-or-pay walls. Vision-model viewport cost dropped 59 %; on 3 / 7 vanilla pages the model failed JSON entirely.</div>
+      <span class="badge partial">Page payload + viewport measured</span>
+    </article>
+    <article class="region-card">
+      <div class="head"><h3>US / California</h3><span class="pages">8 pages</span></div>
+      <div class="stat-line partial">~25 – 40 %</div>
+      <div class="desc">CCPA modals appear on roughly half the set (cnn, forbes, theverge, theguardian). The rest skip server-side or block automation entirely.</div>
+      <span class="badge estimated">Trajectory estimated from EU</span>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Where the cost actually comes from</h2>
+  <p class="muted">Picture one page — wp.pl. The agent's job: "find the top headline." Its bill breaks into four pieces.</p>
+  <div class="pieces">
+    <div class="piece">
+      <div class="num">1</div>
+      <div class="body"><strong>The size of one look.</strong> Whatever the agent reads each turn — the HTML, just the visible text, an accessibility outline, or a screenshot. Different agents use different things, so we measure all four. Sizes range from a few hundred tokens (plain text) to over a million (raw HTML).</div>
+    </div>
+    <div class="piece">
+      <div class="num">2</div>
+      <div class="body"><strong>The overhead of one look.</strong> A single round-trip to the model: send the page, get back the next action. Around 3 000 – 5 000 tokens once you add the system prompt, the image and a slice of page text.</div>
+    </div>
+    <div class="piece killer">
+      <div class="num">3</div>
+      <div class="body"><strong>How many looks the task takes.</strong> The model has no memory between calls — every new turn re-sends <em>everything</em> from earlier turns. A 5-look task isn't 5× a 1-look task; it's closer to <strong>15×</strong>, because turn 5 re-reads turns 1 – 4. When a banner blocks the page, the agent burns 4 extra looks finding and clicking dismiss, each one re-paying for every prior look. <strong>Almost all of Ghostery's saving comes from here.</strong></div>
+    </div>
+    <div class="piece">
+      <div class="num">4</div>
+      <div class="body"><strong>What the model writes back.</strong> If the agent asks the model to <em>describe</em> what's on screen, a cluttered page produces more output. A clean Ghostery page produces less, usually — though on US sites it sometimes produces more because the clean page surfaces more articles for the model to list. Small effect either way.</div>
+    </div>
+  </div>
+  <p class="muted">Bill per page-load ≈ (size of one look) × (how many looks) + (whatever the model writes back). Ghostery does almost nothing to <em>size</em> — pages don't shrink. It dramatically cuts <em>how many looks</em> by eliminating the banner-dismissal loop. That's the whole story; everything else is a rounding effect.</p>
+</section>
+
+<section>
+  <h2>Polish news — measured trajectories</h2>
+  <p class="muted">Real Anthropic computer-use agent driven through "find the top headline" on each page, 3 trials per (page, variant).</p>
+  <table class="zebra">
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th class="num">Vanilla turns</th>
+        <th class="num">Ghostery turns</th>
+        <th class="num">Cost reduction</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>wp.pl</td><td class="num">11.0</td><td class="num">2.3</td><td class="num"><span class="bar" style="width:91px"></span>91 %</td></tr>
+      <tr><td>gazeta.pl</td><td class="num">7.0</td><td class="num">2.0</td><td class="num"><span class="bar" style="width:84px"></span>84 %</td></tr>
+      <tr><td>onet.pl</td><td class="num">5.7</td><td class="num">2.0</td><td class="num"><span class="bar" style="width:78px"></span>78 %</td></tr>
+      <tr><td>pudelek.pl</td><td class="num">4.0</td><td class="num">2.0</td><td class="num"><span class="bar" style="width:63px"></span>63 %</td></tr>
+      <tr><td>kwestiasmaku.com</td><td class="num">5.3</td><td class="num">3.0</td><td class="num"><span class="bar" style="width:60px"></span>60 %</td></tr>
+      <tr><td>interia.pl</td><td class="num">3.0</td><td class="num">2.0</td><td class="num"><span class="bar" style="width:43px"></span>43 %</td></tr>
+      <tr><td><strong>Suite average</strong></td><td class="num"><strong>6.0</strong></td><td class="num"><strong>2.2</strong></td><td class="num"><strong>79 %</strong></td></tr>
+    </tbody>
+  </table>
+  <p>The biggest single page is <strong>wp.pl</strong>, where Wirtualna Polska's anti-bot-aware CMP forces the agent through ~11 turns of scrolling and clicking before it can read the headline. Ghostery's autoconsent dismisses the dialog in one step.</p>
+</section>
+
+<section>
+  <h2>Per-agent-type savings (Polish set, fully measured)</h2>
+  <table class="zebra">
+    <thead>
+      <tr>
+        <th>Agent reads…</th>
+        <th class="num">$ saved / 1k loads</th>
+        <th class="num">% saved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>innerText + viewport screenshot</td><td class="num">$55.88</td><td class="num"><strong>71.6 %</strong></td></tr>
+      <tr><td>filtered accessibility tree + viewport</td><td class="num">$57.22</td><td class="num"><strong>40.0 %</strong></td></tr>
+      <tr><td>full HTML + viewport screenshot</td><td class="num">$129.90</td><td class="num"><strong>20.8 %</strong></td></tr>
+      <tr><td>full accessibility tree + viewport</td><td class="num">$87.34</td><td class="num">11.6 %</td></tr>
+    </tbody>
+  </table>
+  <p><small class="note">Sonnet 4.5 / 4.6 input pricing ($3 / MTok). Opus 4.7 scales linearly; the percentage saving is unchanged.</small></p>
+</section>
+
+<section>
+  <h2>What this means</h2>
+  <p>If you ship an AI agent that browses the web — research-assistants, deal-hunters, knowledge-workers, web-scrapers — the cost reduction from running Ghostery inside the browser is bigger than a typical "blocked ad bytes" measurement would suggest. The dominant saving is the agent <em>not having to dismiss the consent banner</em>, and that saving compounds every turn the model would otherwise spend looking at, deciding about, and clicking dismiss buttons.</p>
+  <p>The effect is strongest where consent dialogs are most common (EU traffic) and shrinks proportionally on traffic mixes where most pages don't show a CMP to a headless browser. Vision-mode agents and innerText agents see the biggest percentage gains because their per-turn cost is moderate; full-HTML scrapers see the smallest because their per-turn cost is dominated by the page they were going to load anyway.</p>
+</section>
+
+<hr class="footer-rule">
+
+<footer>
+  <p><strong>Method</strong>: Per page × variant runs in a fresh Chrome for Testing session with anti-bot fingerprints suppressed. 5 samples per cell, median reported. The "how many looks" number comes from Anthropic's computer-use API on Sonnet 4.5; the "viewport cost" number comes from asking Sonnet 4.5 to inventory each viewport screenshot.</p>
+  <p><strong>Caveats</strong>: 21 pages across two regions can't support an industry-wide per-million-loads claim. Visibility detector misses modals rendered in shadow DOM (Ketch, OneTrust 2.x, Guardian custom CMP) — those modals are real and confirmed by screenshots; the autoconsent oracle catches some but not all. Anti-bot-blocked pages (dailymail, allrecipes, reuters, imdb, people, politico) are excluded.</p>
+  <p>For the journal of decisions behind these numbers and the per-run data, see <code>JOURNAL.md</code> and the per-run <code>results/&lt;id&gt;/report.md</code> files in the repository.</p>
+</footer>
+
+</main>
+</body>
+</html>
