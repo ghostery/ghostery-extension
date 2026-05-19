@@ -27,11 +27,11 @@ async function setDistractionToggle(name, value) {
 describe('Distractions', function () {
   before(enableExtension);
 
-  after(() => setDistractionToggle('google', false));
+  after(() => setDistractionToggle('signInWithGoogle', false));
 
   describe('Google Sign-In', function () {
     it('loads the client script when the toggle is disabled', async function () {
-      await setDistractionToggle('google', false);
+      await setDistractionToggle('signInWithGoogle', false);
 
       await browser.url(PAGE_URL);
 
@@ -41,7 +41,7 @@ describe('Distractions', function () {
     });
 
     it('blocks the client script when the toggle is enabled', async function () {
-      await setDistractionToggle('google', true);
+      await setDistractionToggle('signInWithGoogle', true);
 
       await browser.url(PAGE_URL);
 

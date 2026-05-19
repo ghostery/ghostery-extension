@@ -21,9 +21,15 @@ import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 import { reloadMainEngine } from './adblocker/engines.js';
-import filters from './resources/distractions.json';
 
-function getFiltersChecksum() {
+const FILTERS_URL = chrome.runtime.getURL('background/rule_resources/distractions.json');
+
+async function fetchFilters() {
+  const res = await fetch(FILTERS_URL);
+  return res.json();
+}
+
+function getFiltersChecksum(filters) {
   const bytes = new TextEncoder().encode(
     Object.values(filters)
       .map((filters) => filters.join('\n'))
@@ -33,6 +39,8 @@ function getFiltersChecksum() {
 }
 
 async function updateDistractions(distractions) {
+  const filters = await fetchFilters();
+
   const enabledFilters = Object.entries(distractions)
     .filter(([, enabled]) => enabled)
     .flatMap(([id]) => filters[id] || []);
@@ -79,7 +87,7 @@ async function updateDistractions(distractions) {
     networkFilters,
     cosmeticFilters,
     preprocessors,
-    lists: { filters: getFiltersChecksum() },
+    lists: { filters: getFiltersChecksum(filters) },
   });
   console.info(`[distractions] Engine updated with ${cosmeticFilters.length} filter(s)`);
 
@@ -92,7 +100,7 @@ async function updateDistractions(distractions) {
 chrome.runtime.onInstalled.addListener(async () => {
   try {
     const engine = await engines.init(engines.DISTRACTIONS_ENGINE);
-    if (!engine || engine.lists.get('filters') === getFiltersChecksum()) {
+    if (!engine || engine.lists.get('filters') === getFiltersChecksum(await fetchFilters())) {
       return;
     }
 
