@@ -11,7 +11,7 @@
 
 import { html, store } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 
 import Notification from '../store/notification.js';
 
@@ -26,7 +26,7 @@ export default {
       <ui-action>
         <a
           href="${notification.url}"
-          onclick="${openTabWithUrl}"
+          onclick="${openHref}"
           layout="row gap:2 items:stretch padding:1.5"
         >
           ${(notification.icon || notification.img) &&

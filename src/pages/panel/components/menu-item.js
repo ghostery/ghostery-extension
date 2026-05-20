@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 
 export default {
   href: '',
@@ -24,7 +24,7 @@ export default {
         <a
           href="${href}"
           layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
-          onclick="${internal ? undefined : openTabWithUrl}"
+          onclick="${internal ? undefined : openHref}"
         >
           <ui-icon name="${icon}" color="secondary" layout="size:2.5"></ui-icon>
           <ui-text type="label-m" ellipsis layout="column width::0:full" color="inherit">

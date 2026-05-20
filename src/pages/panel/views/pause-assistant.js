@@ -14,7 +14,7 @@ import { html, router, store } from 'hybrids';
 import TabStats from '/store/tab-stats.js';
 import Config from '/store/config.js';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL } from '/utils/urls.js';
 
 export default {
@@ -33,7 +33,7 @@ export default {
           ${issueUrl &&
           html`
             <ui-action>
-              <a href="${issueUrl}" onclick="${openTabWithUrl}" layout="row gap:2">
+              <a href="${issueUrl}" onclick="${openHref}" layout="row gap:2">
                 <ui-icon name="doc-m" color="tertiary" layout="size:3"></ui-icon>
                 <div layout="column grow gap:0.5">
                   <ui-text type="label-m">Broken page report</ui-text>
@@ -47,11 +47,7 @@ export default {
             </ui-action>
           `}
           <ui-action>
-            <a
-              href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
-              onclick="${openTabWithUrl}"
-              layout="row gap:2"
-            >
+            <a href="${PAUSE_ASSISTANT_LEARN_MORE_URL}" onclick="${openHref}" layout="row gap:2">
               <ui-icon name="info" color="tertiary" layout="size:3"></ui-icon>
               <div layout="column grow gap:0.5">
                 <ui-text type="label-m">How Browsing Assistant works</ui-text>
