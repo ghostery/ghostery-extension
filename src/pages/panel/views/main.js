@@ -42,7 +42,7 @@ import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
 import { findParentDomain } from '/utils/domains.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
-import { lang } from '/ui/labels.js';
+import { lang, numberFormatter } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy');
@@ -422,7 +422,9 @@ export default {
                                       <span slot="content"> View activity details </span>
                                       <ui-tracker-name> ${tracker.name} </ui-tracker-name>
                                     </ui-tooltip>
-                                    <ui-stats-badge> ${tracker.requestsCount} </ui-stats-badge>
+                                    <ui-stats-badge>
+                                      ${numberFormatter.format(tracker.requestsCount)}
+                                    </ui-stats-badge>
                                     ${tracker.blocked &&
                                     html`<ui-icon
                                       name="block-s"
@@ -472,7 +474,7 @@ export default {
                     <panel-feedback-button
                       type="blocked"
                       icon="block-s"
-                      value="${stats.trackersBlocked}"
+                      value="${numberFormatter.format(stats.trackersBlocked)}"
                       href="${router.url(TrackersReport, { type: 'blocked' })}"
                     >
                       Trackers blocked
@@ -483,7 +485,7 @@ export default {
                     <panel-feedback-button
                       type="modified"
                       icon="eye"
-                      value="${stats.trackersModified}"
+                      value="${numberFormatter.format(stats.trackersModified)}"
                       href="${router.url(TrackersReport, { type: 'modified' })}"
                     >
                       Trackers modified

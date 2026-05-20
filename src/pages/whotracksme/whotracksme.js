@@ -12,7 +12,12 @@
 import { html, store } from 'hybrids';
 
 import { HOME_PAGE_URL, WTM_PAGE_URL } from '/utils/urls.js';
-import { shortDateFormatter, categories } from '/ui/labels.js';
+import {
+  shortDateFormatter,
+  categories,
+  compactNumberFormatter,
+  numberFormatter,
+} from '/ui/labels.js';
 
 import assets from '/pages/settings/assets/index.js';
 
@@ -22,6 +27,10 @@ import Resources from '/store/resources.js';
 const MONTH_IN_MS = 30 * 24 * 60 * 60 * 1000;
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const now = Date.now();
+
+function formatNumber(value) {
+  return value >= 10000 ? compactNumberFormatter.format(value) : numberFormatter.format(value);
+}
 
 function setDurationToLastMonth(host) {
   host.dateFrom = new Date(now - MONTH_IN_MS).toISOString().slice(0, 10);
@@ -168,21 +177,23 @@ export default {
               <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon name="websites" color="wtm-secondary" layout="size:6"></ui-icon>
-                  <ui-text type="display-2xl">${mergedStats.pages}</ui-text>
+                  <ui-text type="display-l">${formatNumber(mergedStats.pages)}</ui-text>
                 </div>
                 <ui-text type="label-l" color="secondary"> Pages visited </ui-text>
               </ui-card>
               <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon name="block-s" color="danger-primary" layout="size:6"></ui-icon>
-                  <ui-text type="display-2xl"> ${mergedStats.trackersBlocked} </ui-text>
+                  <ui-text type="display-l"> ${formatNumber(mergedStats.trackersBlocked)} </ui-text>
                 </div>
                 <ui-text type="label-l" color="secondary"> Trackers blocked </ui-text>
               </ui-card>
               <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon name="eye" color="brand-primary" layout="size:6"></ui-icon>
-                  <ui-text type="display-2xl"> ${mergedStats.trackersModified} </ui-text>
+                  <ui-text type="display-l">
+                    ${formatNumber(mergedStats.trackersModified)}
+                  </ui-text>
                 </div>
                 <ui-text type="label-l" color="secondary"> Trackers modified </ui-text>
               </ui-card>
@@ -193,14 +204,14 @@ export default {
                     color="success-secondary"
                     layout="size:6"
                   ></ui-icon>
-                  <ui-text type="display-2xl">${autoconsent}</ui-text>
+                  <ui-text type="display-l">${formatNumber(autoconsent)}</ui-text>
                 </div>
                 <ui-text type="label-l" color="secondary"> Consent managed </ui-text>
               </ui-card>
               <ui-card narrow layout="column gap padding:2.5">
                 <div layout="row items:center gap">
                   <ui-icon name="cookie" color="warning-secondary" layout="size:6"></ui-icon>
-                  <ui-text type="display-2xl"> ${mergedStats.cookiesRemoved} </ui-text>
+                  <ui-text type="display-l"> ${formatNumber(mergedStats.cookiesRemoved)} </ui-text>
                 </div>
                 <ui-text type="label-l" color="secondary"> Deleted cookies </ui-text>
               </ui-card>
@@ -277,7 +288,9 @@ export default {
                 >
                   <div layout="row items:center gap">
                     <ui-icon name="websites" color="wtm-secondary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s">${mergedStats.pages}</ui-text>
+                    <ui-text type="headline-s">
+                      ${numberFormatter.format(mergedStats.pages)}
+                    </ui-text>
                   </div>
                   <ui-text type="label-xs" color="secondary"> Pages visited </ui-text>
                 </whotracksme-button>
@@ -287,7 +300,9 @@ export default {
                 >
                   <div layout="row items:center gap">
                     <ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s"> ${mergedStats.trackersBlocked} </ui-text>
+                    <ui-text type="headline-s">
+                      ${numberFormatter.format(mergedStats.trackersBlocked)}
+                    </ui-text>
                   </div>
                   <ui-text type="label-xs" color="secondary"> Trackers blocked </ui-text>
                 </whotracksme-button>
@@ -297,7 +312,9 @@ export default {
                 >
                   <div layout="row items:center gap">
                     <ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s"> ${mergedStats.trackersModified} </ui-text>
+                    <ui-text type="headline-s">
+                      ${numberFormatter.format(mergedStats.trackersModified)}
+                    </ui-text>
                   </div>
                   <ui-text type="label-xs" color="secondary"> Trackers modified </ui-text>
                 </whotracksme-button>

@@ -17,6 +17,7 @@ import TabStats from '/store/tab-stats.js';
 
 import { isWebkit } from '/utils/browser-info.js';
 import { download } from '/utils/files.js';
+import { numberFormatter } from '/ui/labels.js';
 
 import { showCopyNotification } from '../components/alert.js';
 
@@ -85,8 +86,9 @@ export default {
                   <ui-text type="label-s">${tracker.name}</ui-text>
                   <ui-category-icon name="${tracker.category}" size="small"></ui-category-icon>
                   <ui-stats-badge layout="height:full">
-                    ${type === 'blocked' && tracker.requestsBlocked.length}
-                    ${type === 'modified' && tracker.requestsModified.length}
+                    ${type === 'blocked' && numberFormatter.format(tracker.requestsBlocked.length)}
+                    ${type === 'modified' &&
+                    numberFormatter.format(tracker.requestsModified.length)}
                   </ui-stats-badge>
                 </div>
                 ${type === 'blocked' &&
