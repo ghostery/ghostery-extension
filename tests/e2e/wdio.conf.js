@@ -32,6 +32,11 @@ export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
+// Stable UUID assigned to the Firefox extension via the
+// `extensions.webextensions.uuids` pref. Lets us build the
+// moz-extension:// base URL without navigating to about:debugging.
+const FIREFOX_EXTENSION_UUID = 'd75e6a3a-1e3a-4d6f-9b3e-7a2d4f8c9e10';
+
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
   (acc, arg) => {
@@ -117,6 +122,13 @@ export const config = {
           'browser.cache.offline.enable': false,
           'network.http.use-cache': false,
           'intl.accept_languages': 'en-GB',
+          // Pre-assign a stable internal UUID to the extension so we can
+          // construct the moz-extension:// base URL without having to scrape
+          // about:debugging (a parent-process page where WebDriver BiDi
+          // disallows script.callFunction since Firefox 138+).
+          'extensions.webextensions.uuids': JSON.stringify({
+            'firefox@ghostery.com': FIREFOX_EXTENSION_UUID,
+          }),
         },
       },
     },
@@ -165,15 +177,11 @@ export const config = {
         const extension = readFileSync(FIREFOX_PATH);
         await browser.installAddOn(extension.toString('base64'), true);
 
-        // Get the extension ID from extensions settings page
-        await browser.url('about:debugging#/runtime/this-firefox');
-
-        const url = (await $('>>>a.qa-manifest-url').getProperty('href')).replace(
-          'manifest.json',
-          'pages',
-        );
-
-        setExtensionBaseUrl(url);
+        // The UUID is preset via the `extensions.webextensions.uuids` pref
+        // (see capabilities above), so we can build the base URL directly
+        // and avoid touching about:debugging (parent-process page, where
+        // WebDriver BiDi script.callFunction is no longer supported).
+        setExtensionBaseUrl(`moz-extension://${FIREFOX_EXTENSION_UUID}/pages`);
       }
 
       // Disable cache for Chrome to avoid caching issues
