@@ -1,0 +1,5 @@
+node_modules/
+results/
+.browsers/
+ghostery-dist/
+.env

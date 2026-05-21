@@ -1,0 +1,17 @@
+{
+  "name": "ghostery-research-v2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "v2: measure the consent-banner cost of AI computer-use agents on US news sites.",
+  "scripts": {
+    "validate": "node src/validate.js",
+    "measure": "node src/measure.js",
+    "report": "node src/report.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@duckduckgo/autoconsent": "^14.78.0",
+    "webdriverio": "^9.27.1"
+  }
+}

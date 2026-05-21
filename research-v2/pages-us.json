@@ -1,0 +1,83 @@
+{
+  "region": "us",
+  "notes": "Candidate set for v2. Each entry needs validation for banner reliability before inclusion in the measurement set. Target: cull to 6-8 pages with >=80% banner-show rate on vanilla loads from a US IP, spanning >=3 distinct CMP vendors.",
+  "candidates": [
+    {
+      "id": "theverge",
+      "url": "https://www.theverge.com/",
+      "cmp": "OneTrust",
+      "status": "confirmed-banner-v1",
+      "notes": "Shadow-DOM modal. Autoconsent oracle catches; visibility detector misses. Strong hero-page candidate -- vanilla viewport dominated by modal."
+    },
+    {
+      "id": "cnn",
+      "url": "https://www.cnn.com/",
+      "cmp": "custom-CCPA",
+      "status": "confirmed-banner-v1",
+      "notes": "California 'Agree' modal in main DOM. Visibility detector catches."
+    },
+    {
+      "id": "forbes",
+      "url": "https://www.forbes.com/",
+      "cmp": "Ketch",
+      "status": "confirmed-banner-v1",
+      "notes": "Shadow-DOM modal. Autoconsent oracle catches; visibility detector misses."
+    },
+    {
+      "id": "theguardian",
+      "url": "https://www.theguardian.com/us",
+      "cmp": "custom-CCPA",
+      "status": "confirmed-banner-v1",
+      "notes": "Custom CCPA UI. Neither v1 signal flagged it; visible in screenshots. Validate detection before including."
+    },
+    {
+      "id": "arstechnica",
+      "url": "https://arstechnica.com/",
+      "cmp": "OneTrust",
+      "status": "needs-validation",
+      "notes": "Condé Nast property, likely OneTrust. HN-favorite publication; strong fit if banner shows."
+    },
+    {
+      "id": "techcrunch",
+      "url": "https://techcrunch.com/",
+      "cmp": "OneTrust",
+      "status": "needs-validation",
+      "notes": "Likely OneTrust. HN-relevant."
+    },
+    {
+      "id": "engadget",
+      "url": "https://www.engadget.com/",
+      "cmp": "OneTrust",
+      "status": "needs-validation",
+      "notes": "Yahoo Inc. property; likely OneTrust."
+    },
+    {
+      "id": "npr",
+      "url": "https://www.npr.org/",
+      "cmp": "unknown",
+      "status": "needs-validation",
+      "notes": "Public broadcaster; CMP vendor unclear. Validate."
+    },
+    {
+      "id": "washingtonpost",
+      "url": "https://www.washingtonpost.com/",
+      "cmp": "Sourcepoint",
+      "status": "needs-validation",
+      "notes": "Has metered paywall; risk that paywall (not consent) dominates the agent task. Validate carefully."
+    }
+  ],
+  "rejected": [
+    {"id": "reuters",     "reason": "anti-bot wall (v1)"},
+    {"id": "politico",    "reason": "anti-bot wall (v1)"},
+    {"id": "dailymail",   "reason": "anti-bot wall (v1)"},
+    {"id": "allrecipes",  "reason": "anti-bot wall (v1)"},
+    {"id": "people",      "reason": "anti-bot wall (v1)"},
+    {"id": "wired",       "reason": "no banner shown to headless browser (v1) -- Condé Nast bot detection skips consent"},
+    {"id": "buzzfeed",    "reason": "no banner shown (v1)"},
+    {"id": "aol",         "reason": "no banner shown (v1)"},
+    {"id": "yahoo",       "reason": "no banner shown (v1)"},
+    {"id": "nytimes",     "reason": "hard paywall -- top-of-page content gated"},
+    {"id": "wsj",         "reason": "hard paywall"},
+    {"id": "bloomberg",   "reason": "hard paywall"}
+  ]
+}
