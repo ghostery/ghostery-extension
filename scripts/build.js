@@ -56,8 +56,29 @@ const argv = process.argv.slice(2).reduce(
     silent: false,
     clean: false,
     watch: false,
+    automation: false,
   },
 );
+
+// --- Automation patch ---
+function applyAutomationPatch(distDir) {
+  const manifestPath = resolve(distDir, 'manifest.json');
+  const m = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  m.name = 'Ghostery (Automation)';
+  m.short_name = 'Ghostery Automation';
+  writeFileSync(manifestPath, JSON.stringify(m, null, 2) + '\n');
+
+  const mcPath = resolve(distDir, 'store/managed-config.js');
+  const mc = readFileSync(mcPath, 'utf8');
+  const patched = mc.replace(/(disableOnboarding:\s*)false/, '$1true');
+  if (patched === mc) {
+    throw new Error('automation patch: did not find `disableOnboarding: false` in ' + mcPath);
+  }
+  writeFileSync(mcPath, patched);
+  if (!silent) {
+    console.log('--automation: patched manifest (Ghostery Automation) + managed-config (disableOnboarding=true)');
+  }
+}
 
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
 const silent = argv.silent;
@@ -523,6 +544,7 @@ const buildPromise = build({
 
 // --- Build content scripts ---
 
+const contentScriptBuilds = [];
 for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
   // Copy assets
   if (!path.endsWith('.js')) {
@@ -532,7 +554,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
     cpSync(path, resolve(options.outDir, id));
   } else {
     // build content scripts
-    build({
+    contentScriptBuilds.push(build({
       ...config,
       build: {
         ...config.build,
@@ -547,8 +569,13 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
           },
         },
       },
-    });
+    }));
   }
+}
+
+if (argv.automation && !argv.watch) {
+  await Promise.all([buildPromise, ...contentScriptBuilds]);
+  applyAutomationPatch(options.outDir);
 }
 
 if (argv.watch) {
