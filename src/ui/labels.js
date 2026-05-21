@@ -51,3 +51,10 @@ export const longDateFormatter = new Intl.DateTimeFormat(lang, {
   hour: 'numeric',
   minute: 'numeric',
 });
+
+export const compactNumberFormatter = new Intl.NumberFormat(lang, {
+  notation: 'compact',
+  maximumFractionDigits: 0,
+});
+
+export const numberFormatter = new Intl.NumberFormat(lang);

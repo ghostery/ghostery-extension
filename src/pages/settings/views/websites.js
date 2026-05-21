@@ -16,6 +16,8 @@ import Config, { dismissAction } from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP, GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
+import { numberFormatter } from '/ui/labels.js';
+
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
@@ -210,7 +212,9 @@ export default {
                             layout="row items:center gap self:center"
                             layout@768px="grow self:auto"
                           >
-                            <ui-text type="label-m"> ${item.counter || ''} </ui-text>
+                            <ui-text type="label-m">
+                              ${item.counter ? numberFormatter.format(item.counter) : ''}
+                            </ui-text>
                           </div>
                         </a>
                       </ui-action>

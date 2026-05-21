@@ -75,13 +75,14 @@ export default {
     return [...data.entries()];
   },
   current: '',
+  value: ({ categories }) => labels.numberFormatter.format(categories?.length || 0),
   tooltip: ({ render }) => render().querySelector('ui-tooltip'),
-  render: ({ categories, data, current }) => html`
+  render: ({ categories, data, current, value }) => html`
     <template layout="grid relative">
       <ui-tooltip layout="block absolute top left padding:top:0.5" show="${current}" delay="0">
         <span slot="content"
           >${labels.categories[getCategoryKey(current)]}:
-          ${categories.reduce(count(current), 0)}</span
+          ${labels.numberFormatter.format(categories.reduce(count(current), 0))}</span
         >
       </ui-tooltip>
       <svg viewBox="0 0 36 36" onmousemove="${updateTooltipPosition}">
@@ -104,11 +105,9 @@ export default {
           y="50%"
           dominant-baseline="central"
           text-anchor="middle"
-          style="${{
-            fontSize: `${14 - String(categories.length).length}px`,
-          }}"
+          style="${{ fontSize: `${14 - value.length}px` }}"
         >
-          ${categories && categories.length}
+          ${value}
         </text>
       </svg>
     </template>
@@ -129,5 +128,5 @@ export default {
       font-family: var(--font-family-label);
       font-weight: 600;
     }
-   `,
+  `,
 };
