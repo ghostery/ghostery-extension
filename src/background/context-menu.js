@@ -288,3 +288,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
 OptionsObserver.addListener('terms', (terms) => {
   chrome.contextMenus.update(ID_PARENT, { enabled: terms }).catch(console.error);
 });
+
+OptionsObserver.addListener('contextMenu', (contextMenu) => {
+  chrome.contextMenus.update(ID_PARENT, { visible: contextMenu }).catch(console.error);
+});

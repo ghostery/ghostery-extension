@@ -93,6 +93,7 @@ const Options = {
 
   // UI
   panel: { statsType: 'graph', notifications: true },
+  contextMenu: true,
   theme: '',
 
   // Tracker exceptions

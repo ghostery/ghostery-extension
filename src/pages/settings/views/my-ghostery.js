@@ -193,6 +193,17 @@ export default {
                 </span>
               </settings-toggle>
 
+              <settings-toggle
+                icon="doc-m"
+                value="${options.contextMenu}"
+                onchange="${html.set(options, 'contextMenu')}"
+              >
+                Quick Actions
+                <span slot="description">
+                  Shows Ghostery options in your browser’s right-click menu.
+                </span>
+              </settings-toggle>
+
               <settings-option icon="websites">
                 Theme
                 <span slot="description">Changes application color theme.</span>
