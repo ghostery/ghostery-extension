@@ -1,0 +1,7 @@
+node_modules/
+screenshots/
+results/
+.browsers/
+ghostery-dist/
+.env
+*.log

@@ -1,0 +1,16 @@
+{
+  "name": "ghostery-research-v3",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "v3: when AI vision models give up on cluttered viewports.",
+  "scripts": {
+    "measure": "node src/measure.js",
+    "report": "node src/report.js",
+    "render": "node src/render-post.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "webdriverio": "^9.27.1"
+  }
+}

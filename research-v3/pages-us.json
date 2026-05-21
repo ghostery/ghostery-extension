@@ -1,0 +1,82 @@
+{
+  "region": "us",
+  "notes": "Pages with viewport-dominating consent UI on US IP. Screenshot source per page: 'v2' means re-use from research-v2/results/<run>/trajectory/, 'v3' means freshly captured into research-v3/screenshots/<id>/.",
+  "v2RunId": "2026-05-18T12-59-15-755Z",
+  "pages": [
+    {
+      "id": "theverge",
+      "url": "https://www.theverge.com/",
+      "cmp": "OneTrust",
+      "screenshotSource": "v3",
+      "notes": "v1 documented this as the strongest US failure: vision model returned zero articles on the vanilla viewport. Hero candidate."
+    },
+    {
+      "id": "cnn",
+      "url": "https://www.cnn.com/",
+      "cmp": "custom-CCPA",
+      "screenshotSource": "v3",
+      "notes": "CCPA 'Agree' modal in main DOM."
+    },
+    {
+      "id": "npr",
+      "url": "https://www.npr.org/",
+      "cmp": "OneTrust",
+      "screenshotSource": "v3",
+      "notes": "Bottom-anchored OneTrust banner, smaller viewport area than theverge. Control case -- banner doesn't dominate viewport."
+    },
+    {
+      "id": "theguardian",
+      "url": "https://www.theguardian.com/us",
+      "cmp": "custom-CCPA",
+      "screenshotSource": "v3",
+      "notes": "Custom CCPA modal. v2 ghostery viewport is clean. Today the Guardian swaps in a donation modal after rejecting cookies -- behavior changed on the Guardian's side between 2026-05-18 and 2026-05-20."
+    },
+    {
+      "id": "usatoday",
+      "url": "https://www.usatoday.com/",
+      "cmp": "OneTrust",
+      "screenshotSource": "v3",
+      "notes": "Center-screen 'About Your Privacy' modal covers ~65% of viewport. Ghostery removes cleanly."
+    },
+    {
+      "id": "slate",
+      "url": "https://slate.com/",
+      "cmp": "OneTrust (Sourcepoint-style)",
+      "screenshotSource": "v3",
+      "notes": "Bottom 'We Care About Your Privacy' modal with 340 partners. Ghostery removes cleanly."
+    },
+    {
+      "id": "vox",
+      "url": "https://www.vox.com/",
+      "cmp": "OneTrust (Sourcepoint-style)",
+      "screenshotSource": "v3",
+      "notes": "Bottom 'Privacy Notice' modal. Ghostery removes cleanly."
+    },
+    {
+      "id": "huffpost",
+      "url": "https://www.huffpost.com/",
+      "cmp": "OneTrust (Sourcepoint-style)",
+      "screenshotSource": "v3",
+      "notes": "Bottom 'We Care About Your Privacy' modal with 1008 partners. Ghostery removes cleanly."
+    },
+    {
+      "id": "newsweek",
+      "url": "https://www.newsweek.com/",
+      "cmp": "Ketch",
+      "screenshotSource": "v3",
+      "notes": "Left-side 'Your Privacy Choices' panel. Ghostery removes cleanly."
+    }
+  ],
+  "candidates": [
+    { "id": "vox",         "url": "https://www.vox.com/",       "cmp": "Sourcepoint?",    "notes": "Vox Media stack; likely Sourcepoint TCF." },
+    { "id": "usatoday",    "url": "https://www.usatoday.com/",  "cmp": "OneTrust?",       "notes": "Large consent UI reported anecdotally." },
+    { "id": "slate",       "url": "https://slate.com/",         "cmp": "?",               "notes": "News magazine; expected consent overlay." },
+    { "id": "newsweek",    "url": "https://www.newsweek.com/",  "cmp": "OneTrust?",       "notes": "News site, consent banner likely." },
+    { "id": "huffpost",    "url": "https://www.huffpost.com/",  "cmp": "OneTrust?",       "notes": "BuzzFeed/Yahoo property; OneTrust likely." },
+    { "id": "axios",       "url": "https://www.axios.com/",     "cmp": "?",               "notes": "Newer outlet; sometimes shows a 'pay or accept' card." },
+    { "id": "espn",        "url": "https://www.espn.com/",      "cmp": "?",               "notes": "Sports; sometimes interrupts with subscription overlays." },
+    { "id": "salon",       "url": "https://www.salon.com/",     "cmp": "?",               "notes": "News magazine, consent." },
+    { "id": "bbc",         "url": "https://www.bbc.com/",       "cmp": "custom-bbc",      "notes": "Has an explicit rule in autoconsent. UK-based but serves US visitors." },
+    { "id": "reddit",      "url": "https://www.reddit.com/r/news/", "cmp": "reddit",      "notes": "Reddit has an explicit rule in autoconsent." }
+  ]
+}

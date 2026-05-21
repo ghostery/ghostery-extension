@@ -1,0 +1,903 @@
+# Research v3 — full results
+
+Run: `2026-05-20T19-39-09-740Z`
+Model: `claude-sonnet-4-5-20250929`
+
+## Per-cell stats
+
+| Page | Variant | Trials | OK | Trunc | Parse-fail | Zero-articles | Med articles | Med output tok | Med input tok |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| theverge | vanilla | 10 | 3 | 0 | 0 | 7 | 0 | 376 | 1267 |
+| theverge | ghostery | 10 | 10 | 0 | 0 | 0 | 2 | 299.5 | 1267 |
+| cnn | vanilla | 10 | 10 | 0 | 0 | 0 | 8 | 449 | 1267 |
+| cnn | ghostery | 10 | 10 | 0 | 0 | 0 | 7 | 318 | 1267 |
+| npr | vanilla | 10 | 8 | 1 | 1 | 0 | 1 | 515.5 | 1267 |
+| npr | ghostery | 10 | 10 | 0 | 0 | 0 | 4 | 253 | 1267 |
+| theguardian | vanilla | 10 | 10 | 0 | 0 | 0 | 4 | 423 | 1267 |
+| theguardian | ghostery | 10 | 10 | 0 | 0 | 0 | 3 | 387 | 1267 |
+| usatoday | vanilla | 10 | 10 | 0 | 0 | 0 | 5 | 504 | 1267 |
+| usatoday | ghostery | 10 | 10 | 0 | 0 | 0 | 6 | 281.5 | 1267 |
+| slate | vanilla | 10 | 3 | 0 | 0 | 7 | 0 | 337 | 1267 |
+| slate | ghostery | 10 | 10 | 0 | 0 | 0 | 8 | 345 | 1267 |
+| vox | vanilla | 10 | 4 | 0 | 0 | 6 | 0 | 374 | 1267 |
+| vox | ghostery | 10 | 10 | 0 | 0 | 0 | 1 | 251.5 | 1267 |
+| huffpost | vanilla | 10 | 0 | 0 | 0 | 10 | 0 | 300 | 1267 |
+| huffpost | ghostery | 10 | 10 | 0 | 0 | 0 | 3 | 178 | 1267 |
+| newsweek | vanilla | 10 | 10 | 0 | 0 | 0 | 4 | 427 | 1267 |
+| newsweek | ghostery | 10 | 10 | 0 | 0 | 0 | 4 | 264 | 1267 |
+
+## Per-trial article extractions
+
+### theverge vanilla
+
+- t1: *(empty)*
+- t2 (4 articles):
+  - "Stop what you're doing and watch this rare footage of a single-celled organism"
+  - "AI chatbot company Character.AI is making its CEO a billionaire"
+  - "Honda's new EV is a rebranded GM Blazer"
+  - "Trump responds to Biden's border visit by posting antisemitic memes"
+- t3 (2 articles):
+  - "Police in L.A. are searching for a motive behind what appeared to be a random attack in a coffee shop."
+  - "The case makes for good politics. It's also going to be hell."
+- t4: *(empty)*
+- t5 (1 articles):
+  - "Insomniac had a relatively low-key launch with its multiplayer spin-off, Marvel's Spider-Man 2. The game launched with only 905 people playing concurrently on Steam, easily the lowest peak count of Insomniac's PC releases since 2022's Marvel's Spider-Man Remastered launched with a peak of nearly 60,000 people, according to SteamDB. That stands in stark contrast to the series' recent single-player adventures."
+- t6: *(empty)*
+- t7: *(empty)*
+- t8: *(empty)*
+- t9: *(empty)*
+- t10: *(empty)*
+
+### theverge ghostery
+
+- t1 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+- t2 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+- t3 (1 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+- t4 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+- t5 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+- t6 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+- t7 (1 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+- t8 (3 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+  - "If you buy something from a Verge link, Vox Media may earn a commission. See our ethics statement."
+- t9 (4 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre."
+  - "As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+  - "If you buy something from a Verge link, Vox Media may earn a commission. See our ethics statement."
+- t10 (2 articles):
+  - "Valve says games like Vampire Survivors fall under the "Bullet Heaven" genre. As one of many updates to Steam store tags, Valve has added "Bullet Heaven," which it defines as: "The opposite of Bullet Hell: Focus on upgrades while automatically attacking hordes of enemies"."
+  - "I'm fine with it, but Aftermath has a great argument about why it doesn't work. What do you think?"
+
+### cnn vanilla
+
+- t1 (9 articles):
+  - "US indict former Cuban leader Raul Castro for 1996 shootdown"
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "Google breakup?"
+- t2 (7 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+- t3 (8 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban president & officials for death of American citizens"
+- t4 (1 articles):
+  - "US indict former Cuban leader Raul Castro"
+- t5 (8 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban leader Raul Castro"
+- t6 (8 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban president over downing of Miami area pilots"
+- t7 (9 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban leader and current president"
+  - "Raul and Miguel Diaz-Canel charged with harboring fugitive"
+- t8 (8 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban president for death of Americans in 1996"
+- t9 (7 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+- t10 (9 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indict former Cuban leaders, including Raul Castro"
+  - "Raul Castro, the former Cuban president and brother of the late revolutionary leader Fidel Castro, has been indicted on charges relating to the 1996 downing of civilian aircraft piloted by anti-Castro activists. The four people on board were killed in the downing, which resulted in global condemnation and the passing of a new law tightening the US embargo of Cuba."
+
+### cnn ghostery
+
+- t1 (5 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t2 (5 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t3 (7 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t4 (7 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t5 (7 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t6 (14 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t7 (14 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indicts former Cuban President Raul Castro"
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t8 (14 articles):
+  - "Raul Castro indicted"
+  - "Ebola outbreak"
+  - "Putin and Xi"
+  - "Cave divers"
+  - "Trump ousts Massie"
+  - "Stephen Colbert"
+  - "'Survivor' winnings"
+  - "US indicts former Cuban President Raúl Castro"
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t9 (7 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "Trump ousts Massie, and other takeaways from Tuesday's primary elections"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+- t10 (7 articles):
+  - "What the numbers tell us about the Ebola outbreak"
+  - "New US surgeon general's advisory raises alarm about screen time risks for children"
+  - "US indicts former Cuban President Raúl Castro"
+  - "94-year-old Castro is charged with conspiracy to kill US nationals, destruction of an aircraft and murder"
+  - "Catch up on today's global news"
+  - "Fed up with bad behavior, Thailand reduces visa-free length for over 90 countries, including the US"
+  - "Arsenal crowned"
+
+### npr vanilla
+
+- t1 (2 articles):
+  - "Here's what's in the new border security and immigration deal"
+  - "Defunding public broadcasting doesn't return money to taxpayers. Here's what happens"
+- t2: *(empty)*
+- t3 (1 articles):
+  - "Cookie Consent & Sponsorship Choices"
+- t4 (2 articles):
+  - "Could Trump force NPR's parent organization to register as a foreign agent?"
+  - "Becky Pringle is pushing back against Republicans' attacks on public schools"
+- t5 (1 articles):
+  - "House Republicans Passed A Budget Blueprint. Here Are The Winners And Losers"
+- t6 (1 articles):
+  - "What's driving Trump's threat to cut federal support for firefighting?"
+- t7 (1 articles):
+  - "Biden administration plans to pause federal funding for public broadcasting"
+- t8 (1 articles):
+  - "As Congress works to avoid a shutdown, public radio could again be a target"
+- t9 (1 articles):
+  - "The House voted to find Merrick Garland in contempt of Congress. What's next?"
+- t10: *(empty)*
+
+### npr ghostery
+
+- t1 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t2 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t3 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t4 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t5 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t6 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t7 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t8 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t9 (4 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "Six states held primaries May 19 that could help to decide the balance of power in Congress and in key state governments."
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+- t10 (3 articles):
+  - "Here's how Tuesday's primary elections played out, state by state"
+  - "4 takeaways from Tuesday's primary night in half a dozen states"
+  - "In Georgia, two GOP Trump backers vie to face a former Atlanta mayor for governor"
+
+### theguardian vanilla
+
+- t1 (6 articles):
+  - "Late-night TV hosts bid goodbye to Stephen Colbert"
+  - "Catholic child sex abuse inquiry asks Home Office to investigate claims of cover-up by its own officials"
+  - "Keir Starmer investigated over potential data breach involving MP"
+  - "The Guardian view on the Green party: an ethical, effective rival to Labour"
+  - "Fiona Griffiths: Chargemaster founder and electric car champion dies aged 60"
+  - "Tory leadership: Tugendhat says new leader should 'take on' Bank of England after Cleverly warns against attacks"
+- t2 (2 articles):
+  - "Late-night TV hosts say goodbye to Stephen Colbert"
+  - "Sir Keir Starmer defends investigation into son's use of £18m donor's 'bracket-sized' bath to revise for exams"
+- t3 (6 articles):
+  - "Late-night TV bids a complicated goodbye to Stephen Colbert"
+  - "Glastonbury 2025 line-up: who could headline and what we know so far"
+  - "Former council worker jailed for corruption"
+  - "Man arrested after body found at Manchester hotel"
+  - "Corruption investigation into market-sized 'bath for one' grants"
+  - "'A moral voice lost': Stephen Colbert reflects on Trump's first day"
+- t4 (8 articles):
+  - "Late-night US TV hosts say goodbye to Stephen Colbert"
+  - "Late-night US TV hosts say goodbye to Stephen Colbert"
+  - "Locals fear 'wild west' Airbnb party house market after death of teenager at Kent property"
+  - "Locals fear 'wild west' Airbnb party house market after death of teenager at Kent property"
+  - "Liz Kendall criticised by Tories for comments on definition of disabled people"
+  - "Liz Kendall criticised by Tories for comments on definition of disabled people"
+  - "Staffing shortages and high blood pressure cited after investigation into market-sized 'bath salts' at clinic in Delhi"
+  - "Staffing shortages and high blood pressure cited after investigation into market-sized 'bath salts' at clinic in Delhi"
+- t5 (3 articles):
+  - "Late-night TV hosts say goodbye to Stephen Colbert"
+  - "Conor McGregor loses case over rape claim and ordered to pay damages of €250,000"
+  - "Government launches Liz Truss investigation into case of pocket-sized 'bath tub' in MP's flat"
+- t6 (3 articles):
+  - "'A moral voice on immigration': Late-night hosts say goodbye to Stephen Colbert"
+  - "Putin appears to defend Syrian chemical attack"
+  - "Sex, surveillance and a $21m mystery villa: Swiss open investigation into Russian oligarch's Côte d'Azur 'pocket-sized bath and spa' estate but find very few residents"
+- t7 (2 articles):
+  - "Late-night television says goodbye to Stephen Colbert"
+  - "'No possible justification': Calls for investigation into Arvin Nathaniel Ghahremani's pocket-sized 'bath torture' and claims of 'mass executions'"
+- t8 (5 articles):
+  - "Late-night hosts bid goodbye to Stephen Colbert"
+  - "Trump loses last-ditch bid to overturn Liz Cheney investigation into Capitol riot"
+  - "Is it normal for men to have their sister sit on lap?"
+  - "A critical look at Meta's report of uncovering 'largest' influence effort"
+  - "Police launch investigation into market-sized 'bath bombs'"
+- t9 (2 articles):
+  - "'A moral voice': BBC axes late-night farewell to Stephen Colbert"
+  - "After police investigation into market-sized 'bath salts'"
+- t10 (6 articles):
+  - "'A moral voice': farewell to Stephen Colbert"
+  - "Late-night hosts say goodbye to Stephen Colbert"
+  - "Legal team blames minister for cover-up in child abuse scandal – as it happened"
+  - "Manslaughter inquiry after festival-goer dies in portaloo"
+  - "Post Office's IT supplier Fujitsu will pay for 'its failures', minister says – as it happened"
+  - "Taxpayers could foot bill to fund investigation into Frasers' market-sized 'bath investment' at Boohoo, MPs say – as it happened"
+
+### theguardian ghostery
+
+- t1 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t2 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t3 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t4 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t5 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t6 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t7 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t8 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t9 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+- t10 (3 articles):
+  - "Late-night TV says goodbye to Stephen Colbert"
+  - "The 20-year-old activist taking on Trump and the fossil fuel industry"
+  - "My investigation into blanket-sized 'bath sheets'"
+
+### usatoday vanilla
+
+- t1 (5 articles):
+  - "Who is Russell Vought, Trump's new OMB director?"
+  - "Who is Dave Sacks, Trump's new AI & crypto czar?"
+  - "Ringo Starr talks the Beatles, Paul McCartney and Bob Dylan doc"
+  - "The biggest recent celebrity deaths and famous people who died in 2024."
+  - "Campus issues warning to Texas voters if Payne lawsuit goes forward"
+- t2 (4 articles):
+  - "Trump issues executive actions related to Kash Patel's FBI confirmation"
+  - "People are comparing Jerry Jones to The Simpsons character after Cowboys photo"
+  - "Campus issues warning to Texas voters if Paxton stops running election: report"
+  - "Two men who passed out at Trump event due to 'likely heat exhaustion,' fire department says"
+- t3 (3 articles):
+  - "Police say man set three people on fire in Chicago"
+  - "Corpus issues warning to Texas voters if Bexar County district attorney in Travis Scott concert:"
+  - "Is Chick-fil-A open Easter? Fast food restaurants"
+- t4 (3 articles):
+  - "New Jersey Sen. Jon Bramnick asks Sec. of State to delay certification of 2025 Senate election due to alleged election fraud"
+  - "New Jersey Sen. Jon Bramnick asks Sec. of State to delay certification of 2025 Senate election due to alleged election fraud"
+  - "Campus issues warning to Texas voters if Paxon arrested: 'He still holds his position'"
+- t5 (8 articles):
+  - "US-Cuba tensions escalate as US accuses Raúl Castro indictment for 1996 killings"
+  - "Congressman in Florida guilty in fraud scheme"
+  - "Senate expels lawmaker after guilty verdict in fraud scheme"
+  - "Marlin Stutzman wins US Senate primary in Indiana, warning to Texas Ted Cruz"
+  - "Trump tax returns case: Supreme Court considers last time"
+  - "DOJ appeals court ruling in Charlie Shrem tax lawsuit"
+  - "What to expect from the long-awaited presidential forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t6 (5 articles):
+  - "Warning to Texas voters after Allred wins US Senate recount"
+  - "Tim Miller is about to be deported for last time"
+  - "Woman arrested over Charlie Hebdo office lawsuit"
+  - "Trump's long-awaited sentencing pushed back. Here's what to expect."
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t7 (6 articles):
+  - "US-Cuba tensions escalate as feds indict Raúl Castro incitement to murder"
+  - "Warning to Texas Democrats: Sen. Ted Cruz wins US Senate reelection"
+  - "Democrats appear to have flipped key congressional chamber in Pennsylvania"
+  - "Zuckerberg's political spending under fire in California campaign finance lawsuit"
+  - "It's been another long-awaited season finale on 'Yellowstone'. Here's what to expect"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t8 (8 articles):
+  - "US-Cuba tensions escalate as former leader Raúl Castro indicted in killing of activists"
+  - "Warning to Texas Democrats after Colin Allred wins US Senate seat?"
+  - "New Google CEO Amar Pichawalla: What to know about the new leader after major executive shake-up"
+  - "South Carolina megachurch pastor is about to be sentenced. It's expected to be the last time"
+  - "Eric Trump arrested on charges tied to Jan. 6? No, this is a fake photo."
+  - "Elon Musk under investigation, arrested over Charlie Kirk's Turning Point USA files lawsuit"
+  - "After 30 years of being vacant, the long-awaited White House press secretary is named. Here's what to know about who she is"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t9 (6 articles):
+  - "Polar bear is about to be moved by himself for last time"
+  - "After Colin Allred wins Texas primary, he'll face Ted Cruz for his seat."
+  - "State department issues travel warning to Texas after controversial immigration wins US Senate approval"
+  - "Trump and Kari Lake arrested over Charlie Kirk defamation lawsuit"
+  - "Your student loans could be getting some long-awaited debt relief. Here's what to know right now."
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t10 (5 articles):
+  - "Democrat Colin Allred returning to Texas with win in US Senate primary, will take on Ted Cruz in November"
+  - "Sam Bankman-Fried's FTX crypto scam founder is about to be sentenced for fraud. He could spend the rest of his life in prison for the last time"
+  - "New York DA reportedly arrested over Charlie Sheen in 1990 Hamptons lawsuit"
+  - "This beloved spring rite has a long-awaited return to the forecast. Here's what to expect from the spring forecast."
+  - "Former Massachusetts representative Barney Frank dies at 86"
+
+### usatoday ghostery
+
+- t1 (9 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "The U.S. has indicted former Cuban President Raúl Castro. The indictment is tied to the alleged downing of two civilian planes in 1996."
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Cornyn issues warning to Texas voters if Paxon wins US Senate runoff"
+  - "This famous beer is about to be brewed for the last time"
+  - "Former cop arrested over Charlie Kirk post settles lawsuit"
+  - "Feds to release long-awaited hurricane forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t2 (8 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Cornyn issues warning to Texas voters if Paxon wins US Senate runoff"
+  - "This famous beer is about to be brewed for the last time"
+  - "Former cop arrested over Charlie Kirk post settles lawsuit"
+  - "Feds to release long-awaited hurricane forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t3 (8 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Cornyn issues warning to Texas voters if Paxon wins US Senate runoff"
+  - "This famous beer is about to be brewed for the last time"
+  - "Former cop arrested over Charlie Kirk post settles lawsuit"
+  - "Feds to release long-awaited hurricane forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t4 (8 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Cornyn issues warning to Texas voters if Paxon wins US Senate runoff"
+  - "This famous beer is about to be brewed for the last time"
+  - "Former cop arrested over Charlie Kirk post settles lawsuit"
+  - "Feds to release long-awaited hurricane forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t5 (9 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "The U.S. has indicted former Cuban President Raúl Castro. The indictment is tied to the alleged downing of two civilian planes in 1996."
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Cornyn issues warning to Texas voters if Paxon wins US Senate runoff"
+  - "This famous beer is about to be brewed for the last time"
+  - "Former cop arrested over Charlie Kirk post settles lawsuit"
+  - "Feds to release long-awaited hurricane forecast. Here's what to know"
+  - "Former Massachusetts representative Barney Frank dies at 86"
+- t6 (3 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+- t7 (3 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+- t8 (4 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Corvus issues warning to Texas voters if Beyoncé doesn't like NFL halftime show"
+- t9 (4 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+  - "Corvus issues warning to Texas voters if Beyoncé has inauguration role"
+- t10 (3 articles):
+  - "US-Cuba tensions escalate amid Raúl Castro indictment: Updates"
+  - "Trump's rating sinks but his grip on GOP holds. Why? Ask Tom Massie"
+  - "Michelle Obama reveals fight for Sasha, Malia: 'Don't ever do that'"
+
+### slate vanilla
+
+- t1: *(empty)*
+- t2: *(empty)*
+- t3 (1 articles):
+  - "What Does It All Mean? Here are five ways that America will be different under Trump."
+- t4 (1 articles):
+  - "Court Releases Audio and Transcripts of Trump Immunity Arguments"
+- t5: *(empty)*
+- t6: *(empty)*
+- t7 (1 articles):
+  - "Stephen Colbert on what scared him in 2024, plus orcas and politics and a Scandinavian death-cleaning trend."
+- t8: *(empty)*
+- t9: *(empty)*
+- t10: *(empty)*
+
+### slate ghostery
+
+- t1 (8 articles):
+  - "The Latest Literary Controversy Is All About Two Pages Out of Hundreds. I Read the Whole Thing."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t2 (8 articles):
+  - "A Bestselling Author Put an Israeli Character Into Her New Novel. Then the Internet Lost Its Mind."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t3 (8 articles):
+  - "An Award-Winning Novelist Is Under Fire for Simply Depicting an Israeli Character. It's Even Dumber Than It Sounds."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t4 (8 articles):
+  - "After Reading the Whole Novel, I Can Confirm That the Latest Online Outrage Is Even Dumber Than It Sounds"
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t5 (8 articles):
+  - "After Reading the Whole Novel, I Can Confirm That the Latest Online Outrage Is Even Dumber Than It Sounds"
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t6 (8 articles):
+  - "An Anti-Colonialist Author Depicted an Israeli Character for Two Pages. Then the Internet Lost Its Mind."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t7 (8 articles):
+  - "An Award-Winning Novelist Is Under Fire for Simply Depicting an Israeli Character. It's Even Dumber Than It Sounds."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t8 (8 articles):
+  - "After Reading the Whole Novel, I Can Confirm That the Latest Online Outrage Is Even Dumber Than It Sounds"
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+- t9 (6 articles):
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "The Latest Literary Controversy Is All About Two Pages Out of Hundreds. I Read the Whole Thing."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+- t10 (9 articles):
+  - "A Bestselling Author Put an Israeli Character Into Her New Novel. Then the Internet Lost Its Mind."
+  - "America's Hottest Primary Has Clues About What's Coming After Trump. It's Not Pretty."
+  - "A MAGA Judge's Bizarre Ruling Clears the Way for the FBI to Surveil You Even More"
+  - "Maybe Trump Is Giving Us the Capital City We Deserve"
+  - "Trump's Efforts to Intimidate Elon Musk's Enemies Just Faced a Severe Setback"
+  - "Justice Jackson Seems to Be Warning Us About the Supreme Court's Next Voting Rights Target"
+  - "Is the Supreme Court's Abortion Pill Ruling Actually a Feint?"
+  - "Play Today's Pears 🍐"
+  - "Slate Mini Crossword for May 20, 2026"
+
+### vox vanilla
+
+- t1: *(empty)*
+- t2 (1 articles):
+  - "Privacy Notice"
+- t3: *(empty)*
+- t4: *(empty)*
+- t5: *(empty)*
+- t6 (1 articles):
+  - "UK to make access to 'life-changing' weight-loss jabs easier"
+- t7 (4 articles):
+  - "I'm A Fitness Editor, And These Are The 37 Things I'm Buying From Amazon This Month"
+  - "Did The Golden Globes Give Us A Hint At This Year's Oscar Noms?"
+  - "The FDA Just Approved A New Over-The-Counter Hearing Aid For Mild-To-Moderate Hearing Loss"
+  - "What Are Personalized Dues, The New Way To Join A Union?"
+- t8: *(empty)*
+- t9 (1 articles):
+  - "Kicking off the second weekend of Coachella is a Friday-night headlining set from Lady Gaga, who not only takes the stage for the first time in five years but also steps into a vacated slot from Ariana Grande (Gaga's first performance cancellation in years). She has kept a low profile for a number of months, occasionally posting on social media before today's Coachella weekend gets underway. For more on Gaga's big performance, keep reading. Lady Gaga, "Joanne" Like much of the world, Lady Gaga is bracing for President Trump's decision on DACA. In an Instagram post, the musician said she's "hurt, confused, and disappointed" by Trump's looming choice. "I am stunned that a country built on the dreams of immigrants, a country that was responsible for ending slavery would take any steps backward in honoring and protecting people who wish to be American," she wrote. Lady Gaga added that she's supporting the Dreamers, young undocumented immigrants who came to the U.S. as children. "I ask President Trump to please be a good Samaritan and treat your neighbors as you would like to be treated," she added. "I wish I could hold you all right now. I know this is scary, but we will get through it together." See Lady Gaga's full post below: This is a developing story. Check back for updates. Lady Gaga's third studio album, Joanne (released Oct. 2016), is an introspective and stripped-back affair, built around the theme of family and the women in Gaga's life. In the title track, which she co-wrote with producer Mark Ronson and pop writer Julia Michaels, Gaga explores her aunt's death and her family's own struggles with grief. "It's hard to feel the rush, to brush the dangerous," she sings in the opening verse, as she looks back at the family she left behind"
+- t10: *(empty)*
+
+### vox ghostery
+
+- t1 (1 articles):
+  - "The most important election is the one happening in your city"
+- t2 (1 articles):
+  - "The most important election is the one that happens where you live"
+- t3 (1 articles):
+  - "The most important election is the one happening in your state"
+- t4 (4 articles):
+  - "The context you need, when you need it"
+  - "When news breaks, you need to understand what actually matters — and what to do about it. At Vox, our mission to help you make sense of the world has never been more vital. But we can't do it on our own."
+  - "We rely on readers like you to fund our journalism. Will you support our work and become a Vox Member today?"
+  - "The most important election is the one coming up in your state"
+- t5 (4 articles):
+  - "The context you need, when you need it"
+  - "When news breaks, you need to understand what actually matters — and what to do about it. At Vox, our mission to help you make sense of the world has never been more vital. But we can't do it on our own."
+  - "We rely on readers like you to fund our journalism. Will you support our work and become a Vox Member today?"
+  - "The most important election is the one happening in your backyard"
+- t6 (2 articles):
+  - "The most important election is the one happening in your backyard"
+  - "When news breaks, you need to understand what actually matters — and what to do about it. At Vox, our mission to help you make sense of the world has never been more vital. But we can't do it on our own."
+- t7 (2 articles):
+  - "The context you need, when you need it"
+  - "The most important election is the one happening in your town"
+- t8 (1 articles):
+  - "The most important election is the one happening in your community"
+- t9 (1 articles):
+  - "The most important election is the one in your backyard"
+- t10 (1 articles):
+  - "The most important election is the one happening in your backyard"
+
+### huffpost vanilla
+
+- t1: *(empty)*
+- t2: *(empty)*
+- t3: *(empty)*
+- t4: *(empty)*
+- t5: *(empty)*
+- t6: *(empty)*
+- t7: *(empty)*
+- t8: *(empty)*
+- t9: *(empty)*
+- t10: *(empty)*
+
+### huffpost ghostery
+
+- t1 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t2 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t3 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t4 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t5 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t6 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t7 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t8 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t9 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+- t10 (3 articles):
+  - "U.S. Announces Criminal Case Against Former Cuban President Raúl Castro..."
+  - "JAN. 6 OFFICERS SUE OVER DON'S SLUSH FUND!"
+  - "SCHEME A LOOPHOLE FROM HELL"
+
+### newsweek vanilla
+
+- t1 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t2 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t3 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t4 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t5 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstratergized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t6 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t7 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstratgized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t8 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t9 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t10 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+
+### newsweek ghostery
+
+- t1 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyzed the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t2 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyzed the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t3 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t4 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyzied the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t5 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t6 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t7 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t8 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstratergized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t9 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategized the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
+- t10 (4 articles):
+  - "Iran Sticks to Its Guns as Trump's Threats Begin to Lose Power"
+  - ""Iran clearly prepared for this war and so far, it has outstrategyzed the Trump administration," one expert told Newsweek."
+  - "Trump Phones Are Finally Here—And People Aren't Happy"
+  - "San Diego Mosque Suspects' Manifesto Repeatedly Mentions Trump"
