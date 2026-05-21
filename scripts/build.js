@@ -76,7 +76,9 @@ function applyAutomationPatch(distDir) {
   }
   writeFileSync(mcPath, patched);
   if (!silent) {
-    console.log('--automation: patched manifest (Ghostery Automation) + managed-config (disableOnboarding=true)');
+    console.log(
+      '--automation: patched manifest (Ghostery Automation) + managed-config (disableOnboarding=true)',
+    );
   }
 }
 
@@ -554,22 +556,24 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
     cpSync(path, resolve(options.outDir, id));
   } else {
     // build content scripts
-    contentScriptBuilds.push(build({
-      ...config,
-      build: {
-        ...config.build,
-        target: 'esnext',
-        rolldownOptions: {
-          ...config.build.rolldownOptions,
-          input: { [id]: path },
-          output: {
-            format: 'iife',
-            dir: options.outDir,
-            entryFileNames: '[name].js',
+    contentScriptBuilds.push(
+      build({
+        ...config,
+        build: {
+          ...config.build,
+          target: 'esnext',
+          rolldownOptions: {
+            ...config.build.rolldownOptions,
+            input: { [id]: path },
+            output: {
+              format: 'iife',
+              dir: options.outDir,
+              entryFileNames: '[name].js',
+            },
           },
         },
-      },
-    }));
+      }),
+    );
   }
 }
 
