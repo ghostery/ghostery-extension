@@ -86,6 +86,32 @@ export default async function syncConfig() {
   }
 }
 
+export function waitForConfigSync(timeout = 5000) {
+  return new Promise((resolve) => {
+    store.resolve(Config).then((config) => {
+      if (config.updatedAt > 0) {
+        resolve();
+        return;
+      }
+
+      let unobserve;
+
+      const timer = setTimeout(() => {
+        unobserve();
+        resolve();
+      }, timeout);
+
+      unobserve = store.observe(Config, (_, config) => {
+        if (config.updatedAt > 0) {
+          clearTimeout(timer);
+          unobserve();
+          resolve();
+        }
+      });
+    });
+  });
+}
+
 if (__DEBUG__) {
   // Enable all available flags
   store.set(Config, {
