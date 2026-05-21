@@ -37,9 +37,12 @@ jobs:
 
       - name: Build Automation packages
         run: |
-          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-firefox.zip web-ext-artifacts/ghostery-automation-firefox.zip
-          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-chromium.zip web-ext-artifacts/ghostery-automation-chromium.zip
-          sh scripts/patch-automation.sh web-ext-artifacts/ghostery-safari.zip web-ext-artifacts/ghostery-automation-safari.zip
+          npm run build firefox -- --silent --automation
+          (cd dist && zip -rq ../web-ext-artifacts/ghostery-automation-firefox.zip .)
+          npm run build chromium -- --silent --automation
+          (cd dist && zip -rq ../web-ext-artifacts/ghostery-automation-chromium.zip .)
+          sh scripts/patch-safari.sh
+          (cd dist && zip -rq ../web-ext-artifacts/ghostery-automation-safari.zip .)
 
       - name: Upload Firefox build
         uses: actions/upload-release-asset@v1
