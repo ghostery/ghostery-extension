@@ -11,7 +11,7 @@
 
 import { html, router, store, msg } from 'hybrids';
 
-import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
+import { getCurrentTab, openHref } from '/utils/tabs.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 
 import ReportConfirm from './report-confirm.js';
@@ -158,7 +158,7 @@ export default {
               </ui-text>
               <ui-text type="body-s" color="secondary" underline>
                 ${msg.html`
-                  Please go to <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">Ghostery Support</a>
+                  Please go to <a href="${SUPPORT_PAGE_URL}" onclick="${openHref}">Ghostery Support</a>
                 `}
               </ui-text>
             </panel-card>

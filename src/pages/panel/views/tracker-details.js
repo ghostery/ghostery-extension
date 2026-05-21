@@ -17,7 +17,7 @@ import TabStats from '/store/tab-stats.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import * as exceptions from '/utils/exceptions.js';
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 
 import ProtectionStatus from './protection-status.js';
 
@@ -101,7 +101,7 @@ export default {
                   href="${chrome.runtime.getURL(
                     `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
                   )}"
-                  onclick="${openTabWithUrl}"
+                  onclick="${openHref}"
                 >
                   <ui-icon name="settings-m" layout="size:2"></ui-icon>
                 </a>
@@ -119,7 +119,7 @@ export default {
             ${wtmUrl &&
             html`
               <ui-text type="label-xs" color="brand-primary" underline>
-                <a href="${wtmUrl}" onclick="${openTabWithUrl}">Read more on WhoTracks.Me</a>
+                <a href="${wtmUrl}" onclick="${openHref}">Read more on WhoTracks.Me</a>
               </ui-text>
             `}
           </div>
@@ -190,9 +190,7 @@ export default {
                 underline
                 layout="padding margin:-1"
               >
-                <a href="${tracker.websiteUrl}" onclick="${openTabWithUrl}">
-                  ${tracker.websiteUrl}
-                </a>
+                <a href="${tracker.websiteUrl}" onclick="${openHref}"> ${tracker.websiteUrl} </a>
               </ui-text>
             </div>
           `}
@@ -210,7 +208,7 @@ export default {
                   underline
                   layout="padding margin:-1"
                 >
-                  <a href="${tracker.organization.websiteUrl}" onclick="${openTabWithUrl}">
+                  <a href="${tracker.organization.websiteUrl}" onclick="${openHref}">
                     ${tracker.organization.websiteUrl}
                   </a>
                 </ui-text>
@@ -228,7 +226,7 @@ export default {
                   underline
                   layout="padding margin:-1"
                 >
-                  <a href="${tracker.organization.privacyPolicy}" onclick="${openTabWithUrl}">
+                  <a href="${tracker.organization.privacyPolicy}" onclick="${openHref}">
                     ${tracker.organization.privacyPolicy}
                   </a>
                 </ui-text>
@@ -250,7 +248,7 @@ export default {
                     href="${tracker.organization.contact.startsWith('http')
                       ? ''
                       : 'mailto:'}${tracker.organization.contact}"
-                    onclick="${openTabWithUrl}"
+                    onclick="${openHref}"
                   >
                     ${tracker.organization.contact}
                   </a>

@@ -11,7 +11,7 @@
 
 import { html, store, router, msg } from 'hybrids';
 
-import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
+import { getCurrentTab, openHref } from '/utils/tabs.js';
 
 import Options, {
   isGloballyPaused,
@@ -272,7 +272,7 @@ export default {
               </panel-actions-button>
               <panel-actions-button>
                 <a
-                  onclick="${openTabWithUrl}"
+                  onclick="${openHref}"
                   href="${chrome.runtime.getURL(
                     '/pages/settings/index.html#@settings-website-details?domain=' + stats.hostname,
                   )}"
@@ -290,7 +290,7 @@ export default {
         html`
           <div layout="::background:danger-primary">
             <ui-button type="danger" layout="height:6 margin:1.5" data-qa="button:enable">
-              <a href="${ONBOARDING_URL}" layout="row center gap:0.5" onclick="${openTabWithUrl}">
+              <a href="${ONBOARDING_URL}" layout="row center gap:0.5" onclick="${openHref}">
                 <ui-icon name="play"></ui-icon>
                 Enable Ghostery
               </a>
@@ -531,7 +531,7 @@ export default {
               class="${{
                 last: managedConfig.disableUserControl || !store.ready(notification),
               }}"
-              onclick="${openTabWithUrl}"
+              onclick="${openHref}"
               layout="block margin:1.5:1.5:0.5"
               layout.last="margin:bottom:1.5"
             >

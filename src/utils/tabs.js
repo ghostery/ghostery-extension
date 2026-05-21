@@ -11,7 +11,7 @@
 
 import { getOS } from './browser-info.js';
 
-export async function openTabWithUrl(host, event) {
+export async function openHref(host, event) {
   // Firefox does not support Tabs API in iframes (Trackers Preview)
   // Firefox Android does not allow using `window.close()` in async event listeners
   if (__FIREFOX__ && (!chrome.tabs || getOS() === 'android')) {
@@ -25,27 +25,30 @@ export async function openTabWithUrl(host, event) {
   const { href } = event.currentTarget;
   event.preventDefault();
 
+  await openTabWithUrl(href);
+
+  window.close();
+}
+
+export async function openTabWithUrl(url) {
   try {
     const tabs = await chrome.tabs.query({
-      url: href.split('#')[0],
+      url: url.split('#')[0],
       currentWindow: true,
     });
 
     if (tabs.length) {
       await chrome.tabs.update(tabs[0].id, {
         active: true,
-        url: href !== tabs[0].url ? href : undefined,
+        url: url !== tabs[0].url ? url : undefined,
       });
-
-      window.close();
       return;
     }
   } catch (e) {
     console.error('[utils|tabs] Error while try to find existing tab:', e);
   }
 
-  chrome.tabs.create({ url: href });
-  window.close();
+  await chrome.tabs.create({ url });
 }
 
 export async function getCurrentTab() {

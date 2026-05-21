@@ -13,6 +13,7 @@ import { store, msg } from 'hybrids';
 
 import Options, { MODE_ZAP } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { openTabWithUrl } from '/utils/tabs.js';
 import { tabStats } from './stats.js';
 import { openElementPicker } from './element-picker.js';
 
@@ -201,17 +202,7 @@ async function pauseSite(tab, id) {
 }
 
 async function openSettings() {
-  const tabs = await chrome.tabs.query({
-    url: SETTINGS_URL,
-    currentWindow: true,
-  });
-
-  if (tabs.length) {
-    await chrome.tabs.update(tabs[0].id, { active: true });
-  } else {
-    await chrome.tabs.create({ url: SETTINGS_URL });
-  }
-
+  await openTabWithUrl(SETTINGS_URL + '#@settings-privacy');
   console.debug('[context-menu] Opened settings page...');
 }
 
@@ -219,7 +210,7 @@ async function openWebsiteSettings(tab) {
   const hostname = tabStats.get(tab.id)?.hostname;
   const url = SETTINGS_URL + '#@settings-website-details?domain=' + (hostname || '');
 
-  await chrome.tabs.create({ url });
+  await openTabWithUrl(url);
 
   console.debug(`[context-menu] Opened website settings for ${hostname}...`);
 }

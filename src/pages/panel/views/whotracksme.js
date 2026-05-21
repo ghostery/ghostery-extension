@@ -15,7 +15,7 @@ import { parse } from 'tldts-experimental';
 import TabStats from '/store/tab-stats.js';
 
 import { WTM_PAGE_URL } from '/utils/urls.js';
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 
 function hasWTMStats(domain) {
   return chrome.runtime.sendMessage({
@@ -41,7 +41,7 @@ export default {
           <ui-action>
             <a
               href="${chrome.runtime.getURL('/pages/whotracksme/index.html')}"
-              onclick="${openTabWithUrl}"
+              onclick="${openHref}"
               layout="row gap:2"
             >
               <ui-icon name="whotracksme" color="tertiary" layout="size:3"></ui-icon>
@@ -61,7 +61,7 @@ export default {
                 link &&
                 html`
                   <ui-action>
-                    <a href="${link}" onclick="${openTabWithUrl}" layout="row gap:2">
+                    <a href="${link}" onclick="${openHref}" layout="row gap:2">
                       <ui-icon name="stats-report" color="tertiary" layout="size:3"></ui-icon>
                       <div layout="column gap:0.5">
                         <ui-text type="label-m"> Website Statistical Report </ui-text>

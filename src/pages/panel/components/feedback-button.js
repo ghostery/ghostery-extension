@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 
 export default {
   type: { value: '', reflect: true },
@@ -24,7 +24,7 @@ export default {
       <ui-button inert="${!href}" layout="grow">
         <a
           href="${href}"
-          onclick="${external && openTabWithUrl}"
+          onclick="${external && openHref}"
           layout="column center padding:0.5 gap:0"
         >
           <div layout="row items:center gap:0.5 height:22px">

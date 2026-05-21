@@ -14,7 +14,7 @@ import { html, router, store } from 'hybrids';
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { openHref } from '/utils/tabs.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 import ReportCategory from './report-category.js';
@@ -75,7 +75,7 @@ export default {
             <ui-button type="outline-primary" layout="margin:1:1.5">
               <a
                 href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=menu-becomeacontributor"
-                onclick="${openTabWithUrl}"
+                onclick="${openHref}"
               >
                 <ui-icon name="heart"></ui-icon>
                 Become a Contributor
