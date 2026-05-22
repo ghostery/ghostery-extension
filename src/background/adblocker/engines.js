@@ -23,22 +23,26 @@ import { updateDNRRulesForExceptions } from '../exceptions.js';
 
 import { contentScripts } from './content-scripts.js';
 
-function getEnabledEngines(config) {
-  if (config.terms) {
-    const list = ENGINES.filter(({ key }) => config[key]).map(({ name }) => name);
+function getEnabledEngines(options) {
+  if (options.terms) {
+    const list = ENGINES.filter(({ key }) => options[key]).map(({ name }) => name);
 
-    if (config.regionalFilters.enabled) {
-      list.push(...config.regionalFilters.regions.map((id) => `lang-${id}`));
+    if (options.regionalFilters.enabled) {
+      list.push(...options.regionalFilters.regions.map((id) => `lang-${id}`));
     }
 
-    if (config.fixesFilters && list.length) {
+    if (options.fixesFilters && list.length) {
       list.push(engines.FIXES_ENGINE);
     }
 
     list.push(engines.ELEMENT_PICKER_ENGINE);
 
-    if (config.customFilters.enabled) {
+    if (options.customFilters.enabled) {
       list.push(engines.CUSTOM_ENGINE);
+    }
+
+    if (Object.values(options.distractions).some(Boolean)) {
+      list.push(engines.DISTRACTIONS_ENGINE);
     }
 
     return list;

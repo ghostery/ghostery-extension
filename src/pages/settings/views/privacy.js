@@ -23,6 +23,7 @@ import assets from '../assets/index.js';
 import Autoconsent from './autoconsent.js';
 import AdditionalFilters, { getAdditionalFiltersLabel } from './additional-filters.js';
 import RedirectProtection, { getRedirectProtectionLabel } from './redirect-protection.js';
+import Distractions, { getDistractionsLabel } from './distractions.js';
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
@@ -46,7 +47,7 @@ function updateEngines(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [Autoconsent, AdditionalFilters, RedirectProtection],
+    stack: [Autoconsent, AdditionalFilters, RedirectProtection, Distractions],
   },
   options: store(Options),
   devMode: __DEBUG__,
@@ -155,6 +156,16 @@ export default {
                     Redirect Protection
                     <ui-text slot="footer" color="tertiary">
                       ${getRedirectProtectionLabel(options)}
+                    </ui-text>
+                  </settings-link>
+                  <settings-link
+                    href="${router.url(Distractions)}"
+                    icon="annoyances"
+                    data-qa="button:distractions"
+                  >
+                    Distractions
+                    <ui-text slot="footer" color="tertiary">
+                      ${getDistractionsLabel(options)}
                     </ui-text>
                   </settings-link>
                 `}

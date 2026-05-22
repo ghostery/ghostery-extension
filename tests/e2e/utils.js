@@ -302,3 +302,27 @@ export async function enableExtension() {
 
   enableExtension.done = true;
 }
+
+// Loads a third-party `<script>` from the page context and reports whether
+// the request was blocked (onerror) or fetched successfully (onload).
+export async function loadThirdPartyScript(src) {
+  return await browser.execute((src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => {
+        script.remove();
+        resolve('loaded');
+      };
+      script.onerror = () => {
+        script.remove();
+        resolve('blocked');
+      };
+      setTimeout(() => {
+        script.remove();
+        resolve('timeout');
+      }, 5000);
+      document.head.appendChild(script);
+    });
+  }, src);
+}

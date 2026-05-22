@@ -30,7 +30,7 @@ const pwd = process.cwd();
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
-  assets: ['_locales', 'icons', 'static_pages'],
+  assets: ['_locales', 'icons', 'static_pages', 'background/rule_resources'],
   pages: ['dnr-converter', 'logger', 'onboarding', 'whotracksme'],
 };
 

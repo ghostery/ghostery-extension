@@ -34,11 +34,17 @@ export const ELEMENT_PICKER_ENGINE = 'element-picker-selectors';
 export const CUSTOM_ENGINE = 'custom-filters';
 
 export const TRACKERDB_ENGINE = 'trackerdb';
+export const DISTRACTIONS_ENGINE = 'distractions';
 
 const engines = new Map();
 
 export function isPersistentEngine(name) {
-  return name !== ELEMENT_PICKER_ENGINE && name !== CUSTOM_ENGINE && name !== MAIN_ENGINE;
+  return (
+    name !== ELEMENT_PICKER_ENGINE &&
+    name !== CUSTOM_ENGINE &&
+    name !== DISTRACTIONS_ENGINE &&
+    name !== MAIN_ENGINE
+  );
 }
 
 export function setEnv(key, value) {
@@ -393,12 +399,18 @@ export async function init(name) {
 export async function create(name, options = null) {
   const baseEngine = await init(FIXES_ENGINE);
 
-  options = {
-    ...options,
-    config: baseEngine.config,
-  };
+  const { lists, ...rest } = options || {};
 
-  const engine = new FiltersEngine({ ...options });
+  const engine = new FiltersEngine({
+    ...rest,
+    config: baseEngine.config,
+  });
+
+  if (lists) {
+    for (const [key, value] of Object.entries(lists)) {
+      engine.lists.set(key, value);
+    }
+  }
 
   engine.resources = Resources.copy(baseEngine.resources);
   engine.updateEnv(ENV);

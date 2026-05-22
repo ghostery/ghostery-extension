@@ -67,6 +67,9 @@ const Options = {
     trustedScriptlets: false,
   },
 
+  // Distractions
+  distractions: store.record(false),
+
   // Experimental features
   autoconsent: { autoAction: 'optOut', gpc: true },
   fixesFilters: true,
