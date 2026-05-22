@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "追跡防止"
   },
+  "applies_to__@_0_": {
+    "message": "$${0}に適用"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Trackers Previewを無効にしてもよいですか？"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "ブラウザ：ベンダー、バージョン、言語、オペレーティングシステムベンダー"
+  },
+  "browser_promotions": {
+    "message": "ブラウザのプロモーション"
   },
   "browser_redirect_protection": {
     "message": "ブラウザリダイレクト保護"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "$${0}で観察された活動に関する独自の洞察を表示し、サイト全体での関連性、カテゴリ、および存在を明らかにします。"
   },
+  "distractions": {
+    "message": "集中を妨げるもの"
+  },
   "dnr_rules__@_0_": {
     "message": "DNRルール: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "有効: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "有効なルール: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "クリックが不要な追跡の回り道をすることなく、選択したページに直接移動するようにします。"
@@ -520,11 +532,23 @@
   "hide": {
     "message": "非表示"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "ブラウジングを中断させるブラウザのプロンプトを非表示にします。"
+  },
   "hide_content_block": {
     "message": "コンテンツブロックを非表示にする"
   },
   "hide_distraction": {
     "message": "気を散らすものを隠す"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "気を散らすループに引き込まれる可能性のある、終わりのない短い動画フィードを非表示にします。"
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "ウェブサイト全体でGoogleログインのプロンプトを非表示にする。"
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "ページのノイズとなるソーシャルウィジェットや共有パネルを非表示にします。"
   },
   "hosting": {
     "message": "ホスティング",
@@ -691,7 +715,7 @@
     "message": "サイトを開く"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "設定を開く"
   },
   "open_video": {
     "message": "ビデオを開く"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "プライバシー保護の重要な側面の概要を提供します。"
   },
+  "quick_actions": {
+    "message": "クイックアクション"
+  },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "このサイトに保存されているすべてのクッキーを削除してプライバシーを保護し、閲覧データをリセットします。"
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "煩わしいプロンプトやインターフェースの乱雑さを排除し、よりすっきりとしたブラウジング体験を実現します。"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "デスクトップからモバイルにGhosteryを移行"
+  },
+  "search_distractions_or_websites___": {
+    "message": "気が散るものやウェブサイトを検索..."
   },
   "search_engine_redirect_protection": {
     "message": "検索エンジンのリダイレクト保護"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "レビューを共有する"
   },
+  "short_video_feeds": {
+    "message": "短い動画フィード"
+  },
   "show_ads": {
     "message": "広告を表示"
   },
   "show_all": {
     "message": "すべてを表示"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "ブラウザの右クリックメニューにGhosteryのオプションを表示します。"
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "検索結果の横にトラッカープレビューを表示します。"
+  },
+  "sign_in_with_google": {
+    "message": "Googleでサインイン"
   },
   "simple_view": {
     "message": "シンプル・ビュー"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "ソーシャル・メディア",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "ソーシャル・メディアの煩雑さ"
   },
   "software_licenses": {
     "message": "ソフトウェア・ライセンス"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "ウェブサイト"
+  },
+  "websites_with_google_sign_in": {
+    "message": "Googleでサインインするウェブサイト"
   },
   "weekly": {
     "message": "週間"
