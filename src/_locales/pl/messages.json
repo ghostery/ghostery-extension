@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "Ochrona przed śledzeniem"
   },
+  "applies_to__@_0_": {
+    "message": "Dotyczy: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Chcesz wyłączyć Podgląd Trackerów?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "przeglądarka: dostawca, wersja, język, dostawca systemu operacyjnego"
+  },
+  "browser_promotions": {
+    "message": "Promocje przeglądarki"
   },
   "browser_redirect_protection": {
     "message": "Ochrona przed przekierowaniami w przeglądarce"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Wyświetla unikalne spostrzeżenia dotyczące zaobserwowanej aktywności na $${0}, ujawniając powiązania, kategorie i obecność na stronie."
   },
+  "distractions": {
+    "message": "Rozpraszacze"
+  },
   "dnr_rules__@_0_": {
     "message": "Reguły DNR: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Włączone: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Włączone reguły: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Zapewnia, że Twoje kliknięcia trafiają bezpośrednio na wybrane strony, bez zbędnych przekierowań śledzących."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "Ukryj"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Ukryj wyskakujące okienka przeglądarki, które przerywają przeglądanie."
+  },
   "hide_content_block": {
     "message": "Ukryj blok treści"
   },
   "hide_distraction": {
     "message": "Ukryj rozpraszacze"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Ukryj niekończące się krótkie filmy, które mogą wciągnąć Cię w pętle rozpraszania uwagi."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Ukryj monity logowania Google w całej sieci."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Ukryj widżety społecznościowe i panele udostępniania, które zaśmiecają strony."
   },
   "hosting": {
     "message": "Hosting",
@@ -691,7 +715,7 @@
     "message": "Otwórz stronę"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "Otwórz ustawienia"
   },
   "open_video": {
     "message": "Otwórz wideo"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Zapewnia przegląd kluczowych aspektów ochrony prywatności."
   },
+  "quick_actions": {
+    "message": "Szybkie działania"
+  },
   "read_more_on_whotracks_me": {
     "message": "Dowiedz się więcej na WhoTracks.Me"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Usuń wszystkie pliki cookie przechowywane przez tę stronę, aby chronić swoją prywatność i zresetować dane przeglądania."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Usuń natrętne komunikaty i bałagan w interfejsie, aby przeglądanie było czystsze."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Zastępuje ikonę Ghostery w pasku narzędzi przeglądarki ikoną koła."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Skanuj i przenieś Ghostery z komputera na urządzenie mobilne"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Szukaj rozpraszaczy lub stron internetowych..."
   },
   "search_engine_redirect_protection": {
     "message": "Ochrona przekierowywania wyszukiwarki"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "Napisz recenzję"
   },
+  "short_video_feeds": {
+    "message": "Krótkie kanały wideo"
+  },
   "show_ads": {
     "message": "Wyświetlaj reklamy"
   },
   "show_all": {
     "message": "Pokaż wszystkie"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Pokazuje opcje Ghostery w menu kontekstowym przeglądarki."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Wyświetla podgląd trackerów przy wynikach wyszukiwania."
+  },
+  "sign_in_with_google": {
+    "message": "Zaloguj się przez Google"
   },
   "simple_view": {
     "message": "Widok uproszczony"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Media społecznościowe",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Media społecznościowe: bałagan"
   },
   "software_licenses": {
     "message": "Licencje na oprogramowanie"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Witryny"
+  },
+  "websites_with_google_sign_in": {
+    "message": "witryny z logowaniem przez Google"
   },
   "weekly": {
     "message": "Tygodniowo"
