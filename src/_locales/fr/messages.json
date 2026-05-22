@@ -933,7 +933,7 @@
     "message": "Tout afficher"
   },
   "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
-    "message": "Affiche les options Ghostery dans le menu contextuel de votre navigateur."
+    "message": "Affiche les options Ghostery dans le menu contextuel du navigateur."
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Affiche l'aperçu des trackers à côté des résultats de recherche."
@@ -956,7 +956,7 @@
     "description": "Tracker category name"
   },
   "social_media_clutter": {
-    "message": "Encombrement des médias sociaux"
+    "message": "Éléments des réseaux sociaux"
   },
   "software_licenses": {
     "message": "Licences d'utilisation de logiciels"
@@ -1167,7 +1167,7 @@
     "message": "Sites Web"
   },
   "websites_with_google_sign_in": {
-    "message": "sites web avec connexion Google"
+    "message": "Sites web utilisant la connexion Google"
   },
   "weekly": {
     "message": "Hebdomadaire"
