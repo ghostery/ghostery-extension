@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "Анти-трекинг"
   },
+  "applies_to__@_0_": {
+    "message": "Применяется к: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Отключить функцию Trackers Preview?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "браузер: производитель, версия, язык, производитель операционной системы"
+  },
+  "browser_promotions": {
+    "message": "Рекламные акции браузера"
   },
   "browser_redirect_protection": {
     "message": "Защита от перенаправления в браузере"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Отображает уникальные сведения о наблюдаемых действиях на $${0}, раскрывая принадлежность, категории и присутствие на сайте."
   },
+  "distractions": {
+    "message": "Отвлекающие факторы"
+  },
   "dnr_rules__@_0_": {
     "message": "Правила DNR: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Включено: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Включенные правила: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Гарантирует, что ваши клики переходят непосредственно на выбранные вами страницы, без ненужных обходных путей отслеживания."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "Скрыть"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Скрывать всплывающие окна браузера, которые прерывают ваш просмотр."
+  },
   "hide_content_block": {
     "message": "Скрыть блок контента"
   },
   "hide_distraction": {
     "message": "Скрыть отвлекающие элементы"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Скрывайте бесконечные короткие видеоленты, которые могут затянуть вас в отвлекающие циклы."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Скрыть запросы на вход через Google на всех сайтах."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Скрывать виджеты социальных сетей и панели для обмена, которые засоряют страницы."
   },
   "hosting": {
     "message": "Хостинг",
@@ -691,7 +715,7 @@
     "message": "Откройте сайт"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "Открыть настройки"
   },
   "open_video": {
     "message": "Открытое видео"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Предоставляет обзор основных аспектов защиты конфиденциальности."
   },
+  "quick_actions": {
+    "message": "Быстрые действия"
+  },
   "read_more_on_whotracks_me": {
     "message": "Читайте больше на WhoTracks.Me"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Удалите все файлы cookie, сохраненные этим сайтом, чтобы защитить вашу конфиденциальность и сбросить данные браузера."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Удалите навязчивые подсказки и беспорядок в интерфейсе для более чистого просмотра."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Заменяет значок Ghostery на панели инструментов статистикой трекеров."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Сканируйте и переносите Ghostery с компьютера на мобильное устройство"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Искать отвлекающие факторы или сайты..."
   },
   "search_engine_redirect_protection": {
     "message": "Защита от перенаправления поисковых систем"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "Поделитесь отзывом"
   },
+  "short_video_feeds": {
+    "message": "Короткие видеоленты"
+  },
   "show_ads": {
     "message": "Показывать рекламу"
   },
   "show_all": {
     "message": "Показать все"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Показывает параметры Ghostery в контекстном меню браузера."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Показывает количество трекеров рядом с результатами поиска."
+  },
+  "sign_in_with_google": {
+    "message": "Войти через Google"
   },
   "simple_view": {
     "message": "Простой вид"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Социальные сети",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Социальные сети: беспорядок"
   },
   "software_licenses": {
     "message": "Лицензии на программное обеспечение"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Веб-сайты"
+  },
+  "websites_with_google_sign_in": {
+    "message": "сайты с входом через Google"
   },
   "weekly": {
     "message": "Еженедельно"
