@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "反跟踪功能"
   },
+  "applies_to__@_0_": {
+    "message": "适用于：$${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "确定要禁用跟踪器预览吗？"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "浏览器：供应商、版本、语言、操作系统供应商"
+  },
+  "browser_promotions": {
+    "message": "浏览器推广"
   },
   "browser_redirect_protection": {
     "message": "浏览器重定向保护"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "在$${0}上显示观察到的活动的独特见解，揭示关联、类别和网站上的存在。"
   },
+  "distractions": {
+    "message": "干扰"
+  },
   "dnr_rules__@_0_": {
     "message": "DNR规则：$${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "已启用：$${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "已启用规则：$${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "确保您的点击直接跳转到您选择的页面，避免不必要的跟踪绕行。"
@@ -520,11 +532,23 @@
   "hide": {
     "message": "隐藏"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "隐藏打断您浏览的浏览器提示。"
+  },
   "hide_content_block": {
     "message": "隐藏内容块"
   },
   "hide_distraction": {
     "message": "隐藏干扰"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "隐藏无休止的短视频信息流，避免让你陷入分心循环。"
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "在网络上隐藏 Google 登录提示。"
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "隐藏社交小组件和分享面板，减少页面干扰。"
   },
   "hosting": {
     "message": "托管",
@@ -691,7 +715,7 @@
     "message": "打开网站"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "打开设置"
   },
   "open_video": {
     "message": "打开视频"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "提供隐私保护基本方面的概述。"
   },
+  "quick_actions": {
+    "message": "快捷操作"
+  },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "删除此网站存储的所有cookie以保护您的隐私并重置您的浏览数据。"
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "移除侵扰性提示和界面杂乱，带来更整洁的浏览体验。"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "将浏览器工具栏的 Ghostery 图标替换为跟踪器轮盘。"
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "扫描并将 Ghostery 从桌面转移到移动设备"
+  },
+  "search_distractions_or_websites___": {
+    "message": "搜索干扰或网站..."
   },
   "search_engine_redirect_protection": {
     "message": "搜索引擎重定向保护"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "分享评价"
   },
+  "short_video_feeds": {
+    "message": "短视频信息流"
+  },
   "show_ads": {
     "message": "显示广告"
   },
   "show_all": {
     "message": "展示所有"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "在浏览器右键菜单中显示 Ghostery 选项。"
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "在搜索结果旁边显示跟踪器预览。"
+  },
+  "sign_in_with_google": {
+    "message": "使用 Google 登录"
   },
   "simple_view": {
     "message": "简单视图"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "社交媒体",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "社交媒体干扰"
   },
   "software_licenses": {
     "message": "软件许可证"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "网站"
+  },
+  "websites_with_google_sign_in": {
+    "message": "使用 Google 登录的网站"
   },
   "weekly": {
     "message": "每周"
