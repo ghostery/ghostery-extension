@@ -822,7 +822,7 @@
     "message": "Bietet einen Überblick über die wesentlichen Aspekte des Datenschutzes."
   },
   "quick_actions": {
-    "message": "Schnellaktionen"
+    "message": "Kontextmenü"
   },
   "read_more_on_whotracks_me": {
     "message": "Lesen Sie mehr auf WhoTracks.Me"
@@ -843,7 +843,7 @@
     "message": "Lösche alle von dieser Webseite gespeicherten Cookies, um deine Privatsphäre zu schützen und deine Browserdaten zurückzusetzen."
   },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
-    "message": "Entfernen Sie aufdringliche Aufforderungen und überflüssige Elemente für ein übersichtlicheres Surferlebnis."
+    "message": "Entfernt störende Hinweise und unnötige Elemente auf Webseiten."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Ersetzt das Ghostery-Symbol in der Werkzeugleiste des Browsers mit dem Tracker-Rad."
@@ -876,7 +876,7 @@
     "message": "QR-Code scannen und direkt auf Android oder iPhone starten"
   },
   "search_distractions_or_websites___": {
-    "message": "Ablenkungen oder Websites suchen..."
+    "message": "Ablenkungen oder Webseiten suchen..."
   },
   "search_engine_redirect_protection": {
     "message": "Schutz vor Suchmaschinenumleitungen"
@@ -956,7 +956,7 @@
     "description": "Tracker category name"
   },
   "social_media_clutter": {
-    "message": "Social Media-Unordnung"
+    "message": "Social Media Ablenkungen"
   },
   "software_licenses": {
     "message": "Software-Lizenzen"
@@ -1167,7 +1167,7 @@
     "message": "Websites"
   },
   "websites_with_google_sign_in": {
-    "message": "Websites mit Google-Anmeldung"
+    "message": "Webseiten mit Google-Anmeldung"
   },
   "weekly": {
     "message": "Wöchentlich"
