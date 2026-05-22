@@ -32,7 +32,7 @@
     "@wdio/globals": "^9.27.0",
     "@wdio/mocha-framework": "^9.27.0",
     "@wdio/spec-reporter": "^9.27.1",
-    "eslint": "^10.2.1",
+    "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.5.0",
