@@ -67,7 +67,7 @@
     "description": "Tracker category name"
   },
   "advertising": {
-    "message": "Anúncio",
+    "message": "Publicidade",
     "description": "Tracker category name"
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
@@ -95,7 +95,7 @@
     "message": "Aplica-se a: $${0}"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
-    "message": "Tem certeza de que deseja desativar a visualização de rastreadores?"
+    "message": "Tem certeza de que deseja desativar a Prévia de Rastreadores?"
   },
   "audio_video_player": {
     "message": "Reprodutor de Áudio/Vídeo",
@@ -218,7 +218,7 @@
     "message": "Limpar cookies"
   },
   "clear_cookies_": {
-    "message": "Limpe os cookies?"
+    "message": "Limpar cookies?"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Clique no ícone do quebra-cabeça ao lado da barra de pesquisa e <strong>fixe o Ghostery</strong> na sua barra de ferramentas."
@@ -311,7 +311,7 @@
     "message": "Desativar"
   },
   "disable_trackers_preview": {
-    "message": "Desativar a visualização de rastreadores"
+    "message": "Desativar a Prévia de Rastreadores"
   },
   "disabled": {
     "message": "Desativado"
@@ -461,7 +461,7 @@
     "message": "Obter ajuda"
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
-    "message": "A Ghostery adicionou uma regra para manter este bloco de conteúdo oculto. Você pode desfazer isso a qualquer momento nas configurações do site."
+    "message": "O Ghostery adicionou uma regra para manter este bloco de conteúdo oculto. Você pode desfazer isso a qualquer momento nas configurações do site."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery foi retomado."
@@ -539,7 +539,7 @@
     "message": "Ocultar bloco de conteúdo"
   },
   "hide_distraction": {
-    "message": "Oculte distrações"
+    "message": "Ocultar distração"
   },
   "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
     "message": "Oculte feeds de vídeos curtos intermináveis que podem te prender em ciclos de distração."
@@ -551,7 +551,7 @@
     "message": "Oculte widgets sociais e painéis de compartilhamento que adicionam ruído às páginas."
   },
   "hosting": {
-    "message": "Hospedando",
+    "message": "Hospedagem",
     "description": "Tracker category name"
   },
   "how_browsing_assistant_works": {
@@ -712,7 +712,7 @@
     "message": "Ligado"
   },
   "open_a_site": {
-    "message": "Abra um site"
+    "message": "Abrir um site"
   },
   "open_settings": {
     "message": "Abrir configurações"
@@ -721,7 +721,7 @@
     "message": "Abrir vídeo"
   },
   "open_website_settings": {
-    "message": "Abra as configurações do site"
+    "message": "Abrir as configurações do site"
   },
   "open_youtube_in_a_private_window": {
     "message": "Abrir o YouTube em uma janela privada"
@@ -765,7 +765,7 @@
     "message": "Pausado"
   },
   "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
-    "message": "Pausou automaticamente pelo Assistente de Navegação do Ghostery para evitar que o bloqueador de anúncios quebre."
+    "message": "Pausado automaticamente pelo Assistente de Navegação do Ghostery para evitar falhas no bloqueador de anúncios."
   },
   "paused_by_browsing_assistant": {
     "message": "Pausado pelo Assistente de Navegação"
@@ -837,7 +837,7 @@
     "message": "Listas de Bloqueio Regionais"
   },
   "reload_to_see_changes": {
-    "message": "Clique para ver as mudanças"
+    "message": "Recarregue para ver as alterações"
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Remova todos os cookies armazenados por este site para proteger sua privacidade e redefinir seus dados de navegação."
@@ -918,7 +918,7 @@
     "message": "Configurações de sincronização"
   },
   "setup_successful": {
-    "message": "Configuração bem sucedida"
+    "message": "Configuração bem-sucedida"
   },
   "share_a_review": {
     "message": "Compartilhe uma Avaliação"
@@ -1038,7 +1038,7 @@
     "message": "Para visitar a página desejada, você precisa permitir este redirecionamento."
   },
   "top_100": {
-    "message": "Os 100 melhores"
+    "message": "Os 100 principais"
   },
   "top_20": {
     "message": "20 principais"
@@ -1071,10 +1071,10 @@
     "message": "Tendências"
   },
   "trust_on_all_websites": {
-    "message": "Confiança em todos os sites"
+    "message": "Confiar em todos os sites"
   },
   "trust_on_this_website": {
-    "message": "Confiar nesse site"
+    "message": "Confiar neste site"
   },
   "trusted": {
     "message": "Confiável"

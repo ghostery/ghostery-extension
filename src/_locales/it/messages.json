@@ -52,18 +52,18 @@
     "message": "Filtri aggiuntivi"
   },
   "adjusted___tracker": {
-    "message": "regolazione effettuata",
+    "message": "regolato",
     "description": "Singular form - tracker has been adjusted"
   },
   "adjusted___tracker_list": {
-    "message": "Regolazione effettuata",
+    "message": "Regolati",
     "description": "Plural form - list of adjusted trackers"
   },
   "ads_are_showing": {
     "message": "Gli annunci sono visibili"
   },
   "adult_advertising": {
-    "message": "Pubblicità per Adulti",
+    "message": "Pubblicità per adulti",
     "description": "Tracker category name"
   },
   "advertising": {
@@ -71,7 +71,7 @@
     "description": "Tracker category name"
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
-    "message": "Tutte le informazioni visualizzate nella scheda WhoTracks.Me o $${0} sono un insieme di dati sui Tracker web. Questi rapporti alimentano la tecnologia anti-tracciamento di Ghostery, proteggendo l'intera comunità."
+    "message": "Tutte le informazioni visualizzate nella scheda WhoTracks.Me o $${0} sono un insieme di dati sui tracker web. Questi rapporti alimentano la tecnologia anti-tracciamento di Ghostery, proteggendo l'intera comunità."
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "Tutti i siti web con stato di protezione regolato saranno elencati qui."
@@ -138,7 +138,7 @@
     "message": "Blocca annunci una volta"
   },
   "block_all": {
-    "message": "Blocca Tutti"
+    "message": "Blocca tutti"
   },
   "block_similar_elements": {
     "message": "Blocca elementi simili"
@@ -157,10 +157,10 @@
     "message": "Bloccato manualmente"
   },
   "blocked_on_all_websites": {
-    "message": "Blocco effettuato su tutti i siti"
+    "message": "Bloccato su tutti i siti web"
   },
   "blocked_on_this_website": {
-    "message": "Blocco effettuato su questo sito"
+    "message": "Bloccato su questo sito web"
   },
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Il blocco è stato messo in pausa temporaneamente e solo su questa pagina. Considera di mettere in pausa anche altri ad blocker per risultati ottimali."
@@ -203,7 +203,7 @@
     "description": "Tracker category name"
   },
   "changes_application_color_theme_": {
-    "message": "Cambia il tema colore dell'applicazione"
+    "message": "Cambia il tema colore dell'applicazione."
   },
   "choose_category": {
     "message": "Scegli categoria"
@@ -256,7 +256,7 @@
     "message": "Banner dei cookie visibile"
   },
   "cookies_successfully_cleared": {
-    "message": "Cookies cancellati con successo"
+    "message": "Cookie cancellati con successo"
   },
   "copied_to_clipboard": {
     "message": "Copiato negli appunti"
@@ -271,7 +271,7 @@
     "message": "Personalizzato"
   },
   "custom_filters": {
-    "message": "Filtri Personalizzati"
+    "message": "Filtri personalizzati"
   },
   "custom_filters_have_been_updated": {
     "message": "I filtri personalizzati sono stati aggiornati"
@@ -287,7 +287,7 @@
     "message": "Scuro"
   },
   "data_collection_summary": {
-    "message": "Riepilogo della Raccolta Dati"
+    "message": "Riepilogo della raccolta dati"
   },
   "date_range__@_0______1_": {
     "message": "Intervallo di date: $${0} - $${1}"
@@ -296,10 +296,10 @@
     "message": "Predefinito"
   },
   "deleted_cookies": {
-    "message": "Cookie eliminate"
+    "message": "Cookie eliminati"
   },
   "detailed_view": {
-    "message": "Vista Dettagliata"
+    "message": "Vista dettagliata"
   },
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "Rileva e previene il malfunzionamento dei blocchi pubblicitari sospendendosi automaticamente sulle pagine interessate."
@@ -311,7 +311,7 @@
     "message": "Disattiva"
   },
   "disable_trackers_preview": {
-    "message": "Disattiva anteprima Tracker"
+    "message": "Disattiva anteprima tracker"
   },
   "disabled": {
     "message": "Disattivato"
@@ -491,10 +491,10 @@
     "message": "Ghostery non raccoglie mai informazioni personali come password, cronologia di navigazione o il contenuto delle pagine che visiti."
   },
   "ghostery_paused": {
-    "message": "Ghostery ha messo in pausa"
+    "message": "Ghostery in pausa"
   },
   "ghostery_privacy_policy": {
-    "message": "Informativa sulla Privacy di Ghostery"
+    "message": "Informativa sulla privacy di Ghostery"
   },
   "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collection_including_ads__trackers__and_cookie_pop_ups_": {
     "message": "Ghostery protegge la tua privacy rilevando e annullando vari tipi di raccolta dei dati, tra cui pubblicità, tracker e popup dei cookie."
@@ -503,7 +503,7 @@
     "message": "Impostazioni Ghostery"
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery Tracker & Ad Blocker si limita a nominare i tracker presenti sui siti web visitati. State navigando sul web senza protezione."
+    "message": "Ghostery Tracker & Ad Blocker si limita a nominare i tracker presenti sui siti web visitati. Stai navigando sul web senza protezione."
   },
   "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
     "message": "Gli utenti di Ghostery segnalano che i blocchi pubblicitari non interrompono più questo sito. Ghostery verrà riattivato."
@@ -515,7 +515,7 @@
     "message": "Ghostery utilizza queste informazioni per fornire le sue funzionalità di privacy basate sulla comunità, garantendo che le informazioni personali, come password, cronologia di navigazione e contenuti delle pagine, non vengano mai raccolte."
   },
   "global_privacy_control": {
-    "message": "Controllo Globale della Privacy"
+    "message": "Controllo globale della privacy"
   },
   "gone_": {
     "message": "Sparito!"
@@ -624,7 +624,7 @@
     "message": "Lascia una recensione oggi"
   },
   "light": {
-    "message": "Leggero"
+    "message": "Chiaro"
   },
   "load_more": {
     "message": "Carica altro"
@@ -718,13 +718,13 @@
     "message": "Apri impostazioni"
   },
   "open_video": {
-    "message": "Aprire il video"
+    "message": "Apri il video"
   },
   "open_website_settings": {
     "message": "Apri le impostazioni del sito web"
   },
   "open_youtube_in_a_private_window": {
-    "message": "Aprire YouTube in una finestra privata"
+    "message": "Apri YouTube in una finestra privata"
   },
   "opt_in": {
     "message": "Attiva"
@@ -777,7 +777,7 @@
     "message": "Autorizzazione richiesta"
   },
   "pin_extension_for_easy_access": {
-    "message": "Blocca l’estensione per un accesso rapido"
+    "message": "Fissa l’estensione per un accesso rapido"
   },
   "pin_ghostery___take_back_control": {
     "message": "Appunta Ghostery – Riprendi il controllo"
@@ -792,10 +792,10 @@
     "message": "Per favore vai a <a href=\"$${0}\" onclick=\"$${1}\">Supporto Ghostery</a>"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Impedisci a Google e Bing di reindirizzare i link dei risultati di ricerca ai loro server anziché direttamente alle pagine."
+    "message": "Impedisce a Google e Bing di reindirizzare i link dei risultati di ricerca ai loro server anziché direttamente alle pagine."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
-    "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."
+    "message": "Impedisce varie tecniche di tracciamento tramite tecnologia AI-driven."
   },
   "prevents_websites_from_redirecting_your_clicks_through_tracking_urls_before_loading_the_destination_pages_": {
     "message": "Impedisce ai siti web di reindirizzare i tuoi clic tramite URL di tracciamento prima di caricare le pagine di destinazione."
@@ -810,7 +810,7 @@
     "message": "Protezione della privacy"
   },
   "proceed": {
-    "message": "Procedere"
+    "message": "Procedi"
   },
   "protection_exceptions": {
     "message": "Eccezioni di protezione"
@@ -855,13 +855,13 @@
     "message": "richiedere i metadati dei potenziali tracker web"
   },
   "reselect": {
-    "message": "Riseleleziona"
+    "message": "Riseleziona"
   },
   "resume": {
     "message": "Riattiva"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
-    "message": "Rivela ciò che è nascosto sotto la superficie di internet. Con WhoTracks.Me, puoi scoprire le identità dietro ogni Tracker."
+    "message": "Rivela ciò che è nascosto sotto la superficie di internet. Con WhoTracks.Me, puoi scoprire le identità dietro ogni tracker."
   },
   "save": {
     "message": "Salva"
@@ -882,7 +882,7 @@
     "message": "Protezione dal reindirizzamento dei motori di ricerca"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Cerca un sito Tracker o un'organizzazione..."
+    "message": "Cerca un tracker o un'organizzazione..."
   },
   "search_website___": {
     "message": "Ricerca sito web..."
@@ -891,7 +891,7 @@
     "message": "Avviso di sicurezza"
   },
   "see_every_tracker_ghostery_stops_in_real_time_": {
-    "message": "Vedi ogni Tracker che Ghostery blocca in tempo reale."
+    "message": "Vedi ogni tracker che Ghostery blocca in tempo reale."
   },
   "see_what_s_new": {
     "message": "Scopri le novità"
@@ -936,13 +936,13 @@
     "message": "Mostra le opzioni di Ghostery nel menu contestuale del browser."
   },
   "shows_the_tracker_preview_beside_search_results_": {
-    "message": "Mostra l’anteprima Tracker accanto ai risultati di ricerca."
+    "message": "Mostra l’anteprima tracker accanto ai risultati di ricerca."
   },
   "sign_in_with_google": {
     "message": "Accedi con Google"
   },
   "simple_view": {
-    "message": "Vista Semplice"
+    "message": "Vista semplice"
   },
   "site_analytics": {
     "message": "Analisi dei siti",
@@ -1005,7 +1005,7 @@
     "message": "Questa pagina è stata impedita dal caricamento a causa di un reindirizzamento di tracciamento noto verso:"
   },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
-    "message": "Questo rapporto sulla privacy è stato generato tracciando i Tracker in un browser protetto da Ghostery. Le statistiche qui fornite offrono trasparenza sul tracciamento web. Per saperne di più su come Ghostery mantiene sicura la sua comunità, visita $${0}."
+    "message": "Questo rapporto sulla privacy è stato generato tracciando i tracker in un browser protetto da Ghostery. Le statistiche qui fornite offrono trasparenza sul tracciamento web. Per saperne di più su come Ghostery mantiene sicura la sua comunità, visita $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Questo sito sarà sempre in pausa. Puoi cambiare questa impostazione in qualsiasi momento nelle impostazioni di Ghostery per impedire ai tracker e agli annunci di tracciare la tua attività sul web"
@@ -1041,13 +1041,13 @@
     "message": "Primi 100"
   },
   "top_20": {
-    "message": "I migliori 20"
+    "message": "Primi 20"
   },
   "top_50": {
-    "message": "I migliori 50"
+    "message": "Primi 50"
   },
   "tracker___ad_blocking_will_be_active_on_this_page_": {
-    "message": "Il blocco di Tracker e annunci sarà attivo su questa pagina."
+    "message": "Il blocco di tracker e annunci sarà attivo su questa pagina."
   },
   "tracker_database": {
     "message": "Database Tracker"
@@ -1191,10 +1191,10 @@
     "message": "Rapporto statistico WhoTracks.Me"
   },
   "whotracks_me_wheel": {
-    "message": "Ruota whotracks.me?"
+    "message": "Ruota WhoTracks.Me"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
-    "message": "Con Ghostery disabilitato, è disponibile solo la funzionalità di base per nominare i Tracker."
+    "message": "Con Ghostery disabilitato, è disponibile solo la funzionalità di base per nominare i tracker."
   },
   "yesterday": {
     "message": "Ieri"

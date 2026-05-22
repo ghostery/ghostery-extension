@@ -71,13 +71,13 @@
     "description": "Tracker category name"
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
-    "message": "Вся информация, отображаемая на вкладке WhoTracks.Me или $${0}, представляет собой совокупность фактов о Трекерах. Эти отчеты поддерживают технологию анти-трекинга Ghostery, защищая всю сообщество."
+    "message": "Вся информация, отображаемая на вкладке WhoTracks.Me или $${0}, представляет собой совокупность фактов о трекерах. Эти отчёты поддерживают технологию анти-трекинга Ghostery, защищая всё сообщество."
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "Все веб-сайты с измененным статусом защиты будут перечислены здесь."
   },
   "allow_ghostery_in_private_windows": {
-    "message": "Разреши Ghostery в приватных окнах"
+    "message": "Разрешить Ghostery в приватных окнах"
   },
   "allow_trusted_scriptlets": {
     "message": "Разрешить доверенные скрипты"
@@ -111,7 +111,7 @@
     "message": "Автоматически приостановлено, чтобы предотвратить сбой блокировщика рекламы"
   },
   "automatically_rejects_cookie_consent_notices_": {
-    "message": "Автоматически запрещает использование файлов cookie."
+    "message": "Автоматически отклоняет уведомления о согласии на использование файлов cookie."
   },
   "back": {
     "message": "Назад"
@@ -187,7 +187,7 @@
     "message": "Помощник по просмотру"
   },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Предоставляя информацию о <a href=\"$${0}\">состоянии дополнения</a> и <a href=\"$${1}\">телеметрии производительности</a>, как указано в нашей <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Политике конфиденциальности</a>, вы помогаете улучшать защиту конфиденциальности для всей сообщества Ghostery."
+    "message": "Предоставляя информацию о <a href=\"$${0}\">состоянии дополнения</a> и <a href=\"$${1}\">телеметрии производительности</a>, как указано в нашей <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Политике конфиденциальности</a>, вы помогаете улучшать защиту конфиденциальности для всего сообщества Ghostery."
   },
   "cancel": {
     "message": "Отмена"
@@ -199,7 +199,7 @@
     "message": "Категория"
   },
   "cdn": {
-    "message": "СДД",
+    "message": "CDN",
     "description": "Tracker category name"
   },
   "changes_application_color_theme_": {
@@ -241,16 +241,16 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "contact": {
-    "message": "Обращайся на"
+    "message": "Контакт"
   },
   "contact_support": {
-    "message": "Контактная поддержка"
+    "message": "Связаться с поддержкой"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Поддержать базу данных трекеров от Ghostery на Github"
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Предоставляет неперсональную информацию о состоянии и производительности дополнения, чтобы помочь улучшить защиту конфиденциальности для всей сообщества Ghostery."
+    "message": "Предоставляет неперсональную информацию о состоянии и производительности дополнения, чтобы помочь улучшить защиту конфиденциальности для всего сообщества Ghostery."
   },
   "cookie_banner_visible": {
     "message": "Баннер с уведомлением о куки виден"
@@ -314,7 +314,7 @@
     "message": "Отключить предварительный просмотр трекеров"
   },
   "disabled": {
-    "message": "Инвалид"
+    "message": "Отключено"
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Откройте для себя новые функции, ключевые улучшения и обновления, созданные благодаря вкладу сообщества, — всё в одном месте."
@@ -335,7 +335,7 @@
     "message": "Правила DNR: $${0}"
   },
   "don_t_ask_again": {
-    "message": "Не спрашивай больше"
+    "message": "Больше не спрашивать"
   },
   "done": {
     "message": "Готово"
@@ -479,7 +479,7 @@
     "message": "Ghostery устанавливается с ограниченной функциональностью"
   },
   "ghostery_is_paused": {
-    "message": "Ghostery сделал паузу"
+    "message": "Ghostery приостановлен"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery приостановлен на этом сайте."
@@ -491,7 +491,7 @@
     "message": "Ghostery никогда не собирает личную информацию, такую как пароли, история браузера или содержимое посещаемых вами страниц."
   },
   "ghostery_paused": {
-    "message": "Ghostery сделал паузу"
+    "message": "Ghostery приостановлен"
   },
   "ghostery_privacy_policy": {
     "message": "Политика конфиденциальности Ghostery"
@@ -503,7 +503,7 @@
     "message": "Настройки Ghostery"
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
+    "message": "Ghostery Tracker & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
   },
   "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
     "message": "Пользователи Ghostery сообщают, что блокировщики рекламы больше не нарушают работу этого сайта. Ghostery будет снова включен."
@@ -579,7 +579,7 @@
     "message": "Уведомления в панели"
   },
   "include_a_screenshot_of_the_current_page": {
-    "message": "Включите снимок текущей страницы"
+    "message": "Прикрепить снимок экрана текущей страницы"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Информация о <a href=\"$${0}\">веб-трекерах</a>, <a href=\"$${1}\">состоянии дополнения</a> и <a href=\"$${2}\">телеметрии производительности</a> будет передаваться в соответствии с нашей <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Политикой конфиденциальности</a>, способствуя усилению защиты конфиденциальности для сообщества Ghostery."
@@ -603,7 +603,7 @@
     "message": "Макет сломан"
   },
   "learn_how": {
-    "message": "Узнай, как"
+    "message": "Узнать, как"
   },
   "learn_how_ghostery_is_automatically_paused_to_avoid_breakage_": {
     "message": "Узнайте, как Ghostery автоматически приостанавливается, чтобы избежать сбоев."
@@ -615,7 +615,7 @@
     "message": "Узнайте больше о $${0} на WhoTracks.Me"
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
-    "message": "Узнай больше о том, как YouTube противостоит блокировщикам рекламы"
+    "message": "Узнайте больше о том, как YouTube противостоит блокировщикам рекламы"
   },
   "learn_more_on_supported_syntax": {
     "message": "Узнайте больше о поддерживаемом синтаксисе"
@@ -624,7 +624,7 @@
     "message": "Оставьте отзыв сегодня"
   },
   "light": {
-    "message": "Легкий"
+    "message": "Светлая"
   },
   "load_more": {
     "message": "Показать еще"
@@ -658,7 +658,7 @@
     "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
   },
   "monthly": {
-    "message": "Месячный"
+    "message": "Ежемесячно"
   },
   "more_ad_blocking_available": {
     "message": "Дополнительные настройки блокировки рекламы"
@@ -718,13 +718,13 @@
     "message": "Открыть настройки"
   },
   "open_video": {
-    "message": "Открытое видео"
+    "message": "Открыть видео"
   },
   "open_website_settings": {
     "message": "Открыть настройки сайта"
   },
   "open_youtube_in_a_private_window": {
-    "message": "Открой YouTube в закрытом окне"
+    "message": "Открыть YouTube в приватном окне"
   },
   "opt_in": {
     "message": "Согласиться"
@@ -861,7 +861,7 @@
     "message": "Возобновить"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
-    "message": "Раскрывает то, что скрыто под поверхностью интернета. С WhoTracks.Me вы можете узнать, кто стоит за каждым Трекером."
+    "message": "Раскрывает то, что скрыто под поверхностью интернета. С WhoTracks.Me вы можете узнать, кто стоит за каждым трекером."
   },
   "save": {
     "message": "Сохранить"
@@ -882,7 +882,7 @@
     "message": "Защита от перенаправления поисковых систем"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Ищи Трекер или организацию..."
+    "message": "Поиск трекера или организации..."
   },
   "search_website___": {
     "message": "Поиск сайта..."
@@ -891,7 +891,7 @@
     "message": "Предупреждение о безопасности"
   },
   "see_every_tracker_ghostery_stops_in_real_time_": {
-    "message": "Увидьте каждый трекер, который Ghostery останавливает в реальном времени."
+    "message": "Наблюдайте за каждым трекером, который Ghostery блокирует в реальном времени."
   },
   "see_what_s_new": {
     "message": "Узнайте, что нового"
@@ -936,7 +936,7 @@
     "message": "Показывает параметры Ghostery в контекстном меню браузера."
   },
   "shows_the_tracker_preview_beside_search_results_": {
-    "message": "Показывает количество трекеров рядом с результатами поиска."
+    "message": "Отображает предварительный просмотр трекеров рядом с результатами поиска."
   },
   "sign_in_with_google": {
     "message": "Войти через Google"
@@ -1050,7 +1050,7 @@
     "message": "Блокировка трекеров и рекламы будет активна на этой странице."
   },
   "tracker_database": {
-    "message": "База данных трекера"
+    "message": "База данных трекеров"
   },
   "trackers": {
     "message": "Трекеры"
@@ -1059,7 +1059,7 @@
     "message": "Заблокированные трекеры"
   },
   "trackers_count": {
-    "message": "Трекеры Count"
+    "message": "Количество трекеров"
   },
   "trackers_modified": {
     "message": "Измененные трекеры"
@@ -1140,7 +1140,7 @@
     "message": "Хотите сообщить о проблеме на другой странице?"
   },
   "we_block_it_all_for_you___ads__trackers__distractions__always_on_when_you_browse_": {
-    "message": "Мы блокируем всё это для вас — рекламу, Трекеры, отвлекающие факторы. Всегда включено, когда вы просматриваете страницы."
+    "message": "Мы блокируем всё это для вас — рекламу, трекеры, отвлекающие факторы. Всегда включено, когда вы просматриваете страницы."
   },
   "we_block_it_all_for_you___ads__trackers__distractions__you_re_fully_covered__no_setup_needed_": {
     "message": "Мы блокируем всё для вас — рекламу, трекеры, отвлекающие факторы. Вы полностью защищены, настройка не требуется."
@@ -1185,7 +1185,7 @@
     "message": "WhoTracks.Me, управляемый Ghostery, является важнейшим элементом технологии Ghostery по борьбе с отслеживанием на основе ИИ, играя ключевую роль в обеспечении защиты конфиденциальности в реальном времени для сообщества Ghostery. Это всеобъемлющий глобальный ресурс о трекерах, обеспечивающий прозрачность веб-отслеживания."
   },
   "whotracks_me_reports": {
-    "message": "КтоСледит.Меня Отчеты"
+    "message": "Отчёты WhoTracks.Me"
   },
   "whotracks_me_statistical_report": {
     "message": "Статистический отчет WhoTracks.Me"
@@ -1224,7 +1224,7 @@
     "message": "Ваши функции конфиденциальности, поддерживаемые сообществом:"
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
-    "message": "Ваш вклад помогает создать более приватный и безопасный интернет для всей сообщества Ghostery."
+    "message": "Ваш вклад помогает создать более приватный и безопасный интернет для всего сообщества Ghostery."
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube блокирует тебе просмотр видео без рекламы?"
