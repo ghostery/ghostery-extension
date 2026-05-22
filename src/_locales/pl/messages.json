@@ -533,7 +533,7 @@
     "message": "Ukryj"
   },
   "hide_browser_prompts_that_interrupt_your_browsing_": {
-    "message": "Ukryj wyskakujące okienka przeglądarki, które przerywają przeglądanie."
+    "message": "Ukryj komunikaty o przeglądarkach, które zakłócają przeglądanie stron."
   },
   "hide_content_block": {
     "message": "Ukryj blok treści"
