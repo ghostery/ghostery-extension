@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "Chống theo dõi"
   },
+  "applies_to__@_0_": {
+    "message": "Áp dụng cho: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Bạn có chắc chắn muốn tắt Xem trước Trình theo dõi không?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "browser: vendor, version, language, operating system vendor"
+  },
+  "browser_promotions": {
+    "message": "Quảng cáo trình duyệt"
   },
   "browser_redirect_protection": {
     "message": "Bảo vệ chuyển hướng trình duyệt"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Hiển thị những thông tin chi tiết độc đáo về các hoạt động quan sát được trên $${0}, tiết lộ mối liên kết, danh mục và sự hiện diện trên toàn trang web."
   },
+  "distractions": {
+    "message": "Yếu tố gây xao nhãng"
+  },
   "dnr_rules__@_0_": {
     "message": "DNR rules: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Đã bật: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Các quy tắc đã bật: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Đảm bảo các cú nhấp chuột của bạn đi thẳng đến các trang bạn chọn, không có các đường vòng theo dõi không cần thiết."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "Ẩn"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Ẩn các lời nhắc của trình duyệt làm gián đoạn quá trình duyệt web của bạn."
+  },
   "hide_content_block": {
     "message": "Ẩn khối nội dung"
   },
   "hide_distraction": {
     "message": "Ẩn phiền nhiễu"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Ẩn các nguồn cấp dữ liệu video ngắn vô tận có thể kéo bạn vào vòng lặp gây xao nhãng."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Ẩn lời nhắc đăng nhập Google trên web."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Ẩn các tiện ích xã hội và bảng chia sẻ gây nhiễu cho các trang."
   },
   "hosting": {
     "message": "Máy lưu trữ",
@@ -691,7 +715,7 @@
     "message": "Mở một trang web"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "Mở cài đặt"
   },
   "open_video": {
     "message": "Mở video"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Cung cấp cái nhìn tổng quan về các khía cạnh thiết yếu của bảo vệ quyền riêng tư."
   },
+  "quick_actions": {
+    "message": "Thao tác nhanh"
+  },
   "read_more_on_whotracks_me": {
     "message": "Đọc thêm tại WhoTracks.Me"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Xóa tất cả cookie được lưu trữ bởi trang web này để bảo vệ quyền riêng tư của bạn và đặt lại dữ liệu duyệt web của bạn."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Loại bỏ các lời nhắc gây phiền nhiễu và giao diện lộn xộn để có trải nghiệm duyệt web gọn gàng hơn."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Thay thế biểu tượng Ghostery trên thanh công cụ của trình duyệt bằng bánh xe theo dõi."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Quét và chuyển Ghostery từ máy tính sang di động"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Tìm kiếm các yếu tố gây xao nhãng hoặc trang web..."
   },
   "search_engine_redirect_protection": {
     "message": "Bảo vệ chuyển hướng công cụ tìm kiếm"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "Chia sẻ Đánh giá"
   },
+  "short_video_feeds": {
+    "message": "Nguồn cấp dữ liệu video ngắn"
+  },
   "show_ads": {
     "message": "Hiển thị quảng cáo"
   },
   "show_all": {
     "message": "Show all"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Hiển thị các tùy chọn của Ghostery trong menu chuột phải của trình duyệt."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Hiển thị bản xem trước của trình theo dõi bên cạnh kết quả tìm kiếm."
+  },
+  "sign_in_with_google": {
+    "message": "Đăng nhập bằng Google"
   },
   "simple_view": {
     "message": "Xem đơn giản"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Truyền thông xã hội",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Mớ hỗn độn trên mạng xã hội"
   },
   "software_licenses": {
     "message": "Giấy phép phần mềm"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Các trang web"
+  },
+  "websites_with_google_sign_in": {
+    "message": "các trang web có tính năng đăng nhập bằng Google"
   },
   "weekly": {
     "message": "Hàng tuần"
