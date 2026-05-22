@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "Anti-Tracking"
   },
+  "applies_to__@_0_": {
+    "message": "Applies to: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Are you sure you want to disable Trackers Preview?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "browser: vendor, version, language, operating system vendor"
+  },
+  "browser_promotions": {
+    "message": "Browser promotions"
   },
   "browser_redirect_protection": {
     "message": "Browser Redirect Protection"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
   },
+  "distractions": {
+    "message": "Distractions"
+  },
   "dnr_rules__@_0_": {
     "message": "DNR rules: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Enabled: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Enabled rules: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Ensures your clicks go directly to the pages you select, without unnecessary tracking detours."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "Hide"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Hide browser prompts that interrupt your browsing."
+  },
   "hide_content_block": {
     "message": "Hide content block"
   },
   "hide_distraction": {
     "message": "Hide distraction"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Hide endless short video feeds that can pull you into distraction loops."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Hide Google sign in prompts across the web."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Hide social widgets and sharing panels that add noise to pages."
   },
   "hosting": {
     "message": "Hosting",
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Provides an overview of the essential aspects of privacy protection."
   },
+  "quick_actions": {
+    "message": "Quick Actions"
+  },
   "read_more_on_whotracks_me": {
     "message": "Read more on WhoTracks.Me"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Remove all cookies stored by this site to protect your privacy and reset your browsing data."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Remove intrusive prompts and interface clutter for a cleaner browsing experience."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Replaces the Ghostery icon in the browser toolbar with the tracker wheel."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scan and take Ghostery from desktop to mobile"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Search distractions or websites..."
   },
   "search_engine_redirect_protection": {
     "message": "Search Engine Redirect Protection"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "Share a Review"
   },
+  "short_video_feeds": {
+    "message": "Short video feeds"
+  },
   "show_ads": {
     "message": "Show ads"
   },
   "show_all": {
     "message": "Show all"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Shows Ghostery options in your browser’s right-click menu."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Shows the tracker preview beside search results."
+  },
+  "sign_in_with_google": {
+    "message": "Sign in with Google"
   },
   "simple_view": {
     "message": "Simple View"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Social media clutter"
   },
   "software_licenses": {
     "message": "Software Licenses"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Websites"
+  },
+  "websites_with_google_sign_in": {
+    "message": "websites with Google sign in"
   },
   "weekly": {
     "message": "Weekly"
