@@ -533,7 +533,7 @@
     "message": "Masquer"
   },
   "hide_browser_prompts_that_interrupt_your_browsing_": {
-    "message": "Masquer les invites du navigateur qui interrompent votre navigation."
+    "message": "Masquer les invites du navigateur qui perturbant votre navigation."
   },
   "hide_content_block": {
     "message": "Masquer le bloc de contenu"
@@ -542,13 +542,13 @@
     "message": "Masquer la distraction"
   },
   "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
-    "message": "Masquer les flux de courtes vidéos sans fin qui peuvent vous entraîner dans des boucles de distraction."
+    "message": "Masquez les flux de vidéos courtes distrayants"
   },
   "hide_google_sign_in_prompts_across_the_web_": {
-    "message": "Masquer les invites de connexion Google sur le Web."
+    "message": "Masquez les demandes de connexion Google sur le Web."
   },
   "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
-    "message": "Masquer les widgets sociaux et les panneaux de partage qui encombrent les pages."
+    "message": "Masquez les widgets sociaux et les panneaux de partage inutiles."
   },
   "hosting": {
     "message": "Hébergement",
@@ -843,7 +843,7 @@
     "message": "Supprimez tous les cookies enregistrés par ce site pour protéger votre vie privée et réinitialiser vos données de navigation."
   },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
-    "message": "Supprimez les invites intrusives et l'encombrement de l'interface pour une expérience de navigation plus épurée."
+    "message": "Supprimez les invites intrusives et les éléments encombrants."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Remplace l'icône Ghostery dans la barre d'outils du navigateur par l'anneau des trackers."
@@ -924,7 +924,7 @@
     "message": "Laisser un avis"
   },
   "short_video_feeds": {
-    "message": "Flux de courtes vidéos"
+    "message": "Flux de vidéos courtes"
   },
   "show_ads": {
     "message": "Afficher des publicités"
