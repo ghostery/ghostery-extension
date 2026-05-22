@@ -6,10 +6,10 @@
     "message": "이 웹 사이트에서 $${0} 항목이 허용됩니다."
   },
   "1_day": {
-    "message": "1 일"
+    "message": "1일"
   },
   "1_hour": {
-    "message": "1 시간"
+    "message": "1시간"
   },
   "a_quick_review_goes_a_long_way": {
     "message": "빠른 리뷰가 큰 도움이 됩니다."
@@ -77,25 +77,28 @@
     "message": "보호 상태를 변경한 모든 웹 사이트가 여기에 표시됩니다."
   },
   "allow_ghostery_in_private_windows": {
-    "message": "게스트 모드 혹은 개인정보 보호 탭에서 Ghostery 허용"
+    "message": "개인정보 보호 창에서 Ghostery 허용"
   },
   "allow_trusted_scriptlets": {
-    "message": "위험한 스크립팅 실행(Trusted scriptlet) 허용하기"
+    "message": "신뢰할 수 있는 스크립틀릿 허용"
   },
   "always": {
     "message": "항상"
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
-    "message": "안드로이드와 아이폰에 새로운 엣지가 추가되었습니다. 고스트리가 포함되어 있습니다."
+    "message": "Android와 iPhone에 새로운 Edge가 추가되었습니다. Ghostery가 포함되어 있습니다."
   },
   "anti_tracking": {
     "message": "추적 방지"
+  },
+  "applies_to__@_0_": {
+    "message": "적용 대상: $${0}"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "정말로 트래커 개요를 더 이상 사용하지 않으시겠습니까?"
   },
   "audio_video_player": {
-    "message": "음악/동영상 플레이어",
+    "message": "오디오/동영상 플레이어",
     "description": "Tracker category name"
   },
   "automatic_action_type": {
@@ -163,7 +166,7 @@
     "message": "이 페이지에서 차단이 일시중지되었습니다. 다른 광고 차단기도 비활성화하면 문제 해결에 도움이 될 수 있습니다."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
-    "message": "사용하시는 언어의 웹 사이트들에 한해 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는걸 방지할 수 있습니다."
+    "message": "사용하시는 언어의 웹 사이트들에 한해 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는 걸 방지할 수 있습니다."
   },
   "broken_page_report": {
     "message": "페이지 오류 보고"
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
+  },
+  "browser_promotions": {
+    "message": "브라우저 프로모션"
   },
   "browser_redirect_protection": {
     "message": "브라우저 리디렉션 보호"
@@ -317,10 +323,13 @@
     "message": "이 사이트에서 직접 숨긴 부분을 모두 표시합니다. 하나씩 제거하거나 모두 지울 수 있습니다."
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
-    "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
+    "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 개수를 표시합니다."
   },
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "$${0}에서 관찰된 활동에 대한 독특한 통찰력을 제공하여 소속, 카테고리 및 사이트 전반의 존재를 드러냅니다."
+  },
+  "distractions": {
+    "message": "방해 요소"
   },
   "dnr_rules__@_0_": {
     "message": "네트워크(DNR) 필터: $${0}"
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "활성화됨: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "활성화된 규칙: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "불필요한 추적 우회 없이 클릭이 선택한 페이지로 직접 이동하도록 보장합니다."
@@ -491,7 +503,7 @@
     "message": "Ghostery 설정"
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
-    "message": "현재 보호없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
+    "message": "현재 보호 없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
   },
   "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
     "message": "Ghostery 사용자들이 광고 차단기가 더 이상 이 웹 사이트에서 문제를 일으키지 않는다고 보고했습니다. Ghostery 사용을 다시 시작합니다."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "숨기기"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "브라우징을 방해하는 브라우저 프롬프트를 숨깁니다."
+  },
   "hide_content_block": {
     "message": "특정 부분 숨기기"
   },
   "hide_distraction": {
     "message": "방해요소 차단하기"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "주의를 분산시키는 루프에 빠지게 할 수 있는 끝없는 짧은 동영상 피드를 숨깁니다."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "웹 전반에서 Google 로그인 메시지를 숨깁니다."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "페이지를 복잡하게 만드는 소셜 위젯 및 공유 패널을 숨깁니다."
   },
   "hosting": {
     "message": "호스팅",
@@ -537,7 +561,7 @@
     "message": "위험을 이해했습니다. 이 사이트에 대해 다시 경고하지 마세요."
   },
   "if_ghostery_makes_your_browsing_better__a_short_review_helps_more_people_discover_a_calmer__ad_free_web_": {
-    "message": "고스트리가 당신의 브라우징을 더 좋게 만든다면, 짧은 리뷰가 더 많은 사람들이 차분하고 광고 없는 웹을 발견하는 데 도움이 됩니다."
+    "message": "Ghostery가 당신의 브라우징을 더 좋게 만든다면, 짧은 리뷰가 더 많은 사람들이 차분하고 광고 없는 웹을 발견하는 데 도움이 됩니다."
   },
   "ignore": {
     "message": "무시"
@@ -646,7 +670,7 @@
     "message": "슬라이더로 숨길 부분을 조정하세요."
   },
   "my_ghostery": {
-    "message": "내 고스트리"
+    "message": "내 Ghostery"
   },
   "name": {
     "message": "이름"
@@ -682,7 +706,7 @@
     "message": "끄기"
   },
   "ok": {
-    "message": "확인 "
+    "message": "확인"
   },
   "on": {
     "message": "켜기"
@@ -691,7 +715,7 @@
     "message": "사이트 열기"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "설정 열기"
   },
   "open_video": {
     "message": "동영상 보기"
@@ -741,16 +765,16 @@
     "message": "일시 중지됨"
   },
   "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
-    "message": "광고 차단기 오작동을 방지하기 위해 Ghostery의 브라우징 어시스턴트가 자동으로 일시 중지했습니다."
+    "message": "광고 차단기 오작동을 방지하기 위해 Ghostery의 브라우징 도우미가 자동으로 일시 중지했습니다."
   },
   "paused_by_browsing_assistant": {
-    "message": "탐색 도우미에 의해 일시 중지됨"
+    "message": "브라우징 도우미에 의해 일시 중지됨"
   },
   "performance_telemetry": {
     "message": "성능 측정"
   },
   "permission_required": {
-    "message": "권한 누락됨"
+    "message": "권한 필요"
   },
   "pin_extension_for_easy_access": {
     "message": "확장 프로그램을 고정하고 빠르게 접근해보세요"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "개인정보 보호의 필수적인 측면에 대한 개요를 제공합니다."
   },
+  "quick_actions": {
+    "message": "빠른 작업"
+  },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
   },
@@ -815,6 +842,9 @@
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "이 사이트에 저장된 모든 쿠키를 제거하여 개인정보를 보호하고 브라우징 데이터를 초기화하세요."
   },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "방해되는 메시지와 복잡한 인터페이스를 제거하여 더 깔끔한 브라우징 환경을 만드세요."
+  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."
   },
@@ -828,7 +858,7 @@
     "message": "다시 선택"
   },
   "resume": {
-    "message": "다시 시작 "
+    "message": "다시 시작"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "인터넷의 표면 아래 숨겨진 것을 드러냅니다. WhoTracks.Me를 사용하면 모든 추적기 뒤에 숨겨진 신원을 밝혀낼 수 있습니다."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "데스크톱에서 모바일로 Ghostery 가져오기"
+  },
+  "search_distractions_or_websites___": {
+    "message": "방해 요소 또는 웹사이트 검색..."
   },
   "search_engine_redirect_protection": {
     "message": "검색엔진 경유 보호"
@@ -873,7 +906,7 @@
     "message": "시간 선택"
   },
   "send": {
-    "message": "보내기 "
+    "message": "보내기"
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK는 위 정보만을 토대로 보고서를 전송하기 위해 사용됩니다. 요청이 여러 개 전송되더라도 각각은 연관성을 가지지 않으며 IP주소는 Sentry와 공유되지 않습니다."
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "리뷰 공유"
   },
+  "short_video_feeds": {
+    "message": "짧은 동영상 피드"
+  },
   "show_ads": {
     "message": "광고 표시"
   },
   "show_all": {
     "message": "모두 보기"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "브라우저의 오른쪽 클릭 메뉴에 Ghostery 옵션을 표시합니다."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "검색 결과 옆에 트래커 개요를 표시합니다."
+  },
+  "sign_in_with_google": {
+    "message": "Google로 로그인"
   },
   "simple_view": {
     "message": "간단한 보기"
@@ -913,6 +955,9 @@
     "message": "소셜 미디어",
     "description": "Tracker category name"
   },
+  "social_media_clutter": {
+    "message": "소셜 미디어 복잡성"
+  },
   "software_licenses": {
     "message": "소프트웨어 라이선스"
   },
@@ -926,10 +971,10 @@
     "message": "새 추적기 제보"
   },
   "support": {
-    "message": "지원 "
+    "message": "지원"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "모든 웹 사이트에서 1 일 동안 개인정보 보호를 중지합니다."
+    "message": "모든 웹 사이트에서 1일 동안 개인정보 보호를 중지합니다."
   },
   "telemetry": {
     "message": "측정 보고",
@@ -966,10 +1011,10 @@
     "message": "이 웹 사이트는 항상 일시 중지됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다"
   },
   "this_site_will_be_paused_for_1_day": {
-    "message": "이 웹 사이트에서 1 일 동안 일시 중지합니다"
+    "message": "이 웹 사이트에서 1일 동안 일시 중지합니다"
   },
   "this_site_will_be_paused_for_1_hour": {
-    "message": "이 웹 사이트에서 1 시간 동안 일시 중지합니다"
+    "message": "이 웹 사이트에서 1시간 동안 일시 중지합니다"
   },
   "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
     "message": "이 작업은 로그아웃을 유발하며, 설정이나 저장된 환경설정을 초기화할 수 있습니다. 일부 페이지는 다시 로그인하거나 쿠키를 수락할 때까지 작동하지 않을 수 있습니다."
@@ -978,7 +1023,7 @@
     "message": "사이트에서 개인정보 보호 설정을 조정하려면:"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."
+    "message": "개인정보 보호 설정을 변경하려면 사이트를 허용하세요:"
   },
   "to_get_insights_on_add_on_usage__the_following_information_about_the_browser_and_the_extension_is_collected_": {
     "message": "확장 프로그램 사용성 분석을 위해 브라우저 및 확장 프로그램 정보가 수집됩니다:"
@@ -999,7 +1044,7 @@
     "message": "상위 20개"
   },
   "top_50": {
-    "message": "톱 50"
+    "message": "상위 50개"
   },
   "tracker___ad_blocking_will_be_active_on_this_page_": {
     "message": "이 페이지에서 추적기와 광고가 차단됩니다."
@@ -1020,7 +1065,7 @@
     "message": "변경된 트래커"
   },
   "trackers_preview": {
-    "message": "추적기 개요"
+    "message": "트래커 개요"
   },
   "trends": {
     "message": "동향"
@@ -1121,6 +1166,9 @@
   "websites": {
     "message": "웹 사이트"
   },
+  "websites_with_google_sign_in": {
+    "message": "Google 로그인 웹사이트"
+  },
   "weekly": {
     "message": "주간"
   },
@@ -1182,9 +1230,9 @@
     "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"
   },
   "zoom_in": {
-    "message": "축소"
+    "message": "확대"
   },
   "zoom_out": {
-    "message": "확대"
+    "message": "축소"
   }
 }

@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "Anti-pistage"
   },
+  "applies_to__@_0_": {
+    "message": "S'applique à : $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Voulez-vous vraiment désactiver l'aperçu des trackers ?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "navigateur : fournisseur, version, langue, fournisseur du système d'exploitation"
+  },
+  "browser_promotions": {
+    "message": "Promotions du navigateur"
   },
   "browser_redirect_protection": {
     "message": "Protection contre les redirections de navigateur"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Affiche des informations uniques sur les activités observées sur $${0}, révélant l'affiliation, les catégories et la présence sur le site."
   },
+  "distractions": {
+    "message": "Distractions"
+  },
   "dnr_rules__@_0_": {
     "message": "Les règles DNR : $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Activé : $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Règles activées : $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Garantit que vos clics mènent directement aux pages choisies, sans détours de suivi inutiles."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "Masquer"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Masquer les invites du navigateur qui perturbant votre navigation."
+  },
   "hide_content_block": {
     "message": "Masquer le bloc de contenu"
   },
   "hide_distraction": {
     "message": "Masquer la distraction"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Masquez les flux de vidéos courtes distrayants"
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Masquez les demandes de connexion Google sur le Web."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Masquez les widgets sociaux et les panneaux de partage inutiles."
   },
   "hosting": {
     "message": "Hébergement",
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Fournit un aperçu des aspects essentiels de la protection de la vie privée."
   },
+  "quick_actions": {
+    "message": "Actions rapides"
+  },
   "read_more_on_whotracks_me": {
     "message": "Plus d'informations sur WhoTracks.Me"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Supprimez tous les cookies enregistrés par ce site pour protéger votre vie privée et réinitialiser vos données de navigation."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Supprimez les invites intrusives et les éléments encombrants."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Remplace l'icône Ghostery dans la barre d'outils du navigateur par l'anneau des trackers."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scannez le QR code et démarrez sur Android ou iPhone"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Rechercher des distractions ou des sites web..."
   },
   "search_engine_redirect_protection": {
     "message": "Protection contre les redirections dans les moteurs de recherche"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "Laisser un avis"
   },
+  "short_video_feeds": {
+    "message": "Flux de vidéos courtes"
+  },
   "show_ads": {
     "message": "Afficher des publicités"
   },
   "show_all": {
     "message": "Tout afficher"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Affiche les options Ghostery dans le menu contextuel du navigateur."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Affiche l'aperçu des trackers à côté des résultats de recherche."
+  },
+  "sign_in_with_google": {
+    "message": "Se connecter avec Google"
   },
   "simple_view": {
     "message": "Affichage simplifié"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Réseaux sociaux",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Éléments des réseaux sociaux"
   },
   "software_licenses": {
     "message": "Licences d'utilisation de logiciels"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Sites Web"
+  },
+  "websites_with_google_sign_in": {
+    "message": "Sites web utilisant la connexion Google"
   },
   "weekly": {
     "message": "Hebdomadaire"

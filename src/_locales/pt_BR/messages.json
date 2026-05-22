@@ -67,7 +67,7 @@
     "description": "Tracker category name"
   },
   "advertising": {
-    "message": "Anúncio",
+    "message": "Publicidade",
     "description": "Tracker category name"
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
@@ -91,8 +91,11 @@
   "anti_tracking": {
     "message": "Anti-rastreamento"
   },
+  "applies_to__@_0_": {
+    "message": "Aplica-se a: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
-    "message": "Tem certeza de que deseja desativar a visualização de rastreadores?"
+    "message": "Tem certeza de que deseja desativar a Prévia de Rastreadores?"
   },
   "audio_video_player": {
     "message": "Reprodutor de Áudio/Vídeo",
@@ -174,6 +177,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "navegador: fornecedor, versão, idioma, fornecedor do sistema operacional"
   },
+  "browser_promotions": {
+    "message": "Promoções do navegador"
+  },
   "browser_redirect_protection": {
     "message": "Proteção contra Redirecionamento de Navegador"
   },
@@ -212,7 +218,7 @@
     "message": "Limpar cookies"
   },
   "clear_cookies_": {
-    "message": "Limpe os cookies?"
+    "message": "Limpar cookies?"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Clique no ícone do quebra-cabeça ao lado da barra de pesquisa e <strong>fixe o Ghostery</strong> na sua barra de ferramentas."
@@ -305,7 +311,7 @@
     "message": "Desativar"
   },
   "disable_trackers_preview": {
-    "message": "Desativar a visualização de rastreadores"
+    "message": "Desativar a Prévia de Rastreadores"
   },
   "disabled": {
     "message": "Desativado"
@@ -321,6 +327,9 @@
   },
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "Exibe insights únicos sobre as atividades observadas em $${0}, revelando afiliação, categorias e presença no site."
+  },
+  "distractions": {
+    "message": "Distrações"
   },
   "dnr_rules__@_0_": {
     "message": "Regras DNR: $${0}"
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "Ativado: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "Regras ativadas: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "Garante que seus cliques vão diretamente para as páginas que você seleciona, sem desvios de rastreamento desnecessários."
@@ -449,7 +461,7 @@
     "message": "Obter ajuda"
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
-    "message": "A Ghostery adicionou uma regra para manter este bloco de conteúdo oculto. Você pode desfazer isso a qualquer momento nas configurações do site."
+    "message": "O Ghostery adicionou uma regra para manter este bloco de conteúdo oculto. Você pode desfazer isso a qualquer momento nas configurações do site."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery foi retomado."
@@ -520,14 +532,26 @@
   "hide": {
     "message": "Ocultar"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "Oculte os avisos do navegador que interrompem sua navegação."
+  },
   "hide_content_block": {
     "message": "Ocultar bloco de conteúdo"
   },
   "hide_distraction": {
-    "message": "Oculte distrações"
+    "message": "Ocultar distração"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "Oculte feeds de vídeos curtos intermináveis que podem te prender em ciclos de distração."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "Ocultar avisos de login do Google em toda a web."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "Oculte widgets sociais e painéis de compartilhamento que adicionam ruído às páginas."
   },
   "hosting": {
-    "message": "Hospedando",
+    "message": "Hospedagem",
     "description": "Tracker category name"
   },
   "how_browsing_assistant_works": {
@@ -688,16 +712,16 @@
     "message": "Ligado"
   },
   "open_a_site": {
-    "message": "Abra um site"
+    "message": "Abrir um site"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "Abrir configurações"
   },
   "open_video": {
     "message": "Abrir vídeo"
   },
   "open_website_settings": {
-    "message": "Abra as configurações do site"
+    "message": "Abrir as configurações do site"
   },
   "open_youtube_in_a_private_window": {
     "message": "Abrir o YouTube em uma janela privada"
@@ -741,7 +765,7 @@
     "message": "Pausado"
   },
   "paused_automatically_by_ghostery_s_browsing_assistant_to_prevent_ad_blocker_breakage_": {
-    "message": "Pausou automaticamente pelo Assistente de Navegação do Ghostery para evitar que o bloqueador de anúncios quebre."
+    "message": "Pausado automaticamente pelo Assistente de Navegação do Ghostery para evitar falhas no bloqueador de anúncios."
   },
   "paused_by_browsing_assistant": {
     "message": "Pausado pelo Assistente de Navegação"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "Fornece uma visão geral dos aspectos essenciais da proteção de privacidade."
   },
+  "quick_actions": {
+    "message": "Ações Rápidas"
+  },
   "read_more_on_whotracks_me": {
     "message": "Leia mais em WhoTracks.Me"
   },
@@ -810,10 +837,13 @@
     "message": "Listas de Bloqueio Regionais"
   },
   "reload_to_see_changes": {
-    "message": "Clique para ver as mudanças"
+    "message": "Recarregue para ver as alterações"
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Remova todos os cookies armazenados por este site para proteger sua privacidade e redefinir seus dados de navegação."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "Remova avisos intrusivos e a desordem da interface para uma experiência de navegação mais limpa."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Substitui o ícone do Ghostery na barra de ferramentas do navegador pela roda do rastreador."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Digitalize e leve o Ghostery do desktop para o celular"
+  },
+  "search_distractions_or_websites___": {
+    "message": "Pesquisar distrações ou sites..."
   },
   "search_engine_redirect_protection": {
     "message": "Proteção contra redirecionamento de mecanismo de pesquisa"
@@ -885,10 +918,13 @@
     "message": "Configurações de sincronização"
   },
   "setup_successful": {
-    "message": "Configuração bem sucedida"
+    "message": "Configuração bem-sucedida"
   },
   "share_a_review": {
     "message": "Compartilhe uma Avaliação"
+  },
+  "short_video_feeds": {
+    "message": "Feeds de vídeos curtos"
   },
   "show_ads": {
     "message": "Exibir anúncios"
@@ -896,8 +932,14 @@
   "show_all": {
     "message": "Mostrar tudo"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "Mostra as opções do Ghostery no menu de clique com o botão direito do seu navegador."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Mostra a visualização do rastreador ao lado dos resultados da pesquisa."
+  },
+  "sign_in_with_google": {
+    "message": "Fazer login com o Google"
   },
   "simple_view": {
     "message": "Visão simples"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "Mídia Social",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "Excesso de mídia social"
   },
   "software_licenses": {
     "message": "Licenças de software"
@@ -993,7 +1038,7 @@
     "message": "Para visitar a página desejada, você precisa permitir este redirecionamento."
   },
   "top_100": {
-    "message": "Os 100 melhores"
+    "message": "Os 100 principais"
   },
   "top_20": {
     "message": "20 principais"
@@ -1026,10 +1071,10 @@
     "message": "Tendências"
   },
   "trust_on_all_websites": {
-    "message": "Confiança em todos os sites"
+    "message": "Confiar em todos os sites"
   },
   "trust_on_this_website": {
-    "message": "Confiar nesse site"
+    "message": "Confiar neste site"
   },
   "trusted": {
     "message": "Confiável"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "Sites"
+  },
+  "websites_with_google_sign_in": {
+    "message": "sites com login do Google"
   },
   "weekly": {
     "message": "Semanal"
