@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "추적 방지"
   },
+  "applies_to__@_0_": {
+    "message": "적용 대상: $${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "정말로 트래커 개요를 더 이상 사용하지 않으시겠습니까?"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
+  },
+  "browser_promotions": {
+    "message": "브라우저 프로모션"
   },
   "browser_redirect_protection": {
     "message": "브라우저 리디렉션 보호"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "$${0}에서 관찰된 활동에 대한 독특한 통찰력을 제공하여 소속, 카테고리 및 사이트 전반의 존재를 드러냅니다."
   },
+  "distractions": {
+    "message": "방해 요소"
+  },
   "dnr_rules__@_0_": {
     "message": "네트워크(DNR) 필터: $${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "활성화됨: $${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "활성화된 규칙: $${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "불필요한 추적 우회 없이 클릭이 선택한 페이지로 직접 이동하도록 보장합니다."
@@ -520,11 +532,23 @@
   "hide": {
     "message": "숨기기"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "브라우징을 방해하는 브라우저 프롬프트를 숨깁니다."
+  },
   "hide_content_block": {
     "message": "특정 부분 숨기기"
   },
   "hide_distraction": {
     "message": "방해요소 차단하기"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "주의를 분산시키는 루프에 빠지게 할 수 있는 끝없는 짧은 동영상 피드를 숨깁니다."
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "웹 전반에서 Google 로그인 메시지를 숨깁니다."
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "페이지를 복잡하게 만드는 소셜 위젯 및 공유 패널을 숨깁니다."
   },
   "hosting": {
     "message": "호스팅",
@@ -691,7 +715,7 @@
     "message": "사이트 열기"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "설정 열기"
   },
   "open_video": {
     "message": "동영상 보기"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "개인정보 보호의 필수적인 측면에 대한 개요를 제공합니다."
   },
+  "quick_actions": {
+    "message": "빠른 작업"
+  },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "이 사이트에 저장된 모든 쿠키를 제거하여 개인정보를 보호하고 브라우징 데이터를 초기화하세요."
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "방해되는 메시지와 복잡한 인터페이스를 제거하여 더 깔끔한 브라우징 환경을 만드세요."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "데스크톱에서 모바일로 Ghostery 가져오기"
+  },
+  "search_distractions_or_websites___": {
+    "message": "방해 요소 또는 웹사이트 검색..."
   },
   "search_engine_redirect_protection": {
     "message": "검색엔진 경유 보호"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "리뷰 공유"
   },
+  "short_video_feeds": {
+    "message": "짧은 동영상 피드"
+  },
   "show_ads": {
     "message": "광고 표시"
   },
   "show_all": {
     "message": "모두 보기"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "브라우저의 오른쪽 클릭 메뉴에 Ghostery 옵션을 표시합니다."
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "검색 결과 옆에 트래커 개요를 표시합니다."
+  },
+  "sign_in_with_google": {
+    "message": "Google로 로그인"
   },
   "simple_view": {
     "message": "간단한 보기"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "소셜 미디어",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "소셜 미디어 복잡성"
   },
   "software_licenses": {
     "message": "소프트웨어 라이선스"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "웹 사이트"
+  },
+  "websites_with_google_sign_in": {
+    "message": "Google 로그인 웹사이트"
   },
   "weekly": {
     "message": "주간"
