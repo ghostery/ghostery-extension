@@ -91,6 +91,9 @@
   "anti_tracking": {
     "message": "反跟蹤"
   },
+  "applies_to__@_0_": {
+    "message": "適用於：$${0}"
+  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "你確定要停用「追蹤器預覽」嗎？"
   },
@@ -173,6 +176,9 @@
   },
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "瀏覽器：供應商、版本、語言、作業系統供應商"
+  },
+  "browser_promotions": {
+    "message": "瀏覽器促銷"
   },
   "browser_redirect_protection": {
     "message": "瀏覽器重新導向保護"
@@ -322,6 +328,9 @@
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
     "message": "顯示在 $${0} 上觀察到的活動的獨特見解，揭示關聯、類別和網站上的存在。"
   },
+  "distractions": {
+    "message": "干擾"
+  },
   "dnr_rules__@_0_": {
     "message": "DNR 規則：$${0}"
   },
@@ -364,6 +373,9 @@
   },
   "enabled__@_0_": {
     "message": "已啟用：$${0}"
+  },
+  "enabled_rules__@_0_": {
+    "message": "已啟用規則：$${0}"
   },
   "ensures_your_clicks_go_directly_to_the_pages_you_select__without_unnecessary_tracking_detours_": {
     "message": "確保您的點擊直接導向您選擇的頁面，避免不必要的追蹤繞道。"
@@ -520,11 +532,23 @@
   "hide": {
     "message": "隱藏"
   },
+  "hide_browser_prompts_that_interrupt_your_browsing_": {
+    "message": "隱藏會中斷您瀏覽的瀏覽器提示。"
+  },
   "hide_content_block": {
     "message": "隱藏內容區塊"
   },
   "hide_distraction": {
     "message": "隱藏干擾"
+  },
+  "hide_endless_short_video_feeds_that_can_pull_you_into_distraction_loops_": {
+    "message": "隱藏無止盡的短影音內容，避免您陷入分心循環。"
+  },
+  "hide_google_sign_in_prompts_across_the_web_": {
+    "message": "隱藏網頁上所有 Google 登入提示。"
+  },
+  "hide_social_widgets_and_sharing_panels_that_add_noise_to_pages_": {
+    "message": "隱藏社群小工具和分享面板，減少頁面上的雜亂。"
   },
   "hosting": {
     "message": "託管",
@@ -691,7 +715,7 @@
     "message": "開啟網站"
   },
   "open_settings": {
-    "message": "Open settings"
+    "message": "開啟設定"
   },
   "open_video": {
     "message": "打開視頻"
@@ -797,6 +821,9 @@
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
     "message": "提供隱私保護基本方面的概述。"
   },
+  "quick_actions": {
+    "message": "快速動作"
+  },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上繼續閱讀"
   },
@@ -814,6 +841,9 @@
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "移除此網站儲存的所有 Cookie 以保護您的隱私並重設您的瀏覽資料。"
+  },
+  "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
+    "message": "移除侵入式提示和介面雜亂，提供更簡潔的瀏覽體驗。"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "將瀏覽器工具列中的 Ghostery 圖示換成追蹤器齒輪。"
@@ -844,6 +874,9 @@
   },
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "掃描並將 Ghostery 從桌面移至行動裝置"
+  },
+  "search_distractions_or_websites___": {
+    "message": "搜尋干擾或網站..."
   },
   "search_engine_redirect_protection": {
     "message": "搜尋引擎重新導向保護"
@@ -890,14 +923,23 @@
   "share_a_review": {
     "message": "分享評論"
   },
+  "short_video_feeds": {
+    "message": "短影音內容"
+  },
   "show_ads": {
     "message": "顯示廣告"
   },
   "show_all": {
     "message": "顯示全部"
   },
+  "shows_ghostery_options_in_your_browser_s_right_click_menu_": {
+    "message": "在瀏覽器的右鍵選單中顯示 Ghostery 選項。"
+  },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "在搜尋結果旁顯示追蹤器預覽。"
+  },
+  "sign_in_with_google": {
+    "message": "使用 Google 帳戶登入"
   },
   "simple_view": {
     "message": "簡單圖示"
@@ -912,6 +954,9 @@
   "social_media": {
     "message": "社交媒體",
     "description": "Tracker category name"
+  },
+  "social_media_clutter": {
+    "message": "社交媒體雜亂"
   },
   "software_licenses": {
     "message": "軟體准許證"
@@ -1120,6 +1165,9 @@
   },
   "websites": {
     "message": "網站"
+  },
+  "websites_with_google_sign_in": {
+    "message": "使用 Google 登入的網站"
   },
   "weekly": {
     "message": "每週"
