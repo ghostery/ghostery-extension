@@ -310,6 +310,9 @@
   "disable": {
     "message": "Vô hiệu hóa"
   },
+  "disable_context_menu": {
+    "message": "Tắt menu ngữ cảnh"
+  },
   "disable_trackers_preview": {
     "message": "Tắt Trackers Preview"
   },
