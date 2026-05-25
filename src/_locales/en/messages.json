@@ -310,6 +310,9 @@
   "disable": {
     "message": "Disable"
   },
+  "disable_context_menu": {
+    "message": "Disable context menu"
+  },
   "disable_trackers_preview": {
     "message": "Disable Trackers Preview"
   },

@@ -310,6 +310,9 @@
   "disable": {
     "message": "停用"
   },
+  "disable_context_menu": {
+    "message": "停用右鍵選單"
+  },
   "disable_trackers_preview": {
     "message": "停用「追蹤器預覽」"
   },

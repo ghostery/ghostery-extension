@@ -310,6 +310,9 @@
   "disable": {
     "message": "사용 중지"
   },
+  "disable_context_menu": {
+    "message": "상황에 맞는 메뉴 비활성화"
+  },
   "disable_trackers_preview": {
     "message": "트래커 개요 사용 중지"
   },

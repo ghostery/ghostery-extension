@@ -310,6 +310,9 @@
   "disable": {
     "message": "Disattiva"
   },
+  "disable_context_menu": {
+    "message": "Disabilita menu contestuale"
+  },
   "disable_trackers_preview": {
     "message": "Disattiva anteprima tracker"
   },

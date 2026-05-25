@@ -310,6 +310,9 @@
   "disable": {
     "message": "Desativar"
   },
+  "disable_context_menu": {
+    "message": "Desativar menu de contexto"
+  },
   "disable_trackers_preview": {
     "message": "Desativar a Prévia de Rastreadores"
   },
