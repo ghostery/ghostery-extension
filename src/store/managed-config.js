@@ -57,7 +57,8 @@ const ManagedConfig = {
           chrome.storage.local.set({ managedConfig });
         } else {
           // Try to get local version as fallback
-          const { managedConfig: fallbackConfig } = await chrome.storage.local.get('managedConfig');
+          const { managedConfig: fallbackConfig = {} } =
+            await chrome.storage.local.get('managedConfig');
 
           managedConfig = fallbackConfig;
         }
