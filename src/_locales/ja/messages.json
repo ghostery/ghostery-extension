@@ -310,6 +310,9 @@
   "disable": {
     "message": "無効化"
   },
+  "disable_context_menu": {
+    "message": "コンテキストメニューを無効にする"
+  },
   "disable_trackers_preview": {
     "message": "Trackers Previewを無効にする"
   },
