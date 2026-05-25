@@ -192,17 +192,19 @@ export default {
                   Turns Ghostery notifications displayed in the panel on or off.
                 </span>
               </settings-toggle>
-
-              <settings-toggle
-                icon="doc-m"
-                value="${options.contextMenu}"
-                onchange="${html.set(options, 'contextMenu')}"
-              >
-                Quick Actions
-                <span slot="description">
-                  Shows Ghostery options in your browser’s right-click menu.
-                </span>
-              </settings-toggle>
+              ${chrome.contextMenus &&
+              html`
+                <settings-toggle
+                  icon="doc-m"
+                  value="${options.contextMenu}"
+                  onchange="${html.set(options, 'contextMenu')}"
+                >
+                  Quick Actions
+                  <span slot="description">
+                    Shows Ghostery options in your browser’s right-click menu.
+                  </span>
+                </settings-toggle>
+              `}
 
               <settings-option icon="websites">
                 Theme
