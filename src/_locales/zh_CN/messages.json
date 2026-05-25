@@ -310,6 +310,9 @@
   "disable": {
     "message": "禁用"
   },
+  "disable_context_menu": {
+    "message": "禁用上下文菜单"
+  },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
   },
