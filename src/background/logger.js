@@ -67,8 +67,14 @@ chrome.runtime.onConnect.addListener(async (port) => {
       const organizations = await getOrganizations();
       const engine = engines.get(engines.MAIN_ENGINE);
 
-      const logFilterMatched = function ({ filter }, { url, request, filterType, callerContext }) {
-        if (filterType === FilterType.COSMETIC && filter.isScriptInject()) {
+      const logFilterMatched = function (
+        { filter, exception },
+        { url, request, filterType, callerContext },
+      ) {
+        const matched = filter || exception;
+        if (!matched) return;
+
+        if (filter && filterType === FilterType.COSMETIC && filter.isScriptInject()) {
           filter = String(filter);
           const scriptInjectArgumentIndex = filter.indexOf('+js(') + 4; /* '+js('.length */
           filter =
@@ -76,7 +82,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
             decodeURIComponent(filter.slice(scriptInjectArgumentIndex, -1)) +
             ')';
         } else {
-          filter = String(filter);
+          filter = String(matched);
         }
 
         let data = { filter, filterType, url, tabId: callerContext?.tabId };
