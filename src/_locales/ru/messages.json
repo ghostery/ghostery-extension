@@ -310,6 +310,9 @@
   "disable": {
     "message": "Отключить"
   },
+  "disable_context_menu": {
+    "message": "Отключить контекстное меню"
+  },
   "disable_trackers_preview": {
     "message": "Отключить предварительный просмотр трекеров"
   },
