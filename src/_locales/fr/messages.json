@@ -310,6 +310,9 @@
   "disable": {
     "message": "Désactiver"
   },
+  "disable_context_menu": {
+    "message": "Désactiver le menu contextuel"
+  },
   "disable_trackers_preview": {
     "message": "Désactiver l'aperçu des trackers"
   },
