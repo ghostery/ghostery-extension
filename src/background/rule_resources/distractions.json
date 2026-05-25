@@ -15,8 +15,8 @@
     "youtube.com##ytd-grid-video-renderer:has(a[href^=\"/shorts/\"])",
     "youtube.com##ytm-pivot-bar-item-renderer:has(a[href^=\"/shorts\"])",
     "instagram.com##a[href=\"/reels/\"]",
-    "instagram.com##div[role=\"link\"]:has(> a[href*=\"/reel/\"])",
-    "instagram.com##article:has(a[href*=\"/reel/\"])",
+    "instagram.com##div[role=\"link\"]:has(> a[href^=\"/reel\"])",
+    "instagram.com##main article:has(a[href^=\"/reel\"])",
     "facebook.com##div[aria-label=\"Reels\"]",
     "facebook.com##div[role=\"navigation\"] a[href*=\"/reel/\"]",
     "facebook.com##div[data-pagelet=\"Reels\"]"
