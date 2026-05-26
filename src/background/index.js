@@ -18,6 +18,7 @@ import './adblocker/index.js';
 import './never-consent/index.js';
 import './cookies.js';
 import './custom-filters.js';
+import './disabled-filters.js';
 import './distractions.js';
 import './element-picker.js';
 import './dnr.js';

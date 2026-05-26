@@ -21,6 +21,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
 
 import { tabStats } from '../stats.js';
+import { isDisabled } from '../disabled-filters.js';
 
 import { setup } from './engines.js';
 import { contentScripts } from './content-scripts.js';
@@ -228,7 +229,7 @@ async function injectCosmetics(details, config) {
     const scriptFilters = [];
 
     for (const { filter, exception } of matches) {
-      if (exception === undefined) {
+      if (exception === undefined && !isDisabled(filter.getId())) {
         if (filter.isScriptInject()) {
           scriptFilters.push(filter);
         } else {
