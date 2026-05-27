@@ -45,30 +45,22 @@ const ManagedConfig = {
       let { managedConfig } = await chrome.storage.local.get('managedConfig');
 
       // Firefox throws if storage.managed is not available unlike Chrome
-      let managedConfigFromBackend = chrome.storage.managed
-        .get()
-        .catch(function (e) {
-          // Allow fallback in debug mode (for e2e tests)
-          if (__DEBUG__) {
-            return {};
-          }
-          throw e;
-        })
-        .then(function (managedConfig) {
-          chrome.storage.local.set({ managedConfig });
-          return managedConfig;
-        });
+      let managedConfigFromBackend = __DEBUG__
+        ? // Allow fallback in debug mode (for e2e tests)
+          (managedConfig ??= {})
+        : chrome.storage.managed.get().then(function (managedConfig) {
+            chrome.storage.local.set({ managedConfig });
+            return managedConfig;
+          });
 
-      if (!managedConfig) {
-        managedConfig = await managedConfigFromBackend;
+      managedConfig ??= await managedConfigFromBackend;
 
-        // Translate `customFilters` storage.managed key (an array) to model structure
-        if (managedConfig.customFilters) {
-          managedConfig.customFilters = {
-            enabled: true,
-            filters: managedConfig.customFilters,
-          };
-        }
+      // Translate `customFilters` storage.managed key (an array) to model structure
+      if (managedConfig.customFilters) {
+        managedConfig.customFilters = {
+          enabled: true,
+          filters: managedConfig.customFilters,
+        };
       }
 
       return managedConfig;
