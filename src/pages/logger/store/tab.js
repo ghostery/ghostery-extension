@@ -10,12 +10,20 @@ export default {
       const tabs = await chrome.tabs.query({});
       return tabs
         .filter(({ url }) => url !== location.href)
-        .map((tab) => ({
-          id: tab.id,
-          title: tab.title,
-          hostname: new URL(tab.url).hostname,
-          active: tab.active,
-        }));
+        .map((tab) => {
+          let hostname = '';
+          try {
+            hostname = new URL(tab.url).hostname;
+          } catch (e) {
+            // Ignore invalid URLs
+          }
+          return {
+            id: tab.id,
+            title: tab.title,
+            hostname,
+            active: tab.active,
+          };
+        });
     },
   },
 };
