@@ -44,16 +44,20 @@ const ManagedConfig = {
       // as service worker will restart frequently.
       let { managedConfig } = await chrome.storage.local.get('managedConfig');
 
-      // Allow fallback in debug mode (for e2e tests)
-      if (__DEBUG__) {
-        return managedConfig || {};
-      }
-
       // Firefox throws if storage.managed is not available unlike Chrome
-      let managedConfigFromBackend = chrome.storage.managed.get().then(function (managedConfig) {
-        chrome.storage.local.set({ managedConfig });
-        return managedConfig;
-      });
+      let managedConfigFromBackend = chrome.storage.managed
+        .get()
+        .catch(function (e) {
+          // Allow fallback in debug mode (for e2e tests)
+          if (__DEBUG__) {
+            return {};
+          }
+          throw e;
+        })
+        .then(function (managedConfig) {
+          chrome.storage.local.set({ managedConfig });
+          return managedConfig;
+        });
 
       if (!managedConfig) {
         managedConfig = await managedConfigFromBackend;
