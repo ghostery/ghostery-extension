@@ -11,6 +11,7 @@
 import { FilterType } from '@ghostery/adblocker';
 import { store } from 'hybrids';
 
+const MAX_STORAGE_SIZE = 10000;
 const storage = [];
 
 export default {
@@ -49,6 +50,9 @@ export default {
         Object.assign(log, values);
       } else {
         storage.push(values);
+        if (storage.length > MAX_STORAGE_SIZE) {
+          storage.shift();
+        }
       }
 
       return values;
