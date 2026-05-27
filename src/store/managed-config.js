@@ -38,41 +38,36 @@ const ManagedConfig = {
     if (__CHROMIUM__ && (isOpera() || isWebkit())) return {};
 
     try {
-      // Firefox uses filesystem configuration on every platform
-      // and throws if storage.managed is not available,
-      // so we can skip fallback for it
-      let managedConfig = await chrome.storage.managed.get().catch((e) => {
-        // Allow fallback in debug mode (for e2e tests)
-        if (__DEBUG__) return {};
-        throw e;
+      // Try to get cached local version to mitigate slow Chrome
+      // managed storage initialization.
+      // We endure and expect the stale cache from local storage cache
+      // as service worker will restart frequently.
+      let { managedConfig } = await chrome.storage.local.get('managedConfig');
+
+      // Allow fallback in debug mode (for e2e tests)
+      if (__DEBUG__) {
+        return managedConfig || {};
+      }
+
+      // Firefox throws if storage.managed is not available unlike Chrome
+      let managedConfigFromBackend = chrome.storage.managed.get().then(function (managedConfig) {
+        chrome.storage.local.set({ managedConfig });
+        return managedConfig;
       });
 
-      // Chromium-based browsers just return an empty object,
-      // and it might be available later (especially on the browser restart),
-      // so we try to read it with fallback from local storage
-      if (__CHROMIUM__ || __DEBUG__) {
-        if (Object.keys(managedConfig).length) {
-          // Save local version for fallback usage
-          // Don't await - we don't need to block on this
-          chrome.storage.local.set({ managedConfig });
-        } else {
-          // Try to get local version as fallback
-          const { managedConfig: fallbackConfig = {} } =
-            await chrome.storage.local.get('managedConfig');
+      if (!managedConfig) {
+        managedConfig = await managedConfigFromBackend;
 
-          managedConfig = fallbackConfig;
+        // Translate `customFilters` storage.managed key (an array) to model structure
+        if (managedConfig.customFilters) {
+          managedConfig.customFilters = {
+            enabled: true,
+            filters: managedConfig.customFilters,
+          };
         }
       }
 
-      // Translate `customFilters` storage.managed key (an array) to model structure
-      if (managedConfig.customFilters) {
-        managedConfig.customFilters = {
-          enabled: true,
-          filters: managedConfig.customFilters,
-        };
-      }
-
-      return managedConfig || {};
+      return managedConfig;
     } catch {
       return {};
     }
