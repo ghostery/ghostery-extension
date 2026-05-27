@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import { ACTION_PAUSE_ASSISTANT, FLAG_PAUSE_ASSISTANT } from '@ghostery/config';
+import { ACTION_PAUSE_ASSISTANT } from '@ghostery/config';
 
 import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
@@ -29,11 +29,7 @@ async function updatePausedDomains(config, lastConfig) {
 
   let paused = {};
 
-  if (
-    options.mode !== MODE_DEFAULT ||
-    !options.pauseAssistant ||
-    !config.hasFlag(FLAG_PAUSE_ASSISTANT)
-  ) {
+  if (options.mode !== MODE_DEFAULT || !options.pauseAssistant) {
     // Clear out all paused domains by pause assistant
     for (const [domain, { assist }] of Object.entries(options.paused)) {
       if (assist) paused[domain] = null;
@@ -104,8 +100,6 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
     }
 
     const config = await store.resolve(Config);
-    if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
-
     const hostname = parseWithCache(details.url).hostname;
     if (!hostname) return;
 
