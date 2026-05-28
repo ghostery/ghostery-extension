@@ -11,18 +11,18 @@
 
 import { store } from 'hybrids';
 
-export const STORAGE_KEY = 'disabledFilterIds';
+const STORAGE_KEY = 'disabledFilters';
 
 const DisabledFilters = {
-  ids: [Number],
+  ids: store.record(false),
   [store.connect]: {
     async get() {
-      const { [STORAGE_KEY]: ids = [] } = await chrome.storage.local.get([STORAGE_KEY]);
-      return { ids };
+      const { [STORAGE_KEY]: values = {} } = await chrome.storage.local.get([STORAGE_KEY]);
+      return values;
     },
-    async set(_, { ids = [] }) {
-      await chrome.storage.local.set({ [STORAGE_KEY]: ids });
-      return { ids };
+    async set(_, values) {
+      await chrome.storage.local.set({ [STORAGE_KEY]: values });
+      return values;
     },
   },
 };

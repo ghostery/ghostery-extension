@@ -66,13 +66,6 @@ function disableEllipsis(host, event) {
   }
 }
 
-const APPLIED_VALUES = ['', 'applied', 'excepted', 'disabled'];
-
-const sessionPref = (key, parse) => ({
-  value: parse(sessionStorage.getItem(key)),
-  observe: (_, value) => sessionStorage.setItem(key, String(value)),
-});
-
 function toggleState(log) {
   if (!log.filterId) return 'none';
   if (log.filterType === FilterType.COSMETIC) return 'toggleable';
@@ -80,13 +73,10 @@ function toggleState(log) {
   return 'none';
 }
 
-async function toggleFilter(host, event, log) {
+function toggleFilter(host, event, log) {
   event.stopPropagation();
-  const resolved = await store.resolve(DisabledFilters);
-  const ids = resolved.ids.includes(log.filterId)
-    ? resolved.ids.filter((id) => id !== log.filterId)
-    : [...resolved.ids, log.filterId];
-  await store.set(DisabledFilters, { ids });
+  const disabled = host.disabledFilters.ids[log.filterId];
+  store.set(host.disabledFilters, { ids: { [log.filterId]: disabled ? null : true } });
 }
 
 export default {
@@ -95,13 +85,12 @@ export default {
   }),
   tabs: store([Tab]),
   disabledFilters: store(DisabledFilters),
-  disabledIds: ({ disabledFilters }) =>
-    store.ready(disabledFilters) ? new Set(disabledFilters.ids) : new Set(),
-  visibleLogs: ({ logs, applied, disabledIds }) => {
+  visibleLogs: ({ logs, applied, disabledFilters }) => {
     if (!store.ready(logs)) return [];
     if (!applied) return logs;
+    const ids = store.ready(disabledFilters) ? disabledFilters.ids : {};
     return logs.filter((log) => {
-      const isDisabled = log.filterId && disabledIds.has(log.filterId);
+      const isDisabled = !!(log.filterId && ids[log.filterId]);
       if (applied === 'applied') {
         if (isDisabled) return false;
         return (
@@ -123,9 +112,9 @@ export default {
     return store.ready(tabs) ? tabs.find((tab) => tab.active).id : '';
   },
   query: '',
-  filterType: sessionPref('logger:filterType', (v) => Number(v) || 0),
-  applied: sessionPref('logger:applied', (v) => (APPLIED_VALUES.includes(v) ? v : '')),
-  render: ({ logs, visibleLogs, tabs, tabId, filterType, applied, disabledIds }) => html`
+  filterType: 0,
+  applied: '',
+  render: ({ logs, visibleLogs, tabs, tabId, filterType, applied, disabledFilters }) => html`
     <template layout="height:full width::960px">
       <main layout="column height:full" translate="no">
         <div layout="row items:center gap padding:2:2:1">
@@ -183,6 +172,17 @@ export default {
           </ui-button>
         </div>
         <ui-line></ui-line>
+        ${__CHROMIUM__ &&
+        html`
+          <div layout="row items:center gap padding:1:2 ::background:secondary">
+            <ui-icon name="info" color="tertiary" layout="size:2"></ui-icon>
+            <ui-text type="body-s" color="tertiary">
+              In this browser, only cosmetic filters can be disabled at runtime. Network filtering
+              is handled by the browser's DNR layer.
+            </ui-text>
+          </div>
+          <ui-line></ui-line>
+        `}
         <div layout="grid:80px|120px|1fr|40px|240px|140px|40px gap padding:1:2">
           <ui-text type="body-s" color="tertiary">Date</ui-text>
           <ui-text type="body-s" color="tertiary">Type</ui-text>
@@ -215,7 +215,10 @@ export default {
             ${store.ready(logs) &&
             visibleLogs.map((log) => {
               const state = toggleState(log);
-              const isDisabled = state === 'toggleable' && disabledIds.has(log.filterId);
+              const isDisabled =
+                state === 'toggleable' &&
+                store.ready(disabledFilters) &&
+                !!disabledFilters.ids[log.filterId];
               return html`
                 <div
                   layout="grid:80px|120px|1fr|40px|240px|140px|40px gap padding:0.5:1"

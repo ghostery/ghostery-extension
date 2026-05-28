@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblocker-webextension';
 
 import Options, { getPausedDetails } from '/store/options.js';
+import DisabledFilters from '/store/disabled-filters.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
@@ -21,7 +22,6 @@ import Request from '/utils/request.js';
 
 import { updateTabStats } from '../stats.js';
 import { getRedirectProtectionUrl } from '../redirect-protection.js';
-import { isDisabled } from '../disabled-filters.js';
 
 import { setup } from './engines.js';
 
@@ -83,7 +83,11 @@ if (__FIREFOX__) {
         const engine = engines.get(engines.MAIN_ENGINE);
         const { redirect, match, filter } = engine.match(request);
 
-        if (!filter || !isDisabled(filter.getId())) {
+        const disabledFilters = store.get(DisabledFilters);
+        const filterDisabled =
+          filter && store.ready(disabledFilters) && disabledFilters.ids[filter.getId()];
+
+        if (!filterDisabled) {
           if (details.type === 'main_frame') {
             // Skip type-less filters whose mask is FROM_ANY: Chrome MV3 DNR's
             // safety default excludes main_frame for filters without an
