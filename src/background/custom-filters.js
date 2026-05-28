@@ -30,6 +30,21 @@ function isTrustedScriptInject(scriptName) {
   );
 }
 
+function encodeScriptletArguments(filter) {
+  if (!filter.isScriptInject() || !filter.selector) {
+    return;
+  }
+
+  const parsed = filter.parseScript();
+  if (!parsed || !parsed.name) {
+    return;
+  }
+
+  const encodedArgs = parsed.args.map((arg) => encodeURIComponent(arg));
+  filter.selector = [parsed.name, ...encodedArgs].join(', ');
+  filter.scriptletDetails = undefined;
+}
+
 async function updateDNRRules(dnrRules) {
   const removeRuleIds = await getDynamicRulesIds(CUSTOM_FILTERS_ID_RANGE);
 
@@ -112,6 +127,10 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
 
     return true;
   });
+
+  for (const filter of acceptedCosmeticFilters) {
+    encodeScriptletArguments(filter);
+  }
 
   /**
    * @type {Map<number, string>}
