@@ -44,14 +44,22 @@ const ManagedConfig = {
       // as service worker will restart frequently.
       let { managedConfig } = await chrome.storage.local.get('managedConfig');
 
-      // Firefox throws if storage.managed is not available unlike Chrome
-      let managedConfigFromBackend = chrome.storage.managed.get().then(function (managedConfig) {
-        // Prevent local storage overriding in debug mode (for e2e tests)
-        if (!__DEBUG__) chrome.storage.local.set({ managedConfig });
-        return managedConfig;
-      });
+      // We will skip managed config in debug mode
+      // Also this local storage overriding in e2e tests
+      if (__DEBUG__) {
+        managedConfig ??= {};
+      } else {
+        // Firefox throws if storage.managed is not found unlike Chrome
+        // returning empty object
+        const managedConfigFromBackend = chrome.storage.managed
+          .get()
+          .then(function (managedConfig) {
+            chrome.storage.local.set({ managedConfig });
+            return managedConfig;
+          });
 
-      managedConfig ??= await managedConfigFromBackend;
+        managedConfig ??= await managedConfigFromBackend;
+      }
 
       // Translate `customFilters` storage.managed key (an array) to model structure
       if (managedConfig.customFilters) {
