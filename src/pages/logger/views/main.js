@@ -174,7 +174,7 @@ export default {
         <ui-line></ui-line>
         ${__CHROMIUM__ &&
         html`
-          <div layout="row items:center gap padding:1:2 ::background:secondary">
+          <div translate="no" layout="row items:center gap padding:1:2 ::background:secondary">
             <ui-icon name="info" color="tertiary" layout="size:2"></ui-icon>
             <ui-text type="body-s" color="tertiary">
               In this browser, only cosmetic filters can be disabled at runtime. Network filtering
