@@ -581,6 +581,9 @@
   "in_panel_notifications": {
     "message": "In-Panel Notifications"
   },
+  "in_this_browser__only_cosmetic_filters_can_be_disabled_at_runtime__network_filtering_is_handled_by_the_browser_s_dnr_layer_": {
+    "message": "In this browser, only cosmetic filters can be disabled at runtime. Network filtering is handled by the browser's DNR layer."
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "Include a screenshot of the current page"
   },
