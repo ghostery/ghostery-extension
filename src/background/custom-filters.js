@@ -12,7 +12,12 @@
 import { store } from 'hybrids';
 import { parseFilters, FilterType } from '@ghostery/adblocker';
 
-import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
+import {
+  CUSTOM_FILTERS_ID_RANGE,
+  CUSTOM_FILTERS_MAX_DYNAMIC_RULES,
+  CUSTOM_FILTERS_MAX_REGEX_RULES,
+  getDynamicRulesIds,
+} from '/utils/dnr.js';
 import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -30,7 +35,38 @@ function isTrustedScriptInject(scriptName) {
   );
 }
 
+function encodeScriptletArguments(filter) {
+  if (!filter.isScriptInject() || !filter.selector) {
+    return;
+  }
+
+  const parsed = filter.parseScript();
+  if (!parsed || !parsed.name) {
+    return;
+  }
+
+  const encodedArgs = parsed.args.map((arg) => encodeURIComponent(arg));
+  filter.selector = [parsed.name, ...encodedArgs].join(', ');
+  filter.scriptletDetails = undefined;
+}
+
 async function updateDNRRules(dnrRules) {
+  if (dnrRules.length > CUSTOM_FILTERS_MAX_DYNAMIC_RULES) {
+    throw new Error(
+      `Too many custom network filters: ${dnrRules.length} exceeds the maximum of ${CUSTOM_FILTERS_MAX_DYNAMIC_RULES} dynamic rules.`,
+    );
+  }
+
+  const regexRulesCount = dnrRules.reduce(
+    (count, rule) => count + (rule.condition?.regexFilter ? 1 : 0),
+    0,
+  );
+  if (regexRulesCount > CUSTOM_FILTERS_MAX_REGEX_RULES) {
+    throw new Error(
+      `Too many custom regex network filters: ${regexRulesCount} exceeds the maximum of ${CUSTOM_FILTERS_MAX_REGEX_RULES} regex rules.`,
+    );
+  }
+
   const removeRuleIds = await getDynamicRulesIds(CUSTOM_FILTERS_ID_RANGE);
 
   if (removeRuleIds.length) {
@@ -113,6 +149,10 @@ async function collectFilters(text, { isTrustedScriptInjectAllowed }) {
     return true;
   });
 
+  for (const filter of acceptedCosmeticFilters) {
+    encodeScriptletArguments(filter);
+  }
+
   /**
    * @type {Map<number, string>}
    */
@@ -179,7 +219,12 @@ export async function updateCustomFilters(input, options) {
         return filterIdToRawLine.get(filter.getId());
       });
     const { rules, errors } = await convert(acceptedNetworkFilters);
-    result.dnrRules = await updateDNRRules(rules);
+    try {
+      result.dnrRules = await updateDNRRules(rules);
+    } catch (e) {
+      result.dnrRules = [];
+      result.errors.push(e.message);
+    }
 
     if (errors?.length) {
       result.errors.push(...errors);

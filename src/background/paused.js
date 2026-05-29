@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID, MODE_DEFAULT } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
+import ManagedConfig from '/store/managed-config';
 
 import { getDynamicRules, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
 
@@ -79,8 +79,7 @@ OptionsObserver.addListener(async function pausedSites(options, lastOptions) {
       (lastOptions && options.mode !== lastOptions.mode) ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules on SW restart even if the paused state hasn't changed
-      (!lastOptions &&
-        (await store.resolve(ManagedConfig)).trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID))
+      (!lastOptions && (await store.resolve(ManagedConfig)).trustedDomains.enabled))
   ) {
     const currentRules = await getDynamicRules(PAUSED_ID_RANGE);
     const hostnames = Object.keys(options.paused);

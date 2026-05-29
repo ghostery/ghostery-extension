@@ -13,17 +13,13 @@ import { store } from 'hybrids';
 
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 
-export const TRUSTED_DOMAINS_NONE_ID = '<none>';
-
 const ManagedConfig = {
   disableOnboarding: false,
   disableUserControl: false,
   disableUserAccount: false,
   disableTrackersPreview: false,
 
-  // TODO: Update the structure of `trustedDomains` as is with `customFilters`
-  // to have `enabled` flag and `domains` array
-  trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
+  trustedDomains: { enabled: false, domains: [String] },
   customFilters: { enabled: false, filters: [String] },
 
   disableNotifications: (config) => config.disableOnboarding || config.disableUserControl,
@@ -31,7 +27,7 @@ const ManagedConfig = {
   disableModes: (config) =>
     config.disableOnboarding ||
     config.disableUserControl ||
-    config.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID ||
+    config.trustedDomains.enabled ||
     config.customFilters.enabled,
 
   [store.connect]: async () => {
@@ -65,7 +61,14 @@ const ManagedConfig = {
       managedConfig ??= await managedConfigFromBackend;
     }
 
-    // Translate `customFilters` storage.managed key (an array) to model structure
+    // Translate array storage.managed keys to model structure
+    if (managedConfig.trustedDomains) {
+      managedConfig.trustedDomains = {
+        enabled: true,
+        domains: managedConfig.trustedDomains,
+      };
+    }
+
     if (managedConfig.customFilters) {
       managedConfig.customFilters = {
         enabled: true,

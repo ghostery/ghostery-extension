@@ -61,8 +61,8 @@ export function filter(item) {
 
     // Browser check
     // Values from getBrowser() method
-    if (check && typeof item.filter.browser === 'string') {
-      check = getBrowser().name === item.filter.browser;
+    if (check && Array.isArray(item.filter.browser)) {
+      check = item.filter.browser.includes(getBrowser().name);
     }
 
     const extensionVersion = chrome.runtime.getManifest().version;

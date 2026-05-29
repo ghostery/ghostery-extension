@@ -88,7 +88,9 @@ const SELECTORS = [
   '[data-hveid] div.yuRUbf > div > a',
   '[data-hveid] div.xpd a.cz3goc',
   '[data-hveid] > .xpd > div.kCrYT:first-child > a',
+  // Mobile Google
   '[data-hveid] div.OhZyZc > a',
+  '[data-hveid] div.fqvXQb > a',
   // Bing
   'li[data-id] h2 > a',
   'li[data-id] div.b_algoheader > a',

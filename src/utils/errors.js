@@ -55,7 +55,12 @@ const config = {
 Sentry.init(config);
 
 getBrowserInfo().then(
-  ({ token }) => Sentry.setTag('ua', token),
+  ({ token, version, os, osVersion }) => {
+    Sentry.setTag('ua', token);
+    Sentry.setTag('uaVersion', version);
+    Sentry.setTag('os', os);
+    Sentry.setTag('osVersion', osVersion);
+  },
   // empty error handled for tests
   () => {},
 );
@@ -77,12 +82,13 @@ export async function captureException(error, { critical = false, once = false }
 
     const errors = await store.resolve(Errors);
 
-    // Already sent this error, skip it
-    if (errors.onceIds[id]) {
+    // Already sent this error within the last 24 hours, skip it
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    if (Date.now() - errors.onceIds[id] < DAY_MS) {
       return;
     }
 
-    await store.set(errors, { onceIds: { [id]: true } });
+    await store.set(errors, { onceIds: { [id]: Date.now() } });
   }
 
   const newError = new Error(error.message);

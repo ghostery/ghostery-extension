@@ -15,10 +15,28 @@ import {
   setAdditionalFiltersToggle,
   setCustomFilters,
   disableCustomFilters,
+  waitForIdleBackgroundTasks,
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
 } from '../utils.js';
+
+async function setCustomFiltersInput(lines) {
+  await setAdditionalFiltersToggle('custom-filters', true);
+
+  const input = await getExtensionElement('input:custom-filters');
+  await browser.execute(
+    (el, value) => {
+      el.value = value;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    },
+    input,
+    lines.join('\n'),
+  );
+
+  await getExtensionElement('button:custom-filters:save').click();
+  await waitForIdleBackgroundTasks();
+}
 
 describe('Custom Filters', function () {
   before(enableExtension);
@@ -136,5 +154,30 @@ describe('Custom Filters', function () {
       const text = await errors.getText();
       await expect(text).toContain('Filter not supported');
     });
+
+    it('shows error when exceeding max dynamic rules', async function () {
+      const lines = Array.from({ length: 25001 }, (_, i) => `||f${i}.invalid^`);
+      await setCustomFiltersInput(lines);
+
+      const errors = await getExtensionElement('component:custom-filters:errors');
+      const text = await errors.getText();
+      await expect(text).toContain('Too many custom network filters');
+    });
+
+    it('shows error when exceeding max regex rules', async function () {
+      const lines = Array.from({ length: 501 }, (_, i) => `/rx${i}x.invalid/`);
+      await setCustomFiltersInput(lines);
+
+      const errors = await getExtensionElement('component:custom-filters:errors');
+      const text = await errors.getText();
+      await expect(text).toContain('Too many custom regex network filters');
+    });
   }
+
+  it('preserves escaped commas and special characters in scriptlet arguments', async function () {
+    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, 100%\\, escaped)`]);
+
+    await browser.url(PAGE_URL);
+    await expect($('h1')).toHaveText('100%, escaped');
+  });
 });
