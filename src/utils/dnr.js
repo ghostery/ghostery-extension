@@ -11,18 +11,31 @@
 
 // Dynamic Rules ID Ranges and Priorities
 
+export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const PAUSED_ID_RANGE = { start: 1, end: 1_000_000 };
+
 export const CUSTOM_FILTERS_ID_RANGE = { start: 1_000_000, end: 2_000_000 };
+// Reserved budget for non-custom-filter dynamic rules (fixes, exceptions,
+// distractions, redirect protection, paused, GPC, etc.). Fixes alone is the
+// largest contributor (~2000 rules).
+// Maximum number of dynamic rules custom filters may add.
+export const CUSTOM_FILTERS_MAX_DYNAMIC_RULES =
+  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_DYNAMIC_RULES - 5_000;
+
+// Reserved budget for regex rules used by static rulesets and dynamic fixes.
+// The dynamic fixes ruleset mirrors the static one, so they are counted once.
+// Current maximum across all enabled static rulesets is ~370 regex rules.
+// Maximum number of regex rules custom filters may add.
+export const CUSTOM_FILTERS_MAX_REGEX_RULES =
+  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_REGEX_RULES - 500;
+
+export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const EXCEPTIONS_ID_RANGE = { start: 2_000_000, end: 3_000_000 };
+
 export const FIXES_ID_RANGE = { start: 3_000_000, end: 4_000_000 };
-export const REDIRECT_PROTECTION_ID_RANGE = {
-  start: 4_000_000,
-  end: 5_000_000,
-};
-export const REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE = {
-  start: 5_000_000,
-  end: 6_000_000,
-};
+
+export const REDIRECT_PROTECTION_ID_RANGE = { start: 4_000_000, end: 5_000_000 };
+export const REDIRECT_PROTECTION_EXCEPTIONS_ID_RANGE = { start: 5_000_000, end: 6_000_000 };
 
 export const GPC_RULE_ID = 6_000_000;
 export const GPC_RULE_PRIORITY = 40_000;
@@ -30,9 +43,6 @@ export const GPC_RULE_PRIORITY = 40_000;
 export const DISTRACTIONS_ID_RANGE = { start: 6_000_001, end: 7_000_000 };
 
 export const REDIRECT_PROTECTION_SESSION_OFFSET = 100_000;
-
-export const PAUSED_RULE_PRIORITY = 10_000_000;
-export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const MAX_RULE_PRIORITY = 1_073_741_823;
 
 export const ALL_RESOURCE_TYPES = [
