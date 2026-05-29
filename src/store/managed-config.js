@@ -56,10 +56,10 @@ const ManagedConfig = {
           chrome.storage.local.set({ managedConfig });
           return managedConfig;
         })
-        .catch(function (e) {
-          // `e.message` equals `Managed storage manifest not found` here
-          if (__FIREFOX__ && e?.message.includes('not found')) return {};
-          throw e;
+        .catch(function () {
+          // We intend to catch all errors and make the function safe
+          // Returning empty object here will handle every case
+          return {};
         });
 
       managedConfig ??= await managedConfigFromBackend;
