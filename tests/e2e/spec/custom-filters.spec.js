@@ -137,4 +137,11 @@ describe('Custom Filters', function () {
       await expect(text).toContain('Filter not supported');
     });
   }
+
+  it('preserves escaped commas and special characters in scriptlet arguments', async function () {
+    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, 100%\\, escaped)`]);
+
+    await browser.url(PAGE_URL);
+    await expect($('h1')).toHaveText('100%, escaped');
+  });
 });
