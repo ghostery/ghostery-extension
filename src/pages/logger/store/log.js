@@ -26,7 +26,9 @@ export default {
 
   // From matched filter
   filter: '',
+  filterId: 0,
   filterType: FilterType.NETWORK, // FilterType enum from adblocker library
+  exception: false,
 
   // From TrackerDB
   tracker: '',
@@ -54,9 +56,9 @@ export default {
       return values;
     },
     list: ({ tabId, query, filterType }) => {
-      query = query && new RegExp(query.trim(), 'i');
+      const needle = query?.trim().toLowerCase();
 
-      if (!tabId && !query && !filterType)
+      if (!tabId && !needle && !filterType)
         return storage.slice().sort((a, b) => a.timestamp - b.timestamp);
 
       return storage
@@ -72,11 +74,11 @@ export default {
           }
 
           if (
-            query &&
-            !query.test(log.url) &&
-            !query.test(log.filter) &&
-            !query.test(log.tracker) &&
-            !query.test(log.organization)
+            needle &&
+            !log.url?.toLowerCase().includes(needle) &&
+            !log.filter?.toLowerCase().includes(needle) &&
+            !log.tracker?.toLowerCase().includes(needle) &&
+            !log.organization?.toLowerCase().includes(needle)
           ) {
             match = false;
           }

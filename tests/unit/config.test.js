@@ -85,19 +85,19 @@ describe('Remote config', () => {
     });
 
     it('should return true if browser matches', () => {
-      assert.deepEqual(filter({ filter: { browser: 'chrome' } }), true);
+      assert.deepEqual(filter({ filter: { browser: ['chrome'] } }), true);
     });
 
     it('should return false if browser does not match', () => {
-      assert.deepEqual(filter({ filter: { browser: 'firefox' } }), false);
+      assert.deepEqual(filter({ filter: { browser: ['firefox'] } }), false);
     });
 
     it('should return true for firefox browser when set', () => {
       global.__CHROMIUM__ = false;
       global.__FIREFOX__ = true;
 
-      assert.deepEqual(filter({ filter: { browser: 'firefox' } }), true);
-      assert.deepEqual(filter({ filter: { browser: 'chrome' } }), false);
+      assert.deepEqual(filter({ filter: { browser: ['firefox'] } }), true);
+      assert.deepEqual(filter({ filter: { browser: ['chrome'] } }), false);
     });
 
     it('should return true if minVersion matches exactly', () => {

@@ -11,7 +11,7 @@
 import { store } from 'hybrids';
 
 const Errors = {
-  onceIds: store.record(false),
+  onceIds: store.record(0),
   [store.connect]: {
     async get() {
       const { errors = {} } = await chrome.storage.local.get('errors');

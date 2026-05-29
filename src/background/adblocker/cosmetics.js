@@ -15,6 +15,7 @@ import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
+import DisabledFilters from '/store/disabled-filters.js';
 
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -227,13 +228,16 @@ async function injectCosmetics(details, config) {
     const styleFilters = [];
     const scriptFilters = [];
 
+    const disabledFilters = store.get(DisabledFilters);
+
     for (const { filter, exception } of matches) {
-      if (exception === undefined) {
-        if (filter.isScriptInject()) {
-          scriptFilters.push(filter);
-        } else {
-          styleFilters.push(filter);
-        }
+      if (exception !== undefined) continue;
+      if (store.ready(disabledFilters) && disabledFilters.ids[filter.getId()]) continue;
+
+      if (filter.isScriptInject()) {
+        scriptFilters.push(filter);
+      } else {
+        styleFilters.push(filter);
       }
     }
 
