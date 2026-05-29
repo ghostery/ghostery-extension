@@ -37,42 +37,43 @@ const ManagedConfig = {
   [store.connect]: async () => {
     if (__CHROMIUM__ && (isOpera() || isWebkit())) return {};
 
-    try {
-      // Try to get cached local version to mitigate slow Chrome
-      // managed storage initialization.
-      // We endure and expect the stale cache from local storage cache
-      // as service worker will restart frequently.
-      let { managedConfig } = await chrome.storage.local.get('managedConfig');
+    // Try to get cached local version to mitigate slow Chrome
+    // managed storage initialization.
+    // We endure and expect the stale cache from local storage cache
+    // as service worker will restart frequently.
+    let { managedConfig } = await chrome.storage.local.get('managedConfig');
 
-      // We will skip managed config in debug mode
-      // Also this local storage overriding in e2e tests
-      if (__DEBUG__) {
-        managedConfig ??= {};
-      } else {
-        // Firefox throws if storage.managed is not found unlike Chrome
-        // returning empty object
-        const managedConfigFromBackend = chrome.storage.managed
-          .get()
-          .then(function (managedConfig) {
-            chrome.storage.local.set({ managedConfig });
-            return managedConfig;
-          });
+    // We will skip managed config in debug mode
+    // Also this local storage overriding in e2e tests
+    if (__DEBUG__) {
+      managedConfig ??= {};
+    } else {
+      // Firefox throws if storage.managed is not found unlike Chrome
+      // returning empty object
+      const managedConfigFromBackend = chrome.storage.managed
+        .get()
+        .then(function (managedConfig) {
+          chrome.storage.local.set({ managedConfig });
+          return managedConfig;
+        })
+        .catch(function (e) {
+          // `e.message` equals `Managed storage manifest not found` here
+          if (__FIREFOX__ && e?.message.includes('not found')) return {};
+          throw e;
+        });
 
-        managedConfig ??= await managedConfigFromBackend;
-      }
-
-      // Translate `customFilters` storage.managed key (an array) to model structure
-      if (managedConfig.customFilters) {
-        managedConfig.customFilters = {
-          enabled: true,
-          filters: managedConfig.customFilters,
-        };
-      }
-
-      return managedConfig;
-    } catch {
-      return {};
+      managedConfig ??= await managedConfigFromBackend;
     }
+
+    // Translate `customFilters` storage.managed key (an array) to model structure
+    if (managedConfig.customFilters) {
+      managedConfig.customFilters = {
+        enabled: true,
+        filters: managedConfig.customFilters,
+      };
+    }
+
+    return managedConfig;
   },
 };
 
