@@ -71,12 +71,15 @@ chrome.runtime.onConnect.addListener(async (port) => {
         { filter, exception: matchedException },
         { url, request, filterType, callerContext },
       ) {
-        const filterId = filter.getId();
+        const matched = filter || matchedException;
+        if (!matched) return;
+
+        const filterId = matched.getId();
         const isException =
           !!matchedException ||
-          (filterType === FilterType.COSMETIC ? filter.isUnhide() : filter.isException());
+          (filterType === FilterType.COSMETIC ? matched.isUnhide() : matched.isException());
 
-        if (filterType === FilterType.COSMETIC && filter.isScriptInject()) {
+        if (filter && filterType === FilterType.COSMETIC && filter.isScriptInject()) {
           filter = String(filter);
           const scriptInjectArgumentIndex = filter.indexOf('+js(') + 4; /* '+js('.length */
           filter =
@@ -84,7 +87,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
             decodeURIComponent(filter.slice(scriptInjectArgumentIndex, -1)) +
             ')';
         } else {
-          filter = String(filter);
+          filter = String(matched);
         }
 
         let data = {
