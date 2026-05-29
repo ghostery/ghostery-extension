@@ -80,9 +80,7 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
     runner.setUninstallUrl();
     if (feedback) runner.ping('active');
   } else {
-    chrome.runtime.setUninstallURL(
-      'https://blocksurvey.io/ghostery-uninstall-survey-fresh-installs-jlxtBrryRfKLSgB7PajxAg?v=o',
-    );
+    chrome.runtime.setUninstallURL('https://www.ghostery.com/uninstall-fresh');
   }
 });
 
