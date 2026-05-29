@@ -16,7 +16,7 @@ import { isOpera, isSafari } from '/utils/browser-info.js';
 import { findParentDomain } from '/utils/domains.js';
 
 import CustomFilters from './custom-filters.js';
-import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
+import ManagedConfig from './managed-config.js';
 import Notification from './notification.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
@@ -277,10 +277,9 @@ async function manage(options) {
   }
 
   // Apply trusted domains if they are configured
-  // (`trustedDomains` is empty or contain real domains)
-  if (managed.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID) {
+  if (managed.trustedDomains.enabled) {
     options.paused ||= {};
-    managed.trustedDomains.forEach((domain) => {
+    managed.trustedDomains.domains.forEach((domain) => {
       options.paused[domain] = { revokeAt: 0, managed: true };
     });
   }
