@@ -221,7 +221,9 @@ export default class Metrics {
       // Page views yesterday (0=none, 1=<10, 2=>=10)
       buildQueryPair('pv', conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
       // SERP visits yesterday (0=none, 1=<10, 2=>=10)
-      buildQueryPair('se', this._getSearchSignal());
+      buildQueryPair('se', this._getSearchSignal()) +
+      // Feedback state
+      buildQueryPair('hw', conf.options.feedback ? '1' : '0');
 
     if (type !== 'uninstall') {
       metrics_url +=
@@ -238,11 +240,9 @@ export default class Metrics {
         buildQueryPair('va', this._getVelocityActive(type).toString()) +
         // Engaged Recency
         // prettier-ignore
-        buildQueryPair('re',this._getRecencyEngaged(type, frequency).toString()) +
+        buildQueryPair('re', this._getRecencyEngaged(type, frequency).toString()) +
         // Engaged Velocity
-        buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
-        // Feedback state
-        buildQueryPair('hw', conf.options.feedback ? '1' : '0');
+        buildQueryPair('ve', this._getVelocityEngaged(type).toString());
     }
 
     if (CAMPAIGN_METRICS.includes(type)) {

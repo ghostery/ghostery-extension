@@ -79,8 +79,6 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
 
     runner.setUninstallUrl();
     if (feedback) runner.ping('active');
-  } else {
-    chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
 
