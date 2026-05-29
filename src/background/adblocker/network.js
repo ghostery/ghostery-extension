@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblocker-webextension';
 
 import Options, { getPausedDetails } from '/store/options.js';
+import DisabledFilters from '/store/disabled-filters.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
@@ -82,30 +83,36 @@ if (__FIREFOX__) {
         const engine = engines.get(engines.MAIN_ENGINE);
         const { redirect, match, filter } = engine.match(request);
 
-        if (details.type === 'main_frame') {
-          // Skip type-less filters whose mask is FROM_ANY: Chrome MV3 DNR's
-          // safety default excludes main_frame for filters without an
-          // explicit resource type, and we mirror that here.
-          if (match === true && filter?.fromDocument() && !filter.fromAny()) {
-            const options = store.get(Options);
-            const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+        const disabledFilters = store.get(DisabledFilters);
+        const filterDisabled =
+          filter && store.ready(disabledFilters) && disabledFilters.ids[filter.getId()];
 
-            return { redirectUrl };
+        if (!filterDisabled) {
+          if (details.type === 'main_frame') {
+            // Skip type-less filters whose mask is FROM_ANY: Chrome MV3 DNR's
+            // safety default excludes main_frame for filters without an
+            // explicit resource type, and we mirror that here.
+            if (match === true && filter?.fromDocument() && !filter.fromAny()) {
+              const options = store.get(Options);
+              const redirectUrl = getRedirectProtectionUrl(details.url, request.hostname, options);
+
+              return { redirectUrl };
+            }
+          } else if (redirect !== undefined) {
+            request.blocked = true;
+            // There's a possibility that redirecting to file URL can expose
+            // extension existence.
+            if (details.type !== 'xmlhttprequest') {
+              result = {
+                redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
+              };
+            } else {
+              result = { redirectUrl: redirect.dataUrl };
+            }
+          } else if (match === true) {
+            request.blocked = true;
+            result = { cancel: true };
           }
-        } else if (redirect !== undefined) {
-          request.blocked = true;
-          // There's a possibility that redirecting to file URL can expose
-          // extension existence.
-          if (details.type !== 'xmlhttprequest') {
-            result = {
-              redirectUrl: chrome.runtime.getURL('rule_resources/redirects/' + redirect.filename),
-            };
-          } else {
-            result = { redirectUrl: redirect.dataUrl };
-          }
-        } else if (match === true) {
-          request.blocked = true;
-          result = { cancel: true };
         }
       }
 

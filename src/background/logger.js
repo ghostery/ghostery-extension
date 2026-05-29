@@ -68,11 +68,16 @@ chrome.runtime.onConnect.addListener(async (port) => {
       const engine = engines.get(engines.MAIN_ENGINE);
 
       const logFilterMatched = function (
-        { filter, exception },
+        { filter, exception: matchedException },
         { url, request, filterType, callerContext },
       ) {
-        const matched = filter || exception;
+        const matched = filter || matchedException;
         if (!matched) return;
+
+        const filterId = matched.getId();
+        const isException =
+          !!matchedException ||
+          (filterType === FilterType.COSMETIC ? matched.isUnhide() : matched.isException());
 
         if (filter && filterType === FilterType.COSMETIC && filter.isScriptInject()) {
           filter = String(filter);
@@ -85,7 +90,14 @@ chrome.runtime.onConnect.addListener(async (port) => {
           filter = String(matched);
         }
 
-        let data = { filter, filterType, url, tabId: callerContext?.tabId };
+        let data = {
+          filter,
+          filterId,
+          filterType,
+          exception: isException,
+          url,
+          tabId: callerContext?.tabId,
+        };
 
         if (filterType === FilterType.COSMETIC) {
           Object.assign(data, {
