@@ -24,6 +24,13 @@ import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { $, $$ } from '@wdio/globals';
 
+// Pin geckodriver to 0.36.0 — when installing an extension via base64
+// (installAddOn API), the file is removed from the filesystem after install,
+// causing issues like broken extension reload and content scripts not loading.
+// v0.37.0 made this worse; 0.36.0 is the last known good version.
+// TODO: check https://github.com/mozilla/geckodriver/issues/2248 and remove the pin once fixed.
+process.env.GECKODRIVER_VERSION = '0.36.0';
+
 import { setupTestPage } from './page/server.js';
 
 import { getExtensionPageURL, setExtensionBaseUrl, PAGE_PORT, PAGE_URL } from './utils.js';
