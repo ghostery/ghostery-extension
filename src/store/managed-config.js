@@ -33,52 +33,50 @@ const ManagedConfig = {
   [store.connect]: async () => {
     if (__CHROMIUM__ && (isOpera() || isWebkit())) return {};
 
-    try {
-      // Firefox uses filesystem configuration on every platform
-      // and throws if storage.managed is not available,
-      // so we can skip fallback for it
-      let managedConfig = await chrome.storage.managed.get().catch((e) => {
-        // Allow fallback in debug mode (for e2e tests)
-        if (__DEBUG__) return {};
-        throw e;
-      });
+    // Try to get cached local version to mitigate slow Chrome
+    // managed storage initialization.
+    // We endure and expect the stale cache from local storage cache
+    // as service worker will restart frequently.
+    let { managedConfig } = await chrome.storage.local.get('managedConfig');
 
-      // Chromium-based browsers just return an empty object,
-      // and it might be available later (especially on the browser restart),
-      // so we try to read it with fallback from local storage
-      if (__CHROMIUM__ || __DEBUG__) {
-        if (Object.keys(managedConfig).length) {
-          // Save local version for fallback usage
-          // Don't await - we don't need to block on this
+    // We will skip managed config in debug mode
+    // Also this local storage overriding in e2e tests
+    if (__DEBUG__) {
+      managedConfig ??= {};
+    } else {
+      // Firefox throws if storage.managed is not found unlike Chrome
+      // returning empty object
+      const managedConfigFromBackend = chrome.storage.managed
+        .get()
+        .then(function (managedConfig) {
           chrome.storage.local.set({ managedConfig });
-        } else {
-          // Try to get local version as fallback
-          const { managedConfig: fallbackConfig = {} } =
-            await chrome.storage.local.get('managedConfig');
+          return managedConfig;
+        })
+        .catch(function () {
+          // We intend to catch all errors and make the function safe
+          // Returning empty object here will handle every case
+          return {};
+        });
 
-          managedConfig = fallbackConfig;
-        }
-      }
-
-      // Translate array storage.managed keys to model structure
-      if (managedConfig.trustedDomains) {
-        managedConfig.trustedDomains = {
-          enabled: true,
-          domains: managedConfig.trustedDomains,
-        };
-      }
-
-      if (managedConfig.customFilters) {
-        managedConfig.customFilters = {
-          enabled: true,
-          filters: managedConfig.customFilters,
-        };
-      }
-
-      return managedConfig || {};
-    } catch {
-      return {};
+      managedConfig ??= await managedConfigFromBackend;
     }
+
+    // Translate array storage.managed keys to model structure
+    if (managedConfig.trustedDomains) {
+      managedConfig.trustedDomains = {
+        enabled: true,
+        domains: managedConfig.trustedDomains,
+      };
+    }
+
+    if (managedConfig.customFilters) {
+      managedConfig.customFilters = {
+        enabled: true,
+        filters: managedConfig.customFilters,
+      };
+    }
+
+    return managedConfig;
   },
 };
 
