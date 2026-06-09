@@ -10,8 +10,11 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets from '@ghostery/scriptlets';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
+
+// Wrapped at build time with an in-document idempotency guard, see
+// scripts/generate-scriptlets.js. The file is gitignored and regenerated each build.
+import scriptlets from './scriptlets.generated.js';
 
 import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
@@ -46,6 +49,11 @@ const scriptletGlobals = {
   // The dynamic ID is generated per session.
   // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
+
+  // Random property name for the per-document idempotency registry the wrapped
+  // scriptlets keep on the page global. Randomized so a page can neither pre-seed
+  // `self[base]` to suppress injection nor hardcode the name to detect us.
+  __guardBase: crypto.randomUUID(),
 };
 
 function injectScriptlets(filters, hostname, details) {
@@ -77,7 +85,12 @@ function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+
+    // Identity of this exact scriptlet+args: the same (name, args) from two
+    // overlapping triggers is one effect (deduped); different args run separately.
+    const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
+    const globals = { ...scriptletGlobals, __guardToken: token };
+    const args = [globals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     if (__FIREFOX__) {
