@@ -67,6 +67,7 @@ function injectScriptlets(filters, hostname, details) {
 
     const func = scriptlet.func;
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     if (__FIREFOX__) {
       if (filter.hasSubframeConstraint()) {
@@ -79,7 +80,10 @@ function injectScriptlets(filters, hostname, details) {
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
-        world: chrome.scripting.ExecutionWorld?.MAIN ?? (__FIREFOX__ ? undefined : 'MAIN'),
+        world:
+          declaredWorld === 'ISOLATED'
+            ? (chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED')
+            : (chrome.scripting.ExecutionWorld?.MAIN ?? 'MAIN'),
         target: resolveInjectionTarget(details),
         func,
         args,
