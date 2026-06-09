@@ -69,18 +69,19 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
   // as the `terms` option can only by enabled once
   if (lastOptions && lastOptions.terms) return;
 
+  if (runner.isJustInstalled()) {
+    await runner.setUTMs(await detectAttribution());
+  }
+
+  // We always go through uninstall url to measure bots
+  runner.setUninstallUrl();
+
   if (terms) {
     setup.pending && (await setup.pending);
 
-    if (runner.isJustInstalled()) {
-      await runner.setUTMs(await detectAttribution());
-      runner.ping('install');
-    }
+    if (runner.isJustInstalled()) runner.ping('install');
 
-    runner.setUninstallUrl();
     if (feedback) runner.ping('active');
-  } else {
-    chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
 

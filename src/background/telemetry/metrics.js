@@ -199,50 +199,49 @@ export default class Metrics {
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
-      // Toolbar pinned
-      buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1)) +
-      // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
-      buildQueryPair(
-        'zap',
-        !conf.config.hasFlag(FLAG_MODES)
-          ? '-1'
-          : this.storage.modeTouched
-            ? conf.options.mode === 'zap'
-              ? '3'
-              : '2'
-            : conf.options.mode === 'zap'
-              ? '1'
-              : '0',
-      ) +
-      // Allowed Incognito Access
-      buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0') +
       // Onboarding complete
       buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0') +
-      // Page views yesterday (0=none, 1=<10, 2=>=10)
-      buildQueryPair('pv', conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
-      // SERP visits yesterday (0=none, 1=<10, 2=>=10)
-      buildQueryPair('se', this._getSearchSignal());
+      // Feedback state
+      buildQueryPair('hw', conf.options.terms && conf.options.feedback ? '1' : '0');
 
     if (type !== 'uninstall') {
       metrics_url +=
+        // Toolbar pinned
+        buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1)) +
+        // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
+        buildQueryPair(
+          'zap',
+          !conf.config.hasFlag(FLAG_MODES)
+            ? '-1'
+            : this.storage.modeTouched
+              ? conf.options.mode === 'zap'
+                ? '3'
+                : '2'
+              : conf.options.mode === 'zap'
+                ? '1'
+                : '0',
+        ) +
+        // Allowed Incognito Access
+        buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0') +
         // Adblocking state
         buildQueryPair('ab', conf.options.blockAds ? '1' : '0') +
         // Smartblocking state
         buildQueryPair('sm', conf.options.blockAnnoyances ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.options.blockTrackers ? '1' : '0') +
-        // Recency, days since last active daily ping
+        // Page views yesterday (0=none, 1=<10, 2=>=10)
         // prettier-ignore
+        buildQueryPair('pv', conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
+        // SERP visits yesterday (0=none, 1=<10, 2=>=10)
+        buildQueryPair('se', this._getSearchSignal()) +
+        // Recency, days since last active daily ping
         buildQueryPair('rc', this._getRecencyActive(type, frequency).toString()) +
         // Active Velocity
         buildQueryPair('va', this._getVelocityActive(type).toString()) +
         // Engaged Recency
-        // prettier-ignore
-        buildQueryPair('re',this._getRecencyEngaged(type, frequency).toString()) +
+        buildQueryPair('re', this._getRecencyEngaged(type, frequency).toString()) +
         // Engaged Velocity
-        buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
-        // Feedback state
-        buildQueryPair('hw', conf.options.feedback ? '1' : '0');
+        buildQueryPair('ve', this._getVelocityEngaged(type).toString());
     }
 
     if (CAMPAIGN_METRICS.includes(type)) {
