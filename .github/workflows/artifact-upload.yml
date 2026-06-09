@@ -8,6 +8,10 @@ on:
       - synchronize
       - labeled
 
+concurrency:
+  group: artifact-upload-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   artifact-upload:
     if: contains(github.event.pull_request.labels.*.name, 'package')
