@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/chrome": "^0.1.42",
+    "@types/chrome": "^0.1.43",
     "@wdio/browser-runner": "^9.27.2",
     "@wdio/cli": "^9.27.2",
     "@wdio/globals": "^9.27.0",
@@ -42,12 +42,12 @@
     "web-ext": "^10.3.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.90.0",
+    "@duckduckgo/autoconsent": "^14.92.0",
     "@ghostery/adblocker": "^2.18.0",
     "@ghostery/adblocker-content": "^2.17.0",
     "@ghostery/adblocker-extended-selectors": "^2.17.0",
     "@ghostery/adblocker-webextension": "^2.18.0",
-    "@ghostery/config": "^0.0.12",
+    "@ghostery/config": "^0.0.14",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^2.0.4",
     "@github/relative-time-element": "^5.0.0",
