@@ -10,7 +10,7 @@
  */
 
 import { writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import scriptlets from '@ghostery/scriptlets';
 
@@ -20,14 +20,12 @@ const OUTPUT_PATH = fileURLToPath(
   new URL('../src/background/adblocker/scriptlets.generated.js', import.meta.url),
 );
 
-// Synthetic counting scriptlet, only emitted into debug builds. Used by the e2e
-// idempotency spec: each execution bumps `self[args[0]]`, so the test can assert
-// it ran exactly once regardless of how many triggers fired.
+// Debug-build-only counting scriptlet: each run bumps `self[args[0]]`, letting
+// the e2e spec assert exactly-once execution however many triggers fired.
 export const TEST_SCRIPTLET_NAME = '__e2e-inc.js';
 
 const TEST_SCRIPTLET_SOURCE = `function (scriptletGlobals = {}, ...args) {
-  var k = args[0] || '__e2e_runs__';
-  self[k] = (self[k] || 0) + 1;
+  self[args[0]] = (self[args[0]] || 0) + 1;
 }`;
 
 const BANNER = `/* eslint-disable */
@@ -50,9 +48,8 @@ function emitEntry(name, entry) {
 }
 
 export function generateScriptletsModule(source, { includeTestScriptlets = false } = {}) {
-  // The package's index.js expands aliases by pointing multiple keys at the same
-  // object, inserting the canonical name first. Dedupe by object identity to
-  // recover the canonical entries in their original order.
+  // The package expands aliases as extra keys on the same object, canonical name
+  // first; dedupe by identity to recover the canonical entries in order.
   const seen = new Set();
   const blocks = [];
 
@@ -95,15 +92,13 @@ function main() {
 
   writeFileSync(OUTPUT_PATH, module);
 
-  if (!process.argv.includes('--silent')) {
-    console.log(
-      `Generated scriptlets.generated.js (${Object.keys(scriptlets).length} scriptlets${
-        includeTestScriptlets ? ' + e2e test scriptlet' : ''
-      })`,
-    );
-  }
+  console.log(
+    `Generated scriptlets.generated.js (${Object.keys(scriptlets).length} scriptlets${
+      includeTestScriptlets ? ' + e2e test scriptlet' : ''
+    })`,
+  );
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }
