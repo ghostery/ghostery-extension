@@ -29,11 +29,9 @@ function waitForGlobal(key, value, timeoutMsg) {
   });
 }
 
-// On Firefox, `contentScripts.register` only affects future document loads, so
-// the first visit to a freshly (re)registered hostname can miss the scriptlet.
-// Reload until it is active before asserting exact counts. On Chromium
-// (`executeScript` per navigation) the first load already injects, so this
-// returns after a single navigation.
+// Firefox's `contentScripts.register` only affects future document loads, so the
+// first visit after (re)registration can miss the scriptlet; reload until it is
+// active. On Chromium the first load already injects.
 async function ensureScriptletActive(key) {
   await browser.waitUntil(
     async () => {
@@ -45,12 +43,8 @@ async function ensureScriptletActive(key) {
   );
 }
 
-// The synthetic `__e2e-inc` counting scriptlet is emitted into debug builds
-// (scripts/generate-scriptlets.js). It writes to `self[args[0]]`, which is the
-// page global on both platforms: Chromium injects scriptlets into the MAIN
-// world via `executeScript`, and Firefox registers them with `world: 'MAIN'`
-// via `contentScripts.register`. The guard makes the overlap of all triggers
-// idempotent on both.
+// Uses the debug-build-only `__e2e-inc` counting scriptlet (see
+// scripts/generate-scriptlets.js); it bumps `window[args[0]]` in the MAIN world.
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {

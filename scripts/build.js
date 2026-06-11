@@ -127,16 +127,10 @@ execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
 });
 
-// Wrap @ghostery/scriptlets with an in-document idempotency guard.
-// Debug builds also emit a synthetic counting scriptlet for e2e tests.
-execSync(
-  'node scripts/generate-scriptlets.js' +
-    (argv.debug ? ' --debug' : '') +
-    (silent ? ' --silent' : ''),
-  {
-    stdio: silent ? '' : 'inherit',
-  },
-);
+// --debug also emits the synthetic counting scriptlet used by the e2e tests
+execSync('node scripts/generate-scriptlets.js' + (argv.debug ? ' --debug' : ''), {
+  stdio: silent ? '' : 'inherit',
+});
 
 // --- Generate static pages ---
 

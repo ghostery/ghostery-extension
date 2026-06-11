@@ -90,14 +90,29 @@ describe('scriptlet idempotency guard', () => {
   });
 
   it('cannot be suppressed by a page that poisons the registry with a non-Set', () => {
-    // A hostile page that managed to occupy the base with a fake `{ has: () => true }`
-    // must not be able to short-circuit injection: a non-Set is ignored and the
-    // scriptlet runs (we never claim, so it just loses dedup, never injection).
+    // A fake registry occupying the base must not short-circuit injection:
+    // non-Sets are ignored, so dedup is lost but the scriptlet still runs.
     globalThis.self = { __base: { has: () => true, add() {} } };
     const fn = build(COUNTER);
 
     assert.equal(fn({ __guardBase: '__base', __guardToken: 't' }), true);
     assert.equal(globalThis.self.__c, 1);
+  });
+
+  it('fails open when the page nukes the global Set', () => {
+    const fn = build(COUNTER);
+    const globals = { __guardBase: '__base', __guardToken: 't' };
+    const OriginalSet = globalThis.Set;
+    globalThis.Set = undefined;
+
+    try {
+      assert.equal(fn(globals), true);
+      assert.equal(fn(globals), true);
+    } finally {
+      globalThis.Set = OriginalSet;
+    }
+
+    assert.equal(globalThis.self.__c, 2);
   });
 
   it('is unaffected by a decoy registry under a guessed name (random base is load-bearing)', () => {
