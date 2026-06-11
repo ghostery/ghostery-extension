@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getCurrentTab } from '/utils/tabs.js';
+import { getPhantomCount, getPhantomStats } from '/utils/phantom-stats.js';
 
 import Organization from './organization.js';
 
@@ -76,6 +77,31 @@ const TabStats = {
       ...Array(counts.slice(5).reduce((acc, [, count]) => acc + count, 0)).fill('other'),
     ];
   },
+
+  observedCount: ({ trackers }) => trackers.length,
+  withoutCount: ({ domain }) => getPhantomCount(domain),
+  phantomCount: ({ observedCount, withoutCount }) => Math.max(0, withoutCount - observedCount),
+  seenCategories: ({ domain }) => getPhantomStats(domain) || {},
+  observedCategories: ({ groupedTrackers }) =>
+    Object.fromEntries(groupedTrackers.map(([category, list]) => [category, list.length])),
+  phantomCategories: ({ seenCategories, observedCategories }) =>
+    Object.entries(seenCategories).reduce((acc, [category, count]) => {
+      const diff = count - (observedCategories[category] || 0);
+      if (diff > 0) acc[category] = diff;
+      return acc;
+    }, {}),
+  phantomBars: ({
+    observedCount,
+    phantomCount,
+    withoutCount,
+    observedCategories,
+    phantomCategories,
+    seenCategories,
+  }) => [
+    { label: 'on this page', total: observedCount, categories: observedCategories },
+    { label: 'phantom', total: phantomCount, categories: phantomCategories },
+    { label: 'seen', total: withoutCount, categories: seenCategories },
+  ],
 
   [store.connect]: {
     async get() {
