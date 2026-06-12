@@ -37,6 +37,7 @@ export const TRACKERDB_ENGINE = 'trackerdb';
 export const DISTRACTIONS_ENGINE = 'distractions';
 
 const engines = new Map();
+const engineReplaceListeners = new Map();
 
 export function isPersistentEngine(name) {
   return (
@@ -76,6 +77,23 @@ function loadFromMemory(name) {
 
 function saveToMemory(name, engine) {
   engines.set(name, engine);
+
+  const listeners = engineReplaceListeners.get(name);
+  if (listeners) {
+    for (const callback of listeners) callback(engine);
+  }
+}
+
+// The in-memory engine instance is replaced (not mutated) on reload, so holders must re-bind.
+export function onReplace(name, callback) {
+  let listeners = engineReplaceListeners.get(name);
+  if (!listeners) {
+    listeners = new Set();
+    engineReplaceListeners.set(name, listeners);
+  }
+  listeners.add(callback);
+
+  return () => listeners.delete(callback);
 }
 
 const DB_NAME = registerDatabase('engines');
