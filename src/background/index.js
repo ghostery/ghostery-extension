@@ -17,7 +17,7 @@ import './config.js';
 import './adblocker/index.js';
 import './never-consent/index.js';
 import './cookies.js';
-import './custom-filters.js';
+import './custom-filters/index.js';
 import './distractions.js';
 import './element-picker.js';
 import './dnr.js';
