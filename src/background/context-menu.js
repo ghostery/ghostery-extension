@@ -12,7 +12,6 @@
 import { store, msg } from 'hybrids';
 
 import Options, { MODE_ZAP } from '/store/options.js';
-import * as OptionsObserver from '/utils/options-observer.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 import { tabStats } from './stats.js';
 import { openElementPicker } from './element-picker.js';
@@ -35,12 +34,14 @@ const ID_DISABLE_CONTEXT_MENU = 'ghostery:disable-context-menu';
 
 if (chrome.contextMenus) {
   chrome.runtime.onInstalled.addListener(() => {
-    chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.removeAll(async () => {
       chrome.contextMenus.create({
         id: ID_PARENT,
         title: 'Ghostery',
         contexts: ['all'],
         documentUrlPatterns: ['http://*/*', 'https://*/*'],
+        enabled: false,
+        visible: false,
       });
 
       chrome.contextMenus.create({
@@ -157,7 +158,8 @@ if (chrome.contextMenus) {
         contexts: ['all'],
         documentUrlPatterns: ['http://*/*', 'https://*/*'],
       });
-      console.debug('[context-menu] Context menu created...');
+
+      console.info('[context-menu] Context menu created...');
     });
   });
 
@@ -273,8 +275,16 @@ if (chrome.contextMenus) {
   async function updateVisibility(tabId) {
     if (tabId === undefined) return;
 
-    const hostname = tabStats.get(tabId)?.hostname;
     const options = await store.resolve(Options);
+
+    await chrome.contextMenus.update(ID_PARENT, {
+      visible: options.contextMenu,
+      enabled: options.terms,
+    });
+
+    if (!options.contextMenu) return;
+
+    const hostname = tabStats.get(tabId)?.hostname;
     const isZapMode = options.mode === MODE_ZAP;
 
     let isPaused = false;
@@ -310,13 +320,5 @@ if (chrome.contextMenus) {
     if (changeInfo.status === 'complete') {
       updateVisibility(tabId).catch(console.error);
     }
-  });
-
-  OptionsObserver.addListener('terms', (terms) => {
-    chrome.contextMenus.update(ID_PARENT, { enabled: terms }).catch(console.error);
-  });
-
-  OptionsObserver.addListener('contextMenu', (contextMenu) => {
-    chrome.contextMenus.update(ID_PARENT, { visible: contextMenu }).catch(console.error);
   });
 }
