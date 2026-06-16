@@ -253,6 +253,7 @@ async function manage(options) {
 
   if (managed.disableUserControl === true) {
     options.sync = false;
+    options.contextMenu = false;
 
     // Clear out the paused state, to overwrite with the current managed state
     options.paused = {};
