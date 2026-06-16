@@ -132,7 +132,16 @@ export default {
                   data-qa="checkbox:custom-filters:trusted-scriptlets"
                 />
               </ui-input>
-              <ui-text type="body-s">Allow trusted scriptlets</ui-text>
+              <div layout="row gap:0.5 items:center">
+                <ui-text type="body-s">Allow trusted scriptlets</ui-text>
+                <ui-tooltip autohide="0" wrap delay="0" position="bottom" focusable>
+                  <div slot="content" layout="width::250px">
+                    Trusted scriptlets can use powerful rule modifiers — make sure you only use
+                    filter lists from trusted authors.
+                  </div>
+                  <ui-icon name="warning" color="warning-primary" layout="size:2"></ui-icon>
+                </ui-tooltip>
+              </div>
             </label>
 
             <ui-button layout="self:start" onclick="${update}" data-qa="button:custom-filters:save">
@@ -239,13 +248,26 @@ export default {
                                   data-qa="checkbox:custom-filters:remote-url-trusted-scriptlets"
                                 />
                               </ui-input>
-                              <ui-text type="body-s">Allow trusted scriptlets</ui-text>
+                              <div layout="row gap:0.5 items:center">
+                                <ui-text type="body-s">Allow trusted scriptlets</ui-text>
+                                <ui-tooltip autohide="0" wrap delay="0" position="bottom" focusable>
+                                  <div slot="content" layout="width::250px">
+                                    Trusted scriptlets can use powerful rule modifiers — make sure
+                                    you only use filter lists from trusted authors.
+                                  </div>
+                                  <ui-icon
+                                    name="warning"
+                                    color="warning-primary"
+                                    layout="size:2"
+                                  ></ui-icon>
+                                </ui-tooltip>
+                              </div>
                             </label>
                             <ui-action>
                               <button
                                 onclick="${removeRemoteUrl(url)}"
                                 data-qa="button:custom-filters:remove-remote-url"
-                                layout="row gap:0.5 items:center"
+                                layout="row gap:0.5 items:center padding:0.25"
                               >
                                 <ui-icon name="trash" layout="size:2" color="tertiary"></ui-icon>
                                 <ui-text type="body-s">Remove</ui-text>
