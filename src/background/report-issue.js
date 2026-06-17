@@ -10,9 +10,10 @@
  */
 
 import { store } from 'hybrids';
+import { FLAGS } from '@ghostery/config';
 
 import Config from '/store/config.js';
-import Options, { REPORT_OPTIONS } from '/store/options.js';
+import Options, { getReportOptions } from '/store/options.js';
 import Resources from '/store/resources.js';
 
 import getBrowserInfo from '/utils/browser-info.js';
@@ -28,26 +29,24 @@ async function getMetadata(tab) {
   // Add options
   result +=
     `Options:\n` +
-    Object.entries(await store.resolve(Options))
-      .filter(([key]) => REPORT_OPTIONS.includes(key))
-      .reduce((acc, [key, value]) => {
-        // Skip options that are equal to the default value
-        if (key !== 'regionalFilters' && OptionsObserver.isOptionEqual(Options[key], value)) {
-          return acc;
-        }
+    Object.entries(getReportOptions(await store.resolve(Options))).reduce((acc, [key, value]) => {
+      // Skip options that are equal to the default value
+      if (key !== 'regionalFilters' && OptionsObserver.isOptionEqual(Options[key], value)) {
+        return acc;
+      }
 
-        acc += `* ${key}: `;
+      acc += `* ${key}: `;
 
-        if (typeof value === 'object') {
-          acc += Object.entries(value)
-            .map(([k, v]) => `${k}: ${v}`)
-            .join(', ');
-        } else {
-          acc += value;
-        }
+      if (typeof value === 'object') {
+        acc += Object.entries(value)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join(', ');
+      } else {
+        acc += value;
+      }
 
-        return `${acc}\n`;
-      }, '');
+      return `${acc}\n`;
+    }, '');
 
   // Add checksums of resources
   result +=
@@ -65,7 +64,7 @@ async function getMetadata(tab) {
 
   // Add enabled flags
   const flags = Object.entries((await store.resolve(Config)).flags)
-    .filter(([, { enabled }]) => enabled)
+    .filter(([key, { enabled }]) => enabled && FLAGS.includes(key))
     .map(([key]) => `* ${key}`);
 
   result += `\n\nFlags:\n` + (flags.length ? flags.join('\n') : '* None');
@@ -148,7 +147,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           );
         }
 
-        await fetch(SUPPORT_PAGE_URL, {
+        await fetch('http://localhost:3000/report', {
           method: 'POST',
           body: formData,
         }).then((res) => {
