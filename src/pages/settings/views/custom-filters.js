@@ -103,11 +103,10 @@ export default {
         html`
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
-              <ui-text type="headline-xs">Local Filter Rules</ui-text>
               <ui-text type="body-s" color="tertiary">
                 Create your own filter rules to block specific content or bypass blocking on certain
                 sites. The syntax is the same as for regular filter lists, but only a subset of
-                supported rules is allowed. Changes are applied immediately after saving.
+                supported rules is allowed.
               </ui-text>
             </div>
             <ui-input>
@@ -150,7 +149,7 @@ export default {
           </div>
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
-              <ui-text type="headline-xs">Remote Filter Lists</ui-text>
+              <ui-text type="headline-xs">Filter Lists</ui-text>
               <ui-text type="body-s" color="tertiary">
                 Add URLs of filter lists to have them automatically updated and applied. Only lists
                 in the supported format will be added successfully.
@@ -281,25 +280,6 @@ export default {
               `}
             </div>
           </div>
-          ${!!customFilters.errors.length &&
-          html`
-            <div
-              layout="column gap:0.5"
-              data-qa="component:custom-filters:errors"
-              slot="card-footer"
-            >
-              <ui-text type="headline-xs">
-                Compilation errors (${customFilters.errors.length})
-              </ui-text>
-              <ui-text type="body-s" color="danger-secondary">
-                <ol>
-                  ${customFilters.errors.map(
-                    (error) => html`<li layout="margin:bottom:0.5">${error}</li>`,
-                  )}
-                </ol>
-              </ui-text>
-            </div>
-          `}
           <div
             layout="column gap margin:top"
             data-qa="component:custom-filters:usage"
@@ -320,6 +300,25 @@ export default {
               </ui-text>
             </div>
           </div>
+          ${!!customFilters.errors.length &&
+          html`
+            <div
+              layout="column gap:0.5"
+              data-qa="component:custom-filters:errors"
+              slot="card-footer"
+            >
+              <ui-text type="headline-xs">
+                Compilation errors (${customFilters.errors.length})
+              </ui-text>
+              <ui-text type="body-s" color="danger-secondary">
+                <ol>
+                  ${customFilters.errors.map(
+                    (error) => html`<li layout="margin:bottom:0.5">${error}</li>`,
+                  )}
+                </ol>
+              </ui-text>
+            </div>
+          `}
         `}
       </settings-toggle>
     </template>
