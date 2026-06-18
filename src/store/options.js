@@ -52,7 +52,7 @@ const Options = {
   customFilters: {
     enabled: false,
     trustedScriptlets: false,
-    remoteUrls: store.record({ enabled: true, trustedScriptlets: false }),
+    filterLists: store.record({ enabled: true, trustedScriptlets: false }),
   },
 
   // Distractions
@@ -314,7 +314,7 @@ async function manage(options) {
       enabled: true,
       trustedScriptlets: true,
       // Only filters from the managed storage are allowed
-      remoteUrls: {},
+      filterLists: {},
     };
   }
 

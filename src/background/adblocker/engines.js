@@ -20,7 +20,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import asyncSetup from '/utils/setup.js';
 
 import { updateDNRRulesForExceptions } from '../exceptions.js';
-import { updateRemoteUrls } from '../custom-filters/index.js';
+import { updateFilterLists } from '../custom-filters/index.js';
 
 import { contentScripts } from './content-scripts.js';
 
@@ -127,13 +127,13 @@ export async function updateEngines({ cache = true } = {}) {
         await updateDNRRulesForExceptions();
       }
 
-      // Refresh custom filters remote URLs - if any of the lists have changed,
+      // Refresh custom filters remote lists - if any of the lists have changed,
       // the custom engine is rebuilt, so the main engine is reloaded below.
       // The user-triggered update ("Update now") forces a refresh of all lists.
       try {
-        updated = (await updateRemoteUrls({ cache })) || updated;
+        updated = (await updateFilterLists({ cache })) || updated;
       } catch (e) {
-        console.error('[adblocker] Failed to refresh custom filters remote URLs', e);
+        console.error('[adblocker] Failed to refresh custom filters remote lists', e);
       }
 
       // Update timestamp after the engines are updated

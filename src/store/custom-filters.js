@@ -13,12 +13,13 @@ import { store } from 'hybrids';
 
 const CustomFilters = {
   text: '',
-  remoteUrls: store.record({
+  filterLists: store.record({
     text: '',
     name: '',
     lastUpdatedAt: 0,
     expires: 0,
     error: '',
+    errors: [String],
   }),
   networkFilters: 0,
   cosmeticFilters: 0,

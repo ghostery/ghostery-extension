@@ -25,7 +25,7 @@ export default {
 
       const options = await store.resolve(Options);
 
-      if (options.customFilters.remoteUrls[url]) {
+      if (options.customFilters.filterLists[url]) {
         throw msg`The URL is already added`;
       }
 

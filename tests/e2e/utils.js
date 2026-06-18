@@ -173,7 +173,7 @@ export async function setCustomFilters(filters) {
   await getExtensionElement('button:custom-filters:save').click();
   await waitForIdleBackgroundTasks();
 
-  await expect(getExtensionElement('component:custom-filters:result')).toBeDisplayed();
+  await expect(getExtensionElement('component:custom-filters:usage')).toHaveText(/\d/);
 }
 
 export async function disableCustomFilters() {

@@ -25,7 +25,7 @@ import ManagedConfig from '/store/managed-config.js';
 import { setup, reloadMainEngine } from '../adblocker/engines.js';
 
 import { updateDNRRules } from './dnr.js';
-import { fetchRemoteUrl, cleanupRemoteUrls, refreshRemoteUrls } from './remote-urls.js';
+import { fetchFilterList, cleanupFilterLists, refreshFilterLists } from './filter-lists.js';
 
 function isTrustedScriptInject(scriptName) {
   return (
@@ -129,7 +129,7 @@ async function collectFilters(text, { trustedScriptlets }) {
 
 // Rebuilds the custom engine and DNR rules from the user input
 // and cached remote lists, without reloading the main engine
-async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
+async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
@@ -149,19 +149,22 @@ async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
 
   if (userScripts) {
     for (const [url, { enabled, trustedScriptlets: urlTrustedScriptlets }] of Object.entries(
-      remoteUrls,
+      filterLists,
     )) {
-      const text = customFilters.remoteUrls[url]?.text;
+      const text = customFilters.filterLists[url]?.text;
       if (enabled && text) {
-        sources.push({ text, trustedScriptlets: urlTrustedScriptlets });
+        sources.push({ url, text, trustedScriptlets: urlTrustedScriptlets });
       }
     }
   }
 
-  const networkFilters = [];
-  const cosmeticFilters = [];
-  const preprocessors = [];
-  const errors = [];
+  let networkFilters = [];
+  let cosmeticFilters = [];
+  let preprocessors = [];
+  // Errors of the local hand-added rules (primary source)
+  let errors = [];
+  // Compilation errors kept separately for each filter list (keyed by URL)
+  const listErrors = {};
   const filterIdToRawLine = __CHROMIUM__ ? new Map() : null;
 
   for (const source of sources) {
@@ -169,12 +172,14 @@ async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
       trustedScriptlets: source.trustedScriptlets,
     });
 
-    networkFilters.push(...result.networkFilters);
-    cosmeticFilters.push(...result.cosmeticFilters);
-    preprocessors.push(...result.preprocessors);
+    networkFilters = networkFilters.concat(result.networkFilters);
+    cosmeticFilters = cosmeticFilters.concat(result.cosmeticFilters);
+    preprocessors = preprocessors.concat(result.preprocessors);
 
     if (source.primary) {
-      errors.push(...result.errors);
+      errors = errors.concat(result.errors);
+    } else {
+      listErrors[source.url] = result.errors;
     }
 
     if (__CHROMIUM__) {
@@ -216,7 +221,7 @@ async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
     }
 
     if (convertErrors?.length) {
-      errors.push(...convertErrors);
+      errors = errors.concat(convertErrors);
     }
   }
 
@@ -227,6 +232,10 @@ async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
     dnrRules: result.dnrRules?.length || 0,
     userScripts,
     errors,
+    // Update compilation errors for each cached filter list (cleared when none)
+    filterLists: Object.fromEntries(
+      Object.keys(customFilters.filterLists).map((url) => [url, { errors: listErrors[url] || [] }]),
+    ),
   });
 
   console.info('[custom-filters] Engine rebuild completed with result:', result);
@@ -234,12 +243,12 @@ async function rebuildCustomFilters({ trustedScriptlets, remoteUrls }) {
   return result;
 }
 
-// Refreshes remote URLs and rebuilds the custom engine if any of them changed.
-// The main engine is not reloaded - it is up to the caller.
-export async function updateRemoteUrls({ cache = true } = {}) {
-  console.info('[custom-filters] Refreshing remote URLs...');
+// Refreshes remote filter lists and rebuilds the custom engine if any of them
+// changed. The main engine is not reloaded - it is up to the caller.
+export async function updateFilterLists({ cache = true } = {}) {
+  console.info('[custom-filters] Refreshing remote filter lists...');
 
-  if (await refreshRemoteUrls({ cache })) {
+  if (await refreshFilterLists({ cache })) {
     const options = await store.resolve(Options);
     await rebuildCustomFilters(options.customFilters);
 
@@ -300,14 +309,14 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
   // Omit if `trustedScriptlets` is changed, as user then must click "save" button
   if (value.trustedScriptlets !== lastValue.trustedScriptlets) return;
 
-  // Remote URLs are changed
-  if (!OptionsObserver.isOptionEqual(value.remoteUrls, lastValue.remoteUrls)) {
-    // Clean up cached content of removed URLs
-    await cleanupRemoteUrls(value);
+  // Remote filter lists are changed
+  if (!OptionsObserver.isOptionEqual(value.filterLists, lastValue.filterLists)) {
+    // Clean up cached content of removed lists
+    await cleanupFilterLists(value);
 
     if (value.enabled) {
       // Fetch missing lists (e.g. URLs added on another device via sync)
-      await refreshRemoteUrls();
+      await refreshFilterLists();
 
       // Rebuild custom filters and reload the main engine to apply changes
       await rebuildCustomFilters(value);
@@ -357,7 +366,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       return true;
     }
-    case 'customFilters:addRemoteUrl': {
+    case 'customFilters:addFilterList': {
       (async () => {
         try {
           const managedConfig = await store.resolve(ManagedConfig);
@@ -365,7 +374,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             throw new Error('Custom filters are managed by your organization');
           }
 
-          await fetchRemoteUrl(message.url);
+          await fetchFilterList(message.url);
           sendResponse({});
         } catch (e) {
           sendResponse({ error: e.message });
