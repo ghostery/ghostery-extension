@@ -16,6 +16,7 @@ import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
 import DisabledFilters from '/store/disabled-filters.js';
+import FilteringDebug from '/store/filtering-debug.js';
 
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -182,6 +183,12 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
 
+  const debug = store.get(FilteringDebug);
+  const debugReady = store.ready(debug);
+  const cssEnabled = !debugReady || debug.cosmeticsCSS;
+  const scriptletsEnabled = !debugReady || debug.cosmeticsScriptlets;
+  const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
+
   let ancestors = undefined;
   if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
     if (__FIREFOX__) {
@@ -242,7 +249,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptFilters, hostname, details);
+      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details);
     }
 
     if (scriptletsOnly) {
@@ -258,11 +265,11 @@ async function injectCosmetics(details, config) {
       getBaseRules: false,
     });
 
-    if (styles) {
+    if (styles && cssEnabled) {
       injectStyles(styles, details);
     }
 
-    if (extended && extended.length > 0) {
+    if (extended && extended.length > 0 && extendedCSSEnabled) {
       chrome.tabs
         .sendMessage(tabId, { action: 'evaluateExtendedSelectors', extended }, { frameId })
         // In case the frame is destroyed before the message is delivered, we can get an error
@@ -272,7 +279,7 @@ async function injectCosmetics(details, config) {
 
   // Global cosmetic filters (styles only)
   // Execution: bootstrap
-  if (isBootstrap) {
+  if (isBootstrap && cssEnabled) {
     const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,

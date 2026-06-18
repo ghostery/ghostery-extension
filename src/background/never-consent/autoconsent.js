@@ -18,10 +18,17 @@ import { store } from 'hybrids';
 import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
 import Resources from '/store/resources.js';
+import FilteringDebug from '/store/filtering-debug.js';
 import { parseWithCache } from '/utils/request.js';
 
 async function initialize(msg, sender) {
-  const [options, config] = await Promise.all([store.resolve(Options), store.resolve(Config)]);
+  const [options, config, debug] = await Promise.all([
+    store.resolve(Options),
+    store.resolve(Config),
+    store.resolve(FilteringDebug),
+  ]);
+
+  if (!debug.autoconsent) return;
 
   if (options.terms && options.blockAnnoyances) {
     const { tab, frameId } = sender;
