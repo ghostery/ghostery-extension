@@ -23,6 +23,7 @@ export function setupTestPage(port = 6789) {
     '.css': 'text/css',
     '.js': 'application/javascript',
     '.json': 'application/json',
+    '.txt': 'text/plain',
     '.svg': 'image/svg+xml',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',

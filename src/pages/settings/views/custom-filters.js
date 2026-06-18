@@ -18,7 +18,7 @@ import CustomFilters from '/store/custom-filters.js';
 import { CUSTOM_FILTERS_MAX_DYNAMIC_RULES } from '/utils/dnr.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import { asyncAction } from '../utils/actions.js';
-import RemoteUrl from '../store/remote-url.js';
+import FilterList from '../store/filter-list.js';
 
 async function update(host, event) {
   asyncAction(
@@ -30,26 +30,26 @@ async function update(host, event) {
   );
 }
 
-async function addRemoteUrl(host, event) {
+async function addFilterList(host, event) {
   event.preventDefault();
 
-  const { url } = await store.submit(host.remoteUrl);
-  host.remoteUrl = null;
+  const { url } = await store.submit(host.filterList);
+  host.filterList = null;
 
   await store.set(host.options, {
-    customFilters: { remoteUrls: { [url]: { enabled: true } } },
+    customFilters: { filterLists: { [url]: { enabled: true } } },
   });
 }
 
-function removeRemoteUrl(url) {
-  return ({ options }) => store.set(options, { customFilters: { remoteUrls: { [url]: null } } });
+function removeFilterList(url) {
+  return ({ options }) => store.set(options, { customFilters: { filterLists: { [url]: null } } });
 }
 
-function toggleRemoteUrl(url, key) {
+function toggleFilterList(url, key) {
   return ({ options }, event) =>
     store.set(options, {
       customFilters: {
-        remoteUrls: { [url]: { [key]: event.target.checked ?? event.target.value } },
+        filterLists: { [url]: { [key]: event.target.checked ?? event.target.value } },
       },
     });
 }
@@ -64,7 +64,7 @@ export default {
   customFilters: store(CustomFilters),
   input: ({ customFilters }, value) =>
     value ?? ((store.ready(customFilters) && customFilters.text) || ''),
-  remoteUrl: store(RemoteUrl, { draft: true }),
+  filterList: store(FilterList, { draft: true }),
   userScripts: {
     value: isUserScriptsSupported,
     connect: (host, key, invalidate) => {
@@ -74,7 +74,7 @@ export default {
       return () => window.removeEventListener('focus', invalidate);
     },
   },
-  render: ({ options, customFilters, input, remoteUrl, userScripts }) => html`
+  render: ({ options, customFilters, input, filterList, userScripts }) => html`
     <template layout="contents">
       <settings-toggle
         value="${options.customFilters.enabled}"
@@ -103,10 +103,10 @@ export default {
         html`
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
-              <ui-text type="body-s" color="tertiary">
+              <ui-text color="tertiary">
                 Create your own filter rules to block specific content or bypass blocking on certain
                 sites. The syntax is the same as for regular filter lists, but only a subset of
-                supported rules is allowed.
+                supported rules is supported.
               </ui-text>
             </div>
             <ui-input>
@@ -121,6 +121,26 @@ export default {
                 data-qa="input:custom-filters"
               ></textarea>
             </ui-input>
+
+            ${!!customFilters.errors.length &&
+            html`
+              <div
+                layout="column gap:0.5"
+                data-qa="component:custom-filters:errors"
+                slot="card-footer"
+              >
+                <ui-text type="body-s" color="danger-secondary" layout="inline">
+                  <details>
+                    <summary>Errors (${customFilters.errors.length})</summary>
+                    <ol>
+                      ${customFilters.errors.map(
+                        (error) => html`<li layout="margin:bottom:0.5">${error}</li>`,
+                      )}
+                    </ol>
+                  </details>
+                </ui-text>
+              </div>
+            `}
 
             <label layout="row gap items:center ::user-select:none">
               <ui-input>
@@ -149,10 +169,8 @@ export default {
           </div>
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
-              <ui-text type="headline-xs">Filter Lists</ui-text>
-              <ui-text type="body-s" color="tertiary">
-                Add URLs of filter lists to have them automatically updated and applied. Only lists
-                in the supported format will be added successfully.
+              <ui-text color="tertiary">
+                Add URLs of filter lists to have them automatically updated and applied.
               </ui-text>
             </div>
             ${__CHROMIUM__ &&
@@ -166,7 +184,7 @@ export default {
                 <div layout="row gap:0.5 items:center">
                   <ui-icon name="warning" color="warning-secondary" layout="size:2"></ui-icon>
                   <ui-text type="body-s" color="warning-secondary" underline>
-                    To use remote filter lists, enable "Allow user scripts" in your browser's
+                    To use filter lists, enable "Allow user scripts" in your browser's
                     <a
                       href="${`chrome://extensions/?id=${chrome.runtime.id}`}"
                       onclick="${openExtensionSettings}"
@@ -181,70 +199,83 @@ export default {
               inert="${__CHROMIUM__ && !userScripts}"
               style="${{ opacity: __CHROMIUM__ && !userScripts ? 0.5 : undefined }}"
             >
-              <form layout="row gap items:start" data-qa="form:custom-filters:remote-url">
-                <ui-input error="${store.error(remoteUrl)}" layout="grow">
+              <form layout="row gap items:start" data-qa="form:custom-filters:filter-list">
+                <ui-input error="${store.error(filterList)}" layout="grow">
                   <input
                     type="url"
-                    placeholder="${msg`Enter filter list URL`}"
-                    value="${remoteUrl.url}"
-                    oninput="${html.set(remoteUrl, 'url')}"
-                    data-qa="input:custom-filters:remote-url"
+                    placeholder="${msg`Add a filter list URL`}"
+                    value="${filterList.url}"
+                    oninput="${html.set(filterList, 'url')}"
+                    data-qa="input:custom-filters:filter-list"
                   />
                 </ui-input>
-                <ui-button onclick="${addRemoteUrl}">
-                  <button type="submit" data-qa="button:custom-filters:add-remote-url">Add</button>
+                <ui-button onclick="${addFilterList}">
+                  <button type="submit" data-qa="button:custom-filters:add-filter-list">Add</button>
                 </ui-button>
               </form>
-              ${!!Object.keys(options.customFilters.remoteUrls).length &&
+              ${!!Object.keys(options.customFilters.filterLists).length &&
               html`
                 <div
                   layout="column gap:2 margin:top"
-                  data-qa="component:custom-filters:remote-urls"
+                  data-qa="component:custom-filters:filter-lists"
                 >
-                  ${Object.entries(options.customFilters.remoteUrls)
+                  ${Object.entries(options.customFilters.filterLists)
                     .sort()
                     .map(([url, { enabled, trustedScriptlets }]) => {
-                      const name = customFilters.remoteUrls[url]?.name;
+                      const name = customFilters.filterLists[url]?.name;
                       return html`
                         <div layout="column gap">
                           <ui-toggle
                             value="${enabled}"
-                            onchange="${toggleRemoteUrl(url, 'enabled')}"
+                            onchange="${toggleFilterList(url, 'enabled')}"
                           >
-                            <div layout="row gap items:center">
-                              <div layout="column gap:0.5 grow overflow">
-                                <ui-text type="label-s">${name || url}</ui-text>
-                                ${name &&
-                                html`<ui-text type="body-s" color="secondary" ellipsis
-                                  >${url}</ui-text
-                                >`}
-                                <div layout="row gap items:center">
-                                  <ui-text type="body-s" color="tertiary">
-                                    ${customFilters.remoteUrls[url]?.lastUpdatedAt
-                                      ? html`Last updated:
-                                        ${longDateFormatter.format(
-                                          customFilters.remoteUrls[url].lastUpdatedAt,
-                                        )}`
-                                      : html`Pending update...`}
-                                  </ui-text>
-                                </div>
-                                ${!!customFilters.remoteUrls[url]?.error &&
-                                html`
-                                  <ui-text type="body-s" color="danger-secondary">
-                                    Failed update: ${customFilters.remoteUrls[url].error}
-                                  </ui-text>
-                                `}
+                            <div layout="column gap:0.5 grow width:0">
+                              <ui-text type="label-s">${name || url}</ui-text>
+                              ${name &&
+                              html`<ui-text type="body-s" color="secondary" ellipsis>
+                                ${url}
+                              </ui-text>`}
+                              <div layout="row gap items:center">
+                                <ui-text type="body-s" color="tertiary">
+                                  ${customFilters.filterLists[url]?.lastUpdatedAt
+                                    ? html`Last update:
+                                      ${longDateFormatter.format(
+                                        customFilters.filterLists[url].lastUpdatedAt,
+                                      )}`
+                                    : html`Pending update...`}
+                                </ui-text>
                               </div>
+                              ${!!customFilters.filterLists[url]?.error &&
+                              html`
+                                <ui-text type="body-s" color="danger-secondary">
+                                  Failed update: ${customFilters.filterLists[url].error}
+                                </ui-text>
+                              `}
                             </div>
                           </ui-toggle>
+                          ${!!customFilters.filterLists[url]?.errors.length &&
+                          html`
+                            <ui-text type="body-s" color="danger-secondary">
+                              <details>
+                                <summary>
+                                  Errors (${customFilters.filterLists[url].errors.length})
+                                </summary>
+                                <ol>
+                                  ${customFilters.filterLists[url].errors.map(
+                                    (error) => html`<li layout="margin:bottom:0.5">${error}</li>`,
+                                  )}
+                                </ol>
+                              </details>
+                            </ui-text>
+                          `}
                           <div layout="row gap:2 items:center">
                             <label layout="row gap items:center ::user-select:none">
                               <ui-input>
                                 <input
                                   type="checkbox"
                                   checked="${trustedScriptlets}"
-                                  onchange="${toggleRemoteUrl(url, 'trustedScriptlets')}"
-                                  data-qa="checkbox:custom-filters:remote-url-trusted-scriptlets"
+                                  onchange="${toggleFilterList(url, 'trustedScriptlets')}"
+                                  data-qa="checkbox:custom-filters:filter-list-trusted-scriptlets"
                                 />
                               </ui-input>
                               <div layout="row gap:0.5 items:center">
@@ -264,8 +295,8 @@ export default {
                             </label>
                             <ui-action>
                               <button
-                                onclick="${removeRemoteUrl(url)}"
-                                data-qa="button:custom-filters:remove-remote-url"
+                                onclick="${removeFilterList(url)}"
+                                data-qa="button:custom-filters:remove-filter-list"
                                 layout="row gap:0.5 items:center padding:0.25"
                               >
                                 <ui-icon name="trash" layout="size:2" color="tertiary"></ui-icon>
@@ -300,25 +331,6 @@ export default {
               </ui-text>
             </div>
           </div>
-          ${!!customFilters.errors.length &&
-          html`
-            <div
-              layout="column gap:0.5"
-              data-qa="component:custom-filters:errors"
-              slot="card-footer"
-            >
-              <ui-text type="headline-xs">
-                Compilation errors (${customFilters.errors.length})
-              </ui-text>
-              <ui-text type="body-s" color="danger-secondary">
-                <ol>
-                  ${customFilters.errors.map(
-                    (error) => html`<li layout="margin:bottom:0.5">${error}</li>`,
-                  )}
-                </ol>
-              </ui-text>
-            </div>
-          `}
         `}
       </settings-toggle>
     </template>

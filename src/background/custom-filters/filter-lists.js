@@ -71,7 +71,7 @@ export async function fetchListText(url) {
   return text;
 }
 
-export async function fetchRemoteUrl(url) {
+export async function fetchFilterList(url) {
   // On Chromium remote filter lists require the User Scripts API,
   // which is only available when "Allow user scripts" is enabled
   if (__CHROMIUM__ && !isUserScriptsSupported()) {
@@ -83,11 +83,11 @@ export async function fetchRemoteUrl(url) {
   const text = await fetchListText(url);
   const { name, expires } = parseListMetadata(text);
 
-  const { remoteUrls } = await store.resolve(CustomFilters);
-  const changed = remoteUrls[url]?.text !== text;
+  const { filterLists } = await store.resolve(CustomFilters);
+  const changed = filterLists[url]?.text !== text;
 
   await store.set(CustomFilters, {
-    remoteUrls: {
+    filterLists: {
       [url]: { text, name, lastUpdatedAt: Date.now(), expires, error: '' },
     },
   });
@@ -97,39 +97,39 @@ export async function fetchRemoteUrl(url) {
   return changed;
 }
 
-export async function cleanupRemoteUrls(options) {
-  const { remoteUrls } = await store.resolve(CustomFilters);
-  const urls = Object.keys(remoteUrls).filter((url) => !options.remoteUrls[url]);
+export async function cleanupFilterLists(options) {
+  const { filterLists } = await store.resolve(CustomFilters);
+  const urls = Object.keys(filterLists).filter((url) => !options.filterLists[url]);
 
   if (urls.length) {
     await store.set(CustomFilters, {
-      remoteUrls: Object.fromEntries(urls.map((url) => [url, null])),
+      filterLists: Object.fromEntries(urls.map((url) => [url, null])),
     });
   }
 }
 
-export async function refreshRemoteUrls({ cache = true } = {}) {
+export async function refreshFilterLists({ cache = true } = {}) {
   const options = await store.resolve(Options);
   if (!options.customFilters.enabled) return false;
 
-  const { remoteUrls } = await store.resolve(CustomFilters);
+  const { filterLists } = await store.resolve(CustomFilters);
   let changed = false;
 
-  for (const [url, { enabled }] of Object.entries(options.customFilters.remoteUrls)) {
+  for (const [url, { enabled }] of Object.entries(options.customFilters.filterLists)) {
     if (!enabled) continue;
 
-    const cached = remoteUrls[url];
+    const cached = filterLists[url];
     if (cache && cached?.lastUpdatedAt && Date.now() < cached.lastUpdatedAt + cached.expires) {
       continue;
     }
 
     try {
-      changed = (await fetchRemoteUrl(url)) || changed;
+      changed = (await fetchFilterList(url)) || changed;
     } catch (e) {
       console.error(`[custom filters] Failed to fetch the list from "${url}"`, e);
 
       await store.set(CustomFilters, {
-        remoteUrls: { [url]: { error: e.message } },
+        filterLists: { [url]: { error: e.message } },
       });
     }
   }

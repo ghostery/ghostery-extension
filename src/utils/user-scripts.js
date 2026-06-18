@@ -10,6 +10,10 @@
  */
 
 export function isUserScriptsSupported() {
+  // In debug builds (e.g. e2e tests) skip the guard, as the "Allow user
+  // scripts" toggle cannot be enabled programmatically in the test browser.
+  if (__DEBUG__) return true;
+
   try {
     chrome.userScripts.getScripts();
     return true;

@@ -38,6 +38,24 @@ async function setCustomFiltersInput(lines) {
   await waitForIdleBackgroundTasks();
 }
 
+async function addCustomFilterList(url) {
+  await setAdditionalFiltersToggle('custom-filters', true);
+
+  const input = await getExtensionElement('input:custom-filters:filter-list');
+  await input.setValue(url);
+
+  await getExtensionElement('button:custom-filters:add-filter-list').click();
+  await waitForIdleBackgroundTasks();
+}
+
+// Errors are wrapped in a collapsed <details> element - expand it to read the text
+async function getCustomFiltersErrorsText() {
+  const component = await getExtensionElement('component:custom-filters:errors');
+  await component.$('summary').click();
+
+  return component.getText();
+}
+
 describe('Custom Filters', function () {
   before(enableExtension);
   before(async () => {
@@ -149,9 +167,7 @@ describe('Custom Filters', function () {
     it('throws for unsupported regex filter', async function () {
       await setCustomFilters([`/(?>ab)c/`]);
 
-      const errors = await getExtensionElement('component:custom-filters:errors');
-
-      const text = await errors.getText();
+      const text = await getCustomFiltersErrorsText();
       await expect(text).toContain('Filter not supported');
     });
 
@@ -159,8 +175,7 @@ describe('Custom Filters', function () {
       const lines = Array.from({ length: 25001 }, (_, i) => `||f${i}.invalid^`);
       await setCustomFiltersInput(lines);
 
-      const errors = await getExtensionElement('component:custom-filters:errors');
-      const text = await errors.getText();
+      const text = await getCustomFiltersErrorsText();
       await expect(text).toContain('Too many custom network filters');
     });
 
@@ -168,8 +183,7 @@ describe('Custom Filters', function () {
       const lines = Array.from({ length: 501 }, (_, i) => `/rx${i}x.invalid/`);
       await setCustomFiltersInput(lines);
 
-      const errors = await getExtensionElement('component:custom-filters:errors');
-      const text = await errors.getText();
+      const text = await getCustomFiltersErrorsText();
       await expect(text).toContain('Too many custom regex network filters');
     });
   }
@@ -179,5 +193,32 @@ describe('Custom Filters', function () {
 
     await browser.url(PAGE_URL);
     await expect($('h1')).toHaveText('100%, escaped');
+  });
+
+  it('applies a remote filter list', async function () {
+    // The element is visible before the filter list is applied
+    await browser.url(PAGE_URL);
+    await expect($('#filter-list')).toBeDisplayed();
+
+    // Add the filter list served by the local test server
+    await addCustomFilterList(`${PAGE_URL}filter-list.txt`);
+
+    // The list name parsed from its `! Title:` metadata is shown in the UI
+    await expect(getExtensionElement('component:custom-filters:filter-lists')).toHaveText(
+      expect.stringContaining('E2E Test Filter List'),
+    );
+
+    // The cosmetic rule from the list hides the element
+    await browser.url(PAGE_URL);
+    await expect($('#filter-list')).not.toBeDisplayed();
+
+    // Remove the filter list and verify the element is visible again
+    await browser.url('ghostery:settings');
+    await getExtensionElement('button:additional-filters').click();
+    await getExtensionElement('button:custom-filters:remove-filter-list').click();
+    await waitForIdleBackgroundTasks();
+
+    await browser.url(PAGE_URL);
+    await expect($('#filter-list')).toBeDisplayed();
   });
 });
