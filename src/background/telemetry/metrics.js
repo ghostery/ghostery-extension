@@ -127,6 +127,13 @@ export default class Metrics {
     await this.saveStorage(this.storage);
   }
 
+  async setInstallReason(reason) {
+    // Freeze the reason once install has pinged so later update events don't overwrite it.
+    if (this.storage.install_all || this.storage.installReason === reason) return;
+    this.storage.installReason = reason;
+    await this.saveStorage(this.storage);
+  }
+
   /**
    * Prepare data and send telemetry pings.
    * @param {string} type    type of the telemetry ping
@@ -202,7 +209,9 @@ export default class Metrics {
       // Onboarding complete
       buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0') +
       // Feedback state
-      buildQueryPair('hw', conf.options.terms && conf.options.feedback ? '1' : '0');
+      buildQueryPair('hw', conf.options.terms && conf.options.feedback ? '1' : '0') +
+      // 'na' here flags an install ping with no fresh-install lifecycle event
+      buildQueryPair('rsn', this.storage.installReason || 'na');
 
     if (type !== 'uninstall') {
       metrics_url +=
