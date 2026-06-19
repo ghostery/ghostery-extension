@@ -212,6 +212,13 @@ describe('Custom Filters', function () {
     await browser.url(PAGE_URL);
     await expect($('#filter-list')).not.toBeDisplayed();
 
+    // The network rule from the list blocks the tracker request
+    await browser.url('ghostery:panel');
+    await getExtensionElement('button:detailed-view').click();
+    await expect(
+      getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
+    ).toBeDisplayed();
+
     // Remove the filter list and verify the element is visible again
     await browser.url('ghostery:settings');
     await getExtensionElement('button:additional-filters').click();
@@ -220,5 +227,12 @@ describe('Custom Filters', function () {
 
     await browser.url(PAGE_URL);
     await expect($('#filter-list')).toBeDisplayed();
+
+    // The network rule no longer blocks the tracker request
+    await browser.url('ghostery:panel');
+    await getExtensionElement('button:detailed-view').click();
+    await expect(
+      getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
+    ).not.toBeDisplayed();
   });
 });

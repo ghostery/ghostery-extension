@@ -107,20 +107,8 @@ async function collectFilters(text, { trustedScriptlets }) {
     encodeScriptletArguments(filter);
   }
 
-  /**
-   * @type {Map<number, string>}
-   */
-  let filterIdToRawLine = null;
-  if (__CHROMIUM__) {
-    filterIdToRawLine = new Map();
-    for (const filter of networkFilters) {
-      filterIdToRawLine.set(filter.getId(), filter.rawLine);
-    }
-  }
-
   return {
     networkFilters,
-    filterIdToRawLine,
     cosmeticFilters: acceptedCosmeticFilters,
     preprocessors,
     errors,
@@ -139,13 +127,7 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
   // The user input is the primary source - the parse errors are reported back.
   // Remote lists are parsed with their own trusted scriptlets setting,
   // and their unsupported filters are silently skipped.
-  const sources = [
-    {
-      text: customFilters.text,
-      trustedScriptlets,
-      primary: true,
-    },
-  ];
+  const sources = [{ text: customFilters.text, trustedScriptlets, primary: true }];
 
   if (userScripts) {
     for (const [url, { enabled, trustedScriptlets: urlTrustedScriptlets }] of Object.entries(
@@ -161,11 +143,12 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
   let networkFilters = [];
   let cosmeticFilters = [];
   let preprocessors = [];
-  // Errors of the local hand-added rules (primary source)
   let errors = [];
-  // Compilation errors kept separately for each filter list (keyed by URL)
   const listErrors = {};
-  const filterIdToRawLine = __CHROMIUM__ ? new Map() : null;
+
+  // Maps each network filter id to its source (filter list URL, or `undefined`
+  // for the primary input), so conversion errors can be reported in scope.
+  const filterIdToSource = __CHROMIUM__ ? new Map() : null;
 
   for (const source of sources) {
     const result = await collectFilters(source.text, {
@@ -183,8 +166,8 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
     }
 
     if (__CHROMIUM__) {
-      for (const [id, rawLine] of result.filterIdToRawLine) {
-        filterIdToRawLine.set(id, rawLine);
+      for (const filter of result.networkFilters) {
+        filterIdToSource.set(filter.getId(), source.url);
       }
     }
   }
@@ -196,51 +179,60 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
     preprocessors,
   });
 
-  const result = {
-    networkFilters: networkFilters.length,
-    cosmeticFilters: cosmeticFilters.length,
-  };
+  let dnrRules = __CHROMIUM__ ? [] : null;
 
   // Update DNR rules for Chromium
   if (__CHROMIUM__) {
-    const acceptedNetworkFilters = engine
-      .getFilters()
-      .networkFilters.filter(function (filter) {
-        return engine.preprocessors.isFilterExcluded(filter) === false;
-      })
-      .map(function (filter) {
-        return filterIdToRawLine.get(filter.getId());
-      });
-    const { rules, errors: convertErrors } = await convert(acceptedNetworkFilters);
+    // Group the accepted network filters (not excluded by preprocessors) by
+    // their source, so conversion errors can be reported in the proper scope.
+    const rawLinesBySource = new Map();
+    for (const filter of engine.getFilters().networkFilters) {
+      if (engine.preprocessors.isFilterExcluded(filter)) continue;
 
-    try {
-      result.dnrRules = await updateDNRRules(rules);
-    } catch (e) {
-      result.dnrRules = [];
-      errors.push(e.message);
+      const url = filterIdToSource.get(filter.getId());
+      const lines = rawLinesBySource.get(url);
+
+      if (lines) {
+        lines.push(filter.rawLine);
+      } else {
+        rawLinesBySource.set(url, [filter.rawLine]);
+      }
     }
 
-    if (convertErrors?.length) {
-      errors = errors.concat(convertErrors);
+    let rules = [];
+    for (const [url, lines] of rawLinesBySource) {
+      const { rules: sourceRules, errors: convertErrors } = await convert(lines);
+
+      rules = rules.concat(sourceRules);
+
+      if (convertErrors?.length) {
+        if (url === undefined) {
+          errors = errors.concat(convertErrors);
+        } else {
+          listErrors[url] = (listErrors[url] || []).concat(convertErrors);
+        }
+      }
+    }
+
+    try {
+      dnrRules = await updateDNRRules(rules);
+    } catch (e) {
+      errors.push(e.message);
     }
   }
 
-  // Keep the latest results in the model, so they can be displayed in the UI
-  await store.set(CustomFilters, {
-    networkFilters: networkFilters.length,
-    cosmeticFilters: cosmeticFilters.length,
-    dnrRules: result.dnrRules?.length || 0,
-    userScripts,
-    errors,
-    // Update compilation errors for each cached filter list (cleared when none)
+  const values = await store.set(CustomFilters, {
     filterLists: Object.fromEntries(
       Object.keys(customFilters.filterLists).map((url) => [url, { errors: listErrors[url] || [] }]),
     ),
+    networkFilters: engine.getFilters().networkFilters.length,
+    cosmeticFilters: engine.getFilters().cosmeticFilters.length,
+    dnrRules: dnrRules?.length || 0,
+    userScripts,
+    errors,
   });
 
-  console.info('[custom-filters] Engine rebuild completed with result:', result);
-
-  return result;
+  console.info('[custom-filters] Engine rebuild completed with result:', values);
 }
 
 // Refreshes remote filter lists and rebuilds the custom engine if any of them

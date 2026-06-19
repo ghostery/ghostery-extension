@@ -109,6 +109,11 @@ export async function cleanupFilterLists(options) {
 }
 
 export async function refreshFilterLists({ cache = true } = {}) {
+  // On Chromium remote filter lists require the User Scripts API - skip the
+  // refresh when it is not available to avoid pointless fetches and confusing
+  // "Failed update" errors (the UI shows a dedicated warning instead).
+  if (__CHROMIUM__ && !isUserScriptsSupported()) return false;
+
   const options = await store.resolve(Options);
   if (!options.customFilters.enabled) return false;
 
