@@ -147,7 +147,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           );
         }
 
-        await fetch('http://localhost:3000/report', {
+        await fetch(SUPPORT_PAGE_URL, {
           method: 'POST',
           body: formData,
         }).then((res) => {

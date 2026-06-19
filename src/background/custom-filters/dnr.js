@@ -56,6 +56,7 @@ export async function updateDNRRules(dnrRules) {
     });
 
     console.info(`[custom filters] DNR updated with rules: ${dnrRules.length}`);
+    if (__DEBUG__) console.info(`[custom filters] DNR rules: `, dnrRules);
   }
 
   if (removeRuleIds.length || dnrRules.length) {
