@@ -55,19 +55,19 @@ export default {
       --ui-notification-color: var(--color-danger-primary);
     }
 
-    :host([type="review"]) #icon {
-      background: #0D1850;
+    :host([type="image"]) #icon {
       width: 40px;
+      height: 56px;
     }
 
-    :host([type="review"]) img {
-      margin:0;
+    :host([type="image"]) img {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px;
+      width: 40px;
       height: 56px;
+      margin:0;
+      transform: translate(-50%, -50%);
     }
 
     a {

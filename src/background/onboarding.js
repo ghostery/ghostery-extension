@@ -14,13 +14,12 @@ import { FLAG_ONBOARDING_SURVEY } from '@ghostery/config';
 import Config from '/store/config.js';
 import Options from '/store/options.js';
 
+import { SURVEY_POST_ONBOARDING_URL } from '/utils/urls.js';
+
 import { isBrave } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 import { waitForConfigSync } from './config.js';
-
-export const SURVEY_URL =
-  'https://blocksurvey.io/install-survey-postonboarding-R6q0d5dGR9OY6202iNPmGQ?v=o';
 
 OptionsObserver.addListener('onboarding', async (onboarding) => {
   // Onboarding already shown
@@ -51,7 +50,7 @@ OptionsObserver.addListener('onboarding', async (onboarding) => {
           return;
         }
 
-        chrome.tabs.create({ url: SURVEY_URL });
+        chrome.tabs.create({ url: SURVEY_POST_ONBOARDING_URL });
       }
     });
   }
