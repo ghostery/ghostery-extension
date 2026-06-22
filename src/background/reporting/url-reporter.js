@@ -19,22 +19,24 @@ import config from './config.js';
 import StorageLocal from './storage-chrome-local.js';
 import prefixedIndexedDBKeyValueStore from './storage-indexeddb.js';
 
+export const pauseState = {
+  getFilteringMode: () => store.get(Options).mode,
+  isHostnamePaused: (hostname) => !!getPausedDetails(store.get(Options), hostname),
+  connectHostnamePausingEvents: (notify) => {
+    chrome.runtime.onMessage.addListener((msg) => {
+      if (msg.action === 'reporting:updateHostnamePause') {
+        const { hostname, paused } = msg;
+        notify({ hostname, paused });
+      }
+    });
+  },
+};
+
 export default new UrlReporter({
   config: config.url,
   storage: new StorageLocal('reporting'),
   connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
   communication,
 
-  pauseState: {
-    getFilteringMode: () => store.get(Options).mode,
-    isHostnamePaused: (hostname) => !!getPausedDetails(store.get(Options), hostname),
-    connectHostnamePausingEvents: (notify) => {
-      chrome.runtime.onMessage.addListener((msg) => {
-        if (msg.action === 'reporting:updateHostnamePause') {
-          const { hostname, paused } = msg;
-          notify({ hostname, paused });
-        }
-      });
-    },
-  },
+  pauseState,
 });

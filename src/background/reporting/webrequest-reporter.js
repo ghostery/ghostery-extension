@@ -22,7 +22,7 @@ import { updateTabStats } from '../stats.js';
 
 import config from './config.js';
 import communication from './communication.js';
-import urlReporter from './url-reporter.js';
+import urlReporter, { pauseState } from './url-reporter.js';
 
 let webRequestReporter = null;
 
@@ -37,6 +37,7 @@ if (chrome.webRequest) {
       onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
       countryProvider: urlReporter.countryProvider,
       trustedClock: communication.trustedClock,
+      pauseState,
       isRequestAllowed: (state) => {
         const options = store.get(Options);
         const hostname = state.tabUrlParts.hostname;
