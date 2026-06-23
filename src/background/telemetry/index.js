@@ -91,8 +91,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (!runner) return;
 
     await runner.setInstallReason(details.reason);
-    // Refresh so the uninstall URL also carries the reason for churn analysis
-    runner.setUninstallUrl();
   })();
 });
 
