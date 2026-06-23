@@ -20,7 +20,7 @@ function stopPropagation(host, event) {
 
 export default {
   icon: { value: '', reflect: true },
-  error: { value: '', reflect: true },
+  error: { value: undefined, reflect: true },
   render: ({ icon, error }) =>
     html`
       <template layout="column gap:0.5 relative">
@@ -33,7 +33,7 @@ export default {
         <div layout="contents" onchange="${stopPropagation}" oninput="${stopPropagation}">
           <slot></slot>
         </div>
-        ${error && html` <ui-text color="danger-secondary" type="body-s">${error}</ui-text> `}
+        ${error && html`<ui-text color="danger-secondary" type="body-s">${error}</ui-text>`}
       </template>
     `.css`
     :host {
