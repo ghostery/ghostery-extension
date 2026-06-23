@@ -25,7 +25,7 @@ import ManagedConfig from '/store/managed-config.js';
 import { setup, reloadMainEngine } from '../adblocker/engines.js';
 
 import { updateDNRRules } from './dnr.js';
-import { fetchFilterList, cleanupFilterLists, refreshFilterLists } from './filter-lists.js';
+import { cleanupFilterLists, refreshFilterLists } from './filter-lists.js';
 
 function isTrustedScriptInject(scriptName) {
   return (
@@ -353,23 +353,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         } catch (e) {
           await store.set(CustomFilters, { errors: [e.message] }).catch(() => {});
           sendResponse(msg`Failed to update filter rules`);
-        }
-      })();
-
-      return true;
-    }
-    case 'customFilters:addFilterList': {
-      (async () => {
-        try {
-          const managedConfig = await store.resolve(ManagedConfig);
-          if (managedConfig.customFilters.enabled) {
-            throw new Error('Custom filters are managed by your organization');
-          }
-
-          await fetchFilterList(message.url);
-          sendResponse({});
-        } catch (e) {
-          sendResponse({ error: e.message });
         }
       })();
 

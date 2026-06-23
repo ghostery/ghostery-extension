@@ -16,8 +16,10 @@ import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
-const HOUR_IN_MS = 60 * 60 * 1000;
+const MINUTE_IN_MS = 60 * 1000;
+const HOUR_IN_MS = 60 * MINUTE_IN_MS;
 const DAY_IN_MS = 24 * HOUR_IN_MS;
+const WEEK_IN_MS = 7 * DAY_IN_MS;
 
 const DEFAULT_EXPIRES = DAY_IN_MS;
 const MIN_EXPIRES = HOUR_IN_MS;
@@ -34,16 +36,37 @@ export function parseListMetadata(text) {
     if (!match) continue;
 
     if (match[1].toLowerCase() === 'title') {
-      result.name = match[2].trim();
+      // The title is untrusted data, so cap its length and strip control
+      // and format characters to avoid breaking the UI.
+      result.name = match[2]
+        .trim()
+        .slice(0, 100)
+        .replace(/[\p{Cc}\p{Cf}]/gu, '')
+        .trim();
     } else {
-      // Supported formats: "5 days", "12 hours" or a bare number of days
-      const expires = match[2].match(/^(\d+)\s*(day|hour)?/i);
+      // Supported formats: "5 days", "12 hours", "2 weeks", "30 minutes"
+      // or a bare number of days. Unknown units are ignored.
+      const expires = match[2].match(/^(\d+)\s*([a-z]+)?/i);
       if (expires) {
-        const unit = (expires[2] || 'day').toLowerCase() === 'hour' ? HOUR_IN_MS : DAY_IN_MS;
-        result.expires = Math.min(
-          Math.max(parseInt(expires[1], 10) * unit, MIN_EXPIRES),
-          MAX_EXPIRES,
-        );
+        const unit = (expires[2] || 'day').toLowerCase();
+        const UNITS = {
+          minute: MINUTE_IN_MS,
+          hour: HOUR_IN_MS,
+          day: DAY_IN_MS,
+          week: WEEK_IN_MS,
+        };
+
+        // Match the longest unit prefix (e.g. "hours" -> "hour", "d" -> "day")
+        const factor = Object.entries(UNITS).find(
+          ([name]) => name.startsWith(unit) || unit.startsWith(name),
+        )?.[1];
+
+        if (factor) {
+          result.expires = Math.min(
+            Math.max(parseInt(expires[1], 10) * factor, MIN_EXPIRES),
+            MAX_EXPIRES,
+          );
+        }
       }
     }
   }

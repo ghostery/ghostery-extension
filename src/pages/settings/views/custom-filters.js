@@ -220,7 +220,7 @@ export default {
                   data-qa="component:custom-filters:filter-lists"
                 >
                   ${Object.entries(options.customFilters.filterLists)
-                    .sort()
+                    .sort(([a], [b]) => a.localeCompare(b))
                     .map(([url, { enabled, trustedScriptlets }]) => {
                       const name = customFilters.filterLists[url]?.name;
                       return html`
