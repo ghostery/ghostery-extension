@@ -15,19 +15,26 @@ export const PAUSED_RULE_PRIORITY = 10_000_000;
 export const PAUSED_ID_RANGE = { start: 1, end: 1_000_000 };
 
 export const CUSTOM_FILTERS_ID_RANGE = { start: 1_000_000, end: 2_000_000 };
+
 // Reserved budget for non-custom-filter dynamic rules (fixes, exceptions,
 // distractions, redirect protection, paused, GPC, etc.). Fixes alone is the
 // largest contributor (~2000 rules).
 // Maximum number of dynamic rules custom filters may add.
-export const CUSTOM_FILTERS_MAX_DYNAMIC_RULES =
-  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_DYNAMIC_RULES - 5_000;
+const MAX_NUMBER_OF_DYNAMIC_RULES =
+  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_DYNAMIC_RULES ||
+  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES;
+
+export const CUSTOM_FILTERS_MAX_DYNAMIC_RULES = MAX_NUMBER_OF_DYNAMIC_RULES - 5_000;
 
 // Reserved budget for regex rules used by static rulesets and dynamic fixes.
 // The dynamic fixes ruleset mirrors the static one, so they are counted once.
 // Current maximum across all enabled static rulesets is ~370 regex rules.
 // Maximum number of regex rules custom filters may add.
-export const CUSTOM_FILTERS_MAX_REGEX_RULES =
-  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_REGEX_RULES - 500;
+
+const MAX_NUMBER_OF_REGEX_RULES =
+  globalThis.chrome?.declarativeNetRequest?.MAX_NUMBER_OF_REGEX_RULES || Infinity;
+
+export const CUSTOM_FILTERS_MAX_REGEX_RULES = MAX_NUMBER_OF_REGEX_RULES - 500;
 
 export const EXCEPTIONS_RULE_PRIORITY = 2_000_000;
 export const EXCEPTIONS_ID_RANGE = { start: 2_000_000, end: 3_000_000 };
