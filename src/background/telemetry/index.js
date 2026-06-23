@@ -85,6 +85,15 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
   }
 });
 
+chrome.runtime.onInstalled.addListener((details) => {
+  (async () => {
+    setup.pending && (await setup.pending);
+    if (!runner) return;
+
+    await runner.setInstallReason(details.reason);
+  })();
+});
+
 export async function recordSerpVisit() {
   setup.pending && (await setup.pending);
   if (!runner) return;

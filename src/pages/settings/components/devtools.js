@@ -215,6 +215,12 @@ export default {
                           <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
                         </ui-text>
                         <ui-text type="body-m" color="secondary">
+                          <ui-text type="label-m">Install reason:</ui-text>
+                          <span data-qa="text:install-reason"
+                            >${storage.installReason || 'N/A'}</span
+                          >
+                        </ui-text>
+                        <ui-text type="body-m" color="secondary">
                           <ui-text type="label-m">Source:</ui-text>
                           <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
                         </ui-text>
