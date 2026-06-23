@@ -19,7 +19,7 @@ export default {
     async set(_, values) {
       const url = values.url.trim();
 
-      if (!/^https?:/.test(url)) {
+      if (!/^https?:/.test(url) || !URL.canParse(url)) {
         throw msg`The URL is invalid`;
       }
 
