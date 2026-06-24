@@ -22,8 +22,7 @@ import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
 import { checkStorage } from '/utils/storage.js';
 import * as telemetry from '/utils/telemetry.js';
-
-import { SURVEY_URL } from './onboarding.js';
+import { SURVEY_POST_ONBOARDING_URL } from '/utils/urls.js';
 
 export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
   const options = await store.resolve(Options);
@@ -124,7 +123,7 @@ if (
     }
 
     // Opened page is the onboarding survey
-    if (details.url === SURVEY_URL) return;
+    if (details.url === SURVEY_POST_ONBOARDING_URL) return;
 
     openNotification({
       id: 'pin-it',
