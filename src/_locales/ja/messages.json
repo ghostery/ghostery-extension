@@ -979,6 +979,9 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "1日間、グローバルにプライバシー保護を一時停止します。"
   },
+  "take_the_2_minute_survey": {
+    "message": "2分間のアンケートに回答する"
+  },
   "telemetry": {
     "message": "テレメトリー",
     "description": "Tracker category name"
@@ -1150,6 +1153,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"
+  },
+  "we_re_considering_a_new_way_to_support_youtube_creators_while_keeping_your_web_ad_free__should_we_build_it_": {
+    "message": "ウェブを広告なしに保ちながら、YouTubeクリエイターを支援する新しい方法を検討しています。実現すべきでしょうか？"
   },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Ghosteryを気に入っていただきありがとうございます！他の人にも見つけてもらえるように手助けしてください。ほんの一瞬でできます。"
