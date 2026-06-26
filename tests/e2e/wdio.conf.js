@@ -112,8 +112,11 @@ export const config = {
   capabilities: [
     {
       browserName: 'firefox',
-      browserVersion: 'stable',
+      browserVersion: process.env.FIREFOX_VERSION || 'stable',
       cacheDir: '.wdio',
+      // Firefox builds below ~129 lack the WebDriver BiDi events WDIO subscribes
+      // to, so drive the pinned (older) versions over classic WebDriver instead.
+      'wdio:enforceWebDriverClassic': Boolean(process.env.FIREFOX_VERSION),
       'moz:firefoxOptions': {
         args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
         prefs: {
