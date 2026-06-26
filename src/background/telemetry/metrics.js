@@ -206,6 +206,19 @@ export default class Metrics {
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
+      // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
+      buildQueryPair(
+        'zap',
+        !conf.config.hasFlag(FLAG_MODES)
+          ? '-1'
+          : this.storage.modeTouched
+            ? conf.options.mode === 'zap'
+              ? '3'
+              : '2'
+            : conf.options.mode === 'zap'
+              ? '1'
+              : '0',
+      ) +
       // Onboarding complete
       buildQueryPair('oc', this.storage.install_complete_all ? '1' : '0') +
       // Feedback state
@@ -217,19 +230,6 @@ export default class Metrics {
       metrics_url +=
         // Toolbar pinned
         buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1)) +
-        // ZAP mode (-1 = flag disabled, 0 = default, 1 = zap, 2 = default + touched, 3 = zap + touched)
-        buildQueryPair(
-          'zap',
-          !conf.config.hasFlag(FLAG_MODES)
-            ? '-1'
-            : this.storage.modeTouched
-              ? conf.options.mode === 'zap'
-                ? '3'
-                : '2'
-              : conf.options.mode === 'zap'
-                ? '1'
-                : '0',
-        ) +
         // Allowed Incognito Access
         buildQueryPair('aia', conf.isAllowedIncognitoAccess ? '1' : '0') +
         // Adblocking state
