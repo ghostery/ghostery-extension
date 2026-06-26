@@ -51,7 +51,6 @@ async function initialize(msg, sender) {
           config: {
             autoAction: options.autoconsent.autoAction,
             enableCosmeticRules: false,
-            enableFilterList: false,
           },
         },
         { frameId },
