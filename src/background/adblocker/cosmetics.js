@@ -47,7 +47,7 @@ const scriptletGlobals = {
 };
 
 function injectScriptlets(filters, hostname, details) {
-  let contentScript = '';
+  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -69,10 +69,12 @@ function injectScriptlets(filters, hostname, details) {
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     if (__FIREFOX__) {
+      let code = '';
       if (filter.hasSubframeConstraint()) {
-        contentScript += `window.parent!==window&&`;
+        code += `window.parent!==window&&`;
       }
-      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      scriptletsByWorld[declaredWorld] += code;
       continue;
     }
 
@@ -99,9 +101,7 @@ function injectScriptlets(filters, hostname, details) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
-      contentScripts.register(hostname, contentScript);
-    } else {
-      // do nothing if already registered
+      contentScripts.register(hostname, scriptletsByWorld);
     }
   }
 }

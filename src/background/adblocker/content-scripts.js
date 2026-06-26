@@ -9,38 +9,59 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+function registerWorld(hostname, world, code) {
+  const options = {
+    js: [{ code }],
+    allFrames: true,
+    matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+    matchAboutBlank: true,
+    matchOriginAsFallback: true,
+    runAt: 'document_start',
+  };
+
+  // `world: 'MAIN'` is only honored on Firefox 128+; omitting `world` runs in the
+  // isolated content-script world, which is supported on every Firefox version.
+  if (world === 'MAIN') {
+    options.world = 'MAIN';
+  }
+
+  return browser.contentScripts.register(options);
+}
+
 export const contentScripts = (() => {
   const map = new Map();
   return {
-    async register(hostname, code) {
+    async register(hostname, scripts) {
       this.unregister(hostname);
-      try {
-        const contentScript = await browser.contentScripts.register({
-          js: [
-            {
-              code,
-            },
-          ],
-          allFrames: true,
-          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
-          matchAboutBlank: true,
-          matchOriginAsFallback: true,
-          runAt: 'document_start',
-          world: 'MAIN',
-        });
-        map.set(hostname, contentScript);
-      } catch (e) {
-        console.warn(e);
-        this.unregister(hostname);
+
+      const handles = {};
+
+      // Register the isolated world first so that a MAIN-world rejection on
+      // Firefox < 128 cannot prevent the isolated scriptlets from registering.
+      for (const world of ['ISOLATED', 'MAIN']) {
+        const code = scripts[world];
+        if (!code) continue;
+
+        try {
+          handles[world] = await registerWorld(hostname, world, code);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      if (Object.keys(handles).length) {
+        map.set(hostname, handles);
       }
     },
     isRegistered(hostname) {
       return map.has(hostname);
     },
     unregister(hostname) {
-      const contentScript = map.get(hostname);
-      if (contentScript) {
-        contentScript.unregister();
+      const handles = map.get(hostname);
+      if (handles) {
+        for (const handle of Object.values(handles)) {
+          handle.unregister();
+        }
         map.delete(hostname);
       }
     },
