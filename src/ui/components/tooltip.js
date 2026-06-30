@@ -39,6 +39,7 @@ export default {
   position: 'top', // top, bottom
   delay: 1,
   inline: false,
+  focusable: false,
   show: {
     value: false,
     connect: (host) => () => clearTimeout(timeouts.get(host)),
@@ -77,16 +78,20 @@ export default {
       }
     },
   },
-  render: ({ position, inline }) => html`
-    <template layout="contents">
+  render: ({ position, inline, focusable }) => html`
+    <template layout="grid">
       <div
+        id="container"
         ontouchstart="${toggle(true)}"
         onmouseenter="${toggle(true)}"
         onmouseleave="${toggle(false)}"
+        onfocusin="${toggle(true)}"
+        onfocusout="${toggle(false)}"
         onclick="${toggle(false)}"
         class="${{ inline }}"
         layout="block relative"
         layout.inline="block inline"
+        tabindex="${focusable ? '0' : '-1'}"
       >
         <slot></slot>
         <div
@@ -104,6 +109,12 @@ export default {
       </div>
     </template>
   `.css`
+    #container:focus-visible {
+      outline: 2px solid var(--border-brand-solid);
+      outline-offset: 1px;
+      border-radius: 8px;
+    }
+
     @media (hover: none) {
       #tooltip { display: none; }
     }
