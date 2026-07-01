@@ -15,6 +15,7 @@ import { ACTION_DISABLE_ANTITRACKING_MODIFICATION } from '@ghostery/config';
 
 import Options, { getPausedDetails } from '/store/options.js';
 import Config from '/store/config.js';
+import FilteringDebug from '/store/filtering-debug.js';
 
 import Request from '/utils/request.js';
 
@@ -41,6 +42,11 @@ if (chrome.webRequest) {
       isRequestAllowed: (state) => {
         const options = store.get(Options);
         const hostname = state.tabUrlParts.hostname;
+
+        const debug = store.get(FilteringDebug);
+        if (store.ready(debug) && !debug.antitracking) {
+          return true;
+        }
 
         return (
           !options.blockTrackers ||

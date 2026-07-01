@@ -14,6 +14,7 @@ import { filterRequestHTML, updateResponseHeadersWithCSP } from '@ghostery/adblo
 
 import Options, { getPausedDetails } from '/store/options.js';
 import DisabledFilters from '/store/disabled-filters.js';
+import FilteringDebug from '/store/filtering-debug.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
@@ -51,6 +52,12 @@ if (__FIREFOX__) {
   }
 
   function isMatchableRequest(details, request) {
+    // Network filtering disabled for the session (dev tools)
+    const debug = store.get(FilteringDebug);
+    if (store.ready(debug) && !debug.network) {
+      return false;
+    }
+
     // Extension context request
     if (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
