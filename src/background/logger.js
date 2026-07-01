@@ -65,7 +65,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
       setup.pending && (await setup.pending);
 
       const organizations = await getOrganizations();
-      const engine = engines.get(engines.MAIN_ENGINE);
+      let engine = engines.get(engines.MAIN_ENGINE);
 
       const logFilterMatched = function (
         { filter, exception: matchedException },
@@ -120,11 +120,18 @@ chrome.runtime.onConnect.addListener(async (port) => {
 
       engine.on('filter-matched', logFilterMatched);
 
+      const offReplace = engines.onReplace(engines.MAIN_ENGINE, (nextEngine) => {
+        engine.unsubscribe('filter-matched', logFilterMatched);
+        engine = nextEngine;
+        engine.on('filter-matched', logFilterMatched);
+      });
+
       port.onDisconnect.addListener(() => {
         ports.delete(port);
         console.log('[logger] Disconnected logger with id', port.sender.tab.id);
 
         if (ports.size === 0) {
+          offReplace();
           engine.unsubscribe('filter-matched', logFilterMatched);
         }
       });
