@@ -23,7 +23,7 @@ import { parseWithCache } from '/utils/request.js';
 import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
-import { contentScripts } from './content-scripts.js';
+import { contentScripts, EXECUTION_WORLD } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -47,7 +47,7 @@ const scriptletGlobals = {
 };
 
 function injectScriptlets(filters, hostname, details) {
-  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  const scriptletsByWorld = { [EXECUTION_WORLD.MAIN]: '', [EXECUTION_WORLD.ISOLATED]: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -66,7 +66,10 @@ function injectScriptlets(filters, hostname, details) {
 
     const func = scriptlet.func;
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
-    const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
+    const declaredWorld =
+      scriptlet.world === EXECUTION_WORLD.ISOLATED
+        ? EXECUTION_WORLD.ISOLATED
+        : EXECUTION_WORLD.MAIN;
 
     if (__FIREFOX__) {
       let code = '';
@@ -81,10 +84,7 @@ function injectScriptlets(filters, hostname, details) {
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
-        world:
-          declaredWorld === 'ISOLATED'
-            ? (chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED')
-            : (chrome.scripting.ExecutionWorld?.MAIN ?? 'MAIN'),
+        world: chrome.scripting.ExecutionWorld?.[declaredWorld] ?? declaredWorld,
         target: resolveInjectionTarget(details),
         func,
         args,

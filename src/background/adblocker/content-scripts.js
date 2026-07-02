@@ -9,9 +9,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// `contentScripts.register` honors the `world` option only on Firefox 128+, while
-// the extension supports 115+. The content script therefore runs in the isolated
-// world and reaches the page's MAIN world by injecting a <script> element.
+export const EXECUTION_WORLD = {
+  MAIN: 'MAIN',
+  ISOLATED: 'ISOLATED',
+};
+
+// Neither `contentScripts.register` nor `scripting.executeScript` honors the MAIN
+// `world` before Firefox 128, while the extension supports 115+. The content script
+// therefore runs in the isolated world and reaches the page's MAIN world by
+// injecting a <script> element.
 function injectMainWorldScriptlets(details) {
   const doc = document;
   const { sentinel, scriptlets } = details;
@@ -31,34 +37,36 @@ function injectMainWorldScriptlets(details) {
       return;
     }
 
-    const blob = new self.Blob([scriptlets], { type: 'text/javascript; charset=utf-8' });
-    const url = self.URL.createObjectURL(blob);
+    const blob = new Blob([scriptlets], { type: 'text/javascript; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
     const fallback = doc.createElement('script');
     fallback.async = false;
     fallback.src = url;
     parent.appendChild(fallback);
     fallback.remove();
-    self.URL.revokeObjectURL(url);
+    URL.revokeObjectURL(url);
   } catch {
     // Injecting into the page is best-effort; ignore failures (e.g. a torn-down frame).
   }
 }
 
-function buildContentScript({ MAIN, ISOLATED }) {
+function buildContentScript(scriptletsByWorld) {
   let code = '';
 
   // MAIN-world scriptlets are bootstrapped into the page; ISOLATED-world ones run
   // directly in this content script's own (isolated) world.
-  if (MAIN) {
+  const main = scriptletsByWorld[EXECUTION_WORLD.MAIN];
+  if (main) {
     const details = {
       sentinel: `ghostery_${Math.random().toString(36).slice(2)}`,
-      scriptlets: MAIN,
+      scriptlets: main,
     };
     code += `(${injectMainWorldScriptlets.toString()})(${JSON.stringify(details)});\n`;
   }
 
-  if (ISOLATED) {
-    code += ISOLATED;
+  const isolated = scriptletsByWorld[EXECUTION_WORLD.ISOLATED];
+  if (isolated) {
+    code += isolated;
   }
 
   return code;
