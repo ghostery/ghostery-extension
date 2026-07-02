@@ -99,6 +99,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version-file: '.tool-versions'
+      # Firefox < 121 cannot start without libdbus-glib, which Ubuntu 24.04 no longer ships.
+      - name: Install Firefox host dependencies
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libdbus-glib-1-2
       - name: Install dependencies
         run: npm ci
       - name: Run scriptlet execution-world tests
