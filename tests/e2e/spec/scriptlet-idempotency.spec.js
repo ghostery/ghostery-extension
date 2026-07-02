@@ -22,24 +22,22 @@ function readGlobal(key) {
   return browser.execute((k) => window[k], key);
 }
 
-function waitForGlobal(key, timeoutMsg) {
+function waitForGlobal(key) {
   return browser.waitUntil(async () => (await readGlobal(key)) === 1, {
     timeout: 10000,
-    timeoutMsg,
+    timeoutMsg: `scriptlet "${key}" did not run exactly once`,
   });
 }
 
-async function expectRanExactlyOnce(key, timeoutMsg) {
-  await waitForGlobal(key, timeoutMsg);
+async function expectRanExactlyOnce(key) {
+  await waitForGlobal(key);
 
   // Give any further overlapping triggers a chance to (incorrectly) run again.
   await browser.pause(500);
   await expect(await readGlobal(key)).toBe(1);
 }
 
-// Firefox's `contentScripts.register` only affects future document loads, so the
-// first visit after (re)registration can miss the scriptlet; reload until it is
-// active. On Chromium the first load already injects.
+// Firefox's `contentScripts.register` only affects future document loads; reload until active.
 async function ensureScriptletActive(key) {
   await browser.waitUntil(
     async () => {
@@ -51,8 +49,7 @@ async function ensureScriptletActive(key) {
   );
 }
 
-// Uses the debug-build-only `__e2e-inc` counting scriptlet (see
-// scripts/utils/scriptlets-module.js); it bumps `window[args[0]]` in the MAIN world.
+// `__e2e-inc` is the debug-build-only counting scriptlet from scripts/utils/scriptlets-module.js.
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
@@ -62,28 +59,20 @@ describe('Scriptlet injection idempotency', function () {
 
   after(disableCustomFilters);
 
-  it('injects a scriptlet exactly once under natural triggers', async function () {
+  it('injects a scriptlet exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
-
-    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once');
-  });
-
-  it('re-runs once on reload (self-heals with the new document)', async function () {
-    await browser.url(PAGE_URL);
-    await waitForGlobal('counter', 'scriptlet did not run on first load');
+    await expectRanExactlyOnce('counter');
 
     await browser.refresh();
-
-    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once after reload');
+    await expectRanExactlyOnce('counter');
   });
 
   it('keeps a separate registry per frame', async function () {
     await browser.url(PAGE_URL);
-    await waitForGlobal('counter', 'scriptlet did not run in the main frame');
+    await waitForGlobal('counter');
 
     await switchFrame($('#iframe-static'));
-
-    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once in the sub-frame');
+    await expectRanExactlyOnce('counter');
 
     await browser.switchFrame(null);
   });
@@ -96,8 +85,7 @@ describe('Scriptlet injection idempotency', function () {
     await ensureScriptletActive('a');
 
     await browser.url(PAGE_URL);
-
-    await expectRanExactlyOnce('a', 'scriptlet with arg "a" did not run once');
-    await expectRanExactlyOnce('b', 'scriptlet with arg "b" did not run once');
+    await expectRanExactlyOnce('a');
+    await expectRanExactlyOnce('b');
   });
 });

@@ -50,9 +50,7 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Property name for the per-document registry the wrapped scriptlets keep on the
-// page global. Random so a page cannot pre-seed it; per-hostname so the
-// page-readable name is not a cross-site identifier.
+// Random so a page cannot pre-seed the registry; per-hostname so its name is not a cross-site identifier.
 const guardBases = new Map();
 function getGuardBase(hostname) {
   let base = guardBases.get(hostname);
@@ -94,7 +92,6 @@ function injectScriptlets(filters, hostname, details) {
 
     const func = scriptlet.func;
 
-    // Dedup identity: the same (name, args) from overlapping triggers runs once.
     const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
     const args = [
       getGuardBase(hostname),
