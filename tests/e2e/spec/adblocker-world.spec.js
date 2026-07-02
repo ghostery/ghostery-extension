@@ -46,8 +46,7 @@ describe('Adblocker Execution World', function () {
 
   it('runs MAIN and ISOLATED scriptlets together on the same page', async function () {
     // `set-attr` is ISOLATED (must survive the page's setAttribute override) and
-    // `set` is MAIN (must define a page-visible global). Both target one hostname,
-    // so both worlds have to be injected and applied on a single load.
+    // `set` is MAIN (must define a page-visible global).
     await setCustomFilters([
       `${PAGE_DOMAIN}##+js(set-attr, #world-target, data-world, true)`,
       `${PAGE_DOMAIN}##+js(set, mainWorldProbe, true)`,

@@ -55,8 +55,6 @@ function injectMainWorldScriptlets(details) {
 function buildContentScript(scriptletsByWorld) {
   let code = '';
 
-  // MAIN-world scriptlets are bootstrapped into the page; ISOLATED-world ones run
-  // directly in this content script's own (isolated) world.
   const main = scriptletsByWorld[EXECUTION_WORLD.MAIN];
   if (main) {
     const details = {
