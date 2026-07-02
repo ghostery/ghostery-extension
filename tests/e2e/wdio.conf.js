@@ -81,6 +81,11 @@ export function buildForChrome() {
   }
 }
 
+if (process.env.FIREFOX_VERSION) {
+  // installAddOn breaks with geckodriver 0.37+, which sends base64 add-ons straight to Marionette — Firefox 115 only accepts a file path
+  process.env.GECKODRIVER_VERSION ||= '0.36.0';
+}
+
 export const config = {
   specs: [
     // Main features
