@@ -24,7 +24,7 @@ import { parseWithCache } from '/utils/request.js';
 import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
-import { contentScripts } from './content-scripts.js';
+import { contentScripts, EXECUTION_WORLD } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -48,7 +48,17 @@ const scriptletGlobals = {
 };
 
 function injectScriptlets(filters, hostname, details) {
-  let contentScript = '';
+  if (__FIREFOX__) {
+    if (filters.length === 0) {
+      contentScripts.unregister(hostname);
+      return;
+    }
+    if (contentScripts.isRegistered(hostname)) {
+      return;
+    }
+  }
+
+  const scriptletsByWorld = { [EXECUTION_WORLD.MAIN]: '', [EXECUTION_WORLD.ISOLATED]: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -67,19 +77,25 @@ function injectScriptlets(filters, hostname, details) {
 
     const func = scriptlet.func;
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const declaredWorld =
+      scriptlet.world === EXECUTION_WORLD.ISOLATED
+        ? EXECUTION_WORLD.ISOLATED
+        : EXECUTION_WORLD.MAIN;
 
     if (__FIREFOX__) {
+      let code = '';
       if (filter.hasSubframeConstraint()) {
-        contentScript += `window.parent!==window&&`;
+        code += `window.parent!==window&&`;
       }
-      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      scriptletsByWorld[declaredWorld] += code;
       continue;
     }
 
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
-        world: chrome.scripting.ExecutionWorld?.MAIN ?? (__FIREFOX__ ? undefined : 'MAIN'),
+        world: chrome.scripting.ExecutionWorld?.[declaredWorld] ?? declaredWorld,
         target: resolveInjectionTarget(details),
         func,
         args,
@@ -93,13 +109,7 @@ function injectScriptlets(filters, hostname, details) {
   }
 
   if (__FIREFOX__) {
-    if (filters.length === 0) {
-      contentScripts.unregister(hostname);
-    } else if (!contentScripts.isRegistered(hostname)) {
-      contentScripts.register(hostname, contentScript);
-    } else {
-      // do nothing if already registered
-    }
+    contentScripts.register(hostname, scriptletsByWorld);
   }
 }
 
