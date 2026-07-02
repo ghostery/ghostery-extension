@@ -22,6 +22,8 @@ function evaluateModule(source) {
   return import('data:text/javascript,' + encodeURIComponent(source));
 }
 
+const FIXTURE = { 'noop.js': { aliases: [], func: function () {} } };
+
 const generatedPromise = evaluateModule(generateScriptletsModule(scriptlets));
 
 describe('generate-scriptlets', () => {
@@ -49,7 +51,7 @@ describe('generate-scriptlets', () => {
 
   it('includes the synthetic test scriptlet only in debug builds', async () => {
     const { default: debugBuild } = await evaluateModule(
-      generateScriptletsModule(scriptlets, { debug: true }),
+      generateScriptletsModule(FIXTURE, { debug: true }),
     );
     const { default: releaseBuild } = await generatedPromise;
 
@@ -65,10 +67,8 @@ describe('generate-scriptlets', () => {
   });
 
   it('emits per-scriptlet error logging only in debug builds', () => {
-    const fixture = { 'noop.js': { aliases: [], func: function () {} } };
-
-    const debugModule = generateScriptletsModule(fixture, { debug: true });
-    const releaseModule = generateScriptletsModule(fixture);
+    const debugModule = generateScriptletsModule(FIXTURE, { debug: true });
+    const releaseModule = generateScriptletsModule(FIXTURE);
 
     assert.match(debugModule, /console\.error\("\[adblocker\] noop\.js failed:", e\)/);
     assert.doesNotMatch(releaseModule, /console\.error/);

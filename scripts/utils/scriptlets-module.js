@@ -11,8 +11,7 @@
 
 import { wrapScriptletSource } from './wrap-scriptlet.js';
 
-// Debug-build-only counting scriptlet: each run bumps `self[args[0]]`, letting
-// the e2e spec assert exactly-once execution however many triggers fired.
+// Lets the e2e suite count executions and assert exactly-once injection.
 export const TEST_SCRIPTLET_NAME = '__e2e-inc.js';
 
 const TEST_SCRIPTLET = {
@@ -41,8 +40,7 @@ function emitEntry(name, entry, debug) {
 }
 
 export function generateScriptletsModule(source, { debug = false } = {}) {
-  // The package expands aliases as extra keys on the same object, canonical name
-  // first; dedupe by identity to recover the canonical entries in order.
+  // The package repeats each entry under its aliases, canonical name first; dedupe by identity.
   const seen = new Set();
   const entries = [];
   for (const [name, entry] of Object.entries(source)) {

@@ -9,16 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Wraps a scriptlet's source so it runs at most once per (scriptlet, args) per
-// document, tracked as tokens in a locked Set on `self[__guardBase]`. The guard
-// channel is two wrapper-owned leading parameters, so the upstream scriptlet
-// still receives its original arguments untouched. Tokens are claimed only
-// after the original returns, so a throwing injection is retried by the next
-// trigger. In-world injections run as serialized run-to-completion tasks, so
-// check-then-claim cannot interleave; on guard failure (hostile or frozen
-// global) the original still runs, just unguarded.
-// Scriptlet errors never escape the wrapper, so one broken scriptlet cannot stop
-// the others bundled in the same content script; debug builds log them.
+// Fail open: a broken guard must never suppress the scriptlet. Tokens are claimed
+// only after the original returns (throwing injections retry); in-world execution
+// is run-to-completion, so check-then-claim cannot interleave.
 export function wrapScriptletSource(originalSource, { debug = false, name = 'scriptlet' } = {}) {
   const logError = debug
     ? `\n    console.error(${JSON.stringify(`[adblocker] ${name} failed:`)}, e);`
