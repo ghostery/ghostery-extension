@@ -47,6 +47,16 @@ const scriptletGlobals = {
 };
 
 function injectScriptlets(filters, hostname, details) {
+  if (__FIREFOX__) {
+    if (filters.length === 0) {
+      contentScripts.unregister(hostname);
+      return;
+    }
+    if (contentScripts.isRegistered(hostname)) {
+      return;
+    }
+  }
+
   const scriptletsByWorld = { [EXECUTION_WORLD.MAIN]: '', [EXECUTION_WORLD.ISOLATED]: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -98,11 +108,7 @@ function injectScriptlets(filters, hostname, details) {
   }
 
   if (__FIREFOX__) {
-    if (filters.length === 0) {
-      contentScripts.unregister(hostname);
-    } else if (!contentScripts.isRegistered(hostname)) {
-      contentScripts.register(hostname, scriptletsByWorld);
-    }
+    contentScripts.register(hostname, scriptletsByWorld);
   }
 }
 

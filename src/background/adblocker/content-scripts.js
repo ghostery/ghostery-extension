@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import getBrowserInfo from '/utils/browser-info.js';
+
 export const EXECUTION_WORLD = {
   MAIN: 'MAIN',
   ISOLATED: 'ISOLATED',
@@ -79,29 +81,31 @@ export const contentScripts = (() => {
       this.unregister(hostname);
 
       const code = buildContentScript(scripts);
-      if (!code) return;
+      if (!code) {
+        // Cache "nothing to inject" so isRegistered() short-circuits later navigations.
+        map.set(hostname, { unregister() {} });
+        return;
+      }
 
       const options = {
         js: [{ code }],
         allFrames: true,
         matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
         matchAboutBlank: true,
-        matchOriginAsFallback: true,
         runAt: 'document_start',
       };
 
+      // `matchOriginAsFallback` requires Firefox 128+; older versions reject the
+      // whole registration (without it only opaque-origin frames are lost).
+      if ((await getBrowserInfo()).version >= 128) {
+        options.matchOriginAsFallback = true;
+      }
+
       try {
         map.set(hostname, await browser.contentScripts.register(options));
-      } catch {
-        // `matchOriginAsFallback` requires Firefox 128+; older versions reject the
-        // whole call, so retry without it (only opaque-origin frames are lost).
-        delete options.matchOriginAsFallback;
-        try {
-          map.set(hostname, await browser.contentScripts.register(options));
-        } catch (e) {
-          console.warn(e);
-          this.unregister(hostname);
-        }
+      } catch (e) {
+        console.warn(e);
+        this.unregister(hostname);
       }
     },
     isRegistered(hostname) {
