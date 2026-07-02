@@ -15,7 +15,12 @@
 // the next trigger. In-world injections run as serialized run-to-completion
 // tasks, so check-then-claim cannot interleave; on guard failure (hostile or
 // frozen global) the original still runs, just unguarded.
-export function wrapScriptletSource(originalSource) {
+// Scriptlet errors never escape the wrapper, so one broken scriptlet cannot stop
+// the others bundled in the same content script; debug builds log them.
+export function wrapScriptletSource(originalSource, { debug = false, name = 'scriptlet' } = {}) {
+  const logError = debug
+    ? `\n    console.error(${JSON.stringify(`[adblocker] ${name} failed:`)}, e);`
+    : '';
   return `function (scriptletGlobals = {}, ...args) {
   var __orig = (${originalSource});
   var __base = scriptletGlobals?.__guardBase, __token = scriptletGlobals?.__guardToken, __reg;
@@ -36,7 +41,7 @@ export function wrapScriptletSource(originalSource) {
   }
   try {
     __orig.apply(this, arguments);
-  } catch (e) {
+  } catch (e) {${logError}
     return undefined;
   }
   if (__reg) __reg.add(__token);
