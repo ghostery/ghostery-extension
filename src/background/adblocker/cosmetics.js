@@ -10,8 +10,10 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets from '@ghostery/scriptlets';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
+
+// Generated at build time (gitignored), see scripts/generate-scriptlets.js.
+import scriptlets from './scriptlets.generated.js';
 
 import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
@@ -47,6 +49,18 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
+// Random so a page cannot pre-seed the registry; per-hostname so its name is not a cross-site identifier.
+const guardBases = new Map();
+function getGuardBase(hostname) {
+  let base = guardBases.get(hostname);
+  if (!base) {
+    if (guardBases.size >= 1000) guardBases.clear();
+    base = crypto.randomUUID();
+    guardBases.set(hostname, base);
+  }
+  return base;
+}
+
 function injectScriptlets(filters, hostname, details) {
   let contentScript = '';
   for (const filter of filters) {
@@ -66,7 +80,14 @@ function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+
+    const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
+    const args = [
+      getGuardBase(hostname),
+      token,
+      scriptletGlobals,
+      ...parsed.args.map((arg) => decodeURIComponent(arg)),
+    ];
 
     if (__FIREFOX__) {
       if (filter.hasSubframeConstraint()) {

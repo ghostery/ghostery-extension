@@ -127,6 +127,10 @@ execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
 });
 
+execSync('node scripts/generate-scriptlets.js' + (argv.debug ? ' --debug' : ''), {
+  stdio: silent ? '' : 'inherit',
+});
+
 // --- Generate static pages ---
 
 const staticPath = resolve('src', 'static_pages');

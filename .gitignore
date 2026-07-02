@@ -28,6 +28,7 @@ npm-debug.log
 # Source
 src/rule_resources
 src/static_pages
+*.generated.js
 
 # Downloaded binaries
 scripts/bin/
