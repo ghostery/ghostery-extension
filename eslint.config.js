@@ -53,7 +53,7 @@ export default [
       'dist/*',
       'xcode/*',
       'src/rule_resources*',
-      'src/background/adblocker/scriptlets.generated.js',
+      '**/*.generated.js',
       'web-ext-artifacts/*',
     ],
   },

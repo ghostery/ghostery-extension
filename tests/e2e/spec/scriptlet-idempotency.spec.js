@@ -22,11 +22,19 @@ function readGlobal(key) {
   return browser.execute((k) => window[k], key);
 }
 
-function waitForGlobal(key, value, timeoutMsg) {
-  return browser.waitUntil(async () => (await readGlobal(key)) === value, {
+function waitForGlobal(key, timeoutMsg) {
+  return browser.waitUntil(async () => (await readGlobal(key)) === 1, {
     timeout: 10000,
     timeoutMsg,
   });
+}
+
+async function expectRanExactlyOnce(key, timeoutMsg) {
+  await waitForGlobal(key, timeoutMsg);
+
+  // Give any further overlapping triggers a chance to (incorrectly) run again.
+  await browser.pause(500);
+  await expect(await readGlobal(key)).toBe(1);
 }
 
 // Firefox's `contentScripts.register` only affects future document loads, so the
@@ -44,7 +52,7 @@ async function ensureScriptletActive(key) {
 }
 
 // Uses the debug-build-only `__e2e-inc` counting scriptlet (see
-// scripts/generate-scriptlets.js); it bumps `window[args[0]]` in the MAIN world.
+// scripts/utils/scriptlets-module.js); it bumps `window[args[0]]` in the MAIN world.
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
@@ -57,33 +65,25 @@ describe('Scriptlet injection idempotency', function () {
   it('injects a scriptlet exactly once under natural triggers', async function () {
     await browser.url(PAGE_URL);
 
-    await waitForGlobal('counter', 1, 'scriptlet did not run exactly once');
-
-    // Give any further overlapping triggers a chance to (incorrectly) run again.
-    await browser.pause(500);
-    await expect(await readGlobal('counter')).toBe(1);
+    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once');
   });
 
   it('re-runs once on reload (self-heals with the new document)', async function () {
     await browser.url(PAGE_URL);
-    await waitForGlobal('counter', 1, 'scriptlet did not run on first load');
+    await waitForGlobal('counter', 'scriptlet did not run on first load');
 
     await browser.refresh();
 
-    await waitForGlobal('counter', 1, 'scriptlet did not run exactly once after reload');
-    await browser.pause(500);
-    await expect(await readGlobal('counter')).toBe(1);
+    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once after reload');
   });
 
   it('keeps a separate registry per frame', async function () {
     await browser.url(PAGE_URL);
-    await waitForGlobal('counter', 1, 'scriptlet did not run in the main frame');
+    await waitForGlobal('counter', 'scriptlet did not run in the main frame');
 
     await switchFrame($('#iframe-static'));
 
-    await waitForGlobal('counter', 1, 'scriptlet did not run exactly once in the sub-frame');
-    await browser.pause(500);
-    await expect(await readGlobal('counter')).toBe(1);
+    await expectRanExactlyOnce('counter', 'scriptlet did not run exactly once in the sub-frame');
 
     await browser.switchFrame(null);
   });
@@ -97,11 +97,7 @@ describe('Scriptlet injection idempotency', function () {
 
     await browser.url(PAGE_URL);
 
-    await waitForGlobal('a', 1, 'scriptlet with arg "a" did not run once');
-    await waitForGlobal('b', 1, 'scriptlet with arg "b" did not run once');
-
-    await browser.pause(500);
-    await expect(await readGlobal('a')).toBe(1);
-    await expect(await readGlobal('b')).toBe(1);
+    await expectRanExactlyOnce('a', 'scriptlet with arg "a" did not run once');
+    await expectRanExactlyOnce('b', 'scriptlet with arg "b" did not run once');
   });
 });

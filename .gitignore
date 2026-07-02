@@ -28,7 +28,7 @@ npm-debug.log
 # Source
 src/rule_resources
 src/static_pages
-src/background/adblocker/scriptlets.generated.js
+*.generated.js
 
 # Downloaded binaries
 scripts/bin/

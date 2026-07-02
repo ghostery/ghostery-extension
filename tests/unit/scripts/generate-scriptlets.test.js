@@ -16,15 +16,17 @@ import scriptlets from '@ghostery/scriptlets';
 import {
   generateScriptletsModule,
   TEST_SCRIPTLET_NAME,
-} from '../../../scripts/generate-scriptlets.js';
+} from '../../../scripts/utils/scriptlets-module.js';
 
 function evaluateModule(source) {
   return import('data:text/javascript,' + encodeURIComponent(source));
 }
 
+const generatedPromise = evaluateModule(generateScriptletsModule(scriptlets));
+
 describe('generate-scriptlets', () => {
   it('emits a wrapped, importable module with every scriptlet preserved', async () => {
-    const { default: generated } = await evaluateModule(generateScriptletsModule(scriptlets));
+    const { default: generated } = await generatedPromise;
 
     assert.deepEqual(Object.keys(generated).sort(), Object.keys(scriptlets).sort());
 
@@ -36,7 +38,7 @@ describe('generate-scriptlets', () => {
   });
 
   it('preserves aliases, world and requiresTrust metadata', async () => {
-    const { default: generated } = await evaluateModule(generateScriptletsModule(scriptlets));
+    const { default: generated } = await generatedPromise;
 
     for (const [name, entry] of Object.entries(scriptlets)) {
       assert.deepEqual(generated[name].aliases, entry.aliases, `aliases for ${name}`);
@@ -45,14 +47,14 @@ describe('generate-scriptlets', () => {
     }
   });
 
-  it('includes the synthetic test scriptlet only when requested', async () => {
-    const { default: withTest } = await evaluateModule(
-      generateScriptletsModule(scriptlets, { includeTestScriptlets: true }),
+  it('includes the synthetic test scriptlet only in debug builds', async () => {
+    const { default: debugBuild } = await evaluateModule(
+      generateScriptletsModule(scriptlets, { debug: true }),
     );
-    const { default: withoutTest } = await evaluateModule(generateScriptletsModule(scriptlets));
+    const { default: releaseBuild } = await generatedPromise;
 
-    assert.equal(typeof withTest[TEST_SCRIPTLET_NAME].func, 'function');
-    assert.equal(withoutTest[TEST_SCRIPTLET_NAME], undefined);
+    assert.equal(typeof debugBuild[TEST_SCRIPTLET_NAME].func, 'function');
+    assert.equal(releaseBuild[TEST_SCRIPTLET_NAME], undefined);
   });
 
   it('fails loudly when an upstream entry is not a function', () => {
