@@ -103,8 +103,10 @@ jobs:
       # Firefox < 121 cannot start without libdbus-glib, which Ubuntu 24.04 no longer ships.
       - name: Install Firefox host dependencies
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libdbus-glib-1-2
-      - name: Runner diagnostics
-        run: sysctl kernel.apparmor_restrict_unprivileged_userns || true
+      # Firefox 115 content processes segfault when AppArmor (Ubuntu 24.04) denies
+      # unprivileged user namespaces; newer Firefox falls back gracefully.
+      - name: Allow Firefox sandbox user namespaces
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Install dependencies
         run: npm ci
       - name: Run scriptlet execution-world tests
