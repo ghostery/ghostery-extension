@@ -55,8 +55,12 @@ const scriptletGlobals = {
 // page-readable name is not a cross-site identifier.
 const guardBases = new Map();
 function getGuardBase(hostname) {
-  const base = guardBases.get(hostname) ?? crypto.randomUUID();
-  guardBases.set(hostname, base);
+  let base = guardBases.get(hostname);
+  if (!base) {
+    if (guardBases.size >= 1000) guardBases.clear();
+    base = crypto.randomUUID();
+    guardBases.set(hostname, base);
+  }
   return base;
 }
 
@@ -92,12 +96,12 @@ function injectScriptlets(filters, hostname, details) {
 
     // Dedup identity: the same (name, args) from overlapping triggers runs once.
     const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
-    const globals = {
-      ...scriptletGlobals,
-      __guardBase: getGuardBase(hostname),
-      __guardToken: token,
-    };
-    const args = [globals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const args = [
+      getGuardBase(hostname),
+      token,
+      scriptletGlobals,
+      ...parsed.args.map((arg) => decodeURIComponent(arg)),
+    ];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     if (__FIREFOX__) {
