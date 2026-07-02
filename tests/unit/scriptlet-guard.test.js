@@ -14,8 +14,8 @@ import assert from 'node:assert/strict';
 
 import { wrapScriptletSource } from '../../scripts/utils/wrap-scriptlet.js';
 
-function build(originalSource) {
-  return new Function(`return (${wrapScriptletSource(originalSource)});`)();
+function build(originalSource, options) {
+  return new Function(`return (${wrapScriptletSource(originalSource, options)});`)();
 }
 
 const COUNTER = 'function (g, ...a) { self.__c = (self.__c || 0) + 1; }';
@@ -56,6 +56,53 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(fn(globals), undefined);
     assert.equal(globalThis.self.__base.has('boom'), false);
     assert.equal(fn(globals), undefined);
+  });
+
+  it('keeps later scriptlets in a concatenated bundle running when an earlier one throws', () => {
+    // Mirrors the Firefox content-script assembly in cosmetics.js:
+    // `(${func})(...args);\n` statements executed in sequence.
+    const thrower = wrapScriptletSource('function () { throw new Error("boom"); }');
+    const counter = wrapScriptletSource(COUNTER);
+    const bundle = `(${thrower})({});\n(${counter})({});\n`;
+
+    new Function(bundle)();
+
+    assert.equal(globalThis.self.__c, 1);
+  });
+
+  it('logs the swallowed error in debug builds', () => {
+    const fn = build('function () { throw new Error("boom"); }', {
+      debug: true,
+      name: 'broken.js',
+    });
+    const calls = [];
+    const original = console.error;
+    console.error = (...args) => calls.push(args);
+
+    try {
+      assert.equal(fn({}), undefined);
+    } finally {
+      console.error = original;
+    }
+
+    assert.equal(calls.length, 1);
+    assert.match(calls[0][0], /broken\.js/);
+    assert.match(String(calls[0][1]), /boom/);
+  });
+
+  it('stays silent about the swallowed error outside debug builds', () => {
+    const fn = build('function () { throw new Error("boom"); }');
+    const calls = [];
+    const original = console.error;
+    console.error = (...args) => calls.push(args);
+
+    try {
+      assert.equal(fn({}), undefined);
+    } finally {
+      console.error = original;
+    }
+
+    assert.equal(calls.length, 0);
   });
 
   it('runs unguarded (no dedup) when guard fields are missing', () => {

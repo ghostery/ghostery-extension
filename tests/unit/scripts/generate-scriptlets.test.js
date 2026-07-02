@@ -61,4 +61,14 @@ describe('generate-scriptlets', () => {
       /expected "func" to be a function/,
     );
   });
+
+  it('emits per-scriptlet error logging only in debug builds', () => {
+    const fixture = { 'noop.js': { aliases: [], func: function () {} } };
+
+    const debugModule = generateScriptletsModule(fixture, { debug: true });
+    const releaseModule = generateScriptletsModule(fixture);
+
+    assert.match(debugModule, /console\.error\("\[adblocker\] noop\.js failed:", e\)/);
+    assert.doesNotMatch(releaseModule, /console\.error/);
+  });
 });
