@@ -9,23 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Runs the scriptlet at most once per document without leaving a detectable
-// footprint. The executed-token set is kept in a closure behind a Proxy over
-// `document.evaluate` (an obscure, rarely-called API) rather than in a property
-// on the page global: patching the existing prototype slot in place adds no new
-// key, so property scans of window/document/Document.prototype are unchanged.
-//
-// A page cannot forge the handshake — the guard only answers a caller that
-// already knows the per-hostname secret and echoes it back — so a hostile page
-// can at worst force a duplicate run, never suppress one. It also fails open on
-// any error and claims a token only after the scriptlet returns, so a throwing
-// injection is retried by the next trigger.
-//
-// In the MAIN world the page shares the realm and could, by wrapping
-// `document.evaluate` first, observe the secret we pass and later suppress
-// *subsequent* injections; the first injection (at document_start, before page
-// script) always runs. This matches the guarantee for the isolated world, where
-// the guard is invisible to the page entirely.
+// The executed-token set hides in a closure behind a Proxy over `document.evaluate`:
+// patching the existing slot in place adds no page-enumerable property.
 function guardRunOnce(secret, token, orig, args, thisArg, logError) {
   function run() {
     try {
@@ -39,20 +24,10 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
 
   if (!secret || !token) return run();
 
-  var evaluate;
-  try {
-    evaluate = document.evaluate;
-  } catch {
-    return run();
-  }
-  if (typeof evaluate !== 'function') return run();
-
-  // Native `evaluate` throws on these arguments; only our guard returns an
-  // object echoing the secret. `claim === true` records the token, otherwise it
-  // reports whether the token already ran.
+  // Native `evaluate` throws on these arguments; only the guard proxy answers, echoing the secret.
   function ask(key, claim) {
     try {
-      var answer = document.evaluate(secret, key, claim === true);
+      var answer = document.evaluate(secret, key, claim);
       return answer && typeof answer === 'object' && answer.s === secret ? answer : null;
     } catch {
       return null;
@@ -63,6 +38,9 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
 
   if (!status) {
     try {
+      var evaluate = document.evaluate;
+      if (typeof evaluate !== 'function') return run();
+
       var owner = document;
       while (owner && !Object.prototype.hasOwnProperty.call(owner, 'evaluate')) {
         owner = Object.getPrototypeOf(owner);
@@ -70,22 +48,17 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
       if (!owner) return run();
 
       var store = new Set();
-      var proxy = new Proxy(evaluate, {
-        apply: function (target, that, callArgs) {
-          if (callArgs[0] === secret) {
-            var key = callArgs[1];
-            if (callArgs[2] === true) {
-              store.add(key);
+      Object.defineProperty(owner, 'evaluate', {
+        value: new Proxy(evaluate, {
+          apply: function (target, that, callArgs) {
+            if (callArgs[0] !== secret) return target.apply(that, callArgs);
+            if (callArgs[2]) {
+              store.add(callArgs[1]);
               return { s: secret };
             }
-            return { s: secret, has: store.has(key) };
-          }
-          return target.apply(that, callArgs);
-        },
-      });
-
-      Object.defineProperty(owner, 'evaluate', {
-        value: proxy,
+            return { s: secret, has: store.has(callArgs[1]) };
+          },
+        }),
         writable: true,
         enumerable: false,
         configurable: true,
@@ -98,8 +71,9 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
     if (!status) return run();
   }
 
-  if (status.has === true) return false;
+  if (status.has) return false;
 
+  // Claiming only after a successful run means a throwing scriptlet is retried, never suppressed.
   var result = run();
   if (result === true) ask(token, true);
   return result;
@@ -110,14 +84,7 @@ export function wrapScriptletSource(originalSource, { debug = false, name = 'scr
     ? `function (e) { console.error(${JSON.stringify(`[adblocker] ${name} failed:`)}, e); }`
     : 'null';
 
-  return `function (__secret, __token) {
-  return (${guardRunOnce.toString()})(
-    __secret,
-    __token,
-    (${originalSource}),
-    Array.prototype.slice.call(arguments, 2),
-    this,
-    ${logError},
-  );
+  return `function (__secret, __token, ...__args) {
+  return (${guardRunOnce.toString()})(__secret, __token, (${originalSource}), __args, this, ${logError});
 }`;
 }

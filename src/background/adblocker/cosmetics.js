@@ -48,8 +48,7 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Handshake secret the wrapped scriptlets pass to the in-document guard. Random
-// so a page cannot forge it, per-hostname so it is not a cross-site identifier.
+// Random so a page cannot forge the guard handshake; per-hostname so it is not a cross-site identifier.
 const guardSecrets = new Map();
 function getGuardSecret(hostname) {
   let secret = guardSecrets.get(hostname);
@@ -78,8 +77,6 @@ function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
-    const func = scriptlet.func;
-
     const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
     const args = [
       getGuardSecret(hostname),
@@ -94,7 +91,7 @@ function injectScriptlets(filters, hostname, details) {
         injectImmediately: true,
         world: declaredWorld,
         target: resolveInjectionTarget(details),
-        func,
+        func: scriptlet.func,
         args,
       },
       () => {
@@ -142,11 +139,7 @@ const framesHierarchy = new FramesHierarchy();
 framesHierarchy.handleWebWorkerStart();
 framesHierarchy.handleWebextensionEvents();
 
-/*
- * returns `false` if the injection should be blocked for the given hostname
- * otherwise returns `undefined` and performs necessary preparations for the injection
- * (like registering content scripts for scriptlet filters on Firefox)
- */
+// Returns `false` when injection is blocked for the hostname; the content script checks for it.
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false } = config;
 

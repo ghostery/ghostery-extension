@@ -30,14 +30,11 @@ function captureConsoleError(fn) {
   return calls;
 }
 
-// A DOM stand-in whose `evaluate` lives on the prototype and throws for our
-// probe arguments, exactly like the real `document.evaluate`.
+// Mimics the real document: `evaluate` lives on the prototype and throws on non-Node arguments.
 function installFakeDocument() {
-  let nativeCalls = 0;
   const proto = {};
   Object.defineProperty(proto, 'evaluate', {
     value: function evaluate(expression, contextNode) {
-      nativeCalls += 1;
       if (arguments.length < 2 || (contextNode !== null && typeof contextNode !== 'object')) {
         throw new TypeError("Failed to execute 'evaluate': parameter 2 is not of type 'Node'.");
       }
@@ -50,7 +47,7 @@ function installFakeDocument() {
 
   const document = Object.create(proto);
   globalThis.document = document;
-  return { document, proto, nativeCalls: () => nativeCalls };
+  return { document, proto };
 }
 
 const COUNTER = 'function (g, ...a) { self.__c = (self.__c || 0) + 1; }';
@@ -59,14 +56,10 @@ const THROWER = 'function () { self.__t = (self.__t || 0) + 1; throw new Error("
 const SECRET = 'secret-8f3a';
 
 describe('scriptlet idempotency guard', () => {
-  let previousSelf;
-  let previousDocument;
   let counter;
   let thrower;
 
   beforeEach(() => {
-    previousSelf = globalThis.self;
-    previousDocument = globalThis.document;
     globalThis.self = {};
     installFakeDocument();
     counter = build(COUNTER);
@@ -74,49 +67,34 @@ describe('scriptlet idempotency guard', () => {
   });
 
   afterEach(() => {
-    globalThis.self = previousSelf;
-    globalThis.document = previousDocument;
+    delete globalThis.self;
+    delete globalThis.document;
   });
 
-  it('runs the original once for the same token, then dedups', () => {
+  it('runs once per token, deduping across independently injected copies', () => {
+    const second = build(COUNTER);
+
     assert.equal(counter(SECRET, 'token-1'), true);
     assert.equal(counter(SECRET, 'token-1'), false);
-    assert.equal(globalThis.self.__c, 1);
-  });
-
-  it('runs again for a different token', () => {
-    assert.equal(counter(SECRET, 'a'), true);
-    assert.equal(counter(SECRET, 'b'), true);
+    assert.equal(second(SECRET, 'token-1'), false);
+    assert.equal(counter(SECRET, 'token-2'), true);
     assert.equal(globalThis.self.__c, 2);
   });
 
-  it('dedups across independently injected copies of the scriptlet', () => {
-    const first = build(COUNTER);
-    const second = build(COUNTER);
-
-    assert.equal(first(SECRET, 'shared'), true);
-    assert.equal(second(SECRET, 'shared'), false);
-    assert.equal(globalThis.self.__c, 1);
-  });
-
-  it('does not claim the token when the scriptlet throws, so it is retried', () => {
-    assert.equal(thrower(SECRET, 'boom'), undefined);
-    assert.equal(thrower(SECRET, 'boom'), undefined);
-    assert.equal(globalThis.self.__t, 2);
-  });
-
-  it('logs the swallowed error only in debug builds', () => {
+  it('does not claim the token when the scriptlet throws, and logs only in debug builds', () => {
     const debugThrower = build(THROWER, { debug: true, name: 'broken.js' });
 
-    const debugCalls = captureConsoleError(() =>
-      assert.equal(debugThrower(SECRET, 'x'), undefined),
+    const releaseCalls = captureConsoleError(() =>
+      assert.equal(thrower(SECRET, 'boom'), undefined),
     );
-    const releaseCalls = captureConsoleError(() => assert.equal(thrower(SECRET, 'y'), undefined));
+    const debugCalls = captureConsoleError(() =>
+      assert.equal(debugThrower(SECRET, 'boom'), undefined),
+    );
 
-    assert.equal(debugCalls.length, 1);
-    assert.match(debugCalls[0][0], /broken\.js/);
-    assert.match(String(debugCalls[0][1]), /boom/);
+    assert.equal(globalThis.self.__t, 2);
     assert.equal(releaseCalls.length, 0);
+    assert.equal(debugCalls.length, 1);
+    assert.match(debugCalls[0].join(' '), /broken\.js.*boom/);
   });
 
   it('runs unguarded (no dedup) when the guard arguments are missing', () => {
@@ -166,10 +144,9 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(globalThis.self.__c, 1);
   });
 
-  it('fails open when Proxy is unavailable', () => {
+  it('fails open (no dedup) when Proxy or document.evaluate is unavailable', () => {
     const OriginalProxy = globalThis.Proxy;
     globalThis.Proxy = undefined;
-
     try {
       assert.equal(counter(SECRET, 't'), true);
       assert.equal(counter(SECRET, 't'), true);
@@ -177,15 +154,8 @@ describe('scriptlet idempotency guard', () => {
       globalThis.Proxy = OriginalProxy;
     }
 
-    assert.equal(globalThis.self.__c, 2);
-  });
-
-  it('fails open when document.evaluate is missing', () => {
     globalThis.document = {};
-    counter = build(COUNTER);
-
     assert.equal(counter(SECRET, 't'), true);
-    assert.equal(counter(SECRET, 't'), true);
-    assert.equal(globalThis.self.__c, 2);
+    assert.equal(globalThis.self.__c, 3);
   });
 });

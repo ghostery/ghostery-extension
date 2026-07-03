@@ -15,8 +15,8 @@ import { wrapScriptletSource } from './wrap-scriptlet.js';
 export const TEST_SCRIPTLET_NAME = '__e2e-inc.js';
 
 const TEST_SCRIPTLET = {
-  func: function (scriptletGlobals, ...args) {
-    self[args[0]] = (self[args[0]] || 0) + 1;
+  func: function (globals, name) {
+    self[name] = (self[name] || 0) + 1;
   },
 };
 
@@ -31,12 +31,15 @@ function emitEntry(name, entry, debug) {
     );
   }
 
-  const lines = [`  aliases: ${JSON.stringify(entry.aliases || [])},`];
-  if (entry.world) lines.push(`  world: ${JSON.stringify(entry.world)},`);
-  lines.push(`  requiresTrust: ${!!entry.requiresTrust},`);
-  lines.push(`  func: ${wrapScriptletSource(entry.func.toString(), { debug, name })},`);
+  const key = JSON.stringify(name);
+  const world = entry.world ? `\n  world: ${JSON.stringify(entry.world)},` : '';
+  const aliases = (entry.aliases || [])
+    .map((alias) => `\nSCRIPTLETS[${JSON.stringify(alias)}] = SCRIPTLETS[${key}];`)
+    .join('');
 
-  return `SCRIPTLETS[${JSON.stringify(name)}] = {\n${lines.join('\n')}\n};`;
+  return `SCRIPTLETS[${key}] = {${world}
+  func: ${wrapScriptletSource(entry.func.toString(), { debug, name })},
+};${aliases}`;
 }
 
 export function generateScriptletsModule(source, { debug = false } = {}) {
@@ -58,14 +61,6 @@ const SCRIPTLETS = {};
 
 ${blocks.join('\n\n')}
 
-const scriptlets = {};
-for (const [name, scriptlet] of Object.entries(SCRIPTLETS)) {
-  scriptlets[name] = scriptlet;
-  for (const alias of scriptlet.aliases) {
-    scriptlets[alias] = scriptlet;
-  }
-}
-
-export default scriptlets;
+export default SCRIPTLETS;
 `;
 }

@@ -53,7 +53,11 @@ async function ensureScriptletActive(key) {
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
-    await setCustomFilters([`${PAGE_DOMAIN}##+js(__e2e-inc, counter)`]);
+    await setCustomFilters([
+      `${PAGE_DOMAIN}##+js(__e2e-inc, counter)`,
+      `${PAGE_DOMAIN}##+js(__e2e-inc, a)`,
+      `${PAGE_DOMAIN}##+js(__e2e-inc, b)`,
+    ]);
     await ensureScriptletActive('counter');
   });
 
@@ -67,6 +71,12 @@ describe('Scriptlet injection idempotency', function () {
     await expectRanExactlyOnce('counter');
   });
 
+  it('treats different scriptlet args as distinct injections', async function () {
+    await browser.url(PAGE_URL);
+    await expectRanExactlyOnce('a');
+    await expectRanExactlyOnce('b');
+  });
+
   it('keeps a separate registry per frame', async function () {
     await browser.url(PAGE_URL);
     await waitForGlobal('counter');
@@ -75,17 +85,5 @@ describe('Scriptlet injection idempotency', function () {
     await expectRanExactlyOnce('counter');
 
     await browser.switchFrame(null);
-  });
-
-  it('treats different scriptlet args as distinct injections', async function () {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(__e2e-inc, a)`,
-      `${PAGE_DOMAIN}##+js(__e2e-inc, b)`,
-    ]);
-    await ensureScriptletActive('a');
-
-    await browser.url(PAGE_URL);
-    await expectRanExactlyOnce('a');
-    await expectRanExactlyOnce('b');
   });
 });
