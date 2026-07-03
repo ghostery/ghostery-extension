@@ -48,16 +48,17 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Random so a page cannot pre-seed the registry; per-hostname so its name is not a cross-site identifier.
-const guardBases = new Map();
-function getGuardBase(hostname) {
-  let base = guardBases.get(hostname);
-  if (!base) {
-    if (guardBases.size >= 1000) guardBases.clear();
-    base = crypto.randomUUID();
-    guardBases.set(hostname, base);
+// Handshake secret the wrapped scriptlets pass to the in-document guard. Random
+// so a page cannot forge it, per-hostname so it is not a cross-site identifier.
+const guardSecrets = new Map();
+function getGuardSecret(hostname) {
+  let secret = guardSecrets.get(hostname);
+  if (!secret) {
+    if (guardSecrets.size >= 1000) guardSecrets.clear();
+    secret = crypto.randomUUID();
+    guardSecrets.set(hostname, secret);
   }
-  return base;
+  return secret;
 }
 
 function injectScriptlets(filters, hostname, details) {
@@ -81,7 +82,7 @@ function injectScriptlets(filters, hostname, details) {
 
     const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
     const args = [
-      getGuardBase(hostname),
+      getGuardSecret(hostname),
       token,
       scriptletGlobals,
       ...parsed.args.map((arg) => decodeURIComponent(arg)),
