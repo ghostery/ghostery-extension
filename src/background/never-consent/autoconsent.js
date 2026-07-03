@@ -75,7 +75,7 @@ async function evalCode(snippetId, id, tabId, frameId) {
       tabId,
       frameIds: [frameId],
     },
-    world: 'MAIN',
+    world: chrome.scripting.ExecutionWorld?.MAIN ?? (__FIREFOX__ ? undefined : 'MAIN'),
     func: evalSnippets[snippetId],
   });
 

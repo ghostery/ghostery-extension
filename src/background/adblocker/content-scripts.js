@@ -11,56 +11,52 @@
 
 export const contentScripts = (() => {
   const map = new Map();
-
   return {
-    async register(hostname, codeByWorld) {
-      const key = JSON.stringify(codeByWorld);
+    async register(hostname, scriptletsByWorld) {
+      const key = JSON.stringify(scriptletsByWorld);
       if (map.get(hostname)?.key === key) return;
 
       if (!map.has(hostname) && map.size >= 1000) this.unregisterAll();
       this.unregister(hostname);
 
-      const entry = { key, handles: [] };
-      map.set(hostname, entry);
+      const registered = [];
+      map.set(hostname, { key, registered });
 
       try {
-        for (const [world, code] of Object.entries(codeByWorld)) {
+        for (const [world, code] of Object.entries(scriptletsByWorld)) {
           if (!code) continue;
 
-          const handle = await browser.contentScripts.register({
-            js: [{ code }],
-            allFrames: true,
-            matches: [`https://${hostname}/*`, `http://${hostname}/*`],
-            matchAboutBlank: true,
-            matchOriginAsFallback: true,
-            runAt: 'document_start',
-            world,
-          });
+          registered.push(
+            await browser.contentScripts.register({
+              js: [{ code }],
+              allFrames: true,
+              matches: [`https://${hostname}/*`, `http://${hostname}/*`],
+              matchAboutBlank: true,
+              matchOriginAsFallback: true,
+              runAt: 'document_start',
+              world,
+            }),
+          );
 
           // A newer registration replaced this entry while awaiting.
-          if (map.get(hostname) !== entry) {
-            handle.unregister();
+          if (map.get(hostname)?.registered !== registered) {
+            registered.pop().unregister();
             return;
           }
-
-          entry.handles.push(handle);
         }
       } catch (e) {
-        console.warn('[adblocker] failed to register scriptlets for', hostname, e);
-        if (map.get(hostname) === entry) this.unregister(hostname);
+        console.warn(e);
+        if (map.get(hostname)?.registered === registered) this.unregister(hostname);
       }
     },
     unregister(hostname) {
-      const entry = map.get(hostname);
-      if (!entry) return;
-
-      map.delete(hostname);
-      for (const handle of entry.handles) {
-        handle.unregister();
+      for (const contentScript of map.get(hostname)?.registered ?? []) {
+        contentScript.unregister();
       }
+      map.delete(hostname);
     },
     unregisterAll() {
-      for (const hostname of [...map.keys()]) {
+      for (const hostname of map.keys()) {
         this.unregister(hostname);
       }
     },

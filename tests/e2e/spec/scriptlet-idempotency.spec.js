@@ -63,18 +63,14 @@ describe('Scriptlet injection idempotency', function () {
 
   after(disableCustomFilters);
 
-  it('injects a scriptlet exactly once per document, including after reload', async function () {
+  it('injects each scriptlet and argument set exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
     await expectRanExactlyOnce('counter');
+    await expectRanExactlyOnce('a');
+    await expectRanExactlyOnce('b');
 
     await browser.refresh();
     await expectRanExactlyOnce('counter');
-  });
-
-  it('treats different scriptlet args as distinct injections', async function () {
-    await browser.url(PAGE_URL);
-    await expectRanExactlyOnce('a');
-    await expectRanExactlyOnce('b');
   });
 
   it('keeps a separate registry per frame', async function () {

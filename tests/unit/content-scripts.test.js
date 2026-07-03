@@ -62,18 +62,13 @@ describe('adblocker content scripts registry', () => {
     );
   });
 
-  it('skips re-registration when the code is unchanged', async () => {
-    await contentScripts.register('example.com', { MAIN: 'm;', ISOLATED: '' });
-    await contentScripts.register('example.com', { MAIN: 'm;', ISOLATED: '' });
-
+  it('re-registers only when the code changes, including to empty code', async () => {
+    await contentScripts.register('example.com', { MAIN: 'v1;', ISOLATED: '' });
+    await contentScripts.register('example.com', { MAIN: 'v1;', ISOLATED: '' });
     assert.equal(registrations.length, 1);
     assert.equal(registrations[0].unregistered, false);
-  });
 
-  it('replaces the registration when the code changes, including with empty code', async () => {
-    await contentScripts.register('example.com', { MAIN: 'v1;', ISOLATED: '' });
     await contentScripts.register('example.com', { MAIN: 'v2;', ISOLATED: '' });
-
     assert.equal(registrations[0].unregistered, true);
     assert.equal(registrations[1].options.js[0].code, 'v2;');
 

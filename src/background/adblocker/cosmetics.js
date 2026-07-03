@@ -63,8 +63,7 @@ function getGuardSecret(hostname) {
 }
 
 function injectScriptlets(filters, hostname, details) {
-  const codeByWorld = __FIREFOX__ ? { MAIN: '', ISOLATED: '' } : null;
-
+  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -81,6 +80,7 @@ function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
+    const func = scriptlet.func;
     const token = `${scriptletName}\x1f${parsed.args.join('\x1f')}`;
     const args = [
       getGuardSecret(hostname),
@@ -91,8 +91,8 @@ function injectScriptlets(filters, hostname, details) {
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Subframe-constrained filters depend on live frame ancestry, so they stay executeScript-only.
-    if (codeByWorld && !filter.hasSubframeConstraint()) {
-      codeByWorld[declaredWorld] += `(${scriptlet.func.toString()})(...${JSON.stringify(args)});\n`;
+    if (__FIREFOX__ && !filter.hasSubframeConstraint()) {
+      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
     }
 
     chrome.scripting.executeScript(
@@ -100,7 +100,7 @@ function injectScriptlets(filters, hostname, details) {
         injectImmediately: true,
         world: declaredWorld,
         target: resolveInjectionTarget(details),
-        func: scriptlet.func,
+        func,
         args,
       },
       () => {
@@ -112,8 +112,8 @@ function injectScriptlets(filters, hostname, details) {
   }
 
   // Engine-injected at document_start on later navigations; the in-document guard dedupes the overlap.
-  if (codeByWorld) {
-    contentScripts.register(hostname, codeByWorld);
+  if (__FIREFOX__) {
+    contentScripts.register(hostname, scriptletsByWorld);
   }
 }
 
@@ -153,7 +153,11 @@ const framesHierarchy = new FramesHierarchy();
 framesHierarchy.handleWebWorkerStart();
 framesHierarchy.handleWebextensionEvents();
 
-// Returns `false` when injection is blocked for the hostname; the content script checks for it.
+/*
+ * returns `false` if the injection should be blocked for the given hostname
+ * otherwise returns `undefined` and performs necessary preparations for the injection
+ * (like registering content scripts for scriptlet filters on Firefox)
+ */
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false } = config;
 

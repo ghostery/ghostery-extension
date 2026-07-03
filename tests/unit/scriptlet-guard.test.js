@@ -12,7 +12,7 @@
 import { describe, it, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { wrapScriptletSource } from '../../scripts/utils/wrap-scriptlet.js';
+import { wrapScriptletSource } from '../../scripts/utils/scriptlets-module.js';
 
 function build(originalSource, options) {
   return new Function(`return (${wrapScriptletSource(originalSource, options)});`)();
@@ -57,13 +57,11 @@ const SECRET = 'secret-8f3a';
 
 describe('scriptlet idempotency guard', () => {
   let counter;
-  let thrower;
 
   beforeEach(() => {
     globalThis.self = {};
     installFakeDocument();
     counter = build(COUNTER);
-    thrower = build(THROWER);
   });
 
   afterEach(() => {
@@ -82,6 +80,7 @@ describe('scriptlet idempotency guard', () => {
   });
 
   it('does not claim the token when the scriptlet throws, and logs only in debug builds', () => {
+    const thrower = build(THROWER);
     const debugThrower = build(THROWER, { debug: true, name: 'broken.js' });
 
     const releaseCalls = captureConsoleError(() =>
@@ -97,12 +96,6 @@ describe('scriptlet idempotency guard', () => {
     assert.match(debugCalls[0].join(' '), /broken\.js.*boom/);
   });
 
-  it('runs unguarded (no dedup) when the guard arguments are missing', () => {
-    assert.equal(counter(), true);
-    assert.equal(counter(), true);
-    assert.equal(globalThis.self.__c, 2);
-  });
-
   it('passes `this`, scriptletGlobals and args through to the original', () => {
     const fn = build('function (g, ...a) { self.seen = { x: this.x, g: g, args: a }; }');
 
@@ -113,7 +106,7 @@ describe('scriptlet idempotency guard', () => {
     assert.deepEqual(globalThis.self.seen.args, ['a', 'b']);
   });
 
-  it('leaves no enumerable or own-property footprint on the page', () => {
+  it('leaves no page-visible footprint and delegates real XPath calls', () => {
     const { document, proto } = installFakeDocument();
     counter = build(COUNTER);
 
@@ -124,13 +117,7 @@ describe('scriptlet idempotency guard', () => {
     assert.deepEqual(Object.getOwnPropertyNames(proto), ['evaluate']);
     assert.equal(Object.getOwnPropertyDescriptor(proto, 'evaluate').enumerable, false);
     assert.deepEqual(Object.getOwnPropertyNames(globalThis).sort(), windowKeysBefore);
-  });
-
-  it('delegates real XPath calls to the native evaluate', () => {
-    counter(SECRET, 't');
-
-    const result = globalThis.document.evaluate('//div', globalThis.document);
-    assert.deepEqual(result, { nativeXPathResult: true });
+    assert.deepEqual(document.evaluate('//div', document), { nativeXPathResult: true });
   });
 
   it('cannot be suppressed by a page that forges the guard handshake', () => {
@@ -144,7 +131,10 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(globalThis.self.__c, 1);
   });
 
-  it('fails open (no dedup) when Proxy or document.evaluate is unavailable', () => {
+  it('fails open (no dedup) without guard args or when Proxy/document.evaluate are unavailable', () => {
+    assert.equal(counter(), true);
+    assert.equal(counter(), true);
+
     const OriginalProxy = globalThis.Proxy;
     globalThis.Proxy = undefined;
     try {
@@ -156,6 +146,6 @@ describe('scriptlet idempotency guard', () => {
 
     globalThis.document = {};
     assert.equal(counter(SECRET, 't'), true);
-    assert.equal(globalThis.self.__c, 3);
+    assert.equal(globalThis.self.__c, 5);
   });
 });

@@ -23,8 +23,4 @@ writeFileSync(
   generateScriptletsModule(scriptlets, { debug }),
 );
 
-console.log(
-  `Generated scriptlets.generated.js (${Object.keys(scriptlets).length} scriptlets${
-    debug ? ' + e2e test scriptlet' : ''
-  })`,
-);
+console.log(`Generated scriptlets.generated.js (${Object.keys(scriptlets).length} scriptlets)`);
