@@ -352,6 +352,51 @@ function mapPaths(paths) {
   }, {});
 }
 
+const PATH_LIMIT = 110;
+const SHORTENED_BASE_LENGTH = 5;
+
+function splitSegment(segment) {
+  const dotIdx = segment.lastIndexOf('.');
+  if (dotIdx <= 0) return { base: segment, ext: '' };
+  return { base: segment.slice(0, dotIdx), ext: segment.slice(dotIdx) };
+}
+
+function hashDJBX33A(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash + str.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+// Replaces the longest segment bases with `firstChar + base36(hash(base))` until the path fits the limit
+function shortenPath(path, limit) {
+  const segments = path.split('/');
+
+  while (segments.join('/').length > limit) {
+    let longestIdx = -1;
+    let longestLength = SHORTENED_BASE_LENGTH + 1;
+
+    for (let i = 0; i < segments.length; i++) {
+      const { base } = splitSegment(segments[i]);
+      if (base.length > longestLength) {
+        longestLength = base.length;
+        longestIdx = i;
+      }
+    }
+
+    if (longestIdx === -1) break;
+
+    const { base, ext } = splitSegment(segments[longestIdx]);
+    const hash = hashDJBX33A(base)
+      .toString(36)
+      .slice(0, SHORTENED_BASE_LENGTH - 1);
+    segments[longestIdx] = base[0] + hash + ext;
+  }
+
+  return segments.join('/');
+}
+
 const shortenedPaths = new Map();
 const buildPromise = build({
   ...config,
@@ -381,45 +426,24 @@ const buildPromise = build({
             .replace('node_modules', 'npm')
             .replace('_virtual', 'virtual');
 
-          const PATH_LIMIT = 110;
           const hasPwd = name.startsWith(pwd);
           let relPath = hasPwd ? name.slice(pwd.length) : name;
 
           if (relPath.length > PATH_LIMIT) {
-            const segments = relPath.split('/');
+            const shortened = shortenPath(relPath, PATH_LIMIT);
 
-            while (segments.join('/').length > PATH_LIMIT) {
-              let maxLen = 0;
-              let maxIdx = -1;
-
-              for (let i = 0; i < segments.length; i++) {
-                const dotIdx = segments[i].lastIndexOf('.');
-                const base = dotIdx > 0 ? segments[i].slice(0, dotIdx) : segments[i];
-                if (base.length > maxLen) {
-                  maxLen = base.length;
-                  maxIdx = i;
-                }
+            if (shortened !== relPath) {
+              const existing = shortenedPaths.get(shortened);
+              if (existing !== undefined && existing !== relPath) {
+                throw new Error(
+                  `Path shortening collision: "${relPath}" and "${existing}" both shorten to "${shortened}"`,
+                );
               }
 
-              if (maxLen <= 6) break;
-
-              const seg = segments[maxIdx];
-              const dotIdx = seg.lastIndexOf('.');
-              const ext = dotIdx > 0 ? seg.slice(dotIdx) : '';
-              const base = dotIdx > 0 ? seg.slice(0, dotIdx) : seg;
-
-              let hash = 5381;
-              for (let i = 0; i < base.length; i++) {
-                hash = ((hash << 5) + hash + base.charCodeAt(i)) >>> 0;
-              }
-
-              segments[maxIdx] = base[0] + hash.toString(36).slice(0, 4) + ext;
+              shortenedPaths.set(shortened, relPath);
+              relPath = shortened;
+              name = hasPwd ? pwd + relPath : relPath;
             }
-
-            const shortened = segments.join('/');
-            shortenedPaths.set(shortened, relPath);
-            relPath = shortened;
-            name = hasPwd ? pwd + relPath : relPath;
           }
 
           if (relPath.length > PATH_LIMIT && !argv['no-filename-limit']) {
@@ -436,6 +460,9 @@ const buildPromise = build({
   plugins: [
     {
       name: 'shortened-path-banner',
+      buildStart() {
+        shortenedPaths.clear();
+      },
       generateBundle(_, bundle) {
         for (const [fileName, chunk] of Object.entries(bundle)) {
           if (chunk.type !== 'chunk') continue;
