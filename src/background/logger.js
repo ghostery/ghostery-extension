@@ -120,7 +120,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
 
       engine.on('filter-matched', logFilterMatched);
 
-      const offReplace = engines.onReplace(engines.MAIN_ENGINE, (nextEngine) => {
+      const unsubscribeSaveListener = engines.addSaveListener(engines.MAIN_ENGINE, (nextEngine) => {
         engine.unsubscribe('filter-matched', logFilterMatched);
         engine = nextEngine;
         engine.on('filter-matched', logFilterMatched);
@@ -131,7 +131,7 @@ chrome.runtime.onConnect.addListener(async (port) => {
         console.log('[logger] Disconnected logger with id', port.sender.tab.id);
 
         if (ports.size === 0) {
-          offReplace();
+          unsubscribeSaveListener();
           engine.unsubscribe('filter-matched', logFilterMatched);
         }
       });
