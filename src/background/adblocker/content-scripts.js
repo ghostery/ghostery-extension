@@ -9,11 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const EXECUTION_WORLD = {
-  MAIN: 'MAIN',
-  ISOLATED: 'ISOLATED',
-};
-
 export const contentScripts = (() => {
   const map = new Map();
   return {
@@ -22,8 +17,7 @@ export const contentScripts = (() => {
 
       const registered = [];
       try {
-        for (const world of Object.values(EXECUTION_WORLD)) {
-          const code = scriptletsByWorld[world];
+        for (const [world, code] of Object.entries(scriptletsByWorld)) {
           if (!code) continue;
 
           registered.push(
