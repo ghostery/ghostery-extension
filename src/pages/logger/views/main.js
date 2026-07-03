@@ -227,8 +227,17 @@ export default {
                 >
                   <ui-text type="body-s" color="tertiary"> ${log.time} </ui-text>
                   <ui-text type="body-s" color="secondary"> ${log.typeLabel} </ui-text>
-                  <ui-text ellipsis>${log.filter}</ui-text>
+                  <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
+                    >${log.filter}</ui-text
+                  >
                   <div layout="row gap:0.5">
+                    ${log.exception &&
+                    html`<ui-icon
+                      name="pause"
+                      color="tertiary"
+                      layout="size:2"
+                      title="Exception — filter matched but not applied"
+                    ></ui-icon>`}
                     ${log.blocked &&
                     html`<ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>`}
                     ${log.modified &&
