@@ -21,11 +21,13 @@ import DisabledFilters from '/store/disabled-filters.js';
 import FilteringDebug from '/store/filtering-debug.js';
 
 import * as engines from '/utils/engines.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
 
 import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
+import { contentScripts } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -61,6 +63,8 @@ function getGuardSecret(hostname) {
 }
 
 function injectScriptlets(filters, hostname, details) {
+  const codeByWorld = __FIREFOX__ ? { MAIN: '', ISOLATED: '' } : null;
+
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -86,6 +90,11 @@ function injectScriptlets(filters, hostname, details) {
     ];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
+    // Subframe-constrained filters depend on live frame ancestry, so they stay executeScript-only.
+    if (codeByWorld && !filter.hasSubframeConstraint()) {
+      codeByWorld[declaredWorld] += `(${scriptlet.func.toString()})(...${JSON.stringify(args)});\n`;
+    }
+
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
@@ -100,6 +109,11 @@ function injectScriptlets(filters, hostname, details) {
         }
       },
     );
+  }
+
+  // Engine-injected at document_start on later navigations; the in-document guard dedupes the overlap.
+  if (codeByWorld) {
+    contentScripts.register(hostname, codeByWorld);
   }
 }
 
@@ -301,7 +315,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-if (!__FIREFOX__) {
+if (__FIREFOX__) {
+  OptionsObserver.addListener('paused', function unregisterScriptletsOnPause() {
+    contentScripts.unregisterAll();
+  });
+} else {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (details.tabId === -1) return;
