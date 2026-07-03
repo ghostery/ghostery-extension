@@ -18,67 +18,66 @@ import {
   PAGE_URL,
 } from '../utils.js';
 
-function readGlobal(key) {
-  return browser.execute((k) => window[k], key);
+function readMarker(id) {
+  return browser.execute((el) => document.getElementById(el)?.textContent, id);
 }
 
-function waitForGlobal(key) {
-  return browser.waitUntil(async () => (await readGlobal(key)) === 1, {
-    timeout: 10000,
-    timeoutMsg: `scriptlet "${key}" did not run exactly once`,
-  });
-}
-
-async function expectRanExactlyOnce(key) {
-  await waitForGlobal(key);
+async function expectRanExactlyOnce(id, expected) {
+  try {
+    await browser.waitUntil(async () => (await readMarker(id)) === expected, {
+      timeout: 10000,
+    });
+  } catch {
+    throw new Error(
+      `marker "${id}" was not rewritten exactly once: ${JSON.stringify(await readMarker(id))}`,
+    );
+  }
 
   // Give any further overlapping triggers a chance to (incorrectly) run again.
   await browser.pause(500);
-  await expect(await readGlobal(key)).toBe(1);
+  await expect(await readMarker(id)).toBe(expected);
 }
 
 // Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
-async function ensureScriptletActive(key) {
+async function ensureScriptletActive() {
   await browser.waitUntil(
     async () => {
       await browser.url(PAGE_URL);
       await browser.pause(300);
-      return (await readGlobal(key)) >= 1;
+      return ((await readMarker('rpnt-a')) || '').includes('+');
     },
-    { timeout: 20000, interval: 500, timeoutMsg: `scriptlet "${key}" never became active` },
+    { timeout: 20000, interval: 500, timeoutMsg: 'scriptlet never became active' },
   );
 }
 
-// `__e2e-inc` is the debug-build-only counting scriptlet from scripts/utils/scriptlets-module.js.
+// `rpnt` rewrites matching text on every execution, so a duplicate run is DOM-visible ("aaa++").
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
     await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(__e2e-inc, counter)`,
-      `${PAGE_DOMAIN}##+js(__e2e-inc, a)`,
-      `${PAGE_DOMAIN}##+js(__e2e-inc, b)`,
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
     ]);
-    await ensureScriptletActive('counter');
+    await ensureScriptletActive();
   });
 
   after(disableCustomFilters);
 
   it('injects each scriptlet and argument set exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
-    await expectRanExactlyOnce('counter');
-    await expectRanExactlyOnce('a');
-    await expectRanExactlyOnce('b');
+    await expectRanExactlyOnce('rpnt-a', 'aaa+');
+    await expectRanExactlyOnce('rpnt-b', 'bbb+');
 
     await browser.refresh();
-    await expectRanExactlyOnce('counter');
+    await expectRanExactlyOnce('rpnt-a', 'aaa+');
   });
 
   it('keeps a separate registry per frame', async function () {
     await browser.url(PAGE_URL);
-    await waitForGlobal('counter');
+    await expectRanExactlyOnce('rpnt-a', 'aaa+');
 
     await switchFrame($('#iframe-static'));
-    await expectRanExactlyOnce('counter');
+    await expectRanExactlyOnce('rpnt-a', 'aaa+');
 
     await browser.switchFrame(null);
   });

@@ -16,11 +16,9 @@ import scriptlets from '@ghostery/scriptlets';
 
 import { generateScriptletsModule } from './utils/scriptlets-module.js';
 
-const debug = process.argv.includes('--debug');
-
 writeFileSync(
   resolve('src/background/adblocker/scriptlets.generated.js'),
-  generateScriptletsModule(scriptlets, { debug }),
+  generateScriptletsModule(scriptlets),
 );
 
 console.log(`Generated scriptlets.generated.js (${Object.keys(scriptlets).length} scriptlets)`);

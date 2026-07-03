@@ -127,7 +127,7 @@ execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
 });
 
-execSync('node scripts/generate-scriptlets.js' + (argv.debug ? ' --debug' : ''), {
+execSync('node scripts/generate-scriptlets.js', {
   stdio: silent ? '' : 'inherit',
 });
 

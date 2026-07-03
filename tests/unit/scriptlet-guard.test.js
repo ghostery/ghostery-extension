@@ -14,8 +14,8 @@ import assert from 'node:assert/strict';
 
 import { wrapScriptletSource } from '../../scripts/utils/scriptlets-module.js';
 
-function build(originalSource, options) {
-  return new Function(`return (${wrapScriptletSource(originalSource, options)});`)();
+function build(originalSource, name) {
+  return new Function(`return (${wrapScriptletSource(originalSource, name)});`)();
 }
 
 function captureConsoleError(fn) {
@@ -79,21 +79,17 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(globalThis.self.__c, 2);
   });
 
-  it('does not claim the token when the scriptlet throws, and logs only in debug builds', () => {
-    const thrower = build(THROWER);
-    const debugThrower = build(THROWER, { debug: true, name: 'broken.js' });
+  it('does not claim the token when the scriptlet throws, and logs the error', () => {
+    const thrower = build(THROWER, 'broken.js');
 
-    const releaseCalls = captureConsoleError(() =>
-      assert.equal(thrower(SECRET, 'boom'), undefined),
-    );
-    const debugCalls = captureConsoleError(() =>
-      assert.equal(debugThrower(SECRET, 'boom'), undefined),
-    );
+    const calls = captureConsoleError(() => {
+      assert.equal(thrower(SECRET, 'boom'), undefined);
+      assert.equal(thrower(SECRET, 'boom'), undefined);
+    });
 
     assert.equal(globalThis.self.__t, 2);
-    assert.equal(releaseCalls.length, 0);
-    assert.equal(debugCalls.length, 1);
-    assert.match(debugCalls[0].join(' '), /broken\.js.*boom/);
+    assert.equal(calls.length, 2);
+    assert.match(calls[0].join(' '), /broken\.js.*boom/);
   });
 
   it('passes `this`, scriptletGlobals and args through to the original', () => {
@@ -118,6 +114,17 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(Object.getOwnPropertyDescriptor(proto, 'evaluate').enumerable, false);
     assert.deepEqual(Object.getOwnPropertyNames(globalThis).sort(), windowKeysBefore);
     assert.deepEqual(document.evaluate('//div', document), { nativeXPathResult: true });
+  });
+
+  it('dedups per document when the patched prototype survives a navigation', () => {
+    const proto = Object.getPrototypeOf(globalThis.document);
+
+    assert.equal(counter(SECRET, 't'), true);
+    assert.equal(counter(SECRET, 't'), false);
+
+    globalThis.document = Object.create(proto);
+    assert.equal(counter(SECRET, 't'), true);
+    assert.equal(globalThis.self.__c, 2);
   });
 
   it('cannot be suppressed by a page that forges the guard handshake', () => {
