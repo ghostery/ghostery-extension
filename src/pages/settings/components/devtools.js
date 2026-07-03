@@ -22,6 +22,7 @@ import Options from '/store/options.js';
 import Config from '/store/config.js';
 import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
+import FilteringDebug from '/store/filtering-debug.js';
 import * as telemetry from '/utils/telemetry.js';
 
 import { longDateFormatter } from '/ui/labels.js';
@@ -97,7 +98,8 @@ export default {
   config: store(Config),
   notifications: store([Notification]),
   resources: store(Resources),
-  render: ({ visible, counter, options, config, notifications, resources }) => html`
+  filteringDebug: store(FilteringDebug),
+  render: ({ visible, counter, options, config, notifications, resources, filteringDebug }) => html`
     <template layout="column gap:3 margin:top:2">
       ${(visible || counter > 5) &&
       html`
@@ -180,6 +182,62 @@ export default {
                 Ghostery specific fixes
               </settings-toggle>
             </div>
+            ${store.ready(filteringDebug) &&
+            html`
+              <settings-card static layout="column gap:3" translate="no">
+                <div layout="column gap:0.5">
+                  <ui-text type="headline-s">Filtering (this session)</ui-text>
+                  <ui-text type="body-xs" color="tertiary">
+                    Disable individual filtering capabilities for the current browser session. These
+                    overrides reset when the browser restarts.
+                  </ui-text>
+                </div>
+                <div layout="column gap">
+                  <settings-toggle
+                    value="${filteringDebug.network}"
+                    onchange="${html.set(filteringDebug, 'network')}"
+                    data-qa="toggle:filtering-debug:network"
+                  >
+                    Network filtering
+                  </settings-toggle>
+                  <settings-toggle
+                    value="${filteringDebug.cosmeticsCSS}"
+                    onchange="${html.set(filteringDebug, 'cosmeticsCSS')}"
+                    data-qa="toggle:filtering-debug:cosmetics-css"
+                  >
+                    Cosmetic filters (CSS)
+                  </settings-toggle>
+                  <settings-toggle
+                    value="${filteringDebug.cosmeticsScriptlets}"
+                    onchange="${html.set(filteringDebug, 'cosmeticsScriptlets')}"
+                    data-qa="toggle:filtering-debug:cosmetics-scriptlets"
+                  >
+                    Cosmetic filters (scriptlets)
+                  </settings-toggle>
+                  <settings-toggle
+                    value="${filteringDebug.cosmeticsExtendedCSS}"
+                    onchange="${html.set(filteringDebug, 'cosmeticsExtendedCSS')}"
+                    data-qa="toggle:filtering-debug:cosmetics-extended-css"
+                  >
+                    Cosmetic filters (extended CSS)
+                  </settings-toggle>
+                  <settings-toggle
+                    value="${filteringDebug.antitracking}"
+                    onchange="${html.set(filteringDebug, 'antitracking')}"
+                    data-qa="toggle:filtering-debug:antitracking"
+                  >
+                    Anti-tracking
+                  </settings-toggle>
+                  <settings-toggle
+                    value="${filteringDebug.autoconsent}"
+                    onchange="${html.set(filteringDebug, 'autoconsent')}"
+                    data-qa="toggle:filtering-debug:autoconsent"
+                  >
+                    Never-Consent (autoconsent)
+                  </settings-toggle>
+                </div>
+              </settings-card>
+            `}
             <settings-card static layout="column gap:3">
               ${store.ready(notifications) &&
               html`

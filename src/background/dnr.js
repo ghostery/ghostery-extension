@@ -11,8 +11,9 @@
 
 import { store } from 'hybrids';
 
-import { ENGINES, isGloballyPaused } from '/store/options.js';
+import Options, { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
+import FilteringDebug from '/store/filtering-debug.js';
 
 import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -71,7 +72,10 @@ if (__CHROMIUM__) {
   }
 
   function getIds(options) {
-    if (!options.terms || isGloballyPaused(options)) return [];
+    const debug = store.get(FilteringDebug);
+    const networkDisabled = store.ready(debug) && !debug.network;
+
+    if (!options.terms || isGloballyPaused(options) || networkDisabled) return [];
 
     const ids = ENGINES.reduce((acc, { name, key }) => {
       if (options[key] && DNR_RESOURCES.includes(name)) acc.push(name);
@@ -101,7 +105,7 @@ if (__CHROMIUM__) {
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
-  OptionsObserver.addListener(async function dnr(options, lastOptions) {
+  async function syncDNR(options, lastOptions) {
     const nextRulesetIds = getIds(options);
 
     if (
@@ -252,5 +256,13 @@ if (__CHROMIUM__) {
         captureException(e, { critical: true, once: true });
       }
     }
+  }
+
+  OptionsObserver.addListener(syncDNR);
+
+  // Re-sync rulesets when network filtering is toggled for the session (dev tools)
+  store.observe(FilteringDebug, async (_, debug, lastDebug) => {
+    if (!lastDebug || debug.network === lastDebug.network) return;
+    syncDNR(await store.resolve(Options));
   });
 }
