@@ -11,11 +11,10 @@
 
 /*
  * Usage:
- *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--firefox-version=esr_115.0] [--debug] [--clean]
+ *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--debug] [--clean]
  *
  * Options:
  *   --target: comma separated list of browsers to run the tests on (default: firefox,chrome)
- *   --firefox-version: pin the Firefox version to run the tests on (default: stable)
  *   --debug: run the tests in debug mode (default: false)
  *   --clean: clean the build artifacts before running the tests (default: false)
  */
@@ -82,16 +81,6 @@ export function buildForChrome() {
   }
 }
 
-const FIREFOX_VERSION = argv['firefox-version']?.[0];
-const FIREFOX_MAJOR = FIREFOX_VERSION
-  ? parseInt(FIREFOX_VERSION.replace(/^esr_/, ''), 10)
-  : Infinity;
-
-if (FIREFOX_MAJOR < 129) {
-  // installAddOn breaks with geckodriver 0.37+, which sends base64 add-ons straight to Marionette — old Firefox only accepts a file path. The version must be pinned via env: `wdio:geckodriverOptions` leaks geckoDriverVersion into the driver's CLI args.
-  process.env.GECKODRIVER_VERSION ||= '0.36.0';
-}
-
 export const config = {
   specs: [
     // Main features
@@ -105,7 +94,6 @@ export const config = {
     // The rest explicitly defined (a pattern would match main features too)
     [
       'spec/exceptions.spec.js',
-      'spec/adblocker-world.spec.js',
       'spec/custom-filters.spec.js',
       'spec/redirect-protection.spec.js',
       'spec/clear-cookies.spec.js',
@@ -124,11 +112,8 @@ export const config = {
   capabilities: [
     {
       browserName: 'firefox',
-      browserVersion: FIREFOX_VERSION || 'stable',
+      browserVersion: 'stable',
       cacheDir: '.wdio',
-      // Firefox builds below ~129 lack the WebDriver BiDi events WDIO subscribes
-      // to, so drive the pinned (older) versions over classic WebDriver instead.
-      'wdio:enforceWebDriverClassic': FIREFOX_MAJOR < 129,
       'moz:firefoxOptions': {
         args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
         prefs: {

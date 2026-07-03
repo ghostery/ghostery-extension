@@ -103,7 +103,7 @@
     "gecko_android": {},
     "gecko": {
       "id": "firefox@ghostery.com",
-      "strict_min_version": "115.0"
+      "strict_min_version": "128.0"
     }
   }
 }
