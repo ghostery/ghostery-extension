@@ -171,9 +171,16 @@ export async function setCustomFilters(filters) {
   await input.setValue(filters.join('\n'));
 
   await getExtensionElement('button:custom-filters:save').click();
-  await waitForIdleBackgroundTasks();
 
-  await expect(getExtensionElement('component:custom-filters:result')).toBeDisplayed();
+  // The save button label is updated with a success message only after the
+  // background round-trip completes (rebuilding the custom engine and reloading
+  // the main engine). Waiting for it ensures the filters are applied before the
+  // test navigates, otherwise cosmetic/scriptlet injection may run too early.
+  await expect(getExtensionElement('button:custom-filters:save')).toHaveText(
+    'Filter rules have been updated',
+  );
+
+  await waitForIdleBackgroundTasks();
 }
 
 export async function disableCustomFilters() {

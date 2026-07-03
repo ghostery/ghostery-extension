@@ -31,19 +31,6 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
-const LOCAL_OPTIONS = [
-  'terms',
-  'feedback',
-  'onboarding',
-  'panel',
-  'sync',
-  'revision',
-  'filtersUpdatedAt',
-  'fixesFilters',
-  'whatsNewVersion',
-];
-const PROTECTED_OPTIONS = ['exceptions', 'paused', 'zapped'];
-
 const OPTIONS_VERSION = 5;
 
 const Options = {
@@ -65,6 +52,7 @@ const Options = {
   customFilters: {
     enabled: false,
     trustedScriptlets: false,
+    filterLists: store.record({ enabled: true, trustedScriptlets: false }),
   },
 
   // Distractions
@@ -163,12 +151,48 @@ const Options = {
   },
 };
 
+// Options that are stored only in the local storage and not synced across devices
+const LOCAL_OPTIONS = [
+  'terms',
+  'feedback',
+  'onboarding',
+  'panel',
+  'sync',
+  'revision',
+  'filtersUpdatedAt',
+  'fixesFilters',
+  'whatsNewVersion',
+];
+
 export const SYNC_OPTIONS = Object.keys(Options).filter((key) => !LOCAL_OPTIONS.includes(key));
 
-export const REPORT_OPTIONS = [
-  ...SYNC_OPTIONS.filter((key) => !PROTECTED_OPTIONS.includes(key)),
-  'filtersUpdatedAt',
-];
+// Protected options may contain sensitive information, so in the
+// broken page reports they are reduced to a simple boolean.
+const PROTECTED_OPTIONS = {
+  customFilters: (value) => value.enabled,
+  exceptions: (value) => Object.keys(value).length > 0,
+  paused: (value) => Object.values(value).some(({ assist }) => !assist),
+  zapped: (value) => Object.keys(value).length > 0,
+};
+
+// Returns options prepared for the broken page report. Protected options, which
+// may contain sensitive information, are reduced to a simple boolean.
+export function getReportOptions(options) {
+  const result = {};
+
+  for (const key of [...SYNC_OPTIONS, 'filtersUpdatedAt']) {
+    const protect = PROTECTED_OPTIONS[key];
+
+    if (protect) {
+      // Only report protected options when they are active
+      if (protect(options[key])) result[key] = true;
+    } else {
+      result[key] = options[key];
+    }
+  }
+
+  return result;
+}
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
@@ -286,7 +310,12 @@ async function manage(options) {
   }
 
   if (managed.customFilters.enabled) {
-    options.customFilters = { enabled: true, trustedScriptlets: true };
+    options.customFilters = {
+      enabled: true,
+      trustedScriptlets: true,
+      // Only filters from the managed storage are allowed
+      filterLists: {},
+    };
   }
 
   return options;
