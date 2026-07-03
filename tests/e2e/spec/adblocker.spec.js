@@ -249,4 +249,45 @@ describe('Adblocker Capabilities', function () {
       ).not.toContain(true);
     });
   });
+
+  describe('Execution world', function () {
+    const WORLD_PAGE_URL = PAGE_URL + 'adblocker/world.html';
+
+    function waitForPageProbe(probe, timeoutMsg) {
+      return browser.waitUntil(() => browser.execute(probe), {
+        timeout: 5000,
+        timeoutMsg,
+      });
+    }
+
+    it('injects scriptlets into their declared ISOLATED world', async function () {
+      // `set-attr` declares `world: 'ISOLATED'`. The page sabotages its own
+      // `Element.prototype.setAttribute`, which only affects the MAIN world.
+      await setCustomFilters([`${PAGE_DOMAIN}##+js(set-attr, #world-target, data-world, true)`]);
+
+      await browser.url(WORLD_PAGE_URL);
+
+      await waitForPageProbe(function () {
+        return document.getElementById('world-target')?.getAttribute('data-world') === 'true';
+      }, 'ISOLATED scriptlet did not apply — it was likely injected into the MAIN world');
+    });
+
+    it('runs MAIN and ISOLATED scriptlets together on the same page', async function () {
+      // `set-attr` is ISOLATED (must survive the page's setAttribute override) and
+      // `set` is MAIN (must define a page-visible global).
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(set-attr, #world-target, data-world, true)`,
+        `${PAGE_DOMAIN}##+js(set, mainWorldProbe, true)`,
+      ]);
+
+      await browser.url(WORLD_PAGE_URL);
+
+      await waitForPageProbe(function () {
+        return (
+          document.getElementById('world-target')?.getAttribute('data-world') === 'true' &&
+          window.mainWorldProbe === true
+        );
+      }, 'MAIN and ISOLATED scriptlets did not both apply on the same page');
+    });
+  });
 });

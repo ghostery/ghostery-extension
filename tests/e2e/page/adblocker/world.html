@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Execution world</title>
+    <script>
+      // Neutralize setAttribute in the page's MAIN world. A scriptlet injected
+      // into the MAIN world is defeated by this override; one injected into its
+      // declared ISOLATED world keeps a pristine setAttribute and still applies.
+      (function () {
+        const setAttribute = Element.prototype.setAttribute;
+        Element.prototype.setAttribute = function (name, value) {
+          if (name === "data-world") {
+            return;
+          }
+          return setAttribute.call(this, name, value);
+        };
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="world-target"></div>
+  </body>
+</html>
