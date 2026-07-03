@@ -353,7 +353,7 @@ function mapPaths(paths) {
 }
 
 const PATH_LIMIT = 110;
-const SHORTENED_BASE_LENGTH = 5;
+const MIN_SHORTEN_BASE = 6;
 
 function splitSegment(segment) {
   const dotIdx = segment.lastIndexOf('.');
@@ -361,21 +361,17 @@ function splitSegment(segment) {
   return { base: segment.slice(0, dotIdx), ext: segment.slice(dotIdx) };
 }
 
-function hashDJBX33A(str) {
-  let hash = 5381;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) + hash + str.charCodeAt(i)) >>> 0;
-  }
-  return hash;
-}
+let shortNameCounter = 0;
+const shortNameBySegment = new Map();
+const originalByOutput = new Map();
 
-// Replaces the longest segment bases with `firstChar + base36(hash(base))` until the path fits the limit
+// Rename the longest segments to short counter values: "0", "1", ..., "z", "10", ...
 function shortenPath(path, limit) {
   const segments = path.split('/');
 
   while (segments.join('/').length > limit) {
     let longestIdx = -1;
-    let longestLength = SHORTENED_BASE_LENGTH + 1;
+    let longestLength = MIN_SHORTEN_BASE;
 
     for (let i = 0; i < segments.length; i++) {
       const { base } = splitSegment(segments[i]);
@@ -387,17 +383,38 @@ function shortenPath(path, limit) {
 
     if (longestIdx === -1) break;
 
-    const { base, ext } = splitSegment(segments[longestIdx]);
-    const hash = hashDJBX33A(base)
-      .toString(36)
-      .slice(0, SHORTENED_BASE_LENGTH - 1);
-    segments[longestIdx] = base[0] + hash + ext;
+    const segment = segments[longestIdx];
+    let short = shortNameBySegment.get(segment);
+    if (short === undefined) {
+      short = (shortNameCounter++).toString(36) + splitSegment(segment).ext;
+      shortNameBySegment.set(segment, short);
+    }
+    segments[longestIdx] = short;
   }
 
   return segments.join('/');
 }
 
-const shortenedPaths = new Map();
+// If a short name collides with a real file, append "-1", "-2", ... until unique.
+function makeUnique(path, original) {
+  const taken = (candidate) =>
+    originalByOutput.has(candidate) && originalByOutput.get(candidate) !== original;
+
+  if (!taken(path)) return path;
+
+  const slash = path.lastIndexOf('/');
+  const dir = path.slice(0, slash + 1);
+  const { base, ext } = splitSegment(path.slice(slash + 1));
+
+  let suffix = 1;
+  let candidate = `${dir}${base}-${suffix}${ext}`;
+  while (taken(candidate)) {
+    suffix += 1;
+    candidate = `${dir}${base}-${suffix}${ext}`;
+  }
+  return candidate;
+}
+
 const buildPromise = build({
   ...config,
   build: {
@@ -427,24 +444,21 @@ const buildPromise = build({
             .replace('_virtual', 'virtual');
 
           const hasPwd = name.startsWith(pwd);
-          let relPath = hasPwd ? name.slice(pwd.length) : name;
+          const original = hasPwd ? name.slice(pwd.length) : name;
+          let relPath = original;
 
           if (relPath.length > PATH_LIMIT) {
-            const shortened = shortenPath(relPath, PATH_LIMIT);
-
-            if (shortened !== relPath) {
-              const existing = shortenedPaths.get(shortened);
-              if (existing !== undefined && existing !== relPath) {
-                throw new Error(
-                  `Path shortening collision: "${relPath}" and "${existing}" both shorten to "${shortened}"`,
-                );
-              }
-
-              shortenedPaths.set(shortened, relPath);
-              relPath = shortened;
-              name = hasPwd ? pwd + relPath : relPath;
-            }
+            relPath = makeUnique(shortenPath(relPath, PATH_LIMIT), original);
+            name = hasPwd ? pwd + relPath : relPath;
           }
+
+          const claimed = originalByOutput.get(relPath);
+          if (claimed !== undefined && claimed !== original) {
+            throw new Error(
+              `Path collision: "${original}" and "${claimed}" both map to "${relPath}"`,
+            );
+          }
+          originalByOutput.set(relPath, original);
 
           if (relPath.length > PATH_LIMIT && !argv['no-filename-limit']) {
             throw new Error(
@@ -461,13 +475,16 @@ const buildPromise = build({
     {
       name: 'shortened-path-banner',
       buildStart() {
-        shortenedPaths.clear();
+        shortNameCounter = 0;
+        shortNameBySegment.clear();
+        originalByOutput.clear();
       },
       generateBundle(_, bundle) {
         for (const [fileName, chunk] of Object.entries(bundle)) {
           if (chunk.type !== 'chunk') continue;
-          const original = shortenedPaths.get('/' + fileName);
-          if (original) {
+          const outputPath = '/' + fileName;
+          const original = originalByOutput.get(outputPath);
+          if (original && original !== outputPath) {
             chunk.code = `/* original: ${original} */\n` + chunk.code;
           }
         }
