@@ -44,3 +44,4 @@ xcuserdata
 
 # WDIO
 .wdio
+.claude/

@@ -20,7 +20,7 @@ import { setup, reloadMainEngine } from './adblocker/engines.js';
 export async function openElementPicker(tabId) {
   await chrome.scripting.executeScript({
     injectImmediately: true,
-    world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
+    world: 'ISOLATED',
     target: { tabId },
     files: ['/content_scripts/element-picker.js'],
   });

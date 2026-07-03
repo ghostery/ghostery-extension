@@ -37,7 +37,7 @@ async function expectRanExactlyOnce(key) {
   await expect(await readGlobal(key)).toBe(1);
 }
 
-// Firefox's `contentScripts.register` only affects future document loads; reload until active.
+// Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
 async function ensureScriptletActive(key) {
   await browser.waitUntil(
     async () => {

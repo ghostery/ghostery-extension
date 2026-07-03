@@ -75,7 +75,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
       chrome.scripting.executeScript(
         {
           injectImmediately: true,
-          world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
+          world: 'ISOLATED',
           target: {
             tabId: details.tabId,
           },

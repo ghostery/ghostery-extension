@@ -66,17 +66,6 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(thrower('__base', 'boom'), undefined);
   });
 
-  it('keeps later scriptlets in a concatenated bundle running when an earlier one throws', () => {
-    // Mirrors the Firefox content-script assembly: wrapped calls executed in sequence.
-    const throwerSrc = wrapScriptletSource(THROWER);
-    const counterSrc = wrapScriptletSource(COUNTER);
-    const bundle = `(${throwerSrc})("__base", "t1", {});\n(${counterSrc})("__base", "t2", {});\n`;
-
-    new Function(bundle)();
-
-    assert.equal(globalThis.self.__c, 1);
-  });
-
   it('logs the swallowed error only in debug builds', () => {
     const debugThrower = build(THROWER, { debug: true, name: 'broken.js' });
 

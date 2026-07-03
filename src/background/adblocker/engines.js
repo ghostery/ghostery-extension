@@ -22,8 +22,6 @@ import asyncSetup from '/utils/setup.js';
 import { updateDNRRulesForExceptions } from '../exceptions.js';
 import { updateFilterLists } from '../custom-filters/index.js';
 
-import { contentScripts } from './content-scripts.js';
-
 function getEnabledEngines(options) {
   if (options.terms) {
     const list = ENGINES.filter(({ key }) => options[key]).map(({ name }) => name);
@@ -89,10 +87,6 @@ export async function reloadMainEngine() {
   } else {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
-  }
-
-  if (__FIREFOX__) {
-    contentScripts.unregisterAll();
   }
 }
 

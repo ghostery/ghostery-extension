@@ -21,13 +21,11 @@ import DisabledFilters from '/store/disabled-filters.js';
 import FilteringDebug from '/store/filtering-debug.js';
 
 import * as engines from '/utils/engines.js';
-import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
 
 import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
-import { contentScripts } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -63,17 +61,6 @@ function getGuardBase(hostname) {
 }
 
 function injectScriptlets(filters, hostname, details) {
-  if (__FIREFOX__) {
-    if (filters.length === 0) {
-      contentScripts.unregister(hostname);
-      return;
-    }
-    if (contentScripts.isRegistered(hostname)) {
-      return;
-    }
-  }
-
-  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -101,16 +88,6 @@ function injectScriptlets(filters, hostname, details) {
     ];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-    if (__FIREFOX__) {
-      let code = '';
-      if (filter.hasSubframeConstraint()) {
-        code += `window.parent!==window&&`;
-      }
-      code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      scriptletsByWorld[declaredWorld] += code;
-      continue;
-    }
-
     chrome.scripting.executeScript(
       {
         injectImmediately: true,
@@ -125,10 +102,6 @@ function injectScriptlets(filters, hostname, details) {
         }
       },
     );
-  }
-
-  if (__FIREFOX__) {
-    contentScripts.register(hostname, scriptletsByWorld);
   }
 }
 
@@ -164,13 +137,9 @@ function injectStyles(styles, details) {
 
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
-let framesHierarchy;
-if (__CHROMIUM__) {
-  framesHierarchy = new FramesHierarchy();
-
-  framesHierarchy.handleWebWorkerStart();
-  framesHierarchy.handleWebextensionEvents();
-}
+const framesHierarchy = new FramesHierarchy();
+framesHierarchy.handleWebWorkerStart();
+framesHierarchy.handleWebextensionEvents();
 
 /*
  * returns `false` if the injection should be blocked for the given hostname
@@ -178,7 +147,7 @@ if (__CHROMIUM__) {
  * (like registering content scripts for scriptlet filters on Firefox)
  */
 async function injectCosmetics(details, config) {
-  const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
+  const { bootstrap: isBootstrap = false } = config;
 
   try {
     setup.pending && (await setup.pending);
@@ -192,10 +161,6 @@ async function injectCosmetics(details, config) {
   const parsed = parseWithCache(url);
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
-
-  if (__FIREFOX__ && scriptletsOnly && contentScripts.isRegistered(hostname)) {
-    return;
-  }
 
   const options = store.get(Options);
   // Checking the request url hostname
@@ -219,20 +184,10 @@ async function injectCosmetics(details, config) {
 
   let ancestors = undefined;
   if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    if (__FIREFOX__) {
-      // On Firefox with content scripts API, we need to collect
-      // every scriptlets will potentially run on the hostname.
-      // Putting same values to `ancestors` enables adblocker to
-      // find all possible cases. The subframe constraint is
-      // validated by the `window.parent` property upon a script
-      // is executed.
-      ancestors = [{ domain, hostname }];
-    } else {
-      ancestors = framesHierarchy.ancestors(
-        { tabId, frameId, parentFrameId, documentId },
-        { domain, hostname },
-      );
-    }
+    ancestors = framesHierarchy.ancestors(
+      { tabId, frameId, parentFrameId, documentId },
+      { domain, hostname },
+    );
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
@@ -278,10 +233,6 @@ async function injectCosmetics(details, config) {
 
     if (isBootstrap) {
       injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details);
-    }
-
-    if (scriptletsOnly) {
-      return;
     }
 
     const { styles, extended } = engine.injectCosmeticFilters(styleFilters, {
@@ -356,20 +307,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-if (__FIREFOX__) {
-  OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
-    for (const hostname of Object.keys(paused)) {
-      contentScripts.unregister(hostname);
-    }
-  });
-
-  chrome.webNavigation.onBeforeNavigate.addListener(
-    (details) => {
-      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-    },
-    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-  );
-} else {
+if (!__FIREFOX__) {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (details.tabId === -1) return;
