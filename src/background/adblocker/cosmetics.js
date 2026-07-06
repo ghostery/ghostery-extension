@@ -50,7 +50,12 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Unguessable per-hostname value: hardens the handshake (a page running before us could still observe it) and is not a cross-site identifier.
+// crypto.randomUUID per hostname:
+//  - random so forging the handshake by brute-force guessing is infeasible
+//  - per-hostname, so the value cannot serve as a cross-site identifier
+//
+// Note that a page that runs before us can read the secret (via a hooked document.evaluate) and forge the handshake,
+// but it can already neutralize scriptlets directly — so the guard is not the weak link.
 const guardSecrets = new Map();
 function getGuardSecret(hostname) {
   let secret = guardSecrets.get(hostname);
