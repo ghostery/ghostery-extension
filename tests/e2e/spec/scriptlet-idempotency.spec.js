@@ -25,7 +25,7 @@ function readMarker(id) {
 async function expectRanExactlyOnce(id, expected) {
   try {
     await browser.waitUntil(async () => (await readMarker(id)) === expected, {
-      timeout: 10000,
+      timeout: 5000,
     });
   } catch {
     throw new Error(
@@ -70,6 +70,7 @@ describe('Scriptlet injection idempotency', function () {
 
     await browser.refresh();
     await expectRanExactlyOnce('rpnt-a', 'aaa+');
+    await expectRanExactlyOnce('rpnt-b', 'bbb+');
   });
 
   it('keeps a separate registry per frame', async function () {

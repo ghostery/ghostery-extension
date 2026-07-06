@@ -25,16 +25,16 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
   if (!secret || !token) return run();
 
   // Native `evaluate` throws on these arguments; only the guard proxy answers, echoing the secret.
-  function ask(key, claim) {
+  function ask(claim) {
     try {
-      var answer = document.evaluate(secret, key, claim);
+      var answer = document.evaluate(secret, token, claim);
       return answer && typeof answer === 'object' && answer.s === secret ? answer : null;
     } catch {
       return null;
     }
   }
 
-  var status = ask(token, false);
+  var status = ask(false);
 
   if (!status) {
     try {
@@ -51,12 +51,13 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
       var store = new WeakMap();
       Object.defineProperty(owner, 'evaluate', {
         value: new Proxy(evaluate, {
-          apply: function (target, that, callArgs) {
-            if (callArgs[0] !== secret || !that) return target.apply(that, callArgs);
-            var tokens = store.get(that);
+          apply: function (target, receiver, callArgs) {
+            if (callArgs[0] !== secret || !receiver)
+              return Reflect.apply(target, receiver, callArgs);
+            var tokens = store.get(receiver);
             if (!tokens) {
               tokens = new Set();
-              store.set(that, tokens);
+              store.set(receiver, tokens);
             }
             if (callArgs[2]) {
               tokens.add(callArgs[1]);
@@ -73,16 +74,15 @@ function guardRunOnce(secret, token, orig, args, thisArg, logError) {
       return run();
     }
 
-    status = ask(token, false);
+    status = ask(false);
     if (!status) return run();
   }
 
   if (status.has) return false;
 
-  // Claiming only after a successful run means a throwing scriptlet is retried, never suppressed.
-  var result = run();
-  if (result === true) ask(token, true);
-  return result;
+  // Claim before running so a scriptlet that throws mid-way is not re-run against a mutated document.
+  ask(true);
+  return run();
 }
 
 export function wrapScriptletSource(originalSource, name = 'scriptlet') {

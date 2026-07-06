@@ -100,6 +100,7 @@ describe('adblocker content scripts registry', () => {
   });
 
   it('retries after a failed registration', async () => {
+    const original = globalThis.browser.contentScripts.register;
     const warn = console.warn;
     console.warn = () => {};
     try {
@@ -109,16 +110,38 @@ describe('adblocker content scripts registry', () => {
       await contentScripts.register('example.com', { MAIN: 'm;', ISOLATED: '' });
     } finally {
       console.warn = warn;
+      globalThis.browser.contentScripts.register = original;
     }
 
-    globalThis.browser.contentScripts.register = async (options) => {
-      const handle = { options, unregistered: false, unregister() {} };
-      registrations.push(handle);
-      return handle;
-    };
     await contentScripts.register('example.com', { MAIN: 'm;', ISOLATED: '' });
 
     assert.equal(registrations.length, 1);
+  });
+
+  it('unregisters already-registered worlds when a later world fails', async () => {
+    const handles = [];
+    const warn = console.warn;
+    console.warn = () => {};
+    try {
+      globalThis.browser.contentScripts.register = async (options) => {
+        if (options.world === 'ISOLATED') throw new Error('boom');
+        const handle = {
+          options,
+          unregistered: false,
+          unregister() {
+            this.unregistered = true;
+          },
+        };
+        handles.push(handle);
+        return handle;
+      };
+      await contentScripts.register('example.com', { MAIN: 'm;', ISOLATED: 'i;' });
+    } finally {
+      console.warn = warn;
+    }
+
+    assert.equal(handles.length, 1);
+    assert.equal(handles[0].unregistered, true);
   });
 
   it('unregisterAll removes every registration and allows re-registration', async () => {

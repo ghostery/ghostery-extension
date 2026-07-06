@@ -14,9 +14,10 @@ export const contentScripts = (() => {
   return {
     async register(hostname, scriptletsByWorld) {
       const key = JSON.stringify(scriptletsByWorld);
-      if (map.get(hostname)?.key === key) return;
+      const existing = map.get(hostname);
+      if (existing?.key === key) return;
 
-      if (!map.has(hostname) && map.size >= 1000) this.unregisterAll();
+      if (!existing && map.size >= 1000) this.unregisterAll();
       this.unregister(hostname);
 
       const registered = [];

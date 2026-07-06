@@ -79,16 +79,16 @@ describe('scriptlet idempotency guard', () => {
     assert.equal(globalThis.self.__c, 2);
   });
 
-  it('does not claim the token when the scriptlet throws, and logs the error', () => {
+  it('runs a throwing scriptlet exactly once, claiming the token, and logs the error', () => {
     const thrower = build(THROWER, 'broken.js');
 
     const calls = captureConsoleError(() => {
       assert.equal(thrower(SECRET, 'boom'), undefined);
-      assert.equal(thrower(SECRET, 'boom'), undefined);
+      assert.equal(thrower(SECRET, 'boom'), false);
     });
 
-    assert.equal(globalThis.self.__t, 2);
-    assert.equal(calls.length, 2);
+    assert.equal(globalThis.self.__t, 1);
+    assert.equal(calls.length, 1);
     assert.match(calls[0].join(' '), /broken\.js.*boom/);
   });
 
@@ -116,7 +116,7 @@ describe('scriptlet idempotency guard', () => {
     assert.deepEqual(document.evaluate('//div', document), { nativeXPathResult: true });
   });
 
-  it('dedups per document when the patched prototype survives a navigation', () => {
+  it('dedups per document when the patched prototype survives the initial about:blank swap', () => {
     const proto = Object.getPrototypeOf(globalThis.document);
 
     assert.equal(counter(SECRET, 't'), true);

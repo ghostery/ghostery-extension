@@ -50,7 +50,7 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Random so a page cannot forge the guard handshake; per-hostname so it is not a cross-site identifier.
+// Unguessable per-hostname value: hardens the handshake (a page running before us could still observe it) and is not a cross-site identifier.
 const guardSecrets = new Map();
 function getGuardSecret(hostname) {
   let secret = guardSecrets.get(hostname);
