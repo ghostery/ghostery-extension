@@ -44,9 +44,10 @@ function handleMainContext(scriptletGlobals = {}, ...args) {
     Number.isSafeInteger(scriptletGlobals.__secret, key);
   } else {
     const storage = new Set([key]);
-    const signature = Function.prototype.toString.call(Number.isSafeInteger);
+    const isSafeIntegerSign = Function.prototype.toString.call(Number.isSafeInteger);
+    const toStringSign = Function.prototype.toString.call(Function.prototype.toString);
 
-    Number.isSafeInteger = new Proxy(Number.isSafeInteger, {
+    const isSafeIntegerProxy = new Proxy(Number.isSafeInteger, {
       apply(target, thisArg, argArray) {
         if (argArray[0] === scriptletGlobals.__secret) {
           if (argArray.length === 1) {
@@ -66,14 +67,29 @@ function handleMainContext(scriptletGlobals = {}, ...args) {
     });
 
     // Patch `Function.prototype.toString.call`
-    Function.prototype.toString = new Proxy(Function.prototype.toString, {
+    const toStringProxy = new Proxy(Function.prototype.toString, {
       apply(target, thisArg, argArray) {
-        if (thisArg === Number.isSafeInteger) {
-          return signature;
+        if (thisArg === isSafeIntegerProxy) {
+          return isSafeIntegerSign;
+        } else if (thisArg === toStringProxy) {
+          return toStringSign;
         }
 
         return Reflect.apply(target, thisArg, argArray);
       },
+    });
+
+    Object.defineProperty(Number, 'isSafeInteger', {
+      value: isSafeIntegerProxy,
+      configurable: true,
+      enumerable: false,
+      writable: true,
+    });
+    Object.defineProperty(Function.prototype, 'toString', {
+      value: toStringProxy,
+      configurable: true,
+      enumerable: false,
+      writable: true,
     });
   }
 
