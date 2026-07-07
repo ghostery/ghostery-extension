@@ -38,19 +38,25 @@ async function expectRanExactlyOnce(id, expected) {
   await expect(await readMarker(id)).toBe(expected);
 }
 
-function readMainWorldRuns() {
-  return browser.execute(() => window.mainWorldRuns);
+// A MAIN-world-only wrap of the page's `JSON.stringify`; each extra wrap adds a `+` ("aaa++").
+function readStringifyMarker() {
+  return browser.execute(() => JSON.parse(JSON.stringify({ marker: 'aaa' })).marker);
 }
 
 async function expectMainWorldRanExactlyOnce() {
-  await browser.waitUntil(async () => (await readMainWorldRuns()) >= 1, {
-    timeout: 5000,
-    timeoutMsg: 'MAIN-world scriptlet never ran',
-  });
+  try {
+    await browser.waitUntil(async () => (await readStringifyMarker()) === 'aaa+', {
+      timeout: 5000,
+    });
+  } catch {
+    throw new Error(
+      `MAIN-world scriptlet did not wrap JSON.stringify exactly once: ${JSON.stringify(await readStringifyMarker())}`,
+    );
+  }
 
   // Give any further overlapping triggers a chance to (incorrectly) run again.
   await browser.pause(500);
-  await expect(await readMainWorldRuns()).toBe(1);
+  await expect(await readStringifyMarker()).toBe('aaa+');
 }
 
 // Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
@@ -65,16 +71,15 @@ async function ensureScriptletActive() {
   );
 }
 
-// `rpnt` (ISOLATED world) rewrites matching text on every execution, so a duplicate run is
-// DOM-visible ("aaa++"). `set-constant` (MAIN world) writes `scriptletProbe.value` once per
-// execution, which the page's counting accessor turns into a duplicate-run counter.
+// A duplicate run compounds into a visible "++": `rpnt` (ISOLATED) rewrites DOM text, and
+// `trusted-replace-outbound-text` (MAIN) rewrites the page's own `JSON.stringify` output.
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
     await setCustomFilters([
       `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
       `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
-      `${PAGE_DOMAIN}##+js(set-constant, scriptletProbe.value, 1)`,
+      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
     ]);
     await ensureScriptletActive();
   });
