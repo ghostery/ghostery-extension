@@ -20,6 +20,8 @@ function handleIsolatedContext(scriptletGlobals = {}, ...args) {
     return;
   }
 
+  markers.add(key);
+
   return __CALLEE__(scriptletGlobals, ...args);
 }
 
