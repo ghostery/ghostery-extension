@@ -38,6 +38,21 @@ async function expectRanExactlyOnce(id, expected) {
   await expect(await readMarker(id)).toBe(expected);
 }
 
+function readMainWorldRuns() {
+  return browser.execute(() => window.mainWorldRuns);
+}
+
+async function expectMainWorldRanExactlyOnce() {
+  await browser.waitUntil(async () => (await readMainWorldRuns()) >= 1, {
+    timeout: 5000,
+    timeoutMsg: 'MAIN-world scriptlet never ran',
+  });
+
+  // Give any further overlapping triggers a chance to (incorrectly) run again.
+  await browser.pause(500);
+  await expect(await readMainWorldRuns()).toBe(1);
+}
+
 // Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
 async function ensureScriptletActive() {
   await browser.waitUntil(
@@ -50,13 +65,16 @@ async function ensureScriptletActive() {
   );
 }
 
-// `rpnt` rewrites matching text on every execution, so a duplicate run is DOM-visible ("aaa++").
+// `rpnt` (ISOLATED world) rewrites matching text on every execution, so a duplicate run is
+// DOM-visible ("aaa++"). `set-constant` (MAIN world) writes `scriptletProbe.value` once per
+// execution, which the page's counting accessor turns into a duplicate-run counter.
 describe('Scriptlet injection idempotency', function () {
   before(enableExtension);
   before(async () => {
     await setCustomFilters([
       `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
       `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
+      `${PAGE_DOMAIN}##+js(set-constant, scriptletProbe.value, 1)`,
     ]);
     await ensureScriptletActive();
   });
@@ -79,6 +97,24 @@ describe('Scriptlet injection idempotency', function () {
 
     await switchFrame($('#iframe-static'));
     await expectRanExactlyOnce('rpnt-a', 'aaa+');
+
+    await browser.switchFrame(null);
+  });
+
+  it('injects a MAIN-world scriptlet exactly once per document, including after reload', async function () {
+    await browser.url(PAGE_URL);
+    await expectMainWorldRanExactlyOnce();
+
+    await browser.refresh();
+    await expectMainWorldRanExactlyOnce();
+  });
+
+  it('keeps a MAIN-world scriptlet idempotent per frame', async function () {
+    await browser.url(PAGE_URL);
+    await expectMainWorldRanExactlyOnce();
+
+    await switchFrame($('#iframe-static'));
+    await expectMainWorldRanExactlyOnce();
 
     await browser.switchFrame(null);
   });
