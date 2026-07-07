@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets from '@ghostery/scriptlets';
+import scriptlets from '../../rule_resources/scriptlets.js';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -27,6 +27,8 @@ import { tabStats } from '../stats.js';
 import { setup } from './engines.js';
 import { contentScripts } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
+
+const secret = crypto.randomUUID();
 
 function resolveInjectionTarget(details) {
   const target = { tabId: details.tabId };
@@ -77,7 +79,10 @@ function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const args = [
+      { ...scriptletGlobals, __funcName: parsed.name, __secret: secret },
+      ...parsed.args.map((arg) => decodeURIComponent(arg)),
+    ];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     if (__FIREFOX__) {

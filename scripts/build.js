@@ -127,6 +127,10 @@ execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
 });
 
+execSync('node scripts/wrap-scriptlets.js', {
+  stdio: silent ? '' : 'inherit',
+});
+
 // --- Generate static pages ---
 
 const staticPath = resolve('src', 'static_pages');
@@ -321,6 +325,13 @@ for (const file of readdirSync(resolve(options.srcDir, 'rule_resources', 'redire
     resolve(options.outDir, 'rule_resources', 'redirects', file),
   );
 }
+
+// generate temporary scriptlets
+
+cpSync(
+  resolve(options.srcDir, 'rule_resources/scriptlets.js'),
+  resolve(options.outDir, 'rule_resources/scriptlets.js'),
+);
 
 // append web_accessible_resources
 const redirectResources = readdirSync(resolve(options.outDir, 'rule_resources/redirects'));
