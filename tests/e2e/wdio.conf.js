@@ -102,6 +102,7 @@ export const config = {
     [
       'spec/exceptions.spec.js',
       'spec/custom-filters.spec.js',
+      'spec/scriptlet-idempotency.spec.js',
       'spec/redirect-protection.spec.js',
       'spec/clear-cookies.spec.js',
       'spec/panel.spec.js',
