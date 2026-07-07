@@ -48,7 +48,32 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-function injectScriptlets(filters, hostname, details) {
+// On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
+// same document, so scriptlets would run twice. We remember the documentIds we have already
+// injected into (proved by executeScript's result) and skip a repeat. The in-memory set gives
+// a synchronous check that closes the race between the two triggers; session storage keeps it
+// across service-worker restarts.
+const INJECTED_DOCUMENTS_KEY = 'injectedScriptletDocuments';
+const injectedDocuments = new Set();
+
+if (__CHROMIUM__) {
+  chrome.storage.session
+    .get(INJECTED_DOCUMENTS_KEY)
+    .then((stored) => {
+      for (const id of stored[INJECTED_DOCUMENTS_KEY] || []) injectedDocuments.add(id);
+    })
+    .catch(() => {});
+}
+
+function rememberInjectedDocument(documentId) {
+  injectedDocuments.add(documentId);
+  if (injectedDocuments.size > 1000) {
+    injectedDocuments.delete(injectedDocuments.values().next().value);
+  }
+  chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
+}
+
+async function injectScriptlets(filters, hostname, details) {
   if (__FIREFOX__) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
@@ -59,7 +84,16 @@ function injectScriptlets(filters, hostname, details) {
     }
   }
 
+  if (__CHROMIUM__) {
+    if (filters.length === 0) return;
+    if (details.documentId) {
+      if (injectedDocuments.has(details.documentId)) return;
+      injectedDocuments.add(details.documentId);
+    }
+  }
+
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  const injections = [];
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -90,24 +124,36 @@ function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
-    chrome.scripting.executeScript(
-      {
-        injectImmediately: true,
-        world: declaredWorld,
-        target: resolveInjectionTarget(details),
-        func,
-        args,
-      },
-      () => {
-        if (chrome.runtime.lastError) {
-          console.warn(chrome.runtime.lastError);
-        }
-      },
+    injections.push(
+      chrome.scripting
+        .executeScript({
+          injectImmediately: true,
+          world: declaredWorld,
+          target: resolveInjectionTarget(details),
+          func,
+          args,
+        })
+        .catch((e) => {
+          console.warn(e);
+          return null;
+        }),
     );
   }
 
   if (__FIREFOX__) {
     contentScripts.register(hostname, scriptletsByWorld);
+    return;
+  }
+
+  // The documentId echoed back by executeScript proves the injection landed; persist it so
+  // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
+  const results = await Promise.all(injections);
+  const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
+
+  if (injectedDocumentId) {
+    rememberInjectedDocument(injectedDocumentId);
+  } else if (details.documentId) {
+    injectedDocuments.delete(details.documentId);
   }
 }
 
