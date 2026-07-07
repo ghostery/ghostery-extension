@@ -51,9 +51,9 @@ function handleMainContext(scriptletGlobals = {}, ...args) {
             return true;
           }
 
-          if (argArray[1] === key) {
-            const result = storage.has(key);
-            storage.add(key);
+          if (typeof argArray[1] === 'string') {
+            const result = storage.has(argArray[1]);
+            storage.add(argArray[1]);
 
             return result;
           }
