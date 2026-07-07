@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E2E Test Iframe Page</title>
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Counts MAIN-world scriptlet writes so a duplicate `set-constant` injection is observable. -->
+    <script>
+      window.mainWorldRuns = 0;
+      (function () {
+        const probe = {};
+        Object.defineProperty(probe, 'value', {
+          configurable: false,
+          set() {
+            window.mainWorldRuns += 1;
+          },
+        });
+        window.scriptletProbe = probe;
+      })();
+    </script>
   </head>
   <body>
     <!-- Ad-Blocking CSS container -->
