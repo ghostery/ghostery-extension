@@ -27,3 +27,14 @@ export function isUserScriptsSupported() {
     return false;
   }
 }
+
+// Real capability probe (no __DEBUG__ bypass) so a disabled "Allow user scripts"
+// toggle falls back to the legacy executeScript injection path.
+export function isUserScriptsRegisterSupported() {
+  try {
+    chrome.userScripts.getScripts();
+    return typeof chrome.userScripts.register === 'function';
+  } catch {
+    return false;
+  }
+}

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { browser, expect, $ } from '@wdio/globals';
+import { browser, expect, $, $$ } from '@wdio/globals';
 
 export const PAGE_PORT = 6789;
 export const PAGE_DOMAIN = `page.localhost`;
@@ -105,6 +105,51 @@ export async function reloadExtension() {
 
   await browser.url('ghostery:panel');
   await waitForIdleBackgroundTasks();
+}
+
+// Reports whether the background registers scriptlets via chrome.userScripts (true)
+// or falls back to scripting.executeScript (false). Chromium only.
+export async function isUserScriptsPathActive() {
+  await browser.url('ghostery:panel');
+  await browser.pause(100);
+
+  return browser.execute(async function () {
+    return (window.chrome || window.browser).runtime.sendMessage({
+      action: 'e2e:userScriptsActive',
+    });
+  });
+}
+
+// Chrome 138+ gates chrome.userScripts behind a per-extension "Allow user scripts"
+// toggle, so e2e can reach the userScripts injection path only by flipping it. No-op
+// on Firefox. The service worker only picks up the change on a fresh start, hence the
+// reload.
+export async function setUserScriptsAllowed(value) {
+  if (!browser.isChromium) return;
+
+  const extensionId = BASE_URL.match(/^chrome-extension:\/\/([^/]+)\//)?.[1];
+  if (!extensionId) {
+    throw new Error(`Could not resolve extension id from base URL: ${BASE_URL}`);
+  }
+
+  await browser.url(`chrome://extensions/?id=${extensionId}`);
+
+  const toggle = await $('>>>#allow-user-scripts');
+  if (!(await toggle.isExisting())) {
+    const ids = [];
+    for (const t of await $$('>>>cr-toggle')) ids.push(await t.getAttribute('id'));
+    throw new Error(`"Allow user scripts" toggle not found; cr-toggle ids: ${JSON.stringify(ids)}`);
+  }
+
+  if ((await toggle.getProperty('checked')) === value) return;
+
+  await toggle.click();
+  await browser.waitUntil(async () => (await toggle.getProperty('checked')) === value, {
+    timeout: 5000,
+    timeoutMsg: `"Allow user scripts" toggle did not turn ${value ? 'on' : 'off'}`,
+  });
+
+  await reloadExtension();
 }
 
 export async function setToggle(name, value) {

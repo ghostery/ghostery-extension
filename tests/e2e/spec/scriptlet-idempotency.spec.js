@@ -13,6 +13,8 @@ import {
   enableExtension,
   setCustomFilters,
   disableCustomFilters,
+  setUserScriptsAllowed,
+  isUserScriptsPathActive,
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -73,19 +75,7 @@ async function ensureScriptletActive() {
 
 // A duplicate run compounds into a visible "++": `rpnt` (ISOLATED) rewrites DOM text, and
 // `trusted-replace-outbound-text` (MAIN) rewrites the page's own `JSON.stringify` output.
-describe('Scriptlet injection idempotency', function () {
-  before(enableExtension);
-  before(async () => {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
-      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
-    ]);
-    await ensureScriptletActive();
-  });
-
-  after(disableCustomFilters);
-
+function idempotencyChecks() {
   it('injects each scriptlet and argument set exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
     await expectRanExactlyOnce('rpnt-a', 'aaa+');
@@ -122,5 +112,49 @@ describe('Scriptlet injection idempotency', function () {
     await expectMainWorldRanExactlyOnce();
 
     await browser.switchFrame(null);
+  });
+}
+
+describe('Scriptlet injection idempotency', function () {
+  before(enableExtension);
+  before(async () => {
+    await setCustomFilters([
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
+      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
+    ]);
+    await ensureScriptletActive();
+  });
+
+  after(disableCustomFilters);
+
+  // Legacy path: scripting.executeScript on Chromium, browser.contentScripts on Firefox.
+  describe('via the legacy injection path', function () {
+    before(async function () {
+      if (browser.isChromium) {
+        await setUserScriptsAllowed(false);
+        await ensureScriptletActive();
+        await expect(await isUserScriptsPathActive()).toBe(false);
+      }
+    });
+
+    idempotencyChecks();
+  });
+
+  // Chromium only: the same guarantees through chrome.userScripts (document_start).
+  describe('via chrome.userScripts', function () {
+    before(async function () {
+      if (!browser.isChromium) this.skip();
+
+      await setUserScriptsAllowed(true);
+      await ensureScriptletActive();
+      await expect(await isUserScriptsPathActive()).toBe(true);
+    });
+
+    after(async function () {
+      if (browser.isChromium) await setUserScriptsAllowed(false);
+    });
+
+    idempotencyChecks();
   });
 });
