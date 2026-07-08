@@ -22,6 +22,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
+import { getPhantomCount } from '/utils/phantom-stats.js';
 import Request from '/utils/request.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 
@@ -114,7 +115,7 @@ async function refreshIcon(tabId) {
         tabId,
         text:
           options.trackerCount && (options.mode !== MODE_ZAP || !paused)
-            ? String(stats.trackers.length)
+            ? String(getPhantomCount(stats.domain) || stats.trackers.length)
             : '',
       });
     } catch (e) {

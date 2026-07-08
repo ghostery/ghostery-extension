@@ -372,6 +372,14 @@ export default {
         <panel-container>
           ${store.ready(stats)
             ? html`
+                ${stats.phantomCount > 0 &&
+                html`
+                  <panel-phantom-snapshot
+                    bars="${stats.phantomBars}"
+                    domain="${stats.domain}"
+                    layout="margin:1.5:1.5:0"
+                  ></panel-phantom-snapshot>
+                `}
                 <ui-stats
                   categories="${stats.topCategories}"
                   type="${options.panel.statsType}"
