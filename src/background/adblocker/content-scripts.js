@@ -24,7 +24,10 @@ const firefoxRegistry = (() => {
             await browser.contentScripts.register({
               js: [{ code }],
               allFrames: true,
-              matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+              // Match the exact hostname (like the Chromium userScripts registry). A `*.` wildcard
+              // would also match subdomain frames, which self-register under their own hostname —
+              // the overlap injects the same scriptlet twice into a subdomain child.
+              matches: [`https://${hostname}/*`, `http://${hostname}/*`],
               matchAboutBlank: true,
               matchOriginAsFallback: true,
               runAt: 'document_start',
