@@ -36,8 +36,14 @@
     "message": "Adicionar $${0} como exceção",
     "description": "Add domain as an exception"
   },
+  "add_a_filter_list_url": {
+    "message": "Adicionar um URL de lista de filtros"
+  },
   "add_exception": {
     "message": "Adicionar exceção"
+  },
+  "add_filter_list_urls_to_have_them_automatically_updated_and_applied_": {
+    "message": "Adicione URLs de listas de filtros para que sejam atualizadas e aplicadas automaticamente."
   },
   "add_on_s_health": {
     "message": "Saúde do Complemento"
@@ -267,14 +273,14 @@
   "country": {
     "message": "País"
   },
+  "create_custom_filter_rules_to_block_specific_content_or_bypass_blocking_on_certain_sites__the_syntax_is_the_same_as_for_standard_filter_lists__but_only_a_subset_of_rules_is_supported_": {
+    "message": "Crie regras de filtro personalizadas para bloquear conteúdo específico ou ignorar o bloqueio em determinados sites. A sintaxe é a mesma das listas de filtros padrão, mas apenas um subconjunto de regras é compatível."
+  },
   "custom": {
     "message": "Personalizado"
   },
   "custom_filters": {
     "message": "Filtros Personalizados"
-  },
-  "custom_filters_have_been_updated": {
-    "message": "Os filtros personalizados foram atualizados"
   },
   "customer_interaction": {
     "message": "Interação com o cliente",
@@ -334,8 +340,8 @@
   "distractions": {
     "message": "Distrações"
   },
-  "dnr_rules__@_0_": {
-    "message": "Regras DNR: $${0}"
+  "dnr_rules__@_0______1_": {
+    "message": "Regras DNR: $${0} / $${1}"
   },
   "don_t_ask_again": {
     "message": "Não pergunte novamente"
@@ -448,8 +454,17 @@
   "failed_to_clear_cookies__@_0_": {
     "message": "Falha ao limpar cookies: $${0}"
   },
+  "failed_to_update_filter_rules": {
+    "message": "Falha ao atualizar as regras de filtro"
+  },
+  "failed_update__@_0_": {
+    "message": "Falha na atualização: $${0}"
+  },
   "feedback_sharing": {
     "message": "Compartilhamento de Feedback"
+  },
+  "filter_rules_have_been_updated": {
+    "message": "As regras de filtro foram atualizadas"
   },
   "filtering_mode": {
     "message": "Modo de Filtragem"
@@ -773,6 +788,9 @@
   "paused_by_browsing_assistant": {
     "message": "Pausado pelo Assistente de Navegação"
   },
+  "pending_update___": {
+    "message": "Atualização pendente..."
+  },
   "performance_telemetry": {
     "message": "Telemetria de Desempenho"
   },
@@ -841,6 +859,9 @@
   },
   "reload_to_see_changes": {
     "message": "Recarregue para ver as alterações"
+  },
+  "remove": {
+    "message": "Remover"
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Remova todos os cookies armazenados por este site para proteger sua privacidade e redefinir seus dados de navegação."
@@ -1001,6 +1022,15 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "O recurso é gerenciado pela sua organização"
   },
+  "the_url_is_already_added": {
+    "message": "A URL já foi adicionada"
+  },
+  "the_url_is_invalid": {
+    "message": "A URL é inválida"
+  },
+  "the_value_must_be_a_valid_hostname_or_ip_address_": {
+    "message": "O valor deve ser um nome de host ou endereço IP válido."
+  },
   "theme": {
     "message": "Tema"
   },
@@ -1039,6 +1069,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Para fornecer recursos de proteção de privacidade, as seguintes informações sobre rastreadores da web são coletadas:"
+  },
+  "to_use_filter_lists__enable__allow_user_scripts__in_your_browser_s__a_onclick__@_0___extension_settings__a__": {
+    "message": "Para usar as listas de filtros, ative \"Permitir scripts de usuário\" nas <a onclick=\"$${0}\">configurações da extensão</a> do seu navegador."
   },
   "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
     "message": "Para visitar a página desejada, você precisa permitir este redirecionamento."
@@ -1094,6 +1127,9 @@
   },
   "trusted_on_this_website": {
     "message": "Confiável neste site"
+  },
+  "trusted_scriptlets_can_use_powerful_rule_modifiers__only_use_filter_lists_from_authors_you_trust_": {
+    "message": "Scripts confiáveis podem usar modificadores de regra poderosos. Use apenas listas de filtros de autores em quem você confia."
   },
   "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
     "message": "Ativa ou desativa as notificações do Ghostery exibidas no painel."
