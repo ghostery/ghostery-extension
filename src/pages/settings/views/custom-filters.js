@@ -104,9 +104,9 @@ export default {
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
               <ui-text color="tertiary">
-                Create your own filter rules to block specific content or bypass blocking on certain
-                sites. The syntax is the same as for regular filter lists, but only a subset of
-                supported rules is supported.
+                Create custom filter rules to block specific content or bypass blocking on certain
+                sites. The syntax is the same as for standard filter lists, but only a subset of
+                rules is supported.
               </ui-text>
             </div>
             <ui-input>
@@ -155,8 +155,8 @@ export default {
                 <ui-text type="body-s">Allow trusted scriptlets</ui-text>
                 <ui-tooltip autohide="0" wrap delay="0" position="bottom" focusable>
                   <div slot="content" layout="width::250px">
-                    Trusted scriptlets can use powerful rule modifiers — make sure you only use
-                    filter lists from trusted authors.
+                    Trusted scriptlets can use powerful rule modifiers. Only use filter lists from
+                    authors you trust.
                   </div>
                   <ui-icon name="warning" color="warning-primary" layout="size:2"></ui-icon>
                 </ui-tooltip>
@@ -170,7 +170,7 @@ export default {
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
               <ui-text color="tertiary">
-                Add URLs of filter lists to have them automatically updated and applied.
+                Add filter list URLs to have them automatically updated and applied.
               </ui-text>
             </div>
             ${__CHROMIUM__ &&
@@ -184,12 +184,8 @@ export default {
                 <div layout="row gap:0.5 items:center">
                   <ui-icon name="warning" color="warning-secondary" layout="size:2"></ui-icon>
                   <ui-text type="body-s" color="warning-secondary" underline>
-                    To use filter lists, enable "Allow user scripts" in your browser's
-                    <a
-                      href="${`chrome://extensions/?id=${chrome.runtime.id}`}"
-                      onclick="${openExtensionSettings}"
-                      >extension settings</a
-                    >.
+                    ${msg.html`To use filter lists, enable "Allow user scripts"
+                      in your browser's <a onclick="${openExtensionSettings}">extension settings</a>.`}
                   </ui-text>
                 </div>
               </div>
@@ -282,8 +278,8 @@ export default {
                                 <ui-text type="body-s">Allow trusted scriptlets</ui-text>
                                 <ui-tooltip autohide="0" wrap delay="0" position="bottom" focusable>
                                   <div slot="content" layout="width::250px">
-                                    Trusted scriptlets can use powerful rule modifiers — make sure
-                                    you only use filter lists from trusted authors.
+                                    Trusted scriptlets can use powerful rule modifiers. Only use
+                                    filter lists from authors you trust.
                                   </div>
                                   <ui-icon
                                     name="warning"

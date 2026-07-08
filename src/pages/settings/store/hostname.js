@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { store } from 'hybrids';
+import { store, msg } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
 export default {
@@ -19,7 +19,7 @@ export default {
     set: (id, model) => {
       const parsed = parse(model.value);
       if (!parsed.hostname && !parsed.isIp) {
-        throw 'The value must be a valid hostname or IP address.';
+        throw msg`The value must be a valid hostname or IP address.`;
       }
       return {
         ...model,
