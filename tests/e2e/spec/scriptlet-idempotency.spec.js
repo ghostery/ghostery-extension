@@ -128,7 +128,6 @@ describe('Scriptlet injection idempotency', function () {
 
   after(disableCustomFilters);
 
-  // Legacy path: scripting.executeScript on Chromium, browser.contentScripts on Firefox.
   describe('via the legacy injection path', function () {
     before(async function () {
       if (browser.isChromium) {
@@ -141,7 +140,6 @@ describe('Scriptlet injection idempotency', function () {
     idempotencyChecks();
   });
 
-  // Chromium only: the same guarantees through chrome.userScripts (document_start).
   describe('via chrome.userScripts', function () {
     before(async function () {
       if (!browser.isChromium) this.skip();

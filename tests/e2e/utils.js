@@ -107,8 +107,6 @@ export async function reloadExtension() {
   await waitForIdleBackgroundTasks();
 }
 
-// Reports whether the background registers scriptlets via chrome.userScripts (true)
-// or falls back to scripting.executeScript (false). Chromium only.
 export async function isUserScriptsPathActive() {
   await browser.url('ghostery:panel');
   await browser.pause(100);
@@ -120,10 +118,9 @@ export async function isUserScriptsPathActive() {
   });
 }
 
-// Chrome 138+ gates chrome.userScripts behind a per-extension "Allow user scripts"
-// toggle, so e2e can reach the userScripts injection path only by flipping it. No-op
-// on Firefox. The service worker only picks up the change on a fresh start, hence the
-// reload.
+// Chrome 138+ gates chrome.userScripts behind a per-extension "Allow user scripts" toggle;
+// flipping it is the only way e2e can reach that path. The service worker picks up the change
+// only on a fresh start, hence the reload.
 export async function setUserScriptsAllowed(value) {
   if (!browser.isChromium) return;
 

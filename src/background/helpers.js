@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       return true;
 
     case 'e2e:userScriptsActive':
-      sendResponse(isUserScriptsRegisterSupported());
+      sendResponse(__CHROMIUM__ && isUserScriptsRegisterSupported());
       break;
   }
 

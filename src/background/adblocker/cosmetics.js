@@ -26,7 +26,7 @@ import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
 import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
-import { contentScripts, userScripts } from './content-scripts.js';
+import { contentScripts } from './content-scripts.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -49,14 +49,7 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-// Chromium can register scriptlets at document_start via chrome.userScripts when the
-// "Allow user scripts" permission is available; otherwise it falls back to executeScript.
 const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsRegisterSupported();
-
-// The document_start registration registry: browser.contentScripts on Firefox,
-// chrome.userScripts on Chromium. Their isolated worlds are named differently.
-const registrationRegistry = __FIREFOX__ ? contentScripts : userScripts;
-const ISOLATED_WORLD = __FIREFOX__ ? 'ISOLATED' : 'USER_SCRIPT';
 
 // On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
 // same document, so scriptlets would run twice. We remember the documentIds we have already
@@ -83,76 +76,54 @@ function rememberInjectedDocument(documentId) {
   chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
 }
 
-function resolveScriptlet(filter) {
-  const parsed = filter.parseScript();
-
-  if (!parsed) {
-    console.warn('[adblocker] could not inject script filter:', filter.toString());
-    return null;
-  }
-
-  const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
-  const scriptlet = scriptlets[scriptletName];
-
-  if (!scriptlet) {
-    console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
-    return null;
-  }
-
-  return {
-    func: scriptlet.func,
-    args: [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))],
-    declaredWorld: scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN',
-  };
-}
-
 async function injectScriptlets(filters, hostname, details) {
-  // Firefox always, and Chromium when chrome.userScripts is available: register the
-  // scriptlets so the browser injects them at document_start on every navigation. The
-  // per-hostname registration also dedupes the repeated bootstrap triggers.
   if (__FIREFOX__ || USER_SCRIPTS) {
     if (filters.length === 0) {
-      registrationRegistry.unregister(hostname);
+      contentScripts.unregister(hostname);
       return;
     }
-    if (registrationRegistry.isRegistered(hostname)) {
+    if (contentScripts.isRegistered(hostname)) {
       return;
     }
+  } else if (__CHROMIUM__) {
+    if (filters.length === 0) return;
+    if (details.documentId) {
+      if (injectedDocuments.has(details.documentId)) return;
+      injectedDocuments.add(details.documentId);
+    }
+  }
 
-    const scriptletsByWorld = { MAIN: '', [ISOLATED_WORLD]: '' };
-    for (const filter of filters) {
-      const resolved = resolveScriptlet(filter);
-      if (!resolved) continue;
+  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  const injections = [];
+  for (const filter of filters) {
+    const parsed = filter.parseScript();
 
-      const { func, args, declaredWorld } = resolved;
-      const world = declaredWorld === 'ISOLATED' ? ISOLATED_WORLD : 'MAIN';
+    if (!parsed) {
+      console.warn('[adblocker] could not inject script filter:', filter.toString());
+      continue;
+    }
 
+    const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
+    const scriptlet = scriptlets[scriptletName];
+
+    if (!scriptlet) {
+      console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+      continue;
+    }
+
+    const func = scriptlet.func;
+    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
+
+    if (__FIREFOX__ || USER_SCRIPTS) {
       let code = '';
       if (filter.hasSubframeConstraint()) {
         code += `window.parent!==window&&`;
       }
       code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      scriptletsByWorld[world] += code;
+      scriptletsByWorld[declaredWorld] += code;
+      continue;
     }
-
-    registrationRegistry.register(hostname, scriptletsByWorld);
-    return;
-  }
-
-  // Chromium without chrome.userScripts: inject reactively with executeScript, deduped per
-  // document because onCommitted and onResponseStarted both fire for the same documentId.
-  if (filters.length === 0) return;
-  if (details.documentId) {
-    if (injectedDocuments.has(details.documentId)) return;
-    injectedDocuments.add(details.documentId);
-  }
-
-  const injections = [];
-  for (const filter of filters) {
-    const resolved = resolveScriptlet(filter);
-    if (!resolved) continue;
-
-    const { func, args, declaredWorld } = resolved;
 
     injections.push(
       chrome.scripting
@@ -168,6 +139,11 @@ async function injectScriptlets(filters, hostname, details) {
           return null;
         }),
     );
+  }
+
+  if (__FIREFOX__ || USER_SCRIPTS) {
+    contentScripts.register(hostname, scriptletsByWorld);
+    return;
   }
 
   // The documentId echoed back by executeScript proves the injection landed; persist it so
@@ -243,11 +219,7 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
-  if (
-    (__FIREFOX__ || USER_SCRIPTS) &&
-    scriptletsOnly &&
-    registrationRegistry.isRegistered(hostname)
-  ) {
+  if ((__FIREFOX__ || USER_SCRIPTS) && scriptletsOnly && contentScripts.isRegistered(hostname)) {
     return;
   }
 
@@ -274,10 +246,8 @@ async function injectCosmetics(details, config) {
   let ancestors = undefined;
   if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
     if (__FIREFOX__ || USER_SCRIPTS) {
-      // With the content scripts / userScripts registration API we collect every
-      // scriptlet that could run on the hostname (the registration is not per-frame).
-      // Passing the same values as `ancestors` makes the adblocker surface all cases;
-      // the subframe constraint is validated by `window.parent` when the script runs.
+      // The registration API is not per-frame, so surface every scriptlet that could run on
+      // the hostname; the subframe constraint is enforced by `window.parent` at runtime.
       ancestors = [{ domain, hostname }];
     } else {
       ancestors = framesHierarchy.ancestors(
@@ -435,8 +405,12 @@ if (__FIREFOX__) {
   );
 
   if (USER_SCRIPTS) {
-    // Register the scriptlets before the document starts loading so chrome.userScripts
-    // runs them at document_start on this and every following navigation.
+    OptionsObserver.addListener('paused', function chromiumUserScriptScriptlets(paused) {
+      for (const hostname of Object.keys(paused)) {
+        contentScripts.unregister(hostname);
+      }
+    });
+
     chrome.webNavigation.onBeforeNavigate.addListener(
       (details) => {
         injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
@@ -444,17 +418,10 @@ if (__FIREFOX__) {
       { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
     );
 
-    OptionsObserver.addListener('paused', function chromiumUserScriptScriptlets(paused) {
-      for (const hostname of Object.keys(paused)) {
-        userScripts.unregister(hostname);
-      }
-    });
-
-    // chrome.userScripts registrations persist across restarts and updates, so start from a
-    // clean slate and refresh them whenever the engine reloads.
-    const refreshUserScripts = () => userScripts.unregisterAll();
-    chrome.runtime.onStartup.addListener(refreshUserScripts);
-    chrome.runtime.onInstalled.addListener(refreshUserScripts);
-    engines.addSaveListener(engines.MAIN_ENGINE, refreshUserScripts);
+    // Registrations persist across restarts, so drop stale ones when the engine changes.
+    const refresh = () => contentScripts.unregisterAll();
+    chrome.runtime.onStartup.addListener(refresh);
+    chrome.runtime.onInstalled.addListener(refresh);
+    engines.addSaveListener(engines.MAIN_ENGINE, refresh);
   }
 }
