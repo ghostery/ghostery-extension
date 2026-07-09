@@ -223,7 +223,7 @@ export default {
             ${options.mode === MODE_DEFAULT &&
             html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`}
             ${options.mode === MODE_ZAP &&
-            html`<ui-icon name="logo-zap" slot="icon" layout="margin:left:-1"></ui-icon>`}
+            html`<ui-icon name="logo-zap" slot="icon" layout="margin:left:-1 width:7"></ui-icon>`}
             ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
