@@ -40,7 +40,7 @@ export default [
     },
   },
   {
-    files: ['tests/**/*.spec.js'],
+    files: ['tests/**/*.spec.js', 'tests/e2e/utils.js'],
     languageOptions: {
       globals: {
         ...globals.mocha,

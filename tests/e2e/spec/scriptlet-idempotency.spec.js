@@ -13,8 +13,8 @@ import {
   enableExtension,
   setCustomFilters,
   disableCustomFilters,
-  setUserScriptsAllowed,
-  isUserScriptsPathActive,
+  describeInjectionPaths,
+  reloadUntilActive,
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -61,20 +61,10 @@ async function expectMainWorldRanExactlyOnce() {
   await expect(await readStringifyMarker()).toBe('aaa+');
 }
 
-// Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
-async function ensureScriptletActive() {
-  await browser.waitUntil(
-    async () => {
-      await browser.url(PAGE_URL);
-      await browser.pause(300);
-      return ((await readMarker('rpnt-a')) || '').includes('+');
-    },
-    { timeout: 20000, interval: 500, timeoutMsg: 'scriptlet never became active' },
-  );
-}
+const ensureScriptletActive = () =>
+  reloadUntilActive(async () => ((await readMarker('rpnt-a')) || '').includes('+'));
 
-// A duplicate run compounds into a visible "++": `rpnt` (ISOLATED) rewrites DOM text, and
-// `trusted-replace-outbound-text` (MAIN) rewrites the page's own `JSON.stringify` output.
+// A duplicate run would compound into a visible "++", so these markers catch double injection.
 function idempotencyChecks() {
   it('injects each scriptlet and argument set exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
@@ -128,31 +118,5 @@ describe('Scriptlet injection idempotency', function () {
 
   after(disableCustomFilters);
 
-  describe('via the legacy injection path', function () {
-    before(async function () {
-      if (browser.isChromium) {
-        await setUserScriptsAllowed(false);
-        await ensureScriptletActive();
-        await expect(await isUserScriptsPathActive()).toBe(false);
-      }
-    });
-
-    idempotencyChecks();
-  });
-
-  describe('via chrome.userScripts', function () {
-    before(async function () {
-      if (!browser.isChromium) this.skip();
-
-      await setUserScriptsAllowed(true);
-      await ensureScriptletActive();
-      await expect(await isUserScriptsPathActive()).toBe(true);
-    });
-
-    after(async function () {
-      if (browser.isChromium) await setUserScriptsAllowed(false);
-    });
-
-    idempotencyChecks();
-  });
+  describeInjectionPaths(ensureScriptletActive, idempotencyChecks);
 });

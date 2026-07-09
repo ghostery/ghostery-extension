@@ -5,15 +5,9 @@
     <title>Subframe Scriptlet Probe</title>
   </head>
   <body>
-    <!--
-      Loaded as a child frame (often cross-origin, so the parent cannot read this document
-      directly). It reports, via postMessage, whether the extension's scriptlets ran here:
-        - subframeScriptlet: a MAIN-world `set` from a `domain>>##+js(...)` subframe filter.
-        - stringifyMarker:   a MAIN-world `trusted-replace-outbound-text` wrapping JSON.stringify;
-                             each injection appends a `+`, so a double injection shows `aaa++`.
-      Scriptlets can land slightly after parse, so the probe reports repeatedly and the parent
-      keeps the latest values.
-    -->
+    <!-- Child frame (often cross-origin); postMessages to the parent whether the subframe scriptlet
+         (__ghostery_subframe__) and the JSON.stringify wrap ran. Each wrap appends "+", so a double
+         injection shows "aaa++". Posts repeatedly since scriptlets can land after parse. -->
     <script>
       function collect() {
         var stringifyMarker;

@@ -13,8 +13,8 @@ import {
   enableExtension,
   setCustomFilters,
   disableCustomFilters,
-  setUserScriptsAllowed,
-  isUserScriptsPathActive,
+  describeInjectionPaths,
+  reloadUntilActive,
   PAGE_DOMAIN,
   PAGE_PORT,
   PAGE_URL,
@@ -25,12 +25,10 @@ import {
 const CROSS_ORIGIN_PROBE_URL = `${SUBPAGE_URL}subframe-probe.html`;
 // Same origin as the top frame.
 const SAME_ORIGIN_PROBE_URL = `${PAGE_URL}subframe-probe.html`;
-// A subdomain of PAGE_DOMAIN (same registrable domain): both the parent-domain registration and
-// the subdomain's own registration match it, which is where the historical double-injection lived.
+// A subdomain of PAGE_DOMAIN — where parent-domain and subdomain registrations historically double-injected.
 const SUBDOMAIN_PROBE_URL = `http://sub.${PAGE_DOMAIN}:${PAGE_PORT}/subframe-probe.html`;
 
-// Embeds a child frame and returns what the probe reports back over postMessage. Scriptlets can
-// land a beat after the frame parses, so the probe posts repeatedly and we keep every value seen.
+// Embeds a child frame; the probe posts repeatedly (scriptlets can land after parse) and we keep every value.
 function probeSubframe(src, windowMs = 3500) {
   return browser.executeAsync(
     (src, windowMs, done) => {
@@ -65,18 +63,10 @@ function probeSubframe(src, windowMs = 3500) {
   );
 }
 
-// Custom filter updates reach the engine asynchronously; reload until the direct-domain scriptlet
-// (which runs on the top frame) is live before asserting on the subframe behavior.
-async function ensureFiltersActive() {
-  await browser.waitUntil(
-    async () => {
-      await browser.url(PAGE_URL);
-      await browser.pause(300);
-      return browser.execute(() => JSON.parse(JSON.stringify({ marker: 'aaa' })).marker === 'aaa+');
-    },
-    { timeout: 20000, interval: 500, timeoutMsg: 'scriptlet never became active' },
+const ensureFiltersActive = () =>
+  reloadUntilActive(() =>
+    browser.execute(() => JSON.parse(JSON.stringify({ marker: 'aaa' })).marker === 'aaa+'),
   );
-}
 
 function subframeChecks() {
   it('injects a subframe (>>) scriptlet into a cross-origin child frame', async function () {
@@ -129,31 +119,5 @@ describe('Subframe scriptlet injection', function () {
 
   after(disableCustomFilters);
 
-  describe('via the legacy injection path', function () {
-    before(async function () {
-      if (browser.isChromium) {
-        await setUserScriptsAllowed(false);
-        await ensureFiltersActive();
-        await expect(await isUserScriptsPathActive()).toBe(false);
-      }
-    });
-
-    subframeChecks();
-  });
-
-  describe('via chrome.userScripts', function () {
-    before(async function () {
-      if (!browser.isChromium) this.skip();
-
-      await setUserScriptsAllowed(true);
-      await ensureFiltersActive();
-      await expect(await isUserScriptsPathActive()).toBe(true);
-    });
-
-    after(async function () {
-      if (browser.isChromium) await setUserScriptsAllowed(false);
-    });
-
-    subframeChecks();
-  });
+  describeInjectionPaths(ensureFiltersActive, subframeChecks);
 });

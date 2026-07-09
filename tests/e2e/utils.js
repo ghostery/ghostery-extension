@@ -149,6 +149,49 @@ export async function setUserScriptsAllowed(value) {
   await reloadExtension();
 }
 
+// Custom filter updates reach the engine asynchronously; reload PAGE_URL until `check` passes.
+export function reloadUntilActive(check, timeoutMsg = 'scriptlet never became active') {
+  return browser.waitUntil(
+    async () => {
+      await browser.url(PAGE_URL);
+      await browser.pause(300);
+      return check();
+    },
+    { timeout: 20000, interval: 500, timeoutMsg },
+  );
+}
+
+// Runs the same checks through both Chromium scriptlet paths (legacy executeScript and userScripts).
+export function describeInjectionPaths(ensureActive, runChecks) {
+  describe('via the legacy injection path', function () {
+    before(async function () {
+      if (browser.isChromium) {
+        await setUserScriptsAllowed(false);
+        await ensureActive();
+        await expect(await isUserScriptsPathActive()).toBe(false);
+      }
+    });
+
+    runChecks();
+  });
+
+  describe('via chrome.userScripts', function () {
+    before(async function () {
+      if (!browser.isChromium) this.skip();
+
+      await setUserScriptsAllowed(true);
+      await ensureActive();
+      await expect(await isUserScriptsPathActive()).toBe(true);
+    });
+
+    after(async function () {
+      if (browser.isChromium) await setUserScriptsAllowed(false);
+    });
+
+    runChecks();
+  });
+}
+
 export async function setToggle(name, value) {
   const toggle = await getExtensionElement(`toggle:${name}`);
 
