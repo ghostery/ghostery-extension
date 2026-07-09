@@ -74,16 +74,6 @@ function rememberInjectedDocument(documentId) {
 }
 
 async function injectScriptlets(filters, hostname, details) {
-  if (__FIREFOX__) {
-    if (filters.length === 0) {
-      contentScripts.unregister(hostname);
-      return;
-    }
-    if (contentScripts.isRegistered(hostname)) {
-      return;
-    }
-  }
-
   if (__CHROMIUM__) {
     if (filters.length === 0) return;
     if (details.documentId) {
@@ -114,13 +104,10 @@ async function injectScriptlets(filters, hostname, details) {
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-    if (__FIREFOX__) {
-      let code = '';
-      if (filter.hasSubframeConstraint()) {
-        code += `window.parent!==window&&`;
-      }
-      code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      scriptletsByWorld[declaredWorld] += code;
+    // Firefox registers direct-domain scriptlets (document_start); a per-hostname registration
+    // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
+    if (__FIREFOX__ && !filter.hasSubframeConstraint()) {
+      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
 
@@ -141,7 +128,13 @@ async function injectScriptlets(filters, hostname, details) {
   }
 
   if (__FIREFOX__) {
-    contentScripts.register(hostname, scriptletsByWorld);
+    if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
+      if (!contentScripts.isRegistered(hostname)) {
+        contentScripts.register(hostname, scriptletsByWorld);
+      }
+    } else {
+      contentScripts.unregister(hostname);
+    }
     return;
   }
 
@@ -189,13 +182,9 @@ function injectStyles(styles, details) {
 
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
-let framesHierarchy;
-if (__CHROMIUM__) {
-  framesHierarchy = new FramesHierarchy();
-
-  framesHierarchy.handleWebWorkerStart();
-  framesHierarchy.handleWebextensionEvents();
-}
+const framesHierarchy = new FramesHierarchy();
+framesHierarchy.handleWebWorkerStart();
+framesHierarchy.handleWebextensionEvents();
 
 /*
  * returns `false` if the injection should be blocked for the given hostname
@@ -243,21 +232,11 @@ async function injectCosmetics(details, config) {
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
   let ancestors = undefined;
-  if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    if (__FIREFOX__) {
-      // On Firefox with content scripts API, we need to collect
-      // every scriptlets will potentially run on the hostname.
-      // Putting same values to `ancestors` enables adblocker to
-      // find all possible cases. The subframe constraint is
-      // validated by the `window.parent` property upon a script
-      // is executed.
-      ancestors = [{ domain, hostname }];
-    } else {
-      ancestors = framesHierarchy.ancestors(
-        { tabId, frameId, parentFrameId, documentId },
-        { domain, hostname },
-      );
-    }
+  if (!scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
+    ancestors = framesHierarchy.ancestors(
+      { tabId, frameId, parentFrameId, documentId },
+      { domain, hostname },
+    );
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
