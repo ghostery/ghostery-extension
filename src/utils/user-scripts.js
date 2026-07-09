@@ -28,8 +28,7 @@ export function isUserScriptsSupported() {
   }
 }
 
-// Real capability probe (unlike isUserScriptsSupported, without the __DEBUG__/Safari
-// bypass) so a disabled "Allow user scripts" toggle falls back to the executeScript path.
+// Real capability probe (no __DEBUG__/Safari bypass) so a disabled toggle falls back to executeScript.
 export function isUserScriptsRegisterSupported() {
   try {
     chrome.userScripts.getScripts();

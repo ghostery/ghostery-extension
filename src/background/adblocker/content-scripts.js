@@ -24,9 +24,7 @@ const firefoxRegistry = (() => {
             await browser.contentScripts.register({
               js: [{ code }],
               allFrames: true,
-              // Match the exact hostname (like the Chromium userScripts registry). A `*.` wildcard
-              // would also match subdomain frames, which self-register under their own hostname —
-              // the overlap injects the same scriptlet twice into a subdomain child.
+              // Exact hostname: a `*.` wildcard would double-inject into subdomain frames that self-register.
               matches: [`https://${hostname}/*`, `http://${hostname}/*`],
               matchAboutBlank: true,
               matchOriginAsFallback: true,
@@ -63,15 +61,13 @@ const firefoxRegistry = (() => {
   };
 })();
 
-// Registrations persist across service-worker restarts, so register() upserts by a stable id
-// and unregisterAll() queries the browser to purge them (the map is empty after a restart).
+// userScripts registrations persist across restarts; upsert by a stable id, purge via getScripts().
 const USER_SCRIPTS_NAMESPACE = 'ghostery-scriptlet';
 
 function userScriptId(hostname, world) {
   return `${USER_SCRIPTS_NAMESPACE}:${world}:${hostname}`;
 }
 
-// __CHROMIUM__ guard so chrome.userScripts is tree-shaken from the Firefox build.
 const chromiumRegistry =
   __CHROMIUM__ &&
   (() => {
@@ -121,6 +117,4 @@ const chromiumRegistry =
     };
   })();
 
-// browser.contentScripts (Firefox) and chrome.userScripts (Chromium) fill the same role;
-// the rest of the adblocker treats whichever one this resolves to as "content scripts".
 export const contentScripts = __FIREFOX__ ? firefoxRegistry : chromiumRegistry;

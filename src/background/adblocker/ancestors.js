@@ -230,8 +230,7 @@ export class FramesHierarchy {
       this.unregister(tabId, 0);
     });
 
-    // onReplaced only fires on Chromium (prerender/instant swaps); guard so a browser without it
-    // does not throw when the hierarchy is initialized.
+    // onReplaced is Chromium-only; guard so Firefox doesn't throw now the hierarchy runs there.
     chrome.tabs.onReplaced?.addListener((addedTabId, removedTabId) => {
       this.replace(addedTabId, removedTabId);
     });

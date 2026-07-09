@@ -51,30 +51,8 @@ const scriptletGlobals = {
 
 const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsRegisterSupported();
 
-// On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
-// same document, so scriptlets would run twice. We remember the documentIds we have already
-// injected into (proved by executeScript's result) and skip a repeat. The in-memory set gives
-// a synchronous check that closes the race between the two triggers; session storage keeps it
-// across service-worker restarts.
-const INJECTED_DOCUMENTS_KEY = 'injectedScriptletDocuments';
+// Chromium fires onCommitted and onResponseStarted per document; dedup so executeScript runs once.
 const injectedDocuments = new Set();
-
-if (__CHROMIUM__) {
-  chrome.storage.session
-    .get(INJECTED_DOCUMENTS_KEY)
-    .then((stored) => {
-      for (const id of stored[INJECTED_DOCUMENTS_KEY] || []) injectedDocuments.add(id);
-    })
-    .catch(() => {});
-}
-
-function rememberInjectedDocument(documentId) {
-  injectedDocuments.add(documentId);
-  if (injectedDocuments.size > 1000) {
-    injectedDocuments.delete(injectedDocuments.values().next().value);
-  }
-  chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
-}
 
 function buildScriptletInjection(filter) {
   const parsed = filter.parseScript();
@@ -99,17 +77,14 @@ function buildScriptletInjection(filter) {
   };
 }
 
-// Direct (non-subframe) scriptlets are delivered through the content-script registry so the
-// browser runs them at document_start. Registration is keyed by hostname and deduped there.
+// Registered rather than executeScript'd so the browser runs them at document_start.
 function registerDirectScriptlets(filters, hostname) {
   if (filters.length === 0) {
     contentScripts.unregister(hostname);
     return;
   }
 
-  if (contentScripts.isRegistered(hostname)) {
-    return;
-  }
+  if (contentScripts.isRegistered(hostname)) return;
 
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
   for (const filter of filters) {
@@ -123,26 +98,22 @@ function registerDirectScriptlets(filters, hostname) {
   contentScripts.register(hostname, scriptletsByWorld);
 }
 
-// A per-frame ancestor decision is the only way to reach a cross-origin child (a per-hostname
-// registration cannot), so subframe-constrained scriptlets go through executeScript on every
-// platform. The Chromium legacy path (no userScripts permission) sends every scriptlet here.
+// Per-frame injection reaches cross-origin children that a per-hostname registration cannot.
 async function executeScriptlets(filters, details) {
   if (filters.length === 0) return;
 
-  // onCommitted and onResponseStarted both fire for the same document on Chromium, so skip a
-  // repeat. Firefox drives executeScript from onCommitted alone and needs no cross-trigger guard.
-  if (__CHROMIUM__ && details.documentId) {
-    if (injectedDocuments.has(details.documentId)) return;
-    injectedDocuments.add(details.documentId);
+  const { documentId } = details;
+  if (__CHROMIUM__ && documentId) {
+    if (injectedDocuments.has(documentId)) return;
+    injectedDocuments.add(documentId);
   }
 
-  const injections = [];
-  for (const filter of filters) {
-    const injection = buildScriptletInjection(filter);
-    if (!injection) continue;
+  const results = await Promise.all(
+    filters.map((filter) => {
+      const injection = buildScriptletInjection(filter);
+      if (!injection) return null;
 
-    injections.push(
-      chrome.scripting
+      return chrome.scripting
         .executeScript({
           injectImmediately: true,
           world: injection.world,
@@ -153,22 +124,13 @@ async function executeScriptlets(filters, details) {
         .catch((e) => {
           console.warn(e);
           return null;
-        }),
-    );
-  }
+        });
+    }),
+  );
 
-  const results = await Promise.all(injections);
-
-  if (!__CHROMIUM__) return;
-
-  // The documentId echoed back by executeScript proves the injection landed; persist it so
-  // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
-  const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
-
-  if (injectedDocumentId) {
-    rememberInjectedDocument(injectedDocumentId);
-  } else if (details.documentId) {
-    injectedDocuments.delete(details.documentId);
+  // Nothing landed (e.g. the frame was gone) — release so the other trigger can retry.
+  if (__CHROMIUM__ && documentId && !results.some((r) => r?.length)) {
+    injectedDocuments.delete(documentId);
   }
 }
 
@@ -182,9 +144,7 @@ async function injectScriptlets(filters, hostname, details, scriptletsOnly) {
 
     registerDirectScriptlets(directFilters, hostname);
 
-    // The scriptletsOnly pass (onBeforeNavigate) runs before the document commits; its only job
-    // is to register document_start scripts. executeScript needs the committed document, so the
-    // subframe scriptlets wait for the full bootstrap on onCommitted.
+    // executeScript needs the committed document; the onBeforeNavigate pass only registers.
     if (scriptletsOnly) return;
 
     await executeScriptlets(subframeFilters, details);
@@ -226,8 +186,7 @@ function injectStyles(styles, details) {
 
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
-// Subframe scriptlets are injected per-frame on every platform (see executeScriptlets), and the
-// per-frame decision needs the real ancestor chain — so the hierarchy is tracked everywhere.
+// Per-frame subframe injection needs the real ancestor chain on every platform.
 const framesHierarchy = new FramesHierarchy();
 framesHierarchy.handleWebWorkerStart();
 framesHierarchy.handleWebextensionEvents();
@@ -406,20 +365,20 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-if (__FIREFOX__) {
-  OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
+if (__FIREFOX__ || USER_SCRIPTS) {
+  OptionsObserver.addListener('paused', (paused) => {
     for (const hostname of Object.keys(paused)) {
       contentScripts.unregister(hostname);
     }
   });
 
   chrome.webNavigation.onBeforeNavigate.addListener(
-    (details) => {
-      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-    },
+    (details) => injectCosmetics(details, { bootstrap: true, scriptletsOnly: true }),
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
-} else {
+}
+
+if (__CHROMIUM__) {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (details.tabId === -1) return;
@@ -433,19 +392,6 @@ if (__FIREFOX__) {
   );
 
   if (USER_SCRIPTS) {
-    OptionsObserver.addListener('paused', function chromiumUserScriptScriptlets(paused) {
-      for (const hostname of Object.keys(paused)) {
-        contentScripts.unregister(hostname);
-      }
-    });
-
-    chrome.webNavigation.onBeforeNavigate.addListener(
-      (details) => {
-        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-      },
-      { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-    );
-
     // Registrations persist across restarts, so drop stale ones when the engine changes.
     const refresh = () => contentScripts.unregisterAll();
     chrome.runtime.onStartup.addListener(refresh);
