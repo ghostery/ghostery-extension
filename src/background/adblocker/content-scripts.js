@@ -15,7 +15,13 @@ const firefoxRegistry = (() => {
     async register(hostname, scriptletsByWorld) {
       this.unregister(hostname);
 
+      // Reserve the hostname synchronously so the onCommitted pass short-circuits on
+      // isRegistered() before this async register resolves — otherwise both the
+      // onBeforeNavigate and onCommitted passes register the same hostname and leak
+      // two overlapping content scripts, injecting the scriptlet twice.
       const registered = [];
+      map.set(hostname, registered);
+
       try {
         for (const [world, code] of Object.entries(scriptletsByWorld)) {
           if (!code) continue;
@@ -35,14 +41,8 @@ const firefoxRegistry = (() => {
         }
       } catch (e) {
         console.warn(e);
-        for (const contentScript of registered) {
-          contentScript.unregister();
-        }
-        return;
+        this.unregister(hostname);
       }
-
-      // Cache the entry (even when empty) so isRegistered() short-circuits later navigations.
-      map.set(hostname, registered);
     },
     isRegistered(hostname) {
       return map.has(hostname);
