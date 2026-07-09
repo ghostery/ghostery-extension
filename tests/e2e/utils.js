@@ -107,6 +107,18 @@ export async function reloadExtension() {
   await waitForIdleBackgroundTasks();
 }
 
+// Custom filter updates reach the engine asynchronously; reload PAGE_URL until `check` passes.
+export function reloadUntilActive(check, timeoutMsg = 'scriptlet never became active') {
+  return browser.waitUntil(
+    async () => {
+      await browser.url(PAGE_URL);
+      await browser.pause(300);
+      return check();
+    },
+    { timeout: 20000, interval: 500, timeoutMsg },
+  );
+}
+
 export async function setToggle(name, value) {
   const toggle = await getExtensionElement(`toggle:${name}`);
 
