@@ -163,7 +163,7 @@ if (!existsSync(licensesPath)) {
 // privacy-policy.html...
 if (argv.target !== 'firefox') {
   const policyPath = resolve(staticPath, 'privacy-policy.html');
-  const url = `https://www.${argv.debug ? 'ghosterystage' : 'ghostery'}.com/privacy-policy?embed=true`;
+  const url = `https://www.${argv.debug ? 'ghosterystage' : 'ghostery'}.com/privacy/policy?embed=true`;
 
   if (!existsSync(policyPath)) {
     const policy = await fetch(url);
