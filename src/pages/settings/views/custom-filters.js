@@ -13,12 +13,15 @@ import { html, msg, store } from 'hybrids';
 
 import { longDateFormatter, numberFormatter } from '/ui/labels.js';
 
-import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
+import ManagedConfig from '/store/managed-config.js';
+import Options from '/store/options.js';
+
 import { CUSTOM_FILTERS_MAX_DYNAMIC_RULES } from '/utils/dnr.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
-import { asyncAction } from '../utils/actions.js';
+
 import FilterList from '../store/filter-list.js';
+import { asyncAction } from '../utils/actions.js';
 
 async function update(host, event) {
   asyncAction(
@@ -62,6 +65,7 @@ function openExtensionSettings(host, event) {
 export default {
   options: store(Options),
   customFilters: store(CustomFilters),
+  managedConfig: store(ManagedConfig),
   input: ({ customFilters }, value) =>
     value ?? ((store.ready(customFilters) && customFilters.text) || ''),
   filterList: store(FilterList, { draft: true }),
@@ -74,7 +78,7 @@ export default {
       return () => window.removeEventListener('focus', invalidate);
     },
   },
-  render: ({ options, customFilters, input, filterList, userScripts }) => html`
+  render: ({ options, customFilters, managedConfig, input, filterList, userScripts }) => html`
     <template layout="contents">
       <settings-toggle
         value="${options.customFilters.enabled}"
@@ -99,7 +103,8 @@ export default {
           </a>
         </ui-text>
         ${options.customFilters.enabled &&
-        store.ready(customFilters) &&
+        store.ready(customFilters, managedConfig) &&
+        !managedConfig.customFilters.enabled &&
         html`
           <div layout="column gap:2" slot="card-footer">
             <div layout="column gap:0.5">
@@ -185,7 +190,7 @@ export default {
                   <ui-icon name="warning" color="warning-secondary" layout="size:2"></ui-icon>
                   <ui-text type="body-s" color="warning-secondary" underline>
                     ${msg.html`To use filter lists, enable "Allow user scripts"
-                      in your browser's <a onclick="${openExtensionSettings}">extension settings</a>.`}
+                      in your browser's <a href="#" onclick="${openExtensionSettings}">extension settings</a>.`}
                   </ui-text>
                 </div>
               </div>
