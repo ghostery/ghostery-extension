@@ -65,9 +65,9 @@
     "tldts-experimental": "^7.4.7"
   },
   "dataDependencies": {
-    "redirect-resources": "24ae4f63d5a83b33407f43d5b912851148870e6bf2ef16dad49f9a8355f39d9a",
+    "redirect-resources": "40762d476b31b424dbcbdb587a8bf9e6d16666f059d6f6aec47afae698712a15",
     "wtm-bloomfilter": "2026-07-06",
-    "wtm-stats": "b0f037c01149853c1058609572a4fe38249598ae"
+    "wtm-stats": "0bb79e7f6bb009f080a75ee5c055e0706a6cad41"
   },
   "engineStrict": true,
   "engines": {
