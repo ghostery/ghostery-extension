@@ -25,11 +25,6 @@ node ./scripts/data-dependencies.js
 # Update xcode version
 node ./scripts/xcode-version.js
 
-# Compile, push and pull new translations
-npm run locales
-tx push
-tx pull -f
-
 # Get version from package.json
 version=$(node -p "require('./package.json').version")
 # Get build number from xcode
