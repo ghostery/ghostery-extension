@@ -39,135 +39,146 @@ export default {
             Ghostery community.
           </ui-text>
         </div>
-        ${store.ready(options, managedConfig) &&
-        html`
-          <section layout="column gap:4">
-            <div layout="column gap">
-              ${options.mode === MODE_DEFAULT &&
-              html`
-                <settings-toggle
-                  value="${options.pauseAssistant}"
-                  onchange="${html.set(options, 'pauseAssistant')}"
-                  data-qa="toggle:pauseAssistant"
-                >
-                  <settings-help-image slot="icon">
-                    <img src="${assets.pause_assistant}" alt="Browsing Assistant" />
-                  </settings-help-image>
-                  Browsing Assistant
-                  <span slot="description">
-                    Detects and prevents ad blocker breakage by automatically pausing on affected
-                    pages.
-                  </span>
-                  <ui-text
-                    type="label-s"
-                    color="secondary"
-                    underline
-                    slot="footer"
-                    layout="self:start"
-                  >
-                    <a
-                      href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
-                      target="_blank"
-                      layout="row gap:0.5"
+        ${
+          store.ready(options, managedConfig) &&
+          html`
+            <section layout="column gap:4">
+              <div layout="column gap">
+                ${
+                  options.mode === MODE_DEFAULT &&
+                  html`
+                    <settings-toggle
+                      value="${options.pauseAssistant}"
+                      onchange="${html.set(options, 'pauseAssistant')}"
+                      data-qa="toggle:pauseAssistant"
                     >
-                      Learn more <ui-icon name="arrow-right-s"></ui-icon>
-                    </a>
-                  </ui-text>
-                </settings-toggle>
-              `}
-              <settings-toggle
-                value="${options.trackerWheel}"
-                onchange="${html.set(options, 'trackerWheel')}"
-                data-qa="toggle:trackerWheel"
-              >
-                <settings-help-image slot="icon">
-                  <img src="${assets.wtm_wheel}" alt="WhoTracks.Me Wheel" />
-                </settings-help-image>
-                WhoTracks.Me Wheel
-                <span slot="description">
-                  Replaces the Ghostery icon in the browser toolbar with the tracker wheel.
-                </span>
-              </settings-toggle>
-              ${Options.trackerCount &&
-              html`
+                      <settings-help-image slot="icon">
+                        <img src="${assets.pause_assistant}" alt="Browsing Assistant" />
+                      </settings-help-image>
+                      Browsing Assistant
+                      <span slot="description">
+                        Detects and prevents ad blocker breakage by automatically pausing on
+                        affected pages.
+                      </span>
+                      <ui-text
+                        type="label-s"
+                        color="secondary"
+                        underline
+                        slot="footer"
+                        layout="self:start"
+                      >
+                        <a
+                          href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
+                          target="_blank"
+                          layout="row gap:0.5"
+                        >
+                          Learn more <ui-icon name="arrow-right-s"></ui-icon>
+                        </a>
+                      </ui-text>
+                    </settings-toggle>
+                  `
+                }
                 <settings-toggle
-                  value="${options.trackerCount}"
-                  onchange="${html.set(options, 'trackerCount')}"
-                  data-qa="toggle:trackerCount"
+                  value="${options.trackerWheel}"
+                  onchange="${html.set(options, 'trackerWheel')}"
+                  data-qa="toggle:trackerWheel"
                 >
                   <settings-help-image slot="icon">
-                    <img src="${assets.trackers_count}" alt="Trackers Count" />
+                    <img src="${assets.wtm_wheel}" alt="WhoTracks.Me Wheel" />
                   </settings-help-image>
-                  Trackers Count
+                  WhoTracks.Me Wheel
                   <span slot="description">
-                    Displays the tracker count on the Ghostery icon in the browser toolbar.
+                    Replaces the Ghostery icon in the browser toolbar with the tracker wheel.
                   </span>
                 </settings-toggle>
-              `}
-              <settings-managed value="${managedConfig.disableTrackersPreview}">
-                <settings-toggle
-                  value="${options.wtmSerpReport}"
-                  onchange="${html.set(options, 'wtmSerpReport')}"
-                  data-qa="toggle:wtmSerpReport"
-                >
-                  <settings-help-image slot="icon">
-                    <img src="${assets.trackers_preview}" alt="Trackers Preview" />
-                  </settings-help-image>
-                  Trackers Preview
-                  <span slot="description"> Shows the tracker preview beside search results. </span>
-                  <ui-text
-                    type="label-s"
-                    color="secondary"
-                    underline
-                    slot="footer"
-                    layout="self:start"
-                  >
-                    <a
-                      href="${TRACKERS_PREVIEW_LEARN_MORE_URL}"
-                      target="_blank"
-                      layout="row gap:0.5"
+                ${
+                  Options.trackerCount &&
+                  html`
+                    <settings-toggle
+                      value="${options.trackerCount}"
+                      onchange="${html.set(options, 'trackerCount')}"
+                      data-qa="toggle:trackerCount"
                     >
-                      Learn more <ui-icon name="arrow-right-s"></ui-icon>
-                    </a>
-                  </ui-text>
-                </settings-toggle>
-              </settings-managed>
-              ${__FIREFOX__ &&
-              html`
-                <settings-toggle
-                  value="${options.feedback}"
-                  onchange="${html.set(options, 'feedback')}"
-                >
-                  <settings-help-image slot="icon">
-                    <img src="${assets.feedback}" alt="Feedback Sharing" />
-                  </settings-help-image>
-                  Feedback Sharing
-                  <span slot="description">
-                    Contributes non-personal information about add-on health and performance
-                    telemetry to help advance privacy protections for the entire Ghostery community.
-                  </span>
-                </settings-toggle>
-              `}
-            </div>
-            <ui-action>
-              <a href="${chrome.runtime.getURL('/pages/whotracksme/index.html')}" target="_blank">
-                <settings-option>
-                  <settings-help-image slot="icon">
-                    <img src="${assets.wtm_privacy_report}" alt="WTM Privacy Report" />
-                  </settings-help-image>
-                  Your Browser Privacy Report
-                  <span slot="description">
-                    Generates a global transparency report on web tracking in your
-                    Ghostery-protected browser.
-                  </span>
-                  <ui-button slot="footer" size="s" layout="margin:top">
-                    <button>View Report</button>
-                  </ui-button>
-                </settings-option>
-              </a>
-            </ui-action>
-          </section>
-        `}
+                      <settings-help-image slot="icon">
+                        <img src="${assets.trackers_count}" alt="Trackers Count" />
+                      </settings-help-image>
+                      Trackers Count
+                      <span slot="description">
+                        Displays the tracker count on the Ghostery icon in the browser toolbar.
+                      </span>
+                    </settings-toggle>
+                  `
+                }
+                <settings-managed value="${managedConfig.disableTrackersPreview}">
+                  <settings-toggle
+                    value="${options.wtmSerpReport}"
+                    onchange="${html.set(options, 'wtmSerpReport')}"
+                    data-qa="toggle:wtmSerpReport"
+                  >
+                    <settings-help-image slot="icon">
+                      <img src="${assets.trackers_preview}" alt="Trackers Preview" />
+                    </settings-help-image>
+                    Trackers Preview
+                    <span slot="description">
+                      Shows the tracker preview beside search results.
+                    </span>
+                    <ui-text
+                      type="label-s"
+                      color="secondary"
+                      underline
+                      slot="footer"
+                      layout="self:start"
+                    >
+                      <a
+                        href="${TRACKERS_PREVIEW_LEARN_MORE_URL}"
+                        target="_blank"
+                        layout="row gap:0.5"
+                      >
+                        Learn more <ui-icon name="arrow-right-s"></ui-icon>
+                      </a>
+                    </ui-text>
+                  </settings-toggle>
+                </settings-managed>
+                ${
+                  __FIREFOX__ &&
+                  html`
+                    <settings-toggle
+                      value="${options.feedback}"
+                      onchange="${html.set(options, 'feedback')}"
+                    >
+                      <settings-help-image slot="icon">
+                        <img src="${assets.feedback}" alt="Feedback Sharing" />
+                      </settings-help-image>
+                      Feedback Sharing
+                      <span slot="description">
+                        Contributes non-personal information about add-on health and performance
+                        telemetry to help advance privacy protections for the entire Ghostery
+                        community.
+                      </span>
+                    </settings-toggle>
+                  `
+                }
+              </div>
+              <ui-action>
+                <a href="${chrome.runtime.getURL('/pages/whotracksme/index.html')}" target="_blank">
+                  <settings-option>
+                    <settings-help-image slot="icon">
+                      <img src="${assets.wtm_privacy_report}" alt="WTM Privacy Report" />
+                    </settings-help-image>
+                    Your Browser Privacy Report
+                    <span slot="description">
+                      Generates a global transparency report on web tracking in your
+                      Ghostery-protected browser.
+                    </span>
+                    <ui-button slot="footer" size="s" layout="margin:top">
+                      <button>View Report</button>
+                    </ui-button>
+                  </settings-option>
+                </a>
+              </ui-action>
+            </section>
+          `
+        }
       </settings-page-layout>
     </template>
   `,

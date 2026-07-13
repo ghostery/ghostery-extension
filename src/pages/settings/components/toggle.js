@@ -24,13 +24,15 @@ export default {
       <settings-card layout="column padding:0">
         <ui-toggle value="${value}" onchange="${html.set('value')}" layout="grow">
           <div id="content" layout="column gap:2 grow self:stretch margin:right:-100px">
-            ${icon
-              ? html`
-                  <div id="icon" layout="row center padding self:start">
-                    <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
-                  </div>
-                `
-              : html`<slot name="icon"></slot>`}
+            ${
+              icon
+                ? html`
+                    <div id="icon" layout="row center padding self:start">
+                      <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                    </div>
+                  `
+                : html`<slot name="icon"></slot>`
+            }
 
             <div layout="column gap:0.5 grow items:start content:center">
               <ui-text id="name" type="headline-s"><slot></slot></ui-text>

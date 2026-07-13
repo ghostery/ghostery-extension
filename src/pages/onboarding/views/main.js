@@ -66,39 +66,43 @@ export default {
           </div>
         </div>
         <div layout="column gap:2">
-          ${__FIREFOX__ &&
-          html`
-            <div layout="row gap items:start">
-              <ui-input>
-                <input
-                  type="checkbox"
-                  checked
-                  value="${feedback}"
-                  onchange="${html.set('feedback')}"
-                />
-              </ui-input>
-              <ui-text type="body-s" underline data-qa="text:description">
-                ${msg.html`
+          ${
+            __FIREFOX__ &&
+            html`
+              <div layout="row gap items:start">
+                <ui-input>
+                  <input
+                    type="checkbox"
+                    checked
+                    value="${feedback}"
+                    onchange="${html.set('feedback')}"
+                  />
+                </ui-input>
+                <ui-text type="body-s" underline data-qa="text:description">
+                  ${msg.html`
                   By sharing insights on <a href="${router.url(AddonHealth)}">add-on's health</a> and
                   <a href="${router.url(Performance)}">performance telemetry</a>
                   as outlined in our <a href="${'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'}" target="_blank" rel="noreferrer">Privacy Policy</a>,
                   you help advance privacy protections for the entire Ghostery community.
                 `}
-              </ui-text>
-            </div>
-          `}
-          ${__CHROMIUM__ &&
-          html`
-            <ui-text type="body-s" underline data-qa="text:description">
-              ${msg.html`
+                </ui-text>
+              </div>
+            `
+          }
+          ${
+            __CHROMIUM__ &&
+            html`
+              <ui-text type="body-s" underline data-qa="text:description">
+                ${msg.html`
                 Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
                 <a href="${router.url(AddonHealth)}">add-on's health</a>, and
                 <a href="${router.url(Performance)}">performance telemetry</a>
                 will be shared in accordance with our <a href="${router.url(Privacy)}" target="_blank" rel="noreferrer">Privacy Policy</a>,
                 advancing privacy protection for the Ghostery community.
               `}
-            </ui-text>
-          `}
+              </ui-text>
+            `
+          }
           <ui-text type="body-s">
             Ghostery uses this information to provide its community-powered privacy features,
             ensuring that personal information—such as passwords, browsing history, and page

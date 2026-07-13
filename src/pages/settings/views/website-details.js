@@ -103,74 +103,82 @@ export default {
           <settings-back-button></settings-back-button>
           <ui-text type="headline-l" style="word-break:break-word"> ${domain} </ui-text>
 
-          ${paused.revokeAt !== undefined &&
-          !paused.assist &&
-          html`
-            <div layout="row items:center gap">
-              <settings-protection-status
-                revokeAt="${paused.revokeAt}"
-              ></settings-protection-status>
-              ${!paused.managed &&
-              html`
-                <ui-action>
-                  <button layout@768px="order:1">
-                    <ui-icon
-                      name="trash"
-                      layout="size:2.5"
-                      color="tertiary"
-                      onclick="${revokePaused}"
-                    ></ui-icon>
-                  </button>
-                </ui-action>
-              `}
-            </div>
-          `}
-          ${paused.revokeAt !== undefined &&
-          paused.assist &&
-          html`
-            <settings-card type="pause-assistant" layout="self:stretch">
-              <div layout="column gap:2" layout@768px="row gap:2 items:center">
-                <div layout="grow">
-                  <ui-text type="label-m" color="onbrand">Paused by Browsing Assistant</ui-text>
-                  <ui-text type="body-s" color="onbrand">
-                    Automatically paused to prevent adblocker breakage
-                  </ui-text>
-                  <div layout="row:wrap gap:4:2 margin:top">
-                    ${issueUrl &&
-                    html`
+          ${
+            paused.revokeAt !== undefined &&
+            !paused.assist &&
+            html`
+              <div layout="row items:center gap">
+                <settings-protection-status
+                  revokeAt="${paused.revokeAt}"
+                ></settings-protection-status>
+                ${
+                  !paused.managed &&
+                  html`
+                    <ui-action>
+                      <button layout@768px="order:1">
+                        <ui-icon
+                          name="trash"
+                          layout="size:2.5"
+                          color="tertiary"
+                          onclick="${revokePaused}"
+                        ></ui-icon>
+                      </button>
+                    </ui-action>
+                  `
+                }
+              </div>
+            `
+          }
+          ${
+            paused.revokeAt !== undefined &&
+            paused.assist &&
+            html`
+              <settings-card type="pause-assistant" layout="self:stretch">
+                <div layout="column gap:2" layout@768px="row gap:2 items:center">
+                  <div layout="grow">
+                    <ui-text type="label-m" color="onbrand">Paused by Browsing Assistant</ui-text>
+                    <ui-text type="body-s" color="onbrand">
+                      Automatically paused to prevent adblocker breakage
+                    </ui-text>
+                    <div layout="row:wrap gap:4:2 margin:top">
+                      ${
+                        issueUrl &&
+                        html`
+                          <ui-button type="transparent" style="height:auto">
+                            <a
+                              href="${issueUrl}"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              layout="padding:0"
+                            >
+                              <ui-icon name="doc-m" color="onbrand" layout="size:2"></ui-icon>
+                              <ui-text type="label-s" color="onbrand">Broken page report</ui-text>
+                            </a>
+                          </ui-button>
+                        `
+                      }
                       <ui-button type="transparent" style="height:auto">
                         <a
-                          href="${issueUrl}"
+                          href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
                           target="_blank"
-                          rel="noopener noreferrer"
                           layout="padding:0"
                         >
-                          <ui-icon name="doc-m" color="onbrand" layout="size:2"></ui-icon>
-                          <ui-text type="label-s" color="onbrand">Broken page report</ui-text>
+                          <ui-icon name="info" color="onbrand" layout="size:2"></ui-icon>
+                          <ui-text type="label-s" color="onbrand">Learn more</ui-text>
                         </a>
                       </ui-button>
-                    `}
-                    <ui-button type="transparent" style="height:auto">
-                      <a
-                        href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
-                        target="_blank"
-                        layout="padding:0"
-                      >
-                        <ui-icon name="info" color="onbrand" layout="size:2"></ui-icon>
-                        <ui-text type="label-s" color="onbrand">Learn more</ui-text>
-                      </a>
-                    </ui-button>
+                    </div>
                   </div>
+                  <ui-button>
+                    <button onclick="${revokePaused}">
+                      <ui-icon name="play"></ui-icon>
+                      Resume
+                    </button>
+                  </ui-button>
                 </div>
-                <ui-button>
-                  <button onclick="${revokePaused}">
-                    <ui-icon name="play"></ui-icon>
-                    Resume
-                  </button>
-                </ui-button>
-              </div>
-            </settings-card>
-          `}
+              </settings-card>
+            `
+          }
         </div>
         <div layout="column gap">
           <settings-option icon="shield">
@@ -184,41 +192,51 @@ export default {
                 <ui-text type="label-m" layout="hidden" layout@768px="block"> Category </ui-text>
                 <ui-text type="label-m" mobile-type="label-s"> Protection status </ui-text>
               </div>
-              ${!trackers.length &&
-              html`
-                <div layout="column center gap padding:3:0">
-                  <ui-icon name="block-m" color="tertiary" layout="size:3"></ui-icon>
-                  <ui-text color="tertiary" layout="block:center width:::180px">
-                    No exceptions added yet
-                  </ui-text>
-                </div>
-              `}
+              ${
+                !trackers.length &&
+                html`
+                  <div layout="column center gap padding:3:0">
+                    <ui-icon name="block-m" color="tertiary" layout="size:3"></ui-icon>
+                    <ui-text color="tertiary" layout="block:center width:::180px">
+                      No exceptions added yet
+                    </ui-text>
+                  </div>
+                `
+              }
               ${trackers.map(
                 (tracker) =>
                   !store.pending(tracker) &&
                   html`
                     <div layout="grid:2 gap:2" layout@768px="grid:2fr|2fr|3fr gap:4">
-                      ${store.ready(tracker) &&
-                      html`<ui-action>
-                        <a
-                          href="${router.url(TrackerDetails, {
-                            tracker: tracker.id,
-                          })}"
-                          layout="column gap:0.5"
-                        >
-                          <ui-text type="label-m" mobile-type="label-s"> ${tracker.name} </ui-text>
-                          ${tracker.organization &&
-                          html`
-                            <ui-text type="body-s" color="secondary">
-                              ${tracker.organization.name}
+                      ${
+                        store.ready(tracker) &&
+                        html`<ui-action>
+                          <a
+                            href="${router.url(TrackerDetails, {
+                              tracker: tracker.id,
+                            })}"
+                            layout="column gap:0.5"
+                          >
+                            <ui-text type="label-m" mobile-type="label-s">
+                              ${tracker.name}
                             </ui-text>
-                          `}
-                        </a>
-                      </ui-action>`}
-                      ${!store.ready(tracker) &&
-                      html`<ui-text type="label-m" mobile-type="label-s">
-                        ${tracker.name}
-                      </ui-text>`}
+                            ${
+                              tracker.organization &&
+                              html`
+                                <ui-text type="body-s" color="secondary">
+                                  ${tracker.organization.name}
+                                </ui-text>
+                              `
+                            }
+                          </a>
+                        </ui-action>`
+                      }
+                      ${
+                        !store.ready(tracker) &&
+                        html`<ui-text type="label-m" mobile-type="label-s">
+                          ${tracker.name}
+                        </ui-text>`
+                      }
                       <ui-text type="label-m" layout="hidden" layout@768px="row items:center">
                         ${labels.categories[tracker.category]}
                       </ui-text>
@@ -279,12 +297,14 @@ export default {
               Remove all cookies stored by this site to protect your privacy and reset your browsing
               data.
             </span>
-            ${clearedCookies &&
-            html`
-              <ui-text slot="footer" type="body-s" color="success-primary">
-                Cookies successfully cleared
-              </ui-text>
-            `}
+            ${
+              clearedCookies &&
+              html`
+                <ui-text slot="footer" type="body-s" color="success-primary">
+                  Cookies successfully cleared
+                </ui-text>
+              `
+            }
             <ui-button slot="footer" disabled="${clearedCookies}" size="s" layout="margin:top">
               <a
                 href="${router.url(WebsiteClearCookies, { domain })}"
@@ -295,16 +315,18 @@ export default {
             </ui-button>
           </settings-option>
         </div>
-        ${hasWTMStats(topLevelDomain) &&
-        html`
-          <div layout="margin:1:0">
-            <ui-action>
-              <a href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}" target="_blank">
-                <settings-wtm-link> WhoTracks.Me Statistical Report </settings-wtm-link>
-              </a>
-            </ui-action>
-          </div>
-        `}
+        ${
+          hasWTMStats(topLevelDomain) &&
+          html`
+            <div layout="margin:1:0">
+              <ui-action>
+                <a href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}" target="_blank">
+                  <settings-wtm-link> WhoTracks.Me Statistical Report </settings-wtm-link>
+                </a>
+              </ui-action>
+            </div>
+          `
+        }
       </settings-page-layout>
     </template>
   `,

@@ -43,32 +43,34 @@ export default {
           <slot name="header"></slot>
         </div>
         <slot name="actions"></slot>
-        ${type &&
-        html`
-          <ui-action-button-group>
-            <ui-tooltip position="bottom">
-              <span slot="content">Simple View</span>
-              <ui-action-button grouped active="${type === 'graph'}" layout="size:30px">
-                <button onclick="${html.set('type', 'graph')}">
-                  <ui-icon name="chart" color="primary"></ui-icon>
-                </button>
-              </ui-action-button>
-            </ui-tooltip>
-            <ui-tooltip position="bottom">
-              <span slot="content">Detailed View</span>
-              <ui-action-button
-                grouped
-                active="${type === 'list'}"
-                layout="size:30px"
-                data-qa="button:detailed-view"
-              >
-                <button onclick="${html.set('type', 'list')}">
-                  <ui-icon name="list" color="primary"></ui-icon>
-                </button>
-              </ui-action-button>
-            </ui-tooltip>
-          </ui-action-button-group>
-        `}
+        ${
+          type &&
+          html`
+            <ui-action-button-group>
+              <ui-tooltip position="bottom">
+                <span slot="content">Simple View</span>
+                <ui-action-button grouped active="${type === 'graph'}" layout="size:30px">
+                  <button onclick="${html.set('type', 'graph')}">
+                    <ui-icon name="chart" color="primary"></ui-icon>
+                  </button>
+                </ui-action-button>
+              </ui-tooltip>
+              <ui-tooltip position="bottom">
+                <span slot="content">Detailed View</span>
+                <ui-action-button
+                  grouped
+                  active="${type === 'list'}"
+                  layout="size:30px"
+                  data-qa="button:detailed-view"
+                >
+                  <button onclick="${html.set('type', 'list')}">
+                    <ui-icon name="list" color="primary"></ui-icon>
+                  </button>
+                </ui-action-button>
+              </ui-tooltip>
+            </ui-action-button-group>
+          `
+        }
       </div>
       <ui-switch>
         <ui-switch-item active="${!type || type === 'graph'}" layout="row gap:3 padding:0:1">
@@ -77,12 +79,14 @@ export default {
             layout="shrink:0 size:12 margin:top"
           ></ui-tracker-wheel>
           <div layout="column grow">
-            ${!groupedCategories.length &&
-            html`
-              <ui-text type="body-s" color="secondary" layout="grow row center">
-                No activities detected
-              </ui-text>
-            `}
+            ${
+              !groupedCategories.length &&
+              html`
+                <ui-text type="body-s" color="secondary" layout="grow row center">
+                  No activities detected
+                </ui-text>
+              `
+            }
             ${groupedCategories.map(
               ([category, count]) => html`
                 <ui-category
@@ -95,12 +99,14 @@ export default {
             )}
           </div>
         </ui-switch-item>
-        ${type &&
-        html`
-          <ui-switch-item active="${type === 'list'}" layout="column grow height::104px">
-            <slot name="list"></slot>
-          </ui-switch-item>
-        `}
+        ${
+          type &&
+          html`
+            <ui-switch-item active="${type === 'list'}" layout="column grow height::104px">
+              <slot name="list"></slot>
+            </ui-switch-item>
+          `
+        }
       </ui-switch>
     </template>
   `,

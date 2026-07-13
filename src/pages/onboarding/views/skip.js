@@ -30,16 +30,18 @@ export default {
             Ghostery Tracker & Ad Blocker is naming the trackers present on websites you visit. You
             are browsing the web unprotected.
           </ui-text>
-          ${chrome.management?.uninstallSelf &&
-          html`
-            <ui-button
-              type="danger"
-              onclick="${() => chrome.management.uninstallSelf({ showConfirmDialog: true })}"
-              layout="self:center margin:top:2"
-            >
-              <button>Uninstall</button>
-            </ui-button>
-          `}
+          ${
+            chrome.management?.uninstallSelf &&
+            html`
+              <ui-button
+                type="danger"
+                onclick="${() => chrome.management.uninstallSelf({ showConfirmDialog: true })}"
+                layout="self:center margin:top:2"
+              >
+                <button>Uninstall</button>
+              </ui-button>
+            `
+          }
         </section>
       </ui-card>
       <ui-button type="transparent" layout="self:center">

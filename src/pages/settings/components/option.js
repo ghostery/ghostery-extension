@@ -17,13 +17,15 @@ export default {
     <template layout="block">
       <settings-card static layout="padding:0">
         <div id="content" layout="column gap:2 grow self:stretch padding:2">
-          ${icon
-            ? html`
-                <div id="icon" layout="row center padding self:start">
-                  <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
-                </div>
-              `
-            : html`<slot name="icon"></slot>`}
+          ${
+            icon
+              ? html`
+                  <div id="icon" layout="row center padding self:start">
+                    <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                  </div>
+                `
+              : html`<slot name="icon"></slot>`
+          }
 
           <div layout="row gap:2 items:start grow">
             <div layout="column gap:0.5 grow items:start grow self:center">

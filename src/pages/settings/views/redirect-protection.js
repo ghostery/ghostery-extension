@@ -70,55 +70,63 @@ export default {
                 Prevents websites from redirecting your clicks through tracking URLs before loading
                 the destination pages.
               </span>
-              ${options.redirectProtection.enabled &&
-              html`
-                <div slot="card-footer" layout="column gap:2">
-                  <div layout="row content:space-between items:center">
-                    <ui-text type="label-l">Exceptions</ui-text>
-                    <ui-button data-qa="button:redirect-protection:add">
-                      <a href="${router.url(RedirectProtectionAddException)}"> Add </a>
-                    </ui-button>
-                  </div>
-
-                  <settings-table>
-                    <div slot="header" layout="grid:1|max gap">
-                      <ui-text type="label-m">
-                        Website <span>${!!hostnames.length && html`(${hostnames.length})`}</span>
-                      </ui-text>
+              ${
+                options.redirectProtection.enabled &&
+                html`
+                  <div slot="card-footer" layout="column gap:2">
+                    <div layout="row content:space-between items:center">
+                      <ui-text type="label-l">Exceptions</ui-text>
+                      <ui-button data-qa="button:redirect-protection:add">
+                        <a href="${router.url(RedirectProtectionAddException)}"> Add </a>
+                      </ui-button>
                     </div>
-                    ${hostnames.length
-                      ? hostnames.map(
-                          (hostname) => html`
-                            <div
-                              layout="grid:1|max content:center gap"
-                              data-qa="item:redirect-protection:exception:${hostname}"
-                            >
-                              <ui-text type="label-m">${hostname}</ui-text>
-                              <ui-action>
-                                <button
-                                  onclick="${removeException(hostname)}"
-                                  data-qa="button:redirect-protection:remove:${hostname}"
+
+                    <settings-table>
+                      <div slot="header" layout="grid:1|max gap">
+                        <ui-text type="label-m">
+                          Website <span>${!!hostnames.length && html`(${hostnames.length})`}</span>
+                        </ui-text>
+                      </div>
+                      ${
+                        hostnames.length
+                          ? hostnames.map(
+                              (hostname) => html`
+                                <div
+                                  layout="grid:1|max content:center gap"
+                                  data-qa="item:redirect-protection:exception:${hostname}"
                                 >
-                                  <ui-icon name="trash" color="tertiary" layout="size:3"></ui-icon>
-                                </button>
-                              </ui-action>
-                            </div>
-                          `,
-                        )
-                      : html`
-                          <div
-                            layout="column center gap padding:3:0"
-                            data-qa="component:redirect-protection:empty-state"
-                          >
-                            <ui-icon name="block-m" color="tertiary" layout="size:3"></ui-icon>
-                            <ui-text color="tertiary" layout="block:center width:::180px">
-                              No exceptions added yet
-                            </ui-text>
-                          </div>
-                        `}
-                  </settings-table>
-                </div>
-              `}
+                                  <ui-text type="label-m">${hostname}</ui-text>
+                                  <ui-action>
+                                    <button
+                                      onclick="${removeException(hostname)}"
+                                      data-qa="button:redirect-protection:remove:${hostname}"
+                                    >
+                                      <ui-icon
+                                        name="trash"
+                                        color="tertiary"
+                                        layout="size:3"
+                                      ></ui-icon>
+                                    </button>
+                                  </ui-action>
+                                </div>
+                              `,
+                            )
+                          : html`
+                              <div
+                                layout="column center gap padding:3:0"
+                                data-qa="component:redirect-protection:empty-state"
+                              >
+                                <ui-icon name="block-m" color="tertiary" layout="size:3"></ui-icon>
+                                <ui-text color="tertiary" layout="block:center width:::180px">
+                                  No exceptions added yet
+                                </ui-text>
+                              </div>
+                            `
+                      }
+                    </settings-table>
+                  </div>
+                `
+              }
             </settings-toggle>
             <settings-toggle
               value="${options.serpTrackingPrevention}"

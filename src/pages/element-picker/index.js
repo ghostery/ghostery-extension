@@ -106,11 +106,13 @@ mount(document.body, {
       <template layout="column height:full">
         <div layout="row items:center content:space-between height:4.5">
           <ui-icon name="drag" color="tertiary" layout="padding:1"></ui-icon>
-          ${state === 'configure' &&
-          html`<ui-text type="label-m" layout="row items:center gap">
-            <ui-icon name="logo" layout="size:2.5"></ui-icon>
-            Hide content block
-          </ui-text>`}
+          ${
+            state === 'configure' &&
+            html`<ui-text type="label-m" layout="row items:center gap">
+              <ui-icon name="logo" layout="size:2.5"></ui-icon>
+              Hide content block
+            </ui-text>`
+          }
           <ui-button type="transparent" onclick="${close}">
             <button layout="padding:0:1">
               <ui-icon name="close" color="tertiary"></ui-icon>
@@ -118,87 +120,95 @@ mount(document.body, {
           </ui-button>
         </div>
 
-        ${state === 'select' &&
-        html`
-          <div layout="grow column center gap:2 padding:0:1.5:1.5">
-            <img src="${selectImage}" width="200" height="96" />
-            <div layout="block:center padding:bottom:2">
-              <ui-text type="label-l">Hide distraction</ui-text>
-              <ui-text color="tertiary">Select distracting element</ui-text>
-            </div>
-          </div>
-        `}
-        ${state === 'configure' &&
-        html`
-          <element-picker-container layout="column gap:1.5 padding:1.5">
-            <div layout="column gap">
-              <ui-input>
-                <textarea
-                  style="resize:none"
-                  rows="3"
-                  value="${selector}"
-                  spellcheck="false"
-                  autocorrect="off"
-                  oninput="${updateSelector}"
-                ></textarea>
-              </ui-input>
-              <label layout="row items:center gap">
-                <ui-input>
-                  <input type="checkbox" checked="${similar}" onchange="${toggleSimilar}" />
-                </ui-input>
-                <ui-text type="body-xs" color="tertiary"> Block similar elements </ui-text>
-              </label>
-            </div>
-            ${sliderMax > 1 &&
-            html`
-              <div layout="column gap">
-                <div layout="column">
-                  <ui-text type="label-s" layout="block:center">
-                    Move the slider to show or hide sections.
-                  </ui-text>
-                  <element-picker-range
-                    max="${sliderMax}"
-                    value="${sliderValue}"
-                    oninput="${slide}"
-                  ></element-picker-range>
-                  <div layout="row content:space-between items:center">
-                    <ui-text type="label-xs" color="tertiary" uppercase> Zoom out </ui-text>
-                    <ui-text type="label-xs" color="tertiary" uppercase> Zoom in </ui-text>
-                  </div>
-                </div>
+        ${
+          state === 'select' &&
+          html`
+            <div layout="grow column center gap:2 padding:0:1.5:1.5">
+              <img src="${selectImage}" width="200" height="96" />
+              <div layout="block:center padding:bottom:2">
+                <ui-text type="label-l">Hide distraction</ui-text>
+                <ui-text color="tertiary">Select distracting element</ui-text>
               </div>
-            `}
-          </element-picker-container>
-          <element-picker-footer>
-            <ui-button onclick="${reselect}">
-              <button>Reselect</button>
-            </ui-button>
-            <ui-button type="danger" onclick="${hide}">
-              <button>Hide</button>
-            </ui-button>
-          </element-picker-footer>
-        `}
-        ${state === 'hidden' &&
-        html`
-          <div layout="column center gap padding:0:1.5:0">
-            <img src="${hiddenImage}" width="200" height="96" />
-            <div layout="block:center padding:bottom:2">
-              <ui-text type="label-l">Gone!</ui-text>
-              <ui-text type="body-s" color="tertiary">
-                Ghostery added a rule to keep this content block hidden. You can undo this anytime
-                in website settings.
-              </ui-text>
             </div>
-          </div>
-          <element-picker-footer>
-            <ui-button onclick="${back}">
-              <button>Back</button>
-            </ui-button>
-            <ui-button type="primary" onclick="${close}">
-              <button>Done</button>
-            </ui-button>
-          </element-picker-footer>
-        `}
+          `
+        }
+        ${
+          state === 'configure' &&
+          html`
+            <element-picker-container layout="column gap:1.5 padding:1.5">
+              <div layout="column gap">
+                <ui-input>
+                  <textarea
+                    style="resize:none"
+                    rows="3"
+                    value="${selector}"
+                    spellcheck="false"
+                    autocorrect="off"
+                    oninput="${updateSelector}"
+                  ></textarea>
+                </ui-input>
+                <label layout="row items:center gap">
+                  <ui-input>
+                    <input type="checkbox" checked="${similar}" onchange="${toggleSimilar}" />
+                  </ui-input>
+                  <ui-text type="body-xs" color="tertiary"> Block similar elements </ui-text>
+                </label>
+              </div>
+              ${
+                sliderMax > 1 &&
+                html`
+                  <div layout="column gap">
+                    <div layout="column">
+                      <ui-text type="label-s" layout="block:center">
+                        Move the slider to show or hide sections.
+                      </ui-text>
+                      <element-picker-range
+                        max="${sliderMax}"
+                        value="${sliderValue}"
+                        oninput="${slide}"
+                      ></element-picker-range>
+                      <div layout="row content:space-between items:center">
+                        <ui-text type="label-xs" color="tertiary" uppercase> Zoom out </ui-text>
+                        <ui-text type="label-xs" color="tertiary" uppercase> Zoom in </ui-text>
+                      </div>
+                    </div>
+                  </div>
+                `
+              }
+            </element-picker-container>
+            <element-picker-footer>
+              <ui-button onclick="${reselect}">
+                <button>Reselect</button>
+              </ui-button>
+              <ui-button type="danger" onclick="${hide}">
+                <button>Hide</button>
+              </ui-button>
+            </element-picker-footer>
+          `
+        }
+        ${
+          state === 'hidden' &&
+          html`
+            <div layout="column center gap padding:0:1.5:0">
+              <img src="${hiddenImage}" width="200" height="96" />
+              <div layout="block:center padding:bottom:2">
+                <ui-text type="label-l">Gone!</ui-text>
+                <ui-text type="body-s" color="tertiary">
+                  Ghostery added a rule to keep this content block hidden. You can undo this anytime
+                  in website settings.
+                </ui-text>
+              </div>
+            </div>
+            <element-picker-footer>
+              <ui-button onclick="${back}">
+                <button>Back</button>
+              </ui-button>
+              <ui-button type="primary" onclick="${close}">
+                <button>Done</button>
+              </ui-button>
+            </element-picker-footer>
+          `
+        }
       </template>
     `,
     connect: (host) => {

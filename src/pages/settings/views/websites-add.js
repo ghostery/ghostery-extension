@@ -49,10 +49,14 @@ export default {
         <form action="${router.backUrl()}" onsubmit="${add}" layout="column gap:3">
           <ui-text type="label-l" layout="block:center margin:bottom"> Add website </ui-text>
           <div layout="column gap items:start">
-            ${options.mode === MODE_DEFAULT &&
-            html` <ui-text>To adjust privacy protection trust a site:</ui-text> `}
-            ${options.mode === MODE_ZAP &&
-            html` <ui-text>To adjust privacy protection enable on a site:</ui-text> `}
+            ${
+              options.mode === MODE_DEFAULT &&
+              html` <ui-text>To adjust privacy protection trust a site:</ui-text> `
+            }
+            ${
+              options.mode === MODE_ZAP &&
+              html` <ui-text>To adjust privacy protection enable on a site:</ui-text> `
+            }
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>
@@ -66,25 +70,27 @@ export default {
               />
             </ui-input>
           </div>
-          ${options.mode === MODE_DEFAULT &&
-          html`
-            <div layout="column gap:0.5">
-              <ui-text type="label-m">Select time frame</ui-text>
-              <ui-input>
-                <select
-                  type="text"
-                  placeholder="${msg`Enter website URL`}"
-                  value="${pauseType}"
-                  oninput="${html.set('pauseType')}"
-                  tabindex="2"
-                >
-                  <option value="1">1 hour</option>
-                  <option value="24">1 day</option>
-                  <option value="0">Always</option>
-                </select>
-              </ui-input>
-            </div>
-          `}
+          ${
+            options.mode === MODE_DEFAULT &&
+            html`
+              <div layout="column gap:0.5">
+                <ui-text type="label-m">Select time frame</ui-text>
+                <ui-input>
+                  <select
+                    type="text"
+                    placeholder="${msg`Enter website URL`}"
+                    value="${pauseType}"
+                    oninput="${html.set('pauseType')}"
+                    tabindex="2"
+                  >
+                    <option value="1">1 hour</option>
+                    <option value="24">1 day</option>
+                    <option value="0">Always</option>
+                  </select>
+                </ui-input>
+              </div>
+            `
+          }
           <div layout="grid:1|1 gap margin:top:2">
             <ui-button>
               <a href="${router.backUrl()}" tabindex="2">Cancel</a>

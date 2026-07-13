@@ -15,19 +15,21 @@ export default {
   blocked: false,
   render: ({ blocked }) => html`
     <template layout="block">
-      ${blocked
-        ? html`
-            <settings-badge>
-              <ui-icon name="block-s"></ui-icon>
-              Blocked
-            </settings-badge>
-          `
-        : html`
-            <settings-badge>
-              <ui-icon name="trust-s"></ui-icon>
-              Trusted
-            </settings-badge>
-          `}
+      ${
+        blocked
+          ? html`
+              <settings-badge>
+                <ui-icon name="block-s"></ui-icon>
+                Blocked
+              </settings-badge>
+            `
+          : html`
+              <settings-badge>
+                <ui-icon name="trust-s"></ui-icon>
+                Trusted
+              </settings-badge>
+            `
+      }
     </template>
   `,
 };

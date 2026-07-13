@@ -58,129 +58,137 @@ export default {
             <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
           <div layout="column gap:4">
-            ${config.hasFlag(FLAG_MODES) &&
-            !managedConfig.disableModes &&
-            html`
-              <settings-option icon="ghosty-m">
-                Filtering Mode
-                <span slot="description">
-                  Because no two people surf alike, we're giving you the power to pick how you want
-                  to experience the web.
-                </span>
-                <div slot="card-footer" layout="column gap" layout@768px="grid:2">
-                  <ui-mode-radio
-                    checked="${options.mode === MODE_DEFAULT}"
-                    id="mode-option-default"
-                  >
-                    <input
-                      type="radio"
-                      name="filtering-mode"
-                      value="${MODE_DEFAULT}"
-                      checked="${options.mode === MODE_DEFAULT}"
-                      onchange="${updateMode(MODE_DEFAULT)}"
-                      data-qa="input:filtering-mode:ghostery"
-                    />
-                    <ui-lottie
-                      src="${modeGhosteryScreenshotUrl}"
-                      layout="ratio:83/45 width:220px"
-                      layout@768px="width:100%"
-                      play-on-hover="mode-option-default"
-                    ></ui-lottie>
-                    <ui-icon
-                      name="logo-in-box"
-                      layout="width:83px"
-                      layout@768px="width:138px"
-                    ></ui-icon>
-                    <ui-text>
-                      We block it all for you - ads, trackers, distractions. You’re fully covered,
-                      no setup needed.
-                    </ui-text>
-                    <ui-text type="label-s" slot="footer">
-                      Best for full coverage and privacy enthusiasts.
-                    </ui-text>
-                  </ui-mode-radio>
-                  <ui-mode-radio checked="${options.mode === MODE_ZAP}" id="mode-option-zap">
-                    <input
-                      type="radio"
-                      name="filtering-mode"
-                      value="${MODE_ZAP}"
-                      checked="${options.mode === MODE_ZAP}"
-                      onchange="${updateMode(MODE_ZAP)}"
-                      data-qa="input:filtering-mode:zap"
-                    />
-                    <ui-lottie
-                      src="${modeZapScreenshotUrl}"
-                      layout="ratio:83/45 width:220px"
-                      layout@768px="width:100%"
-                      play-on-hover="mode-option-zap"
-                    ></ui-lottie>
-                    <ui-icon
-                      name="logo-zap"
-                      layout="width:83px"
-                      layout@768px="width:116px"
-                    ></ui-icon>
-                    <ui-text>
-                      You zap ads away, one site at a time. One button, one page, and you build your
-                      own ad-free list.
-                    </ui-text>
-                    <ui-text type="label-s" slot="footer">
-                      Best for beginners or sharing with family.
-                    </ui-text>
-                  </ui-mode-radio>
-                </div>
-              </settings-option>
-            `}
-            ${!managedConfig.disableUserAccount &&
-            html`
-              <div layout="column gap">
-                ${(__FIREFOX__ || (!isOpera() && !isWebkit())) &&
-                html`
-                  <settings-toggle
-                    icon="globe"
-                    value="${options.sync}"
-                    onchange="${html.set(options, 'sync')}"
-                  >
-                    Settings Sync
-                    <span slot="description">
-                      Saves and synchronizes your custom settings between different devices.
-                    </span>
-                  </settings-toggle>
-                `}
-
-                <settings-option icon="external-link">
-                  Settings Backup
+            ${
+              config.hasFlag(FLAG_MODES) &&
+              !managedConfig.disableModes &&
+              html`
+                <settings-option icon="ghosty-m">
+                  Filtering Mode
                   <span slot="description">
-                    Save your custom settings to a file, or restore them from a file.
+                    Because no two people surf alike, we're giving you the power to pick how you
+                    want to experience the web.
                   </span>
-                  <ui-text type="body-xs" color="tertiary" slot="footer">
-                    Importing supports uBlock Origin file format with selected features.
-                  </ui-text>
-
-                  ${importStatus &&
-                  html`
-                    <ui-text type="body-s" color="${importStatus.type}" slot="footer">
-                      ${importStatus.msg}
-                    </ui-text>
-                  `}
-                  <div slot="action" layout="row:wrap gap" layout@768px="content:end">
-                    <ui-button size="s" onclick="${backup.exportToFile}">
-                      <button><ui-icon name="arrow-square-up"></ui-icon> Export to file</button>
-                    </ui-button>
-                    <ui-button size="s">
-                      <label for="import-settings-input">
-                        <ui-icon name="arrow-square-down"></ui-icon> Import from file
-                      </label>
+                  <div slot="card-footer" layout="column gap" layout@768px="grid:2">
+                    <ui-mode-radio
+                      checked="${options.mode === MODE_DEFAULT}"
+                      id="mode-option-default"
+                    >
                       <input
-                        id="import-settings-input"
-                        type="file"
-                        accept=".json,.txt"
-                        onchange="${importSettings}"
+                        type="radio"
+                        name="filtering-mode"
+                        value="${MODE_DEFAULT}"
+                        checked="${options.mode === MODE_DEFAULT}"
+                        onchange="${updateMode(MODE_DEFAULT)}"
+                        data-qa="input:filtering-mode:ghostery"
                       />
-                    </ui-button>
+                      <ui-lottie
+                        src="${modeGhosteryScreenshotUrl}"
+                        layout="ratio:83/45 width:220px"
+                        layout@768px="width:100%"
+                        play-on-hover="mode-option-default"
+                      ></ui-lottie>
+                      <ui-icon
+                        name="logo-in-box"
+                        layout="width:83px"
+                        layout@768px="width:138px"
+                      ></ui-icon>
+                      <ui-text>
+                        We block it all for you - ads, trackers, distractions. You’re fully covered,
+                        no setup needed.
+                      </ui-text>
+                      <ui-text type="label-s" slot="footer">
+                        Best for full coverage and privacy enthusiasts.
+                      </ui-text>
+                    </ui-mode-radio>
+                    <ui-mode-radio checked="${options.mode === MODE_ZAP}" id="mode-option-zap">
+                      <input
+                        type="radio"
+                        name="filtering-mode"
+                        value="${MODE_ZAP}"
+                        checked="${options.mode === MODE_ZAP}"
+                        onchange="${updateMode(MODE_ZAP)}"
+                        data-qa="input:filtering-mode:zap"
+                      />
+                      <ui-lottie
+                        src="${modeZapScreenshotUrl}"
+                        layout="ratio:83/45 width:220px"
+                        layout@768px="width:100%"
+                        play-on-hover="mode-option-zap"
+                      ></ui-lottie>
+                      <ui-icon
+                        name="logo-zap"
+                        layout="width:83px"
+                        layout@768px="width:116px"
+                      ></ui-icon>
+                      <ui-text>
+                        You zap ads away, one site at a time. One button, one page, and you build
+                        your own ad-free list.
+                      </ui-text>
+                      <ui-text type="label-s" slot="footer">
+                        Best for beginners or sharing with family.
+                      </ui-text>
+                    </ui-mode-radio>
                   </div>
                 </settings-option>
-              </div>
-            `}
+              `
+            }
+            ${
+              !managedConfig.disableUserAccount &&
+              html`
+                <div layout="column gap">
+                  ${
+                    (__FIREFOX__ || (!isOpera() && !isWebkit())) &&
+                    html`
+                      <settings-toggle
+                        icon="globe"
+                        value="${options.sync}"
+                        onchange="${html.set(options, 'sync')}"
+                      >
+                        Settings Sync
+                        <span slot="description">
+                          Saves and synchronizes your custom settings between different devices.
+                        </span>
+                      </settings-toggle>
+                    `
+                  }
+
+                  <settings-option icon="external-link">
+                    Settings Backup
+                    <span slot="description">
+                      Save your custom settings to a file, or restore them from a file.
+                    </span>
+                    <ui-text type="body-xs" color="tertiary" slot="footer">
+                      Importing supports uBlock Origin file format with selected features.
+                    </ui-text>
+
+                    ${
+                      importStatus &&
+                      html`
+                        <ui-text type="body-s" color="${importStatus.type}" slot="footer">
+                          ${importStatus.msg}
+                        </ui-text>
+                      `
+                    }
+                    <div slot="action" layout="row:wrap gap" layout@768px="content:end">
+                      <ui-button size="s" onclick="${backup.exportToFile}">
+                        <button><ui-icon name="arrow-square-up"></ui-icon> Export to file</button>
+                      </ui-button>
+                      <ui-button size="s">
+                        <label for="import-settings-input">
+                          <ui-icon name="arrow-square-down"></ui-icon> Import from file
+                        </label>
+                        <input
+                          id="import-settings-input"
+                          type="file"
+                          accept=".json,.txt"
+                          onchange="${importSettings}"
+                        />
+                      </ui-button>
+                    </div>
+                  </settings-option>
+                </div>
+              `
+            }
             <div layout="column gap">
               <settings-toggle
                 icon="info"
@@ -192,19 +200,21 @@ export default {
                   Turns Ghostery notifications displayed in the panel on or off.
                 </span>
               </settings-toggle>
-              ${chrome.contextMenus &&
-              html`
-                <settings-toggle
-                  icon="doc-m"
-                  value="${options.contextMenu}"
-                  onchange="${html.set(options, 'contextMenu')}"
-                >
-                  Quick Actions
-                  <span slot="description">
-                    Shows Ghostery options in your browser’s right-click menu.
-                  </span>
-                </settings-toggle>
-              `}
+              ${
+                chrome.contextMenus &&
+                html`
+                  <settings-toggle
+                    icon="doc-m"
+                    value="${options.contextMenu}"
+                    onchange="${html.set(options, 'contextMenu')}"
+                  >
+                    Quick Actions
+                    <span slot="description">
+                      Shows Ghostery options in your browser’s right-click menu.
+                    </span>
+                  </settings-toggle>
+                `
+              }
 
               <settings-option icon="websites">
                 Theme

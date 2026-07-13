@@ -97,17 +97,19 @@ export default {
                   autoplay
                 ></ui-lottie>
                 <ui-icon name="logo-zap" layout="width:83px" layout@768px="width:116px"></ui-icon>
-                ${lang === 'en'
-                  ? html`
-                      <div translate="no">
-                        <ui-text> You zap ads away on the sites you use. </ui-text>
-                        <ui-text> Zap once. They stay ad-free every time you visit. </ui-text>
-                      </div>
-                    `
-                  : html`<ui-text balance>
-                      You block ads on the sites you use. Block once. They stay ad-free every time
-                      you visit.
-                    </ui-text>`}
+                ${
+                  lang === 'en'
+                    ? html`
+                        <div translate="no">
+                          <ui-text> You zap ads away on the sites you use. </ui-text>
+                          <ui-text> Zap once. They stay ad-free every time you visit. </ui-text>
+                        </div>
+                      `
+                    : html`<ui-text balance>
+                        You block ads on the sites you use. Block once. They stay ad-free every time
+                        you visit.
+                      </ui-text>`
+                }
                 <ui-text type="label-s" slot="footer">
                   Best for beginners or sharing with family.
                 </ui-text>

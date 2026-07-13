@@ -120,36 +120,40 @@ export default {
                 <button>Print to PDF</button>
               </ui-button>
               <div layout="column" layout@print="hidden">
-                ${duration !== 'custom' &&
-                html`<ui-input layout="width::16">
-                  <select value="${duration}" onchange="${html.set('duration')}">
-                    <option value="month">Last Month</option>
-                    <option value="yesterday">Yesterday</option>
-                    <option value="custom">Custom</option>
-                  </select>
-                </ui-input>`}
-                ${duration === 'custom' &&
-                html`
-                  <div layout="row gap items:center">
-                    <ui-input layout="width::16">
-                      <input
-                        type="date"
-                        value="${dateFrom}"
-                        max="${dateTo}"
-                        onchange="${html.set('dateFrom')}"
-                      />
-                    </ui-input>
-                    <ui-text>-</ui-text>
-                    <ui-input layout="width::16">
-                      <input
-                        type="date"
-                        value="${dateTo}"
-                        min="${dateFrom}"
-                        onchange="${html.set('dateTo')}"
-                      />
-                    </ui-input>
-                  </div>
-                `}
+                ${
+                  duration !== 'custom' &&
+                  html`<ui-input layout="width::16">
+                    <select value="${duration}" onchange="${html.set('duration')}">
+                      <option value="month">Last Month</option>
+                      <option value="yesterday">Yesterday</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                  </ui-input>`
+                }
+                ${
+                  duration === 'custom' &&
+                  html`
+                    <div layout="row gap items:center">
+                      <ui-input layout="width::16">
+                        <input
+                          type="date"
+                          value="${dateFrom}"
+                          max="${dateTo}"
+                          onchange="${html.set('dateFrom')}"
+                        />
+                      </ui-input>
+                      <ui-text>-</ui-text>
+                      <ui-input layout="width::16">
+                        <input
+                          type="date"
+                          value="${dateTo}"
+                          min="${dateFrom}"
+                          onchange="${html.set('dateTo')}"
+                        />
+                      </ui-input>
+                    </div>
+                  `
+                }
               </div>
             </div>
             <ui-text type="label-xs" color="tertiary" layout="margin:right">
@@ -159,230 +163,246 @@ export default {
           </div>
         </section>
         ${store.error(mergedStats)}
-        ${store.ready(mergedStats) &&
-        html`
-          <section layout="column gap:2">
-            <div layout="column gap">
-              <ui-text type="display-s">Facts</ui-text>
-              <ui-text type="body-m" color="secondary">
-                Provides an overview of the essential aspects of privacy protection.
-              </ui-text>
-            </div>
-            <div
-              layout="column gap:2"
-              layout@768px="grid:2:2"
-              layout@1024px:print="grid:5:1"
-              layout@print="padding:0:1px"
-            >
-              <ui-card narrow layout="column gap padding:2.5">
-                <div layout="row items:center gap">
-                  <ui-icon name="websites" color="wtm-secondary" layout="size:6"></ui-icon>
-                  <ui-text type="display-l">${formatNumber(mergedStats.pages)}</ui-text>
-                </div>
-                <ui-text type="label-l" color="secondary"> Pages visited </ui-text>
-              </ui-card>
-              <ui-card narrow layout="column gap padding:2.5">
-                <div layout="row items:center gap">
-                  <ui-icon name="block-s" color="danger-primary" layout="size:6"></ui-icon>
-                  <ui-text type="display-l"> ${formatNumber(mergedStats.trackersBlocked)} </ui-text>
-                </div>
-                <ui-text type="label-l" color="secondary"> Trackers blocked </ui-text>
-              </ui-card>
-              <ui-card narrow layout="column gap padding:2.5">
-                <div layout="row items:center gap">
-                  <ui-icon name="eye" color="brand-primary" layout="size:6"></ui-icon>
-                  <ui-text type="display-l">
-                    ${formatNumber(mergedStats.trackersModified)}
+        ${
+          store.ready(mergedStats) &&
+          html`
+            <section layout="column gap:2">
+              <div layout="column gap">
+                <ui-text type="display-s">Facts</ui-text>
+                <ui-text type="body-m" color="secondary">
+                  Provides an overview of the essential aspects of privacy protection.
+                </ui-text>
+              </div>
+              <div
+                layout="column gap:2"
+                layout@768px="grid:2:2"
+                layout@1024px:print="grid:5:1"
+                layout@print="padding:0:1px"
+              >
+                <ui-card narrow layout="column gap padding:2.5">
+                  <div layout="row items:center gap">
+                    <ui-icon name="websites" color="wtm-secondary" layout="size:6"></ui-icon>
+                    <ui-text type="display-l">${formatNumber(mergedStats.pages)}</ui-text>
+                  </div>
+                  <ui-text type="label-l" color="secondary"> Pages visited </ui-text>
+                </ui-card>
+                <ui-card narrow layout="column gap padding:2.5">
+                  <div layout="row items:center gap">
+                    <ui-icon name="block-s" color="danger-primary" layout="size:6"></ui-icon>
+                    <ui-text type="display-l">
+                      ${formatNumber(mergedStats.trackersBlocked)}
+                    </ui-text>
+                  </div>
+                  <ui-text type="label-l" color="secondary"> Trackers blocked </ui-text>
+                </ui-card>
+                <ui-card narrow layout="column gap padding:2.5">
+                  <div layout="row items:center gap">
+                    <ui-icon name="eye" color="brand-primary" layout="size:6"></ui-icon>
+                    <ui-text type="display-l">
+                      ${formatNumber(mergedStats.trackersModified)}
+                    </ui-text>
+                  </div>
+                  <ui-text type="label-l" color="secondary"> Trackers modified </ui-text>
+                </ui-card>
+                <ui-card narrow layout="column gap padding:2.5">
+                  <div layout="row items:center gap">
+                    <ui-icon
+                      name="autoconsent-managed"
+                      color="success-secondary"
+                      layout="size:6"
+                    ></ui-icon>
+                    <ui-text type="display-l">${formatNumber(autoconsent)}</ui-text>
+                  </div>
+                  <ui-text type="label-l" color="secondary"> Consent managed </ui-text>
+                </ui-card>
+                <ui-card narrow layout="column gap padding:2.5">
+                  <div layout="row items:center gap">
+                    <ui-icon name="cookie" color="warning-secondary" layout="size:6"></ui-icon>
+                    <ui-text type="display-l">
+                      ${formatNumber(mergedStats.cookiesRemoved)}
+                    </ui-text>
+                  </div>
+                  <ui-text type="label-l" color="secondary"> Deleted cookies </ui-text>
+                </ui-card>
+              </div>
+            </section>
+            <section layout="column gap:2:5" layout@1120px:print="grid:2:1">
+              <div layout="column gap:3" layout@1120px:print="padding">
+                <div layout="column gap:2">
+                  <ui-text type="display-s">Observed activities</ui-text>
+                  <ui-text type="body-m" color="secondary">
+                    Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can
+                    uncover the identities behind every tracker.
                   </ui-text>
                 </div>
-                <ui-text type="label-l" color="secondary"> Trackers modified </ui-text>
-              </ui-card>
-              <ui-card narrow layout="column gap padding:2.5">
-                <div layout="row items:center gap">
-                  <ui-icon
-                    name="autoconsent-managed"
-                    color="success-secondary"
-                    layout="size:6"
-                  ></ui-icon>
-                  <ui-text type="display-l">${formatNumber(autoconsent)}</ui-text>
+                <div layout="column" layout@768px:print="row gap:2">
+                  <ui-tracker-wheel
+                    categories="${mergedStats.categories}"
+                    layout="size:24 self:center margin:4"
+                    layout@768px="self:start margin:2"
+                  ></ui-tracker-wheel>
+                  <div layout="column grow">
+                    ${mergedStats.groupedCategories.map(
+                      ({ id, count }) => html`
+                        <ui-category name="${id}" count="${count}" large></ui-category>
+                      `,
+                    )}
+                  </div>
                 </div>
-                <ui-text type="label-l" color="secondary"> Consent managed </ui-text>
-              </ui-card>
-              <ui-card narrow layout="column gap padding:2.5">
-                <div layout="row items:center gap">
-                  <ui-icon name="cookie" color="warning-secondary" layout="size:6"></ui-icon>
-                  <ui-text type="display-l"> ${formatNumber(mergedStats.cookiesRemoved)} </ui-text>
-                </div>
-                <ui-text type="label-l" color="secondary"> Deleted cookies </ui-text>
-              </ui-card>
-            </div>
-          </section>
-          <section layout="column gap:2:5" layout@1120px:print="grid:2:1">
-            <div layout="column gap:3" layout@1120px:print="padding">
-              <div layout="column gap:2">
-                <ui-text type="display-s">Observed activities</ui-text>
-                <ui-text type="body-m" color="secondary">
-                  Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can
-                  uncover the identities behind every tracker.
-                </ui-text>
-              </div>
-              <div layout="column" layout@768px:print="row gap:2">
-                <ui-tracker-wheel
-                  categories="${mergedStats.categories}"
-                  layout="size:24 self:center margin:4"
-                  layout@768px="self:start margin:2"
-                ></ui-tracker-wheel>
-                <div layout="column grow">
-                  ${mergedStats.groupedCategories.map(
-                    ({ id, count }) => html`
-                      <ui-category name="${id}" count="${count}" large></ui-category>
+                <ui-pagination
+                  layout="column gap"
+                  layout@768px="grid:2"
+                  layout@1120px:print="grid:2:5 height::360px"
+                >
+                  ${mergedStats.groupedTrackers.map(
+                    ({ id, name, category }, index) => html`
+                      <ui-action>
+                        <a href="${WTM_PAGE_URL}/trackers/${id}" target="_blank">
+                          <ui-card narrow flat layout="padding row gap items:center">
+                            <ui-text type="label-s" layout="block:center width::3">
+                              ${index + 1}
+                            </ui-text>
+                            <div layout="grow width:0">
+                              <ui-text type="label-m" ellipsis>${name}</ui-text>
+                              <ui-text type="body-s" color="secondary">
+                                ${categories[category]}
+                              </ui-text>
+                            </div>
+                            <ui-category-icon name="${category}"></ui-category-icon>
+                          </ui-card>
+                        </a>
+                      </ui-action>
                     `,
                   )}
+                </ui-pagination>
+              </div>
+              <div layout="column gap:3" layout@1120px:print="padding">
+                <div layout="column gap:2 relative">
+                  <ui-text type="display-s">Trends</ui-text>
+                  <ui-text type="body-m" color="secondary">
+                    Uncovers that no two days are alike. With Ghostery, you’re protected each day.
+                  </ui-text>
+                  <ui-input layout="absolute top:-1 right" layout@print="hidden">
+                    <select value="${trendsAggregate}" onchange="${html.set('trendsAggregate')}">
+                      <option value="0">Daily</option>
+                      <option value="7">Weekly</option>
+                      <option value="30">Monthly</option>
+                    </select>
+                  </ui-input>
                 </div>
+                <div layout="grid:3">
+                  <whotracksme-button
+                    active="${trends.includes('pages')}"
+                    onclick="${toggleTrend('pages')}"
+                  >
+                    <div layout="row items:center gap">
+                      <ui-icon name="websites" color="wtm-secondary" layout="size:2"></ui-icon>
+                      <ui-text type="headline-s">
+                        ${numberFormatter.format(mergedStats.pages)}
+                      </ui-text>
+                    </div>
+                    <ui-text type="label-xs" color="secondary"> Pages visited </ui-text>
+                  </whotracksme-button>
+                  <whotracksme-button
+                    active="${trends.includes('trackersBlocked')}"
+                    onclick="${toggleTrend('trackersBlocked')}"
+                  >
+                    <div layout="row items:center gap">
+                      <ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>
+                      <ui-text type="headline-s">
+                        ${numberFormatter.format(mergedStats.trackersBlocked)}
+                      </ui-text>
+                    </div>
+                    <ui-text type="label-xs" color="secondary"> Trackers blocked </ui-text>
+                  </whotracksme-button>
+                  <whotracksme-button
+                    active="${trends.includes('trackersModified')}"
+                    onclick="${toggleTrend('trackersModified')}"
+                  >
+                    <div layout="row items:center gap">
+                      <ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>
+                      <ui-text type="headline-s">
+                        ${numberFormatter.format(mergedStats.trackersModified)}
+                      </ui-text>
+                    </div>
+                    <ui-text type="label-xs" color="secondary"> Trackers modified </ui-text>
+                  </whotracksme-button>
+                </div>
+                <whotracksme-trends-chart
+                  dateFrom="${dateFrom}"
+                  dateTo="${dateTo}"
+                  trends="${trends}"
+                  aggregate="${trendsAggregate}"
+                  layout="grow"
+                ></whotracksme-trends-chart>
               </div>
-              <ui-pagination
-                layout="column gap"
-                layout@768px="grid:2"
-                layout@1120px:print="grid:2:5 height::360px"
-              >
-                ${mergedStats.groupedTrackers.map(
-                  ({ id, name, category }, index) => html`
-                    <ui-action>
-                      <a href="${WTM_PAGE_URL}/trackers/${id}" target="_blank">
-                        <ui-card narrow flat layout="padding row gap items:center">
-                          <ui-text type="label-s" layout="block:center width::3">
-                            ${index + 1}
-                          </ui-text>
-                          <div layout="grow width:0">
-                            <ui-text type="label-m" ellipsis>${name}</ui-text>
-                            <ui-text type="body-s" color="secondary">
-                              ${categories[category]}
-                            </ui-text>
-                          </div>
-                          <ui-category-icon name="${category}"></ui-category-icon>
-                        </ui-card>
-                      </a>
-                    </ui-action>
-                  `,
-                )}
-              </ui-pagination>
-            </div>
-            <div layout="column gap:3" layout@1120px:print="padding">
+            </section>
+            <section layout="column gap:3">
               <div layout="column gap:2 relative">
-                <ui-text type="display-s">Trends</ui-text>
+                <ui-text type="display-s">Tracker Database</ui-text>
                 <ui-text type="body-m" color="secondary">
-                  Uncovers that no two days are alike. With Ghostery, you’re protected each day.
+                  Ghostery maps the ownership structure linking activities to the organizations
+                  controlling them. This knowledge, hand-curated by experts, is publicly available
+                  on
+                  <a href="${'https://github.com/ghostery/trackerdb'}" translate="no">Github</a>.
                 </ui-text>
-                <ui-input layout="absolute top:-1 right" layout@print="hidden">
-                  <select value="${trendsAggregate}" onchange="${html.set('trendsAggregate')}">
-                    <option value="0">Daily</option>
-                    <option value="7">Weekly</option>
-                    <option value="30">Monthly</option>
-                  </select>
-                </ui-input>
+                ${
+                  mergedStats.groupedTrackers.length > 20 &&
+                  html`
+                    <ui-input layout="absolute top:-1 right" layout@print="hidden">
+                      <select
+                        value="${sankeyChartSlice}"
+                        onchange="${html.set('sankeyChartSlice')}"
+                      >
+                        <option value="20">Top 20</option>
+                        ${
+                          mergedStats.groupedTrackers.length > 20 &&
+                          html`<option value="50">Top 50</option>`
+                        }
+                        ${
+                          mergedStats.groupedTrackers.length > 50 &&
+                          html`<option value="100">Top 100</option>`
+                        }
+                      </select>
+                    </ui-input>
+                  `
+                }
               </div>
-              <div layout="grid:3">
-                <whotracksme-button
-                  active="${trends.includes('pages')}"
-                  onclick="${toggleTrend('pages')}"
-                >
-                  <div layout="row items:center gap">
-                    <ui-icon name="websites" color="wtm-secondary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s">
-                      ${numberFormatter.format(mergedStats.pages)}
-                    </ui-text>
-                  </div>
-                  <ui-text type="label-xs" color="secondary"> Pages visited </ui-text>
-                </whotracksme-button>
-                <whotracksme-button
-                  active="${trends.includes('trackersBlocked')}"
-                  onclick="${toggleTrend('trackersBlocked')}"
-                >
-                  <div layout="row items:center gap">
-                    <ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s">
-                      ${numberFormatter.format(mergedStats.trackersBlocked)}
-                    </ui-text>
-                  </div>
-                  <ui-text type="label-xs" color="secondary"> Trackers blocked </ui-text>
-                </whotracksme-button>
-                <whotracksme-button
-                  active="${trends.includes('trackersModified')}"
-                  onclick="${toggleTrend('trackersModified')}"
-                >
-                  <div layout="row items:center gap">
-                    <ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>
-                    <ui-text type="headline-s">
-                      ${numberFormatter.format(mergedStats.trackersModified)}
-                    </ui-text>
-                  </div>
-                  <ui-text type="label-xs" color="secondary"> Trackers modified </ui-text>
-                </whotracksme-button>
-              </div>
-              <whotracksme-trends-chart
+              <whotracksme-sankey-chart
                 dateFrom="${dateFrom}"
                 dateTo="${dateTo}"
-                trends="${trends}"
-                aggregate="${trendsAggregate}"
-                layout="grow"
-              ></whotracksme-trends-chart>
-            </div>
-          </section>
-          <section layout="column gap:3">
-            <div layout="column gap:2 relative">
-              <ui-text type="display-s">Tracker Database</ui-text>
-              <ui-text type="body-m" color="secondary">
-                Ghostery maps the ownership structure linking activities to the organizations
-                controlling them. This knowledge, hand-curated by experts, is publicly available on
-                <a href="${'https://github.com/ghostery/trackerdb'}" translate="no">Github</a>.
-              </ui-text>
-              ${mergedStats.groupedTrackers.length > 20 &&
-              html`
-                <ui-input layout="absolute top:-1 right" layout@print="hidden">
-                  <select value="${sankeyChartSlice}" onchange="${html.set('sankeyChartSlice')}">
-                    <option value="20">Top 20</option>
-                    ${mergedStats.groupedTrackers.length > 20 &&
-                    html`<option value="50">Top 50</option>`}
-                    ${mergedStats.groupedTrackers.length > 50 &&
-                    html`<option value="100">Top 100</option>`}
-                  </select>
-                </ui-input>
-              `}
-            </div>
-            <whotracksme-sankey-chart
-              dateFrom="${dateFrom}"
-              dateTo="${dateTo}"
-              slice="${sankeyChartSlice}"
-            ></whotracksme-sankey-chart>
-          </section>
-          <section layout="column center gap:2 padding:top:2" layout@print="hidden">
-            <img src="${assets['hands']}" layout="size:12" alt="Contribution" slot="picture" />
-            <div layout="block:center column center gap:2 width:::400px">
-              <div layout="column gap:0.5">
-                <ui-text type="headline-m">Become a Contributor</ui-text>
-                <ui-text type="body-s" color="secondary">
-                  Help Ghostery fight for a web where privacy is a basic human right.
-                </ui-text>
+                slice="${sankeyChartSlice}"
+              ></whotracksme-sankey-chart>
+            </section>
+            <section layout="column center gap:2 padding:top:2" layout@print="hidden">
+              <img src="${assets['hands']}" layout="size:12" alt="Contribution" slot="picture" />
+              <div layout="block:center column center gap:2 width:::400px">
+                <div layout="column gap:0.5">
+                  <ui-text type="headline-m">Become a Contributor</ui-text>
+                  <ui-text type="body-s" color="secondary">
+                    Help Ghostery fight for a web where privacy is a basic human right.
+                  </ui-text>
+                </div>
+                <ui-button type="primary">
+                  <a
+                    href="${HOME_PAGE_URL}/become-a-contributor?utm_source=wtmtab-becomeacontributor"
+                    target="_blank"
+                  >
+                    Become a Contributor
+                  </a>
+                </ui-button>
               </div>
-              <ui-button type="primary">
-                <a
-                  href="${HOME_PAGE_URL}/become-a-contributor?utm_source=wtmtab-becomeacontributor"
-                  target="_blank"
-                >
-                  Become a Contributor
-                </a>
-              </ui-button>
-            </div>
-          </section>
-          <section layout="block:center margin:2:auto:0 width:::960px">
-            <ui-text type="body-s" color="secondary">
-              All information displayed on the WhoTracks.Me Tab or
-              ${html`<a href="${WTM_PAGE_URL}" translate="no">ghostery.com/whotracksme</a>`} is an
-              aggregate of facts about web trackers. These reports power Ghostery's anti-tracking
-              technology, protecting the entire community.
-            </ui-text>
-          </section>
-        `}
+            </section>
+            <section layout="block:center margin:2:auto:0 width:::960px">
+              <ui-text type="body-s" color="secondary">
+                All information displayed on the WhoTracks.Me Tab or
+                ${html`<a href="${WTM_PAGE_URL}" translate="no">ghostery.com/whotracksme</a>`} is an
+                aggregate of facts about web trackers. These reports power Ghostery's anti-tracking
+                technology, protecting the entire community.
+              </ui-text>
+            </section>
+          `
+        }
       </main>
     </template>
   `,
