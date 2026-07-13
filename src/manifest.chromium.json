@@ -88,6 +88,14 @@
       "all_frames": true
     },
     {
+      "js": ["content_scripts/gpc.js"],
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
       "js": ["content_scripts/notifications.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start"
