@@ -20,12 +20,14 @@ export default {
         <a href="${href}" layout="block">
           <settings-card>
             <div id="content" layout="row gap:2 items:center">
-              ${icon &&
-              html`
-                <div id="icon" layout="row center padding self:start">
-                  <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
-                </div>
-              `}
+              ${
+                icon &&
+                html`
+                  <div id="icon" layout="row center padding self:start">
+                    <ui-icon name="${icon}" color="brand-primary" layout="size:3"></ui-icon>
+                  </div>
+                `
+              }
               <div id="description" layout="column gap:2px grow">
                 <ui-text type="headline-xs" color="primary">
                   <slot></slot>

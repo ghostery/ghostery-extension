@@ -17,25 +17,27 @@ export default {
   closed: { value: false, reflect: true },
   render: ({ name, closed }) => html`
     <template layout="column gap:1.5 padding:1:1.5">
-      ${name &&
-      html`<ui-action>
-        <button
-          id="header"
-          onclick="${html.set('closed', !closed)}"
-          layout="row items:center gap overflow padding margin:-1"
-        >
-          <ui-category-icon name="${name}"></ui-category-icon>
-          <ui-text type="label-m">${labels.categories[name]}</ui-text>
-          <ui-icon
-            id="arrow"
-            name="chevron-down"
-            color="secondary"
-            layout="margin:right:-0.5"
-          ></ui-icon>
-          <div layout="grow"></div>
-          <slot name="header"></slot>
-        </button>
-      </ui-action>`}
+      ${
+        name &&
+        html`<ui-action>
+          <button
+            id="header"
+            onclick="${html.set('closed', !closed)}"
+            layout="row items:center gap overflow padding margin:-1"
+          >
+            <ui-category-icon name="${name}"></ui-category-icon>
+            <ui-text type="label-m">${labels.categories[name]}</ui-text>
+            <ui-icon
+              id="arrow"
+              name="chevron-down"
+              color="secondary"
+              layout="margin:right:-0.5"
+            ></ui-icon>
+            <div layout="grow"></div>
+            <slot name="header"></slot>
+          </button>
+        </ui-action>`
+      }
       <div id="content" class="${{ name }}" layout="column grow" layout.name="margin:left:4">
         <slot></slot>
       </div>

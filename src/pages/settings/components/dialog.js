@@ -39,18 +39,20 @@ export default {
           overflow:y:auto
         "
       >
-        ${closable &&
-        html`
-          <ui-action>
-            <a
-              href="${router.backUrl()}"
-              layout="absolute top:2 right:2 padding:0.5"
-              tabindex="100"
-            >
-              <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
-            </a>
-          </ui-action>
-        `}
+        ${
+          closable &&
+          html`
+            <ui-action>
+              <a
+                href="${router.backUrl()}"
+                layout="absolute top:2 right:2 padding:0.5"
+                tabindex="100"
+              >
+                <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
+              </a>
+            </ui-action>
+          `
+        }
         <slot></slot>
       </div>
     </template>

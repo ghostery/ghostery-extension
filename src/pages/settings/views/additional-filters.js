@@ -38,26 +38,28 @@ export default {
   render: ({ options, managedConfig }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
-        ${store.ready(options) &&
-        html`
-          <section layout="column gap:4">
-            <div layout="column gap" layout@992px="margin:bottom">
-              <settings-back-button></settings-back-button>
-              <ui-text type="headline-m">Additional Filters</ui-text>
-              <div layout="column gap:0.5">
-                <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                  Extend your protection with regional and custom filters for advanced control.
-                </ui-text>
+        ${
+          store.ready(options) &&
+          html`
+            <section layout="column gap:4">
+              <div layout="column gap" layout@992px="margin:bottom">
+                <settings-back-button></settings-back-button>
+                <ui-text type="headline-m">Additional Filters</ui-text>
+                <div layout="column gap:0.5">
+                  <ui-text type="body-l" mobile-type="body-m" color="secondary">
+                    Extend your protection with regional and custom filters for advanced control.
+                  </ui-text>
+                </div>
               </div>
-            </div>
-            <div layout="column gap">
-              <settings-regional-filters></settings-regional-filters>
-              <settings-managed value="${managedConfig.customFilters.enabled}">
-                <settings-custom-filters></settings-custom-filters>
-              </settings-managed>
-            </div>
-          </section>
-        `}
+              <div layout="column gap">
+                <settings-regional-filters></settings-regional-filters>
+                <settings-managed value="${managedConfig.customFilters.enabled}">
+                  <settings-custom-filters></settings-custom-filters>
+                </settings-managed>
+              </div>
+            </section>
+          `
+        }
       </settings-page-layout>
     </template>
   `,

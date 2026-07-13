@@ -101,246 +101,267 @@ export default {
   filteringDebug: store(FilteringDebug),
   render: ({ visible, counter, options, config, notifications, resources, filteringDebug }) => html`
     <template layout="column gap:3 margin:top:2">
-      ${(visible || counter > 5) &&
-      html`
-        <section layout="column gap:4" translate="no">
-          <div layout="column gap:3" translate="no">
-            <ui-text type="headline-m">Developer tools</ui-text>
-            <div layout="column gap">
-              <settings-toggle value="${config.enabled}" onchange="${html.set(config, 'enabled')}">
-                Remote Configuration
-                <ui-text type="body-s" color="tertiary" slot="footer">
-                  Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
-                </ui-text>
-                ${config.enabled &&
+      ${
+        (visible || counter > 5) &&
+        html`
+          <section layout="column gap:4" translate="no">
+            <div layout="column gap:3" translate="no">
+              <ui-text type="headline-m">Developer tools</ui-text>
+              <div layout="column gap">
+                <settings-toggle
+                  value="${config.enabled}"
+                  onchange="${html.set(config, 'enabled')}"
+                >
+                  Remote Configuration
+                  <ui-text type="body-s" color="tertiary" slot="footer">
+                    Updated at: ${longDateFormatter.format(new Date(config.updatedAt))}
+                  </ui-text>
+                  ${
+                    config.enabled &&
+                    html`
+                      <div layout="column gap:3" slot="card-footer" translate="no">
+                        <div layout="column gap">
+                          <ui-text type="label-m">Flags</ui-text>
+                          <div layout="row:wrap gap:2:1">
+                            ${FLAGS.map(
+                              (name) => html`
+                                <label layout="row items:center gap">
+                                  <ui-input>
+                                    <input
+                                      type="checkbox"
+                                      checked="${config.hasFlag(name)}"
+                                      onchange="${toggleFlag(name)}"
+                                    />
+                                  </ui-input>
+                                  <ui-text type="body-xs" color="tertiary"> ${name} </ui-text>
+                                </label>
+                              `,
+                            )}
+                          </div>
+                        </div>
+                        <div layout="column gap">
+                          <ui-text type="label-m">Domains</ui-text>
+                          <div layout="row:wrap gap">
+                            ${
+                              Object.entries(config.domains)
+                                .filter(([, d]) => d.actions.length)
+                                .map(
+                                  ([name, d]) =>
+                                    html`<ui-text
+                                      color="secondary"
+                                      onclick="${createClearConfigDomain(name)}"
+                                      style="cursor: pointer;"
+                                    >
+                                      ${name} (${d.actions.join(', ')})
+                                    </ui-text>`,
+                                ) || 'none'
+                            }
+                          </div>
+                        </div>
+                        <div layout="row gap">
+                          <ui-button
+                            onclick="${forceConfigSync}"
+                            layout="shrink:0 self:start"
+                            size="s"
+                            slot="footer"
+                          >
+                            <button>
+                              <ui-icon name="refresh" layout="size:2"></ui-icon>
+                              Force sync
+                            </button>
+                          </ui-button>
+                          <ui-button
+                            layout="shrink:0 self:start"
+                            onclick="${testConfigDomain}"
+                            size="s"
+                          >
+                            <button>Add domain</button>
+                          </ui-button>
+                        </div>
+                      </div>
+                    `
+                  }
+                </settings-toggle>
+                <settings-toggle
+                  value="${options.fixesFilters}"
+                  onchange="${html.set(options, 'fixesFilters')}"
+                  data-qa="toggle:fixes-filters"
+                >
+                  Ghostery specific fixes
+                </settings-toggle>
+              </div>
+              ${
+                store.ready(filteringDebug) &&
                 html`
-                  <div layout="column gap:3" slot="card-footer" translate="no">
+                  <settings-card static layout="column gap:3" translate="no">
+                    <div layout="column gap:0.5">
+                      <ui-text type="headline-s">Filtering (this session)</ui-text>
+                      <ui-text type="body-xs" color="tertiary">
+                        Disable individual filtering capabilities for the current browser session.
+                        These overrides reset when the browser restarts.
+                      </ui-text>
+                    </div>
                     <div layout="column gap">
-                      <ui-text type="label-m">Flags</ui-text>
-                      <div layout="row:wrap gap:2:1">
-                        ${FLAGS.map(
-                          (name) => html`
-                            <label layout="row items:center gap">
-                              <ui-input>
-                                <input
-                                  type="checkbox"
-                                  checked="${config.hasFlag(name)}"
-                                  onchange="${toggleFlag(name)}"
-                                />
-                              </ui-input>
-                              <ui-text type="body-xs" color="tertiary"> ${name} </ui-text>
-                            </label>
+                      <settings-toggle
+                        value="${filteringDebug.network}"
+                        onchange="${html.set(filteringDebug, 'network')}"
+                        data-qa="toggle:filtering-debug:network"
+                      >
+                        Network filtering
+                      </settings-toggle>
+                      <settings-toggle
+                        value="${filteringDebug.cosmeticsCSS}"
+                        onchange="${html.set(filteringDebug, 'cosmeticsCSS')}"
+                        data-qa="toggle:filtering-debug:cosmetics-css"
+                      >
+                        Cosmetic filters (CSS)
+                      </settings-toggle>
+                      <settings-toggle
+                        value="${filteringDebug.cosmeticsScriptlets}"
+                        onchange="${html.set(filteringDebug, 'cosmeticsScriptlets')}"
+                        data-qa="toggle:filtering-debug:cosmetics-scriptlets"
+                      >
+                        Cosmetic filters (scriptlets)
+                      </settings-toggle>
+                      <settings-toggle
+                        value="${filteringDebug.cosmeticsExtendedCSS}"
+                        onchange="${html.set(filteringDebug, 'cosmeticsExtendedCSS')}"
+                        data-qa="toggle:filtering-debug:cosmetics-extended-css"
+                      >
+                        Cosmetic filters (extended CSS)
+                      </settings-toggle>
+                      <settings-toggle
+                        value="${filteringDebug.antitracking}"
+                        onchange="${html.set(filteringDebug, 'antitracking')}"
+                        data-qa="toggle:filtering-debug:antitracking"
+                      >
+                        Anti-tracking
+                      </settings-toggle>
+                      <settings-toggle
+                        value="${filteringDebug.autoconsent}"
+                        onchange="${html.set(filteringDebug, 'autoconsent')}"
+                        data-qa="toggle:filtering-debug:autoconsent"
+                      >
+                        Never-Consent (autoconsent)
+                      </settings-toggle>
+                    </div>
+                  </settings-card>
+                `
+              }
+              <settings-card static layout="column gap:3">
+                ${
+                  store.ready(notifications) &&
+                  html`
+                    <div layout="column gap items:start" translate="no">
+                      <ui-text type="headline-s">Notifications</ui-text>
+                      <div layout="row:wrap gap">
+                        ${
+                          notifications.length === 0 &&
+                          html`
+                            <ui-text type="body-m" color="secondary" translate="no">
+                              No notifications shown yet
+                            </ui-text>
+                          `
+                        }
+                        ${notifications.map(
+                          ({ id, shown, lastShownAt }) => html`
+                            <ui-text type="body-m" color="secondary">
+                              <ui-text type="label-m">${id}:</ui-text>
+                              ${shown}
+                              ${!!lastShownAt && `(${longDateFormatter.format(new Date(lastShownAt))})`}
+                            </ui-text>
                           `,
                         )}
                       </div>
                     </div>
-                    <div layout="column gap">
-                      <ui-text type="label-m">Domains</ui-text>
-                      <div layout="row:wrap gap">
-                        ${Object.entries(config.domains)
-                          .filter(([, d]) => d.actions.length)
-                          .map(
-                            ([name, d]) =>
-                              html`<ui-text
-                                color="secondary"
-                                onclick="${createClearConfigDomain(name)}"
-                                style="cursor: pointer;"
-                              >
-                                ${name} (${d.actions.join(', ')})
-                              </ui-text>`,
-                          ) || 'none'}
+                  `
+                }
+                ${html.resolve(
+                  telemetry.getStorage().then(
+                    (storage) => html`
+                      <div layout="column gap items:start" translate="no">
+                        <ui-text type="headline-s">Attribution</ui-text>
+                        <div layout="column gap:0.5">
+                          <ui-text type="body-m" color="secondary">
+                            <ui-text type="label-m">Install date:</ui-text>
+                            <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
+                          </ui-text>
+                          <ui-text type="body-m" color="secondary">
+                            <ui-text type="label-m">Install reason:</ui-text>
+                            <span data-qa="text:install-reason"
+                              >${storage.installReason || 'N/A'}</span
+                            >
+                          </ui-text>
+                          <ui-text type="body-m" color="secondary">
+                            <ui-text type="label-m">Source:</ui-text>
+                            <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
+                          </ui-text>
+                          <ui-text type="body-m" color="secondary">
+                            <ui-text type="label-m">Campaign:</ui-text>
+                            <span data-qa="text:utm-campaign"
+                              >${storage.utm_campaign || 'N/A'}</span
+                            >
+                          </ui-text>
+                        </div>
                       </div>
-                    </div>
-                    <div layout="row gap">
-                      <ui-button
-                        onclick="${forceConfigSync}"
-                        layout="shrink:0 self:start"
-                        size="s"
-                        slot="footer"
-                      >
-                        <button>
-                          <ui-icon name="refresh" layout="size:2"></ui-icon>
-                          Force sync
-                        </button>
-                      </ui-button>
-                      <ui-button
-                        layout="shrink:0 self:start"
-                        onclick="${testConfigDomain}"
-                        size="s"
-                      >
-                        <button>Add domain</button>
-                      </ui-button>
-                    </div>
-                  </div>
-                `}
-              </settings-toggle>
-              <settings-toggle
-                value="${options.fixesFilters}"
-                onchange="${html.set(options, 'fixesFilters')}"
-                data-qa="toggle:fixes-filters"
-              >
-                Ghostery specific fixes
-              </settings-toggle>
-            </div>
-            ${store.ready(filteringDebug) &&
-            html`
-              <settings-card static layout="column gap:3" translate="no">
-                <div layout="column gap:0.5">
-                  <ui-text type="headline-s">Filtering (this session)</ui-text>
-                  <ui-text type="body-xs" color="tertiary">
-                    Disable individual filtering capabilities for the current browser session. These
-                    overrides reset when the browser restarts.
-                  </ui-text>
-                </div>
-                <div layout="column gap">
-                  <settings-toggle
-                    value="${filteringDebug.network}"
-                    onchange="${html.set(filteringDebug, 'network')}"
-                    data-qa="toggle:filtering-debug:network"
-                  >
-                    Network filtering
-                  </settings-toggle>
-                  <settings-toggle
-                    value="${filteringDebug.cosmeticsCSS}"
-                    onchange="${html.set(filteringDebug, 'cosmeticsCSS')}"
-                    data-qa="toggle:filtering-debug:cosmetics-css"
-                  >
-                    Cosmetic filters (CSS)
-                  </settings-toggle>
-                  <settings-toggle
-                    value="${filteringDebug.cosmeticsScriptlets}"
-                    onchange="${html.set(filteringDebug, 'cosmeticsScriptlets')}"
-                    data-qa="toggle:filtering-debug:cosmetics-scriptlets"
-                  >
-                    Cosmetic filters (scriptlets)
-                  </settings-toggle>
-                  <settings-toggle
-                    value="${filteringDebug.cosmeticsExtendedCSS}"
-                    onchange="${html.set(filteringDebug, 'cosmeticsExtendedCSS')}"
-                    data-qa="toggle:filtering-debug:cosmetics-extended-css"
-                  >
-                    Cosmetic filters (extended CSS)
-                  </settings-toggle>
-                  <settings-toggle
-                    value="${filteringDebug.antitracking}"
-                    onchange="${html.set(filteringDebug, 'antitracking')}"
-                    data-qa="toggle:filtering-debug:antitracking"
-                  >
-                    Anti-tracking
-                  </settings-toggle>
-                  <settings-toggle
-                    value="${filteringDebug.autoconsent}"
-                    onchange="${html.set(filteringDebug, 'autoconsent')}"
-                    data-qa="toggle:filtering-debug:autoconsent"
-                  >
-                    Never-Consent (autoconsent)
-                  </settings-toggle>
-                </div>
-              </settings-card>
-            `}
-            <settings-card static layout="column gap:3">
-              ${store.ready(notifications) &&
-              html`
-                <div layout="column gap items:start" translate="no">
-                  <ui-text type="headline-s">Notifications</ui-text>
-                  <div layout="row:wrap gap">
-                    ${notifications.length === 0 &&
-                    html`
-                      <ui-text type="body-m" color="secondary" translate="no">
-                        No notifications shown yet
-                      </ui-text>
-                    `}
-                    ${notifications.map(
-                      ({ id, shown, lastShownAt }) => html`
-                        <ui-text type="body-m" color="secondary">
-                          <ui-text type="label-m">${id}:</ui-text>
-                          ${shown}
-                          ${!!lastShownAt && `(${longDateFormatter.format(new Date(lastShownAt))})`}
-                        </ui-text>
-                      `,
-                    )}
-                  </div>
-                </div>
-              `}
-              ${html.resolve(
-                telemetry.getStorage().then(
-                  (storage) => html`
+                    `,
+                  ),
+                )}
+                ${
+                  __CHROMIUM__ &&
+                  html`
                     <div layout="column gap items:start" translate="no">
-                      <ui-text type="headline-s">Attribution</ui-text>
-                      <div layout="column gap:0.5">
-                        <ui-text type="body-m" color="secondary">
-                          <ui-text type="label-m">Install date:</ui-text>
-                          <span data-qa="text:install-date">${storage.installDate || 'N/A'}</span>
-                        </ui-text>
-                        <ui-text type="body-m" color="secondary">
-                          <ui-text type="label-m">Install reason:</ui-text>
-                          <span data-qa="text:install-reason"
-                            >${storage.installReason || 'N/A'}</span
-                          >
-                        </ui-text>
-                        <ui-text type="body-m" color="secondary">
-                          <ui-text type="label-m">Source:</ui-text>
-                          <span data-qa="text:utm-source">${storage.utm_source || 'N/A'}</span>
-                        </ui-text>
-                        <ui-text type="body-m" color="secondary">
-                          <ui-text type="label-m">Campaign:</ui-text>
-                          <span data-qa="text:utm-campaign">${storage.utm_campaign || 'N/A'}</span>
-                        </ui-text>
+                      <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+                      <ui-text type="body-xs" color="tertiary">
+                        The below list is not reactive to changes made in the extension - use
+                        refresh button
+                      </ui-text>
+                      <div layout="block:left">
+                        ${html.resolve(
+                          chrome.declarativeNetRequest
+                            .getEnabledRulesets()
+                            .then((rules) => html`${rules.join(', ') || 'No rulesets enabled...'}`),
+                        )}
+                      </div>
+                      <ui-button onclick="${refresh}" layout="shrink:0" size="s">
+                        <button>Refresh</button>
+                      </ui-button>
+                    </div>
+                  `
+                }
+                ${
+                  store.ready(resources) &&
+                  html`
+                    <div layout="column gap" translate="no">
+                      <ui-text type="headline-s">Resource Checksums</ui-text>
+                      <div>
+                        ${Object.entries(resources.checksums).map(
+                          ([key, value]) => html`
+                            <ui-text type="body-m" color="secondary" style="word-break: break-all;">
+                              ${key}: ${value}
+                            </ui-text>
+                          `,
+                        )}
                       </div>
                     </div>
-                  `,
-                ),
-              )}
-              ${__CHROMIUM__ &&
-              html`
-                <div layout="column gap items:start" translate="no">
-                  <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-                  <ui-text type="body-xs" color="tertiary">
-                    The below list is not reactive to changes made in the extension - use refresh
-                    button
-                  </ui-text>
-                  <div layout="block:left">
-                    ${html.resolve(
-                      chrome.declarativeNetRequest
-                        .getEnabledRulesets()
-                        .then((rules) => html`${rules.join(', ') || 'No rulesets enabled...'}`),
-                    )}
-                  </div>
-                  <ui-button onclick="${refresh}" layout="shrink:0" size="s">
-                    <button>Refresh</button>
+                  `
+                }
+              </settings-card>
+              <settings-card static layout="column gap:2">
+                <ui-text type="headline-s">Actions</ui-text>
+                <div layout="row gap items:start">
+                  <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
+                    <button>
+                      <ui-icon name="trash" layout="size:2"></ui-icon>
+                      Clear storage
+                    </button>
                   </ui-button>
                 </div>
-              `}
-              ${store.ready(resources) &&
-              html`
-                <div layout="column gap" translate="no">
-                  <ui-text type="headline-s">Resource Checksums</ui-text>
-                  <div>
-                    ${Object.entries(resources.checksums).map(
-                      ([key, value]) => html`
-                        <ui-text type="body-m" color="secondary" style="word-break: break-all;">
-                          ${key}: ${value}
-                        </ui-text>
-                      `,
-                    )}
-                  </div>
-                </div>
-              `}
-            </settings-card>
-            <settings-card static layout="column gap:2">
-              <ui-text type="headline-s">Actions</ui-text>
-              <div layout="row gap items:start">
-                <ui-button onclick="${clearStorage}" layout="shrink:0" size="s">
-                  <button>
-                    <ui-icon name="trash" layout="size:2"></ui-icon>
-                    Clear storage
-                  </button>
-                </ui-button>
-              </div>
-            </settings-card>
-          </div>
-        </section>
-      `}
+              </settings-card>
+            </div>
+          </section>
+        `
+      }
       <div layout="column" translate="no">
         <div onclick="${refresh}">
           <ui-text type="body-m" color="tertiary" style="user-select: none;"> v${VERSION} </ui-text>

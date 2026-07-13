@@ -37,14 +37,16 @@ export default {
                 <ui-text type="body-s" color="secondary" layout="width::90px">
                   Activities<span>:</span> ${labels.numberFormatter.format(size)}
                 </ui-text>
-                ${!!adjusted &&
-                html`
-                  <ui-text type="body-s" color="secondary" layout="width::90px">
-                    <!-- | tracker-list -->Adjusted<span>:</span> ${labels.numberFormatter.format(
-                      adjusted,
-                    )}
-                  </ui-text>
-                `}
+                ${
+                  !!adjusted &&
+                  html`
+                    <ui-text type="body-s" color="secondary" layout="width::90px">
+                      <!-- | tracker-list -->Adjusted<span>:</span> ${labels.numberFormatter.format(
+                        adjusted,
+                      )}
+                    </ui-text>
+                  `
+                }
               </div>
             </div>
           </button>

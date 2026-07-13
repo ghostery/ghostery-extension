@@ -30,22 +30,24 @@ export default {
       <panel-dialog>
         <ui-text slot="header" type="label-m" layout="padding:1:0"> Browsing Assistant </ui-text>
         <div layout="column gap:2 padding:1:0">
-          ${issueUrl &&
-          html`
-            <ui-action>
-              <a href="${issueUrl}" onclick="${openHref}" layout="row gap:2">
-                <ui-icon name="doc-m" color="tertiary" layout="size:3"></ui-icon>
-                <div layout="column grow gap:0.5">
-                  <ui-text type="label-m">Broken page report</ui-text>
-                  <ui-text type="body-s" color="tertiary">
-                    View a detailed report showing which adblocker functionality may have caused the
-                    issue.
-                  </ui-text>
-                </div>
-                <ui-icon name="external-link" color="quaternary" layout="size:2"></ui-icon>
-              </a>
-            </ui-action>
-          `}
+          ${
+            issueUrl &&
+            html`
+              <ui-action>
+                <a href="${issueUrl}" onclick="${openHref}" layout="row gap:2">
+                  <ui-icon name="doc-m" color="tertiary" layout="size:3"></ui-icon>
+                  <div layout="column grow gap:0.5">
+                    <ui-text type="label-m">Broken page report</ui-text>
+                    <ui-text type="body-s" color="tertiary">
+                      View a detailed report showing which adblocker functionality may have caused
+                      the issue.
+                    </ui-text>
+                  </div>
+                  <ui-icon name="external-link" color="quaternary" layout="size:2"></ui-icon>
+                </a>
+              </ui-action>
+            `
+          }
           <ui-action>
             <a href="${PAUSE_ASSISTANT_LEARN_MORE_URL}" onclick="${openHref}" layout="row gap:2">
               <ui-icon name="info" color="tertiary" layout="size:3"></ui-icon>

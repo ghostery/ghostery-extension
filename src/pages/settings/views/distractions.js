@@ -71,60 +71,64 @@ export default {
   render: ({ options, filter, query, distractions }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
-        ${store.ready(options) &&
-        html`
-          <section layout="column gap:5">
-            <div layout="column gap" layout@992px="margin:bottom">
-              <settings-back-button></settings-back-button>
-              <ui-text type="headline-m">Distractions</ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Remove intrusive prompts and interface clutter for a cleaner browsing experience.
-              </ui-text>
-            </div>
-            <div layout="column gap" layout@425px="row">
-              <ui-input>
-                <select value="${filter}" onchange="${html.set('filter')}">
-                  <option value="">Show all</option>
-                  <option value="enabled">Enabled</option>
-                  <option value="disabled">Disabled</option>
-                </select>
-              </ui-input>
-              <ui-input icon="search" layout="grow:1">
-                <input
-                  type="search"
-                  value="${query}"
-                  placeholder="${msg`Search distractions or websites...`}"
-                  oninput="${html.set('query')}"
-                />
-              </ui-input>
-            </div>
+        ${
+          store.ready(options) &&
+          html`
+            <section layout="column gap:5">
+              <div layout="column gap" layout@992px="margin:bottom">
+                <settings-back-button></settings-back-button>
+                <ui-text type="headline-m">Distractions</ui-text>
+                <ui-text type="body-l" mobile-type="body-m" color="secondary">
+                  Remove intrusive prompts and interface clutter for a cleaner browsing experience.
+                </ui-text>
+              </div>
+              <div layout="column gap" layout@425px="row">
+                <ui-input>
+                  <select value="${filter}" onchange="${html.set('filter')}">
+                    <option value="">Show all</option>
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                  </select>
+                </ui-input>
+                <ui-input icon="search" layout="grow:1">
+                  <input
+                    type="search"
+                    value="${query}"
+                    placeholder="${msg`Search distractions or websites...`}"
+                    oninput="${html.set('query')}"
+                  />
+                </ui-input>
+              </div>
 
-            <div layout="column gap:5">
-              ${distractions.map(
-                ({ id, title, websites, description }) => html`
-                  <ui-toggle
-                    value="${options.distractions[id]}"
-                    onchange="${html.set(options, `distractions.${id}`)}"
-                    data-qa="toggle:distractions:${id}"
-                  >
-                    <div layout="column gap:0.5">
+              <div layout="column gap:5">
+                ${distractions.map(
+                  ({ id, title, websites, description }) => html`
+                    <ui-toggle
+                      value="${options.distractions[id]}"
+                      onchange="${html.set(options, `distractions.${id}`)}"
+                      data-qa="toggle:distractions:${id}"
+                    >
                       <div layout="column gap:0.5">
-                        <ui-text type="label-l">${title}</ui-text>
-                        <ui-text type="body-m" color="secondary">${description}</ui-text>
-                        ${websites &&
-                        html`
-                          <ui-text type="body-s" color="tertiary">
-                            Applies to: ${websites.join(', ')}
-                          </ui-text>
-                        `}
+                        <div layout="column gap:0.5">
+                          <ui-text type="label-l">${title}</ui-text>
+                          <ui-text type="body-m" color="secondary">${description}</ui-text>
+                          ${
+                            websites &&
+                            html`
+                              <ui-text type="body-s" color="tertiary">
+                                Applies to: ${websites.join(', ')}
+                              </ui-text>
+                            `
+                          }
+                        </div>
                       </div>
-                    </div>
-                  </ui-toggle>
-                `,
-              )}
-            </div>
-          </section>
-        `}
+                    </ui-toggle>
+                  `,
+                )}
+              </div>
+            </section>
+          `
+        }
       </settings-page-layout>
     </template>
   `,

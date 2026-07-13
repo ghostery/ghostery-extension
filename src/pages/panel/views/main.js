@@ -98,9 +98,11 @@ async function togglePause(host, event) {
 
   showAlert(html`
     <panel-alert type="danger">
-      ${paused
-        ? msg`Ghostery has been resumed on this site.`
-        : msg`Ghostery is paused on this site.`}
+      ${
+        paused
+          ? msg`Ghostery has been resumed on this site.`
+          : msg`Ghostery is paused on this site.`
+      }
       <ui-text type="body-s" layout="block" underline>
         <a href="#" onclick="${reloadTab}" layout="row inline gap:0.5 items:center ::color:inherit"
           >Reload to see changes</a
@@ -212,358 +214,411 @@ export default {
     consentManaged,
   }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, managedConfig) &&
-      html`
-        ${options.terms &&
+      ${
+        store.ready(options, managedConfig) &&
         html`
-          <ui-header>
-            ${store.ready(stats) &&
-            (managedConfig.disableUserControl || (options.mode === MODE_ZAP && paused)) &&
-            html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
-            ${options.mode === MODE_DEFAULT &&
-            html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`}
-            ${options.mode === MODE_ZAP &&
-            html`<ui-icon name="logo-zap" slot="icon" layout="margin:left:-1 width:7"></ui-icon>`}
-            ${!managedConfig.disableUserControl &&
+          ${
+            options.terms &&
             html`
-              <ui-action slot="actions">
-                <a href="${router.url(Menu)}" data-qa="button:menu">
-                  <ui-icon name="menu" color="primary"></ui-icon>
-                </a>
-              </ui-action>
-            `}
-          </ui-header>
-          ${store.ready(stats) &&
-          !managedConfig.disableUserControl &&
-          (options.mode !== MODE_ZAP || !paused) &&
-          html`
-            <panel-actions hostname="${stats.displayHostname}">
-              <panel-actions-button
-                onclick="${openElementPicker}"
-                disabled="${paused}"
-                icon="hide-element"
-              >
-                <button>
-                  <panel-actions-icon name="hide-element"></panel-actions-icon>
-                  Hide content block
-                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
-                </button>
-              </panel-actions-button>
-              <panel-actions-button>
-                <a href="${router.url(ReportCategory)}">
-                  <panel-actions-icon name="report"></panel-actions-icon>
-                  Report an issue
-                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
-                </a>
-              </panel-actions-button>
-              <panel-actions-button>
-                <a href="${router.url(ClearCookies)}" data-qa="button:clear-cookies">
-                  <panel-actions-icon name="cookie"></panel-actions-icon>
-                  Clear cookies
-                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
-                </a>
-              </panel-actions-button>
-              <panel-actions-button>
-                <button onclick="${openLogger}">
-                  <panel-actions-icon name="open-book"></panel-actions-icon>
-                  View detailed logs
-                  <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
-                </button>
-              </panel-actions-button>
-              <panel-actions-button>
-                <a
-                  onclick="${openHref}"
-                  href="${chrome.runtime.getURL(
-                    '/pages/settings/index.html#@settings-website-details?domain=' + stats.hostname,
-                  )}"
-                  data-qa="button:website-settings"
-                >
-                  <panel-actions-icon name="settings"></panel-actions-icon>
-                  Open website settings
-                  <ui-icon name="external-link" color="tertiary" layout="size:2"></ui-icon>
-                </a>
-              </panel-actions-button>
-            </panel-actions>
-          `}
-        `}
-        ${!options.terms &&
-        html`
-          <div layout="::background:danger-primary">
-            <ui-button type="danger" layout="height:6 margin:1.5" data-qa="button:enable">
-              <a href="${ONBOARDING_URL}" layout="row center gap:0.5" onclick="${openHref}">
-                <ui-icon name="play"></ui-icon>
-                Enable Ghostery
-              </a>
-            </ui-button>
-          </div>
-        `}
-        ${options.terms &&
-        store.ready(stats) &&
-        !managedConfig.disableUserControl &&
-        (options.mode === MODE_DEFAULT || globalPause) &&
-        html`
-          <panel-pause
-            onaction="${globalPause ? toggleGlobalPause : togglePause}"
-            paused="${paused || globalPause}"
-            global="${globalPause}"
-            managed="${paused?.managed}"
-            assist="${paused?.assist}"
-            revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
-            data-qa="component:pause"
-          >
-            ${!!paused?.revokeAt &&
-            !paused.assist &&
-            html`
-              <div layout="row center">
-                <ui-action>
-                  <a
-                    href="${router.url(ReportCategory)}"
-                    layout="row center gap padding:0.5:1:1 margin:top:-1"
-                  >
-                    <ui-text type="body-s">Something wrong?</ui-text>
-                    <ui-text type="label-s" layout="row inline items:center gap:0.5">
-                      Report an issue
-                      <ui-icon name="chevron-right" layout="size:1.5"></ui-icon>
-                    </ui-text>
-                  </a>
-                </ui-action>
-              </div>
-            `}
-            ${!!paused?.assist &&
-            html`
-              <div layout="row center">
-                <ui-action>
-                  <a
-                    href="${router.url(PauseAssistant)}"
-                    layout="row center padding:0.5:1:1 margin:top:-1"
-                  >
-                    <ui-text type="label-s" color="onbrand" layout="row items:center gap:0.5">
-                      Paused by Browsing Assistant
-                      <ui-icon name="info" layout="size:1.5"></ui-icon>
-                    </ui-text>
-                  </a>
-                </ui-action>
-              </div>
-            `}
-          </panel-pause>
-        `}
-        ${options.terms &&
-        store.ready(stats) &&
-        !managedConfig.disableUserControl &&
-        options.mode === MODE_ZAP &&
-        !globalPause &&
-        html`
-          <panel-zap
-            onclick="${toggleZapped}"
-            zapped="${!paused}"
-            data-qa="button:zap:${paused ? 'enable' : 'disable'}"
-          >
-            ${paused
-              ? html`
-                  <div layout="row items:center gap">
-                    ${lang === 'en'
-                      ? html`<ui-icon name="zap-with-text"></ui-icon>`
-                      : html`<ui-icon name="zap"></ui-icon> Block ads`}
-                  </div>
-                `
-              : msg`Show ads`}
-          </panel-zap>
-        `}
-        <panel-container>
-          ${store.ready(stats)
-            ? html`
-                <ui-stats
-                  categories="${stats.topCategories}"
-                  type="${options.panel.statsType}"
-                  ontypechange="${setStatsType}"
-                  layout="margin:1.5:1.5:1"
-                >
-                  <ui-tooltip position="bottom" slot="actions">
-                    <span slot="content">WhoTracks.Me Reports</span>
-                    <ui-action-button layout="size:4.5">
-                      <a href="${router.url(WhoTracksMe)}">
-                        <ui-icon name="whotracksme" color="primary"></ui-icon>
+              <ui-header>
+                ${
+                  store.ready(stats) &&
+                  (managedConfig.disableUserControl || (options.mode === MODE_ZAP && paused)) &&
+                  html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`
+                }
+                ${
+                  options.mode === MODE_DEFAULT &&
+                  html`<ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>`
+                }
+                ${
+                  options.mode === MODE_ZAP &&
+                  html`<ui-icon
+                    name="logo-zap"
+                    slot="icon"
+                    layout="margin:left:-1 width:7"
+                  ></ui-icon>`
+                }
+                ${
+                  !managedConfig.disableUserControl &&
+                  html`
+                    <ui-action slot="actions">
+                      <a href="${router.url(Menu)}" data-qa="button:menu">
+                        <ui-icon name="menu" color="primary"></ui-icon>
                       </a>
-                    </ui-action-button>
-                  </ui-tooltip>
-                  ${!stats.groupedTrackers.length &&
-                  html`
-                    <ui-list layout="grow margin:0.5:0" slot="list">
-                      <ui-text type="body-s" color="secondary" layout="grow row center">
-                        No activities detected
-                      </ui-text>
-                    </ui-list>
-                  `}
-                  ${stats.groupedTrackers.map(
-                    ([name, trackers]) => html`
-                      <ui-list
-                        name="${name}"
-                        layout:last-of-type="margin:bottom:0.5"
-                        layout:first-of-type="margin:top:0.5"
-                        slot="list"
-                      >
-                        <div slot="header" layout="row items:center gap">
-                          <ui-text type="label-s">${trackers.length}</ui-text>
-                        </div>
-
-                        <section layout="column gap:0.5">
-                          ${trackers.map(
-                            (tracker) => html`
-                              <div layout="row gap content:space-between items:center">
-                                <ui-text type="body-s">
-                                  <a
-                                    href="${router.url(TrackerDetails, {
-                                      trackerId: tracker.id,
-                                    })}"
-                                    layout="row items:center gap:0.5 padding:0.5:0"
-                                    data-qa="button:tracker:${tracker.id}"
-                                  >
-                                    <ui-tooltip>
-                                      <span slot="content"> View activity details </span>
-                                      <ui-tracker-name> ${tracker.name} </ui-tracker-name>
-                                    </ui-tooltip>
-                                    <ui-stats-badge>
-                                      ${numberFormatter.format(tracker.requestsCount)}
-                                    </ui-stats-badge>
-                                    ${tracker.blocked &&
-                                    html`<ui-icon
-                                      name="block-s"
-                                      color="danger-primary"
-                                      data-qa="icon:tracker:${tracker.id}:blocked"
-                                    ></ui-icon>`}
-                                    ${tracker.modified &&
-                                    html`<ui-icon
-                                      name="eye"
-                                      color="brand-primary"
-                                      data-qa="icon:tracker:${tracker.id}:modified"
-                                    ></ui-icon>`}
-                                  </a>
-                                </ui-text>
-                                ${options.terms &&
-                                !managedConfig.disableUserControl &&
-                                !paused &&
-                                !globalPause &&
-                                html`
-                                  <ui-action-button layout="shrink:0 width:4.5">
-                                    <a
-                                      href="${router.url(ProtectionStatus, {
-                                        trackerId: tracker.id,
-                                      })}"
-                                      layout="row center relative"
-                                      data-qa="button:tracker:protection-status:${tracker.id}"
-                                    >
-                                      <panel-protection-status-icon
-                                        options="${options}"
-                                        trackerId="${tracker.id}"
-                                        hostname="${stats.hostname}"
-                                      ></panel-protection-status-icon>
-                                    </a>
-                                  </ui-action-button>
-                                `}
-                              </div>
-                            `,
-                          )}
-                        </section>
-                      </ui-list>
-                    `,
-                  )}
-                </ui-stats>
-                <panel-feedback layout="margin:1:0:1.5">
-                  ${stats.trackersBlocked > 0 &&
-                  html`
-                    <panel-feedback-button
-                      type="blocked"
-                      icon="block-s"
-                      value="${numberFormatter.format(stats.trackersBlocked)}"
-                      href="${router.url(TrackersReport, { type: 'blocked' })}"
-                    >
-                      Trackers blocked
-                    </panel-feedback-button>
-                  `}
-                  ${stats.trackersModified > 0 &&
-                  html`
-                    <panel-feedback-button
-                      type="modified"
-                      icon="eye"
-                      value="${numberFormatter.format(stats.trackersModified)}"
-                      href="${router.url(TrackersReport, { type: 'modified' })}"
-                    >
-                      Trackers modified
-                    </panel-feedback-button>
-                  `}
-                  ${consentManaged &&
-                  html`
-                    <panel-feedback-button type="autoconsent" icon="autoconsent-managed">
-                      Consent managed
-                    </panel-feedback-button>
-                  `}
-                  ${contentBlocksSelectors > 0 &&
-                  html`
-                    <panel-feedback-button
-                      type="content"
+                    </ui-action>
+                  `
+                }
+              </ui-header>
+              ${
+                store.ready(stats) &&
+                !managedConfig.disableUserControl &&
+                (options.mode !== MODE_ZAP || !paused) &&
+                html`
+                  <panel-actions hostname="${stats.displayHostname}">
+                    <panel-actions-button
+                      onclick="${openElementPicker}"
+                      disabled="${paused}"
                       icon="hide-element"
-                      value="${contentBlocksSelectors}"
-                      href="${chrome.runtime.getURL(
-                        '/pages/settings/index.html#@settings-website-details?domain=' +
-                          stats.hostname,
-                      )}"
-                      external
                     >
-                      Blocked manually
-                    </panel-feedback-button>
-                  `}
-                </panel-feedback>
-              `
-            : html`
-                <div layout="column items:center gap margin:1.5">
-                  <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
-                  <ui-text type="label-l" layout="block:center width:::210px margin:top">
-                    Ghostery has nothing to do on this page
-                  </ui-text>
-                  <ui-text type="body-m" layout="block:center width:::245px">
-                    Navigate to a website to see Ghostery in action.
-                  </ui-text>
-                </div>
-              `}
-          <ui-action hidden="${globalPause}" inert="${managedConfig.disableUserControl}">
-            <a
-              href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-              class="${{
-                last: managedConfig.disableUserControl || !store.ready(notification),
-              }}"
-              onclick="${openHref}"
-              layout="block margin:1.5:1.5:0.5"
-              layout.last="margin:bottom:1.5"
-            >
-              <panel-options-item
-                icon="block-ads"
-                enabled="${options.blockAds}"
-                terms="${options.terms}"
+                      <button>
+                        <panel-actions-icon name="hide-element"></panel-actions-icon>
+                        Hide content block
+                        <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
+                      </button>
+                    </panel-actions-button>
+                    <panel-actions-button>
+                      <a href="${router.url(ReportCategory)}">
+                        <panel-actions-icon name="report"></panel-actions-icon>
+                        Report an issue
+                        <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
+                      </a>
+                    </panel-actions-button>
+                    <panel-actions-button>
+                      <a href="${router.url(ClearCookies)}" data-qa="button:clear-cookies">
+                        <panel-actions-icon name="cookie"></panel-actions-icon>
+                        Clear cookies
+                        <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
+                      </a>
+                    </panel-actions-button>
+                    <panel-actions-button>
+                      <button onclick="${openLogger}">
+                        <panel-actions-icon name="open-book"></panel-actions-icon>
+                        View detailed logs
+                        <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
+                      </button>
+                    </panel-actions-button>
+                    <panel-actions-button>
+                      <a
+                        onclick="${openHref}"
+                        href="${chrome.runtime.getURL(
+                          '/pages/settings/index.html#@settings-website-details?domain=' +
+                            stats.hostname,
+                        )}"
+                        data-qa="button:website-settings"
+                      >
+                        <panel-actions-icon name="settings"></panel-actions-icon>
+                        Open website settings
+                        <ui-icon name="external-link" color="tertiary" layout="size:2"></ui-icon>
+                      </a>
+                    </panel-actions-button>
+                  </panel-actions>
+                `
+              }
+            `
+          }
+          ${
+            !options.terms &&
+            html`
+              <div layout="::background:danger-primary">
+                <ui-button type="danger" layout="height:6 margin:1.5" data-qa="button:enable">
+                  <a href="${ONBOARDING_URL}" layout="row center gap:0.5" onclick="${openHref}">
+                    <ui-icon name="play"></ui-icon>
+                    Enable Ghostery
+                  </a>
+                </ui-button>
+              </div>
+            `
+          }
+          ${
+            options.terms &&
+            store.ready(stats) &&
+            !managedConfig.disableUserControl &&
+            (options.mode === MODE_DEFAULT || globalPause) &&
+            html`
+              <panel-pause
+                onaction="${globalPause ? toggleGlobalPause : togglePause}"
+                paused="${paused || globalPause}"
+                global="${globalPause}"
+                managed="${paused?.managed}"
+                assist="${paused?.assist}"
+                revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
+                data-qa="component:pause"
               >
-                Ad-Blocking
-              </panel-options-item>
-              <panel-options-item
-                icon="anti-tracking"
-                enabled="${options.blockTrackers}"
-                terms="${options.terms}"
+                ${
+                  !!paused?.revokeAt &&
+                  !paused.assist &&
+                  html`
+                    <div layout="row center">
+                      <ui-action>
+                        <a
+                          href="${router.url(ReportCategory)}"
+                          layout="row center gap padding:0.5:1:1 margin:top:-1"
+                        >
+                          <ui-text type="body-s">Something wrong?</ui-text>
+                          <ui-text type="label-s" layout="row inline items:center gap:0.5">
+                            Report an issue
+                            <ui-icon name="chevron-right" layout="size:1.5"></ui-icon>
+                          </ui-text>
+                        </a>
+                      </ui-action>
+                    </div>
+                  `
+                }
+                ${
+                  !!paused?.assist &&
+                  html`
+                    <div layout="row center">
+                      <ui-action>
+                        <a
+                          href="${router.url(PauseAssistant)}"
+                          layout="row center padding:0.5:1:1 margin:top:-1"
+                        >
+                          <ui-text type="label-s" color="onbrand" layout="row items:center gap:0.5">
+                            Paused by Browsing Assistant
+                            <ui-icon name="info" layout="size:1.5"></ui-icon>
+                          </ui-text>
+                        </a>
+                      </ui-action>
+                    </div>
+                  `
+                }
+              </panel-pause>
+            `
+          }
+          ${
+            options.terms &&
+            store.ready(stats) &&
+            !managedConfig.disableUserControl &&
+            options.mode === MODE_ZAP &&
+            !globalPause &&
+            html`
+              <panel-zap
+                onclick="${toggleZapped}"
+                zapped="${!paused}"
+                data-qa="button:zap:${paused ? 'enable' : 'disable'}"
               >
-                Anti-Tracking
-              </panel-options-item>
-              <panel-options-item
-                icon="never-consent"
-                enabled="${options.blockAnnoyances}"
-                terms="${options.terms}"
+                ${
+                  paused
+                    ? html`
+                        <div layout="row items:center gap">
+                          ${
+                            lang === 'en'
+                              ? html`<ui-icon name="zap-with-text"></ui-icon>`
+                              : html`<ui-icon name="zap"></ui-icon> Block ads`
+                          }
+                        </div>
+                      `
+                    : msg`Show ads`
+                }
+              </panel-zap>
+            `
+          }
+          <panel-container>
+            ${
+              store.ready(stats)
+                ? html`
+                    <ui-stats
+                      categories="${stats.topCategories}"
+                      type="${options.panel.statsType}"
+                      ontypechange="${setStatsType}"
+                      layout="margin:1.5:1.5:1"
+                    >
+                      <ui-tooltip position="bottom" slot="actions">
+                        <span slot="content">WhoTracks.Me Reports</span>
+                        <ui-action-button layout="size:4.5">
+                          <a href="${router.url(WhoTracksMe)}">
+                            <ui-icon name="whotracksme" color="primary"></ui-icon>
+                          </a>
+                        </ui-action-button>
+                      </ui-tooltip>
+                      ${
+                        !stats.groupedTrackers.length &&
+                        html`
+                          <ui-list layout="grow margin:0.5:0" slot="list">
+                            <ui-text type="body-s" color="secondary" layout="grow row center">
+                              No activities detected
+                            </ui-text>
+                          </ui-list>
+                        `
+                      }
+                      ${stats.groupedTrackers.map(
+                        ([name, trackers]) => html`
+                          <ui-list
+                            name="${name}"
+                            layout:last-of-type="margin:bottom:0.5"
+                            layout:first-of-type="margin:top:0.5"
+                            slot="list"
+                          >
+                            <div slot="header" layout="row items:center gap">
+                              <ui-text type="label-s">${trackers.length}</ui-text>
+                            </div>
+
+                            <section layout="column gap:0.5">
+                              ${trackers.map(
+                                (tracker) => html`
+                                  <div layout="row gap content:space-between items:center">
+                                    <ui-text type="body-s">
+                                      <a
+                                        href="${router.url(TrackerDetails, {
+                                          trackerId: tracker.id,
+                                        })}"
+                                        layout="row items:center gap:0.5 padding:0.5:0"
+                                        data-qa="button:tracker:${tracker.id}"
+                                      >
+                                        <ui-tooltip>
+                                          <span slot="content"> View activity details </span>
+                                          <ui-tracker-name> ${tracker.name} </ui-tracker-name>
+                                        </ui-tooltip>
+                                        <ui-stats-badge>
+                                          ${numberFormatter.format(tracker.requestsCount)}
+                                        </ui-stats-badge>
+                                        ${
+                                          tracker.blocked &&
+                                          html`<ui-icon
+                                            name="block-s"
+                                            color="danger-primary"
+                                            data-qa="icon:tracker:${tracker.id}:blocked"
+                                          ></ui-icon>`
+                                        }
+                                        ${
+                                          tracker.modified &&
+                                          html`<ui-icon
+                                            name="eye"
+                                            color="brand-primary"
+                                            data-qa="icon:tracker:${tracker.id}:modified"
+                                          ></ui-icon>`
+                                        }
+                                      </a>
+                                    </ui-text>
+                                    ${
+                                      options.terms &&
+                                      !managedConfig.disableUserControl &&
+                                      !paused &&
+                                      !globalPause &&
+                                      html`
+                                        <ui-action-button layout="shrink:0 width:4.5">
+                                          <a
+                                            href="${router.url(ProtectionStatus, {
+                                              trackerId: tracker.id,
+                                            })}"
+                                            layout="row center relative"
+                                            data-qa="button:tracker:protection-status:${tracker.id}"
+                                          >
+                                            <panel-protection-status-icon
+                                              options="${options}"
+                                              trackerId="${tracker.id}"
+                                              hostname="${stats.hostname}"
+                                            ></panel-protection-status-icon>
+                                          </a>
+                                        </ui-action-button>
+                                      `
+                                    }
+                                  </div>
+                                `,
+                              )}
+                            </section>
+                          </ui-list>
+                        `,
+                      )}
+                    </ui-stats>
+                    <panel-feedback layout="margin:1:0:1.5">
+                      ${
+                        stats.trackersBlocked > 0 &&
+                        html`
+                          <panel-feedback-button
+                            type="blocked"
+                            icon="block-s"
+                            value="${numberFormatter.format(stats.trackersBlocked)}"
+                            href="${router.url(TrackersReport, { type: 'blocked' })}"
+                          >
+                            Trackers blocked
+                          </panel-feedback-button>
+                        `
+                      }
+                      ${
+                        stats.trackersModified > 0 &&
+                        html`
+                          <panel-feedback-button
+                            type="modified"
+                            icon="eye"
+                            value="${numberFormatter.format(stats.trackersModified)}"
+                            href="${router.url(TrackersReport, { type: 'modified' })}"
+                          >
+                            Trackers modified
+                          </panel-feedback-button>
+                        `
+                      }
+                      ${
+                        consentManaged &&
+                        html`
+                          <panel-feedback-button type="autoconsent" icon="autoconsent-managed">
+                            Consent managed
+                          </panel-feedback-button>
+                        `
+                      }
+                      ${
+                        contentBlocksSelectors > 0 &&
+                        html`
+                          <panel-feedback-button
+                            type="content"
+                            icon="hide-element"
+                            value="${contentBlocksSelectors}"
+                            href="${chrome.runtime.getURL(
+                              '/pages/settings/index.html#@settings-website-details?domain=' +
+                                stats.hostname,
+                            )}"
+                            external
+                          >
+                            Blocked manually
+                          </panel-feedback-button>
+                        `
+                      }
+                    </panel-feedback>
+                  `
+                : html`
+                    <div layout="column items:center gap margin:1.5">
+                      <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
+                      <ui-text type="label-l" layout="block:center width:::210px margin:top">
+                        Ghostery has nothing to do on this page
+                      </ui-text>
+                      <ui-text type="body-m" layout="block:center width:::245px">
+                        Navigate to a website to see Ghostery in action.
+                      </ui-text>
+                    </div>
+                  `
+            }
+            <ui-action hidden="${globalPause}" inert="${managedConfig.disableUserControl}">
+              <a
+                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
+                class="${{
+                  last: managedConfig.disableUserControl || !store.ready(notification),
+                }}"
+                onclick="${openHref}"
+                layout="block margin:1.5:1.5:0.5"
+                layout.last="margin:bottom:1.5"
               >
-                Never-Consent
-              </panel-options-item>
-            </a>
-          </ui-action>
-        </panel-container>
-        ${!managedConfig.disableUserControl &&
-        store.ready(notification) &&
-        !store.error(notification) &&
-        html`<panel-notification></panel-notification>`}
-      `}
+                <panel-options-item
+                  icon="block-ads"
+                  enabled="${options.blockAds}"
+                  terms="${options.terms}"
+                >
+                  Ad-Blocking
+                </panel-options-item>
+                <panel-options-item
+                  icon="anti-tracking"
+                  enabled="${options.blockTrackers}"
+                  terms="${options.terms}"
+                >
+                  Anti-Tracking
+                </panel-options-item>
+                <panel-options-item
+                  icon="never-consent"
+                  enabled="${options.blockAnnoyances}"
+                  terms="${options.terms}"
+                >
+                  Never-Consent
+                </panel-options-item>
+              </a>
+            </ui-action>
+          </panel-container>
+          ${
+            !managedConfig.disableUserControl &&
+            store.ready(notification) &&
+            !store.error(notification) &&
+            html`<panel-notification></panel-notification>`
+          }
+        `
+      }
     </template>
   `,
 };
