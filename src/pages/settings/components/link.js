@@ -34,7 +34,7 @@ export default {
                 </ui-text>
                 <slot name="footer"></slot>
               </div>
-              <div id="chevron" layout="row center size:4">
+              <div id="chevron" layout="row center size:4 shrink:0">
                 <ui-icon name="chevron-right" color="onbrand" layout="size:2"></ui-icon>
               </div>
             </div>
