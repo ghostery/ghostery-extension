@@ -26,6 +26,7 @@ import {
 import callForReviewImage from '../assets/call-for-review.svg';
 import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
 import callForSurveyImage from '../assets/call-for-survey.svg';
+import zapImage from '../assets/zap.svg';
 
 const NOTIFICATIONS = {
   terms: {
@@ -73,6 +74,13 @@ const NOTIFICATIONS = {
     url: SURVEY_PANEL_NOTIFICATION_URL,
     action: msg`Take the 2-Minute Survey`,
   },
+  zap: {
+    img: zapImage,
+    type: 'image',
+    text: msg`Love your calm, ad-free web? Help friends & family enjoy it too.`,
+    url: 'https://www.ghostery.com/zap?utm_source=gbe&utm_campaign=panel-zap',
+    action: msg`Share Ghostery Zap`,
+  },
 };
 
 const randomize = Math.random();
@@ -103,6 +111,11 @@ const Notification = {
     if (config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
       return NOTIFICATIONS.survey;
     }
+
+    // Zap notification
+    // TODO: Re-enable notifications below when we decide to move Zap notification
+    // to the list of notifications that are shown to users
+    if (randomize <= 1) return NOTIFICATIONS.zap;
 
     // Edge mobile notification for Edge desktop users
     if (__CHROMIUM__ && isEdge() && !isMobile()) {
