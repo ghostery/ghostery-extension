@@ -42,7 +42,8 @@ const setup = asyncSetup('telemetry', [
         const [options, config, dailyStats] = await Promise.all([
           store.resolve(Options),
           store.resolve(Config),
-          store.resolve(DailyStats, yesterdayId),
+          // A failed `insights` DB read must not block the ping.
+          store.resolve(DailyStats, yesterdayId).catch(() => ({ pages: 0 })),
         ]);
 
         return {
