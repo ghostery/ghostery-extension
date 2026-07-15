@@ -16,7 +16,6 @@ import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 import Options, { isGloballyPaused } from '/store/options.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
 import { parseWithCache } from '/utils/request.js';
-import { recordSerpVisit } from './telemetry/index.js';
 
 // Trackers preview messages
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -40,14 +39,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   return false;
 });
 
-const SERP_URL_REGEXP =
+export const SERP_URL_REGEXP =
   /^https?:[/][/][^/]*[.](google|bing)[.][a-z]+([.][a-z]+)?([/][a-z]+)*[/]search/;
 
 // SERP tracking prevention and trackers preview content scripts
 chrome.webNavigation.onCommitted.addListener(async (details) => {
   if (details.url.match(SERP_URL_REGEXP)) {
-    recordSerpVisit();
-
     const options = await store.resolve(Options);
 
     if (options.wtmSerpReport) {
