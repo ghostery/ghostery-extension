@@ -73,7 +73,7 @@ function rememberInjectedDocument(documentId) {
   chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
 }
 
-async function injectScriptlets(filters, hostname, details) {
+async function injectScriptlets(filters, hostname, details, frameReady = false) {
   if (__CHROMIUM__) {
     if (filters.length === 0) return;
     if (details.documentId) {
@@ -111,6 +111,15 @@ async function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
+    // On Firefox, injecting a subframe-constrained (>>) scriptlet at webNavigation.onCommitted is
+    // unreliable for out-of-process (cross-origin) child frames: the committed document is still
+    // provisional and gets replaced, so executeScript resolves but its effect is discarded. We
+    // defer these injections to the content script's bootstrap message, which runs inside the
+    // frame's final document (frameReady), guaranteeing the scriptlet lands.
+    if (__FIREFOX__ && !frameReady) {
+      continue;
+    }
+
     injections.push(
       chrome.scripting
         .executeScript({
@@ -128,12 +137,17 @@ async function injectScriptlets(filters, hostname, details) {
   }
 
   if (__FIREFOX__) {
-    if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
-      if (!contentScripts.isRegistered(hostname)) {
-        contentScripts.register(hostname, scriptletsByWorld);
+    // Content-script registration for direct-domain scriptlets is handled at onCommitted
+    // (document_start). The frameReady path only performs the deferred subframe executeScript
+    // above, so it must not touch the per-hostname registration state.
+    if (!frameReady) {
+      if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
+        if (!contentScripts.isRegistered(hostname)) {
+          contentScripts.register(hostname, scriptletsByWorld);
+        }
+      } else {
+        contentScripts.unregister(hostname);
       }
-    } else {
-      contentScripts.unregister(hostname);
     }
     return;
   }
@@ -192,7 +206,7 @@ framesHierarchy.handleWebextensionEvents();
  * (like registering content scripts for scriptlet filters on Firefox)
  */
 async function injectCosmetics(details, config) {
-  const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
+  const { bootstrap: isBootstrap = false, scriptletsOnly, frameReady = false } = config;
 
   try {
     setup.pending && (await setup.pending);
@@ -281,7 +295,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details);
+      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details, frameReady);
     }
 
     if (scriptletsOnly) {
@@ -353,6 +367,25 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       frameId: sender.frameId,
       documentId: sender.documentId,
     };
+
+    // On Firefox, subframe-constrained (>>) scriptlets can't be reliably injected at
+    // webNavigation.onCommitted for out-of-process (cross-origin) child frames, because the
+    // committed document is provisional and gets replaced. The content script's bootstrap message
+    // runs inside the frame's final document, so we resolve the parent frame to evaluate the
+    // ancestor chain and inject the subframe scriptlet here, where the frame is ready.
+    if (__FIREFOX__ && msg.bootstrap && sender.frameId !== 0) {
+      chrome.webNavigation
+        .getFrame({ tabId: sender.tab.id, frameId: sender.frameId })
+        .then((frame) => {
+          if (frame && typeof frame.parentFrameId === 'number') {
+            details.parentFrameId = frame.parentFrameId;
+          }
+          return injectCosmetics(details, { ...msg, frameReady: true });
+        })
+        .then(sendResponse, () => sendResponse());
+
+      return true;
+    }
 
     injectCosmetics(details, msg).then(sendResponse);
 
