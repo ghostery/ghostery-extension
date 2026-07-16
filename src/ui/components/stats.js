@@ -76,7 +76,7 @@ export default {
         <ui-switch-item active="${!type || type === 'graph'}" layout="row gap:3 padding:0:1">
           <ui-tracker-wheel
             categories="${categories}"
-            layout="shrink:0 size:12 margin:top"
+            layout="shrink:0 size:12 margin:0.5:0"
           ></ui-tracker-wheel>
           <div layout="column grow">
             ${
