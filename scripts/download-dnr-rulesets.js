@@ -32,6 +32,35 @@ const RULESETS = {
   }, {}),
 };
 
+const SERP_RULES = [
+  {
+    id: 1,
+    priority: 1,
+    action: {
+      type: 'redirect',
+      redirect: {
+        transform: {
+          queryTransform: {
+            addOrReplaceParams: [{ key: 'pws', value: '0' }],
+          },
+        },
+      },
+    },
+    condition: {
+      regexFilter: '^https://www\\.google\\.[a-z.]+/search\\?',
+      resourceTypes: ['main_frame'],
+    },
+  },
+];
+
+function createSerpRuleset() {
+  const outputPath = `${RESOURCES_PATH}/dnr-serp.json`;
+  writeFileSync(outputPath, JSON.stringify(SERP_RULES, null, 2));
+  console.log('Created DNR ruleset for "dnr-serp"');
+}
+
+createSerpRuleset();
+
 /**
  * @param {Response} res
  */
