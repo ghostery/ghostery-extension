@@ -647,6 +647,9 @@
   "load_more": {
     "message": "Charger plus"
   },
+  "love_your_calm__ad_free_web__help_friends___family_enjoy_it_too_": {
+    "message": "Vous profitez d’un web plus calme, sans publicité ? Installez Ghostery Zap pour vos proches."
+  },
   "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
     "message": "Gérez la liste des trackers autorisés à se charger sur ce site."
   },
@@ -946,6 +949,9 @@
   },
   "share_a_review": {
     "message": "Laisser un avis"
+  },
+  "share_ghostery_zap": {
+    "message": "Installer Ghostery Zap"
   },
   "short_video_feeds": {
     "message": "Flux de vidéos courtes"

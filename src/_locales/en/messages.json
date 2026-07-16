@@ -647,6 +647,9 @@
   "load_more": {
     "message": "Load more"
   },
+  "love_your_calm__ad_free_web__help_friends___family_enjoy_it_too_": {
+    "message": "Love your calm, ad-free web? Help friends & family enjoy it too."
+  },
   "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
     "message": "Manage the list of trackers that are allowed to load on this site."
   },
@@ -946,6 +949,9 @@
   },
   "share_a_review": {
     "message": "Share a Review"
+  },
+  "share_ghostery_zap": {
+    "message": "Share Ghostery Zap"
   },
   "short_video_feeds": {
     "message": "Short video feeds"
