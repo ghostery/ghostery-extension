@@ -206,7 +206,7 @@ const config = {
       ...(argv.watch && {
         onLog(level, log, handler) {
           // Suppress FILE_NAME_CONFLICT warnings caused by the watch mode
-          // when files overrite each other during the sequential builds.
+          // when files overwrite each other during the sequential builds.
           if (log.code === 'FILE_NAME_CONFLICT') return;
 
           handler(level, log);
@@ -597,40 +597,62 @@ const buildPromise = build({
     {
       name: 'clean-up-html-imports',
       enforce: 'pre',
-      generateBundle(options, bundle) {
+      generateBundle(_, bundle) {
+        // Map each CSS source module to its emitted CSS asset(s). With
+        // `preserveModules`, every imported `.css` file becomes its own
+        // `.css.js` chunk whose `facadeModuleId` points back to the source
+        // module, which lets us derive ordering from the real module graph.
+        const cssModuleToAssets = new Map();
+        for (const c of Object.values(bundle)) {
+          if (
+            c.type === 'chunk' &&
+            c.facadeModuleId?.replace(/\?.*$/, '').endsWith('.css') &&
+            c.viteMetadata?.importedCss?.size
+          ) {
+            cssModuleToAssets.set(c.facadeModuleId.replace(/\?.*$/, ''), [
+              ...c.viteMetadata.importedCss,
+            ]);
+          }
+        }
+
         for (const chunk of Object.values(bundle)) {
           if (chunk.fileName.endsWith('.html.js')) {
             for (const name of chunk.imports) {
               const importChunk = bundle[name];
               if (importChunk?.type === 'chunk') {
-                // Collect all CSS from the full transitive import tree
-                const allCss = new Set();
+                // Collect CSS in module execution order (dependencies first) by
+                // walking the module graph in source-import order. This keeps
+                // shared styles (e.g. `/ui/styles.css`) before page-specific
+                // styles so the cascade is correct, regardless of how chunks are
+                // named or sorted.
+                const orderedCss = new Set();
                 const visited = new Set();
-                const walk = (chunkName) => {
-                  if (visited.has(chunkName)) return;
-                  visited.add(chunkName);
-                  const c = bundle[chunkName];
-                  if (!c || c.type !== 'chunk') return;
-                  if (c.viteMetadata?.importedCss) {
-                    for (const css of c.viteMetadata.importedCss) {
-                      allCss.add(css);
+                const walk = (moduleId) => {
+                  const id = moduleId.replace(/\?.*$/, '');
+                  if (visited.has(id)) return;
+                  visited.add(id);
+
+                  const info = this.getModuleInfo(moduleId);
+                  if (info) {
+                    for (const importedId of info.importedIds) {
+                      walk(importedId);
                     }
                   }
-                  for (const imp of c.imports) {
-                    walk(imp);
+
+                  const assets = cssModuleToAssets.get(id);
+                  if (assets) {
+                    for (const asset of assets) orderedCss.add(asset);
                   }
                 };
-                walk(name);
+                if (importChunk.facadeModuleId) walk(importChunk.facadeModuleId);
 
                 importChunk.imports = importChunk.imports.filter((name) =>
                   name.endsWith('.css.js'),
                 );
 
                 // Preserve collected CSS on this chunk so Vite adds <link> tags
-                if (allCss.size > 0 && importChunk.viteMetadata) {
-                  // The chunk imports array is sorted alphabetically, so we reverse the collected CSS to ensure
-                  // the correct order in the final HTML (the global /ui/styles.css is added last).
-                  importChunk.viteMetadata.importedCss = new Set([...allCss].reverse());
+                if (orderedCss.size > 0 && importChunk.viteMetadata) {
+                  importChunk.viteMetadata.importedCss = orderedCss;
                 }
               }
             }
