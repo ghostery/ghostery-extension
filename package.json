@@ -51,7 +51,7 @@
     "@ghostery/config": "^0.0.16",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^2.0.4",
-    "@github/relative-time-element": "^5.2.0",
+    "@github/relative-time-element": "^5.3.0",
     "@sentry/browser": "^10.66.0",
     "@whotracksme/reporting": "^11.0.1",
     "apexsankey": "github:ghostery/apexsankey",
