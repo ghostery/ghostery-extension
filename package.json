@@ -62,7 +62,7 @@
     "lottie-web": "^5.13.0",
     "minixxh": "^0.3.1",
     "plotly.js-basic-dist": "^3.7.0",
-    "tldts-experimental": "^7.4.8"
+    "tldts-experimental": "^7.4.9"
   },
   "dataDependencies": {
     "redirect-resources": "40762d476b31b424dbcbdb587a8bf9e6d16666f059d6f6aec47afae698712a15",
