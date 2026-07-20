@@ -42,7 +42,7 @@ const setup = asyncSetup('telemetry', [
         const [options, config, dailyStats] = await Promise.all([
           store.resolve(Options),
           store.resolve(Config),
-          store.resolve(DailyStats, yesterdayId),
+          store.resolve(DailyStats, yesterdayId).catch(() => undefined),
         ]);
 
         return {
@@ -50,7 +50,7 @@ const setup = asyncSetup('telemetry', [
           config,
           // Use the previous full UTC day so the bucket doesn't depend on
           // the time-of-day at which the ping fires.
-          yesterdayPages: dailyStats.pages,
+          yesterdayPages: dailyStats?.pages,
           userSettings: __CHROMIUM__ ? await chrome.action?.getUserSettings?.() : undefined,
           isAllowedIncognitoAccess: await chrome.extension.isAllowedIncognitoAccess(),
         };
