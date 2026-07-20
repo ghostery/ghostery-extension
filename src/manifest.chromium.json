@@ -70,6 +70,11 @@
         "id": "redirect-protection",
         "enabled": false,
         "path": "rule_resources/dnr-redirect-protection.json"
+      },
+      {
+        "id": "serp",
+        "enabled": false,
+        "path": "rule_resources/dnr-serp.json"
       }
     ]
   },

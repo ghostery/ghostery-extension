@@ -10,10 +10,12 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_DNR_SERP } from '@ghostery/config';
 
 import Options, { ENGINES, isGloballyPaused } from '/store/options.js';
 import Resources from '/store/resources.js';
 import FilteringDebug from '/store/filtering-debug.js';
+import Config from '/store/config.js';
 
 import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -71,7 +73,7 @@ if (__CHROMIUM__) {
     );
   }
 
-  function getIds(options) {
+  async function getIds(options) {
     const debug = store.get(FilteringDebug);
     const networkDisabled = store.ready(debug) && !debug.network;
 
@@ -99,6 +101,11 @@ if (__CHROMIUM__) {
       ids.push('redirect-protection');
     }
 
+    if (ids.length && DNR_RESOURCES.includes('serp')) {
+      const config = await store.resolve(Config);
+      if (config.hasFlag(FLAG_DNR_SERP)) ids.push('serp');
+    }
+
     return ids;
   }
 
@@ -106,13 +113,13 @@ if (__CHROMIUM__) {
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
   async function syncDNR(options, lastOptions) {
-    const nextRulesetIds = getIds(options);
+    const nextRulesetIds = await getIds(options);
 
     if (
       lastOptions &&
       lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
       lastOptions.fixesFilters === options.fixesFilters &&
-      String(nextRulesetIds) === String(getIds(lastOptions))
+      String(nextRulesetIds) === String(await getIds(lastOptions))
     ) {
       // No changes in options triggering an update, skip updating rules
       return;
