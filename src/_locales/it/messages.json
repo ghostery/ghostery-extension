@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "Telemetria delle prestazioni"
   },
-  "permission_required": {
-    "message": "Autorizzazione richiesta"
-  },
   "pin_extension_for_easy_access": {
     "message": "Fissa l’estensione per un accesso rapido"
   },

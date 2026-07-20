@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "Performance Telemetry"
   },
-  "permission_required": {
-    "message": "Cần quyền"
-  },
   "pin_extension_for_easy_access": {
     "message": "Ghim tiện ích mở rộng để dễ dàng truy cập"
   },

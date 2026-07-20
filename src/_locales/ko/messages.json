@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "성능 측정"
   },
-  "permission_required": {
-    "message": "권한 필요"
-  },
   "pin_extension_for_easy_access": {
     "message": "확장 프로그램을 고정하고 빠르게 접근해보세요"
   },

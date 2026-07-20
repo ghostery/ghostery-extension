@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "Телеметрия производительности"
   },
-  "permission_required": {
-    "message": "Требуется разрешение"
-  },
   "pin_extension_for_easy_access": {
     "message": "Закрепите расширение для быстрого доступа"
   },

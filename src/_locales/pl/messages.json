@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "Telemetria wydajności"
   },
-  "permission_required": {
-    "message": "Wymagane uprawnienia"
-  },
   "pin_extension_for_easy_access": {
     "message": "Przypnij rozszerzenie i ciesz się łatwiejszym dostępem"
   },
