@@ -45,7 +45,6 @@ import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 import { lang, numberFormatter } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
-const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy');
 const ONBOARDING_URL = chrome.runtime.getURL(
   '/pages/onboarding/index.html#@onboarding-views-main?scrollToTop=1',
 );
@@ -511,7 +510,7 @@ export default {
                         `,
                       )}
                     </ui-stats>
-                    <panel-feedback layout="margin:1:0:1.5">
+                    <panel-feedback>
                       ${
                         stats.trackersBlocked > 0 &&
                         html`
@@ -566,7 +565,7 @@ export default {
                     </panel-feedback>
                   `
                 : html`
-                    <div layout="column items:center gap margin:1.5">
+                    <div layout="column items:center gap margin:2:1.5">
                       <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
                       <ui-text type="label-l" layout="block:center width:::210px margin:top">
                         Ghostery has nothing to do on this page
@@ -577,39 +576,6 @@ export default {
                     </div>
                   `
             }
-            <ui-action hidden="${globalPause}" inert="${managedConfig.disableUserControl}">
-              <a
-                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-                class="${{
-                  last: managedConfig.disableUserControl || !store.ready(notification),
-                }}"
-                onclick="${openHref}"
-                layout="block margin:1.5:1.5:0.5"
-                layout.last="margin:bottom:1.5"
-              >
-                <panel-options-item
-                  icon="block-ads"
-                  enabled="${options.blockAds}"
-                  terms="${options.terms}"
-                >
-                  Ad-Blocking
-                </panel-options-item>
-                <panel-options-item
-                  icon="anti-tracking"
-                  enabled="${options.blockTrackers}"
-                  terms="${options.terms}"
-                >
-                  Anti-Tracking
-                </panel-options-item>
-                <panel-options-item
-                  icon="never-consent"
-                  enabled="${options.blockAnnoyances}"
-                  terms="${options.terms}"
-                >
-                  Never-Consent
-                </panel-options-item>
-              </a>
-            </ui-action>
           </panel-container>
           ${
             !managedConfig.disableUserControl &&

@@ -75,26 +75,9 @@ export default {
                   data collection including ads, trackers, and cookie pop-ups.
                 </ui-text>
               </div>
-              <settings-toggle
-                icon="pause"
-                value="${globalPause}"
-                onchange="${html.set('globalPause')}"
-                data-qa="toggle:global-pause"
-                layout@768px="margin:bottom:-3"
-              >
-                Pause Ghostery
-                <span slot="description">Suspends privacy protection globally for 1 day.</span>
-                ${
-                  globalPauseRevokeAt &&
-                  html`
-                    <ui-text type="body-s" color="secondary" slot="footer">
-                      <ui-revoke-at revokeAt="${globalPauseRevokeAt}"></ui-revoke-at>
-                    </ui-text>
-                  `
-                }
-              </settings-toggle>
+
               <div
-                layout="column gap:5"
+                layout="column gap:4"
                 style="${{ opacity: globalPause ? 0.5 : undefined }}"
                 inert="${globalPause}"
               >
@@ -187,6 +170,24 @@ export default {
                   </settings-link>
                 </div>
               </div>
+              <settings-toggle
+                icon="pause"
+                value="${globalPause}"
+                onchange="${html.set('globalPause')}"
+                data-qa="toggle:global-pause"
+                layout@768px="margin:bottom:-3"
+              >
+                Pause Ghostery
+                <span slot="description">Suspends privacy protection globally for 1 day.</span>
+                ${
+                  globalPauseRevokeAt &&
+                  html`
+                    <ui-text type="body-s" color="secondary" slot="footer">
+                      <ui-revoke-at revokeAt="${globalPauseRevokeAt}"></ui-revoke-at>
+                    </ui-text>
+                  `
+                }
+              </settings-toggle>
             </section>
 
             <div>
