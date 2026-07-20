@@ -238,9 +238,9 @@ export default class Metrics {
         buildQueryPair('sm', conf.options.blockAnnoyances ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.options.blockTrackers ? '1' : '0') +
-        // Page views yesterday (0=none, 1=<10, 2=>=10)
+        // Page views yesterday (-1=undefined, 0=none, 1=<10, 2=>=10)
         // prettier-ignore
-        buildQueryPair('pv', conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
+        buildQueryPair('pv', conf.yesterdayPages === undefined ? '-1' : conf.yesterdayPages >= 10 ? '2' : conf.yesterdayPages > 0 ? '1' : '0') +
         // SERP visits yesterday (0=none, 1=<10, 2=>=10)
         buildQueryPair('se', this._getSearchSignal()) +
         // Recency, days since last active daily ping
