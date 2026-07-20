@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "性能遥测"
   },
-  "permission_required": {
-    "message": "需要权限"
-  },
   "pin_extension_for_easy_access": {
     "message": "锁定扩展程序以便轻松访问"
   },
