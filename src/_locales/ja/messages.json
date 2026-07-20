@@ -797,9 +797,6 @@
   "performance_telemetry": {
     "message": "パフォーマンステレメトリ"
   },
-  "permission_required": {
-    "message": "許可が必要"
-  },
   "pin_extension_for_easy_access": {
     "message": "アクセスしやすいように拡張機能をピン留めする"
   },
