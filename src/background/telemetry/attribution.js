@@ -35,7 +35,13 @@ async function getAttributionFromSessionStorage() {
       const [injection] = await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         world: 'MAIN',
-        func: () => sessionStorage.getItem('attribution'),
+        func: () => {
+          try {
+            return sessionStorage.getItem('attribution');
+          } catch {
+            return null;
+          }
+        },
       });
 
       const attribution = parseAttributionCookie(injection?.result);
