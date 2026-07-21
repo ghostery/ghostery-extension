@@ -121,9 +121,10 @@ export default class Metrics {
     return !this.storage.install_all;
   }
 
-  async setUTMs({ utm_source = '', utm_campaign = '' }) {
+  async setUTMs({ utm_source = '', utm_campaign = '', source = '' }) {
     this.storage.utm_source = utm_source;
     this.storage.utm_campaign = utm_campaign;
+    this.storage.attributionSource = source;
     await this.saveStorage(this.storage);
   }
 
@@ -259,7 +260,9 @@ export default class Metrics {
         // Marketing source (Former utm_source)
         buildQueryPair('us', this.storage.utm_source) +
         // Marketing campaign (Former utm_campaign)
-        buildQueryPair('uc', this.storage.utm_campaign);
+        buildQueryPair('uc', this.storage.utm_campaign) +
+        // Which mechanism supplied attribution, to compare session storage vs cookie during migration
+        buildQueryPair('as', this.storage.attributionSource || '');
     }
 
     return metrics_url;
