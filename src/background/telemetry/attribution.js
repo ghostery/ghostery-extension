@@ -109,37 +109,20 @@ async function getAttributionFromUTMs() {
   return {};
 }
 
-function attributionSource(session, cookie) {
-  if (session && cookie) {
-    const matches =
-      session.utm_source === cookie.utm_source && session.utm_campaign === cookie.utm_campaign;
-    return matches ? 'both' : 'mismatch';
-  }
-  if (session) return 'session';
-  if (cookie) return 'cookie';
-  return null;
-}
-
 export default async function detectAttribution() {
   try {
-    const [session, cookie] = await Promise.all([
-      getAttributionFromSessionStorage(),
-      getAttributionFromCookies(),
-    ]);
+    const session = await getAttributionFromSessionStorage();
+    if (session) return session;
 
-    const source = attributionSource(session, cookie);
-    if (source) {
-      return { ...(session || cookie), source };
+    const cookie = await getAttributionFromCookies();
+    if (cookie) {
+      // _c marks a legacy-cookie fallback, to measure session-storage coverage during migration
+      return { ...cookie, utm_source: `${cookie.utm_source}_c` };
     }
 
-    const url = await getAttributionFromUTMs();
-    if (url.utm_source && url.utm_campaign) {
-      return { ...url, source: 'url' };
-    }
-
-    return { source: 'none' };
+    return getAttributionFromUTMs();
   } catch (error) {
     console.error('[telemetry] Error detecting attribution:', error);
-    return { source: 'error' };
+    return {};
   }
 }
