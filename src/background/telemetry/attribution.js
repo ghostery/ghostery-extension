@@ -41,10 +41,7 @@ async function getAttributionFromSessionStorage() {
       const attribution = parseAttributionCookie(injection?.result);
       if (attribution) return attribution;
     } catch (e) {
-      console.error(
-        `[telemetry] Failed to read session storage for ${tab.url}:`,
-        e,
-      );
+      console.error(`[telemetry] Failed to read session storage for ${tab.url}:`, e);
     }
   }
   return null;
