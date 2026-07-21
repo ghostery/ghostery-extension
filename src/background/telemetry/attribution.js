@@ -25,6 +25,31 @@ function parseAttributionCookie(value) {
   return null;
 }
 
+async function getAttributionFromSessionStorage() {
+  const tabs = await chrome.tabs.query({
+    url: ATTRIBUTION_DOMAINS.map((domain) => `https://${domain}/*`),
+  });
+
+  for (const tab of tabs) {
+    try {
+      const [injection] = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        world: 'MAIN',
+        func: () => sessionStorage.getItem('attribution'),
+      });
+
+      const attribution = parseAttributionCookie(injection?.result);
+      if (attribution) return attribution;
+    } catch (e) {
+      console.error(
+        `[telemetry] Failed to read session storage for ${tab.url}:`,
+        e,
+      );
+    }
+  }
+  return null;
+}
+
 async function getAttributionFromCookies() {
   const tabs = await chrome.tabs.query({
     url: ATTRIBUTION_DOMAINS.map((domain) => `https://${domain}/*`),
@@ -89,6 +114,9 @@ async function getAttributionFromUTMs() {
 
 export default async function detectAttribution() {
   try {
+    const sessionAttribution = await getAttributionFromSessionStorage();
+    if (sessionAttribution) return sessionAttribution;
+
     const cookieAttribution = await getAttributionFromCookies();
     if (cookieAttribution) return cookieAttribution;
 
