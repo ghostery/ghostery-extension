@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+const EXTENSION_ORIGIN = chrome.runtime.getURL('/').toLowerCase().slice(0, -1);
+
 export function isFromExtensionFrame(event) {
-  return event.origin + '/' === chrome.runtime.getURL('/').toLowerCase();
+  return event.origin === EXTENSION_ORIGIN;
 }
