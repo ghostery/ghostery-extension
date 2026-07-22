@@ -110,6 +110,8 @@ function mount(url, position = 'right', debug = false) {
   const iframe = shadowRoot.querySelector('iframe');
 
   window.addEventListener('message', (e) => {
+    if (e.source !== iframe.contentWindow) return;
+
     const type = e.data?.type;
 
     if (type === notifications.RESIZE_WINDOW_EVENT) {

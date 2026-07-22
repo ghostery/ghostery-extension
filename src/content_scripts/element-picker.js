@@ -434,6 +434,8 @@ function getElementArea(element) {
   /* Message Event Listener from Popup */
 
   const messageEventListener = (event) => {
+    if (event.source !== iframe.contentWindow) return;
+
     switch (event.data?.type) {
       case 'gh:element-picker:resize':
         container.style.height = `${event.data.height}px`;
