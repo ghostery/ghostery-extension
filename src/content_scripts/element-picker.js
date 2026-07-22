@@ -434,7 +434,7 @@ function getElementArea(element) {
   /* Message Event Listener from Popup */
 
   const messageEventListener = (event) => {
-    if (event.source !== iframe.contentWindow) return;
+    if (event.origin + '/' !== chrome.runtime.getURL('/').toLowerCase()) return;
 
     switch (event.data?.type) {
       case 'gh:element-picker:resize':

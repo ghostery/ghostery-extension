@@ -110,7 +110,7 @@ function mount(url, position = 'right', debug = false) {
   const iframe = shadowRoot.querySelector('iframe');
 
   window.addEventListener('message', (e) => {
-    if (e.source !== iframe.contentWindow) return;
+    if (e.origin + '/' !== chrome.runtime.getURL('/').toLowerCase()) return;
 
     const type = e.data?.type;
 
