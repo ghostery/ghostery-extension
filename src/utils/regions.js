@@ -40,6 +40,7 @@ const REGIONS = [
   'pt',
   'ro',
   'ru',
+  'sl',
   'sv',
   'tr',
   'vi',
