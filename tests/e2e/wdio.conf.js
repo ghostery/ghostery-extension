@@ -124,7 +124,11 @@ export const config = {
       browserVersion: 'stable',
       cacheDir: '.wdio',
       'moz:firefoxOptions': {
-        args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
+        // Firefox 153+ blocks WebDriver navigation to moz-extension:// and
+        // about:debugging pages unless system access is explicitly allowed.
+        args: ['--remote-allow-system-access'].concat(
+          argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
+        ),
         prefs: {
           'browser.cache.disk.enable': false,
           'browser.cache.memory.enable': false,
