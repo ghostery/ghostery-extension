@@ -168,6 +168,13 @@ async function executeScriptlets(filters, details) {
 
 async function injectScriptlets(filters, hostname, details) {
   if (__FIREFOX__ || USER_SCRIPTS) {
+    // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
+    // local frames (about:blank, srcdoc), so their documents are injected per-frame.
+    if (USER_SCRIPTS && details.localFrame) {
+      await executeScriptlets(filters, details);
+      return;
+    }
+
     const directFilters = [];
     const subframeFilters = [];
     for (const filter of filters) {
@@ -384,6 +391,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       tabId: sender.tab.id,
       frameId: sender.frameId,
       documentId: sender.documentId,
+      localFrame: !sender.url.startsWith('http'),
     };
 
     injectCosmetics(details, msg).then(sendResponse);
