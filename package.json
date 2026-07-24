@@ -43,7 +43,7 @@
     "web-ext": "^10.5.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^16.11.0",
+    "@duckduckgo/autoconsent": "^16.15.0",
     "@ghostery/adblocker": "^2.18.1",
     "@ghostery/adblocker-content": "^2.17.0",
     "@ghostery/adblocker-extended-selectors": "^2.17.0",
