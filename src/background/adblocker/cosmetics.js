@@ -76,117 +76,89 @@ function rememberInjectedDocument(documentId) {
   chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
 }
 
-function resolveScriptlet(filter) {
-  const parsed = filter.parseScript();
+async function injectScriptlets(filters, hostname, details) {
+  // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
+  // local frames (about:blank, srcdoc), so their documents are injected per-frame.
+  const useRegistry = __FIREFOX__ || (USER_SCRIPTS && !details.localFrame);
 
-  if (!parsed) {
-    console.warn('[adblocker] could not inject script filter:', filter.toString());
-    return null;
-  }
-
-  const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
-  const scriptlet = scriptlets[scriptletName];
-
-  if (!scriptlet) {
-    console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
-    return null;
-  }
-
-  return {
-    func: scriptlet.func,
-    args: [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))],
-    declaredWorld: scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN',
-  };
-}
-
-// Registered rather than executeScript'd so the browser injects at document_start on every
-// navigation. The per-hostname registration also dedupes the repeated bootstrap triggers.
-function registerDirectScriptlets(filters, hostname) {
-  if (filters.length === 0) {
-    contentScripts.unregister(hostname);
-    return;
-  }
-
-  if (contentScripts.isRegistered(hostname)) {
-    return;
+  let alreadyInjected = false;
+  if (__CHROMIUM__) {
+    if (filters.length === 0 && !useRegistry) return;
+    if (details.documentId) {
+      alreadyInjected = injectedDocuments.has(details.documentId);
+      if (alreadyInjected && !useRegistry) return;
+      injectedDocuments.add(details.documentId);
+    }
   }
 
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  const injections = [];
   for (const filter of filters) {
-    const resolved = resolveScriptlet(filter);
-    if (!resolved) continue;
+    const parsed = filter.parseScript();
 
-    scriptletsByWorld[resolved.declaredWorld] +=
-      `(${resolved.func.toString()})(...${JSON.stringify(resolved.args)});\n`;
-  }
+    if (!parsed) {
+      console.warn('[adblocker] could not inject script filter:', filter.toString());
+      continue;
+    }
 
-  contentScripts.register(hostname, scriptletsByWorld);
-}
+    const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
+    const scriptlet = scriptlets[scriptletName];
 
-// Per-frame injection reaches cross-origin children that a per-hostname registration cannot.
-async function executeScriptlets(filters, details) {
-  if (filters.length === 0) return;
+    if (!scriptlet) {
+      console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+      continue;
+    }
 
-  const { documentId } = details;
-  if (__CHROMIUM__ && documentId) {
-    if (injectedDocuments.has(documentId)) return;
-    injectedDocuments.add(documentId);
-  }
+    const func = scriptlet.func;
+    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-  const results = await Promise.all(
-    filters.map((filter) => {
-      const resolved = resolveScriptlet(filter);
-      if (!resolved) return null;
+    // Direct-domain scriptlets get registered (document_start); a per-hostname registration
+    // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
+    if (useRegistry && !filter.hasSubframeConstraint()) {
+      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      continue;
+    }
 
-      return chrome.scripting
+    if (alreadyInjected) continue;
+
+    injections.push(
+      chrome.scripting
         .executeScript({
           injectImmediately: true,
-          world: resolved.declaredWorld,
+          world: declaredWorld,
           target: resolveInjectionTarget(details),
-          func: resolved.func,
-          args: resolved.args,
+          func,
+          args,
         })
         .catch((e) => {
           console.warn(e);
           return null;
-        });
-    }),
-  );
+        }),
+    );
+  }
+
+  if (useRegistry) {
+    if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
+      if (!contentScripts.isRegistered(hostname)) {
+        contentScripts.register(hostname, scriptletsByWorld);
+      }
+    } else {
+      contentScripts.unregister(hostname);
+    }
+    if (__FIREFOX__) return;
+  }
 
   // The documentId echoed back by executeScript proves the injection landed; persist it so
   // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
-  if (__CHROMIUM__ && documentId) {
-    const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
+  const results = await Promise.all(injections);
+  const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
 
-    if (injectedDocumentId) {
-      rememberInjectedDocument(injectedDocumentId);
-    } else {
-      injectedDocuments.delete(documentId);
-    }
+  if (injectedDocumentId) {
+    rememberInjectedDocument(injectedDocumentId);
+  } else if (details.documentId && !alreadyInjected) {
+    injectedDocuments.delete(details.documentId);
   }
-}
-
-async function injectScriptlets(filters, hostname, details) {
-  if (__FIREFOX__ || USER_SCRIPTS) {
-    // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
-    // local frames (about:blank, srcdoc), so their documents are injected per-frame.
-    if (USER_SCRIPTS && details.localFrame) {
-      await executeScriptlets(filters, details);
-      return;
-    }
-
-    const directFilters = [];
-    const subframeFilters = [];
-    for (const filter of filters) {
-      (filter.hasSubframeConstraint() ? subframeFilters : directFilters).push(filter);
-    }
-
-    registerDirectScriptlets(directFilters, hostname);
-    await executeScriptlets(subframeFilters, details);
-    return;
-  }
-
-  await executeScriptlets(filters, details);
 }
 
 function injectStyles(styles, details) {
@@ -400,8 +372,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-if (__FIREFOX__) {
-  OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
+if (__FIREFOX__ || USER_SCRIPTS) {
+  OptionsObserver.addListener('paused', function contentScriptScriptlets(paused) {
     for (const hostname of Object.keys(paused)) {
       contentScripts.unregister(hostname);
     }
@@ -413,7 +385,9 @@ if (__FIREFOX__) {
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
-} else {
+}
+
+if (!__FIREFOX__) {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (details.tabId === -1) return;
@@ -425,25 +399,12 @@ if (__FIREFOX__) {
     },
     { urls: ['http://*/*', 'https://*/*'] },
   );
+}
 
-  if (USER_SCRIPTS) {
-    OptionsObserver.addListener('paused', function chromiumUserScriptScriptlets(paused) {
-      for (const hostname of Object.keys(paused)) {
-        contentScripts.unregister(hostname);
-      }
-    });
-
-    chrome.webNavigation.onBeforeNavigate.addListener(
-      (details) => {
-        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-      },
-      { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-    );
-
-    // Registrations persist across restarts, so drop stale ones when the engine changes.
-    const refresh = () => contentScripts.unregisterAll();
-    chrome.runtime.onStartup.addListener(refresh);
-    chrome.runtime.onInstalled.addListener(refresh);
-    engines.addSaveListener(engines.MAIN_ENGINE, refresh);
-  }
+if (USER_SCRIPTS) {
+  // Registrations persist across restarts, so drop stale ones when the engine changes.
+  const refresh = () => contentScripts.unregisterAll();
+  chrome.runtime.onStartup.addListener(refresh);
+  chrome.runtime.onInstalled.addListener(refresh);
+  engines.addSaveListener(engines.MAIN_ENGINE, refresh);
 }
