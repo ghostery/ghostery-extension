@@ -104,6 +104,27 @@ export class FramesHierarchy {
     return [];
   }
 
+  ancestorsOf(tabId, frameId) {
+    const tabIndex = this.#findTab(tabId);
+    if (tabIndex === -1) {
+      return [];
+    }
+
+    const frames = this.tabs[tabIndex].frames;
+    const chain = [];
+
+    let frame = frames.find((f) => f.id === frameId);
+    while (frame && frame.parent !== -1) {
+      frame = frames.find((f) => f.id === frame.parent);
+      if (!frame) {
+        return [];
+      }
+      chain.push(frame.details);
+    }
+
+    return chain;
+  }
+
   #handleFrameReplacement(frames, frameIndex, frameId, parentFrameId, details, tabId) {
     const targetFrame = frames[frameIndex];
     targetFrame.parent = -1;

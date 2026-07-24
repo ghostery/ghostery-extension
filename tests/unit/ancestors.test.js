@@ -651,4 +651,41 @@ describe('#FramesHierarchy', () => {
       ]);
     });
   });
+
+  describe('ancestorsOf', () => {
+    it('returns the tracked ancestor chain without mutating the hierarchy', () => {
+      const hierarchy = new FramesHierarchy();
+
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com');
+      hierarchy.ancestors({ tabId: 0, frameId: 1, parentFrameId: 0 }, 'frame.foo.com');
+      hierarchy.ancestors({ tabId: 0, frameId: 2, parentFrameId: 1 }, 'frameof.frame.foo.com');
+
+      const before = structuredClone(hierarchy.tabs);
+
+      assert.deepEqual(hierarchy.ancestorsOf(0, 2).reverse(), ['foo.com', 'frame.foo.com']);
+      assert.deepEqual(hierarchy.ancestorsOf(0, 1), ['foo.com']);
+      assert.deepEqual(hierarchy.ancestorsOf(0, 0), []);
+
+      assert.deepEqual(hierarchy.tabs, before);
+    });
+
+    it('returns an empty chain for unknown tabs and frames', () => {
+      const hierarchy = new FramesHierarchy();
+
+      assert.deepEqual(hierarchy.ancestorsOf(0, 1), []);
+
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com');
+
+      assert.deepEqual(hierarchy.ancestorsOf(0, 1), []);
+    });
+
+    it('returns an empty chain when the hierarchy is incomplete', () => {
+      const hierarchy = new FramesHierarchy();
+
+      hierarchy.ancestors({ tabId: 0, frameId: 0, parentFrameId: -1 }, 'foo.com');
+      hierarchy.tabs[0].frames.push({ id: 2, parent: 1, documentId: '', details: 'orphan.com' });
+
+      assert.deepEqual(hierarchy.ancestorsOf(0, 2), []);
+    });
+  });
 });
