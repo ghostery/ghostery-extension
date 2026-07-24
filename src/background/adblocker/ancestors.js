@@ -21,12 +21,10 @@ export class FramesHierarchy {
     return this.tabs.findIndex((tab) => tab.id === tabId);
   }
 
-  ancestors(target, details) {
-    let { tabId, frameId, parentFrameId, documentId = '' } = target;
+  updateAncestry(target, details) {
+    const { tabId, frameId, parentFrameId, documentId = '' } = target;
     const tabIndex = this.#findTab(tabId);
 
-    // If the tab is just registered, we can skip retrieving
-    // the ancestor chain as there's no details stored.
     if (tabIndex === -1) {
       // Only build the list from the main frame.
       if (parentFrameId === -1) {
@@ -35,11 +33,10 @@ export class FramesHierarchy {
           frames: [{ id: frameId, parent: parentFrameId, documentId, details }],
         });
       }
-      return [];
+      return;
     }
 
     const frames = this.tabs[tabIndex].frames;
-    const chain = [];
 
     // Handle frame updates and replacements
     let frameIndex = frames.length;
@@ -77,31 +74,42 @@ export class FramesHierarchy {
       });
     }
 
-    // If no parent, return empty chain
-    if (parentFrameId === -1) {
+    // If hierarchy is incomplete, remove the tab
+    if (parentFrameId !== -1 && !this.#isComplete(frames, parentFrameId)) {
+      this.tabs.splice(tabIndex, 1);
+    }
+  }
+
+  #isComplete(frames, parentFrameId) {
+    while (parentFrameId !== -1) {
+      const parent = frames.find((frame) => frame.id === parentFrameId);
+      if (!parent) {
+        return false;
+      }
+      parentFrameId = parent.parent;
+    }
+    return true;
+  }
+
+  ancestorsOf(tabId, frameId) {
+    const tabIndex = this.#findTab(tabId);
+    if (tabIndex === -1) {
       return [];
     }
 
-    // Build the ancestor chain
-    frameIndex = 0;
-    while (frameIndex !== -1) {
-      frameIndex = frames.length;
-      while (--frameIndex >= 0) {
-        if (frames[frameIndex].id === parentFrameId) {
-          chain.push(frames[frameIndex].details);
-          parentFrameId = frames[frameIndex].parent;
-          if (parentFrameId === -1) {
-            // top-most frame reached
-            return chain;
-          }
-          break;
-        }
+    const frames = this.tabs[tabIndex].frames;
+    const chain = [];
+
+    let frame = frames.find((f) => f.id === frameId);
+    while (frame && frame.parent !== -1) {
+      frame = frames.find((f) => f.id === frame.parent);
+      if (!frame) {
+        return [];
       }
+      chain.push(frame.details);
     }
 
-    // If hierarchy is incomplete, remove the tab
-    this.tabs.splice(tabIndex, 1);
-    return [];
+    return chain;
   }
 
   #handleFrameReplacement(frames, frameIndex, frameId, parentFrameId, details, tabId) {

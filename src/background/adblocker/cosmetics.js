@@ -231,12 +231,23 @@ async function injectCosmetics(details, config) {
   const scriptletsEnabled = !debugReady || debug.cosmeticsScriptlets;
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
-  let ancestors = undefined;
-  if (!scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    ancestors = framesHierarchy.ancestors(
-      { tabId, frameId, parentFrameId, documentId },
-      { domain, hostname },
-    );
+  let ancestors;
+  if (SUBFRAME_SCRIPTING.enabled && !scriptletsOnly) {
+    if (typeof parentFrameId === 'number') {
+      framesHierarchy.updateAncestry(
+        { tabId, frameId, parentFrameId, documentId },
+        { domain, hostname },
+      );
+
+      if (!__FIREFOX__) {
+        ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
+      }
+    } else if (__FIREFOX__ && isBootstrap) {
+      // On Firefox, subframe (>>) filters are evaluated only at the bootstrap message: it comes
+      // from the frame's final document, while at onCommitted an out-of-process frame's document
+      // is still provisional, so an executeScript into it is discarded along with that document.
+      ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
+    }
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
