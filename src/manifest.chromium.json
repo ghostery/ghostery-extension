@@ -108,6 +108,10 @@
       "run_at": "document_start"
     },
     {
+      "js": ["content_scripts/gpc.js"],
+      "run_at": "background_execute_script"
+    },
+    {
       "js": ["content_scripts/trackers-preview.js"],
       "run_at": "background_execute_script"
     },
