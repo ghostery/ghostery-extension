@@ -41,7 +41,7 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
-export async function sendMessage(msg) {
+async function sendRawMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
     throw new Error('Message can only be sent from the extension context');
   }
@@ -50,15 +50,19 @@ export async function sendMessage(msg) {
   // to receive messages after the extension page is loaded or reloaded.
   await browser.pause(100);
 
-  await browser.execute(async function (msg) {
+  return browser.execute(async function (msg) {
     console.log('[e2e] Sending message to background:', msg);
     const result = await (window.chrome || window.browser).runtime.sendMessage(JSON.parse(msg));
     console.log('[e2e] Received response from background:', result);
-
-    if (result !== 'done') {
-      throw new Error(`Background tasks did not respond with "done": ${result}`);
-    }
+    return result;
   }, JSON.stringify(msg));
+}
+
+export async function sendMessage(msg) {
+  const result = await sendRawMessage(msg);
+  if (result !== 'done') {
+    throw new Error(`Background tasks did not respond with "done": ${result}`);
+  }
 }
 
 export async function waitForIdleBackgroundTasks() {
@@ -117,6 +121,31 @@ export function reloadUntilActive(check, timeoutMsg = 'scriptlet never became ac
     },
     { timeout: 20000, interval: 500, timeoutMsg },
   );
+}
+
+export async function isUserScriptsPathActive() {
+  await browser.url('ghostery:panel');
+  return sendRawMessage({ action: 'e2e:userScriptsActive' });
+}
+
+// Chrome gates chrome.userScripts behind the per-extension "Allow user scripts" toggle.
+export async function setUserScriptsAllowed(value) {
+  if (!browser.isChromium) return;
+
+  const extensionId = new URL(BASE_URL).hostname;
+  await browser.url(`chrome://extensions/?id=${extensionId}`);
+
+  const toggle = await $('>>>#allow-user-scripts');
+  if ((await toggle.getProperty('checked')) === value) return;
+
+  await toggle.click();
+  await browser.waitUntil(async () => (await toggle.getProperty('checked')) === value, {
+    timeout: 5000,
+    timeoutMsg: `"Allow user scripts" toggle did not turn ${value ? 'on' : 'off'}`,
+  });
+
+  // The service worker picks up the toggle change only on a fresh start.
+  await reloadExtension();
 }
 
 export async function setToggle(name, value) {

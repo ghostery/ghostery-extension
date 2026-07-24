@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const contentScripts = (() => {
+const firefoxRegistry = (() => {
   const map = new Map();
   return {
     async register(hostname, scriptletsByWorld) {
@@ -58,3 +58,70 @@ export const contentScripts = (() => {
     },
   };
 })();
+
+// Registrations persist across service-worker restarts, so register() upserts by a stable id
+// and unregisterAll() queries the browser to purge them (the map is empty after a restart).
+const USER_SCRIPTS_NAMESPACE = 'ghostery-scriptlet';
+
+function userScriptId(hostname, world) {
+  return `${USER_SCRIPTS_NAMESPACE}:${world}:${hostname}`;
+}
+
+// __CHROMIUM__ guard so chrome.userScripts is tree-shaken from the Firefox build.
+const chromiumRegistry =
+  __CHROMIUM__ &&
+  (() => {
+    const registered = new Set();
+    return {
+      async register(hostname, scriptletsByWorld) {
+        // Reserve synchronously so a concurrent register() short-circuits on isRegistered().
+        registered.add(hostname);
+
+        const scripts = [];
+        for (const [world, code] of Object.entries(scriptletsByWorld)) {
+          if (!code) continue;
+
+          scripts.push({
+            id: userScriptId(hostname, world),
+            js: [{ code }],
+            allFrames: true,
+            matches: [`https://${hostname}/*`, `http://${hostname}/*`],
+            runAt: 'document_start',
+            world: world === 'ISOLATED' ? 'USER_SCRIPT' : world,
+          });
+        }
+
+        if (scripts.length) {
+          await chrome.userScripts
+            .register(scripts)
+            .catch(() => chrome.userScripts.update(scripts))
+            // On failure, release the reservation so the next navigation retries.
+            .catch((e) => {
+              console.warn(e);
+              this.unregister(hostname);
+            });
+        }
+      },
+      isRegistered(hostname) {
+        return registered.has(hostname);
+      },
+      unregister(hostname) {
+        registered.delete(hostname);
+        const ids = ['MAIN', 'ISOLATED'].map((world) => userScriptId(hostname, world));
+        chrome.userScripts.unregister({ ids }).catch(() => {});
+      },
+      unregisterAll() {
+        registered.clear();
+        chrome.userScripts.getScripts().then((scripts) => {
+          const ids = scripts
+            .filter((s) => s.id.startsWith(USER_SCRIPTS_NAMESPACE))
+            .map((s) => s.id);
+          if (ids.length) chrome.userScripts.unregister({ ids }).catch(() => {});
+        }, console.warn);
+      },
+    };
+  })();
+
+// browser.contentScripts (Firefox) and chrome.userScripts (Chromium) fill the same role;
+// the rest of the adblocker treats whichever one this resolves to as "content scripts".
+export const contentScripts = __FIREFOX__ ? firefoxRegistry : chromiumRegistry;

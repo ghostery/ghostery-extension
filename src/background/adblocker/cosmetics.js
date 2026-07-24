@@ -21,6 +21,7 @@ import FilteringDebug from '/store/filtering-debug.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
+import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
 
 import { tabStats } from '../stats.js';
 
@@ -48,6 +49,8 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
+const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsRegisterSupported();
+
 // On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
 // same document, so scriptlets would run twice. We remember the documentIds we have already
 // injected into (proved by executeScript's result) and skip a repeat. The in-memory set gives
@@ -74,8 +77,12 @@ function rememberInjectedDocument(documentId) {
 }
 
 async function injectScriptlets(filters, hostname, details) {
+  // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
+  // local frames (about:blank, srcdoc), so their documents are injected per-frame.
+  const useRegistry = __FIREFOX__ || (USER_SCRIPTS && !details.localFrame);
+
   if (__CHROMIUM__) {
-    if (filters.length === 0) return;
+    if (filters.length === 0 && !useRegistry) return;
     if (details.documentId) {
       if (injectedDocuments.has(details.documentId)) return;
       injectedDocuments.add(details.documentId);
@@ -104,9 +111,9 @@ async function injectScriptlets(filters, hostname, details) {
     const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-    // Firefox registers direct-domain scriptlets (document_start); a per-hostname registration
+    // Direct-domain scriptlets get registered (document_start); a per-hostname registration
     // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
-    if (__FIREFOX__ && !filter.hasSubframeConstraint()) {
+    if (useRegistry && !filter.hasSubframeConstraint()) {
       scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
@@ -127,7 +134,7 @@ async function injectScriptlets(filters, hostname, details) {
     );
   }
 
-  if (__FIREFOX__) {
+  if (useRegistry) {
     if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
       if (!contentScripts.isRegistered(hostname)) {
         contentScripts.register(hostname, scriptletsByWorld);
@@ -135,8 +142,9 @@ async function injectScriptlets(filters, hostname, details) {
     } else {
       contentScripts.unregister(hostname);
     }
-    return;
   }
+
+  if (__FIREFOX__) return;
 
   // The documentId echoed back by executeScript proves the injection landed; persist it so
   // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
@@ -207,7 +215,7 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
-  if (__FIREFOX__ && scriptletsOnly && contentScripts.isRegistered(hostname)) {
+  if ((__FIREFOX__ || USER_SCRIPTS) && scriptletsOnly && contentScripts.isRegistered(hostname)) {
     return;
   }
 
@@ -345,13 +353,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
     // Resolve url for the frame/subframe
     // Local frames (about:blank, data:, etc.) do not have a proper URL
-    const url = !sender.url.startsWith('http') ? sender.origin : sender.url;
+    const localFrame = !sender.url.startsWith('http');
+    const url = localFrame ? sender.origin : sender.url;
 
     const details = {
       url,
       tabId: sender.tab.id,
       frameId: sender.frameId,
       documentId: sender.documentId,
+      localFrame,
     };
 
     injectCosmetics(details, msg).then(sendResponse);
@@ -360,8 +370,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-if (__FIREFOX__) {
-  OptionsObserver.addListener('paused', function firefoxContentScriptScriptlets(paused) {
+if (__FIREFOX__ || USER_SCRIPTS) {
+  OptionsObserver.addListener('paused', function contentScriptScriptlets(paused) {
     for (const hostname of Object.keys(paused)) {
       contentScripts.unregister(hostname);
     }
@@ -373,7 +383,9 @@ if (__FIREFOX__) {
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
-} else {
+}
+
+if (!__FIREFOX__) {
   chrome.webRequest?.onResponseStarted.addListener(
     (details) => {
       if (details.tabId === -1) return;
@@ -385,4 +397,12 @@ if (__FIREFOX__) {
     },
     { urls: ['http://*/*', 'https://*/*'] },
   );
+}
+
+if (USER_SCRIPTS) {
+  // Registrations persist across restarts, so drop stale ones when the engine changes.
+  const refresh = () => contentScripts.unregisterAll();
+  chrome.runtime.onStartup.addListener(refresh);
+  chrome.runtime.onInstalled.addListener(refresh);
+  engines.addSaveListener(engines.MAIN_ENGINE, refresh);
 }
