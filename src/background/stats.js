@@ -25,7 +25,10 @@ import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 
+import { recordSerpVisit } from './telemetry/index.js';
+
 import * as logger from './logger.js';
+import { SERP_URL_REGEXP } from './serp.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -214,12 +217,6 @@ export async function updateTabStats(tabId, requests) {
   // as some of the requests are fired before the tab is created, tabId -1
   if (!stats) return;
 
-  // If the tab is in incognito mode, we set the flag to avoid storing the stats
-  if (stats.incognito === undefined) {
-    const tab = await chrome.tabs.get(tabId).catch(() => null);
-    stats.incognito = tab?.incognito ?? false;
-  }
-
   // Filter out requests that are not related to the current page
   // (e.g. requests on trailing edge when navigation to a new page is in progress)
   requests = requests.filter(
@@ -290,7 +287,10 @@ export async function updateTabStats(tabId, requests) {
 
 async function flushTabStatsToDailyStats(tabId) {
   const stats = tabStats.get(tabId);
-  if (!stats || !stats.trackers.length || stats.incognito) return;
+  if (!stats || stats.incognito) return;
+
+  // Count SERP visits with the page view so both share timing and incognito exclusion.
+  if (SERP_URL_REGEXP.test(stats.url)) recordSerpVisit();
 
   let trackersBlocked = 0;
   let trackersModified = 0;
@@ -337,9 +337,16 @@ function setupTabStats(details) {
 }
 
 // Setup stats for the tab when a user navigates to a new page
-chrome.webNavigation.onCommitted.addListener((details) => {
+chrome.webNavigation.onCommitted.addListener(async (details) => {
   if (details.tabId > -1 && details.parentFrameId === -1) {
     setupTabStats(details);
+
+    // Resolve incognito now; on tab close the tab can no longer be queried.
+    const stats = tabStats.get(details.tabId);
+    if (stats) {
+      const tab = await chrome.tabs.get(details.tabId).catch(() => null);
+      stats.incognito = tab?.incognito ?? false;
+    }
   }
 });
 
