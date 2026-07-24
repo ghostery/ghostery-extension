@@ -46,7 +46,7 @@ describe('Onboarding', function () {
   it('captures attribution from ghostery.com cookie', async () => {
     await browser.url('ghostery:settings');
 
-    await expect(getExtensionElement('text:utm-source')).toHaveText('source');
+    await expect(getExtensionElement('text:utm-source')).toHaveText('source_c');
     await expect(getExtensionElement('text:utm-campaign')).toHaveText('campaign');
   });
 });
