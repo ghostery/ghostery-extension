@@ -231,21 +231,20 @@ async function injectCosmetics(details, config) {
   const scriptletsEnabled = !debugReady || debug.cosmeticsScriptlets;
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
+  const subframesTracked =
+    !scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number';
+
+  if (subframesTracked) {
+    // On Firefox the hierarchy is read back later, via ancestorsOf() in the message handler.
+    framesHierarchy.track({ tabId, frameId, parentFrameId, documentId }, { domain, hostname });
+  }
+
   let ancestors;
   if (__FIREFOX__) {
-    // Resolved upfront in the bootstrap handler via ancestorsOf(); see where details.ancestors is set.
+    // Resolved in the bootstrap message handler via ancestorsOf(); see where details.ancestors is set.
     ancestors = details.ancestors;
-  }
-  if (!scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    // Also updates the frames hierarchy — the side effect Firefox reads back via ancestorsOf() — so the call runs on both platforms.
-    const chain = framesHierarchy.ancestors(
-      { tabId, frameId, parentFrameId, documentId },
-      { domain, hostname },
-    );
-
-    if (!__FIREFOX__) {
-      ancestors = chain;
-    }
+  } else if (subframesTracked) {
+    ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
