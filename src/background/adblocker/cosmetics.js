@@ -81,12 +81,10 @@ async function injectScriptlets(filters, hostname, details) {
   // local frames (about:blank, srcdoc), so their documents are injected per-frame.
   const useRegistry = __FIREFOX__ || (USER_SCRIPTS && !details.localFrame);
 
-  let alreadyInjected = false;
   if (__CHROMIUM__) {
     if (filters.length === 0 && !useRegistry) return;
     if (details.documentId) {
-      alreadyInjected = injectedDocuments.has(details.documentId);
-      if (alreadyInjected && !useRegistry) return;
+      if (injectedDocuments.has(details.documentId)) return;
       injectedDocuments.add(details.documentId);
     }
   }
@@ -120,8 +118,6 @@ async function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
-    if (alreadyInjected) continue;
-
     injections.push(
       chrome.scripting
         .executeScript({
@@ -146,8 +142,9 @@ async function injectScriptlets(filters, hostname, details) {
     } else {
       contentScripts.unregister(hostname);
     }
-    if (__FIREFOX__) return;
   }
+
+  if (__FIREFOX__) return;
 
   // The documentId echoed back by executeScript proves the injection landed; persist it so
   // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
@@ -156,7 +153,7 @@ async function injectScriptlets(filters, hostname, details) {
 
   if (injectedDocumentId) {
     rememberInjectedDocument(injectedDocumentId);
-  } else if (details.documentId && !alreadyInjected) {
+  } else if (details.documentId) {
     injectedDocuments.delete(details.documentId);
   }
 }
@@ -356,14 +353,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
     // Resolve url for the frame/subframe
     // Local frames (about:blank, data:, etc.) do not have a proper URL
-    const url = !sender.url.startsWith('http') ? sender.origin : sender.url;
+    const localFrame = !sender.url.startsWith('http');
+    const url = localFrame ? sender.origin : sender.url;
 
     const details = {
       url,
       tabId: sender.tab.id,
       frameId: sender.frameId,
       documentId: sender.documentId,
-      localFrame: !sender.url.startsWith('http'),
+      localFrame,
     };
 
     injectCosmetics(details, msg).then(sendResponse);
