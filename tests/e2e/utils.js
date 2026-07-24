@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { browser, expect, $, $$ } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 
 export const PAGE_PORT = 6789;
 export const PAGE_DOMAIN = `page.localhost`;
@@ -41,7 +41,7 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
-export async function sendMessage(msg) {
+async function sendRawMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
     throw new Error('Message can only be sent from the extension context');
   }
@@ -50,15 +50,19 @@ export async function sendMessage(msg) {
   // to receive messages after the extension page is loaded or reloaded.
   await browser.pause(100);
 
-  await browser.execute(async function (msg) {
+  return browser.execute(async function (msg) {
     console.log('[e2e] Sending message to background:', msg);
     const result = await (window.chrome || window.browser).runtime.sendMessage(JSON.parse(msg));
     console.log('[e2e] Received response from background:', result);
-
-    if (result !== 'done') {
-      throw new Error(`Background tasks did not respond with "done": ${result}`);
-    }
+    return result;
   }, JSON.stringify(msg));
+}
+
+export async function sendMessage(msg) {
+  const result = await sendRawMessage(msg);
+  if (result !== 'done') {
+    throw new Error(`Background tasks did not respond with "done": ${result}`);
+  }
 }
 
 export async function waitForIdleBackgroundTasks() {
@@ -121,35 +125,17 @@ export function reloadUntilActive(check, timeoutMsg = 'scriptlet never became ac
 
 export async function isUserScriptsPathActive() {
   await browser.url('ghostery:panel');
-  await browser.pause(100);
-
-  return browser.execute(async function () {
-    return (window.chrome || window.browser).runtime.sendMessage({
-      action: 'e2e:userScriptsActive',
-    });
-  });
+  return sendRawMessage({ action: 'e2e:userScriptsActive' });
 }
 
-// Chrome 138+ gates chrome.userScripts behind a per-extension "Allow user scripts" toggle;
-// flipping it is the only way e2e can reach that path. The service worker picks up the change
-// only on a fresh start, hence the reload.
+// Chrome gates chrome.userScripts behind the per-extension "Allow user scripts" toggle.
 export async function setUserScriptsAllowed(value) {
   if (!browser.isChromium) return;
 
-  const extensionId = BASE_URL.match(/^chrome-extension:\/\/([^/]+)\//)?.[1];
-  if (!extensionId) {
-    throw new Error(`Could not resolve extension id from base URL: ${BASE_URL}`);
-  }
-
+  const extensionId = new URL(BASE_URL).hostname;
   await browser.url(`chrome://extensions/?id=${extensionId}`);
 
   const toggle = await $('>>>#allow-user-scripts');
-  if (!(await toggle.isExisting())) {
-    const ids = [];
-    for (const t of await $$('>>>cr-toggle')) ids.push(await t.getAttribute('id'));
-    throw new Error(`"Allow user scripts" toggle not found; cr-toggle ids: ${JSON.stringify(ids)}`);
-  }
-
   if ((await toggle.getProperty('checked')) === value) return;
 
   await toggle.click();
@@ -158,6 +144,7 @@ export async function setUserScriptsAllowed(value) {
     timeoutMsg: `"Allow user scripts" toggle did not turn ${value ? 'on' : 'off'}`,
   });
 
+  // The service worker picks up the toggle change only on a fresh start.
   await reloadExtension();
 }
 
