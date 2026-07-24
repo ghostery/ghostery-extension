@@ -21,7 +21,7 @@ export class FramesHierarchy {
     return this.tabs.findIndex((tab) => tab.id === tabId);
   }
 
-  track(target, details) {
+  updateAncestry(target, details) {
     const { tabId, frameId, parentFrameId, documentId = '' } = target;
     const tabIndex = this.#findTab(tabId);
 

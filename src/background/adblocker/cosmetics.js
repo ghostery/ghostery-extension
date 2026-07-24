@@ -234,7 +234,10 @@ async function injectCosmetics(details, config) {
   let ancestors;
   if (SUBFRAME_SCRIPTING.enabled && !scriptletsOnly) {
     if (typeof parentFrameId === 'number') {
-      framesHierarchy.track({ tabId, frameId, parentFrameId, documentId }, { domain, hostname });
+      framesHierarchy.updateAncestry(
+        { tabId, frameId, parentFrameId, documentId },
+        { domain, hostname },
+      );
 
       if (!__FIREFOX__) {
         ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
