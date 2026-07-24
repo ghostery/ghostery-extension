@@ -11,12 +11,6 @@
 
 // Ensures that `navigator.globalPrivacyControl` is truthy (GPC support):
 // https://w3c.github.io/gpc/#javascript-property-to-detect-preference
-//
-// Injected into the page's MAIN world at document_start (including all frames).
-// It must not rely on message passing to read the current settings, since the
-// page must see the final value before any of its scripts run. Instead, the
-// background registers or unregisters this content script when the GPC option
-// changes (see background/never-consent/gpc.js).
 (function () {
   try {
     if (!window.navigator.globalPrivacyControl) {

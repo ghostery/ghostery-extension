@@ -15,7 +15,7 @@ import { ACTION_DISABLE_GPC } from '@ghostery/config';
 import Config from '/store/config.js';
 import Options, { getPausedDetails, isGloballyPaused } from '/store/options.js';
 
-import * as OptionsObserver from '/utils/options-observer.js';
+import { addListener, isOptionEqual } from '/utils/options-observer.js';
 import {
   GPC_RULE_ID,
   GPC_RULE_PRIORITY,
@@ -26,6 +26,15 @@ import Request from '/utils/request.js';
 
 const GPC_CONTENT_SCRIPT_ID = 'gpc';
 
+function shouldEnableGPC(options) {
+  return (
+    options.terms &&
+    options.blockAnnoyances &&
+    options.autoconsent.gpc &&
+    !isGloballyPaused(options)
+  );
+}
+
 // In addition to the Sec-GPC header, the GPC spec requires exposing
 // `navigator.globalPrivacyControl` before the page's scripts run:
 // https://w3c.github.io/gpc/#javascript-property-to-detect-preference
@@ -34,12 +43,13 @@ const GPC_CONTENT_SCRIPT_ID = 'gpc';
 // At that point, it is too late to read the settings; thus, the script is
 // registered (with persistAcrossSessions) while GPC is enabled and
 // unregistered while it is disabled.
-async function updateGPCContentScript(options) {
-  const enabled =
-    options.terms &&
-    options.blockAnnoyances &&
-    options.autoconsent.gpc &&
-    !isGloballyPaused(options);
+async function updateGPCContentScript(options, lastOptions) {
+  const enabledNow = shouldEnableGPC(options);
+
+  if (lastOptions) {
+    const wasEnabledBefore = shouldEnableGPC(lastOptions);
+    if (enabledNow === wasEnabledBefore) return;
+  }
 
   const registered =
     (
@@ -47,10 +57,9 @@ async function updateGPCContentScript(options) {
         ids: [GPC_CONTENT_SCRIPT_ID],
       })
     ).length > 0;
+  if (enabledNow === registered) return;
 
-  if (enabled === registered) return;
-
-  if (enabled) {
+  if (enabledNow) {
     await chrome.scripting.registerContentScripts([
       {
         id: GPC_CONTENT_SCRIPT_ID,
@@ -74,24 +83,27 @@ async function updateGPCContentScript(options) {
   }
 }
 
-OptionsObserver.addListener(updateGPCContentScript);
+addListener(updateGPCContentScript);
 
 if (__CHROMIUM__) {
-  async function updateGPCRule(options) {
-    // Disabled GPC
+  async function updateGPCRule(options, lastOptions) {
+    const enabledNow = shouldEnableGPC(options);
+
     if (
-      !options.terms ||
-      !options.blockAnnoyances ||
-      !options.autoconsent.gpc ||
-      isGloballyPaused(options)
+      lastOptions &&
+      enabledNow === shouldEnableGPC(lastOptions) &&
+      isOptionEqual(options.paused, lastOptions.paused)
     ) {
+      return;
+    }
+
+    // Disabled GPC: clear the GPC rule if it exists
+    if (!enabledNow) {
       const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
-      // Clear the GPC rule if it exists
       if (existingRules.length) {
         await chrome.declarativeNetRequest.updateDynamicRules({
           removeRuleIds: [GPC_RULE_ID],
         });
-
         console.log('[autoconsent] GPC rule has been removed');
       }
 
@@ -149,7 +161,7 @@ if (__CHROMIUM__) {
   }
 
   // Re-evaluate when Options change
-  OptionsObserver.addListener(updateGPCRule);
+  addListener(updateGPCRule);
 
   // Re-evaluate when remote Config changes (e.g. ACTION_DISABLE_GPC domains)
   store.observe(Config, async (_, config, lastConfig) => {
