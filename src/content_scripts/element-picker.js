@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { isFromExtensionFrame } from '/utils/messaging.js';
+
 const PICKER_STYLES = `
   position: absolute;
   overflow: hidden;
@@ -434,6 +436,8 @@ function getElementArea(element) {
   /* Message Event Listener from Popup */
 
   const messageEventListener = (event) => {
+    if (!isFromExtensionFrame(event)) return;
+
     switch (event.data?.type) {
       case 'gh:element-picker:resize':
         container.style.height = `${event.data.height}px`;
