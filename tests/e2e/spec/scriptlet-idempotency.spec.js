@@ -61,30 +61,6 @@ async function expectMainWorldRanExactlyOnce() {
   await expect(await readStringifyMarker()).toBe('aaa+');
 }
 
-function readFrameStringifyMarker(frameId) {
-  return browser.execute((id) => {
-    const w = document.getElementById(id)?.contentWindow;
-    if (!w || !w.JSON) return null;
-    return w.JSON.parse(w.JSON.stringify({ marker: 'aaa' })).marker;
-  }, frameId);
-}
-
-async function expectMainWorldInFrameRanExactlyOnce(frameId) {
-  try {
-    await browser.waitUntil(async () => (await readFrameStringifyMarker(frameId)) === 'aaa+', {
-      timeout: 5000,
-    });
-  } catch {
-    throw new Error(
-      `MAIN-world scriptlet did not run exactly once in ${frameId}: ${JSON.stringify(await readFrameStringifyMarker(frameId))}`,
-    );
-  }
-
-  // Give any further overlapping triggers a chance to (incorrectly) run again.
-  await browser.pause(500);
-  await expect(await readFrameStringifyMarker(frameId)).toBe('aaa+');
-}
-
 // Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
 async function ensureScriptletActive() {
   await browser.waitUntil(
@@ -153,8 +129,12 @@ function idempotencyChecks() {
       document.body.appendChild(srcdoc);
     });
 
-    await expectMainWorldInFrameRanExactlyOnce('iframe-blank');
-    await expectMainWorldInFrameRanExactlyOnce('iframe-srcdoc');
+    for (const id of ['iframe-blank', 'iframe-srcdoc']) {
+      await switchFrame($(`#${id}`));
+      await expectMainWorldRanExactlyOnce();
+    }
+
+    await browser.switchFrame(null);
   });
 }
 
