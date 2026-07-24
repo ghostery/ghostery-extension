@@ -231,14 +231,18 @@ async function injectCosmetics(details, config) {
   const scriptletsEnabled = !debugReady || debug.cosmeticsScriptlets;
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
-  let ancestors = details.ancestors;
+  let ancestors;
+  if (__FIREFOX__) {
+    // Resolved upfront in the bootstrap handler via ancestorsOf(); see where details.ancestors is set.
+    ancestors = details.ancestors;
+  }
   if (!scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
+    // Also updates the frames hierarchy — the side effect Firefox reads back via ancestorsOf() — so the call runs on both platforms.
     const chain = framesHierarchy.ancestors(
       { tabId, frameId, parentFrameId, documentId },
       { domain, hostname },
     );
 
-    // On Firefox the chain is consumed by the bootstrap-message pass instead (see ancestorsOf).
     if (!__FIREFOX__) {
       ancestors = chain;
     }
