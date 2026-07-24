@@ -71,9 +71,12 @@ function userScriptId(hostname, world) {
 const chromiumRegistry =
   __CHROMIUM__ &&
   (() => {
-    const map = new Map();
+    const registered = new Set();
     return {
       async register(hostname, scriptletsByWorld) {
+        // Reserve synchronously so a concurrent register() short-circuits on isRegistered().
+        registered.add(hostname);
+
         const scripts = [];
         for (const [world, code] of Object.entries(scriptletsByWorld)) {
           if (!code) continue;
@@ -92,21 +95,23 @@ const chromiumRegistry =
           await chrome.userScripts
             .register(scripts)
             .catch(() => chrome.userScripts.update(scripts))
-            .catch((e) => console.warn(e));
+            // On failure, release the reservation so the next navigation retries.
+            .catch((e) => {
+              console.warn(e);
+              this.unregister(hostname);
+            });
         }
-
-        map.set(hostname, true);
       },
       isRegistered(hostname) {
-        return map.has(hostname);
+        return registered.has(hostname);
       },
       unregister(hostname) {
-        map.delete(hostname);
+        registered.delete(hostname);
         const ids = ['MAIN', 'ISOLATED'].map((world) => userScriptId(hostname, world));
         chrome.userScripts.unregister({ ids }).catch(() => {});
       },
       unregisterAll() {
-        map.clear();
+        registered.clear();
         chrome.userScripts.getScripts().then((scripts) => {
           const ids = scripts
             .filter((s) => s.id.startsWith(USER_SCRIPTS_NAMESPACE))
