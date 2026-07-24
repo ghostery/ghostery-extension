@@ -231,20 +231,20 @@ async function injectCosmetics(details, config) {
   const scriptletsEnabled = !debugReady || debug.cosmeticsScriptlets;
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
-  const subframesTracked =
-    !scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number';
-
-  if (subframesTracked) {
-    // On Firefox the hierarchy is read back later, via ancestorsOf() in the message handler.
-    framesHierarchy.track({ tabId, frameId, parentFrameId, documentId }, { domain, hostname });
-  }
-
   let ancestors;
-  if (__FIREFOX__) {
-    // Resolved in the bootstrap message handler via ancestorsOf(); see where details.ancestors is set.
-    ancestors = details.ancestors;
-  } else if (subframesTracked) {
-    ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
+  if (SUBFRAME_SCRIPTING.enabled && !scriptletsOnly) {
+    if (typeof parentFrameId === 'number') {
+      framesHierarchy.track({ tabId, frameId, parentFrameId, documentId }, { domain, hostname });
+
+      if (!__FIREFOX__) {
+        ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
+      }
+    } else if (__FIREFOX__ && isBootstrap) {
+      // On Firefox, subframe (>>) filters are evaluated only at the bootstrap message: it comes
+      // from the frame's final document, while at onCommitted an out-of-process frame's document
+      // is still provisional, so an executeScript into it is discarded along with that document.
+      ancestors = framesHierarchy.ancestorsOf(tabId, frameId);
+    }
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)
@@ -361,13 +361,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       frameId: sender.frameId,
       documentId: sender.documentId,
     };
-
-    // On Firefox, subframe (>>) filters are evaluated only here: the bootstrap message comes from
-    // the frame's final document, while at onCommitted an out-of-process frame's document is still
-    // provisional, so an executeScript into it is discarded along with that document.
-    if (__FIREFOX__ && SUBFRAME_SCRIPTING.enabled && msg.bootstrap && sender.frameId !== 0) {
-      details.ancestors = framesHierarchy.ancestorsOf(sender.tab.id, sender.frameId);
-    }
 
     injectCosmetics(details, msg).then(sendResponse);
 
