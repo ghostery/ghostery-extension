@@ -18,49 +18,51 @@ export default {
   render: ({ options }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
-        ${store.ready(options) &&
-        html`
-          <section layout="column gap:4">
-            <div layout="column gap" layout@992px="margin:bottom">
-              <settings-back-button></settings-back-button>
-              <ui-text type="headline-m">Never-Consent</ui-text>
-              <div layout="column gap:0.5">
-                <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                  Extended settings for automatically rejecting cookie consent notices.
-                </ui-text>
+        ${
+          store.ready(options) &&
+          html`
+            <section layout="column gap:4">
+              <div layout="column gap" layout@992px="margin:bottom">
+                <settings-back-button></settings-back-button>
+                <ui-text type="headline-m">Never-Consent</ui-text>
+                <div layout="column gap:0.5">
+                  <ui-text type="body-l" mobile-type="body-m" color="secondary">
+                    Extended settings for automatically rejecting cookie consent notices.
+                  </ui-text>
+                </div>
               </div>
-            </div>
-            <div layout="column gap">
-              <settings-toggle
-                value="${options.autoconsent.gpc}"
-                onchange="${html.set(options, 'autoconsent.gpc')}"
-              >
-                Global Privacy Control
-                <span slot="description">
-                  When enabled, your browser sends a signal to websites asking them not to sell or
-                  share your personal data for advertising, in line with privacy laws like those in
-                  California and the EU.
-                </span>
-              </settings-toggle>
-              <settings-option>
-                Automatic Action Type
-                <span slot="description">
-                  Chooses the default behavior for cookie consent notices.
-                </span>
-                <ui-input slot="action">
-                  <select
-                    value="${options.autoconsent.autoAction}"
-                    onchange="${html.set(options, 'autoconsent.autoAction')}"
-                  >
-                    <option value="optOut">Opt out</option>
-                    <option value="optIn">Opt in</option>
-                    <option value="">None</option>
-                  </select>
-                </ui-input>
-              </settings-option>
-            </div>
-          </section>
-        `}
+              <div layout="column gap">
+                <settings-toggle
+                  value="${options.autoconsent.gpc}"
+                  onchange="${html.set(options, 'autoconsent.gpc')}"
+                >
+                  Global Privacy Control
+                  <span slot="description">
+                    When enabled, your browser sends a signal to websites asking them not to sell or
+                    share your personal data for advertising, in line with privacy laws like those
+                    in California and the EU.
+                  </span>
+                </settings-toggle>
+                <settings-option>
+                  Automatic Action Type
+                  <span slot="description">
+                    Chooses the default behavior for cookie consent notices.
+                  </span>
+                  <ui-input slot="action">
+                    <select
+                      value="${options.autoconsent.autoAction}"
+                      onchange="${html.set(options, 'autoconsent.autoAction')}"
+                    >
+                      <option value="optOut">Opt out</option>
+                      <option value="optIn">Opt in</option>
+                      <option value="">None</option>
+                    </select>
+                  </ui-input>
+                </settings-option>
+              </div>
+            </section>
+          `
+        }
       </settings-page-layout>
     </template>
   `,

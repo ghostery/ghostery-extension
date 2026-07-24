@@ -107,6 +107,18 @@ export async function reloadExtension() {
   await waitForIdleBackgroundTasks();
 }
 
+// Custom filter updates reach the engine asynchronously; reload PAGE_URL until `check` passes.
+export function reloadUntilActive(check, timeoutMsg = 'scriptlet never became active') {
+  return browser.waitUntil(
+    async () => {
+      await browser.url(PAGE_URL);
+      await browser.pause(300);
+      return check();
+    },
+    { timeout: 20000, interval: 500, timeoutMsg },
+  );
+}
+
 export async function isUserScriptsPathActive() {
   await browser.url('ghostery:panel');
   await browser.pause(100);
@@ -212,15 +224,11 @@ export async function setCustomFilters(filters) {
   const input = await getExtensionElement('input:custom-filters');
   await input.setValue(filters.join('\n'));
 
-  await getExtensionElement('button:custom-filters:save').click();
+  const saveButton = await getExtensionElement('button:custom-filters:save');
+  await saveButton.click();
 
-  // The save button label is updated with a success message only after the
-  // background round-trip completes (rebuilding the custom engine and reloading
-  // the main engine). Waiting for it ensures the filters are applied before the
-  // test navigates, otherwise cosmetic/scriptlet injection may run too early.
-  await expect(getExtensionElement('button:custom-filters:save')).toHaveText(
-    'Filter rules have been updated',
-  );
+  await expect(saveButton).toHaveElementProperty('disabled', true);
+  await expect(saveButton).toHaveElementProperty('disabled', false, { wait: 15000 });
 
   await waitForIdleBackgroundTasks();
 }

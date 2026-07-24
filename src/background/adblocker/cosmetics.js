@@ -76,86 +76,110 @@ function rememberInjectedDocument(documentId) {
   chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
 }
 
-async function injectScriptlets(filters, hostname, details) {
-  if (__FIREFOX__ || USER_SCRIPTS) {
-    if (filters.length === 0) {
-      contentScripts.unregister(hostname);
-      return;
-    }
-    if (contentScripts.isRegistered(hostname)) {
-      return;
-    }
-  } else if (__CHROMIUM__) {
-    if (filters.length === 0) return;
-    if (details.documentId) {
-      if (injectedDocuments.has(details.documentId)) return;
-      injectedDocuments.add(details.documentId);
-    }
+function resolveScriptlet(filter) {
+  const parsed = filter.parseScript();
+
+  if (!parsed) {
+    console.warn('[adblocker] could not inject script filter:', filter.toString());
+    return null;
+  }
+
+  const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
+  const scriptlet = scriptlets[scriptletName];
+
+  if (!scriptlet) {
+    console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+    return null;
+  }
+
+  return {
+    func: scriptlet.func,
+    args: [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))],
+    declaredWorld: scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN',
+  };
+}
+
+// Registered rather than executeScript'd so the browser injects at document_start on every
+// navigation. The per-hostname registration also dedupes the repeated bootstrap triggers.
+function registerDirectScriptlets(filters, hostname) {
+  if (filters.length === 0) {
+    contentScripts.unregister(hostname);
+    return;
+  }
+
+  if (contentScripts.isRegistered(hostname)) {
+    return;
   }
 
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
-  const injections = [];
   for (const filter of filters) {
-    const parsed = filter.parseScript();
+    const resolved = resolveScriptlet(filter);
+    if (!resolved) continue;
 
-    if (!parsed) {
-      console.warn('[adblocker] could not inject script filter:', filter.toString());
-      continue;
-    }
+    scriptletsByWorld[resolved.declaredWorld] +=
+      `(${resolved.func.toString()})(...${JSON.stringify(resolved.args)});\n`;
+  }
 
-    const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
-    const scriptlet = scriptlets[scriptletName];
+  contentScripts.register(hostname, scriptletsByWorld);
+}
 
-    if (!scriptlet) {
-      console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
-      continue;
-    }
+// Per-frame injection reaches cross-origin children that a per-hostname registration cannot.
+async function executeScriptlets(filters, details) {
+  if (filters.length === 0) return;
 
-    const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
-    const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
+  const { documentId } = details;
+  if (__CHROMIUM__ && documentId) {
+    if (injectedDocuments.has(documentId)) return;
+    injectedDocuments.add(documentId);
+  }
 
-    if (__FIREFOX__ || USER_SCRIPTS) {
-      let code = '';
-      if (filter.hasSubframeConstraint()) {
-        code += `window.parent!==window&&`;
-      }
-      code += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      scriptletsByWorld[declaredWorld] += code;
-      continue;
-    }
+  const results = await Promise.all(
+    filters.map((filter) => {
+      const resolved = resolveScriptlet(filter);
+      if (!resolved) return null;
 
-    injections.push(
-      chrome.scripting
+      return chrome.scripting
         .executeScript({
           injectImmediately: true,
-          world: declaredWorld,
+          world: resolved.declaredWorld,
           target: resolveInjectionTarget(details),
-          func,
-          args,
+          func: resolved.func,
+          args: resolved.args,
         })
         .catch((e) => {
           console.warn(e);
           return null;
-        }),
-    );
-  }
-
-  if (__FIREFOX__ || USER_SCRIPTS) {
-    contentScripts.register(hostname, scriptletsByWorld);
-    return;
-  }
+        });
+    }),
+  );
 
   // The documentId echoed back by executeScript proves the injection landed; persist it so
   // the dedup outlives a service-worker restart. If nothing landed, release the reservation.
-  const results = await Promise.all(injections);
-  const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
+  if (__CHROMIUM__ && documentId) {
+    const injectedDocumentId = results.flat().find((result) => result?.documentId)?.documentId;
 
-  if (injectedDocumentId) {
-    rememberInjectedDocument(injectedDocumentId);
-  } else if (details.documentId) {
-    injectedDocuments.delete(details.documentId);
+    if (injectedDocumentId) {
+      rememberInjectedDocument(injectedDocumentId);
+    } else {
+      injectedDocuments.delete(documentId);
+    }
   }
+}
+
+async function injectScriptlets(filters, hostname, details) {
+  if (__FIREFOX__ || USER_SCRIPTS) {
+    const directFilters = [];
+    const subframeFilters = [];
+    for (const filter of filters) {
+      (filter.hasSubframeConstraint() ? subframeFilters : directFilters).push(filter);
+    }
+
+    registerDirectScriptlets(directFilters, hostname);
+    await executeScriptlets(subframeFilters, details);
+    return;
+  }
+
+  await executeScriptlets(filters, details);
 }
 
 function injectStyles(styles, details) {
@@ -190,13 +214,9 @@ function injectStyles(styles, details) {
 
 const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
 
-let framesHierarchy;
-if (__CHROMIUM__) {
-  framesHierarchy = new FramesHierarchy();
-
-  framesHierarchy.handleWebWorkerStart();
-  framesHierarchy.handleWebextensionEvents();
-}
+const framesHierarchy = new FramesHierarchy();
+framesHierarchy.handleWebWorkerStart();
+framesHierarchy.handleWebextensionEvents();
 
 /*
  * returns `false` if the injection should be blocked for the given hostname
@@ -244,17 +264,11 @@ async function injectCosmetics(details, config) {
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
   let ancestors = undefined;
-  if (SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
-    if (__FIREFOX__ || USER_SCRIPTS) {
-      // The registration API is not per-frame, so surface every scriptlet that could run on
-      // the hostname; the subframe constraint is enforced by `window.parent` at runtime.
-      ancestors = [{ domain, hostname }];
-    } else {
-      ancestors = framesHierarchy.ancestors(
-        { tabId, frameId, parentFrameId, documentId },
-        { domain, hostname },
-      );
-    }
+  if (!scriptletsOnly && SUBFRAME_SCRIPTING.enabled && typeof parentFrameId === 'number') {
+    ancestors = framesHierarchy.ancestors(
+      { tabId, frameId, parentFrameId, documentId },
+      { domain, hostname },
+    );
   }
 
   // Domain specific cosmetic filters (scriptlets and styles)

@@ -122,14 +122,16 @@ export default {
           <ui-input layout="width:30">
             <select onchange="${html.set('tabId')}" value="${tabId}">
               <option value="">All tabs</option>
-              ${store.ready(tabs) &&
-              tabs.map(
-                (tab) => html`
-                  <option value="${tab.id}" selected=${tab.id === tabId}>
-                    ${tab.title} ${tab.hostname}
-                  </option>
-                `,
-              )}
+              ${
+                store.ready(tabs) &&
+                tabs.map(
+                  (tab) => html`
+                    <option value="${tab.id}" selected=${tab.id === tabId}>
+                      ${tab.title} ${tab.hostname}
+                    </option>
+                  `,
+                )
+              }
             </select>
           </ui-input>
           <ui-input layout="grow">
@@ -172,17 +174,19 @@ export default {
           </ui-button>
         </div>
         <ui-line></ui-line>
-        ${__CHROMIUM__ &&
-        html`
-          <div translate="no" layout="row items:center gap padding:1:2 ::background:secondary">
-            <ui-icon name="info" color="tertiary" layout="size:2"></ui-icon>
-            <ui-text type="body-s" color="tertiary">
-              In this browser, only cosmetic filters can be disabled at runtime. Network filtering
-              is handled by the browser's DNR layer.
-            </ui-text>
-          </div>
-          <ui-line></ui-line>
-        `}
+        ${
+          __CHROMIUM__ &&
+          html`
+            <div translate="no" layout="row items:center gap padding:1:2 ::background:secondary">
+              <ui-icon name="info" color="tertiary" layout="size:2"></ui-icon>
+              <ui-text type="body-s" color="tertiary">
+                In this browser, only cosmetic filters can be disabled at runtime. Network filtering
+                is handled by the browser's DNR layer.
+              </ui-text>
+            </div>
+            <ui-line></ui-line>
+          `
+        }
         <div layout="grid:80px|120px|1fr|40px|240px|140px|40px gap padding:1:2">
           <ui-text type="body-s" color="tertiary">Date</ui-text>
           <ui-text type="body-s" color="tertiary">Type</ui-text>
@@ -194,91 +198,109 @@ export default {
         </div>
         <ui-line></ui-line>
         <div layout="column overflow:scroll grow">
-          ${store.ready(logs) &&
-          logs.length === 0 &&
-          html`
-            <div
-              layout="block:center column grow center self:center gap width:::350px"
-              translate="no"
-            >
-              <img src="${refreshImage}" layout="size:221px" />
-              <ui-text type="headline-s">
-                To view the request log, press refresh on the toolbar
-              </ui-text>
-              <ui-text type="body-s" color="secondary">
-                This is an experimental feature - if you encounter any issues, please contact our
-                support team.
-              </ui-text>
-            </div>
-          `}
+          ${
+            store.ready(logs) &&
+            logs.length === 0 &&
+            html`
+              <div
+                layout="block:center column grow center self:center gap width:::350px"
+                translate="no"
+              >
+                <img src="${refreshImage}" layout="size:221px" />
+                <ui-text type="headline-s">
+                  To view the request log, press refresh on the toolbar
+                </ui-text>
+                <ui-text type="body-s" color="secondary">
+                  This is an experimental feature - if you encounter any issues, please contact our
+                  support team.
+                </ui-text>
+              </div>
+            `
+          }
           <div layout="column-reverse padding" style="word-break:break-all">
-            ${store.ready(logs) &&
-            visibleLogs.map((log) => {
-              const state = toggleState(log);
-              const isDisabled =
-                state === 'toggleable' &&
-                store.ready(disabledFilters) &&
-                !!disabledFilters.ids[log.filterId];
-              return html`
-                <div
-                  layout="grid:80px|120px|1fr|40px|240px|140px|40px gap padding:0.5:1"
-                  layout:hover="::background:secondary"
-                  onclick="${disableEllipsis}"
-                >
-                  <ui-text type="body-s" color="tertiary"> ${log.time} </ui-text>
-                  <ui-text type="body-s" color="secondary"> ${log.typeLabel} </ui-text>
-                  <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
-                    >${log.filter}</ui-text
+            ${
+              store.ready(logs) &&
+              visibleLogs.map((log) => {
+                const state = toggleState(log);
+                const isDisabled =
+                  state === 'toggleable' &&
+                  store.ready(disabledFilters) &&
+                  !!disabledFilters.ids[log.filterId];
+                return html`
+                  <div
+                    layout="grid:80px|120px|1fr|40px|240px|140px|40px gap padding:0.5:1"
+                    layout:hover="::background:secondary"
+                    onclick="${disableEllipsis}"
                   >
-                  <div layout="row gap:0.5">
-                    ${log.exception &&
-                    html`<ui-icon
-                      name="pause"
-                      color="tertiary"
-                      layout="size:2"
-                      title="Exception — filter matched but not applied"
-                    ></ui-icon>`}
-                    ${log.blocked &&
-                    html`<ui-icon name="block-s" color="danger-primary" layout="size:2"></ui-icon>`}
-                    ${log.modified &&
-                    html`<ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>`}
+                    <ui-text type="body-s" color="tertiary"> ${log.time} </ui-text>
+                    <ui-text type="body-s" color="secondary"> ${log.typeLabel} </ui-text>
+                    <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
+                      >${log.filter}</ui-text
+                    >
+                    <div layout="row gap:0.5">
+                      ${
+                        log.exception &&
+                        html`<ui-icon
+                          name="pause"
+                          color="tertiary"
+                          layout="size:2"
+                          title="Exception — filter matched but not applied"
+                        ></ui-icon>`
+                      }
+                      ${
+                        log.blocked &&
+                        html`<ui-icon
+                          name="block-s"
+                          color="danger-primary"
+                          layout="size:2"
+                        ></ui-icon>`
+                      }
+                      ${
+                        log.modified &&
+                        html`<ui-icon name="eye" color="brand-primary" layout="size:2"></ui-icon>`
+                      }
+                    </div>
+                    <ui-text type="body-s" color="tertiary" ellipsis> ${log.url} </ui-text>
+                    <ui-text type="body-s" color="tertiary" ellipsis>
+                      ${log.tracker} ${log.organization && html`(${log.organization})`}
+                    </ui-text>
+                    ${
+                      state === 'toggleable'
+                        ? html`
+                            <ui-button layout="width:4">
+                              <button
+                                title="${
+                                  isDisabled
+                                    ? 'Filter is currently disabled — click to re-enable'
+                                    : 'Disable this filter at runtime'
+                                }"
+                                onclick="${(host, event) => toggleFilter(host, event, log)}"
+                              >
+                                <ui-icon
+                                  name="${isDisabled ? 'check' : 'stop'}"
+                                  color="${isDisabled ? 'success-primary' : ''}"
+                                  layout="size:2"
+                                ></ui-icon>
+                              </button>
+                            </ui-button>
+                          `
+                        : state === 'unsupported'
+                          ? html`
+                              <ui-button layout="width:4" disabled>
+                                <button
+                                  disabled
+                                  title="Network filters cannot be disabled at runtime in this browser (handled by the browser's DNR layer)"
+                                >
+                                  <ui-icon name="stop" color="tertiary" layout="size:2"></ui-icon>
+                                </button>
+                              </ui-button>
+                            `
+                          : ''
+                    }
                   </div>
-                  <ui-text type="body-s" color="tertiary" ellipsis> ${log.url} </ui-text>
-                  <ui-text type="body-s" color="tertiary" ellipsis>
-                    ${log.tracker} ${log.organization && html`(${log.organization})`}
-                  </ui-text>
-                  ${state === 'toggleable'
-                    ? html`
-                        <ui-button layout="width:4">
-                          <button
-                            title="${isDisabled
-                              ? 'Filter is currently disabled — click to re-enable'
-                              : 'Disable this filter at runtime'}"
-                            onclick="${(host, event) => toggleFilter(host, event, log)}"
-                          >
-                            <ui-icon
-                              name="${isDisabled ? 'check' : 'stop'}"
-                              color="${isDisabled ? 'success-primary' : ''}"
-                              layout="size:2"
-                            ></ui-icon>
-                          </button>
-                        </ui-button>
-                      `
-                    : state === 'unsupported'
-                      ? html`
-                          <ui-button layout="width:4" disabled>
-                            <button
-                              disabled
-                              title="Network filters cannot be disabled at runtime in this browser (handled by the browser's DNR layer)"
-                            >
-                              <ui-icon name="stop" color="tertiary" layout="size:2"></ui-icon>
-                            </button>
-                          </ui-button>
-                        `
-                      : ''}
-                </div>
-              `.key(log.id);
-            })}
+                `.key(log.id);
+              })
+            }
           </div>
         </div>
       </main>

@@ -44,29 +44,31 @@ export default {
           Blocks additional ads, trackers, and pop-ups specific to the language of websites you
           visit. Enable only the languages you need to avoid slowing down your browser.
         </span>
-        ${options.regionalFilters.enabled &&
-        html`
-          <div slot="card-footer" layout="grid:repeat(auto-fill,minmax(140px,1fr)) gap:1:0.5">
-            ${REGIONS.map(
-              (id) => html`
-                <label layout="row gap items:center ::user-select:none padding:0.5">
-                  <ui-input>
-                    <input
-                      type="checkbox"
-                      disabled="${!options.regionalFilters.enabled}"
-                      checked="${options.regionalFilters.regions.includes(id)}"
-                      onchange="${setRegion(id)}"
-                      data-qa="checkbox:regional-filters:${id}"
-                    />
-                  </ui-input>
-                  <ui-text type="body-s" color="secondary">
-                    ${labels.languages.of(id.toUpperCase())} (${id})
-                  </ui-text>
-                </label>
-              `,
-            )}
-          </div>
-        `}
+        ${
+          options.regionalFilters.enabled &&
+          html`
+            <div slot="card-footer" layout="grid:repeat(auto-fill,minmax(140px,1fr)) gap:1:0.5">
+              ${REGIONS.map(
+                (id) => html`
+                  <label layout="row gap items:center ::user-select:none padding:0.5">
+                    <ui-input>
+                      <input
+                        type="checkbox"
+                        disabled="${!options.regionalFilters.enabled}"
+                        checked="${options.regionalFilters.regions.includes(id)}"
+                        onchange="${setRegion(id)}"
+                        data-qa="checkbox:regional-filters:${id}"
+                      />
+                    </ui-input>
+                    <ui-text type="body-s" color="secondary">
+                      ${labels.languages.of(id.toUpperCase())} (${id})
+                    </ui-text>
+                  </label>
+                `,
+              )}
+            </div>
+          `
+        }
       </settings-toggle>
     </template>
   `,

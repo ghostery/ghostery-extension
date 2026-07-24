@@ -10,6 +10,7 @@
  */
 
 import * as notifications from '/utils/notifications.js';
+import { isFromExtensionFrame } from '/utils/messaging.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
 
@@ -110,6 +111,8 @@ function mount(url, position = 'right', debug = false) {
   const iframe = shadowRoot.querySelector('iframe');
 
   window.addEventListener('message', (e) => {
+    if (!isFromExtensionFrame(e)) return;
+
     const type = e.data?.type;
 
     if (type === notifications.RESIZE_WINDOW_EVENT) {

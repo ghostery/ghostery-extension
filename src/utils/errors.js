@@ -23,6 +23,12 @@ const TAG_CRITICAL = 'critical'; // Tag to identify critical errors that should 
 const { version } = chrome.runtime.getManifest();
 const hostRegexp = new RegExp(new URL(chrome.runtime.getURL('/')).host, 'g');
 
+// Detects whether a stack string contains actual call frames.
+// V8 uses "\n    at ...", Firefox/Safari use "fn@url" / "@url".
+function hasStackFrames(stack) {
+  return typeof stack === 'string' && /(\n\s*at\s|@)/.test(stack);
+}
+
 const config = {
   tunnel: 'https://crashreporting.ghostery.net/',
   dsn: 'https://05c74f55666649f0b6d671b9c37f6da1@o475874.ingest.sentry.io/6447378',
@@ -66,6 +72,11 @@ getBrowserInfo().then(
 );
 
 export async function captureException(error, { critical = false, once = false } = {}) {
+  // Capture a fallback stack synchronously, before the first `await`,
+  // so it still includes the caller frame when `error.stack` has no frames
+  // (e.g. errors from chrome.* API rejections or serialized across contexts).
+  const fallbackStack = new Error().stack;
+
   const { terms, feedback } = await store.resolve(Options);
 
   if (!terms || !feedback || !(error instanceof Error)) {
@@ -95,7 +106,9 @@ export async function captureException(error, { critical = false, once = false }
 
   newError.name = error.name;
   newError.cause = error.cause;
-  newError.stack = error.stack.replace(hostRegexp, 'filtered');
+
+  const stack = hasStackFrames(error.stack) ? error.stack : (fallbackStack ?? '');
+  newError.stack = stack.replace(hostRegexp, 'filtered');
 
   Sentry.withScope((scope) => {
     if (critical) scope.setTag(TAG_CRITICAL, true);

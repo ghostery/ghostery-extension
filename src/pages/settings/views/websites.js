@@ -158,40 +158,109 @@ export default {
             </ui-button>
           </div>
           <div layout="column gap">
-            ${!websites.length &&
-            !query &&
-            html`
-              <div layout="block:center width:::400px margin:2:auto" layout@768px="margin:top:4">
-                <img src="${NoWebsitesSVG}" layout="size:96px" layout@768px="size:128px" />
-              </div>
-            `}
-            ${userWebsites.length > 0 &&
-            html`
-              <settings-option>
-                Manually Adjusted
-                <settings-table responsive slot="card-footer">
-                  <div slot="header" layout="column" layout@768px="grid:3fr|4fr|1fr|50px gap:2">
-                    <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
-                    <ui-text type="label-m" layout="hidden" layout@768px="block">
-                      Protection status
-                    </ui-text>
-                    <ui-text type="label-m" layout="hidden" layout@768px="block"
-                      >Exceptions</ui-text
-                    >
-                  </div>
-                  ${userWebsites.map(
-                    (item) => html`
-                      <ui-action layout="block" data-qa="component:website:${item.id}">
-                        <a
-                          href="${router.url(WebsiteDetails, {
-                            domain: item.id,
-                          })}"
-                          layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
-                          layout@768px="grid:3fr|4fr|1fr|50px gap:2"
-                        >
-                          <ui-text type="label-l" ellipsis> ${item.id} </ui-text>
-                          ${!item.managed &&
-                          html`
+            ${
+              !websites.length &&
+              !query &&
+              html`
+                <div layout="block:center width:::400px margin:2:auto" layout@768px="margin:top:4">
+                  <img src="${NoWebsitesSVG}" layout="size:96px" layout@768px="size:128px" />
+                </div>
+              `
+            }
+            ${
+              userWebsites.length > 0 &&
+              html`
+                <settings-option>
+                  Manually Adjusted
+                  <settings-table responsive slot="card-footer">
+                    <div slot="header" layout="column" layout@768px="grid:3fr|4fr|1fr|50px gap:2">
+                      <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
+                      <ui-text type="label-m" layout="hidden" layout@768px="block">
+                        Protection status
+                      </ui-text>
+                      <ui-text type="label-m" layout="hidden" layout@768px="block"
+                        >Exceptions</ui-text
+                      >
+                    </div>
+                    ${userWebsites.map(
+                      (item) => html`
+                        <ui-action layout="block" data-qa="component:website:${item.id}">
+                          <a
+                            href="${router.url(WebsiteDetails, {
+                              domain: item.id,
+                            })}"
+                            layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
+                            layout@768px="grid:3fr|4fr|1fr|50px gap:2"
+                          >
+                            <ui-text type="label-l" ellipsis> ${item.id} </ui-text>
+                            ${
+                              !item.managed &&
+                              html`
+                                <ui-action>
+                                  <button
+                                    layout@768px="order:1 row center"
+                                    onclick="${revokeCallback(item)}"
+                                    data-qa="button:website:trash:${item.id}"
+                                  >
+                                    <ui-icon
+                                      name="trash"
+                                      layout="size:3"
+                                      color="tertiary"
+                                    ></ui-icon>
+                                  </button>
+                                </ui-action>
+                              `
+                            }
+                            <ui-line layout="area:2" layout@768px="hidden"></ui-line>
+                            <settings-protection-status
+                              layout@768px="grow"
+                              revokeAt="${item.revokeAt}"
+                              assist="${item.assist}"
+                            ></settings-protection-status>
+                            <div
+                              layout="row items:center gap self:center"
+                              layout@768px="grow self:auto"
+                            >
+                              <ui-text type="label-m">
+                                ${item.counter ? numberFormatter.format(item.counter) : ''}
+                              </ui-text>
+                            </div>
+                          </a>
+                        </ui-action>
+                      `,
+                    )}
+                  </settings-table>
+                </settings-option>
+              `
+            }
+            ${
+              assistWebsites.length > 0 &&
+              html`
+                <settings-option>
+                  Automatically Adjusted
+                  <span slot="description">
+                    Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker
+                    breakage.
+                  </span>
+                  <ui-text slot="footer" color="tertiary" underline>
+                    ${msg.html`You can disable it in <a href="${router.url(Whotracksme)}">WhoTracks.Me settings</a>.`}
+                  </ui-text>
+
+                  <settings-table responsive slot="card-footer">
+                    <div slot="header" layout="column" layout@768px="grid:3fr|60px gap:4">
+                      <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
+                    </div>
+                    ${assistWebsites.map(
+                      (item) => html`
+                        <ui-action layout="block" data-qa="component:website:${item.id}">
+                          <a
+                            href="${router.url(WebsiteDetails, {
+                              domain: item.id,
+                            })}"
+                            layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
+                            layout@768px="grid:3fr|60px gap:4"
+                          >
+                            <ui-text type="label-l" ellipsis>${item.id}</ui-text>
                             <ui-action>
                               <button
                                 layout@768px="order:1 row center"
@@ -201,71 +270,14 @@ export default {
                                 <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
                               </button>
                             </ui-action>
-                          `}
-                          <ui-line layout="area:2" layout@768px="hidden"></ui-line>
-                          <settings-protection-status
-                            layout@768px="grow"
-                            revokeAt="${item.revokeAt}"
-                            assist="${item.assist}"
-                          ></settings-protection-status>
-                          <div
-                            layout="row items:center gap self:center"
-                            layout@768px="grow self:auto"
-                          >
-                            <ui-text type="label-m">
-                              ${item.counter ? numberFormatter.format(item.counter) : ''}
-                            </ui-text>
-                          </div>
-                        </a>
-                      </ui-action>
-                    `,
-                  )}
-                </settings-table>
-              </settings-option>
-            `}
-            ${assistWebsites.length > 0 &&
-            html`
-              <settings-option>
-                Automatically Adjusted
-                <span slot="description">
-                  Paused automatically by Ghostery’s Browsing Assistant to prevent ad blocker
-                  breakage.
-                </span>
-                <ui-text slot="footer" color="tertiary" underline>
-                  ${msg.html`You can disable it in <a href="${router.url(Whotracksme)}">WhoTracks.Me settings</a>.`}
-                </ui-text>
-
-                <settings-table responsive slot="card-footer">
-                  <div slot="header" layout="column" layout@768px="grid:3fr|60px gap:4">
-                    <ui-text type="label-m">Website <span>(${websites.length})</span></ui-text>
-                  </div>
-                  ${assistWebsites.map(
-                    (item) => html`
-                      <ui-action layout="block" data-qa="component:website:${item.id}">
-                        <a
-                          href="${router.url(WebsiteDetails, {
-                            domain: item.id,
-                          })}"
-                          layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
-                          layout@768px="grid:3fr|60px gap:4"
-                        >
-                          <ui-text type="label-l" ellipsis>${item.id}</ui-text>
-                          <ui-action>
-                            <button
-                              layout@768px="order:1 row center"
-                              onclick="${revokeCallback(item)}"
-                              data-qa="button:website:trash:${item.id}"
-                            >
-                              <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>
-                            </button>
-                          </ui-action>
-                        </a>
-                      </ui-action>
-                    `,
-                  )}
-                </settings-table>
-              </settings-option>
-            `}
+                          </a>
+                        </ui-action>
+                      `,
+                    )}
+                  </settings-table>
+                </settings-option>
+              `
+            }
           </div>
         </section>
       </settings-page-layout>

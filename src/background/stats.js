@@ -343,31 +343,6 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   }
 });
 
-if (__CHROMIUM__) {
-  // On Safari we have content script to sends back the list of urls
-  chrome.runtime.onMessage.addListener((msg, sender) => {
-    if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
-      switch (msg.action) {
-        case 'stats:update':
-          updateTabStats(
-            sender.tab.id,
-            msg.urls.map((url) =>
-              Request.fromRequestDetails({
-                url,
-                originUrl: sender.url,
-                tabId: sender.tab.id,
-                requestId: Math.random().toString(36).substring(2, 20),
-              }),
-            ),
-          );
-          break;
-      }
-    }
-
-    return false;
-  });
-}
-
 if (__CHROMIUM__ && chrome.webRequest) {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(

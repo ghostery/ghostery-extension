@@ -76,10 +76,12 @@ export default {
       <ui-text type="label-s" underline layout="block:center" color="inherit">
         <slot></slot>
       </ui-text>
-      ${!!autoclose &&
-      html`<button onclick="${close}">
-        <ui-icon name="close"></ui-icon>
-      </button>`}
+      ${
+        !!autoclose &&
+        html`<button onclick="${close}">
+          <ui-icon name="close"></ui-icon>
+        </button>`
+      }
     </template>
   `.css`
     :host {

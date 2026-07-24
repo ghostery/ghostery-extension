@@ -24,12 +24,14 @@ export default {
   render: ({ icon, error }) =>
     html`
       <template layout="column gap:0.5 relative">
-        ${icon &&
-        html`
-          <div layout="row center absolute inset left:12px right:auto">
-            <ui-icon name="${icon}" color="tertiary" layout="size:3"></ui-icon>
-          </div>
-        `}
+        ${
+          icon &&
+          html`
+            <div layout="row center absolute inset left:12px right:auto">
+              <ui-icon name="${icon}" color="tertiary" layout="size:3"></ui-icon>
+            </div>
+          `
+        }
         <div layout="contents" onchange="${stopPropagation}" oninput="${stopPropagation}">
           <slot></slot>
         </div>

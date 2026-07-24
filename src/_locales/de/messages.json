@@ -36,8 +36,14 @@
     "message": "$${0} als Ausnahme hinzufügen",
     "description": "Add domain as an exception"
   },
+  "add_a_filter_list_url": {
+    "message": "Filterlisten-URL hinzufügen"
+  },
   "add_exception": {
     "message": "Ausnahme hinzufügen"
+  },
+  "add_filter_list_urls_to_have_them_automatically_updated_and_applied_": {
+    "message": "Füge Filterlisten-URLs hinzu, damit diese automatisch aktualisiert und angewendet werden."
   },
   "add_on_s_health": {
     "message": "Zustand des Add-ons"
@@ -267,14 +273,14 @@
   "country": {
     "message": "Land"
   },
+  "create_custom_filter_rules_to_block_specific_content_or_bypass_blocking_on_certain_sites__the_syntax_is_the_same_as_for_standard_filter_lists__but_only_a_subset_of_rules_is_supported_": {
+    "message": "Erstelle eigene Filterregeln, um bestimmte Inhalte zu blockieren oder die Blockierung auf bestimmten Websites zu umgehen. Die Syntax entspricht der von Standard-Filterlisten, allerdings wird nur ein Teil der Regeln unterstützt."
+  },
   "custom": {
     "message": "Benutzerdefiniert"
   },
   "custom_filters": {
     "message": "Benutzerdefinierte Filter"
-  },
-  "custom_filters_have_been_updated": {
-    "message": "Benutzerdefinierte Filter wurden aktualisiert"
   },
   "customer_interaction": {
     "message": "Kundeninteraktion",
@@ -334,8 +340,8 @@
   "distractions": {
     "message": "Ablenkungen"
   },
-  "dnr_rules__@_0_": {
-    "message": "Regeln des DNR: $${0}"
+  "dnr_rules__@_0______1_": {
+    "message": "DNR-Regeln: $${0} / $${1}"
   },
   "don_t_ask_again": {
     "message": "Frag nicht noch einmal"
@@ -448,8 +454,17 @@
   "failed_to_clear_cookies__@_0_": {
     "message": "Beim Löschen der Cookies ist ein Fehler aufgetreten: $${0}"
   },
+  "failed_to_update_filter_rules": {
+    "message": "Filterregeln konnten nicht aktualisiert werden"
+  },
+  "failed_update__@_0_": {
+    "message": "Aktualisierung fehlgeschlagen: $${0}"
+  },
   "feedback_sharing": {
     "message": "Feedback Teilen"
+  },
+  "filter_rules_have_been_updated": {
+    "message": "Filterregeln wurden aktualisiert"
   },
   "filtering_mode": {
     "message": "Filtermodus"
@@ -632,6 +647,9 @@
   "load_more": {
     "message": "Mehr laden"
   },
+  "love_your_calm__ad_free_web__help_friends___family_enjoy_it_too_": {
+    "message": "Genießt du dein ruhiges, werbefreies Web? Installiere Ghostery Zap für Freunde & Familie."
+  },
   "manage_the_list_of_trackers_that_are_allowed_to_load_on_this_site_": {
     "message": "Verwalte die Liste der Tracker, die auf dieser Webseite geladen werden dürfen."
   },
@@ -773,11 +791,11 @@
   "paused_by_browsing_assistant": {
     "message": "Vom Browsing-Assistenten angehalten"
   },
+  "pending_update___": {
+    "message": "Aktualisierung ausstehend ..."
+  },
   "performance_telemetry": {
     "message": "Leistungstelemetrie"
-  },
-  "permission_required": {
-    "message": "Berechtigung erforderlich"
   },
   "pin_extension_for_easy_access": {
     "message": "Erweiterung für leichteren Zugriff anheften"
@@ -841,6 +859,9 @@
   },
   "reload_to_see_changes": {
     "message": "Neu laden, um Änderungen zu sehen"
+  },
+  "remove": {
+    "message": "Entfernen"
   },
   "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
     "message": "Lösche alle von dieser Webseite gespeicherten Cookies, um deine Privatsphäre zu schützen und deine Browserdaten zurückzusetzen."
@@ -926,6 +947,9 @@
   "share_a_review": {
     "message": "Teile deine Bewertung"
   },
+  "share_ghostery_zap": {
+    "message": "Ghostery Zap installieren"
+  },
   "short_video_feeds": {
     "message": "Kurze Video-Feeds"
   },
@@ -1001,6 +1025,15 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "Die Funktion wird von Ihrer Organisation verwaltet"
   },
+  "the_url_is_already_added": {
+    "message": "Die URL wurde bereits hinzugefügt"
+  },
+  "the_url_is_invalid": {
+    "message": "Die URL ist ungültig"
+  },
+  "the_value_must_be_a_valid_hostname_or_ip_address_": {
+    "message": "Gib einen gültigen Hostnamen oder eine gültige IP-Adresse ein."
+  },
   "theme": {
     "message": "Thema"
   },
@@ -1039,6 +1072,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Um Datenschutzfunktionen bereitzustellen, werden folgende Informationen über Web-Tracker gesammelt:"
+  },
+  "to_use_filter_lists__enable__allow_user_scripts__in_your_browser_s__a_href_____onclick__@_0___extension_settings__a__": {
+    "message": "Um Filterlisten zu verwenden, aktiviere in den <a href=\"#\" onclick=\"$${0}\">Erweiterungseinstellungen</a> deines Browsers die Option „Benutzerskripte zulassen“."
   },
   "to_visit_the_intended_page__you_need_to_allow_this_redirect_": {
     "message": "Um die gewünschte Seite zu besuchen, muss die Weiterleitung zugelassen werden."
@@ -1094,6 +1130,9 @@
   },
   "trusted_on_this_website": {
     "message": "Auf dieser Website vertraut"
+  },
+  "trusted_scriptlets_can_use_powerful_rule_modifiers__only_use_filter_lists_from_authors_you_trust_": {
+    "message": "Vertrauenswürdige Scriptlets können leistungsstarke Regelmodifikatoren verwenden. Nutze daher nur Filterlisten von Autoren, denen du vertraust."
   },
   "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
     "message": "Schaltet Ghostery-Benachrichtigungen im Panel ein oder aus."
@@ -1155,7 +1194,7 @@
     "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
   },
   "we_re_considering_a_new_way_to_support_youtube_creators_while_keeping_your_web_ad_free__should_we_build_it_": {
-    "message": "YouTube Creator unterstützen und trotzdem werbefrei surfen? Sollen wir das möglich machen?"
+    "message": "YouTube Creator unterstützen und gleichzeitig werbefrei surfen? Sollen wir das umsetzen?"
   },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Wir freuen uns so sehr, dass Ghostery dein Herz erobert hat! Hilf anderen, uns auch zu finden – es dauert nur einen Moment."

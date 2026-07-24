@@ -65,16 +65,20 @@ export default {
       <panel-dialog header>
         <div slot="header" layout="block:center column center">
           <div layout="row items:center gap:0.5">
-            ${type === 'blocked' &&
-            html`
-              <panel-badge type="danger">${trackers.length}</panel-badge>
-              <ui-text type="label-m">Trackers blocked</ui-text>
-            `}
-            ${type === 'modified' &&
-            html`
-              <panel-badge type="brand">${trackers.length}</panel-badge>
-              <ui-text type="label-m">Trackers modified</ui-text>
-            `}
+            ${
+              type === 'blocked' &&
+              html`
+                <panel-badge type="danger">${trackers.length}</panel-badge>
+                <ui-text type="label-m">Trackers blocked</ui-text>
+              `
+            }
+            ${
+              type === 'modified' &&
+              html`
+                <panel-badge type="brand">${trackers.length}</panel-badge>
+                <ui-text type="label-m">Trackers modified</ui-text>
+              `
+            }
           </div>
           <ui-text type="body-s" color="secondary">${stats.hostname}</ui-text>
         </div>
@@ -87,22 +91,27 @@ export default {
                   <ui-category-icon name="${tracker.category}" size="small"></ui-category-icon>
                   <ui-stats-badge layout="height:full">
                     ${type === 'blocked' && numberFormatter.format(tracker.requestsBlocked.length)}
-                    ${type === 'modified' &&
-                    numberFormatter.format(tracker.requestsModified.length)}
+                    ${
+                      type === 'modified' && numberFormatter.format(tracker.requestsModified.length)
+                    }
                   </ui-stats-badge>
                 </div>
-                ${type === 'blocked' &&
-                tracker.requestsBlocked.map(
-                  ({ url }) => html`
-                    <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
-                  `,
-                )}
-                ${type === 'modified' &&
-                tracker.requestsModified.map(
-                  ({ url }) => html`
-                    <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
-                  `,
-                )}
+                ${
+                  type === 'blocked' &&
+                  tracker.requestsBlocked.map(
+                    ({ url }) => html`
+                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
+                    `,
+                  )
+                }
+                ${
+                  type === 'modified' &&
+                  tracker.requestsModified.map(
+                    ({ url }) => html`
+                      <panel-copy oncopy="${showCopyNotification}"> ${url} </panel-copy>
+                    `,
+                  )
+                }
               </div>
             `,
           )}

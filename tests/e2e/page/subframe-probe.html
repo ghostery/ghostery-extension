@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Subframe Scriptlet Probe</title>
+  </head>
+  <body>
+    <script>
+      // Report state to the parent repeatedly, since a scriptlet can land after parse. Each
+      // JSON.stringify wrap appends "+", so a double injection shows "aaa++".
+      setInterval(function () {
+        parent.postMessage(
+          {
+            __subframeProbe: true,
+            subframeScriptlet: window.__ghostery_subframe__ === true,
+            marker: JSON.parse(JSON.stringify({ marker: 'aaa' })).marker,
+          },
+          '*',
+        );
+      }, 200);
+    </script>
+  </body>
+</html>

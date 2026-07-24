@@ -10,6 +10,7 @@
  */
 
 import { drawWheel } from '/ui/wheel.js';
+import { isFromExtensionFrame } from '/utils/messaging.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 
@@ -184,10 +185,7 @@ function setupTrackersPreview(popupUrl) {
 }
 
 window.addEventListener('message', (message) => {
-  if (
-    message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase() ||
-    typeof message.data !== 'string'
-  ) {
+  if (!isFromExtensionFrame(message) || typeof message.data !== 'string') {
     return;
   }
 

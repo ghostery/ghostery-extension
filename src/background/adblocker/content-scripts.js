@@ -15,7 +15,11 @@ const firefoxRegistry = (() => {
     async register(hostname, scriptletsByWorld) {
       this.unregister(hostname);
 
+      // Reserve synchronously so a concurrent onCommitted register() short-circuits on
+      // isRegistered() instead of registering the hostname again and injecting twice.
       const registered = [];
+      map.set(hostname, registered);
+
       try {
         for (const [world, code] of Object.entries(scriptletsByWorld)) {
           if (!code) continue;
@@ -24,7 +28,8 @@ const firefoxRegistry = (() => {
             await browser.contentScripts.register({
               js: [{ code }],
               allFrames: true,
-              matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+              // Subdomain frames register their own scriptlets, so match only this exact hostname.
+              matches: [`https://${hostname}/*`, `http://${hostname}/*`],
               matchAboutBlank: true,
               matchOriginAsFallback: true,
               runAt: 'document_start',
@@ -34,14 +39,8 @@ const firefoxRegistry = (() => {
         }
       } catch (e) {
         console.warn(e);
-        for (const contentScript of registered) {
-          contentScript.unregister();
-        }
-        return;
+        this.unregister(hostname);
       }
-
-      // Cache the entry (even when empty) so isRegistered() short-circuits later navigations.
-      map.set(hostname, registered);
     },
     isRegistered(hostname) {
       return map.has(hostname);

@@ -29,13 +29,15 @@ export default {
             color="${exceptionStatus.trusted ? 'secondary' : 'quaternary'}"
           ></ui-icon>
 
-          ${exceptionStatus.trusted &&
-          !exceptionStatus.global &&
-          html`
-            <div id="pin-icon" layout="row center absolute right:-1 bottom:-1">
-              <ui-icon name="pin-filled"></ui-icon>
-            </div>
-          `}
+          ${
+            exceptionStatus.trusted &&
+            !exceptionStatus.global &&
+            html`
+              <div id="pin-icon" layout="row center absolute right:-1 bottom:-1">
+                <ui-icon name="pin-filled"></ui-icon>
+              </div>
+            `
+          }
         </div>
       </ui-tooltip>
     </template>
