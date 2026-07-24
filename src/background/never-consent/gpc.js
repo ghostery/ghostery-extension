@@ -24,6 +24,58 @@ import {
 } from '/utils/dnr.js';
 import Request from '/utils/request.js';
 
+const GPC_CONTENT_SCRIPT_ID = 'gpc';
+
+// In addition to the Sec-GPC header, the GPC spec requires exposing
+// `navigator.globalPrivacyControl` before the page's scripts run:
+// https://w3c.github.io/gpc/#javascript-property-to-detect-preference
+//
+// The content script patches the DOM API in the MAIN world at document_start.
+// At that point, it is too late to read the settings; thus, the script is
+// registered (with persistAcrossSessions) while GPC is enabled and
+// unregistered while it is disabled.
+async function updateGPCContentScript(options) {
+  const enabled =
+    options.terms &&
+    options.blockAnnoyances &&
+    options.autoconsent.gpc &&
+    !isGloballyPaused(options);
+
+  const registered =
+    (
+      await chrome.scripting.getRegisteredContentScripts({
+        ids: [GPC_CONTENT_SCRIPT_ID],
+      })
+    ).length > 0;
+
+  if (enabled === registered) return;
+
+  if (enabled) {
+    await chrome.scripting.registerContentScripts([
+      {
+        id: GPC_CONTENT_SCRIPT_ID,
+        js: ['/content_scripts/gpc.js'],
+        matches: ['http://*/*', 'https://*/*'],
+        runAt: 'document_start',
+        matchOriginAsFallback: true,
+        allFrames: true,
+        world: 'MAIN',
+        persistAcrossSessions: true,
+      },
+    ]);
+
+    console.log('[autoconsent] GPC content script has been registered');
+  } else {
+    await chrome.scripting.unregisterContentScripts({
+      ids: [GPC_CONTENT_SCRIPT_ID],
+    });
+
+    console.log('[autoconsent] GPC content script has been unregistered');
+  }
+}
+
+OptionsObserver.addListener(updateGPCContentScript);
+
 if (__CHROMIUM__) {
   async function updateGPCRule(options) {
     // Disabled GPC
