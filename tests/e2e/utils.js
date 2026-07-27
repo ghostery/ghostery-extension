@@ -212,8 +212,16 @@ export async function setCustomFilters(filters) {
     await expect(checkbox).toHaveElementProperty('checked', true);
   }
 
+  // Clearing via setValue('') emits no input event, so an empty save would re-save the old filters.
   const input = await getExtensionElement('input:custom-filters');
-  await input.setValue(filters.join('\n'));
+  await browser.execute(
+    (el, value) => {
+      el.value = value;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    },
+    input,
+    filters.join('\n'),
+  );
 
   const saveButton = await getExtensionElement('button:custom-filters:save');
   await saveButton.click();
