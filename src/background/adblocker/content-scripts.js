@@ -134,7 +134,10 @@ const chromiumRegistry =
           const ids = scripts
             .filter((s) => s.id.startsWith(USER_SCRIPTS_NAMESPACE) && !keep.has(s.id))
             .map((s) => s.id);
-          if (ids.length) chrome.userScripts.unregister({ ids }).catch(() => {});
+          // An id removed since the snapshot would reject a batch call and keep the rest alive.
+          for (const id of ids) {
+            chrome.userScripts.unregister({ ids: [id] }).catch(() => {});
+          }
         }, console.warn);
       },
     };
