@@ -77,38 +77,48 @@ const chromiumRegistry =
         // Reserve synchronously so a concurrent register() short-circuits on isRegistered().
         registered.add(hostname);
 
-        const scripts = [];
+        const jobs = [];
         for (const [world, code] of Object.entries(scriptletsByWorld)) {
-          if (!code) continue;
+          const id = userScriptId(hostname, world);
 
-          scripts.push({
-            id: userScriptId(hostname, world),
+          // A world with no code may still hold a registration from the previous engine.
+          if (!code) {
+            jobs.push(chrome.userScripts.unregister({ ids: [id] }).catch(() => {}));
+            continue;
+          }
+
+          const script = {
+            id,
             js: [{ code }],
             allFrames: true,
             matches: [`https://${hostname}/*`, `http://${hostname}/*`],
             runAt: 'document_start',
             world: world === 'ISOLATED' ? 'USER_SCRIPT' : world,
-          });
+          };
+
+          jobs.push(
+            chrome.userScripts
+              .register([script])
+              .catch(() => chrome.userScripts.update([script]))
+              // On failure, release the reservation so the next navigation retries.
+              .catch((e) => {
+                console.warn(e);
+                this.unregister(hostname);
+              }),
+          );
         }
 
-        if (scripts.length) {
-          await chrome.userScripts
-            .register(scripts)
-            .catch(() => chrome.userScripts.update(scripts))
-            // On failure, release the reservation so the next navigation retries.
-            .catch((e) => {
-              console.warn(e);
-              this.unregister(hostname);
-            });
-        }
+        await Promise.all(jobs);
       },
       isRegistered(hostname) {
         return registered.has(hostname);
       },
       unregister(hostname) {
         registered.delete(hostname);
-        const ids = ['MAIN', 'ISOLATED'].map((world) => userScriptId(hostname, world));
-        chrome.userScripts.unregister({ ids }).catch(() => {});
+        // Batch unregister rejects unless every id exists, so each world gets its own call.
+        for (const world of ['MAIN', 'ISOLATED']) {
+          chrome.userScripts.unregister({ ids: [userScriptId(hostname, world)] }).catch(() => {});
+        }
       },
       unregisterAll() {
         registered.clear();

@@ -11,6 +11,8 @@
 import { browser, expect } from '@wdio/globals';
 import {
   enableExtension,
+  getExtensionElement,
+  waitForIdleBackgroundTasks,
   setCustomFilters,
   disableCustomFilters,
   setUserScriptsAllowed,
@@ -82,6 +84,27 @@ describe('Scriptlet registration refresh', function () {
       'the replacement scriptlet never became active',
     );
     await expect(await readMarker('rpnt-a')).toBe('aaa');
+  });
+
+  it('stops injecting scriptlets on the first load after the site is paused', async function () {
+    await browser.url(PAGE_URL);
+    await browser.url('ghostery:panel');
+    await getExtensionElement('button:pause').click();
+    await waitForIdleBackgroundTasks();
+    await waitForRegistrationDrop();
+
+    await browser.url(PAGE_URL);
+    await browser.pause(500);
+    await expect(await readMarker('rpnt-b')).toBe('bbb');
+
+    await browser.url('ghostery:panel');
+    await getExtensionElement('button:resume').click();
+    await waitForIdleBackgroundTasks();
+
+    await reloadUntilActive(
+      async () => (await readMarker('rpnt-b')) === 'bbb+',
+      'the scriptlet did not resume after unpausing',
+    );
   });
 
   it('stops injecting scriptlets on the first load after their filters are removed', async function () {
