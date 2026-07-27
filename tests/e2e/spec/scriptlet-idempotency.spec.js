@@ -13,6 +13,8 @@ import {
   enableExtension,
   setCustomFilters,
   disableCustomFilters,
+  setUserScriptsAllowed,
+  isUserScriptsPathActive,
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -73,19 +75,7 @@ async function ensureScriptletActive() {
 
 // A duplicate run compounds into a visible "++": `rpnt` (ISOLATED) rewrites DOM text, and
 // `trusted-replace-outbound-text` (MAIN) rewrites the page's own `JSON.stringify` output.
-describe('Scriptlet injection idempotency', function () {
-  before(enableExtension);
-  before(async () => {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
-      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
-    ]);
-    await ensureScriptletActive();
-  });
-
-  after(disableCustomFilters);
-
+function idempotencyChecks() {
   it('injects each scriptlet and argument set exactly once per document, including after reload', async function () {
     await browser.url(PAGE_URL);
     await expectRanExactlyOnce('rpnt-a', 'aaa+');
@@ -122,5 +112,70 @@ describe('Scriptlet injection idempotency', function () {
     await expectMainWorldRanExactlyOnce();
 
     await browser.switchFrame(null);
+  });
+
+  it('injects a MAIN-world scriptlet exactly once into local frames (about:blank, srcdoc)', async function () {
+    await browser.url(PAGE_URL);
+    await expectMainWorldRanExactlyOnce();
+
+    await browser.execute(() => {
+      const blank = document.createElement('iframe');
+      blank.id = 'iframe-blank';
+      document.body.appendChild(blank);
+
+      const srcdoc = document.createElement('iframe');
+      srcdoc.id = 'iframe-srcdoc';
+      srcdoc.srcdoc = '<p>local</p>';
+      document.body.appendChild(srcdoc);
+    });
+
+    for (const id of ['iframe-blank', 'iframe-srcdoc']) {
+      await switchFrame($(`#${id}`));
+      await expectMainWorldRanExactlyOnce();
+    }
+
+    await browser.switchFrame(null);
+  });
+}
+
+describe('Scriptlet injection idempotency', function () {
+  before(enableExtension);
+  before(async () => {
+    await setCustomFilters([
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
+      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
+      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
+    ]);
+    await ensureScriptletActive();
+  });
+
+  after(disableCustomFilters);
+
+  describe('via the legacy injection path', function () {
+    before(async function () {
+      if (browser.isChromium) {
+        await setUserScriptsAllowed(false);
+        await ensureScriptletActive();
+        await expect(await isUserScriptsPathActive()).toBe(false);
+      }
+    });
+
+    idempotencyChecks();
+  });
+
+  describe('via chrome.userScripts', function () {
+    before(async function () {
+      if (!browser.isChromium) this.skip();
+
+      await setUserScriptsAllowed(true);
+      await ensureScriptletActive();
+      await expect(await isUserScriptsPathActive()).toBe(true);
+    });
+
+    after(async function () {
+      if (browser.isChromium) await setUserScriptsAllowed(false);
+    });
+
+    idempotencyChecks();
   });
 });

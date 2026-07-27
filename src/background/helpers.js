@@ -15,6 +15,7 @@ import Config from '/store/config.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
+import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
 import { updateEngines } from './adblocker/engines.js';
 import { openElementPicker } from './element-picker.js';
 
@@ -98,6 +99,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         console.debug('[helpers] "managedConfig" finished');
       }, sendResponse);
       return true;
+
+    case 'e2e:userScriptsActive':
+      sendResponse(__CHROMIUM__ && isUserScriptsRegisterSupported());
+      break;
+
+    case 'e2e:userScriptsRegistrations':
+      if (__CHROMIUM__ && isUserScriptsRegisterSupported()) {
+        chrome.userScripts.getScripts().then((scripts) => {
+          sendResponse(scripts.map((script) => script.id));
+        }, sendResponse);
+        return true;
+      }
+
+      sendResponse([]);
+      break;
   }
 
   return false;
