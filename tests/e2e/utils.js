@@ -128,6 +128,10 @@ export async function isUserScriptsPathActive() {
   return sendRawMessage({ action: 'e2e:userScriptsActive' });
 }
 
+export async function getUserScriptsRegistrations() {
+  return sendRawMessage({ action: 'e2e:userScriptsRegistrations' });
+}
+
 // Chrome gates chrome.userScripts behind the per-extension "Allow user scripts" toggle.
 export async function setUserScriptsAllowed(value) {
   if (!browser.isChromium) return;
