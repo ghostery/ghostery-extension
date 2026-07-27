@@ -176,13 +176,7 @@ if (__FIREFOX__) {
   chrome.webRequest.onBeforeSendHeaders.addListener(
     (details) => {
       const options = store.get(Options);
-      if (
-        !store.ready(options) ||
-        !options.terms ||
-        !options.blockAnnoyances ||
-        !options.autoconsent.gpc ||
-        isGloballyPaused(options)
-      ) {
+      if (!store.ready(options) || !shouldEnableGPC(options)) {
         return;
       }
 
