@@ -14,7 +14,7 @@
 (function () {
   try {
     if (!window.navigator.globalPrivacyControl) {
-      Object.defineProperty(navigator, 'globalPrivacyControl', {
+      Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', {
         get() {
           return true;
         },
