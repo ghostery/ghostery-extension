@@ -15,7 +15,7 @@ import { ACTION_DISABLE_GPC } from '@ghostery/config';
 import Config from '/store/config.js';
 import Options, { getPausedDetails, isGloballyPaused } from '/store/options.js';
 
-import { addListener, isOptionEqual } from '/utils/options-observer.js';
+import { addListener } from '/utils/options-observer.js';
 import {
   GPC_RULE_ID,
   GPC_RULE_PRIORITY,
@@ -35,6 +35,24 @@ function shouldEnableGPC(options) {
   );
 }
 
+function getExcludedDomains(options, config) {
+  return [
+    ...new Set([
+      ...Object.keys(options.paused),
+      ...Object.keys(config.domains).filter((domain) =>
+        config.hasAction(domain, ACTION_DISABLE_GPC),
+      ),
+    ]),
+  ];
+}
+
+// Match patterns cannot express IPv6 hosts or subdomains of IP addresses
+function toExcludeMatches(domain) {
+  if (domain.includes(':')) return [];
+  if (/^[\d.]+$/.test(domain)) return [`*://${domain}/*`];
+  return [`*://${domain}/*`, `*://*.${domain}/*`];
+}
+
 // In addition to the Sec-GPC header, the GPC spec requires exposing
 // `navigator.globalPrivacyControl` before the page's scripts run:
 // https://w3c.github.io/gpc/#javascript-property-to-detect-preference
@@ -43,87 +61,89 @@ function shouldEnableGPC(options) {
 // At that point, it is too late to read the settings; thus, the script is
 // registered (with persistAcrossSessions) while GPC is enabled and
 // unregistered while it is disabled.
-async function updateGPCContentScript(options, lastOptions) {
-  const enabledNow = shouldEnableGPC(options);
+async function updateGPCContentScript(options) {
+  const [registeredScript] = await chrome.scripting.getRegisteredContentScripts({
+    ids: [GPC_CONTENT_SCRIPT_ID],
+  });
 
-  if (lastOptions) {
-    const wasEnabledBefore = shouldEnableGPC(lastOptions);
-    if (enabledNow === wasEnabledBefore) return;
+  if (!shouldEnableGPC(options)) {
+    if (registeredScript) {
+      await chrome.scripting.unregisterContentScripts({
+        ids: [GPC_CONTENT_SCRIPT_ID],
+      });
+
+      console.log('[autoconsent] GPC content script has been unregistered');
+    }
+
+    return;
   }
 
-  const registered =
-    (
-      await chrome.scripting.getRegisteredContentScripts({
-        ids: [GPC_CONTENT_SCRIPT_ID],
-      })
-    ).length > 0;
-  if (enabledNow === registered) return;
+  const config = await store.resolve(Config);
+  const excludeMatches = getExcludedDomains(options, config).flatMap(toExcludeMatches).sort();
 
-  if (enabledNow) {
-    await chrome.scripting.registerContentScripts([
-      {
-        id: GPC_CONTENT_SCRIPT_ID,
-        js: ['/content_scripts/gpc.js'],
-        matches: ['http://*/*', 'https://*/*'],
-        runAt: 'document_start',
-        matchOriginAsFallback: true,
-        allFrames: true,
-        world: 'MAIN',
-        persistAcrossSessions: true,
-      },
-    ]);
+  if (registeredScript) {
+    const registeredMatches = (registeredScript.excludeMatches ?? []).slice().sort();
+
+    if (
+      registeredMatches.length === excludeMatches.length &&
+      registeredMatches.every((match, index) => match === excludeMatches[index])
+    ) {
+      return;
+    }
+  }
+
+  const contentScript = {
+    id: GPC_CONTENT_SCRIPT_ID,
+    js: ['/content_scripts/gpc.js'],
+    matches: ['http://*/*', 'https://*/*'],
+    excludeMatches,
+    runAt: 'document_start',
+    matchOriginAsFallback: true,
+    allFrames: true,
+    world: 'MAIN',
+    persistAcrossSessions: true,
+  };
+
+  if (registeredScript) {
+    await chrome.scripting.updateContentScripts([contentScript]);
+
+    console.log('[autoconsent] GPC content script has been updated');
+  } else {
+    await chrome.scripting.registerContentScripts([contentScript]);
 
     console.log('[autoconsent] GPC content script has been registered');
-  } else {
-    await chrome.scripting.unregisterContentScripts({
-      ids: [GPC_CONTENT_SCRIPT_ID],
-    });
-
-    console.log('[autoconsent] GPC content script has been unregistered');
   }
 }
 
 addListener(updateGPCContentScript);
 
+store.observe(Config, async (_, config, lastConfig) => {
+  if (lastConfig) {
+    updateGPCContentScript(await store.resolve(Options));
+  }
+});
+
 if (__CHROMIUM__) {
-  async function updateGPCRule(options, lastOptions) {
-    const enabledNow = shouldEnableGPC(options);
+  async function updateGPCRule(options) {
+    const [existingRule] = await getDynamicRulesByIds([GPC_RULE_ID]);
 
-    if (
-      lastOptions &&
-      enabledNow === shouldEnableGPC(lastOptions) &&
-      isOptionEqual(options.paused, lastOptions.paused)
-    ) {
-      return;
-    }
-
-    // Disabled GPC: clear the GPC rule if it exists
-    if (!enabledNow) {
-      const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
-      if (existingRules.length) {
+    if (!shouldEnableGPC(options)) {
+      if (existingRule) {
         await chrome.declarativeNetRequest.updateDynamicRules({
           removeRuleIds: [GPC_RULE_ID],
         });
+
         console.log('[autoconsent] GPC rule has been removed');
       }
 
-      // Return early, as no update is needed
       return;
     }
 
     const config = await store.resolve(Config);
-    const excludedDomains = [
-      ...new Set([
-        ...Object.keys(options.paused),
-        ...Object.keys(config.domains).filter((domain) =>
-          config.hasAction(domain, ACTION_DISABLE_GPC),
-        ),
-      ]),
-    ];
+    const excludedDomains = getExcludedDomains(options, config);
 
-    const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
-    if (existingRules.length) {
-      const existingDomains = existingRules[0].condition.excludedInitiatorDomains || [];
+    if (existingRule) {
+      const existingDomains = existingRule.condition.excludedInitiatorDomains || [];
 
       // The rule matches the expected configuration, so no update is needed
       if (
@@ -166,8 +186,7 @@ if (__CHROMIUM__) {
   // Re-evaluate when remote Config changes (e.g. ACTION_DISABLE_GPC domains)
   store.observe(Config, async (_, config, lastConfig) => {
     if (lastConfig) {
-      const options = await store.resolve(Options);
-      updateGPCRule(options);
+      updateGPCRule(await store.resolve(Options));
     }
   });
 }
@@ -176,13 +195,7 @@ if (__FIREFOX__) {
   chrome.webRequest.onBeforeSendHeaders.addListener(
     (details) => {
       const options = store.get(Options);
-      if (
-        !store.ready(options) ||
-        !options.terms ||
-        !options.blockAnnoyances ||
-        !options.autoconsent.gpc ||
-        isGloballyPaused(options)
-      ) {
+      if (!store.ready(options) || !shouldEnableGPC(options)) {
         return;
       }
 

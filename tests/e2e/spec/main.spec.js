@@ -102,6 +102,25 @@ describe('Main Features', function () {
 
       await setPrivacyToggle('never-consent', true);
     });
+
+    it('does not set navigator.globalPrivacyControl on paused websites', async function () {
+      await browser.url(PAGE_URL);
+      expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
+
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:pause').click();
+      await waitForIdleBackgroundTasks();
+
+      await browser.url(PAGE_URL);
+      expect(await browser.execute(() => !!navigator.globalPrivacyControl)).toBe(false);
+
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:resume').click();
+      await waitForIdleBackgroundTasks();
+
+      await browser.url(PAGE_URL);
+      expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
+    });
   });
 
   describe('Ad-Blocking', function () {
