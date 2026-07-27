@@ -84,8 +84,9 @@ describe('Main Features', function () {
     it('sets navigator.globalPrivacyControl in the page main world', async function () {
       await browser.url(PAGE_URL);
 
-      // Main frame
+      // Main frame, including before the page's own scripts run
       expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
+      expect(await browser.execute(() => window.__gpcAtParse)).toBe(true);
 
       // Sub-frame — each frame has its own navigator, so injection must reach it
       await switchFrame($('#iframe-static'));
