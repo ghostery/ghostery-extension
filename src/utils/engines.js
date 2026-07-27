@@ -389,7 +389,8 @@ export async function update(name, { force = false, cache = true } = {}) {
     if (updated) {
       console.info(`[engines] Engine "${name}" updated:`, data.engines[ENGINE_VERSION].checksum);
 
-      // Save the new engine to storage
+      // Save the new engine to memory and storage
+      saveToMemory(name, engine);
       saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
       return true;
