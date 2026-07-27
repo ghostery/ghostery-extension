@@ -113,8 +113,16 @@ const chromiumRegistry =
       unregisterAll() {
         registered.clear();
         chrome.userScripts.getScripts().then((scripts) => {
+          // A hostname re-registered while getScripts was in flight already carries fresh
+          // code; purging it would leave isRegistered() true with no registration behind it.
+          const keep = new Set(
+            [...registered].flatMap((hostname) => [
+              userScriptId(hostname, 'MAIN'),
+              userScriptId(hostname, 'ISOLATED'),
+            ]),
+          );
           const ids = scripts
-            .filter((s) => s.id.startsWith(USER_SCRIPTS_NAMESPACE))
+            .filter((s) => s.id.startsWith(USER_SCRIPTS_NAMESPACE) && !keep.has(s.id))
             .map((s) => s.id);
           if (ids.length) chrome.userScripts.unregister({ ids }).catch(() => {});
         }, console.warn);
