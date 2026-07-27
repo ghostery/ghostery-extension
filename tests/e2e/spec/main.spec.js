@@ -80,6 +80,28 @@ describe('Main Features', function () {
 
       await setPrivacyToggle('never-consent', true);
     });
+
+    it('sets navigator.globalPrivacyControl in the page main world', async function () {
+      await browser.url(PAGE_URL);
+
+      // Main frame
+      expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
+
+      // Sub-frame — each frame has its own navigator, so injection must reach it
+      await switchFrame($('#iframe-static'));
+      expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
+      await browser.switchFrame(null);
+
+      // Disabling never-consent must unregister the content script,
+      // so pages loaded afterwards no longer see the patched value
+      await setPrivacyToggle('never-consent', false);
+
+      await browser.url(PAGE_URL);
+
+      expect(await browser.execute(() => !!navigator.globalPrivacyControl)).toBe(false);
+
+      await setPrivacyToggle('never-consent', true);
+    });
   });
 
   describe('Ad-Blocking', function () {
