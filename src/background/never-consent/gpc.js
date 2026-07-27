@@ -53,6 +53,10 @@ function toExcludeMatches(domain) {
   return [`*://${domain}/*`, `*://*.${domain}/*`];
 }
 
+function isSameSet(a, b) {
+  return a.length === b.length && a.every((value) => b.includes(value));
+}
+
 // The GPC spec requires exposing `navigator.globalPrivacyControl` to page
 // scripts: https://w3c.github.io/gpc/#javascript-property-to-detect-preference
 // Settings cannot be read at document_start, so the MAIN world script is
@@ -75,17 +79,10 @@ async function updateGPCContentScript(options) {
   }
 
   const config = await store.resolve(Config);
-  const excludeMatches = getExcludedDomains(options, config).flatMap(toExcludeMatches).sort();
+  const excludeMatches = getExcludedDomains(options, config).flatMap(toExcludeMatches);
 
-  if (registeredScript) {
-    const registeredMatches = (registeredScript.excludeMatches ?? []).slice().sort();
-
-    if (
-      registeredMatches.length === excludeMatches.length &&
-      registeredMatches.every((match, index) => match === excludeMatches[index])
-    ) {
-      return;
-    }
+  if (registeredScript && isSameSet(registeredScript.excludeMatches ?? [], excludeMatches)) {
+    return;
   }
 
   const contentScript = {
@@ -138,16 +135,11 @@ if (__CHROMIUM__) {
     const config = await store.resolve(Config);
     const excludedDomains = getExcludedDomains(options, config);
 
-    if (existingRule) {
-      const existingDomains = existingRule.condition.excludedInitiatorDomains || [];
-
-      // The rule matches the expected configuration, so no update is needed
-      if (
-        existingDomains.length === excludedDomains.length &&
-        existingDomains.every((d) => excludedDomains.includes(d))
-      ) {
-        return;
-      }
+    if (
+      existingRule &&
+      isSameSet(existingRule.condition.excludedInitiatorDomains ?? [], excludedDomains)
+    ) {
+      return;
     }
 
     await chrome.declarativeNetRequest.updateDynamicRules({
