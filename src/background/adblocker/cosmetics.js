@@ -400,9 +400,8 @@ if (!__FIREFOX__) {
 }
 
 if (USER_SCRIPTS) {
-  // Registrations persist across restarts, so drop stale ones when the engine changes.
+  // Registrations persist across restarts; engine changes refresh them in reloadMainEngine().
   const refresh = () => contentScripts.unregisterAll();
   chrome.runtime.onStartup.addListener(refresh);
   chrome.runtime.onInstalled.addListener(refresh);
-  engines.addSaveListener(engines.MAIN_ENGINE, refresh);
 }

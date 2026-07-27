@@ -143,8 +143,7 @@ async function loadFromStorage(name) {
         throw TypeError(`[engines] Engine "${name}" is obsolete and must be reloaded`);
       }
 
-      // Loading persisted state is not a content change - listeners fire only when an engine changes.
-      engines.set(name, engine);
+      saveToMemory(name, engine);
 
       return engine;
     }
@@ -390,8 +389,7 @@ export async function update(name, { force = false, cache = true } = {}) {
     if (updated) {
       console.info(`[engines] Engine "${name}" updated:`, data.engines[ENGINE_VERSION].checksum);
 
-      // Save the new engine to memory and storage
-      saveToMemory(name, engine);
+      // Save the new engine to storage
       saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
       return true;

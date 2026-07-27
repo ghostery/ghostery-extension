@@ -18,11 +18,14 @@ import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import asyncSetup from '/utils/setup.js';
+import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
 
 import { updateDNRRulesForExceptions } from '../exceptions.js';
 import { updateFilterLists } from '../custom-filters/index.js';
 
 import { contentScripts } from './content-scripts.js';
+
+const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsRegisterSupported();
 
 function getEnabledEngines(options) {
   if (options.terms) {
@@ -91,7 +94,7 @@ export async function reloadMainEngine() {
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 
-  if (__FIREFOX__) {
+  if (__FIREFOX__ || USER_SCRIPTS) {
     contentScripts.unregisterAll();
   }
 }
