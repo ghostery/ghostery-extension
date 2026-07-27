@@ -53,14 +53,10 @@ function toExcludeMatches(domain) {
   return [`*://${domain}/*`, `*://*.${domain}/*`];
 }
 
-// In addition to the Sec-GPC header, the GPC spec requires exposing
-// `navigator.globalPrivacyControl` before the page's scripts run:
-// https://w3c.github.io/gpc/#javascript-property-to-detect-preference
-//
-// The content script patches the DOM API in the MAIN world at document_start.
-// At that point, it is too late to read the settings; thus, the script is
-// registered (with persistAcrossSessions) while GPC is enabled and
-// unregistered while it is disabled.
+// The GPC spec requires exposing `navigator.globalPrivacyControl` to page
+// scripts: https://w3c.github.io/gpc/#javascript-property-to-detect-preference
+// Settings cannot be read at document_start, so the MAIN world script is
+// registered while GPC is enabled and unregistered while it is disabled.
 async function updateGPCContentScript(options) {
   const [registeredScript] = await chrome.scripting.getRegisteredContentScripts({
     ids: [GPC_CONTENT_SCRIPT_ID],
