@@ -382,11 +382,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 if (__FIREFOX__ || USER_SCRIPTS) {
-  // Paused keys are not registered hostnames (`<all_urls>` globally, parent domains per site),
-  // so drop every registration and let the next navigation re-register what is still allowed.
-  // Skipped on startup (no `lastPaused`), where the persisted registrations are still valid.
   OptionsObserver.addListener('paused', function contentScriptScriptlets(paused, lastPaused) {
-    if (lastPaused) contentScripts.unregisterAll();
+    if (!lastPaused) return; // skipped on startup (persisted registrations are still valid)
+
+    if (paused['<all_urls>']) {
+      // Paused keys are not registered hostnames (`<all_urls>` globally, parent domains per site),
+      // so drop every registration and let the next navigation re-register what is still allowed.
+      contentScripts.unregisterAll();
+    } else {
+      for (const hostname of Object.keys(paused)) {
+        contentScripts.unregister(hostname);
+      }
+    }
   });
 
   chrome.webNavigation.onBeforeNavigate.addListener(
