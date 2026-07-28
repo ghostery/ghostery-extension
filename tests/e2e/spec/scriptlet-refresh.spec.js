@@ -16,6 +16,7 @@ import {
   setCustomFilters,
   disableCustomFilters,
   setUserScriptsAllowed,
+  setPrivacyToggle,
   isUserScriptsPathActive,
   getUserScriptsRegistrations,
   reloadUntilActive,
@@ -104,6 +105,26 @@ describe('Scriptlet registration refresh', function () {
     await reloadUntilActive(
       async () => (await readMarker('rpnt-b')) === 'bbb+',
       'the scriptlet did not resume after unpausing',
+    );
+  });
+
+  it('stops injecting scriptlets on the first load after a global pause', async function () {
+    await setPrivacyToggle('global-pause', true);
+
+    try {
+      await waitForRegistrationDrop();
+
+      await browser.url(PAGE_URL);
+      await browser.pause(500);
+      await expect(await readMarker('rpnt-b')).toBe('bbb');
+    } finally {
+      // A leaked global pause would disable filtering for every test that follows.
+      await setPrivacyToggle('global-pause', false);
+    }
+
+    await reloadUntilActive(
+      async () => (await readMarker('rpnt-b')) === 'bbb+',
+      'the scriptlet did not resume after the global pause was lifted',
     );
   });
 
