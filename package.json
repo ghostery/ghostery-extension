@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.5.52",
+  "version": "10.5.53",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
@@ -65,8 +65,8 @@
     "tldts-experimental": "^7.4.9"
   },
   "dataDependencies": {
-    "redirect-resources": "8213671f07bdd4229d9d53899b1790aa84a453e92ffa41c99791d3dfe21549f7",
-    "wtm-bloomfilter": "2026-07-20",
+    "redirect-resources": "dcbabf1634ecee547b9ecdf5ff893a5096d98d9bcecbda74481dc845b4949b7b",
+    "wtm-bloomfilter": "2026-07-27",
     "wtm-stats": "0bb79e7f6bb009f080a75ee5c055e0706a6cad41"
   },
   "engineStrict": true,

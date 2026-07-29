@@ -36,6 +36,9 @@ scripts/bin/
 dist/
 web-ext-artifacts/
 
+# Secrets
+.env
+
 # xcode
 *.xcuserstate
 xcuserdata
