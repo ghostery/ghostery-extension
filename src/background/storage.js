@@ -10,8 +10,8 @@
  */
 
 import { checkSessionStorage } from '/utils/storage.js';
-import { captureException } from '/utils/errors.js';
+import { captureError } from '/utils/errors.js';
 
 checkSessionStorage().catch((e) => {
-  captureException(e, { critical: true, once: true });
+  captureError(e, { critical: true, once: true });
 });

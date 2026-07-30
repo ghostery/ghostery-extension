@@ -62,16 +62,30 @@ Sentry.init(config);
 
 getBrowserInfo().then(
   ({ token, version, os, osVersion }) => {
-    Sentry.setTag('ua', token);
-    Sentry.setTag('uaVersion', version);
-    Sentry.setTag('os', os);
-    Sentry.setTag('osVersion', osVersion);
+    // Sentry rejects tags with empty or NaN values ("expected a non-empty value"),
+    // which discards the whole tag, so only set tags that carry a usable value.
+    const setTag = (key, value) => {
+      if (value === '' || value == null || (typeof value === 'number' && Number.isNaN(value))) {
+        return;
+      }
+      Sentry.setTag(key, value);
+    };
+
+    setTag('ua', token);
+    setTag('uaVersion', version);
+    setTag('os', os);
+    setTag('osVersion', osVersion);
   },
   // empty error handled for tests
   () => {},
 );
 
-export async function captureException(error, { critical = false, once = false } = {}) {
+// Do not rename this to `captureException`/`captureMessage`. Sentry's stack
+// parser (STRIP_FRAME_REGEXP = /captureMessage|captureException/) drops the
+// innermost stack frame whose function name matches, assuming it belongs to the
+// SDK. Our fallback stack below is captured inside this function, so such a name
+// would strip the only frame frameless errors have, leaving no stack trace.
+export async function captureError(error, { critical = false, once = false } = {}) {
   // Capture a fallback stack synchronously, before the first `await`,
   // so it still includes the caller frame when `error.stack` has no frames
   // (e.g. errors from chrome.* API rejections or serialized across contexts).
@@ -117,4 +131,4 @@ export async function captureException(error, { critical = false, once = false }
 }
 
 // Debug tools
-(globalThis.ghostery ??= {}).errors = { captureException };
+(globalThis.ghostery ??= {}).errors = { captureException: captureError };

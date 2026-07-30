@@ -24,7 +24,7 @@ import { isFilterConditionAccepted } from '/utils/engines.js';
 
 import { UPDATE_ENGINES_DELAY } from './adblocker/engines.js';
 import { updateRedirectProtectionRules } from './redirect-protection.js';
-import { captureException } from '/utils/errors.js';
+import { captureError } from '/utils/errors.js';
 
 if (__CHROMIUM__) {
   const DNR_RESOURCES = chrome.runtime
@@ -260,7 +260,7 @@ if (__CHROMIUM__) {
         }
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
-        captureException(e, { critical: true, once: true });
+        captureError(e, { critical: true, once: true });
       }
     }
   }
