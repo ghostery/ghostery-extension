@@ -71,7 +71,7 @@
   },
   "engineStrict": true,
   "engines": {
-    "npm": ">=11.6.3"
+    "npm": ">=11.17.0"
   },
   "webExt": {
     "sourceDir": "./dist/"
