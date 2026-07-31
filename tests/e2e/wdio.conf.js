@@ -113,7 +113,7 @@ export const config = {
     ],
   ],
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
-  logLevel: argv.debug ? 'error' : 'silent',
+  logLevel: 'trace',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
     retries: 2,
