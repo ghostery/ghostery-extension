@@ -37,6 +37,7 @@ jobs:
   e2e-chrome:
     runs-on: ubuntu-latest
     needs: unit
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -50,6 +51,7 @@ jobs:
   e2e-chrome-update:
     runs-on: ubuntu-latest
     needs: unit
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -63,6 +65,7 @@ jobs:
   e2e-firefox:
     runs-on: ubuntu-latest
     needs: unit
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -76,6 +79,7 @@ jobs:
   e2e-firefox-update:
     runs-on: ubuntu-latest
     needs: unit
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
