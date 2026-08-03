@@ -30,7 +30,7 @@ import sleep from '../assets/sleep.svg';
 
 import { clearAlert, showAlert } from '../components/alert.js';
 
-import ClearCookies from './clear-cookies.js';
+import ClearBrowsingData from './clear-browsing-data.js';
 import Menu from './menu.js';
 import PauseAssistant from './pause-assistant.js';
 import ProtectionStatus from './protection-status.js';
@@ -172,7 +172,7 @@ async function openElementPicker() {
 export default {
   [router.connect]: {
     stack: [
-      ClearCookies,
+      ClearBrowsingData,
       Menu,
       PauseAssistant,
       ProtectionStatus,
@@ -273,9 +273,12 @@ export default {
                       </a>
                     </panel-actions-button>
                     <panel-actions-button>
-                      <a href="${router.url(ClearCookies)}" data-qa="button:clear-cookies">
-                        <panel-actions-icon name="cookie"></panel-actions-icon>
-                        Clear cookies
+                      <a
+                        href="${router.url(ClearBrowsingData)}"
+                        data-qa="button:clear-browsing-data"
+                      >
+                        <panel-actions-icon name="clear-data"></panel-actions-icon>
+                        Clear browsing data
                         <ui-icon name="chevron-right" color="tertiary" layout="size:2"></ui-icon>
                       </a>
                     </panel-actions-button>
@@ -410,7 +413,7 @@ export default {
                       categories="${stats.topCategories}"
                       type="${options.panel.statsType}"
                       ontypechange="${setStatsType}"
-                      layout="margin:1.5:1.5:1"
+                      layout="margin:1.5"
                     >
                       <ui-tooltip position="bottom" slot="actions">
                         <span slot="content">WhoTracks.Me Reports</span>

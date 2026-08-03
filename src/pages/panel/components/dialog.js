@@ -46,7 +46,7 @@ export default {
       <div
         id="dialog"
         layout="
-          grid::max|1
+          grid::max|1|max
           width:full::full height:auto::94dvh
           margin:0 padding:0
           fixed inset bottom top:auto
@@ -64,9 +64,11 @@ export default {
             </a>
           </ui-action>
         </section>
-        <section id="content" layout="column overflow:y:auto overflow:x:hidden gap:2 padding:1.5">
-          <slot></slot>
-        </section>
+        <panel-container id="content">
+          <div layout="column gap:2 padding:1.5">
+            <slot></slot>
+          </div>
+        </panel-container>
         <section id="footer" layout="padding:1.5:2">
           <slot name="footer" onslotchange="${html.set('footer', true)}"></slot>
         </section>
@@ -100,16 +102,23 @@ export default {
       display: none;
     }
 
+    /* Fixed rows keep the content scrollable when the header or footer is hidden */
     #header {
+      grid-row: 1;
       border-bottom: 1px solid var(--border-primary);
+    }
+
+    #content {
+      grid-row: 2;
+    }
+
+    #footer {
+      grid-row: 3;
+      border-top: 1px solid var(--border-primary);
     }
 
     :host(:not([footer])) #footer {
       display: none;
-    }
-
-    #footer {
-      border-top: 1px solid var(--border-primary);
     }
 
     a > div {

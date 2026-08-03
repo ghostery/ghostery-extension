@@ -235,6 +235,11 @@ const icons = {
       <path d="M7 12L11 8L7 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
+  'clear-data': /* html */`
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 4V8L10.4293 9.21467M11.2525 14.0809L14.0809 11.2525M11.2525 11.2525L14.0809 14.0809M14.6133 8.84467C14.7895 7.46514 14.5298 6.06506 13.8706 4.84047C13.2114 3.61589 12.1858 2.62811 10.9372 2.01545C9.68874 1.40278 8.27988 1.19591 6.90795 1.42379C5.53602 1.65168 4.2697 2.30291 3.28631 3.28631C2.30291 4.2697 1.65168 5.53602 1.42379 6.90795C1.19591 8.27988 1.40278 9.68874 2.01545 10.9372C2.62811 12.1858 3.61589 13.2114 4.84047 13.8706C6.06506 14.5298 7.46514 14.7895 8.84467 14.6133" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
   'close': /* html */`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

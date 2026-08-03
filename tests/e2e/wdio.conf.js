@@ -106,7 +106,7 @@ export const config = {
       'spec/scriptlet-refresh.spec.js',
       'spec/subframe-scripting.spec.js',
       'spec/redirect-protection.spec.js',
-      'spec/clear-cookies.spec.js',
+      'spec/clear-browsing-data.spec.js',
       'spec/panel.spec.js',
       'spec/pause-assistant.spec.js',
       'spec/whotracksme.spec.js',

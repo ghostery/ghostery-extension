@@ -30,6 +30,8 @@ export default {
   value: { value: false, reflect: true },
   disabled: { value: false, reflect: true },
   noLabel: { value: false, reflect: true },
+  type: { value: '', reflect: true },
+  align: { value: '', reflect: true },
   render: {
     value: ({ disabled, value }) => html`
       <template layout="grid">
@@ -96,7 +98,10 @@ export default {
       }
 
       :host([value]) #toggle { background: var(--color-primary); }
+      :host([value][type='success']) #toggle { background: var(--color-success-secondary); }
       :host([value]) #toggle span { left: calc(100% - 20px); }
+
+      :host([align='center']) #button { align-self: center; }
 
 
       :host([disabled]) #button { color: var(--color-secondary); }

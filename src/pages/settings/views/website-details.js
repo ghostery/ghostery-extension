@@ -24,7 +24,6 @@ import { PAUSE_ASSISTANT_LEARN_MORE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
-import WebsiteClearCookies from './website-clear-cookies.js';
 
 function removeDomain(tracker) {
   return ({ options, domain }) => exceptions.toggleDomain(options, tracker.id, domain);
@@ -65,7 +64,7 @@ async function clearElementPickerSelectors(host) {
 
 export default {
   [router.connect]: {
-    stack: () => [TrackerDetails, WebsiteClearCookies],
+    stack: () => [TrackerDetails],
     replace: true,
   },
   domain: '',
@@ -87,16 +86,7 @@ export default {
   selectors: ({ elementPickerSelectors, domain }) =>
     (store.ready(elementPickerSelectors) && elementPickerSelectors.hostnames[domain]?.join('\n')) ||
     '',
-  clearedCookies: false,
-  render: ({
-    domain,
-    topLevelDomain,
-    paused,
-    issueUrl,
-    trackers,
-    selectors,
-    clearedCookies,
-  }) => html`
+  render: ({ domain, topLevelDomain, paused, issueUrl, trackers, selectors }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
@@ -290,30 +280,6 @@ export default {
               </div>
             </settings-option>
           </form>
-
-          <settings-option icon="cookie">
-            Clear Cookies
-            <span slot="description">
-              Remove all cookies stored by this site to protect your privacy and reset your browsing
-              data.
-            </span>
-            ${
-              clearedCookies &&
-              html`
-                <ui-text slot="footer" type="body-s" color="success-primary">
-                  Cookies successfully cleared
-                </ui-text>
-              `
-            }
-            <ui-button slot="footer" disabled="${clearedCookies}" size="s" layout="margin:top">
-              <a
-                href="${router.url(WebsiteClearCookies, { domain })}"
-                data-qa="button:clear-cookies"
-              >
-                Clear Cookies
-              </a>
-            </ui-button>
-          </settings-option>
         </div>
         ${
           hasWTMStats(topLevelDomain) &&
