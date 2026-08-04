@@ -1,0 +1,40 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Entrenchment page v1.7">
+<g id="Entrenchment page v1.7_2">
+<g id="Frame 48096404">
+<g id="Facts">
+<g id="Frame 271">
+<g id="card" filter="url(#filter0_d_5477_30365)">
+<rect x="-15.5" y="-15.5" width="293" height="139" rx="23.5" stroke="#E0E2E6"/>
+<g id="Icons/M/block-ads">
+<g id="Group 111">
+<path id="Polygon 1" d="M20.9961 1.95239C21.5352 1.9571 22.0534 2.14916 22.4639 2.49146L22.6338 2.64673L29.4658 9.60083C29.8977 10.0404 30.1382 10.633 30.1328 11.2493L30.0479 20.9973C30.0425 21.6136 29.7921 22.2031 29.3525 22.635L22.3994 29.467C21.9599 29.899 21.3663 30.1394 20.75 30.134L11.002 30.0491C10.3858 30.0436 9.79713 29.7932 9.36523 29.3538L2.53223 22.4006C2.10027 21.9611 1.86083 21.3675 1.86621 20.7512L1.95117 11.0032C1.9566 10.3871 2.20619 9.79833 2.64551 9.36646L9.59961 2.53345L9.77051 2.38013C10.1869 2.04495 10.7088 1.86273 11.248 1.86743L20.9961 1.95239Z" stroke="#0077CC" stroke-width="2.66667" stroke-linejoin="round"/>
+<g id="AD">
+<path d="M11.713 11.3518L9.02289 21.3199H6.36719L10.2777 9.18481H11.9364L11.713 11.3518ZM13.8358 21.3199L11.1285 11.3518L10.8793 9.18481H12.5638L16.5087 21.3199H13.8358ZM13.9303 16.7942V18.8195H8.28376V16.7942H13.9303Z" fill="#0077CC"/>
+<path d="M20.9692 21.3199H18.7605L18.7776 19.3029H20.9692C21.5766 19.3029 22.0493 19.1974 22.3873 18.9862C22.7254 18.7751 22.9632 18.4417 23.1007 17.9861C23.2439 17.5305 23.3155 16.9331 23.3155 16.1941V14.3022C23.3155 13.741 23.2783 13.266 23.2038 12.877C23.1293 12.4825 23.0033 12.1658 22.8257 11.9269C22.648 11.6824 22.4103 11.5018 22.1123 11.3851C21.8144 11.2684 21.4448 11.2101 21.0036 11.2101L18.7175 11.2101V9.18481H21.0036C21.7256 9.18481 22.3816 9.29872 22.9718 9.52653C23.5619 9.75434 24.069 10.0877 24.493 10.5267C24.917 10.9601 25.2436 11.4963 25.4728 12.1352C25.702 12.7742 25.8165 13.5021 25.8165 14.3189V16.1941C25.8165 17.0165 25.702 17.7444 25.4728 18.3778C25.2436 19.0112 24.917 19.5474 24.493 19.9864C24.0747 20.4198 23.5676 20.7504 22.9718 20.9782C22.3759 21.206 21.7084 21.3199 20.9692 21.3199ZM20.2215 9.18481V21.3199H17.7033V9.18481H20.2215Z" fill="#0077CC"/>
+</g>
+<path id="Vector 60" d="M6.36719 6.68994L24.9854 25.3081" stroke="#0077CC" stroke-width="2.66667"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_5477_30365" x="-28" y="-24" width="318" height="164" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="6"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5477_30365"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5477_30365" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_5477_30365" x1="131" y1="-16" x2="131" y2="124" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.9"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

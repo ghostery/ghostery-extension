@@ -1,0 +1,27 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Entrenchment page v1.7">
+<g id="Entrenchment page v1.7_2">
+<g id="Sections / Title Block">
+<g id="Frame 271">
+<g id="card" filter="url(#filter0_d_5477_30365)">
+<g id="Icons/M/top-right">
+<path id="Vector" d="M7 7H17V17" stroke="#88898C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M7 17L17 7" stroke="#88898C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_5477_30365" x="-359" y="-32" width="418.668" height="184" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="6"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5477_30365"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5477_30365" result="shape"/>
+</filter>
+</defs>
+</svg>

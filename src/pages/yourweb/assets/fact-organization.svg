@@ -1,0 +1,33 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Entrenchment page v1.7">
+<g id="Entrenchment page v1.7_2">
+<g id="Frame 48096404">
+<g id="Facts">
+<g id="Frame 271">
+<g id="card" filter="url(#filter0_d_5477_30365)">
+<rect x="-15.5" y="-15.5" width="293" height="139" rx="23.5" stroke="#E0E2E6"/>
+<g id="Icons/S/organization">
+<path id="Vector" d="M17.3346 14.6667H23.7346C25.2281 14.6667 25.9749 14.6667 26.5453 14.9573C27.047 15.2129 27.455 15.6209 27.7106 16.1227C28.0013 16.6931 28.0013 17.4399 28.0013 18.9333V28M17.3346 28V8.26667C17.3346 6.7732 17.3346 6.02645 17.044 5.45603C16.7884 4.95425 16.3804 4.54631 15.8786 4.29065C15.3082 4 14.5614 4 13.068 4H8.26797C6.7745 4 6.02776 4 5.45733 4.29065C4.95556 4.54631 4.54761 4.95425 4.29196 5.45603C4.0013 6.02645 4.0013 6.7732 4.0013 8.26667V28M29.3346 28H2.66797M8.66797 9.33333H12.668M8.66797 14.6667H12.668M8.66797 20H12.668" stroke="#0077CC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_5477_30365" x="-28" y="-24" width="318" height="164" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="6"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5477_30365"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5477_30365" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_5477_30365" x1="131" y1="-16" x2="131" y2="124" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.9"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>
