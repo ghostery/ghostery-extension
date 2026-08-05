@@ -35,6 +35,12 @@ function shouldEnableGPC(options) {
   );
 }
 
+function getExcludeMatches(config) {
+  return Object.keys(config.domains)
+    .filter((domain) => config.hasAction(domain, ACTION_DISABLE_GPC))
+    .map((domain) => `*://*.${domain}/*`);
+}
+
 // In addition to the Sec-GPC header, the GPC spec requires exposing
 // `navigator.globalPrivacyControl` before the page's scripts run:
 // https://w3c.github.io/gpc/#javascript-property-to-detect-preference
@@ -42,48 +48,70 @@ function shouldEnableGPC(options) {
 // The content script patches the DOM API in the MAIN world at document_start.
 // At that point, it is too late to read the settings; thus, the script is
 // registered (with persistAcrossSessions) while GPC is enabled and
-// unregistered while it is disabled.
-async function updateGPCContentScript(options, lastOptions) {
-  const enabledNow = shouldEnableGPC(options);
+// unregistered while it is disabled. Domains with the disable action must be
+// excluded upfront as well, as they cannot be filtered out at runtime.
+async function updateGPCContentScript(options) {
+  const [registered] = await chrome.scripting.getRegisteredContentScripts({
+    ids: [GPC_CONTENT_SCRIPT_ID],
+  });
 
-  if (lastOptions) {
-    const wasEnabledBefore = shouldEnableGPC(lastOptions);
-    if (enabledNow === wasEnabledBefore) return;
+  if (!shouldEnableGPC(options)) {
+    if (registered) {
+      await chrome.scripting.unregisterContentScripts({
+        ids: [GPC_CONTENT_SCRIPT_ID],
+      });
+
+      console.log('[autoconsent] GPC content script has been unregistered');
+    }
+
+    return;
   }
 
-  const registered =
-    (
-      await chrome.scripting.getRegisteredContentScripts({
-        ids: [GPC_CONTENT_SCRIPT_ID],
-      })
-    ).length > 0;
-  if (enabledNow === registered) return;
+  const config = await store.resolve(Config);
+  const excludeMatches = getExcludeMatches(config);
 
-  if (enabledNow) {
-    await chrome.scripting.registerContentScripts([
-      {
-        id: GPC_CONTENT_SCRIPT_ID,
-        js: ['/content_scripts/gpc.js'],
-        matches: ['http://*/*', 'https://*/*'],
-        runAt: 'document_start',
-        matchOriginAsFallback: true,
-        allFrames: true,
-        world: 'MAIN',
-        persistAcrossSessions: true,
-      },
-    ]);
+  if (registered) {
+    const registeredMatches = registered.excludeMatches || [];
 
-    console.log('[autoconsent] GPC content script has been registered');
-  } else {
+    // The registration matches the expected configuration, so no update is needed
+    if (
+      registeredMatches.length === excludeMatches.length &&
+      registeredMatches.every((match) => excludeMatches.includes(match))
+    ) {
+      return;
+    }
+
     await chrome.scripting.unregisterContentScripts({
       ids: [GPC_CONTENT_SCRIPT_ID],
     });
-
-    console.log('[autoconsent] GPC content script has been unregistered');
   }
+
+  await chrome.scripting.registerContentScripts([
+    {
+      id: GPC_CONTENT_SCRIPT_ID,
+      js: ['/content_scripts/gpc.js'],
+      matches: ['http://*/*', 'https://*/*'],
+      ...(excludeMatches.length ? { excludeMatches } : {}),
+      runAt: 'document_start',
+      matchOriginAsFallback: true,
+      allFrames: true,
+      world: 'MAIN',
+      persistAcrossSessions: true,
+    },
+  ]);
+
+  console.log('[autoconsent] GPC content script has been registered');
 }
 
 addListener(updateGPCContentScript);
+
+// Re-evaluate when remote Config changes (e.g. ACTION_DISABLE_GPC domains)
+store.observe(Config, async (_, config, lastConfig) => {
+  if (lastConfig) {
+    const options = await store.resolve(Options);
+    await updateGPCContentScript(options);
+  }
+});
 
 if (__CHROMIUM__) {
   async function updateGPCRule(options, lastOptions) {
