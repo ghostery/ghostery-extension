@@ -26,6 +26,14 @@ import Request from '/utils/request.js';
 
 const GPC_CONTENT_SCRIPT_ID = 'gpc';
 
+// Domains flagged in the remote config as broken when GPC is signaled
+// https://github.com/ghostery/broken-page-reports
+function getDisabledDomains(config) {
+  return Object.keys(config.domains).filter((domain) =>
+    config.hasAction(domain, ACTION_DISABLE_GPC),
+  );
+}
+
 function shouldEnableGPC(options) {
   return (
     options.terms &&
@@ -57,14 +65,26 @@ async function updateGPCContentScript(options, lastOptions) {
         ids: [GPC_CONTENT_SCRIPT_ID],
       })
     ).length > 0;
-  if (enabledNow === registered) return;
+
+  // Unregister first, as the excluded domains may have changed
+  if (registered) {
+    await chrome.scripting.unregisterContentScripts({
+      ids: [GPC_CONTENT_SCRIPT_ID],
+    });
+  }
 
   if (enabledNow) {
+    const config = await store.resolve(Config);
+
     await chrome.scripting.registerContentScripts([
       {
         id: GPC_CONTENT_SCRIPT_ID,
         js: ['/content_scripts/gpc.js'],
         matches: ['http://*/*', 'https://*/*'],
+        excludeMatches: getDisabledDomains(config).flatMap((domain) => [
+          `*://${domain}/*`,
+          `*://*.${domain}/*`,
+        ]),
         runAt: 'document_start',
         matchOriginAsFallback: true,
         allFrames: true,
@@ -74,11 +94,7 @@ async function updateGPCContentScript(options, lastOptions) {
     ]);
 
     console.log('[autoconsent] GPC content script has been registered');
-  } else {
-    await chrome.scripting.unregisterContentScripts({
-      ids: [GPC_CONTENT_SCRIPT_ID],
-    });
-
+  } else if (registered) {
     console.log('[autoconsent] GPC content script has been unregistered');
   }
 }
@@ -113,12 +129,7 @@ if (__CHROMIUM__) {
 
     const config = await store.resolve(Config);
     const excludedDomains = [
-      ...new Set([
-        ...Object.keys(options.paused),
-        ...Object.keys(config.domains).filter((domain) =>
-          config.hasAction(domain, ACTION_DISABLE_GPC),
-        ),
-      ]),
+      ...new Set([...Object.keys(options.paused), ...getDisabledDomains(config)]),
     ];
 
     const existingRules = await getDynamicRulesByIds([GPC_RULE_ID]);
