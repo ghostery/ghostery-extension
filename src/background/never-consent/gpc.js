@@ -44,7 +44,9 @@ function shouldEnableGPC(options) {
 // registered (with persistAcrossSessions) while GPC is enabled and
 // unregistered while it is disabled.
 async function updateGPCContentScript(options, lastOptions) {
-  const enabledNow = shouldEnableGPC(options);
+  // TODO: disabled since it breaks x.com logins
+  // (https://github.com/ghostery/broken-page-reports/issues/2574)
+  const enabledNow = false; // shouldEnableGPC(options);
 
   if (lastOptions) {
     const wasEnabledBefore = shouldEnableGPC(lastOptions);

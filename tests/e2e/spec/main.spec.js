@@ -81,6 +81,7 @@ describe('Main Features', function () {
       await setPrivacyToggle('never-consent', true);
     });
 
+    /* TODO: temporarily disabled (https://github.com/ghostery/ghostery-extension/pull/3550)
     it('sets navigator.globalPrivacyControl in the page main world', async function () {
       await browser.url(PAGE_URL);
 
@@ -102,6 +103,7 @@ describe('Main Features', function () {
 
       await setPrivacyToggle('never-consent', true);
     });
+    */
   });
 
   describe('Ad-Blocking', function () {
