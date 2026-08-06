@@ -1,5 +1,5 @@
 if (typeof globalThis.chrome === 'undefined') {
-  global.chrome = {
+  globalThis.chrome = {
     runtime: {
       getManifest() {
         return {};
@@ -17,7 +17,7 @@ if (typeof globalThis.chrome === 'undefined') {
 }
 
 // Mock navigator to simulate Chrome
-Object.defineProperty(global, 'navigator', {
+Object.defineProperty(globalThis, 'navigator', {
   value: {
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
@@ -27,5 +27,5 @@ Object.defineProperty(global, 'navigator', {
   configurable: true,
 });
 
-global.__CHROMIUM__ = true;
-global.__FIREFOX__ = false;
+globalThis.__CHROMIUM__ = true;
+globalThis.__FIREFOX__ = false;

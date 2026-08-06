@@ -239,7 +239,7 @@ const config = {
             generateBundle(_, bundle) {
               for (const chunk of Object.values(bundle)) {
                 if (chunk.type === 'chunk' && (chunk.isEntry || chunk.isDynamicEntry)) {
-                  chunk.code = 'globalThis.chrome = globalThis.browser;\n\n' + chunk.code;
+                  chunk.code = 'const chrome = globalThis.browser;\n\n' + chunk.code;
                 }
               }
             },
