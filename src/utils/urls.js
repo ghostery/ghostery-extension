@@ -36,6 +36,7 @@ export const CDN_URL = __STAGING__
 
 export const PAUSE_ASSISTANT_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/browsing-assistant-user-agent`;
 export const TRACKERS_PREVIEW_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/introducing-wtm-serp-report`;
+export const DISTRACTIONS_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/distractions-remove-UI-clutter`;
 
 export const ZAP_AUTORELOAD_DISABLED_HOSTNAMES = ['youtube.com'];
 

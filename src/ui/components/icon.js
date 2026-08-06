@@ -76,6 +76,11 @@ const icons = {
       <path d="M10.6667 8L8 5.33333M8 5.33333L5.33333 8M8 5.33333L8 10.6667M10.8 2L5.2 2C4.07987 2 3.51987 2 3.092 2.218C2.71567 2.40973 2.40973 2.71567 2.218 3.092C2 3.51987 2 4.07987 2 5.2L2 10.8C2 11.9201 2 12.4802 2.218 12.908C2.40973 13.2843 2.71567 13.5903 3.092 13.782C3.51987 14 4.07987 14 5.2 14L10.8 14C11.9201 14 12.4802 14 12.908 13.782C13.2843 13.5903 13.5903 13.2843 13.782 12.908C14 12.4802 14 11.9201 14 10.8L14 5.2C14 4.07987 14 3.51987 13.782 3.092C13.5903 2.71567 13.2843 2.40973 12.908 2.218C12.4802 2 11.9201 2 10.8 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
+  'arrow-up-right': /* html */`
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 17L17 7M7 7H17V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
   'autoconsent-managed': /* html */`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.16699 1H13.167" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
