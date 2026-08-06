@@ -238,6 +238,10 @@ const config = {
             enforce: 'post',
             generateBundle(_, bundle) {
               for (const chunk of Object.values(bundle)) {
+                // MAIN world scripts must be self-contained, as every change
+                // to the page's environment is risky.
+                if (chunk.fileName.startsWith('content_scripts/main-world/')) continue;
+
                 if (chunk.type === 'chunk' && (chunk.isEntry || chunk.isDynamicEntry)) {
                   chunk.code = 'globalThis.chrome = globalThis.browser;\n\n' + chunk.code;
                 }

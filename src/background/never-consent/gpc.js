@@ -79,7 +79,7 @@ async function updateGPCContentScript(options, lastOptions) {
     await chrome.scripting.registerContentScripts([
       {
         id: GPC_CONTENT_SCRIPT_ID,
-        js: ['/content_scripts/gpc.js'],
+        js: ['/content_scripts/main-world/gpc.js'],
         matches: ['http://*/*', 'https://*/*'],
         excludeMatches: getDisabledDomains(config).flatMap((domain) => [
           `*://${domain}/*`,
