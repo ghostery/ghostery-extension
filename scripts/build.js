@@ -186,6 +186,10 @@ if (argv.target !== 'firefox') {
 
 // --- Base Vite Config ---
 
+// Firefox only exposes the promise-based `browser` namespace, so alias it to `chrome`.
+// It must stay a scoped binding - a global one leaks into pages for MAIN world scripts.
+const FIREFOX_API_ALIAS = 'const chrome = globalThis.browser;';
+
 const config = {
   logLevel: silent ? 'silent' : undefined,
   configFile: false,
@@ -232,14 +236,15 @@ const config = {
   plugins:
     argv.target === 'firefox'
       ? [
-          // Add Firefox polyfill banner to entry point files
+          // Add Firefox polyfill banner to entry point files. Safe for the ESM build only,
+          // as module top-level declarations are scoped to the module.
           {
             name: 'firefox-entry-banner',
             enforce: 'post',
             generateBundle(_, bundle) {
               for (const chunk of Object.values(bundle)) {
                 if (chunk.type === 'chunk' && (chunk.isEntry || chunk.isDynamicEntry)) {
-                  chunk.code = 'const chrome = globalThis.browser;\n\n' + chunk.code;
+                  chunk.code = `${FIREFOX_API_ALIAS}\n\n` + chunk.code;
                 }
               }
             },
@@ -678,6 +683,9 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
     contentScriptBuilds.push(
       build({
         ...config,
+        // The banner plugin would prepend the alias outside of the IIFE wrapper, which puts it
+        // in the page's global lexical scope for MAIN world scripts. `intro` goes inside instead.
+        plugins: [],
         build: {
           ...config.build,
           target: 'esnext',
@@ -688,6 +696,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
               format: 'iife',
               dir: options.outDir,
               entryFileNames: '[name].js',
+              ...(argv.target === 'firefox' && { intro: FIREFOX_API_ALIAS }),
             },
           },
         },
