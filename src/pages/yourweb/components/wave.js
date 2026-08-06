@@ -16,7 +16,7 @@ import assets from '../assets/index.js';
 export default {
   flip: { value: false, reflect: true },
   render: () => html`
-    <template layout="block shrink:0 height:6" layout@768px="height:12"></template>
+    <template layout="block shrink:0 height:6 margin:-1px:0" layout@768px="height:12"></template>
   `.css`
     :host {
       background: var(--background-primary);
