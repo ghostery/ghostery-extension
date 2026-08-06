@@ -76,7 +76,7 @@
       "run_at": "document_start"
     },
     {
-      "js": ["content_scripts/gpc.js"],
+      "js": ["content_scripts/main-world/gpc.js"],
       "run_at": "background_execute_script"
     },
     {
