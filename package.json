@@ -62,7 +62,7 @@
     "lottie-web": "^5.13.0",
     "minixxh": "^0.3.1",
     "plotly.js-basic-dist": "^3.7.0",
-    "tldts-experimental": "^7.4.9"
+    "tldts-experimental": "^7.4.10"
   },
   "overrides": {
     "yauzl": "3.4.0"
