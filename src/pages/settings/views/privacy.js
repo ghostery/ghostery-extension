@@ -175,7 +175,6 @@ export default {
                 value="${globalPause}"
                 onchange="${html.set('globalPause')}"
                 data-qa="toggle:global-pause"
-                layout@768px="margin:bottom:-3"
               >
                 Pause Ghostery
                 <span slot="description">Suspends privacy protection globally for 1 day.</span>
@@ -188,6 +187,29 @@ export default {
                   `
                 }
               </settings-toggle>
+              <ui-action layout@768px="margin:bottom:-3">
+                <a
+                  href="${chrome.runtime.getURL('/pages/yourweb/index.html')}"
+                  target="_blank"
+                  data-qa="button:yourweb"
+                >
+                  <settings-option>
+                    <settings-help-image slot="icon">
+                      <img src="${assets.yourweb}" alt="Your web, lately" />
+                    </settings-help-image>
+                    Your web, lately
+                    <span slot="description">
+                      The cleaner, calmer web you've built - by the numbers (last 3 months)
+                    </span>
+                    <ui-button slot="footer" size="s" layout="margin:top">
+                      <button>
+                        See your recap
+                        <ui-icon name="chevron-right-s"></ui-icon>
+                      </button>
+                    </ui-button>
+                  </settings-option>
+                </a>
+              </ui-action>
             </section>
 
             <div>
