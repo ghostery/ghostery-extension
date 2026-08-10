@@ -602,9 +602,6 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "<a href=\"$${0}\">웹 상 트래커</a>, <a href=\"$${1}\">애드온의 상태</a> 및 <a href=\"$${2}\">성능 측정</a>에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 향상하기 위해 당사의 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유됩니다."
   },
-  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
-    "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity로 보호된 페이지 보고서 표시"
   },
@@ -1229,8 +1226,8 @@
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "이 기능을 활성화하면 브라우저가 웹사이트에 광고 목적으로 개인 데이터를 판매하거나 공유하지 말 것을 요청하는 신호를 보냅니다. 이는 캘리포니아 및 EU와 같은 개인 정보 보호법에 따른 것입니다."
   },
-  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me는 Ghostery가 운영하는 서비스로, Ghostery의 AI 기반 추적 방지 기술의 중요한 초석이며, Ghostery 커뮤니티에 실시간 개인정보 보호를 제공하는 데 중요한 역할을 합니다. 이 서비스는 전 세계의 추적기에 대한 포괄적인 자료로, 웹 추적의 투명성을 제공합니다."
+  "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
+    "message": "Ghostery가 운영하는 WhoTracks.Me는 웹 추적에 대한 투명성을 제공하고 Ghostery의 AI 안티 트래킹 기술을 지원하는 웹 트래커에 대한 포괄적인 글로벌 리소스입니다. Ghostery 사용자가 공유한 비개인적인 기여를 바탕으로 구축되었으며, 전체 Ghostery 커뮤니티를 보호하는 실시간 트래커 인텔리전스를 제공합니다."
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Me 보고서"

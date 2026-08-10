@@ -602,9 +602,6 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern."
   },
-  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
-    "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "Berichte von Seitenansichten geschützt mit k-Anonymität"
   },
@@ -1229,8 +1226,8 @@
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Wenn diese Funktion aktiviert ist, sendet dein Browser ein Signal an Webseiten mit der Aufforderung, deine persönlichen Daten nicht für Werbezwecke zu verkaufen oder weiterzugeben – im Einklang mit Datenschutzgesetzen in der EU und in Kalifornien."
   },
-  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me, betrieben von Ghostery, ist eine wesentliche Komponente der KI-gestützten Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die gesamte Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern und schafft Transparenz im Bereich des Web-Trackings."
+  "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
+    "message": "WhoTracks.Me, betrieben von Ghostery, ist eine umfassende globale Ressource für Web-Tracker, die Transparenz beim Web-Tracking schafft und Ghosterys KI-Anti-Tracking-Technologie antreibt. Basierend auf nicht-persönlichen Beiträgen, die von Ghostery-Unterstützern geteilt werden, bietet WhoTracks.Me Echtzeit-Tracker-Informationen, die die gesamte Ghostery-Community schützen."
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Me Berichte"
