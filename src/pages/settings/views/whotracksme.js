@@ -27,16 +27,10 @@ export default {
         <div layout="column gap" layout@992px="margin:bottom">
           <ui-text type="headline-m" translate="no">WhoTracks.Me</ui-text>
           <ui-text type="body-l" mobile-type="body-m" color="secondary">
-            WhoTracks.Me, operated by Ghostery, is a vital cornerstone of Ghostery’s AI
-            anti-tracking technology, playing a crucial role in providing real-time privacy
-            protection for the Ghostery community. It is a comprehensive global resource on
-            trackers, bringing transparency to web tracking.
-          </ui-text>
-          <ui-text type="body-l" mobile-type="body-m" color="secondary">
-            It exists thanks to the micro-contributions of every Ghostery user who chooses to send
-            non-personal information to WhoTracks.Me. This input enables Ghostery to provide
-            real-time intel on trackers, which, in turn, delivers privacy protection to the entire
-            Ghostery community.
+            WhoTracks.Me, operated by Ghostery, is a comprehensive global resource on web trackers
+            that brings transparency to web tracking and powers Ghostery’s AI anti-tracking
+            technology. Built from non-personal contributions shared by Ghostery users, it provides
+            real-time tracker intelligence that protects the entire Ghostery community.
           </ui-text>
         </div>
         ${
