@@ -16,19 +16,36 @@ import './elements.js';
 import './styles.css';
 
 import Main from './views/main.js';
+import Yourweb from './views/yourweb.js';
 import { getBrowser, getOS } from '/utils/browser-info.js';
+import { SESSION_KEY } from '/utils/yourweb.js';
+
+// The background sets the flag on browser startup and opens the panel,
+// so the recap view takes over as the root view for that single open
+async function shouldShowYourweb() {
+  try {
+    const { [SESSION_KEY]: value } = await chrome.storage.session.get(SESSION_KEY);
+    if (value) await chrome.storage.session.remove(SESSION_KEY);
+
+    return !!value;
+  } catch {
+    return false;
+  }
+}
 
 // Mount the app
-mount(document.body, {
-  stack: router([Main]),
-  browserName: { value: getBrowser().name, reflect: true },
-  platformName: { value: getOS(), reflect: true },
-  render: ({ stack }) => html`
-    <template layout="row">
-      <div id="alert-container" layout="fixed inset:1 top:1 bottom:auto layer:500"></div>
-      ${stack}
-    </template>
-  `,
+shouldShowYourweb().then((yourweb) => {
+  mount(document.body, {
+    stack: router(yourweb ? [Yourweb, Main] : [Main]),
+    browserName: { value: getBrowser().name, reflect: true },
+    platformName: { value: getOS(), reflect: true },
+    render: ({ stack }) => html`
+      <template layout="row">
+        <div id="alert-container" layout="fixed inset:1 top:1 bottom:auto layer:500"></div>
+        ${stack}
+      </template>
+    `,
+  });
 });
 
 // Ping telemetry on panel open

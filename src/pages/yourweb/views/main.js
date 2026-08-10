@@ -13,18 +13,14 @@ import { html, msg, store } from 'hybrids';
 
 import { numberFormatter } from '/ui/labels.js';
 import { WTM_PAGE_URL, DISTRACTIONS_LEARN_MORE_URL } from '/utils/urls.js';
+import { getPeriod } from '/utils/yourweb.js';
 
 import { MergedStats } from '/store/daily-stats.js';
 import Resources from '/store/resources.js';
 
 import assets from '../assets/index.js';
 
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
-const PERIOD_IN_DAYS = 90;
-
-const now = Date.now();
-const dateFrom = new Date(now - PERIOD_IN_DAYS * DAY_IN_MS).toISOString().slice(0, 10);
-const dateTo = new Date(now).toISOString().slice(0, 10);
+const { dateFrom, dateTo } = getPeriod();
 
 export default {
   mergedStats: store(MergedStats, { id: () => ({ dateFrom, dateTo }) }),
@@ -246,27 +242,27 @@ export default {
               <div layout="column gap:0.5 grow" layout@768px="grid:3">
                 <yourweb-step
                   image="${assets['zap-flow-1']}"
-                  step="Step 1"
-                  name="Visit a site"
-                  description="Open any website where ads get in the way"
+                  step="${msg`Step 1`}"
+                  name="${msg`Visit a site`}"
+                  description="${msg`Open any website where ads get in the way`}"
                 ></yourweb-step>
                 <yourweb-step
                   image="${assets['zap-flow-2']}"
-                  step="Step 2"
-                  name="Click “Zap Ads!”"
-                  description="One click instantly blocks ads across the entire site, not just this page"
+                  step="${msg`Step 2`}"
+                  name="${msg`Click “Zap Ads!”`}"
+                  description="${msg`One click instantly blocks ads across the entire site, not just this page`}"
                 ></yourweb-step>
                 <yourweb-step
                   image="${assets['zap-flow-3']}"
-                  step="Step 3"
-                  name="Stay ad-free"
-                  description="The choice is saved, so it stays clean every visit"
+                  step="${msg`Step 3`}"
+                  name="${msg`Stay ad-free`}"
+                  description="${msg`The choice is saved, so it stays clean every visit`}"
                 ></yourweb-step>
               </div>
               <yourweb-step
                 compact
                 image="${assets['zap-flow-4']}"
-                name="Repeat for most visited websites"
+                name="${msg`Repeat for most visited websites`}"
                 layout="shrink:0"
                 layout@768px="shrink:0 self:center width:::22 margin:right:-13"
               ></yourweb-step>

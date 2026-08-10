@@ -32,7 +32,7 @@ import './serp.js';
 import './report-issue.js';
 import './pause-assistant.js';
 
-import './whats-new.js';
+import './yourweb.js';
 
 import './helpers.js';
 import './sync.js';
