@@ -602,9 +602,6 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "有關<a href=\"$${0}\">網路追蹤器</a>、<a href=\"$${1}\">附加元件健康狀況</a>和<a href=\"$${2}\">效能遙測</a>的信息將根據我們的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隱私政策</a>分享，以促進Ghostery社群的隱私保護。."
   },
-  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
-    "message": "它的存在要歸功於每位選擇將非個人資料傳送到 WhoTracks.Me 的 Ghostery 用戶的微小貢獻。這些資料的輸入使 Ghostery 能夠提供有關追蹤器的即時情報，進而為整個 Ghostery 社群提供保護。"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名性保護的頁面顯示報告"
   },
@@ -1229,8 +1226,8 @@
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "啟用後，您的瀏覽器會向網站發送訊號，要求他們不要將您的個人資料用於廣告目的而出售或分享，這符合加州和歐盟等地的隱私法規。"
   },
-  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me由Ghostery運營，是Ghostery人工智慧反追蹤技術的重要基石，在為Ghostery社群提供即時隱私保護方面發揮了關鍵作用。它是一個關於追蹤器的全面全球資源，為網路追蹤帶來透明度。"
+  "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
+    "message": "WhoTracks.Me 由 Ghostery 營運，是一個關於網路追蹤器的全球綜合資源，它讓網路追蹤變得透明，並為 Ghostery 的 AI 反追蹤技術提供支援。它由 Ghostery 使用者分享的非個人貢獻所建立，提供即時追蹤器情報，保護整個 Ghostery 社群。"
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Me 報告"
