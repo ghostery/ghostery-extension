@@ -103,8 +103,8 @@ const Options = {
   // Filters update timestamp
   filtersUpdatedAt: 0,
 
-  // Timestamp of the last time the panel opened with the "Your web" recap view
-  yourwebDisplayedAt: 0,
+  // "Your web" recap: when the panel was opened with the view, and when the user saw it
+  yourweb: { notifiedAt: 0, shownAt: 0 },
 
   [store.connect]: {
     async get() {
@@ -161,7 +161,7 @@ const LOCAL_OPTIONS = [
   'revision',
   'filtersUpdatedAt',
   'fixesFilters',
-  'yourwebDisplayedAt',
+  'yourweb',
 ];
 
 export const SYNC_OPTIONS = Object.keys(Options).filter((key) => !LOCAL_OPTIONS.includes(key));

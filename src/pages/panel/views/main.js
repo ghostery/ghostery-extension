@@ -11,7 +11,12 @@
 
 import { html, store, router, msg } from 'hybrids';
 
+import { lang, numberFormatter } from '/ui/labels.js';
+
+import { findParentDomain } from '/utils/domains.js';
 import { getCurrentTab, openHref } from '/utils/tabs.js';
+import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
+import { PERIOD_IN_MS } from '/utils/yourweb.js';
 
 import Options, {
   isGloballyPaused,
@@ -40,9 +45,6 @@ import ReportConfirm from './report-confirm.js';
 import TrackerDetails from './tracker-details.js';
 import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
-import { findParentDomain } from '/utils/domains.js';
-import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
-import { lang, numberFormatter } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL(
@@ -202,6 +204,10 @@ export default {
     !paused &&
     options.blockAnnoyances &&
     resources.autoconsent[stats.domain],
+  yourwebNotification: ({ options }) =>
+    store.ready(options) &&
+    options.yourweb.shownAt < options.yourweb.notifiedAt &&
+    Date.now() - options.yourweb.notifiedAt < PERIOD_IN_MS,
   render: ({
     options,
     stats,
@@ -211,6 +217,7 @@ export default {
     globalPause,
     contentBlocksSelectors,
     consentManaged,
+    yourwebNotification,
   }) => html`
     <template layout="column grow relative">
       ${
@@ -582,9 +589,11 @@ export default {
           </panel-container>
           ${
             !managedConfig.disableUserControl &&
-            store.ready(notification) &&
-            !store.error(notification) &&
-            html`<panel-notification></panel-notification>`
+            (yourwebNotification
+              ? html`<panel-yourweb-notification></panel-yourweb-notification>`
+              : store.ready(notification) &&
+                !store.error(notification) &&
+                html`<panel-notification></panel-notification>`)
           }
         `
       }

@@ -9,12 +9,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount } from 'hybrids';
+import { mount, store } from 'hybrids';
 
 import '/ui/index.js';
+
+import Options from '/store/options.js';
 
 import './elements.js';
 
 import Main from './views/main.js';
 
 mount(document.body, Main);
+
+// Catches up with the panel notification, which points to this page
+store.set(Options, { yourweb: { shownAt: Date.now() } });

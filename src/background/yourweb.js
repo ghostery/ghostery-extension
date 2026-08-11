@@ -16,22 +16,30 @@ import { PERIOD_IN_MS, SESSION_KEY } from '/utils/yourweb.js';
 
 const chromeAction = chrome.action || chrome.browserAction;
 
-chrome.runtime.onStartup.addListener(async () => {
+// Fresh installations start the period now, so the panel does not pop up right away.
+// shownAt matches notifiedAt, as there is no recap waiting to be seen yet.
+async function startPeriod() {
   const options = await store.resolve(Options);
 
-  if (!options.terms) return;
-
-  // Fresh installations start the period now, so the panel does not pop up right away
-  if (options.yourwebDisplayedAt === 0) {
-    await store.set(options, { yourwebDisplayedAt: Date.now() });
-    return;
+  if (options.yourweb.notifiedAt === 0) {
+    const now = Date.now();
+    await store.set(options, { yourweb: { notifiedAt: now, shownAt: now } });
   }
 
-  if (Date.now() - options.yourwebDisplayedAt < PERIOD_IN_MS) return;
+  return options;
+}
+
+chrome.runtime.onInstalled.addListener(startPeriod);
+
+chrome.runtime.onStartup.addListener(async () => {
+  const options = await startPeriod();
+  if (!options.terms) return;
+
+  if (Date.now() - options.yourweb.notifiedAt < PERIOD_IN_MS) return;
 
   try {
     await chrome.storage.session.set({ [SESSION_KEY]: true });
-    await store.set(options, { yourwebDisplayedAt: Date.now() });
+    await store.set(options, { yourweb: { notifiedAt: Date.now() } });
 
     await chromeAction.openPopup();
     console.log('[yourweb] Opening the panel with the recap view...');
