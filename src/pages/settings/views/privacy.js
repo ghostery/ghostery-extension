@@ -16,6 +16,8 @@ import { longDateFormatter } from '/ui/labels.js';
 import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
+import * as telemetry from '/utils/telemetry.js';
+import { PERIOD_IN_MS } from '/utils/yourweb.js';
 
 import { asyncAction } from '../utils/actions.js';
 import assets from '../assets/index.js';
@@ -61,7 +63,14 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({ options, devMode, globalPause, globalPauseRevokeAt }) => html`
+  // There is nothing worth recapping before the first period is over
+  yourweb: async () => {
+    const { installDate } = await telemetry.getStorage();
+    if (!installDate) return false;
+
+    return Date.now() - new Date(installDate).getTime() >= PERIOD_IN_MS;
+  },
+  render: ({ options, devMode, globalPause, globalPauseRevokeAt, yourweb }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${
@@ -187,29 +196,37 @@ export default {
                   `
                 }
               </settings-toggle>
-              <ui-action layout@768px="margin:bottom:-3">
-                <a
-                  href="${chrome.runtime.getURL('/pages/yourweb/index.html')}"
-                  target="_blank"
-                  data-qa="button:yourweb"
-                >
-                  <settings-option>
-                    <settings-help-image slot="icon">
-                      <img src="${assets.yourweb}" alt="Your web, lately" />
-                    </settings-help-image>
-                    Your web, lately
-                    <span slot="description">
-                      The cleaner, calmer web you've built - by the numbers (last 3 months)
-                    </span>
-                    <ui-button slot="footer" size="s" layout="margin:top">
-                      <button>
-                        See your recap
-                        <ui-icon name="chevron-right-s"></ui-icon>
-                      </button>
-                    </ui-button>
-                  </settings-option>
-                </a>
-              </ui-action>
+              ${html.resolve(
+                yourweb.then(
+                  (show) =>
+                    show &&
+                    html`
+                      <ui-action layout@768px="margin:bottom:-3">
+                        <a
+                          href="${chrome.runtime.getURL('/pages/yourweb/index.html')}"
+                          target="_blank"
+                          data-qa="button:yourweb"
+                        >
+                          <settings-option>
+                            <settings-help-image slot="icon">
+                              <img src="${assets.yourweb}" alt="Your web, lately" />
+                            </settings-help-image>
+                            Your web, lately
+                            <span slot="description">
+                              The cleaner, calmer web you've built - by the numbers (last 3 months)
+                            </span>
+                            <ui-button slot="footer" size="s" layout="margin:top">
+                              <button>
+                                See your recap
+                                <ui-icon name="chevron-right-s"></ui-icon>
+                              </button>
+                            </ui-button>
+                          </settings-option>
+                        </a>
+                      </ui-action>
+                    `,
+                ),
+              )}
             </section>
 
             <div>

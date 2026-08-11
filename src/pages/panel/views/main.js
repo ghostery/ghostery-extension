@@ -206,8 +206,8 @@ export default {
     resources.autoconsent[stats.domain],
   yourwebNotification: ({ options }) =>
     store.ready(options) &&
-    options.yourweb.shownAt < options.yourweb.notifiedAt &&
-    Date.now() - options.yourweb.notifiedAt < PERIOD_IN_MS,
+    options.yourweb.shownAt <= options.yourweb.notifiedAt &&
+    Date.now() - options.yourweb.notifiedAt >= PERIOD_IN_MS,
   render: ({
     options,
     stats,

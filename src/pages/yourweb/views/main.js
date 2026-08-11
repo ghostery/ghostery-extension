@@ -85,7 +85,7 @@ export default {
         <div layout="column gap:5 padding:2:2:0" layout@992px="padding:2.5:2.5:0">
           <div layout="row items:center content:space-between gap:2">
             <img src="${assets.logo}" alt="Ghostery" layout="size:108px:4 shrink:0" />
-            <img src="${assets['header-badge']}" alt="" layout="size:8 shrink:0" />
+            <ui-icon name="yourweb-badge" layout="size:8 shrink:0"></ui-icon>
           </div>
           <div layout="column center gap padding:0:0:8">
             <ui-text mobile-type="display-s" type="headline-l" uppercase layout="block:center">

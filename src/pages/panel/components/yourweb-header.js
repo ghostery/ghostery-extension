@@ -11,7 +11,6 @@
 
 import { html } from 'hybrids';
 
-import badge from '../assets/yourweb-badge.svg';
 import wave from '../assets/yourweb-wave.svg';
 
 export default {
@@ -24,7 +23,7 @@ export default {
         <div></div>
       </div>
       <div layout="relative column center gap:2 padding:4:2">
-        <img src="${badge}" alt="" layout="size:6" />
+        <ui-icon name="yourweb-badge" layout="size:6"></ui-icon>
         <ui-text type="headline-s" color="onbrand" uppercase layout="block:center">
           <slot></slot>
         </ui-text>
@@ -48,9 +47,11 @@ export default {
       position: absolute;
       top: -35px;
       left: 50%;
+      box-sizing: border-box;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.025);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     #rings div:nth-child(1) { width: 688px; height: 688px; }

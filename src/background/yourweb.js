@@ -14,25 +14,19 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 import { PERIOD_IN_MS, SESSION_KEY } from '/utils/yourweb.js';
 
-const chromeAction = chrome.action || chrome.browserAction;
-
-// Fresh installations start the period now, so the panel does not pop up right away.
-// shownAt matches notifiedAt, as there is no recap waiting to be seen yet.
-async function startPeriod() {
+async function setupPeriod() {
   const options = await store.resolve(Options);
 
   if (options.yourweb.notifiedAt === 0) {
     const now = Date.now();
     await store.set(options, { yourweb: { notifiedAt: now, shownAt: now } });
   }
-
-  return options;
 }
 
-chrome.runtime.onInstalled.addListener(startPeriod);
+const chromeAction = chrome.action || chrome.browserAction;
 
-chrome.runtime.onStartup.addListener(async () => {
-  const options = await startPeriod();
+async function openRecap() {
+  const options = await store.resolve(Options);
   if (!options.terms) return;
 
   if (Date.now() - options.yourweb.notifiedAt < PERIOD_IN_MS) return;
@@ -44,7 +38,17 @@ chrome.runtime.onStartup.addListener(async () => {
     await chromeAction.openPopup();
     console.log('[yourweb] Opening the panel with the recap view...');
   } catch (e) {
-    console.error('[yourweb] Failed to open the panel:', e);
     await chrome.storage.session.remove(SESSION_KEY);
+    console.error('[yourweb] Failed to open the panel:', e);
   }
+}
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await setupPeriod();
+  if (__DEBUG__) await openRecap();
+});
+
+chrome.runtime.onStartup.addListener(async () => {
+  await setupPeriod();
+  await openRecap();
 });

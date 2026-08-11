@@ -13,13 +13,11 @@ import { html } from 'hybrids';
 
 import { openHref } from '/utils/tabs.js';
 
-import badge from '../assets/yourweb-badge.svg';
-
 const YOURWEB_URL = chrome.runtime.getURL('/pages/yourweb/index.html');
 
 export default {
   render: () => html`
-    <template layout="block padding:1:1.5:1.5">
+    <template layout="block width:min:full padding:1:1.5:1.5">
       <ui-action>
         <a
           href="${YOURWEB_URL}"
@@ -34,7 +32,7 @@ export default {
               <div></div>
               <div></div>
             </div>
-            <img src="${badge}" alt="" layout="relative size:3.5" />
+            <ui-icon name="yourweb-badge" layout="relative size:3.5"></ui-icon>
           </div>
           <div layout="column grow gap:0.25">
             <ui-text type="label-m">Your web, lately</ui-text>
@@ -73,9 +71,11 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
+      box-sizing: border-box;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     #rings div:nth-child(1) { width: 90px; height: 90px; }
