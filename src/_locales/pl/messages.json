@@ -464,7 +464,7 @@
     "message": "Fakty"
   },
   "failed_to_clear_browsing_data_": {
-    "message": "Nie udało się wyczyścić danych przeglądania."
+    "message": "Nie udało się usunąć danych przeglądania."
   },
   "failed_to_update_filter_rules": {
     "message": "Nie udało się zaktualizować reguł filtrowania"
@@ -1047,7 +1047,7 @@
     "message": "Funkcja jest zarządzana przez Twoją organizację"
   },
   "the_selected_data_of_all_websites_will_be_cleared_": {
-    "message": "Wybrane dane wszystkich stron internetowych zostaną wyczyszczone."
+    "message": "Wybrane dane wszystkich stron internetowych zostaną usunięte."
   },
   "the_selected_data_of_this_website_will_be_cleared_": {
     "message": "Wybrane dane tej witryny zostaną usunięte."
@@ -1296,7 +1296,7 @@
     "message": "Raport prywatności twojej przeglądarki"
   },
   "your_browsing_data_has_been_cleared_": {
-    "message": "Twoje dane przeglądania zostały wyczyszczone."
+    "message": "Twoje dane przeglądania zostały usunięte."
   },
   "your_community_powered_privacy_features_": {
     "message": "Twoje funkcje prywatności wspierane przez społeczność:"
