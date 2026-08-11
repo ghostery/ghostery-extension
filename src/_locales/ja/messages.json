@@ -79,6 +79,12 @@
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "WhoTracks.Meタブまたは$${0}に表示されるすべての情報は、ウェブトラッカーに関する事実の集約です。これらのレポートはGhosteryのアンチトラッキング技術を支え、コミュニティ全体を保護します。"
   },
+  "all_time": {
+    "message": "全期間"
+  },
+  "all_websites": {
+    "message": "すべてのウェブサイト"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "すべての調整済み保護ステータスのウェブサイトがここにリストされます。"
   },
@@ -220,17 +226,26 @@
   "clear": {
     "message": "クリア"
   },
-  "clear_cookies": {
-    "message": "クッキーを消去"
+  "clear_browsing_data": {
+    "message": "閲覧データを消去"
   },
-  "clear_cookies_": {
-    "message": "クッキーを消去しますか？"
+  "clear_cache": {
+    "message": "キャッシュをクリア"
+  },
+  "clear_history": {
+    "message": "履歴を消去"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、<strong>Ghosteryをツールバーに固定</strong>します。"
   },
   "close": {
     "message": "閉じる"
+  },
+  "close_all_tabs": {
+    "message": "すべてのタブを閉じる"
+  },
+  "close_this_tab": {
+    "message": "このタブを閉じる"
   },
   "collapse": {
     "message": "折り畳む"
@@ -260,9 +275,6 @@
   },
   "cookie_banner_visible": {
     "message": "クッキーバナーが表示されています"
-  },
-  "cookies_successfully_cleared": {
-    "message": "クッキーが正常にクリアされました"
   },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
@@ -300,6 +312,9 @@
   },
   "default": {
     "message": "初期設定"
+  },
+  "delete_cookies_and_site_data": {
+    "message": "Cookieとサイトデータを削除"
   },
   "deleted_cookies": {
     "message": "削除されたクッキー"
@@ -448,11 +463,8 @@
   "facts": {
     "message": "事実"
   },
-  "failed_to_clear_cookies": {
-    "message": "クッキーの削除に失敗しました"
-  },
-  "failed_to_clear_cookies__@_0_": {
-    "message": "クッキーの削除に失敗しました: $${0}"
+  "failed_to_clear_browsing_data_": {
+    "message": "閲覧データの消去に失敗しました。"
   },
   "failed_to_update_filter_rules": {
     "message": "フィルタールールの更新に失敗しました"
@@ -504,6 +516,9 @@
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
     "message": "Ghosteryは、活動を管理する組織にリンクする所有構造をマッピングします。この知識は、専門家によって手作業でキュレーションされ、で公開されています。"
+  },
+  "ghostery_needs_an_additional_permission_to_clear_browsing_data_": {
+    "message": "Ghosteryが閲覧データを消去するには、追加の許可が必要です。"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghosteryは、パスワード、閲覧履歴、訪問したページの内容などの個人情報を収集することはありません。"
@@ -602,11 +617,23 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "<a href=\"$${0}\">ウェブトラッカー</a>、<a href=\"$${1}\">アドオンの健全性</a>、<a href=\"$${2}\">パフォーマンステレメトリ</a>に関する情報は、当社の<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に従って共有され、Ghosteryコミュニティのプライバシー保護を推進します。"
   },
+  "it_might_sign_you_out_of_your_accounts_": {
+    "message": "アカウントからログアウトされる可能性があります。"
+  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名性で保護されたページ表示のレポート"
   },
   "keep_disabled": {
     "message": "無効のままにする"
+  },
+  "last_24_hours": {
+    "message": "過去24時間"
+  },
+  "last_7_days": {
+    "message": "過去7日間"
+  },
+  "last_hour": {
+    "message": "過去1時間"
   },
   "last_month": {
     "message": "先月"
@@ -860,9 +887,6 @@
   "remove": {
     "message": "削除"
   },
-  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
-    "message": "このサイトに保存されているすべてのクッキーを削除してプライバシーを保護し、閲覧データをリセットします。"
-  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "煩わしいプロンプトやインターフェースの乱雑さを排除し、よりすっきりとしたブラウジング体験を実現します。"
   },
@@ -1022,6 +1046,12 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "この機能は組織によって管理されています"
   },
+  "the_selected_data_of_all_websites_will_be_cleared_": {
+    "message": "選択したすべてのウェブサイトのデータが消去されます。"
+  },
+  "the_selected_data_of_this_website_will_be_cleared_": {
+    "message": "このウェブサイトの選択されたデータが消去されます。"
+  },
   "the_url_is_already_added": {
     "message": "URLはすでに追加されています"
   },
@@ -1052,8 +1082,11 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "このサイトは1時間停止します"
   },
-  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
-    "message": "サインアウトされ、設定や保存された設定がリセットされる可能性があります。サインインし直すか、再度クッキーを受け入れるまで、一部のページが正常に動作しない場合があります。"
+  "this_website": {
+    "message": "このウェブサイト"
+  },
+  "time_range": {
+    "message": "期間"
   },
   "to_adjust_privacy_protection_enable_on_a_site_": {
     "message": "サイトのプライバシー保護を調整するには:"
@@ -1250,9 +1283,6 @@
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "<a href=\"$${0}\">WhoTracks.Meの設定</a>で無効にできます。"
   },
-  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
-    "message": "$${0}によって保存されたすべてのクッキーを削除しようとしています。"
-  },
   "you_re_ready_to_block_ads": {
     "message": "広告ブロックの準備ができました"
   },
@@ -1264,6 +1294,9 @@
   },
   "your_browser_privacy_report": {
     "message": "ブラウザのプライバシーレポート"
+  },
+  "your_browsing_data_has_been_cleared_": {
+    "message": "閲覧データが消去されました。"
   },
   "your_community_powered_privacy_features_": {
     "message": "コミュニティ主導のプライバシー機能:"
