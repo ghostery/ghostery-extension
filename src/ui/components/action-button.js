@@ -20,6 +20,11 @@ export default {
       <ui-action><slot></slot></ui-action>
     </template>
   `.css`
+    :host([disabled]) {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
     ::slotted(*) {
       cursor: pointer;
       box-sizing: border-box;
@@ -41,6 +46,11 @@ export default {
       background: none;
       border-color: transparent;
       box-shadow: none;
+      color: var(--color-tertiary);
+    }
+
+    :host([grouped][active]) ::slotted(*) {
+      color: var(--color-primary);
     }
 
     @media (hover: hover) {

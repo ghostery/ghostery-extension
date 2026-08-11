@@ -21,6 +21,7 @@
     "offscreen"
   ],
   "host_permissions": ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
+  "optional_permissions": ["browsingData"],
   "icons": {
     "64": "icons/icon-64.png",
     "128": "icons/icon-128.png"
