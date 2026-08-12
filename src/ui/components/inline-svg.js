@@ -11,16 +11,21 @@
 
 import { html } from 'hybrids';
 
+const EXTENSION_URL = chrome.runtime.getURL('/');
+
 const cache = new Map();
 
 function fetchSVG(src) {
   let template = cache.get(src);
 
   if (!template) {
-    template = fetch(src)
-      .then((res) => res.text())
-      .then((markup) => html([markup]))
-      .catch(() => '');
+    // The markup is injected as a template, so it must not come from outside of the extension
+    template = new URL(src, document.baseURI).href.startsWith(EXTENSION_URL)
+      ? fetch(src)
+          .then((res) => res.text())
+          .then((markup) => html([markup]))
+          .catch(() => '')
+      : Promise.resolve('');
 
     cache.set(src, template);
   }

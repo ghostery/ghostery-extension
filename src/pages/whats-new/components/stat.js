@@ -54,8 +54,7 @@ export default {
 
     :host([type="activities"]) #icon { color: var(--color-wtm-secondary); }
     :host([type="blocked"]) #icon { color: var(--color-danger-secondary); }
-    /* The mint accent of the globe icon has no counterpart in the design tokens */
-    :host([type="pages"]) #icon { color: #4ecba1; }
+    :host([type="pages"]) #icon { color: var(--color-category-cdn); }
     :host([type="cookies"]) #icon { color: var(--color-warning-secondary); }
     :host([type="consents"]) #icon { color: var(--color-success-secondary); }
     :host([type="modified"]) #icon { color: var(--color-brand-secondary); }
