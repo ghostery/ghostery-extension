@@ -16,22 +16,22 @@ import { numberFormatter } from '/ui/labels.js';
 import { MergedStats } from '/store/daily-stats.js';
 
 import { openHref } from '/utils/tabs.js';
-import { getPeriod } from '/utils/yourweb.js';
+import { getPeriod } from '/utils/whats-new.js';
 
 import Main from './main.js';
 
 const { dateFrom, dateTo } = getPeriod();
 
-const YOURWEB_URL = chrome.runtime.getURL('/pages/yourweb/index.html');
+const WHATS_NEW_URL = chrome.runtime.getURL('/pages/whats-new/index.html');
 
 export default {
   mergedStats: store(MergedStats, { id: () => ({ dateFrom, dateTo }) }),
   render: ({ mergedStats }) => html`
     <template layout="column grow">
-      <panel-yourweb-header>Your web, lately</panel-yourweb-header>
+      <panel-whats-new-header>Your web, lately</panel-whats-new-header>
       <panel-container>
         <div layout="column padding:0:1.5:1">
-          <panel-yourweb-stats
+          <panel-whats-new-stats
             value="${store.ready(mergedStats) ? numberFormatter.format(mergedStats.trackers.length) : ''}"
             label="${msg`Observed activities`}"
           >
@@ -43,10 +43,10 @@ export default {
               <ui-icon name="globe" color="tertiary" layout="size:2"></ui-icon>
               <ui-text type="label-s">All sites</ui-text>
             </div>
-          </panel-yourweb-stats>
+          </panel-whats-new-stats>
         </div>
       </panel-container>
-      <panel-yourweb-actions>
+      <panel-whats-new-actions>
         <div layout="row center gap padding:1:0.5">
           <ui-icon name="category-organization" color="brand-primary" layout="size:2.5"></ui-icon>
           <ui-text type="label-m" color="brand-primary" layout="block:center">
@@ -54,14 +54,14 @@ export default {
           </ui-text>
         </div>
         <ui-button type="primary" layout="height:6">
-          <a href="${YOURWEB_URL}" onclick="${openHref}" data-qa="button:yourweb:recap">
+          <a href="${WHATS_NEW_URL}" onclick="${openHref}" data-qa="button:whats-new:recap">
             See your recap
           </a>
         </ui-button>
         <ui-button layout="height:6">
-          <a href="${router.url(Main)}" data-qa="button:yourweb:close">Close</a>
+          <a href="${router.url(Main)}" data-qa="button:whats-new:close">Close</a>
         </ui-button>
-      </panel-yourweb-actions>
+      </panel-whats-new-actions>
     </template>
   `,
 };

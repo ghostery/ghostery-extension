@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import wave from '../assets/yourweb-wave.svg';
+import wave from '../assets/whats-new-wave.svg';
 
 export default {
   render: () => html`
@@ -23,7 +23,7 @@ export default {
         <div></div>
       </div>
       <div layout="relative column center gap:2 padding:4:2">
-        <ui-icon name="yourweb-badge" layout="size:6"></ui-icon>
+        <ui-icon name="whats-new-badge" layout="size:6"></ui-icon>
         <ui-text type="headline-s" color="onbrand" uppercase layout="block:center">
           <slot></slot>
         </ui-text>

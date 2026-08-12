@@ -9,11 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const PERIOD_IN_MS = __DEBUG__ ? 10 * 1000 : 90 * 24 * 60 * 60 * 1000;
+export const PERIOD_IN_MS = 90 * 24 * 60 * 60 * 1000;
 
-// Set by the background on browser startup to make the panel open
-// with the "Your web, lately" view instead of the main one
-export const SESSION_KEY = 'yourweb:open:panel';
+// Set by the background when it opens the panel, so the panel starts with the recap view
+export const SESSION_KEY = 'whatsnew:open:panel';
 
 export function getPeriod() {
   const now = Date.now();

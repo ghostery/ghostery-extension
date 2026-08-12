@@ -19,5 +19,4 @@ import Main from './views/main.js';
 
 mount(document.body, Main);
 
-const now = Date.now();
-store.set(Options, { yourweb: { shownAt: now, notifiedAt: now } });
+store.set(Options, { whatsNew: { shown: true } });

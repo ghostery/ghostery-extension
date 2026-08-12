@@ -15,6 +15,6 @@ define.from(
   import.meta.glob(['./components/*.js', './views/*.js'], { eager: true, import: 'default' }),
   {
     root: ['components', 'views'],
-    prefix: 'yourweb',
+    prefix: 'whats-new',
   },
 );

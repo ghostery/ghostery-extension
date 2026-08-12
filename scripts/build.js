@@ -31,7 +31,7 @@ const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
   assets: ['_locales', 'icons', 'static_pages', 'background/rule_resources'],
-  pages: ['dnr-converter', 'logger', 'onboarding', 'whotracksme', 'yourweb'],
+  pages: ['dnr-converter', 'logger', 'onboarding', 'whotracksme', 'whats-new'],
 };
 
 // Generate arguments from command line

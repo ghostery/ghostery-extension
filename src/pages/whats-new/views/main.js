@@ -13,7 +13,7 @@ import { html, msg, store } from 'hybrids';
 
 import { numberFormatter } from '/ui/labels.js';
 import { WTM_PAGE_URL, DISTRACTIONS_LEARN_MORE_URL } from '/utils/urls.js';
-import { getPeriod } from '/utils/yourweb.js';
+import { getPeriod } from '/utils/whats-new.js';
 
 import { MergedStats } from '/store/daily-stats.js';
 import Resources from '/store/resources.js';
@@ -81,11 +81,11 @@ export default {
   },
   render: ({ mergedStats, resources, stats }) => html`
     <template layout="column">
-      <yourweb-hero>
+      <whats-new-hero>
         <div layout="column gap:5 padding:2:2:0" layout@992px="padding:2.5:2.5:0">
           <div layout="row items:center content:space-between gap:2">
             <img src="${assets.logo}" alt="Ghostery" layout="size:108px:4 shrink:0" />
-            <ui-icon name="yourweb-badge" layout="size:8 shrink:0"></ui-icon>
+            <ui-icon name="whats-new-badge" layout="size:8 shrink:0"></ui-icon>
           </div>
           <div layout="column center gap padding:0:0:8">
             <ui-text mobile-type="display-s" type="headline-l" uppercase layout="block:center">
@@ -97,13 +97,13 @@ export default {
             </ui-text>
           </div>
         </div>
-        <yourweb-wave></yourweb-wave>
-      </yourweb-hero>
+        <whats-new-wave></whats-new-wave>
+      </whats-new-hero>
       ${
         store.ready(mergedStats, resources) &&
         html`
-          <yourweb-facts layout="width:full::1200px self:center margin:bottom:5">
-            <yourweb-fact>
+          <whats-new-facts layout="width:full::1200px self:center margin:bottom:5">
+            <whats-new-fact>
               <ui-icon name="shield" color="brand-primary" layout="size:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
                 <ui-text type="label-m">
@@ -111,8 +111,8 @@ export default {
                 </ui-text>
                 stopped before they reached you – and that’s not even the biggest number below
               </ui-text>
-            </yourweb-fact>
-            <yourweb-fact>
+            </whats-new-fact>
+            <whats-new-fact>
               <ui-icon
                 name="category-organization"
                 color="brand-primary"
@@ -122,22 +122,22 @@ export default {
                 The companies that <ui-text type="label-m">wanted your data</ui-text>, named (you’ll
                 recognise a few)
               </ui-text>
-            </yourweb-fact>
-            <yourweb-fact>
+            </whats-new-fact>
+            <whats-new-fact>
               <ui-icon name="logo-zap" layout="size:7:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
                 The <ui-text type="label-m">one-click way</ui-text> to give someone the same
                 <ui-text type="label-m">quiet web</ui-text>, with Ghostery Zap
               </ui-text>
-            </yourweb-fact>
-            <yourweb-fact>
+            </whats-new-fact>
+            <whats-new-fact>
               <ui-icon name="block-ads" color="brand-primary" layout="size:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
                 A new way to <ui-text type="label-m">make pages calmer</ui-text> that isn’t about
                 ads
               </ui-text>
-            </yourweb-fact>
-          </yourweb-facts>
+            </whats-new-fact>
+          </whats-new-facts>
 
           ${
             !!stats.length &&
@@ -151,19 +151,19 @@ export default {
                     The web you built – by the numbers (Last 3 months)
                   </ui-text>
                 </div>
-                <yourweb-stats>
+                <whats-new-stats>
                   ${stats.map(
                     ({ type, value, label, description }, index) => html`
-                      <yourweb-stat
+                      <whats-new-stat
                         type="${type}"
                         value="${numberFormatter.format(value)}"
                         label="${label}"
                         description="${description}"
                         featured="${index === 0}"
-                      ></yourweb-stat>
+                      ></whats-new-stat>
                     `,
                   )}
-                </yourweb-stats>
+                </whats-new-stats>
               </section>
             `
           }
@@ -186,11 +186,11 @@ export default {
                     .slice(0, 3)
                     .map(
                       ({ id, name, category }) => html`
-                        <yourweb-entity
+                        <whats-new-entity
                           name="${name}"
                           category="${category}"
                           href="${WTM_PAGE_URL}/trackers/${id}"
-                        ></yourweb-entity>
+                        ></whats-new-entity>
                       `,
                     )}
                 </div>
@@ -199,7 +199,7 @@ export default {
           }
 
           <section layout="column padding:0:2 margin:bottom:8 width:full::880px self:center">
-            <yourweb-panel
+            <whats-new-panel
               layout="column center gap:5 padding:4:3"
               layout@768px="row gap:5 padding:4:6"
             >
@@ -214,11 +214,11 @@ export default {
                 </ui-text>
                 <ui-text type="desc-m">Better habits make a better web.</ui-text>
               </div>
-            </yourweb-panel>
+            </whats-new-panel>
           </section>
 
-          <yourweb-hero>
-            <yourweb-wave flip></yourweb-wave>
+          <whats-new-hero>
+            <whats-new-wave flip></whats-new-wave>
             <div layout="column center gap padding:5:2" layout@992px="padding:8:15">
               <ui-text mobile-type="display-s" type="display-m" layout="block:center">
                 Share a calmer web
@@ -228,46 +228,46 @@ export default {
                 the same quiet web you built – Ghostery makes the setup one tap.
               </ui-text>
             </div>
-            <yourweb-wave></yourweb-wave>
-          </yourweb-hero>
+            <whats-new-wave></whats-new-wave>
+          </whats-new-hero>
 
           <section layout="column gap:3 padding:0:2 margin:5:0:8 width:full::1200px self:center">
             <ui-text type="display-s" layout="block:center">
               Teach them these 3 steps to block ads with Ghostery Zap
             </ui-text>
-            <yourweb-flow
+            <whats-new-flow
               layout="column gap:2 padding:1.5"
               layout@992px="row items:stretch padding:1.5 margin:right:11"
             >
               <div layout="column gap:0.5 grow" layout@768px="grid:3">
-                <yourweb-step
+                <whats-new-step
                   image="${assets['zap-flow-1']}"
                   step="${msg`Step 1`}"
                   name="${msg`Visit a site`}"
                   description="${msg`Open any website where ads get in the way`}"
-                ></yourweb-step>
-                <yourweb-step
+                ></whats-new-step>
+                <whats-new-step
                   image="${assets['zap-flow-2']}"
                   step="${msg`Step 2`}"
                   name="${msg`Click “Zap Ads!”`}"
                   description="${msg`One click instantly blocks ads across the entire site, not just this page`}"
-                ></yourweb-step>
-                <yourweb-step
+                ></whats-new-step>
+                <whats-new-step
                   image="${assets['zap-flow-3']}"
                   step="${msg`Step 3`}"
                   name="${msg`Stay ad-free`}"
                   description="${msg`The choice is saved, so it stays clean every visit`}"
-                ></yourweb-step>
+                ></whats-new-step>
               </div>
-              <yourweb-step
+              <whats-new-step
                 compact
                 image="${assets['zap-flow-4']}"
                 name="${msg`Repeat for most visited websites`}"
                 layout="shrink:0"
                 layout@768px="shrink:0 self:center width:::22 margin:right:-13"
-              ></yourweb-step>
-            </yourweb-flow>
-            <yourweb-panel
+              ></whats-new-step>
+            </whats-new-flow>
+            <whats-new-panel
               type="secondary"
               layout="column center gap:2 padding:3 self:center"
               layout@768px="width:538px"
@@ -281,42 +281,42 @@ export default {
                 </ui-text>
               </div>
               <div layout="row:wrap center gap:0.5">
-                <yourweb-browser-link
+                <whats-new-browser-link
                   name="Chrome"
                   icon="${assets['browser-chrome']}"
                   href="https://chrome.google.com/webstore/detail/mlomiejdfkolichcflejclcbmpeaniij"
-                ></yourweb-browser-link>
-                <yourweb-browser-link
+                ></whats-new-browser-link>
+                <whats-new-browser-link
                   name="Firefox"
                   icon="${assets['browser-firefox']}"
                   href="https://addons.mozilla.org/firefox/addon/ghostery/"
-                ></yourweb-browser-link>
-                <yourweb-browser-link
+                ></whats-new-browser-link>
+                <whats-new-browser-link
                   name="Safari"
                   icon="${assets['browser-safari']}"
                   href="https://apps.apple.com/app/apple-store/id6504861501"
-                ></yourweb-browser-link>
-                <yourweb-browser-link
+                ></whats-new-browser-link>
+                <whats-new-browser-link
                   name="Brave"
                   icon="${assets['browser-brave']}"
                   href="https://chrome.google.com/webstore/detail/mlomiejdfkolichcflejclcbmpeaniij"
-                ></yourweb-browser-link>
-                <yourweb-browser-link
+                ></whats-new-browser-link>
+                <whats-new-browser-link
                   name="Edge"
                   icon="${assets['browser-edge']}"
                   href="https://microsoftedge.microsoft.com/addons/detail/fclbdkbhjlgkbpfldjodgjncejkkjcme"
-                ></yourweb-browser-link>
-                <yourweb-browser-link
+                ></whats-new-browser-link>
+                <whats-new-browser-link
                   name="Opera"
                   icon="${assets['browser-opera']}"
                   href="https://addons.opera.com/extensions/details/ghostery/"
-                ></yourweb-browser-link>
+                ></whats-new-browser-link>
               </div>
-            </yourweb-panel>
+            </whats-new-panel>
           </section>
 
-          <yourweb-outro layout="column gap:3 margin:bottom:8">
-            <yourweb-wave flip></yourweb-wave>
+          <whats-new-outro layout="column gap:3 margin:bottom:8">
+            <whats-new-wave flip></whats-new-wave>
             <img src="${assets['distractions']}" alt="" />
             <div layout="column center gap:3 padding:0:2 width:full::1200px self:center">
               <div layout="column center gap:2">
@@ -341,10 +341,10 @@ export default {
                 </a>
               </ui-button>
             </div>
-          </yourweb-outro>
+          </whats-new-outro>
 
-          <yourweb-hero>
-            <yourweb-wave flip></yourweb-wave>
+          <whats-new-hero>
+            <whats-new-wave flip></whats-new-wave>
             <div
               layout="column center gap:3 padding:0:2 margin:5:0:10"
               layout@992px="padding:0:15 margin:8:0:10"
@@ -360,7 +360,7 @@ export default {
                 </ui-text>
               </div>
             </div>
-          </yourweb-hero>
+          </whats-new-hero>
         `
       }
     </template>

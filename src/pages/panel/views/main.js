@@ -16,7 +16,6 @@ import { lang, numberFormatter } from '/ui/labels.js';
 import { findParentDomain } from '/utils/domains.js';
 import { getCurrentTab, openHref } from '/utils/tabs.js';
 import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
-import { PERIOD_IN_MS } from '/utils/yourweb.js';
 
 import Options, {
   isGloballyPaused,
@@ -204,10 +203,7 @@ export default {
     !paused &&
     options.blockAnnoyances &&
     resources.autoconsent[stats.domain],
-  yourwebNotification: ({ options }) =>
-    store.ready(options) &&
-    options.yourweb.shownAt <= options.yourweb.notifiedAt &&
-    Date.now() - options.yourweb.notifiedAt >= PERIOD_IN_MS,
+  whatsNewNotification: ({ options }) => store.ready(options) && !options.whatsNew.shown,
   render: ({
     options,
     stats,
@@ -217,7 +213,7 @@ export default {
     globalPause,
     contentBlocksSelectors,
     consentManaged,
-    yourwebNotification,
+    whatsNewNotification,
   }) => html`
     <template layout="column grow relative">
       ${
@@ -589,8 +585,8 @@ export default {
           </panel-container>
           ${
             !managedConfig.disableUserControl &&
-            (yourwebNotification
-              ? html`<panel-yourweb-notification></panel-yourweb-notification>`
+            (whatsNewNotification
+              ? html`<panel-whats-new-notification></panel-whats-new-notification>`
               : store.ready(notification) &&
                 !store.error(notification) &&
                 html`<panel-notification></panel-notification>`)

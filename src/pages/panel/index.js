@@ -16,13 +16,13 @@ import './elements.js';
 import './styles.css';
 
 import Main from './views/main.js';
-import Yourweb from './views/yourweb.js';
+import WhatsNew from './views/whats-new.js';
 import { getBrowser, getOS } from '/utils/browser-info.js';
-import { SESSION_KEY } from '/utils/yourweb.js';
+import { SESSION_KEY } from '/utils/whats-new.js';
 
 // The background sets the flag on browser startup and opens the panel,
 // so the recap view takes over as the root view for that single open
-async function shouldShowYourweb() {
+async function shouldShowWhatsNew() {
   try {
     const { [SESSION_KEY]: value } = await chrome.storage.session.get(SESSION_KEY);
     if (value) await chrome.storage.session.remove(SESSION_KEY);
@@ -34,9 +34,9 @@ async function shouldShowYourweb() {
 }
 
 // Mount the app
-shouldShowYourweb().then((yourweb) => {
+shouldShowWhatsNew().then((whatsNew) => {
   mount(document.body, {
-    stack: router(yourweb ? [Yourweb, Main] : [Main]),
+    stack: router(whatsNew ? [WhatsNew, Main] : [Main]),
     browserName: { value: getBrowser().name, reflect: true },
     platformName: { value: getOS(), reflect: true },
     render: ({ stack }) => html`

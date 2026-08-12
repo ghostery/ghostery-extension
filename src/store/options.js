@@ -31,7 +31,7 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
-const OPTIONS_VERSION = 5;
+const OPTIONS_VERSION = 6;
 
 const Options = {
   // Mode
@@ -103,8 +103,9 @@ const Options = {
   // Filters update timestamp
   filtersUpdatedAt: 0,
 
-  // "Your web" recap: when the panel was opened with the view, and when the user saw it
-  yourweb: { notifiedAt: 0, shownAt: 0 },
+  // What's new: the announced minor version, and whether the recap page was already shown.
+  // It starts as shown, so fresh installations have nothing to catch up on
+  whatsNew: { version: 0, shown: true },
 
   [store.connect]: {
     async get() {
@@ -161,7 +162,7 @@ const LOCAL_OPTIONS = [
   'revision',
   'filtersUpdatedAt',
   'fixesFilters',
-  'yourweb',
+  'whatsNew',
 ];
 
 export const SYNC_OPTIONS = Object.keys(Options).filter((key) => !LOCAL_OPTIONS.includes(key));
@@ -256,6 +257,12 @@ async function migrate(options, optionsVersion) {
     if (options.redirectProtection) {
       options.redirectProtection.enabled = true;
     }
+  }
+
+  // What's new version moved into an object with the recap page state
+  if (optionsVersion < 6) {
+    options.whatsNew = { version: options.whatsNewVersion || 0, shown: true };
+    delete options.whatsNewVersion;
   }
 
   // Flush updated options and version to the storage

@@ -13,17 +13,17 @@ import { html } from 'hybrids';
 
 import { openHref } from '/utils/tabs.js';
 
-const YOURWEB_URL = chrome.runtime.getURL('/pages/yourweb/index.html');
+const WHATS_NEW_URL = chrome.runtime.getURL('/pages/whats-new/index.html');
 
 export default {
   render: () => html`
-    <template layout="block width:min:full padding:1:1.5:1.5">
+    <template layout="block width:min:full padding:1.5">
       <ui-action>
         <a
-          href="${YOURWEB_URL}"
+          href="${WHATS_NEW_URL}"
           onclick="${openHref}"
           layout="row items:center gap:2 padding:1.5"
-          data-qa="button:yourweb:notification"
+          data-qa="button:whats-new:notification"
         >
           <div id="illustration" layout="relative row center shrink:0 size:6:7 overflow">
             <div id="rings">
@@ -32,7 +32,7 @@ export default {
               <div></div>
               <div></div>
             </div>
-            <ui-icon name="yourweb-badge" layout="relative size:3.5"></ui-icon>
+            <ui-icon name="whats-new-badge" layout="relative size:3.5"></ui-icon>
           </div>
           <div layout="column grow gap:0.25">
             <ui-text type="label-m">Your web, lately</ui-text>
@@ -87,6 +87,12 @@ export default {
       background: var(--background-wtm-strong);
       border-radius: 50%;
       color: var(--color-onbrand);
+    }
+
+    @media (hover: hover) {
+      a:hover ui-text {
+        text-decoration: underline;
+      }
     }
   `,
 };
