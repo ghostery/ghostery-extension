@@ -79,6 +79,12 @@
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "All information displayed on the WhoTracks.Me Tab or $${0} is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
   },
+  "all_time": {
+    "message": "All time"
+  },
+  "all_websites": {
+    "message": "All websites"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "All websites with adjusted protection status will be listed here."
   },
@@ -220,17 +226,26 @@
   "clear": {
     "message": "Clear"
   },
-  "clear_cookies": {
-    "message": "Clear cookies"
+  "clear_browsing_data": {
+    "message": "Clear browsing data"
   },
-  "clear_cookies_": {
-    "message": "Clear cookies?"
+  "clear_cache": {
+    "message": "Clear cache"
+  },
+  "clear_history": {
+    "message": "Clear history"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Click the puzzle icon next to the search bar and <strong>pin Ghostery</strong> to your toolbar."
   },
   "close": {
     "message": "Close"
+  },
+  "close_all_tabs": {
+    "message": "Close all tabs"
+  },
+  "close_this_tab": {
+    "message": "Close this tab"
   },
   "collapse": {
     "message": "Collapse"
@@ -260,9 +275,6 @@
   },
   "cookie_banner_visible": {
     "message": "Cookie banner visible"
-  },
-  "cookies_successfully_cleared": {
-    "message": "Cookies successfully cleared"
   },
   "copied_to_clipboard": {
     "message": "Copied to clipboard"
@@ -300,6 +312,9 @@
   },
   "default": {
     "message": "Default"
+  },
+  "delete_cookies_and_site_data": {
+    "message": "Delete cookies and site data"
   },
   "deleted_cookies": {
     "message": "Deleted cookies"
@@ -448,11 +463,8 @@
   "facts": {
     "message": "Facts"
   },
-  "failed_to_clear_cookies": {
-    "message": "Failed to clear cookies"
-  },
-  "failed_to_clear_cookies__@_0_": {
-    "message": "Failed to clear cookies: $${0}"
+  "failed_to_clear_browsing_data_": {
+    "message": "Failed to clear browsing data."
   },
   "failed_to_update_filter_rules": {
     "message": "Failed to update filter rules"
@@ -504,6 +516,9 @@
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
     "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
+  },
+  "ghostery_needs_an_additional_permission_to_clear_browsing_data_": {
+    "message": "Ghostery needs an additional permission to clear browsing data."
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery never collects personal information like passwords, browsing history or the content of the pages you visit."
@@ -602,11 +617,23 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about <a href=\"$${0}\">web trackers</a>, <a href=\"$${1}\">add-on's health</a>, and <a href=\"$${2}\">performance telemetry</a> will be shared in accordance with our <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
+  "it_might_sign_you_out_of_your_accounts_": {
+    "message": "It might sign you out of your accounts."
+  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity protected reports of page shows"
   },
   "keep_disabled": {
     "message": "Keep Disabled"
+  },
+  "last_24_hours": {
+    "message": "Last 24 hours"
+  },
+  "last_7_days": {
+    "message": "Last 7 days"
+  },
+  "last_hour": {
+    "message": "Last hour"
   },
   "last_month": {
     "message": "Last Month"
@@ -860,9 +887,6 @@
   "remove": {
     "message": "Remove"
   },
-  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
-    "message": "Remove all cookies stored by this site to protect your privacy and reset your browsing data."
-  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Remove intrusive prompts and interface clutter for a cleaner browsing experience."
   },
@@ -1022,6 +1046,12 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "The feature is managed by your organization"
   },
+  "the_selected_data_of_all_websites_will_be_cleared_": {
+    "message": "The selected data of all websites will be cleared."
+  },
+  "the_selected_data_of_this_website_will_be_cleared_": {
+    "message": "The selected data of this website will be cleared."
+  },
   "the_url_is_already_added": {
     "message": "The URL is already added"
   },
@@ -1052,8 +1082,11 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "This site will be paused for 1 hour"
   },
-  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
-    "message": "This will sign you out and may reset preferences or saved settings. Some pages may not work until you sign in or accept cookies again."
+  "this_website": {
+    "message": "This website"
+  },
+  "time_range": {
+    "message": "Time range"
   },
   "to_adjust_privacy_protection_enable_on_a_site_": {
     "message": "To adjust privacy protection enable on a site:"
@@ -1250,9 +1283,6 @@
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "You can disable it in <a href=\"$${0}\">WhoTracks.Me settings</a>."
   },
-  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
-    "message": "You’re about to remove all cookies stored by $${0}."
-  },
   "you_re_ready_to_block_ads": {
     "message": "You’re ready to block ads"
   },
@@ -1264,6 +1294,9 @@
   },
   "your_browser_privacy_report": {
     "message": "Your Browser Privacy Report"
+  },
+  "your_browsing_data_has_been_cleared_": {
+    "message": "Your browsing data has been cleared."
   },
   "your_community_powered_privacy_features_": {
     "message": "Your Community‑Powered Privacy Features:"

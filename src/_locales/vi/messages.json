@@ -79,6 +79,12 @@
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "Tất cả thông tin hiển thị trên thẻ WhoTracks.Me hoặc $${0} là tổng hợp các dữ kiện về trình theo dõi web. Những báo cáo này cung cấp sức mạnh cho công nghệ chống theo dõi của Ghostery, bảo vệ toàn bộ cộng đồng."
   },
+  "all_time": {
+    "message": "Mọi lúc"
+  },
+  "all_websites": {
+    "message": "Tất cả các trang web"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "All websites with adjusted protection status will be listed here."
   },
@@ -220,17 +226,26 @@
   "clear": {
     "message": "Xóa"
   },
-  "clear_cookies": {
-    "message": "Xóa cookie"
+  "clear_browsing_data": {
+    "message": "Xóa dữ liệu duyệt web"
   },
-  "clear_cookies_": {
-    "message": "Xóa cookie?"
+  "clear_cache": {
+    "message": "Xóa bộ nhớ đệm"
+  },
+  "clear_history": {
+    "message": "Xóa lịch sử"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Nhấp vào biểu tượng câu đố bên cạnh thanh tìm kiếm và <strong>ghim Ghostery</strong> vào thanh công cụ của bạn."
   },
   "close": {
     "message": "Đóng"
+  },
+  "close_all_tabs": {
+    "message": "Đóng tất cả các tab"
+  },
+  "close_this_tab": {
+    "message": "Đóng tab này"
   },
   "collapse": {
     "message": "Thu gọn"
@@ -260,9 +275,6 @@
   },
   "cookie_banner_visible": {
     "message": "Biểu ngữ cookie hiển thị"
-  },
-  "cookies_successfully_cleared": {
-    "message": "Cookies đã được xóa thành công"
   },
   "copied_to_clipboard": {
     "message": "Đã sao chép vào bảng nhớ tạm"
@@ -300,6 +312,9 @@
   },
   "default": {
     "message": "Mặc định"
+  },
+  "delete_cookies_and_site_data": {
+    "message": "Xóa cookie và dữ liệu trang web"
   },
   "deleted_cookies": {
     "message": "Đã xóa cookie"
@@ -448,11 +463,8 @@
   "facts": {
     "message": "Sự thật"
   },
-  "failed_to_clear_cookies": {
-    "message": "Không thể xóa cookie"
-  },
-  "failed_to_clear_cookies__@_0_": {
-    "message": "Không thể xóa cookie: $${0}"
+  "failed_to_clear_browsing_data_": {
+    "message": "Không thể xóa dữ liệu duyệt web."
   },
   "failed_to_update_filter_rules": {
     "message": "Không thể cập nhật quy tắc lọc"
@@ -504,6 +516,9 @@
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
     "message": "Ghostery lập bản đồ cấu trúc sở hữu liên kết các hoạt động với các tổ chức kiểm soát chúng. Kiến thức này, được các chuyên gia tuyển chọn thủ công, có sẵn công khai trên"
+  },
+  "ghostery_needs_an_additional_permission_to_clear_browsing_data_": {
+    "message": "Ghostery cần thêm quyền để xóa dữ liệu duyệt web."
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery never collects personal information like passwords, browsing history or the content of the pages you visit."
@@ -602,11 +617,23 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about <a href=\"$${0}\">web trackers</a>, <a href=\"$${1}\">add-on's health</a>, and <a href=\"$${2}\">performance telemetry</a> will be shared in accordance with our <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
+  "it_might_sign_you_out_of_your_accounts_": {
+    "message": "Bạn có thể bị đăng xuất khỏi các tài khoản của mình."
+  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity protected reports of page shows"
   },
   "keep_disabled": {
     "message": "Giữ vô hiệu hóa"
+  },
+  "last_24_hours": {
+    "message": "24 giờ qua"
+  },
+  "last_7_days": {
+    "message": "7 ngày qua"
+  },
+  "last_hour": {
+    "message": "Giờ trước"
   },
   "last_month": {
     "message": "Tháng trước"
@@ -860,9 +887,6 @@
   "remove": {
     "message": "Xóa"
   },
-  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
-    "message": "Xóa tất cả cookie được lưu trữ bởi trang web này để bảo vệ quyền riêng tư của bạn và đặt lại dữ liệu duyệt web của bạn."
-  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Loại bỏ các lời nhắc gây phiền nhiễu và giao diện lộn xộn để có trải nghiệm duyệt web gọn gàng hơn."
   },
@@ -1022,6 +1046,12 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "Tính năng này được quản lý bởi tổ chức của bạn"
   },
+  "the_selected_data_of_all_websites_will_be_cleared_": {
+    "message": "Dữ liệu đã chọn của tất cả các trang web sẽ bị xóa."
+  },
+  "the_selected_data_of_this_website_will_be_cleared_": {
+    "message": "Dữ liệu đã chọn của trang web này sẽ bị xóa."
+  },
   "the_url_is_already_added": {
     "message": "URL đã được thêm"
   },
@@ -1052,8 +1082,11 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "This site will be paused for 1 hour"
   },
-  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
-    "message": "Điều này sẽ đăng xuất bạn và có thể đặt lại các tùy chọn hoặc cài đặt đã lưu. Một số trang có thể không hoạt động cho đến khi bạn đăng nhập lại hoặc chấp nhận cookie."
+  "this_website": {
+    "message": "Trang web này"
+  },
+  "time_range": {
+    "message": "Khoảng thời gian"
   },
   "to_adjust_privacy_protection_enable_on_a_site_": {
     "message": "Để điều chỉnh bảo vệ quyền riêng tư trên một trang web:"
@@ -1250,9 +1283,6 @@
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "Bạn có thể tắt tính năng này trong <a href=\"$${0}\">cài đặt WhoTracks.Me</a>."
   },
-  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
-    "message": "Bạn sắp xóa tất cả cookie được lưu trữ bởi $${0}."
-  },
   "you_re_ready_to_block_ads": {
     "message": "Bạn đã sẵn sàng chặn quảng cáo"
   },
@@ -1264,6 +1294,9 @@
   },
   "your_browser_privacy_report": {
     "message": "Báo cáo quyền riêng tư trình duyệt của bạn"
+  },
+  "your_browsing_data_has_been_cleared_": {
+    "message": "Dữ liệu duyệt web của bạn đã được xóa."
   },
   "your_community_powered_privacy_features_": {
     "message": "Các tính năng bảo mật do cộng đồng cung cấp của bạn:"

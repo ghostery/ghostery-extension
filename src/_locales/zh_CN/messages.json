@@ -79,6 +79,12 @@
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "所有显示在 WhoTracks.Me 标签或 $${0} 上的信息都是关于网络追踪器事实的汇总。这些报告为 Ghostery 的反追踪技术提供支持，保护整个社区。"
   },
+  "all_time": {
+    "message": "所有时间"
+  },
+  "all_websites": {
+    "message": "所有网站"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "所有具有调整保护状态的网站将在此处列出。"
   },
@@ -220,17 +226,26 @@
   "clear": {
     "message": "清除"
   },
-  "clear_cookies": {
-    "message": "清除 Cookie"
+  "clear_browsing_data": {
+    "message": "清除浏览数据"
   },
-  "clear_cookies_": {
-    "message": "清除 Cookies？"
+  "clear_cache": {
+    "message": "清除缓存"
+  },
+  "clear_history": {
+    "message": "清除历史记录"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 <strong>Ghostery</strong> 固定到工具栏。"
   },
   "close": {
     "message": "关闭"
+  },
+  "close_all_tabs": {
+    "message": "关闭所有标签页"
+  },
+  "close_this_tab": {
+    "message": "关闭此标签页"
   },
   "collapse": {
     "message": "折叠"
@@ -260,9 +275,6 @@
   },
   "cookie_banner_visible": {
     "message": "Cookie 横幅可见"
-  },
-  "cookies_successfully_cleared": {
-    "message": "Cookies 已成功清除"
   },
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
@@ -300,6 +312,9 @@
   },
   "default": {
     "message": "默认"
+  },
+  "delete_cookies_and_site_data": {
+    "message": "删除Cookie和网站数据"
   },
   "deleted_cookies": {
     "message": "已删除的 Cookie"
@@ -448,11 +463,8 @@
   "facts": {
     "message": "事实"
   },
-  "failed_to_clear_cookies": {
-    "message": "清除 cookies 失败"
-  },
-  "failed_to_clear_cookies__@_0_": {
-    "message": "清除 cookies 失败：$${0}"
+  "failed_to_clear_browsing_data_": {
+    "message": "未能清除浏览数据。"
   },
   "failed_to_update_filter_rules": {
     "message": "未能更新过滤规则"
@@ -504,6 +516,9 @@
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
     "message": "Ghostery绘制了将活动与控制它们的组织联系起来的所有权结构图。这些由专家精心整理的知识可在公共平台上获取"
+  },
+  "ghostery_needs_an_additional_permission_to_clear_browsing_data_": {
+    "message": "Ghostery 需要额外的权限才能清除浏览数据。"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery 从不收集个人信息，如密码、浏览历史或您访问页面的内容。"
@@ -602,11 +617,23 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "有关<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件的健康状况</a>和<a href=\"$${2}\">性能遥测</a>的信息将根据我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，以提升 Ghostery 社区的隐私保护。"
   },
+  "it_might_sign_you_out_of_your_accounts_": {
+    "message": "这可能会导致您退出账户。"
+  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名保护的页面显示报告"
   },
   "keep_disabled": {
     "message": "保持禁用"
+  },
+  "last_24_hours": {
+    "message": "过去24小时"
+  },
+  "last_7_days": {
+    "message": "最近 7 天"
+  },
+  "last_hour": {
+    "message": "最近一小时"
   },
   "last_month": {
     "message": "上个月"
@@ -860,9 +887,6 @@
   "remove": {
     "message": "移除"
   },
-  "remove_all_cookies_stored_by_this_site_to_protect_your_privacy_and_reset_your_browsing_data_": {
-    "message": "删除此网站存储的所有cookie以保护您的隐私并重置您的浏览数据。"
-  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "移除侵扰性提示和界面杂乱，带来更整洁的浏览体验。"
   },
@@ -1022,6 +1046,12 @@
   "the_feature_is_managed_by_your_organization": {
     "message": "此功能由您的组织管理"
   },
+  "the_selected_data_of_all_websites_will_be_cleared_": {
+    "message": "所有网站的所选数据都将被清除。"
+  },
+  "the_selected_data_of_this_website_will_be_cleared_": {
+    "message": "此网站的所选数据将被清除。"
+  },
   "the_url_is_already_added": {
     "message": "该网址已添加"
   },
@@ -1052,8 +1082,11 @@
   "this_site_will_be_paused_for_1_hour": {
     "message": "此网站将暂停1小时"
   },
-  "this_will_sign_you_out_and_may_reset_preferences_or_saved_settings__some_pages_may_not_work_until_you_sign_in_or_accept_cookies_again_": {
-    "message": "这将使您退出登录，并可能重置偏好设置或已保存的设置。在您重新登录或再次接受 cookies 之前，某些页面可能无法正常工作。"
+  "this_website": {
+    "message": "本网站"
+  },
+  "time_range": {
+    "message": "时间范围"
   },
   "to_adjust_privacy_protection_enable_on_a_site_": {
     "message": "要调整隐私保护，请在网站上启用："
@@ -1250,9 +1283,6 @@
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "您可以在<a href=\"$${0}\">WhoTracks.Me 设置</a>中禁用它。"
   },
-  "you_re_about_to_remove_all_cookies_stored_by_@_0__": {
-    "message": "您即将删除由 $${0} 存储的所有 Cookie。"
-  },
   "you_re_ready_to_block_ads": {
     "message": "您已准备好拦截广告"
   },
@@ -1264,6 +1294,9 @@
   },
   "your_browser_privacy_report": {
     "message": "您的浏览器隐私报告"
+  },
+  "your_browsing_data_has_been_cleared_": {
+    "message": "您的浏览数据已清除。"
   },
   "your_community_powered_privacy_features_": {
     "message": "您的社区驱动隐私功能："
