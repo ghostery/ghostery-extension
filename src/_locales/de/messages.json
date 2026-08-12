@@ -83,7 +83,7 @@
     "message": "Gesamtzeit"
   },
   "all_websites": {
-    "message": "Alle Websites"
+    "message": "Alle Webseiten"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "Alle Websites mit angepasstem Schutzstatus werden hier aufgelistet."
@@ -314,7 +314,7 @@
     "message": "Standard"
   },
   "delete_cookies_and_site_data": {
-    "message": "Cookies und Website-Daten löschen"
+    "message": "Cookies und Webseitendaten löschen"
   },
   "deleted_cookies": {
     "message": "Gelöschte Cookies"
@@ -618,7 +618,7 @@
     "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern."
   },
   "it_might_sign_you_out_of_your_accounts_": {
-    "message": "Sie könnten von Ihren Konten abgemeldet werden."
+    "message": "Du könntest von Konten abgemeldet werden, bei denen du im Browser angemeldet bist."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "Berichte von Seitenansichten geschützt mit k-Anonymität"
@@ -1047,10 +1047,10 @@
     "message": "Die Funktion wird von Ihrer Organisation verwaltet"
   },
   "the_selected_data_of_all_websites_will_be_cleared_": {
-    "message": "Die ausgewählten Daten aller Websites werden gelöscht."
+    "message": "Die ausgewählten Daten aller Webseiten werden gelöscht."
   },
   "the_selected_data_of_this_website_will_be_cleared_": {
-    "message": "Die ausgewählten Daten dieser Website werden gelöscht."
+    "message": "Die ausgewählten Daten dieser Webseite werden gelöscht."
   },
   "the_url_is_already_added": {
     "message": "Die URL wurde bereits hinzugefügt"
@@ -1296,7 +1296,7 @@
     "message": "Dein Browser-Datenschutzbericht"
   },
   "your_browsing_data_has_been_cleared_": {
-    "message": "Ihre Browserdaten wurden gelöscht."
+    "message": "Deine Browserdaten wurden gelöscht."
   },
   "your_community_powered_privacy_features_": {
     "message": "Ihre Community-gestützten Datenschutzfunktionen:"
