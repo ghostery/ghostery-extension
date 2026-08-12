@@ -464,7 +464,7 @@
     "message": "Faits"
   },
   "failed_to_clear_browsing_data_": {
-    "message": "Échec de l'effacement des données de navigation."
+    "message": "Échec de l'effacement des données de navigation"
   },
   "failed_to_update_filter_rules": {
     "message": "Échec de la mise à jour des règles de filtrage"
@@ -518,7 +518,7 @@
     "message": "Ghostery cartographie la structure de propriété en reliant les activités aux organisations qui les contrôlent. Ce savoir, minutieusement sélectionné par des experts, est disponible publiquement sur"
   },
   "ghostery_needs_an_additional_permission_to_clear_browsing_data_": {
-    "message": "Ghostery a besoin d'une autorisation supplémentaire pour effacer les données de navigation."
+    "message": "Ghostery a besoin d'une autorisation supplémentaire pour effacer les données de navigation"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery ne collecte jamais d'informations personnelles telles que les mots de passe, l'historique de navigation ou le contenu des pages que vous visitez."
@@ -618,7 +618,7 @@
     "message": "Informations sur les <a href=\"$${0}\">trackers web</a>, la <a href=\"$${1}\">santé des extensions</a> et la <a href=\"$${2}\">télémétrie de performance</a> seront partagées conformément à notre <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Politique de Confidentialité</a>, renforçant la protection de la vie privée pour la communauté Ghostery."
   },
   "it_might_sign_you_out_of_your_accounts_": {
-    "message": "Cela pourrait vous déconnecter de vos comptes."
+    "message": "Cela pourrait vous déconnecter de vos comptes"
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "rapports protégés par k-anonymat des affichages de page"
@@ -1260,7 +1260,7 @@
     "message": "Lorsque cette option est activée, votre navigateur envoie un signal aux sites web leur demandant de ne pas vendre ou partager vos données personnelles à des fins publicitaires, conformément aux lois sur la confidentialité en vigueur dans l’UE et en Californie."
   },
   "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
-    "message": "WhoTracks.Me, géré par Ghostery, est une ressource mondiale complète sur les trackers web qui apporte de la transparence au suivi web et alimente la technologie anti-pistage IA de Ghostery. Basé sur des contributions non personnelles partagées par les utilisateurs de Ghostery, WhoTracks.Me fournit des renseignements en temps réel sur les trackers, protégeant ainsi l'ensemble de la communauté Ghostery."
+    "message": "WhoTracks.Me, géré par Ghostery, est une ressource mondiale complète sur les trackers web qui apporte de la transparence au suivi en ligne et alimente la technologie anti-pistage basée sur l’IA de Ghostery. Alimenté par les contributions non personnelles partagées par les utilisateurs de Ghostery, WhoTracks.Me fournit des informations en temps réel sur les trackers afin de protéger l’ensemble de la communauté Ghostery."
   },
   "whotracks_me_reports": {
     "message": "Rapports WhoTracks.Me"
@@ -1296,7 +1296,7 @@
     "message": "Rapport de confidentialité du navigateur"
   },
   "your_browsing_data_has_been_cleared_": {
-    "message": "Vos données de navigation ont été effacées."
+    "message": "Vos données de navigation ont été effacées"
   },
   "your_community_powered_privacy_features_": {
     "message": "Vos fonctionnalités de confidentialité alimentées par la communauté :"
