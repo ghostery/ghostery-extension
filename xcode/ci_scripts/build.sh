@@ -11,6 +11,14 @@ command -v npm >/dev/null 2>&1 || {
   exit 127
 }
 
-npm run build -- --clean
+# GHOSTERY_DEBUG is a build setting defined by the "Debug (Extension)" configuration.
+BUILD_ARGS="--clean"
+if [ "${GHOSTERY_DEBUG:-0}" = "1" ]; then
+  BUILD_ARGS="$BUILD_ARGS --debug"
+fi
+
+echo "Building extension: npm run build -- $BUILD_ARGS"
+
+npm run build -- $BUILD_ARGS
 
 sh scripts/patch-safari.sh

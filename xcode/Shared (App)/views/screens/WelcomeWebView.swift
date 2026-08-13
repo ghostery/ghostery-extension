@@ -15,7 +15,8 @@ import UIKit
 import Cocoa
 #endif
 
-let extensionBundleIdentifier = "com.ghostery.extension.safari"
+// The extension target's identifier is always the app's, suffixed with ".safari".
+let extensionBundleIdentifier = Bundle.main.bundleIdentifier! + ".safari"
 
 struct WelcomeWebView {
     var openInWebView: (URL) -> Void
