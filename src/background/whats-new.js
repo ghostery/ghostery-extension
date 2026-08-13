@@ -28,7 +28,9 @@ async function openPanel() {
   const options = await store.resolve(Options);
   const version = getMinorVersion();
 
-  if (!options.terms || options.whatsNew.version === version) return;
+  if (!options.terms || !options.panel.notifications || options.whatsNew.version === version) {
+    return;
+  }
 
   try {
     await store.set(options, { whatsNew: { version, shown: false } });
