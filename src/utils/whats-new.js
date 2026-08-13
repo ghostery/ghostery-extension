@@ -9,9 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Set by the background when it opens the panel, so the panel starts with the recap view
-export const SESSION_KEY = 'whatsnew:open:panel';
-
 const PERIOD_IN_MS = 90 * 24 * 60 * 60 * 1000;
 export function getPeriod() {
   const now = Date.now();

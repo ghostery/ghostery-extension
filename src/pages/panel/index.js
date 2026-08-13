@@ -12,40 +12,27 @@ import { mount, router, html } from 'hybrids';
 
 import '/ui/index.js';
 
+import { getBrowser, getOS } from '/utils/browser-info.js';
+
 import './elements.js';
 import './styles.css';
 
 import Main from './views/main.js';
 import WhatsNew from './views/whats-new.js';
-import { getBrowser, getOS } from '/utils/browser-info.js';
-import { SESSION_KEY } from '/utils/whats-new.js';
 
-// The background sets the flag on browser startup and opens the panel,
-// so the recap view takes over as the root view for that single open
-async function shouldShowWhatsNew() {
-  try {
-    const { [SESSION_KEY]: value } = await chrome.storage.session.get(SESSION_KEY);
-    if (value) await chrome.storage.session.remove(SESSION_KEY);
-
-    return !!value;
-  } catch {
-    return false;
-  }
-}
+const isWhatsNew = new URL(window.location.href).searchParams.has('whatsNew');
 
 // Mount the app
-shouldShowWhatsNew().then((whatsNew) => {
-  mount(document.body, {
-    stack: router(whatsNew ? [WhatsNew, Main] : [Main]),
-    browserName: { value: getBrowser().name, reflect: true },
-    platformName: { value: getOS(), reflect: true },
-    render: ({ stack }) => html`
-      <template layout="row">
-        <div id="alert-container" layout="fixed inset:1 top:1 bottom:auto layer:500"></div>
-        ${stack}
-      </template>
-    `,
-  });
+mount(document.body, {
+  stack: router(isWhatsNew ? [WhatsNew, Main] : [Main]),
+  browserName: { value: getBrowser().name, reflect: true },
+  platformName: { value: getOS(), reflect: true },
+  render: ({ stack }) => html`
+    <template layout="row">
+      <div id="alert-container" layout="fixed inset:1 top:1 bottom:auto layer:500"></div>
+      ${stack}
+    </template>
+  `,
 });
 
 // Ping telemetry on panel open

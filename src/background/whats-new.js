@@ -14,9 +14,8 @@ import { store } from 'hybrids';
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
-import { SESSION_KEY } from '/utils/whats-new.js';
-
 const chromeAction = chrome.action || chrome.browserAction;
+const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 
 function getMinorVersion() {
   return parseFloat(chrome.runtime.getManifest().version); // e.g. 10.5.55 -> 10.5
@@ -32,14 +31,17 @@ async function openPanel() {
   if (!options.terms || options.whatsNew.version === version) return;
 
   try {
-    await chrome.storage.session.set({ [SESSION_KEY]: true });
     await store.set(options, { whatsNew: { version, shown: false } });
 
+    // Point the popup at the recap view for this single open, then restore the default
+    await chromeAction.setPopup({ popup: `${PANEL_URL}?whatsNew` });
     await chromeAction.openPopup();
+
     console.log('[whats-new] Opening the panel with the recap view...');
   } catch (e) {
-    await chrome.storage.session.remove(SESSION_KEY);
     console.error('[whats-new] Failed to open the panel:', e);
+  } finally {
+    await chromeAction.setPopup({ popup: PANEL_URL });
   }
 }
 
