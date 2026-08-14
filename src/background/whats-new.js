@@ -18,7 +18,7 @@ const chromeAction = chrome.action || chrome.browserAction;
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 
 function getMinorVersion() {
-  return parseFloat(chrome.runtime.getManifest().version); // e.g. 10.5.55 -> 10.5
+  return chrome.runtime.getManifest().version.split('.', 2).join('.'); // e.g. 10.5.55 -> '10.5'
 }
 
 async function openPanel() {
@@ -51,8 +51,8 @@ chrome.runtime.onStartup.addListener(async () => {
   const options = await store.resolve(Options);
   const version = getMinorVersion();
 
-  // After installing the extension the version is 0, so we only catch up with it
-  if (options.whatsNew.version === 0) {
+  // After installing the extension the version is empty, so we only catch up with it
+  if (!options.whatsNew.version) {
     await store.set(options, { whatsNew: { version } });
     return;
   }
@@ -64,7 +64,7 @@ chrome.runtime.onStartup.addListener(async () => {
 // so development builds show the recap on every reload instead
 if (__DEBUG__) {
   chrome.runtime.onInstalled.addListener(async () => {
-    await store.set(Options, { whatsNew: { version: 0 } });
+    await store.set(Options, { whatsNew: { version: '' } });
     await openPanel();
   });
 }

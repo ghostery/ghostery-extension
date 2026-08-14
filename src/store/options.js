@@ -105,7 +105,7 @@ const Options = {
 
   // What's new: the announced minor version, and whether the recap page was already shown.
   // It starts as shown, so fresh installations have nothing to catch up on
-  whatsNew: { version: 0, shown: true },
+  whatsNew: { version: '', shown: true },
 
   [store.connect]: {
     async get() {
@@ -261,7 +261,7 @@ async function migrate(options, optionsVersion) {
 
   // What's new version moved into an object with the recap page state
   if (optionsVersion < 6) {
-    options.whatsNew = { version: options.whatsNewVersion || 0, shown: true };
+    options.whatsNew = { version: options.whatsNewVersion || '', shown: true };
     delete options.whatsNewVersion;
   }
 
