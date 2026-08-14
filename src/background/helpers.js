@@ -16,7 +16,7 @@ import Config from '/store/config.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
 import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
-import { updateEngines } from './adblocker/engines.js';
+import { setup as adblockerSetup, updateEngines } from './adblocker/engines.js';
 import { openElementPicker } from './element-picker.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -69,8 +69,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
     // Messages for e2e tests
 
-    case 'e2e:idleOptionsObservers':
-      OptionsObserver.waitForIdle().then(() => {
+    case 'e2e:idle':
+      Promise.all([OptionsObserver.waitForIdle(), adblockerSetup.pending]).then(() => {
         sendResponse('done');
         console.debug('[helpers] "idleOptionsObservers" finished');
       }, sendResponse);
