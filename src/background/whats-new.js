@@ -33,6 +33,11 @@ async function openPanel() {
   const managedConfig = await store.resolve(ManagedConfig);
   if (managedConfig.disableUserControl || !notifications) return;
 
+  if (!chromeAction.openPopup) {
+    console.warn('[whats-new] The panel cannot be opened automatically in this browser');
+    return;
+  }
+
   try {
     // Point the popup at the recap view for this single open, then restore the default
     await chromeAction.setPopup({ popup: `${PANEL_URL}?whatsNew` });
