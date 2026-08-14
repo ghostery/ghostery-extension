@@ -22,19 +22,18 @@ function getMinorVersion() {
 }
 
 async function openPanel() {
-  const managedConfig = await store.resolve(ManagedConfig);
-  if (managedConfig.disableUserControl) return;
-
   const options = await store.resolve(Options);
   const version = getMinorVersion();
 
-  if (!options.terms || !options.panel.notifications || options.whatsNew.version === version) {
-    return;
-  }
+  if (!options.terms || options.whatsNew.version === version) return;
+
+  const { notifications } = options.panel;
+  await store.set(options, { whatsNew: { version, shown: !notifications } });
+
+  const managedConfig = await store.resolve(ManagedConfig);
+  if (managedConfig.disableUserControl || !notifications) return;
 
   try {
-    await store.set(options, { whatsNew: { version, shown: false } });
-
     // Point the popup at the recap view for this single open, then restore the default
     await chromeAction.setPopup({ popup: `${PANEL_URL}?whatsNew` });
     await chromeAction.openPopup();

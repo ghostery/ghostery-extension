@@ -22,6 +22,13 @@ import WhatsNew from './views/whats-new.js';
 
 const isWhatsNew = new URL(window.location.href).searchParams.has('whatsNew');
 
+// The background may not restore the default popup if it is terminated while opening it
+if (isWhatsNew) {
+  (chrome.action || chrome.browserAction).setPopup({
+    popup: chrome.runtime.getURL('/pages/panel/index.html'),
+  });
+}
+
 // Mount the app
 mount(document.body, {
   stack: router(isWhatsNew ? [WhatsNew, Main] : [Main]),

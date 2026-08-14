@@ -277,7 +277,7 @@ export default {
                   Help them install Ghostery
                 </ui-text>
                 <ui-text type="body-m" color="secondary" layout="block:center">
-                  Select your friend’s browser
+                  Whatever browser they use, Ghostery’s got it
                 </ui-text>
               </div>
               <div layout="row:wrap center gap:0.5">
