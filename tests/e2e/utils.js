@@ -66,7 +66,7 @@ export async function sendMessage(msg) {
 }
 
 export async function waitForIdleBackgroundTasks() {
-  await sendMessage({ action: 'e2e:idleOptionsObservers' });
+  await sendMessage({ action: 'e2e:idle' });
 }
 
 export async function reloadExtension() {
