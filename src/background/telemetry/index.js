@@ -69,6 +69,9 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
   // as the `terms` option can only by enabled once
   if (lastOptions && lastOptions.terms) return;
 
+  // Wait for setup to finish initializing the runner
+  setup.pending && (await setup.pending);
+
   if (runner.isJustInstalled()) {
     await runner.setUTMs(await detectAttribution());
   }
@@ -77,27 +80,19 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
   runner.setUninstallUrl();
 
   if (terms) {
-    setup.pending && (await setup.pending);
-
     if (runner.isJustInstalled()) runner.ping('install');
 
     if (feedback) runner.ping('active');
   }
 });
 
-chrome.runtime.onInstalled.addListener((details) => {
-  (async () => {
-    setup.pending && (await setup.pending);
-    if (!runner) return;
-
-    await runner.setInstallReason(details.reason);
-  })();
+chrome.runtime.onInstalled.addListener(async (details) => {
+  setup.pending && (await setup.pending);
+  await runner.setInstallReason(details.reason);
 });
 
 export async function recordSerpVisit() {
   setup.pending && (await setup.pending);
-  if (!runner) return;
-
   await runner.recordSerpVisit();
 }
 
