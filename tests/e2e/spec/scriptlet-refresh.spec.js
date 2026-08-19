@@ -45,96 +45,89 @@ async function waitForRegistrationDrop() {
   );
 }
 
-describe('Scriptlet registration refresh', function () {
-  before(async function () {
-    if (!browser.isChromium) this.skip();
+if (browser.isChromium) {
+  describe('Scriptlet registration refresh', function () {
+    before(enableExtension);
 
-    await enableExtension();
-  });
+    before(async function () {
+      await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`]);
 
-  before(async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`]);
+      await setUserScriptsAllowed(true);
+      await expect(await isUserScriptsPathActive()).toBe(true);
+      await reloadUntilActive(async () => (await readMarker('rpnt-a')) === 'aaa+');
+    });
 
-    await setUserScriptsAllowed(true);
-    await expect(await isUserScriptsPathActive()).toBe(true);
-  });
+    after(async function () {
+      await setUserScriptsAllowed(false);
+      await disableCustomFilters();
+    });
 
-  before(async function () {
-    await reloadUntilActive(async () => (await readMarker('rpnt-a')) === 'aaa+');
-  });
+    it('stops injecting a scriptlet on the first load after its filter is replaced', async function () {
+      await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`]);
+      await waitForRegistrationDrop();
 
-  after(async function () {
-    if (!browser.isChromium) return;
+      await browser.url(PAGE_URL);
+      await browser.pause(500);
+      await expect(await readMarker('rpnt-a')).toBe('aaa');
+    });
 
-    await setUserScriptsAllowed(false);
-    await disableCustomFilters();
-  });
+    it('injects the replacement scriptlet after the registration refresh', async function () {
+      await reloadUntilActive(
+        async () => (await readMarker('rpnt-b')) === 'bbb+',
+        'the replacement scriptlet never became active',
+      );
+      await expect(await readMarker('rpnt-a')).toBe('aaa');
+    });
 
-  it('stops injecting a scriptlet on the first load after its filter is replaced', async function () {
-    await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`]);
-    await waitForRegistrationDrop();
-
-    await browser.url(PAGE_URL);
-    await browser.pause(500);
-    await expect(await readMarker('rpnt-a')).toBe('aaa');
-  });
-
-  it('injects the replacement scriptlet after the registration refresh', async function () {
-    await reloadUntilActive(
-      async () => (await readMarker('rpnt-b')) === 'bbb+',
-      'the replacement scriptlet never became active',
-    );
-    await expect(await readMarker('rpnt-a')).toBe('aaa');
-  });
-
-  it('stops injecting scriptlets on the first load after the site is paused', async function () {
-    await browser.url(PAGE_URL);
-    await browser.url('ghostery:panel');
-    await getExtensionElement('button:pause').click();
-    await waitForIdleBackgroundTasks();
-    await waitForRegistrationDrop();
-
-    await browser.url(PAGE_URL);
-    await browser.pause(500);
-    await expect(await readMarker('rpnt-b')).toBe('bbb');
-
-    await browser.url('ghostery:panel');
-    await getExtensionElement('button:resume').click();
-    await waitForIdleBackgroundTasks();
-
-    await reloadUntilActive(
-      async () => (await readMarker('rpnt-b')) === 'bbb+',
-      'the scriptlet did not resume after unpausing',
-    );
-  });
-
-  it('stops injecting scriptlets on the first load after a global pause', async function () {
-    await setPrivacyToggle('global-pause', true);
-
-    try {
+    it('stops injecting scriptlets on the first load after the site is paused', async function () {
+      await browser.url(PAGE_URL);
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:pause').click();
+      await waitForIdleBackgroundTasks();
       await waitForRegistrationDrop();
 
       await browser.url(PAGE_URL);
       await browser.pause(500);
       await expect(await readMarker('rpnt-b')).toBe('bbb');
-    } finally {
-      // A leaked global pause would disable filtering for every test that follows.
-      await setPrivacyToggle('global-pause', false);
-    }
 
-    await reloadUntilActive(
-      async () => (await readMarker('rpnt-b')) === 'bbb+',
-      'the scriptlet did not resume after the global pause was lifted',
-    );
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:resume').click();
+      await waitForIdleBackgroundTasks();
+
+      await reloadUntilActive(
+        async () => (await readMarker('rpnt-b')) === 'bbb+',
+        'the scriptlet did not resume after unpausing',
+      );
+    });
+
+    it('stops injecting scriptlets on the first load after a global pause', async function () {
+      await setPrivacyToggle('global-pause', true);
+
+      try {
+        await waitForRegistrationDrop();
+
+        await browser.url(PAGE_URL);
+        await browser.pause(500);
+        await expect(await readMarker('rpnt-b')).toBe('bbb');
+      } finally {
+        // A leaked global pause would disable filtering for every test that follows.
+        await setPrivacyToggle('global-pause', false);
+      }
+
+      await reloadUntilActive(
+        async () => (await readMarker('rpnt-b')) === 'bbb+',
+        'the scriptlet did not resume after the global pause was lifted',
+      );
+    });
+
+    it('stops injecting scriptlets on the first load after their filters are removed', async function () {
+      await setCustomFilters([]);
+      await waitForRegistrationDrop();
+
+      await browser.url(PAGE_URL);
+      await browser.pause(500);
+      await expect(await readMarker('rpnt-a')).toBe('aaa');
+      await expect(await readMarker('rpnt-b')).toBe('bbb');
+    });
   });
-
-  it('stops injecting scriptlets on the first load after their filters are removed', async function () {
-    await setCustomFilters([]);
-    await waitForRegistrationDrop();
-
-    await browser.url(PAGE_URL);
-    await browser.pause(500);
-    await expect(await readMarker('rpnt-a')).toBe('aaa');
-    await expect(await readMarker('rpnt-b')).toBe('bbb');
-  });
-});
+}

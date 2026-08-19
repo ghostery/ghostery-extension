@@ -134,15 +134,20 @@ export async function getUserScriptsRegistrations() {
 
 // Chrome gates chrome.userScripts behind the per-extension "Allow user scripts" toggle.
 export async function setUserScriptsAllowed(value) {
-  if (!browser.isChromium) return;
-
   const extensionId = new URL(BASE_URL).hostname;
   await browser.url(`chrome://extensions/?id=${extensionId}`);
 
   const toggle = await $('>>>#allow-user-scripts');
   if ((await toggle.getProperty('checked')) === value) return;
 
-  await toggle.click();
+  // The toggle sits outside of the viewport in chrome://extensions, so a native
+  // click is rejected. `#allow-user-scripts` is an `extensions-toggle-row`,
+  // which reacts only to a click on the `cr-toggle` inside its shadow root.
+  await browser.execute((el) => {
+    el.scrollIntoView({ block: 'center' });
+    (el.shadowRoot?.querySelector('cr-toggle') || el).click();
+  }, toggle);
+
   await browser.waitUntil(async () => (await toggle.getProperty('checked')) === value, {
     timeout: 5000,
     timeoutMsg: `"Allow user scripts" toggle did not turn ${value ? 'on' : 'off'}`,
