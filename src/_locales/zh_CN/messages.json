@@ -1,4 +1,7 @@
 {
+  "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
+    "message": "在追踪器接触到您之前，我们已阻止了 <strong>{0} 个追踪器</strong>——这甚至还不是下面最大的数字"
+  },
   "@_0__left": {
     "message": "剩余 $${0} 个"
   },
@@ -11,6 +14,12 @@
   "1_hour": {
     "message": "1 小时"
   },
+  "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
+    "message": "一个更平静的网络不仅仅关乎隐私，也关乎注意力。"
+  },
+  "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
+    "message": "一种让<strong>页面更清爽</strong>的新方式，与广告无关"
+  },
   "a_quick_review_goes_a_long_way": {
     "message": "快速评价，效果显著"
   },
@@ -22,6 +31,9 @@
   },
   "activities": {
     "message": "活动"
+  },
+  "activities_observed": {
+    "message": "观察到的活动"
   },
   "ad_blocker_detected": {
     "message": "检测到广告拦截器"
@@ -68,6 +80,9 @@
   "ads_are_showing": {
     "message": "广告正在显示"
   },
+  "ads_aren_t_the_only_thing_competing_for_your_attention_": {
+    "message": "广告并非唯一争夺您注意力的东西。"
+  },
   "adult_advertising": {
     "message": "成人广告",
     "description": "Tracker category name"
@@ -78,6 +93,9 @@
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "所有显示在 WhoTracks.Me 标签或 $${0} 上的信息都是关于网络追踪器事实的汇总。这些报告为 Ghostery 的反追踪技术提供支持，保护整个社区。"
+  },
+  "all_sites": {
+    "message": "所有网站"
   },
   "all_time": {
     "message": "所有时间"
@@ -96,6 +114,9 @@
   },
   "always": {
     "message": "始终"
+  },
+  "and_we_found_who_wanted_your_data___": {
+    "message": "我们还找到了想要你的数据的人……"
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
     "message": "安卓和 iPhone 刚刚获得了新的 Edge，内置 Ghostery。"
@@ -142,6 +163,9 @@
   },
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "最适合全面覆盖和隐私爱好者。"
+  },
+  "better_habits_make_a_better_web_": {
+    "message": "更好的习惯，更好的网络。"
   },
   "block_ads": {
     "message": "拦截广告"
@@ -235,6 +259,12 @@
   "clear_history": {
     "message": "清除历史记录"
   },
+  "cleared_quietly__so_your_web_stayed_yours_": {
+    "message": "悄然清除，让您的网络世界保持纯净。"
+  },
+  "click__zap_ads__": {
+    "message": "点击“拦截广告！”"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 <strong>Ghostery</strong> 固定到工具栏。"
   },
@@ -261,6 +291,9 @@
     "message": "Cookie 同意管理",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
+  "consent_requests_handled": {
+    "message": "已处理的同意请求"
+  },
   "contact": {
     "message": "联系"
   },
@@ -275,6 +308,9 @@
   },
   "cookie_banner_visible": {
     "message": "Cookie 横幅可见"
+  },
+  "cookies_removed": {
+    "message": "Cookie 已移除"
   },
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
@@ -339,9 +375,6 @@
   },
   "disabled": {
     "message": "已禁用"
-  },
-  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
-    "message": "发现由社区贡献推动的新功能、关键改进和升级——一切尽在此处。"
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "显示此网站上手动隐藏的所有内容块。您可以单独删除它们或清除整个列表。"
@@ -425,6 +458,9 @@
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
+  },
+  "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
+    "message": "每一个更纯净、更平静的页面都是您的选择——Ghostery 很高兴能与您一路同行。感谢您让网络变得更好。"
   },
   "exceptions": {
     "message": "例外"
@@ -535,6 +571,9 @@
   "ghostery_settings": {
     "message": "Ghostery 设置"
   },
+  "ghostery_stayed_with_you_the_whole_way_": {
+    "message": "Ghostery 一路与您同行。"
+  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
@@ -558,6 +597,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "帮助 Ghostery 为建立以隐私为基本人权的网络而奋斗。"
+  },
+  "help_them_install_ghostery": {
+    "message": "帮助他们安装 Ghostery"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜欢 Ghostery 并愿意支持我们的工作吗？"
@@ -629,6 +671,9 @@
   "last_24_hours": {
     "message": "过去24小时"
   },
+  "last_3_months": {
+    "message": "最近3个月"
+  },
   "last_7_days": {
     "message": "最近 7 天"
   },
@@ -661,6 +706,9 @@
   },
   "learn_more_on_supported_syntax": {
     "message": "了解更多支持的语法"
+  },
+  "learn_to_remove_distractions": {
+    "message": "学习如何移除干扰"
   },
   "leave_a_review_today": {
     "message": "请留下评论"
@@ -744,6 +792,9 @@
   "none": {
     "message": "无"
   },
+  "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
+    "message": "现在，您可以隐藏登录提示、短视频源、社交小部件以及其他干扰信息——Ghostery 会清除它们，让您的页面专注于您所需要的内容。"
+  },
   "observed_activities": {
     "message": "已观察过的活动"
   },
@@ -756,8 +807,14 @@
   "on": {
     "message": "开启"
   },
+  "one_click_instantly_blocks_ads_across_the_entire_site__not_just_this_page": {
+    "message": "一键即时屏蔽整个网站的广告，而不仅仅是当前页面"
+  },
   "open_a_site": {
     "message": "打开网站"
+  },
+  "open_any_website_where_ads_get_in_the_way": {
+    "message": "打开任何有广告干扰的网站"
   },
   "open_settings": {
     "message": "打开设置"
@@ -797,6 +854,9 @@
   "page_frozen": {
     "message": "页面冻结"
   },
+  "pages_still_work___but_trackers_learn_nothing_about_you": {
+    "message": "页面仍可正常运行，但追踪器无法获取您的任何信息"
+  },
   "pages_visited": {
     "message": "访问的页面"
   },
@@ -835,6 +895,9 @@
   },
   "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
     "message": "请访问<a href=\"$${0}\" onclick=\"$${1}\">Ghostery支持</a>"
+  },
+  "pop_ups_you_never_had_to_see": {
+    "message": "你再也不用看到的弹窗"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 和 Bing 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
@@ -887,8 +950,14 @@
   "remove": {
     "message": "移除"
   },
+  "remove_distractions": {
+    "message": "移除干扰"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "移除侵扰性提示和界面杂乱，带来更整洁的浏览体验。"
+  },
+  "repeat_for_most_visited_websites": {
+    "message": "对访问量最大的网站重复此操作"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "将浏览器工具栏的 Ghostery 图标替换为跟踪器轮盘。"
@@ -938,8 +1007,8 @@
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "查看 Ghostery 实时阻止的每个追踪器。"
   },
-  "see_what_s_new": {
-    "message": "查看新功能"
+  "see_your_recap": {
+    "message": "查看您的回顾"
   },
   "select_distracting_element": {
     "message": "选择干扰元素"
@@ -964,6 +1033,9 @@
   },
   "setup_successful": {
     "message": "安装成功"
+  },
+  "share_a_calmer_web": {
+    "message": "分享一个更平静的网络"
   },
   "share_a_review": {
     "message": "分享评价"
@@ -1009,11 +1081,26 @@
   "software_licenses": {
     "message": "软件许可证"
   },
+  "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
+    "message": "你身边的人还在忍受广告、追踪和杂乱。你可以把为你打造的清净网络分享给他们——Ghostery 让你一键搞定设置。"
+  },
   "something_wrong_": {
     "message": "出了什么问题？"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "浏览路径统计报告"
+  },
+  "stay_ad_free": {
+    "message": "免受广告干扰"
+  },
+  "step_1": {
+    "message": "步骤 1"
+  },
+  "step_2": {
+    "message": "步骤 2"
+  },
+  "step_3": {
+    "message": "步骤 3"
   },
   "submit_a_new_tracker": {
     "message": "提交新跟踪器"
@@ -1026,6 +1113,9 @@
   },
   "take_the_2_minute_survey": {
     "message": "参加2分钟调查"
+  },
+  "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
+    "message": "教他们这3个步骤，用Ghostery Zap拦截广告"
   },
   "telemetry": {
     "message": "遥测",
@@ -1040,8 +1130,26 @@
   "thank_you_for_your_report_": {
     "message": "感谢您的报告！"
   },
+  "thanks_for_being_part_of_ghostery": {
+    "message": "感谢您成为 Ghostery 的一员"
+  },
+  "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
+    "message": "使用 Ghostery Zap，<strong>一键</strong>即可让其他人拥有同样的<strong>清净网络</strong>"
+  },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "来自 $${0} 的备份已成功导入。"
+  },
+  "the_choice_is_saved__so_it_stays_clean_every_visit": {
+    "message": "选择已保存，因此每次访问都保持干净"
+  },
+  "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
+    "message": "您一直在构建的更干净、更平静的网络——Ghostery 会悄然处理其余部分。"
+  },
+  "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
+    "message": "您所构建的更纯净、更平静的网络——数据一览（过去3个月）"
+  },
+  "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
+    "message": "那些<strong>想要你的数据</strong>的公司，它们是（其中一些你可能认识）"
   },
   "the_feature_is_managed_by_your_organization": {
     "message": "此功能由您的组织管理"
@@ -1061,8 +1169,14 @@
   "the_value_must_be_a_valid_hostname_or_ip_address_": {
     "message": "该值必须是有效的主机名或 IP 地址。"
   },
+  "the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "您构建的网络——数据一览（最近3个月）"
+  },
   "theme": {
     "message": "主题"
+  },
+  "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
+    "message": "这并非偶然。您每天都选择了一个更平静、更私密的网络——而Ghostery让这些选择变得易于保持。"
   },
   "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
     "message": "此页面已被阻止加载，因为它可能是恶意的。重定向目标未知，可能会带来安全或隐私风险："
@@ -1208,6 +1322,12 @@
   "view_report": {
     "message": "查看报告"
   },
+  "view_the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "查看您构建的网络——数据一览（最近3个月）"
+  },
+  "visit_a_site": {
+    "message": "访问网站"
+  },
   "visit_our_blog": {
     "message": "访问我们的博客"
   },
@@ -1253,11 +1373,17 @@
   "welcome_to_ghostery": {
     "message": "欢迎使用 Ghostery"
   },
-  "what_s_new_in_ghostery": {
-    "message": "Ghostery 的新功能有哪些"
+  "whatever_browser_they_use__ghostery_s_got_it": {
+    "message": "无论他们使用哪种浏览器，Ghostery 都能搞定"
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "启用后，您的浏览器会向网站发送信号，要求它们不要出于广告目的出售或分享您的个人数据，这符合加利福尼亚州和欧盟等地的隐私法。"
+  },
+  "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
+    "message": "While you browsed, Ghostery kept watch on these – and shut them out."
+  },
+  "who_wanted_your_data_": {
+    "message": "谁想要您的数据？"
   },
   "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是一个关于网络追踪器的综合性全球资源，旨在提高网络追踪的透明度，并为 Ghostery 的 AI 反追踪技术提供支持。它由 Ghostery 用户分享的非个人贡献构建而成，提供实时追踪器情报，保护整个 Ghostery 社区。"
@@ -1280,11 +1406,20 @@
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "您可以在您使用的网站上屏蔽广告。只需屏蔽一次，每次访问时它们都将保持无广告状态。"
   },
+  "you_browse_with_intention": {
+    "message": "您有目的地浏览"
+  },
+  "you_browsed___ghostery_kept_these_from_reaching_you_": {
+    "message": "您浏览时 — Ghostery 阻止了这些内容。"
+  },
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "您可以在<a href=\"$${0}\">WhoTracks.Me 设置</a>中禁用它。"
   },
   "you_re_ready_to_block_ads": {
     "message": "您已准备好拦截广告"
+  },
+  "you_saw_what_was_really_happening_under_every_page_you_opened_": {
+    "message": "您看到了您打开的每个页面下真正发生的事情。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "搜索结果旁将不再显示跟踪器轮。"
@@ -1303,6 +1438,12 @@
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "您的贡献有助于为整个Ghostery社区构建一个更私密和安全的互联网。"
+  },
+  "your_impact": {
+    "message": "您的影响"
+  },
+  "your_web__lately": {
+    "message": "您最近的上网情况"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 禁止您观看无广告视频？"

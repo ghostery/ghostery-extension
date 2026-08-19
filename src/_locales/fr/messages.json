@@ -1,4 +1,7 @@
 {
+  "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
+    "message": "<strong>$${0} trackers</strong> bloqués avant qu’ils ne vous atteignent – et ce n’est même pas le plus grand nombre ci-dessous"
+  },
   "@_0__left": {
     "message": "$${0} restantes"
   },
@@ -11,6 +14,12 @@
   "1_hour": {
     "message": "1 heure"
   },
+  "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
+    "message": "Un web plus serein, ce n’est pas seulement une question de vie privée. C’est aussi une question d’attention."
+  },
+  "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
+    "message": "Une nouvelle façon de <strong>rendre les pages plus sereines</strong>,au-delà des pubs"
+  },
   "a_quick_review_goes_a_long_way": {
     "message": "Une courte évaluation fait toute la différence"
   },
@@ -22,6 +31,9 @@
   },
   "activities": {
     "message": "Activités"
+  },
+  "activities_observed": {
+    "message": "Activités observées"
   },
   "ad_blocker_detected": {
     "message": "Bloqueur de publicités détecté"
@@ -68,6 +80,9 @@
   "ads_are_showing": {
     "message": "Les publicités s'affichent"
   },
+  "ads_aren_t_the_only_thing_competing_for_your_attention_": {
+    "message": "Les pubs ne sont pas les seules à solliciter votre attention."
+  },
   "adult_advertising": {
     "message": "Publicités réservées aux publics adultes",
     "description": "Tracker category name"
@@ -78,6 +93,9 @@
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "Toutes les informations affichées sur WhoTracks.Me Tab ou $${0} sont un ensemble de faits sur les trackers web. Ces rapports alimentent la technologie anti-traçage de Ghostery, protégeant l'ensemble de la communauté."
+  },
+  "all_sites": {
+    "message": "Tous les sites"
   },
   "all_time": {
     "message": "Tout le temps"
@@ -96,6 +114,9 @@
   },
   "always": {
     "message": "Toujours"
+  },
+  "and_we_found_who_wanted_your_data___": {
+    "message": "Et nous avons découvert qui voulait vos données…"
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
     "message": "La protection Ghostery est maintenant sur Edge Mobile."
@@ -142,6 +163,9 @@
   },
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "Idéal pour une protection complète et les passionnés de vie privée."
+  },
+  "better_habits_make_a_better_web_": {
+    "message": "De meilleures habitudes rendent le web meilleur."
   },
   "block_ads": {
     "message": "Bloquer les publicités"
@@ -235,6 +259,12 @@
   "clear_history": {
     "message": "Effacer l'historique"
   },
+  "cleared_quietly__so_your_web_stayed_yours_": {
+    "message": "Gérées discrètement, pour vous laisser naviguer tranquillement."
+  },
+  "click__zap_ads__": {
+    "message": "Cliquez sur « Bloquer les pubs ! »"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Cliquez sur l’icône en forme de puzzle à côté de la barre de recherche et <strong>épinglez Ghostery</strong> à votre barre d'outils."
   },
@@ -261,6 +291,9 @@
     "message": "Gestion du consentement",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
+  "consent_requests_handled": {
+    "message": "Demandes de consentement traitées"
+  },
   "contact": {
     "message": "Contact"
   },
@@ -275,6 +308,9 @@
   },
   "cookie_banner_visible": {
     "message": "Bannière de cookies affichée"
+  },
+  "cookies_removed": {
+    "message": "Cookies supprimés"
   },
   "copied_to_clipboard": {
     "message": "Copié dans le presse-papiers"
@@ -339,9 +375,6 @@
   },
   "disabled": {
     "message": "Désactivé"
-  },
-  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
-    "message": "Découvrez de nouvelles fonctionnalités, des améliorations majeures et des mises à niveau issues des contributions de la communauté – réunies en un seul endroit."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Affiche tous les blocs de contenu masqués manuellement sur ce site. Vous pouvez les supprimer individuellement ou effacer la liste entière."
@@ -425,6 +458,9 @@
   "essential": {
     "message": "Essentiels",
     "description": "Tracker category name"
+  },
+  "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
+    "message": "Chaque page plus sereine est le résultat de vos choix – et Ghostery est ravi de vous accompagner. Merci de rendre le web un peu meilleur."
   },
   "exceptions": {
     "message": "Exceptions"
@@ -535,6 +571,9 @@
   "ghostery_settings": {
     "message": "Paramètres Ghostery"
   },
+  "ghostery_stayed_with_you_the_whole_way_": {
+    "message": "Ghostery vous a accompagné tout au long du chemin."
+  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery bloqueur de traqueurs et publicités nomme uniquement les traqueurs présents sur les sites web que vous visitez. Vous naviguez sur le web sans protection."
   },
@@ -558,6 +597,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Aidez Ghostery à lutter pour un Web où la vie privée est un droit humain fondamental."
+  },
+  "help_them_install_ghostery": {
+    "message": "Aidez-les à installer Ghostery"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Vous appréciez Ghostery et souhaitez soutenir notre travail ?"
@@ -629,6 +671,9 @@
   "last_24_hours": {
     "message": "Dernières 24 heures"
   },
+  "last_3_months": {
+    "message": "3 derniers mois"
+  },
   "last_7_days": {
     "message": "7 derniers jours"
   },
@@ -661,6 +706,9 @@
   },
   "learn_more_on_supported_syntax": {
     "message": "En savoir plus sur la syntaxe prise en charge"
+  },
+  "learn_to_remove_distractions": {
+    "message": "En savoir plus sur « Éliminer les distractions »"
   },
   "leave_a_review_today": {
     "message": "Laissez un avis aujourd'hui"
@@ -744,6 +792,9 @@
   "none": {
     "message": "Aucun"
   },
+  "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
+    "message": "Vous pouvez désormais masquer les demandes de connexion, les flux de vidéos courtes, les widgets sociaux et autres distractions – Ghostery les fait disparaître pour que vos pages restent centrées sur ce que vous êtes venu chercher."
+  },
   "observed_activities": {
     "message": "Activités observées"
   },
@@ -756,8 +807,14 @@
   "on": {
     "message": "activé"
   },
+  "one_click_instantly_blocks_ads_across_the_entire_site__not_just_this_page": {
+    "message": "Un clic bloque instantanément les publicités sur l’ensemble du site web, pas seulement sur cette page"
+  },
   "open_a_site": {
     "message": "Ouvrir un site Web"
+  },
+  "open_any_website_where_ads_get_in_the_way": {
+    "message": "Ouvrez un site web où les publicités vous gênent"
   },
   "open_settings": {
     "message": "Ouvrir les paramètres"
@@ -797,6 +854,9 @@
   "page_frozen": {
     "message": "Page ne répond plus"
   },
+  "pages_still_work___but_trackers_learn_nothing_about_you": {
+    "message": "Les pages fonctionnent toujours – mais les trackers n'apprennent rien sur vous"
+  },
   "pages_visited": {
     "message": "Pages visitées"
   },
@@ -835,6 +895,9 @@
   },
   "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
     "message": "Rendez-vous sur <a href=\"$${0}\" onclick=\"$${1}\">le support Ghostery</a>"
+  },
+  "pop_ups_you_never_had_to_see": {
+    "message": " Des pop-ups que vous n’avez jamais eu à voir"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Empêche Google et Bing de rediriger les liens des résultats via leurs serveurs au lieu de mener directement aux pages."
@@ -887,8 +950,14 @@
   "remove": {
     "message": "Supprimer"
   },
+  "remove_distractions": {
+    "message": "Supprimer les distractions"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Supprimez les invites intrusives et les éléments encombrants."
+  },
+  "repeat_for_most_visited_websites": {
+    "message": "Répétez l'opération pour les sites web les plus visités"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Remplace l'icône Ghostery dans la barre d'outils du navigateur par l'anneau des trackers."
@@ -938,8 +1007,8 @@
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Voyez en temps réel les traqueurs bloqués par Ghostery."
   },
-  "see_what_s_new": {
-    "message": "Découvrez les nouveautés"
+  "see_your_recap": {
+    "message": "Voir votre récapitulatif"
   },
   "select_distracting_element": {
     "message": "Sélectionner l'élément distrayant"
@@ -964,6 +1033,9 @@
   },
   "setup_successful": {
     "message": "Configuration réussie"
+  },
+  "share_a_calmer_web": {
+    "message": "Partagez un web plus serein"
   },
   "share_a_review": {
     "message": "Laisser un avis"
@@ -1009,11 +1081,26 @@
   "software_licenses": {
     "message": "Licences d'utilisation de logiciels"
   },
+  "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
+    "message": "Quelqu’un dans votre entourage subit encore les publicités, le pistage et les distractions. Faites-lui découvrir le même web plus serein que vous vous êtes créé – avec Ghostery, la configuration se fait en un clic."
+  },
   "something_wrong_": {
     "message": "Quelque chose ne va pas ?"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "rapports statistiques sur les itinéraires de navigation"
+  },
+  "stay_ad_free": {
+    "message": "Dites adieu aux publicités"
+  },
+  "step_1": {
+    "message": "Étape 1"
+  },
+  "step_2": {
+    "message": "Étape 2"
+  },
+  "step_3": {
+    "message": "Étape 3"
   },
   "submit_a_new_tracker": {
     "message": "Soumettre un nouveau mouchard"
@@ -1026,6 +1113,9 @@
   },
   "take_the_2_minute_survey": {
     "message": "Répondre à notre sondage (2 min)"
+  },
+  "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
+    "message": "Enseignez-leur ces 3 étapes pour bloquer les publicités avec Ghostery Zap"
   },
   "telemetry": {
     "message": "Télémétrie",
@@ -1040,8 +1130,26 @@
   "thank_you_for_your_report_": {
     "message": "Merci pour votre signalement !"
   },
+  "thanks_for_being_part_of_ghostery": {
+    "message": "Merci de faire partie de la communauté Ghostery"
+  },
+  "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
+    "message": "Un <strong> clic</strong> pour faire profiter quelqu’un du même <strong>web plus serein</strong>, avec Ghostery Zap"
+  },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "La sauvegarde de $${0} a été importée avec succès."
+  },
+  "the_choice_is_saved__so_it_stays_clean_every_visit": {
+    "message": "Le choix est enregistré, pour que le site web reste sans publicité à chaque visite."
+  },
+  "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
+    "message": "Un web plus serein, selon vos choix – avec Ghostery qui s’est discrètement occupé du reste."
+  },
+  "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
+    "message": "Le web plus serein que vous vous êtes créé – en chiffres (3 derniers mois)"
+  },
+  "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
+    "message": "Les entreprises qui <strong>voulaient vos données</strong>, identifiées (vous en reconnaîtrez quelques-unes)"
   },
   "the_feature_is_managed_by_your_organization": {
     "message": "Cette fonctionnalité est gérée par votre organisation"
@@ -1061,8 +1169,14 @@
   "the_value_must_be_a_valid_hostname_or_ip_address_": {
     "message": "Saisissez un nom d’hôte ou une adresse IP valide."
   },
+  "the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "Le web que vous avez créé – en chiffres (3 derniers mois)"
+  },
   "theme": {
     "message": "Thème"
+  },
+  "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
+    "message": "Ce n’est pas arrivé par hasard. Chaque jour, vous avez choisi un web plus calme et plus respectueux de votre vie privée – et Ghostery vous a aidé à garder le cap."
   },
   "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
     "message": "Cette page a été bloquée car elle pourrait être malveillante. La destination de la redirection est inconnue et pourrait présenter un risque pour votre sécurité ou votre confidentialité :"
@@ -1208,6 +1322,12 @@
   "view_report": {
     "message": "Afficher le rapport"
   },
+  "view_the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "Découvrez votre web en chiffres (3 derniers mois)"
+  },
+  "visit_a_site": {
+    "message": "Visitez un site"
+  },
   "visit_our_blog": {
     "message": "Visite notre blog"
   },
@@ -1253,11 +1373,17 @@
   "welcome_to_ghostery": {
     "message": "Bienvenue à Ghostery"
   },
-  "what_s_new_in_ghostery": {
-    "message": "Nouveautés dans Ghostery"
+  "whatever_browser_they_use__ghostery_s_got_it": {
+    "message": "Quel que soit leur navigateur, Ghostery est là"
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Lorsque cette option est activée, votre navigateur envoie un signal aux sites web leur demandant de ne pas vendre ou partager vos données personnelles à des fins publicitaires, conformément aux lois sur la confidentialité en vigueur dans l’UE et en Californie."
+  },
+  "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
+    "message": "Pendant que vous naviguiez, Ghostery les a surveillés – et les a bloqués."
+  },
+  "who_wanted_your_data_": {
+    "message": "Qui voulait vos données ?"
   },
   "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
     "message": "WhoTracks.Me, géré par Ghostery, est une ressource mondiale complète sur les trackers web qui apporte de la transparence au suivi en ligne et alimente la technologie anti-pistage basée sur l’IA de Ghostery. Alimenté par les contributions non personnelles partagées par les utilisateurs de Ghostery, WhoTracks.Me fournit des informations en temps réel sur les trackers afin de protéger l’ensemble de la communauté Ghostery."
@@ -1280,11 +1406,20 @@
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "Vous bloquez les publicités sur les sites que vous utilisez. Bloquez-les une fois. Ils resteront sans publicité à chaque visite."
   },
+  "you_browse_with_intention": {
+    "message": "Vous naviguez avec intention"
+  },
+  "you_browsed___ghostery_kept_these_from_reaching_you_": {
+    "message": "Vous avez navigué — Ghostery les a empêchés de vous atteindre."
+  },
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "Vous pouvez le désactiver dans les <a href=\"$${0}\">paramètres de WhoTracks.Me</a>."
   },
   "you_re_ready_to_block_ads": {
     "message": "Vous êtes prêt à bloquer les publicités"
+  },
+  "you_saw_what_was_really_happening_under_every_page_you_opened_": {
+    "message": "Vous avez vu ce qui se passait réellement sous chaque page que vous ouvriez."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Vous ne verrez plus de camembert des trackers à côté des résultats de recherche."
@@ -1303,6 +1438,12 @@
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "Votre contribution aide à construire un internet plus privé et sécurisé pour toute la communauté Ghostery."
+  },
+  "your_impact": {
+    "message": "Votre impact"
+  },
+  "your_web__lately": {
+    "message": "Votre web, ces derniers temps"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube t'empêche de regarder des vidéos sans publicité ?"

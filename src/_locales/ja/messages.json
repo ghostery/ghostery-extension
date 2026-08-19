@@ -1,4 +1,7 @@
 {
+  "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
+    "message": "<strong>${0}個のトラッカー</strong>があなたに到達する前にブロックされました – これは、以下の数字の中で最大ではありません"
+  },
   "@_0__left": {
     "message": "$${0} 残"
   },
@@ -11,6 +14,12 @@
   "1_hour": {
     "message": "1時間"
   },
+  "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
+    "message": "穏やかなウェブはプライバシーだけではありません。注意も必要です。"
+  },
+  "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
+    "message": "広告とは違う、<strong>ページをより穏やかにする</strong>新しい方法"
+  },
   "a_quick_review_goes_a_long_way": {
     "message": "簡単なレビューが大きな効果をもたらす"
   },
@@ -22,6 +31,9 @@
   },
   "activities": {
     "message": "アクティビティ"
+  },
+  "activities_observed": {
+    "message": "観測されたアクティビティ"
   },
   "ad_blocker_detected": {
     "message": "広告ブロッカーが検出されました"
@@ -68,6 +80,9 @@
   "ads_are_showing": {
     "message": "広告が表示されています"
   },
+  "ads_aren_t_the_only_thing_competing_for_your_attention_": {
+    "message": "広告だけがあなたの注意を引こうとしているわけではありません。"
+  },
   "adult_advertising": {
     "message": "アダルト広告",
     "description": "Tracker category name"
@@ -78,6 +93,9 @@
   },
   "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
     "message": "WhoTracks.Meタブまたは$${0}に表示されるすべての情報は、ウェブトラッカーに関する事実の集約です。これらのレポートはGhosteryのアンチトラッキング技術を支え、コミュニティ全体を保護します。"
+  },
+  "all_sites": {
+    "message": "すべてのサイト"
   },
   "all_time": {
     "message": "全期間"
@@ -96,6 +114,9 @@
   },
   "always": {
     "message": "常に"
+  },
+  "and_we_found_who_wanted_your_data___": {
+    "message": "そして、あなたのデータを欲しがっていた相手を見つけました..."
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
     "message": "AndroidとiPhoneに新しいEdgeが登場しました。Ghosteryが含まれています。"
@@ -142,6 +163,9 @@
   },
   "best_for_full_coverage_and_privacy_enthusiasts_": {
     "message": "完全なカバレッジとプライバシー愛好家に最適です。"
+  },
+  "better_habits_make_a_better_web_": {
+    "message": "より良い習慣が、より良いウェブを創る。"
   },
   "block_ads": {
     "message": "広告をブロック"
@@ -235,6 +259,12 @@
   "clear_history": {
     "message": "履歴を消去"
   },
+  "cleared_quietly__so_your_web_stayed_yours_": {
+    "message": "静かにクリアされ、あなたのウェブはあなたのままでした。"
+  },
+  "click__zap_ads__": {
+    "message": "「広告をブロック！」をクリック"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、<strong>Ghosteryをツールバーに固定</strong>します。"
   },
@@ -261,6 +291,9 @@
     "message": "同意の管理",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
+  "consent_requests_handled": {
+    "message": "同意リクエストを処理済み"
+  },
   "contact": {
     "message": "お問い合わせ"
   },
@@ -275,6 +308,9 @@
   },
   "cookie_banner_visible": {
     "message": "クッキーバナーが表示されています"
+  },
+  "cookies_removed": {
+    "message": "Cookieを削除しました"
   },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
@@ -339,9 +375,6 @@
   },
   "disabled": {
     "message": "無効化済み"
-  },
-  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
-    "message": "新機能、重要な改善点、コミュニティの貢献によるアップグレードを一箇所で発見しましょう。"
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "このサイトで手動で非表示にしたすべてのコンテンツブロックを表示します。それらを個別に削除するか、リスト全体をクリアすることができます。"
@@ -425,6 +458,9 @@
   "essential": {
     "message": "必須",
     "description": "Tracker category name"
+  },
+  "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
+    "message": "よりクリーンで落ち着いたページは、あなたが選んだものです – Ghosteryは、そのお手伝いができて光栄です。ウェブを少しでも良くしてくれてありがとうございます。"
   },
   "exceptions": {
     "message": "例外"
@@ -535,6 +571,9 @@
   "ghostery_settings": {
     "message": "Ghostery 設定"
   },
+  "ghostery_stayed_with_you_the_whole_way_": {
+    "message": "Ghosteryはずっとあなたと一緒でした。"
+  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
   },
@@ -558,6 +597,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "プライバシーを基本的人権とするウェブのために、Ghosteryと共に戦いましょう。"
+  },
+  "help_them_install_ghostery": {
+    "message": "Ghosteryのインストールをサポートする"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghosteryをお楽しみですか？ぜひ私たちの活動をサポートしてください。"
@@ -629,6 +671,9 @@
   "last_24_hours": {
     "message": "過去24時間"
   },
+  "last_3_months": {
+    "message": "過去3ヶ月"
+  },
   "last_7_days": {
     "message": "過去7日間"
   },
@@ -661,6 +706,9 @@
   },
   "learn_more_on_supported_syntax": {
     "message": "サポートされている構文について詳しく学ぶ"
+  },
+  "learn_to_remove_distractions": {
+    "message": "気が散る要素を取り除く方法を学ぶ"
   },
   "leave_a_review_today": {
     "message": "レビューを残してください"
@@ -744,6 +792,9 @@
   "none": {
     "message": "なし"
   },
+  "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
+    "message": "サインインのプロンプト、ショート動画フィード、ソーシャルウィジェット、その他のノイズを非表示にできるようになりました – Ghosteryがこれらをクリアし、目的のページに集中できます。"
+  },
   "observed_activities": {
     "message": "観察済みのアクティビティ"
   },
@@ -756,8 +807,14 @@
   "on": {
     "message": "オン"
   },
+  "one_click_instantly_blocks_ads_across_the_entire_site__not_just_this_page": {
+    "message": "ワンクリックでこのページだけでなく、サイト全体の広告を瞬時にブロックします"
+  },
   "open_a_site": {
     "message": "サイトを開く"
+  },
+  "open_any_website_where_ads_get_in_the_way": {
+    "message": "広告が邪魔になるウェブサイトを開く"
   },
   "open_settings": {
     "message": "設定を開く"
@@ -797,6 +854,9 @@
   "page_frozen": {
     "message": "ページがフリーズしました"
   },
+  "pages_still_work___but_trackers_learn_nothing_about_you": {
+    "message": "ページは機能するのに、トラッカーはあなたの情報を何も学習しません"
+  },
   "pages_visited": {
     "message": "訪問したページ"
   },
@@ -835,6 +895,9 @@
   },
   "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
     "message": "<a href=\"$${0}\" onclick=\"$${1}\">Ghosteryサポート</a>にアクセスしてください"
+  },
+  "pop_ups_you_never_had_to_see": {
+    "message": "見なくて済んだはずのポップアップ"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "GoogleとBingが検索結果のリンクをページに直接リンクするのではなく、自社のサーバーを経由してリダイレクトするのを防ぎます。"
@@ -887,8 +950,14 @@
   "remove": {
     "message": "削除"
   },
+  "remove_distractions": {
+    "message": "邪魔なものを排除"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "煩わしいプロンプトやインターフェースの乱雑さを排除し、よりすっきりとしたブラウジング体験を実現します。"
+  },
+  "repeat_for_most_visited_websites": {
+    "message": "よくアクセスするウェブサイトで繰り返す"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"
@@ -938,8 +1007,8 @@
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Ghosteryがリアルタイムで停止するすべてのトラッカーを確認してください。"
   },
-  "see_what_s_new": {
-    "message": "新機能をチェック"
+  "see_your_recap": {
+    "message": "まとめを見る"
   },
   "select_distracting_element": {
     "message": "気を散らす要素を選択"
@@ -964,6 +1033,9 @@
   },
   "setup_successful": {
     "message": "セットアップ成功"
+  },
+  "share_a_calmer_web": {
+    "message": "より穏やかなウェブを共有する"
   },
   "share_a_review": {
     "message": "レビューを共有する"
@@ -1009,11 +1081,26 @@
   "software_licenses": {
     "message": "ソフトウェア・ライセンス"
   },
+  "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
+    "message": "あなたの周りの誰かが、まだ広告、トラッキング、煩わしさに我慢しています。あなたが作った静かなウェブを彼らにも手渡しましょう。Ghosteryならワンタップで設定できます。"
+  },
   "something_wrong_": {
     "message": "何か問題がありますか？"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "ナビゲーションルートに関する統計レポート"
+  },
+  "stay_ad_free": {
+    "message": "広告なしで利用"
+  },
+  "step_1": {
+    "message": "ステップ1"
+  },
+  "step_2": {
+    "message": "ステップ2"
+  },
+  "step_3": {
+    "message": "ステップ3"
   },
   "submit_a_new_tracker": {
     "message": "新しいトラッカーを提出"
@@ -1026,6 +1113,9 @@
   },
   "take_the_2_minute_survey": {
     "message": "2分間のアンケートに回答する"
+  },
+  "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
+    "message": "Ghostery Zapで広告をブロックする3つのステップを教えましょう"
   },
   "telemetry": {
     "message": "テレメトリー",
@@ -1040,8 +1130,26 @@
   "thank_you_for_your_report_": {
     "message": "ご報告ありがとうございます！"
   },
+  "thanks_for_being_part_of_ghostery": {
+    "message": "Ghosteryをご利用いただきありがとうございます"
+  },
+  "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
+    "message": "Ghostery Zapで、誰かに同じ<strong>静かなウェブ</strong>を<strong>ワンクリックで</strong>提供する"
+  },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "$${0}からのバックアップが正常にインポートされました。"
+  },
+  "the_choice_is_saved__so_it_stays_clean_every_visit": {
+    "message": "選択は保存されるため、訪問するたびにクリーンな状態が保たれます"
+  },
+  "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
+    "message": "Ghosteryが静かに残りを処理することで、あなたが築き上げてきた、よりクリーンで穏やかなウェブ。"
+  },
+  "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
+    "message": "あなたが作り上げた、よりクリーンで穏やかなウェブ - 数字で見る実績（過去3ヶ月）"
+  },
+  "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
+    "message": "あなたのデータを<strong>欲しがっていた</strong>企業（いくつかはお分かりになるでしょう）"
   },
   "the_feature_is_managed_by_your_organization": {
     "message": "この機能は組織によって管理されています"
@@ -1061,8 +1169,14 @@
   "the_value_must_be_a_valid_hostname_or_ip_address_": {
     "message": "値は有効なホスト名またはIPアドレスである必要があります。"
   },
+  "the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "あなたが構築したウェブ – 数字で見る（過去3ヶ月）"
+  },
   "theme": {
     "message": "テーマ"
+  },
+  "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
+    "message": "これは偶然ではありません。毎日、あなたはより穏やかでプライベートなウェブを選択し、Ghosteryはその選択を簡単に維持できるようにしました。"
   },
   "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
     "message": "このページは悪意のある可能性があるため、読み込みが防止されました。リダイレクト先が不明であり、セキュリティまたはプライバシーのリスクを引き起こす可能性があります。"
@@ -1208,6 +1322,12 @@
   "view_report": {
     "message": "レポートを見る"
   },
+  "view_the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "あなたが構築したウェブを数字で見る（過去3ヶ月）"
+  },
+  "visit_a_site": {
+    "message": "サイトにアクセス"
+  },
   "visit_our_blog": {
     "message": "ブログを見る"
   },
@@ -1253,11 +1373,17 @@
   "welcome_to_ghostery": {
     "message": "Ghosteryをご利用いただきありがとうございます"
   },
-  "what_s_new_in_ghostery": {
-    "message": "Ghosteryの新機能"
+  "whatever_browser_they_use__ghostery_s_got_it": {
+    "message": "どのブラウザを使っていても、Ghosteryが対応します"
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "この機能を有効にすると、カリフォルニア州やEUなどのプライバシー法に準拠し、広告目的で個人データを販売または共有しないよう、ブラウザからウェブサイトに信号が送信されます。"
+  },
+  "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
+    "message": "閲覧中、Ghosteryはこれらを監視し、ブロックしました。"
+  },
+  "who_wanted_your_data_": {
+    "message": "あなたのデータを欲しがっていたのは誰ですか？"
   },
   "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
     "message": "Ghosteryが運営するWhoTracks.Meは、ウェブトラッキングに透明性をもたらし、GhosteryのAIアンチトラッキング技術を強化する、ウェブトラッカーに関する包括的なグローバルリソースです。Ghosteryユーザーから共有された非個人情報に基づいて構築されており、Ghosteryコミュニティ全体を保護するリアルタイムのトラッカーインテリジェンスを提供します。"
@@ -1280,11 +1406,20 @@
   "you_block_ads_on_the_sites_you_use__block_once__they_stay_ad_free_every_time_you_visit_": {
     "message": "利用するサイトの広告をブロックします。一度ブロックすれば、以降の訪問時は常に広告なしの状態を維持します。"
   },
+  "you_browse_with_intention": {
+    "message": "意図を持って閲覧する"
+  },
+  "you_browsed___ghostery_kept_these_from_reaching_you_": {
+    "message": "閲覧中、Ghosteryはこれらが届くのを防ぎました。"
+  },
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "<a href=\"$${0}\">WhoTracks.Meの設定</a>で無効にできます。"
   },
   "you_re_ready_to_block_ads": {
     "message": "広告ブロックの準備ができました"
+  },
+  "you_saw_what_was_really_happening_under_every_page_you_opened_": {
+    "message": "開いたすべてのページで、実際に何が起こっていたのかがわかりました。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
@@ -1303,6 +1438,12 @@
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "あなたの貢献は、Ghosteryコミュニティ全体のために、よりプライベートで安全なインターネットを構築するのに役立ちます。"
+  },
+  "your_impact": {
+    "message": "あなたの影響"
+  },
+  "your_web__lately": {
+    "message": "最近のあなたのウェブ"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTubeが広告なし動画の視聴をブロック？"
