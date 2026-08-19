@@ -1,6 +1,6 @@
 {
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
-    "message": "<strong>$${0} Tracker wurden</strong> gestoppt, bevor sie dich erreicht haben – und das ist noch nicht einmal die größte Zahl unten"
+    "message": "<strong>$${0} Tracker wurden</strong> gestoppt, bevor sie dich erreichen konnten – und das ist noch nicht einmal die größte Zahl unten"
   },
   "@_0__left": {
     "message": "$${0} verbleibend"
@@ -18,7 +18,7 @@
     "message": "Ein ruhigeres Web bedeutet nicht nur mehr Privatsphäre. Es geht auch um Aufmerksamkeit."
   },
   "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
-    "message": "Eine neue Art, <strong>Seiten ruhiger zu machen</strong>, die nichts mit Werbung zu tun hat"
+    "message": "Eine neue Möglichkeit, <strong>Seiten ruhiger zu machen</strong>, bei der es nicht nur um Werbung geht"
   },
   "a_quick_review_goes_a_long_way": {
     "message": "Eine kurze Bewertung wirkt Wunder"
@@ -165,7 +165,7 @@
     "message": "Am besten geeignet für umfassenden Schutz und Datenschutz-Fans."
   },
   "better_habits_make_a_better_web_": {
-    "message": "Bessere Gewohnheiten machen das Web besser."
+    "message": "Bessere Gewohnheiten machen ein besseres Web."
   },
   "block_ads": {
     "message": "Werbung blockieren"
