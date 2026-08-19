@@ -81,7 +81,7 @@
     "message": "Les publicités s'affichent"
   },
   "ads_aren_t_the_only_thing_competing_for_your_attention_": {
-    "message": "Les publicités ne sont pas les seules à se disputer votre attention."
+    "message": "Les pubs ne sont pas les seules à solliciter votre attention."
   },
   "adult_advertising": {
     "message": "Publicités réservées aux publics adultes",
@@ -116,7 +116,7 @@
     "message": "Toujours"
   },
   "and_we_found_who_wanted_your_data___": {
-    "message": "Et nous avons trouvé qui voulait vos données..."
+    "message": "Et nous avons découvert qui voulait vos données…"
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
     "message": "La protection Ghostery est maintenant sur Edge Mobile."
@@ -165,7 +165,7 @@
     "message": "Idéal pour une protection complète et les passionnés de vie privée."
   },
   "better_habits_make_a_better_web_": {
-    "message": "De meilleures habitudes pour un meilleur web."
+    "message": "De meilleures habitudes rendent le web meilleur."
   },
   "block_ads": {
     "message": "Bloquer les publicités"
@@ -260,7 +260,7 @@
     "message": "Effacer l'historique"
   },
   "cleared_quietly__so_your_web_stayed_yours_": {
-    "message": "Nettoyé discrètement, pour que votre web reste le vôtre."
+    "message": "Gérées discrètement, pour vous laisser naviguer tranquillement."
   },
   "click__zap_ads__": {
     "message": "Cliquez sur « Bloquer les pubs ! »"
@@ -460,7 +460,7 @@
     "description": "Tracker category name"
   },
   "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
-    "message": "Chaque page plus propre et plus calme est une page que vous avez choisie – et Ghostery est ravi de vous accompagner. Merci de rendre le web un peu meilleur."
+    "message": "Chaque page plus sereine est le résultat de vos choix – et Ghostery est ravi de vous accompagner. Merci de rendre le web un peu meilleur."
   },
   "exceptions": {
     "message": "Exceptions"
@@ -708,7 +708,7 @@
     "message": "En savoir plus sur la syntaxe prise en charge"
   },
   "learn_to_remove_distractions": {
-    "message": "Apprenez à éliminer les distractions"
+    "message": "En savoir plus sur « Éliminer les distractions »"
   },
   "leave_a_review_today": {
     "message": "Laissez un avis aujourd'hui"
@@ -793,7 +793,7 @@
     "message": "Aucun"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
-    "message": "Vous pouvez désormais masquer les invites de connexion, les flux de courtes vidéos, les widgets sociaux et le reste du bruit – Ghostery les supprime pour que vos pages restent concentrées sur ce que vous cherchez."
+    "message": "Vous pouvez désormais masquer les demandes de connexion, les flux de vidéos courtes, les widgets sociaux et autres distractions – Ghostery les fait disparaître pour que vos pages restent centrées sur ce que vous êtes venu chercher."
   },
   "observed_activities": {
     "message": "Activités observées"
