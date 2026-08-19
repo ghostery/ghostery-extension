@@ -1,6 +1,6 @@
 {
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
-    "message": "<strong>$${0} Tracker wurden</strong> gestoppt, bevor sie Sie erreicht haben – und das ist noch nicht einmal die größte Zahl unten"
+    "message": "<strong>$${0} Tracker wurden</strong> gestoppt, bevor sie dich erreicht haben – und das ist noch nicht einmal die größte Zahl unten"
   },
   "@_0__left": {
     "message": "$${0} verbleibend"
@@ -81,7 +81,7 @@
     "message": "Werbung wird angezeigt"
   },
   "ads_aren_t_the_only_thing_competing_for_your_attention_": {
-    "message": "Anzeigen sind nicht das Einzige, was um Ihre Aufmerksamkeit buhlt."
+    "message": "Anzeigen sind nicht das Einzige, was um deine Aufmerksamkeit buhlt."
   },
   "adult_advertising": {
     "message": "Erwachsenenwerbung",
@@ -116,7 +116,7 @@
     "message": "Immer"
   },
   "and_we_found_who_wanted_your_data___": {
-    "message": "Und wir haben herausgefunden, wer Ihre Daten wollte..."
+    "message": "Und wir haben ausfinding gemacht, wer deine Daten wollte..."
   },
   "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
     "message": "Dein gewohnter Ghostery-Schutz – jetzt auch auf Edge Mobile."
@@ -1440,7 +1440,7 @@
     "message": "Dein Beitrag hilft, ein privateres und sichereres Internet für die gesamte Ghostery-Community aufzubauen."
   },
   "your_impact": {
-    "message": "Ihre Wirkung"
+    "message": "Deine Wirkung"
   },
   "your_web__lately": {
     "message": "Dein Web, in letzter Zeit"
