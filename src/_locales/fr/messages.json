@@ -808,13 +808,13 @@
     "message": "activé"
   },
   "one_click_instantly_blocks_ads_across_the_entire_site__not_just_this_page": {
-    "message": "Un clic suffit à bloquer instantanément les publicités sur l'ensemble du site, pas seulement sur cette page"
+    "message": "Un clic bloque instantanément les publicités sur l’ensemble du site web, pas seulement sur cette page"
   },
   "open_a_site": {
     "message": "Ouvrir un site Web"
   },
   "open_any_website_where_ads_get_in_the_way": {
-    "message": "Ouvrez n'importe quel site web où les publicités vous gênent"
+    "message": "Ouvrez un site web où les publicités vous gênent"
   },
   "open_settings": {
     "message": "Ouvrir les paramètres"
@@ -897,7 +897,7 @@
     "message": "Rendez-vous sur <a href=\"$${0}\" onclick=\"$${1}\">le support Ghostery</a>"
   },
   "pop_ups_you_never_had_to_see": {
-    "message": "Les pop-ups que vous n'auriez jamais dû voir"
+    "message": " Des pop-ups que vous n’avez jamais eu à voir"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Empêche Google et Bing de rediriger les liens des résultats via leurs serveurs au lieu de mener directement aux pages."
@@ -1082,7 +1082,7 @@
     "message": "Licences d'utilisation de logiciels"
   },
   "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
-    "message": "Quelqu'un dans votre entourage supporte encore les publicités, le suivi et le désordre. Vous pouvez lui offrir le même web tranquille que vous avez créé – Ghostery simplifie l'installation en un seul clic."
+    "message": "Quelqu’un dans votre entourage subit encore les publicités, le pistage et les distractions. Faites-lui découvrir le même web plus serein que vous vous êtes créé – avec Ghostery, la configuration se fait en un clic."
   },
   "something_wrong_": {
     "message": "Quelque chose ne va pas ?"
@@ -1131,10 +1131,10 @@
     "message": "Merci pour votre signalement !"
   },
   "thanks_for_being_part_of_ghostery": {
-    "message": "Merci de faire partie de Ghostery"
+    "message": "Merci de faire partie de la communauté Ghostery"
   },
   "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
-    "message": "Le moyen <strong>en un clic</strong> d'offrir à quelqu'un la même <strong>navigation web sereine</strong>, avec Ghostery Zap"
+    "message": "Un <strong> clic</strong> pour faire profiter quelqu’un du même <strong>web plus serein</strong>, avec Ghostery Zap"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "La sauvegarde de $${0} a été importée avec succès."
