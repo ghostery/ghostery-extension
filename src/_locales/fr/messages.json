@@ -1140,16 +1140,16 @@
     "message": "La sauvegarde de $${0} a été importée avec succès."
   },
   "the_choice_is_saved__so_it_stays_clean_every_visit": {
-    "message": "Le choix est enregistré, il reste donc propre à chaque visite"
+    "message": "Le choix est enregistré, pour que le site web reste sans publicité à chaque visite."
   },
   "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
-    "message": "Le web plus propre et plus serein que vous avez construit – avec Ghostery qui s'occupe discrètement du reste."
+    "message": "Un web plus serein, selon vos choix – avec Ghostery qui s’est discrètement occupé du reste."
   },
   "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
-    "message": "Le web plus propre et plus serein que vous avez bâti – en chiffres (3 derniers mois)"
+    "message": "Le web plus serein que vous vous êtes créé – en chiffres (3 derniers mois)"
   },
   "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
-    "message": "Les entreprises qui <strong>voulaient vos données</strong>, nommées (vous en reconnaîtrez quelques-unes)"
+    "message": "Les entreprises qui <strong>voulaient vos données</strong>, identifiées (vous en reconnaîtrez quelques-unes)"
   },
   "the_feature_is_managed_by_your_organization": {
     "message": "Cette fonctionnalité est gérée par votre organisation"
@@ -1170,13 +1170,13 @@
     "message": "Saisissez un nom d’hôte ou une adresse IP valide."
   },
   "the_web_you_built___by_the_numbers__last_3_months_": {
-    "message": "Le web que vous avez bâti – en chiffres (3 derniers mois)"
+    "message": "Le web que vous avez créé – en chiffres (3 derniers mois)"
   },
   "theme": {
     "message": "Thème"
   },
   "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
-    "message": "Ce n’est pas arrivé par hasard. Chaque jour, vous avez choisi un web plus calme et plus privé – et Ghostery a rendu ces choix faciles à maintenir."
+    "message": "Ce n’est pas arrivé par hasard. Chaque jour, vous avez choisi un web plus calme et plus respectueux de votre vie privée – et Ghostery vous a aidé à garder le cap."
   },
   "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
     "message": "Cette page a été bloquée car elle pourrait être malveillante. La destination de la redirection est inconnue et pourrait présenter un risque pour votre sécurité ou votre confidentialité :"
@@ -1323,7 +1323,7 @@
     "message": "Afficher le rapport"
   },
   "view_the_web_you_built___by_the_numbers__last_3_months_": {
-    "message": "Découvrez le web que vous avez bâti – en chiffres (3 derniers mois)"
+    "message": "Découvrez votre web en chiffres (3 derniers mois)"
   },
   "visit_a_site": {
     "message": "Visitez un site"
@@ -1374,7 +1374,7 @@
     "message": "Bienvenue à Ghostery"
   },
   "whatever_browser_they_use__ghostery_s_got_it": {
-    "message": "Quel que soit le navigateur qu'ils utilisent, Ghostery l'a"
+    "message": "Quel que soit leur navigateur, Ghostery est là"
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Lorsque cette option est activée, votre navigateur envoie un signal aux sites web leur demandant de ne pas vendre ou partager vos données personnelles à des fins publicitaires, conformément aux lois sur la confidentialité en vigueur dans l’UE et en Californie."
