@@ -12,15 +12,26 @@ import { mount, router, html } from 'hybrids';
 
 import '/ui/index.js';
 
+import { getBrowser, getOS } from '/utils/browser-info.js';
+
 import './elements.js';
 import './styles.css';
 
 import Main from './views/main.js';
-import { getBrowser, getOS } from '/utils/browser-info.js';
+import WhatsNew from './views/whats-new.js';
+
+const isWhatsNew = new URL(window.location.href).searchParams.has('whatsNew');
+
+// The background may not restore the default popup if it is terminated while opening it
+if (isWhatsNew) {
+  (chrome.action || chrome.browserAction).setPopup({
+    popup: chrome.runtime.getURL('/pages/panel/index.html'),
+  });
+}
 
 // Mount the app
 mount(document.body, {
-  stack: router([Main]),
+  stack: router(isWhatsNew ? [WhatsNew, Main] : [Main]),
   browserName: { value: getBrowser().name, reflect: true },
   platformName: { value: getOS(), reflect: true },
   render: ({ stack }) => html`

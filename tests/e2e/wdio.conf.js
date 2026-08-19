@@ -110,6 +110,7 @@ export const config = {
       'spec/panel.spec.js',
       'spec/pause-assistant.spec.js',
       'spec/whotracksme.spec.js',
+      'spec/whats-new.spec.js',
     ],
   ],
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],

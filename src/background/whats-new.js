@@ -10,49 +10,72 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_WHATS_NEW } from '@ghostery/config';
 
+import Config from '/store/config.js';
+import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
-import { WHATS_NEW_PAGE_URL } from '/utils/urls.js';
 
-import { openNotification } from './notifications.js';
+const chromeAction = chrome.action || chrome.browserAction;
+const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 
-const { version } = chrome.runtime.getManifest();
+function getMinorVersion() {
+  return chrome.runtime.getManifest().version.split('.', 2).join('.'); // e.g. 10.5.55 -> '10.5'
+}
 
-chrome.runtime.onStartup.addListener(async () => {
-  console.log('[whats-new] Checking for new minor version...');
+async function openPanel() {
+  // Without the flag the version is left untouched, so the release is announced
+  // as soon as the flag is rolled out to the user
+  const config = await store.resolve(Config);
+  if (!config.hasFlag(FLAG_WHATS_NEW)) return;
 
   const options = await store.resolve(Options);
-  const whatsNewVersion = parseFloat(version); // e.g., 10.5.0 -> 10.5
+  const version = getMinorVersion();
 
-  if (options.whatsNewVersion === whatsNewVersion) {
+  if (!options.terms || options.whatsNew.version === version) return;
+
+  const { notifications } = options.panel;
+  await store.set(options, { whatsNew: { version, shown: !notifications } });
+
+  const managedConfig = await store.resolve(ManagedConfig);
+  if (managedConfig.disableUserControl || !notifications) return;
+
+  if (!chromeAction.openPopup) {
+    console.warn('[whats-new] The panel cannot be opened automatically in this browser');
     return;
   }
 
-  // After installing the extension version is 0,
-  // so we set it to the current version and return early
-  if (options.whatsNewVersion === 0) {
-    store.set(options, { whatsNewVersion });
+  try {
+    // Point the popup at the recap view for this single open, then restore the default
+    await chromeAction.setPopup({ popup: `${PANEL_URL}?whatsNew` });
+    await chromeAction.openPopup();
+
+    console.log('[whats-new] Opening the panel with the recap view...');
+  } catch (e) {
+    console.error('[whats-new] Failed to open the panel:', e);
+  } finally {
+    await chromeAction.setPopup({ popup: PANEL_URL });
+  }
+}
+
+chrome.runtime.onStartup.addListener(async () => {
+  const options = await store.resolve(Options);
+  const version = getMinorVersion();
+
+  // After installing the extension the version is empty, so we only catch up with it
+  if (!options.whatsNew.version) {
+    await store.set(options, { whatsNew: { version } });
     return;
   }
 
-  const tabs = await chrome.tabs.query({ currentWindow: true });
-  const activeTab = tabs.find((tab) => tab.active);
-
-  if (tabs.length && activeTab?.url.startsWith('http')) {
-    // There are tabs and the active tab is a web page, show the notification
-    const mounted = await openNotification({
-      id: 'whats-new',
-      tabId: activeTab.id,
-      position: 'center',
-      params: { whatsNewVersion },
-    });
-
-    // Update the stored version
-    if (mounted) await store.set(options, { whatsNewVersion });
-  } else if (tabs.length <= 1 && !activeTab?.url.startsWith('http')) {
-    // There are no tabs or the active tab is not a web page (blank, etc), open the what's new page
-    await chrome.tabs.create({ url: WHATS_NEW_PAGE_URL, active: true });
-    // Update the stored version
-    await store.set(options, { whatsNewVersion });
-  }
+  await openPanel();
 });
+
+// The version does not change between reloads of the unpacked extension,
+// so development builds show the recap on every reload instead
+if (__DEBUG__) {
+  chrome.runtime.onInstalled.addListener(async () => {
+    await store.set(Options, { whatsNew: { version: '' } });
+    await openPanel();
+  });
+}

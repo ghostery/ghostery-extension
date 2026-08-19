@@ -16,12 +16,14 @@ export default {
   mobileType: { value: '', reflect: true },
   color: 'primary',
   ellipsis: { value: false, reflect: true },
+  balance: { value: false, reflect: true },
   underline: { value: false, reflect: true },
   uppercase: { value: false, reflect: true },
   render: ({ type, mobileType, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
       font: var(--font-${mobileType || type});
+      letter-spacing: var(--letter-spacing-${mobileType || type}, normal);
       color: var(--color-${color});
     }
 
@@ -33,12 +35,15 @@ export default {
       mobileType &&
       /*css*/ `
           @media screen and (min-width: 768px) {
-            :host { font: var(--font-${type}); }
+            :host {
+              font: var(--font-${type});
+              letter-spacing: var(--letter-spacing-${type}, normal);
+            }
           }
         `
     }
 
-    :host([type^="display"]), :host([type^="headline"]) {
+    :host([type^="display"]), :host([type^="headline"]), :host([balance]) {
       text-wrap: balance;
     }
 

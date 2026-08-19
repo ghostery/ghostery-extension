@@ -10,8 +10,13 @@
  */
 
 import { html, store, router, msg } from 'hybrids';
+import { FLAG_WHATS_NEW } from '@ghostery/config';
 
+import { lang, numberFormatter } from '/ui/labels.js';
+
+import { findParentDomain } from '/utils/domains.js';
 import { getCurrentTab, openHref } from '/utils/tabs.js';
+import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
 
 import Options, {
   isGloballyPaused,
@@ -20,6 +25,7 @@ import Options, {
   MODE_DEFAULT,
   MODE_ZAP,
 } from '/store/options.js';
+import Config from '/store/config.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
 import ManagedConfig from '/store/managed-config.js';
@@ -40,9 +46,6 @@ import ReportConfirm from './report-confirm.js';
 import TrackerDetails from './tracker-details.js';
 import TrackersReport from './trackers-report.js';
 import WhoTracksMe from './whotracksme.js';
-import { findParentDomain } from '/utils/domains.js';
-import { ZAP_AUTORELOAD_DISABLED_HOSTNAMES } from '/utils/urls.js';
-import { lang, numberFormatter } from '/ui/labels.js';
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL(
@@ -187,6 +190,7 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
+  config: store(Config),
   managedConfig: store(ManagedConfig),
   elementPickerSelectors: store(ElementPickerSelectors),
   resources: store(Resources),
@@ -202,6 +206,8 @@ export default {
     !paused &&
     options.blockAnnoyances &&
     resources.autoconsent[stats.domain],
+  whatsNewNotification: ({ config, options }) =>
+    store.ready(config, options) && config.hasFlag(FLAG_WHATS_NEW) && !options.whatsNew.shown,
   render: ({
     options,
     stats,
@@ -211,6 +217,7 @@ export default {
     globalPause,
     contentBlocksSelectors,
     consentManaged,
+    whatsNewNotification,
   }) => html`
     <template layout="column grow relative">
       ${
@@ -582,9 +589,11 @@ export default {
           </panel-container>
           ${
             !managedConfig.disableUserControl &&
-            store.ready(notification) &&
-            !store.error(notification) &&
-            html`<panel-notification></panel-notification>`
+            (whatsNewNotification
+              ? html`<panel-whats-new-notification></panel-whats-new-notification>`
+              : store.ready(notification) &&
+                !store.error(notification) &&
+                html`<panel-notification></panel-notification>`)
           }
         `
       }

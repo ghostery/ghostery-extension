@@ -18,7 +18,6 @@ export const HOME_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/`;
 
 export const WTM_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme`;
 export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;
-export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/ghostery-extension-v10-5?embed=1&utm_campaign=whatsnew`;
 
 export const PANEL_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=panel`;
 export const REVIEW_STORE_PAGE_URL = `${HOME_PAGE_URL}downloads/review?utm_source=gbe&utm_campaign=review`;
@@ -36,6 +35,7 @@ export const CDN_URL = __STAGING__
 
 export const PAUSE_ASSISTANT_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/browsing-assistant-user-agent`;
 export const TRACKERS_PREVIEW_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/introducing-wtm-serp-report`;
+export const DISTRACTIONS_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/distractions-remove-UI-clutter`;
 
 export const ZAP_AUTORELOAD_DISABLED_HOSTNAMES = ['youtube.com'];
 
