@@ -97,7 +97,7 @@ export async function recordSerpVisit() {
 }
 
 chrome.runtime.onMessage.addListener((msg) => {
-  if (enabled && msg.action.startsWith('telemetry:')) {
+  if (enabled && msg.action?.startsWith('telemetry:')) {
     (async () => {
       setup.pending && (await setup.pending);
 
