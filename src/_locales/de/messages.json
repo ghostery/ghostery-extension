@@ -18,7 +18,7 @@
     "message": "Ein ruhigeres Web bedeutet nicht nur mehr Privatsphäre. Es geht auch um Aufmerksamkeit."
   },
   "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
-    "message": "Eine neue Möglichkeit, <strong>Seiten ruhiger zu machen</strong>, bei der es nicht nur um Werbung geht"
+    "message": "Eine neue Möglichkeit, <strong>Seiten ruhiger zu gestalten</strong>, bei der es nicht nur um Werbung geht"
   },
   "a_quick_review_goes_a_long_way": {
     "message": "Eine kurze Bewertung wirkt Wunder"
@@ -263,7 +263,7 @@
     "message": "Leise gelöscht, damit Ihr Web Ihnen erhalten bleibt."
   },
   "click__zap_ads__": {
-    "message": "Klicken Sie auf „Werbung zappen!“"
+    "message": "Klicke auf „Werbung entfernen“"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and__strong_pin_ghostery__strong__to_your_toolbar_": {
     "message": "Klicke auf das Puzzle-Symbol neben der Suchleiste um <strong>Ghostery</strong> an deine Symbolleiste anzuheften."
@@ -460,7 +460,7 @@
     "description": "Tracker category name"
   },
   "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
-    "message": "Jede sauberere, ruhigere Seite ist eine, die Sie gewählt haben – und Ghostery freut sich, dabei zu sein. Danke, dass Sie das Web ein bisschen besser machen."
+    "message": "Jede ruhigere, werbefreie Seite ist eine bewusste Entscheidung von dir – und Ghostery begleitet dich gerne dabei. Danke, dass du das Web ein kleines bisschen besser machst."
   },
   "exceptions": {
     "message": "Ausnahmen"
@@ -572,7 +572,7 @@
     "message": "Ghostery-Einstellungen"
   },
   "ghostery_stayed_with_you_the_whole_way_": {
-    "message": "Ghostery war die ganze Zeit an Ihrer Seite."
+    "message": "Ghostery war die ganze Zeit an deiner Seite."
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
@@ -599,7 +599,7 @@
     "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
   },
   "help_them_install_ghostery": {
-    "message": "Helfen Sie ihnen dabei, Ghostery zu installieren."
+    "message": "Hilf ihnen, Ghostery zu installieren"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Gefällt Ihnen Ghostery? Möchten Sie unsere Arbeit unterstützen?"
@@ -708,7 +708,7 @@
     "message": "Erfahre mehr über die unterstützte Syntax"
   },
   "learn_to_remove_distractions": {
-    "message": "Lernen Sie, Ablenkungen zu entfernen"
+    "message": "Mehr zu „Ablenkungen entfernen“"
   },
   "leave_a_review_today": {
     "message": "Hinterlass uns hier eine Bewertung!"
@@ -1091,7 +1091,7 @@
     "message": "Statistische Berichte über Navigationsrouten"
   },
   "stay_ad_free": {
-    "message": "Werbefrei bleiben"
+    "message": "Werbefrei surfen"
   },
   "step_1": {
     "message": "Schritt 1"
