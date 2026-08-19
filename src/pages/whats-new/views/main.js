@@ -106,10 +106,10 @@ export default {
             <whats-new-fact>
               <ui-icon name="shield" color="brand-primary" layout="size:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
-                <ui-text type="label-m">
-                  ${numberFormatter.format(mergedStats.trackersBlocked)} trackers
-                </ui-text>
-                stopped before they reached you – and that’s not even the biggest number below
+                ${msg.html`
+                  <strong>${numberFormatter.format(mergedStats.trackersBlocked)} trackers</strong>
+                  stopped before they reached you – and that’s not even the biggest number below
+                `}
               </ui-text>
             </whats-new-fact>
             <whats-new-fact>
@@ -119,22 +119,28 @@ export default {
                 layout="size:4 shrink:0"
               ></ui-icon>
               <ui-text type="body-m">
-                The companies that <ui-text type="label-m">wanted your data</ui-text>, named (you’ll
-                recognise a few)
+                ${msg.html`
+                  The companies that <strong>wanted your data</strong>, named (you’ll
+                  recognize a few)
+                `}
               </ui-text>
             </whats-new-fact>
             <whats-new-fact>
               <ui-icon name="logo-zap" layout="size:7:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
-                The <ui-text type="label-m">one-click way</ui-text> to give someone the same
-                <ui-text type="label-m">quiet web</ui-text>, with Ghostery Zap
+                ${msg.html`
+                  The <strong>one-click way</strong> to give someone the same
+                  <strong>quiet web</strong>, with Ghostery Zap
+                `}
               </ui-text>
             </whats-new-fact>
             <whats-new-fact>
               <ui-icon name="block-ads" color="brand-primary" layout="size:4 shrink:0"></ui-icon>
               <ui-text type="body-m">
-                A new way to <ui-text type="label-m">make pages calmer</ui-text> that isn’t about
-                ads
+                ${msg.html`
+                  A new way to <strong>make pages calmer</strong> that isn’t about
+                  ads
+                `}
               </ui-text>
             </whats-new-fact>
           </whats-new-facts>
