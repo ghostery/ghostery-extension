@@ -1176,7 +1176,7 @@
     "message": "Thema"
   },
   "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
-    "message": "Das ist kein Zufall. Jeden Tag haben Sie sich für ein ruhigeres, privateres Web entschieden – und Ghostery hat es Ihnen leicht gemacht, diese Entscheidungen beizubehalten."
+    "message": "Das ist kein Zufall. Jeden Tag hast du dich für ein ruhigeres, privateres und werbefreies Web entschieden – und Ghostery hat es dir leicht gemacht, dabei zu bleiben."
   },
   "this_page_was_prevented_from_loading_because_it_may_be_malicious__the_redirect_destination_is_unknown_and_could_pose_a_security_or_privacy_risk_": {
     "message": "Diese Seite wurde blockiert, da sie möglicherweise unsicher ist. Das Ziel der Weiterleitung ist unbekannt und könnte ein Sicherheits- oder Datenschutzrisiko darstellen:"
@@ -1323,10 +1323,10 @@
     "message": "Bericht anzeigen"
   },
   "view_the_web_you_built___by_the_numbers__last_3_months_": {
-    "message": "Das von Ihnen gestaltete Web – in Zahlen (Letzte 3 Monate)"
+    "message": "Dein Web in Zahlen (letzte 3 Monate)"
   },
   "visit_a_site": {
-    "message": "Besuchen Sie eine Website"
+    "message": "Eine Website besuchen"
   },
   "visit_our_blog": {
     "message": "Besuche unseren Blog"
@@ -1374,16 +1374,16 @@
     "message": "Willkommen bei Ghostery"
   },
   "whatever_browser_they_use__ghostery_s_got_it": {
-    "message": "Egal welchen Browser sie verwenden, Ghostery unterstützt ihn."
+    "message": "Egal welchen Browser sie nutzen, Ghostery ist dabei."
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Wenn diese Funktion aktiviert ist, sendet dein Browser ein Signal an Webseiten mit der Aufforderung, deine persönlichen Daten nicht für Werbezwecke zu verkaufen oder weiterzugeben – im Einklang mit Datenschutzgesetzen in der EU und in Kalifornien."
   },
   "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
-    "message": "Während du gesurft hast, hat Ghostery diese im Auge behalten – und sie ausgesperrt."
+    "message": "Während du gesurft hast, hat Ghostery sie im Auge behalten – und ausgesperrt."
   },
   "who_wanted_your_data_": {
-    "message": "Wer wollte Ihre Daten?"
+    "message": "Wer wollte deine Daten?"
   },
   "whotracks_me__operated_by_ghostery__is_a_comprehensive_global_resource_on_web_trackers_that_brings_transparency_to_web_tracking_and_powers_ghostery_s_ai_anti_tracking_technology__built_from_non_personal_contributions_shared_by_ghostery_users__it_provides_real_time_tracker_intelligence_that_protects_the_entire_ghostery_community_": {
     "message": "WhoTracks.Me, betrieben von Ghostery, ist eine umfassende globale Ressource für Web-Tracker, die Transparenz beim Web-Tracking schafft und Ghosterys KI-Anti-Tracking-Technologie antreibt. Basierend auf nicht-persönlichen Beiträgen, die von Ghostery-Unterstützern geteilt werden, bietet WhoTracks.Me Echtzeit-Tracker-Informationen, die die gesamte Ghostery-Community schützen."
@@ -1407,7 +1407,7 @@
     "message": "Du blockierst Werbung auf den Webseiten, die du nutzt. Einmal blockieren - und sie bleiben bei jedem Besuch werbefrei."
   },
   "you_browse_with_intention": {
-    "message": "Sie surfen mit Absicht"
+    "message": "Du surfst ganz bewusst"
   },
   "you_browsed___ghostery_kept_these_from_reaching_you_": {
     "message": "Sie haben gesurft – Ghostery hat verhindert, dass diese Sie erreichen."
