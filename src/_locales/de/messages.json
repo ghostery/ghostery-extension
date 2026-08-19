@@ -793,7 +793,7 @@
     "message": "Keine"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
-    "message": "Jetzt können Sie Anmeldeaufforderungen, Kurzvideo-Feeds, soziale Widgets und den restlichen Lärm ausblenden – Ghostery entfernt sie, damit Ihre Seiten sich auf das konzentrieren, wofür Sie gekommen sind."
+    "message": "Jetzt kannst du Anmeldeaufforderungen, Kurzvideo-Feeds, Social-Media-Widgets und andere Ablenkungen ausblenden – Ghostery räumt sie aus dem Weg, damit du dich auf das konzentrieren kannst, weswegen du gekommen bist."
   },
   "observed_activities": {
     "message": "Beobachtete Aktivitäten"
@@ -814,7 +814,7 @@
     "message": "Öffne eine Seite"
   },
   "open_any_website_where_ads_get_in_the_way": {
-    "message": "Öffnen Sie eine beliebige Website, auf der Werbung stört."
+    "message": "Öffne eine beliebige Website, auf der Werbung stört."
   },
   "open_settings": {
     "message": "Einstellungen öffnen"
@@ -855,7 +855,7 @@
     "message": "Seite eingefroren"
   },
   "pages_still_work___but_trackers_learn_nothing_about_you": {
-    "message": "Seiten funktionieren weiterhin – aber Tracker erfahren nichts über Sie"
+    "message": "Seiten funktionieren weiterhin – aber Tracker erfahren nichts über dich"
   },
   "pages_visited": {
     "message": "Besuchte Seiten"
@@ -897,7 +897,7 @@
     "message": "Bitte wende dich an <a href=\"$${0}\" onclick=\"$${1}\">Ghostery Support</a>"
   },
   "pop_ups_you_never_had_to_see": {
-    "message": "Pop-ups, die Sie nie sehen mussten"
+    "message": "Pop-ups, die du nie sehen musstest"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Verhindert, dass Google und Bing die Links der Suchergebnisse über ihre Server umleiten, anstatt sie direkt auf die Seiten zu verlinken."
@@ -957,7 +957,7 @@
     "message": "Entfernt störende Hinweise und unnötige Elemente auf Webseiten."
   },
   "repeat_for_most_visited_websites": {
-    "message": "Für die meistbesuchten Websites wiederholen"
+    "message": "Für deine meistbesuchten Websites wiederholen"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Ersetzt das Ghostery-Symbol in der Werkzeugleiste des Browsers mit dem Tracker-Rad."
@@ -1008,7 +1008,7 @@
     "message": "Erkenne live, welche Tracker Ghostery stoppt."
   },
   "see_your_recap": {
-    "message": "Ihre Zusammenfassung ansehen"
+    "message": "Deine Zusammenfassung ansehen"
   },
   "select_distracting_element": {
     "message": "Wähle ablenkendes Element aus"
@@ -1035,7 +1035,7 @@
     "message": "Einrichtung erfolgreich"
   },
   "share_a_calmer_web": {
-    "message": "Ein ruhigeres Web teilen"
+    "message": "Teile ein ruhigeres Web"
   },
   "share_a_review": {
     "message": "Teile deine Bewertung"
@@ -1082,7 +1082,7 @@
     "message": "Software-Lizenzen"
   },
   "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
-    "message": "Jemand in Ihrem Umfeld muss sich immer noch mit Werbung, Tracking und Unordnung herumschlagen. Sie können ihm das gleiche ruhige Web schenken, das Sie sich aufgebaut haben – Ghostery macht die Einrichtung mit einem Fingertipp möglich."
+    "message": "Bestimmt kennst du jemanden, der sich noch mit Werbung, Tracking und Ablenkungen herumschlägt. Zeig ihnen, wie angenehm das Web mit Ghostery sein kann – die Einrichtung ist nur einen Klick entfernt."
   },
   "something_wrong_": {
     "message": "Etwas nicht in Ordnung?"
@@ -1115,7 +1115,7 @@
     "message": "An der Umfrage teilnehmen"
   },
   "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
-    "message": "Bringen Sie ihnen diese drei Schritte bei, um Werbung mit Ghostery Zap zu blockieren"
+    "message": "Zeig ihnen in 3 Schritten, wie sie Werbung mit Ghostery Zap blockieren"
   },
   "telemetry": {
     "message": "Telemetrie",
