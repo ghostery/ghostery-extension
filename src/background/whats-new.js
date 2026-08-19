@@ -10,7 +10,9 @@
  */
 
 import { store } from 'hybrids';
+import { FLAG_WHATS_NEW } from '@ghostery/config';
 
+import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
@@ -22,6 +24,11 @@ function getMinorVersion() {
 }
 
 async function openPanel() {
+  // Without the flag the version is left untouched, so the release is announced
+  // as soon as the flag is rolled out to the user
+  const config = await store.resolve(Config);
+  if (!config.hasFlag(FLAG_WHATS_NEW)) return;
+
   const options = await store.resolve(Options);
   const version = getMinorVersion();
 

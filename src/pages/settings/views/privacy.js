@@ -10,9 +10,11 @@
  */
 
 import { html, router, store } from 'hybrids';
+import { FLAG_WHATS_NEW } from '@ghostery/config';
 
 import { longDateFormatter } from '/ui/labels.js';
 
+import Config from '/store/config.js';
 import Options, { GLOBAL_PAUSE_ID, MODE_ZAP } from '/store/options.js';
 
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
@@ -50,6 +52,7 @@ export default {
     stack: [Autoconsent, AdditionalFilters, RedirectProtection, Distractions],
   },
   options: store(Options),
+  config: store(Config),
   devMode: __DEBUG__,
   globalPause: {
     value: false,
@@ -61,7 +64,7 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({ options, devMode, globalPause, globalPauseRevokeAt }) => html`
+  render: ({ options, config, devMode, globalPause, globalPauseRevokeAt }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${
@@ -187,31 +190,36 @@ export default {
                   `
                 }
               </settings-toggle>
-              <ui-action layout@768px="margin:bottom:-3">
-                <a
-                  href="${chrome.runtime.getURL('/pages/whats-new/index.html')}"
-                  target="_blank"
-                  data-qa="button:whats-new"
-                >
-                  <settings-option>
-                    <settings-help-image slot="icon">
-                      <img src="${assets['whats-new']}" alt="Your web, lately" />
-                    </settings-help-image>
-                    Your web, lately
-                    <span slot="description">
-                      The cleaner, calmer web you've built - by the numbers (last 3 months)
-                    </span>
-                    <ui-button slot="footer" size="s" layout="margin:top">
-                      <button>
-                        See your recap
-                        <ui-icon name="chevron-right-s"></ui-icon>
-                      </button>
-                    </ui-button>
-                  </settings-option>
-                </a>
-              </ui-action>
+              ${
+                store.ready(config) &&
+                config.hasFlag(FLAG_WHATS_NEW) &&
+                html`
+                  <ui-action layout@768px="margin:bottom:-3">
+                    <a
+                      href="${chrome.runtime.getURL('/pages/whats-new/index.html')}"
+                      target="_blank"
+                      data-qa="button:whats-new"
+                    >
+                      <settings-option>
+                        <settings-help-image slot="icon">
+                          <img src="${assets['whats-new']}" alt="Your web, lately" />
+                        </settings-help-image>
+                        Your web, lately
+                        <span slot="description">
+                          The cleaner, calmer web you've built - by the numbers (last 3 months)
+                        </span>
+                        <ui-button slot="footer" size="s" layout="margin:top">
+                          <button>
+                            See your recap
+                            <ui-icon name="chevron-right-s"></ui-icon>
+                          </button>
+                        </ui-button>
+                      </settings-option>
+                    </a>
+                  </ui-action>
+                `
+              }
             </section>
-
             <div>
               <settings-devtools
                 onshown="${html.set('devMode', true)}"

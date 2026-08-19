@@ -189,7 +189,7 @@ export default {
                         <whats-new-entity
                           name="${name}"
                           category="${category}"
-                          href="${WTM_PAGE_URL}/trackers/${id}"
+                          href="${WTM_PAGE_URL}/trackers/${id}?utm_source=gbe&utm_campaign=yourweb"
                         ></whats-new-entity>
                       `,
                     )}
@@ -336,7 +336,10 @@ export default {
                 </ui-text>
               </div>
               <ui-button type="primary" layout="height:6">
-                <a href="${DISTRACTIONS_LEARN_MORE_URL}" target="_blank">
+                <a
+                  href="${DISTRACTIONS_LEARN_MORE_URL}?utm_source=gbe&utm_campaign=yourweb"
+                  target="_blank"
+                >
                   Learn to Remove Distractions
                 </a>
               </ui-button>

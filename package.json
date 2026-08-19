@@ -48,7 +48,7 @@
     "@ghostery/adblocker-content": "^2.18.2",
     "@ghostery/adblocker-extended-selectors": "^2.18.2",
     "@ghostery/adblocker-webextension": "^2.18.2",
-    "@ghostery/config": "^0.0.16",
+    "@ghostery/config": "^0.0.17",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^2.0.4",
     "@github/relative-time-element": "^5.3.1",

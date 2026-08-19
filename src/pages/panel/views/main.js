@@ -10,6 +10,7 @@
  */
 
 import { html, store, router, msg } from 'hybrids';
+import { FLAG_WHATS_NEW } from '@ghostery/config';
 
 import { lang, numberFormatter } from '/ui/labels.js';
 
@@ -24,6 +25,7 @@ import Options, {
   MODE_DEFAULT,
   MODE_ZAP,
 } from '/store/options.js';
+import Config from '/store/config.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
 import ManagedConfig from '/store/managed-config.js';
@@ -188,6 +190,7 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
+  config: store(Config),
   managedConfig: store(ManagedConfig),
   elementPickerSelectors: store(ElementPickerSelectors),
   resources: store(Resources),
@@ -203,7 +206,8 @@ export default {
     !paused &&
     options.blockAnnoyances &&
     resources.autoconsent[stats.domain],
-  whatsNewNotification: ({ options }) => store.ready(options) && !options.whatsNew.shown,
+  whatsNewNotification: ({ config, options }) =>
+    store.ready(config, options) && config.hasFlag(FLAG_WHATS_NEW) && !options.whatsNew.shown,
   render: ({
     options,
     stats,
