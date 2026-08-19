@@ -15,10 +15,10 @@
     "message": "1 Stunde"
   },
   "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
-    "message": "Ein ruhigeres Web bedeutet nicht nur mehr Privatsphäre. Es geht auch um Aufmerksamkeit."
+    "message": "Ein ruhigeres Web schützt nicht nur deine Privatsphäre, sondern auch deine Aufmerksamkeit."
   },
   "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
-    "message": "Eine neue Möglichkeit, <strong>Seiten ruhiger zu gestalten</strong>, bei der es nicht nur um Werbung geht"
+    "message": "Eine neue Möglichkeit <strong>für noch ruhigere Websites</strong>, jenseits von Werbung"
   },
   "a_quick_review_goes_a_long_way": {
     "message": "Eine kurze Bewertung wirkt Wunder"
@@ -292,7 +292,7 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "consent_requests_handled": {
-    "message": "Zustimmungsanfragen bearbeitet"
+    "message": "Cookie-Anfragen bearbeitet"
   },
   "contact": {
     "message": "Kontakt"
@@ -1410,7 +1410,7 @@
     "message": "Du surfst ganz bewusst"
   },
   "you_browsed___ghostery_kept_these_from_reaching_you_": {
-    "message": "Sie haben gesurft – Ghostery hat verhindert, dass diese Sie erreichen."
+    "message": "Du warst im Web unterwegs – Ghostery hielt die Tracker von dir fern."
   },
   "you_can_disable_it_in__a_href__@_0___whotracks_me_settings__a__": {
     "message": "Du kannst diese Funktion in den <a href=\"$${0}\">WhoTracks.Me-Einstellungen</a> deaktivieren."
@@ -1419,7 +1419,7 @@
     "message": "Du bist bereit, Werbung zu blockieren"
   },
   "you_saw_what_was_really_happening_under_every_page_you_opened_": {
-    "message": "Sie sahen, was wirklich unter jeder geöffneten Seite geschah."
+    "message": "Du konntest sehen, was wirklich hinter den Kulissen jeder geöffneten Seite passiert."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
@@ -1443,7 +1443,7 @@
     "message": "Deine Wirkung"
   },
   "your_web__lately": {
-    "message": "Dein Web, in letzter Zeit"
+    "message": "Dein Web der letzten Monate"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube hindert dich daran, werbefreie Videos anzusehen?"
