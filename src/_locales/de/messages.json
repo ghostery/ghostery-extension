@@ -1131,25 +1131,25 @@
     "message": "Danke für deine Meldung!"
   },
   "thanks_for_being_part_of_ghostery": {
-    "message": "Danke, dass Sie Teil von Ghostery sind"
+    "message": "Danke, dass du Teil der Ghostery-Community bist"
   },
   "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
-    "message": "Der <strong>Ein-Klick-Weg</strong>, um jemandem das gleiche <strong>ruhige Web</strong> zu ermöglichen, mit Ghostery Zap"
+    "message": "Mit <strong>einem Klick</strong> jemandem das gleiche <strong>ruhige, werbefreie Web</strong> ermöglichen, mit Ghostery Zap"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Das Backup von $${0} wurde erfolgreich importiert."
   },
   "the_choice_is_saved__so_it_stays_clean_every_visit": {
-    "message": "Die Auswahl wird gespeichert, damit es bei jedem Besuch sauber bleibt"
+    "message": "Die Auswahl wird gespeichert, damit es bei jedem Besuch werbefrei bleibt"
   },
   "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
-    "message": "Das sauberere, ruhigere Web, das Sie aufgebaut haben – mit Ghostery, das sich leise um den Rest kümmert."
+    "message": "Das werbefreie, ruhige Web, das du dir geschaffen hast – mit Ghostery an deiner Seite."
   },
   "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
-    "message": "Das sauberere, ruhigere Web, das Sie aufgebaut haben – in Zahlen (letzte 3 Monate)"
+    "message": "Das werbefreie, ruhige Web, das du dir geschaffen hast – in Zahlen (letzte 3 Monate)"
   },
   "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
-    "message": "Die Unternehmen, die <strong>Ihre Daten wollten</strong>, namentlich (einige davon werden Sie wiedererkennen)"
+    "message": "Die Unternehmen, die <strong>deine Daten wollten</strong>, namentlich (einige davon wirst du wiedererkennen)"
   },
   "the_feature_is_managed_by_your_organization": {
     "message": "Die Funktion wird von Ihrer Organisation verwaltet"
@@ -1170,7 +1170,7 @@
     "message": "Gib einen gültigen Hostnamen oder eine gültige IP-Adresse ein."
   },
   "the_web_you_built___by_the_numbers__last_3_months_": {
-    "message": "Das Web, das Sie aufgebaut haben – in Zahlen (Letzte 3 Monate)"
+    "message": "Das Web, das du dir geschaffen hast – in Zahlen (Letzte 3 Monate)"
   },
   "theme": {
     "message": "Thema"
