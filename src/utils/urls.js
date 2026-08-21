@@ -41,3 +41,4 @@ export const ZAP_AUTORELOAD_DISABLED_HOSTNAMES = ['youtube.com'];
 
 export const SURVEY_POST_ONBOARDING_URL = `https://blocksurvey.io/install-survey-postonboarding-R6q0d5dGR9OY6202iNPmGQ?v=o`;
 export const SURVEY_PANEL_NOTIFICATION_URL = `https://blocksurvey.io/youtube-channel-whitelisting-survey-iGbWdVLXQnWiTk9gFYTkHQ?v=o`;
+export const SURVEY_PANEL_USAGE_URL = `https://blocksurvey.io/panel-user-feedback-l8ijSFaLTGuLCV2ZZSFzYg`;
