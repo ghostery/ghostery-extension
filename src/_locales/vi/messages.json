@@ -340,9 +340,6 @@
   "disabled": {
     "message": "Đã vô hiệu"
   },
-  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
-    "message": "Khám phá các tính năng mới, cải tiến quan trọng và nâng cấp được thúc đẩy bởi sự đóng góp của cộng đồng - tất cả đều có ở một nơi."
-  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Hiển thị tất cả các khối nội dung đã được ẩn thủ công trên trang web này. Bạn có thể xóa từng khối riêng lẻ hoặc xóa toàn bộ danh sách."
   },
@@ -938,9 +935,6 @@
   "see_every_tracker_ghostery_stops_in_real_time_": {
     "message": "Xem mọi trình theo dõi mà Ghostery ngăn chặn theo thời gian thực."
   },
-  "see_what_s_new": {
-    "message": "Xem có gì mới"
-  },
   "select_distracting_element": {
     "message": "Chọn yếu tố gây xao lãng"
   },
@@ -1253,9 +1247,6 @@
   "welcome_to_ghostery": {
     "message": "Chào mừng bạn đến với Ghostery"
   },
-  "what_s_new_in_ghostery": {
-    "message": "Có gì mới trong Ghostery"
-  },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Khi được bật, trình duyệt của bạn sẽ gửi tín hiệu đến các trang web yêu cầu họ không bán hoặc chia sẻ dữ liệu cá nhân của bạn cho mục đích quảng cáo, phù hợp với luật bảo mật như ở California và EU."
   },
@@ -1312,5 +1303,155 @@
   },
   "zoom_out": {
     "message": "Thu nhỏ"
+  },
+  "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
+    "message": "<strong>$${0} trình theo dõi</strong> đã bị chặn trước khi đến được với bạn – và đó thậm chí chưa phải là con số lớn nhất bên dưới"
+  },
+  "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
+    "message": "Một web yên bình hơn không chỉ là về quyền riêng tư. Nó còn là về sự tập trung."
+  },
+  "a_new_way_to__strong_make_pages_calmer__strong__that_isn_t_about_ads": {
+    "message": "Một cách mới để <strong>làm cho các trang yên bình hơn</strong> mà không liên quan đến quảng cáo"
+  },
+  "activities_observed": {
+    "message": "Các hoạt động đã quan sát"
+  },
+  "ads_aren_t_the_only_thing_competing_for_your_attention_": {
+    "message": "Quảng cáo không phải là thứ duy nhất tranh giành sự chú ý của bạn."
+  },
+  "all_sites": {
+    "message": "Tất cả trang web"
+  },
+  "and_we_found_who_wanted_your_data___": {
+    "message": "Và chúng tôi đã tìm ra ai muốn dữ liệu của bạn..."
+  },
+  "better_habits_make_a_better_web_": {
+    "message": "Thói quen tốt hơn tạo nên một web tốt hơn."
+  },
+  "cleared_quietly__so_your_web_stayed_yours_": {
+    "message": "Đã xóa âm thầm, để web của bạn vẫn là của bạn."
+  },
+  "click__zap_ads__": {
+    "message": "Nhấp “Zap Ads!”"
+  },
+  "consent_requests_handled": {
+    "message": "Yêu cầu chấp thuận đã được xử lý"
+  },
+  "cookies_removed": {
+    "message": "Cookie đã được gỡ bỏ"
+  },
+  "every_cleaner__calmer_page_is_one_you_chose___and_ghostery_is_glad_to_be_along_for_it__thanks_for_making_the_web_a_little_better_": {
+    "message": "Mỗi trang web sạch hơn, yên bình hơn là một lựa chọn của bạn – và Ghostery rất vui được đồng hành cùng bạn. Cảm ơn bạn đã làm cho web tốt đẹp hơn một chút."
+  },
+  "ghostery_stayed_with_you_the_whole_way_": {
+    "message": "Ghostery đã đồng hành cùng bạn suốt chặng đường."
+  },
+  "help_them_install_ghostery": {
+    "message": "Hãy giúp họ cài đặt Ghostery"
+  },
+  "last_3_months": {
+    "message": "3 tháng qua"
+  },
+  "learn_to_remove_distractions": {
+    "message": "Học cách loại bỏ phiền nhiễu"
+  },
+  "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
+    "message": "Giờ đây bạn có thể ẩn các lời nhắc đăng nhập, nguồn cấp video ngắn, tiện ích xã hội và những phiền nhiễu khác – Ghostery sẽ dọn sạch chúng để các trang của bạn luôn tập trung vào điều bạn muốn xem."
+  },
+  "one_click_instantly_blocks_ads_across_the_entire_site__not_just_this_page": {
+    "message": "Một cú nhấp là chặn ngay quảng cáo trên toàn bộ trang web, không chỉ trang này"
+  },
+  "open_any_website_where_ads_get_in_the_way": {
+    "message": "Mở bất kỳ trang web nào mà quảng cáo gây phiền toái"
+  },
+  "pages_still_work___but_trackers_learn_nothing_about_you": {
+    "message": "Các trang vẫn hoạt động – nhưng trình theo dõi không biết gì về bạn"
+  },
+  "pop_ups_you_never_had_to_see": {
+    "message": "Những cửa sổ bật lên bạn không bao giờ cần thấy"
+  },
+  "remove_distractions": {
+    "message": "Loại bỏ phiền nhiễu"
+  },
+  "repeat_for_most_visited_websites": {
+    "message": "Lặp lại cho các trang web bạn truy cập nhiều nhất"
+  },
+  "see_your_recap": {
+    "message": "Xem bản tóm tắt của bạn"
+  },
+  "share_a_calmer_web": {
+    "message": "Chia sẻ một web yên bình hơn"
+  },
+  "someone_in_your_life_still_puts_up_with_ads__tracking_and_clutter__you_can_hand_them_the_same_quiet_web_you_built___ghostery_makes_the_setup_one_tap_": {
+    "message": "Ai đó trong cuộc sống của bạn vẫn phải chịu đựng quảng cáo, theo dõi và sự lộn xộn. Bạn có thể trao cho họ cùng một web yên tĩnh mà bạn đã xây dựng – Ghostery giúp thiết lập chỉ bằng một chạm."
+  },
+  "stay_ad_free": {
+    "message": "Luôn không quảng cáo"
+  },
+  "step_1": {
+    "message": "Bước 1"
+  },
+  "step_2": {
+    "message": "Bước 2"
+  },
+  "step_3": {
+    "message": "Bước 3"
+  },
+  "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
+    "message": "Hãy dạy họ 3 bước này để chặn quảng cáo bằng Ghostery Zap"
+  },
+  "thanks_for_being_part_of_ghostery": {
+    "message": "Cảm ơn bạn đã là một phần của Ghostery"
+  },
+  "the__strong_one_click_way__strong__to_give_someone_the_same__strong_quiet_web__strong___with_ghostery_zap": {
+    "message": "Cách <strong>một chạm</strong> để trao cho ai đó cùng một <strong>web yên tĩnh</strong>, với Ghostery Zap"
+  },
+  "the_choice_is_saved__so_it_stays_clean_every_visit": {
+    "message": "Lựa chọn được lưu, nên web vẫn sạch mỗi lần bạn ghé thăm"
+  },
+  "the_cleaner__calmer_web_you_ve_been_building___with_ghostery_quietly_handling_the_rest_": {
+    "message": "Web sạch hơn, yên bình hơn mà bạn đã xây dựng – với Ghostery âm thầm xử lý phần còn lại."
+  },
+  "the_cleaner__calmer_web_you_ve_built___by_the_numbers__last_3_months_": {
+    "message": "Web sạch hơn, yên bình hơn mà bạn đã xây dựng – theo số liệu (3 tháng qua)"
+  },
+  "the_companies_that__strong_wanted_your_data__strong___named__you_ll_recognize_a_few_": {
+    "message": "Những công ty <strong>muốn dữ liệu của bạn</strong>, được nêu tên (bạn sẽ nhận ra vài cái)"
+  },
+  "the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "Web bạn đã xây dựng – theo số liệu (3 tháng qua)"
+  },
+  "this_didn_t_happen_by_accident__every_day_you_chose_a_calmer__more_private_web___and_ghostery_made_those_choices_easy_to_keep_": {
+    "message": "Điều này không xảy ra ngẫu nhiên. Mỗi ngày bạn đã chọn một web yên bình hơn, riêng tư hơn – và Ghostery đã giúp những lựa chọn đó dễ duy trì."
+  },
+  "view_the_web_you_built___by_the_numbers__last_3_months_": {
+    "message": "Xem web bạn đã xây dựng – theo số liệu (3 tháng qua)"
+  },
+  "visit_a_site": {
+    "message": "Truy cập một trang web"
+  },
+  "whatever_browser_they_use__ghostery_s_got_it": {
+    "message": "Dù họ dùng trình duyệt nào, Ghostery vẫn hỗ trợ."
+  },
+  "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
+    "message": "Trong lúc bạn duyệt web, Ghostery đã theo dõi những thứ này – và chặn chúng lại."
+  },
+  "who_wanted_your_data_": {
+    "message": "Ai muốn dữ liệu của bạn?"
+  },
+  "you_browse_with_intention": {
+    "message": "Bạn duyệt web có chủ đích"
+  },
+  "you_browsed___ghostery_kept_these_from_reaching_you_": {
+    "message": "Bạn đã duyệt web — Ghostery đã ngăn những thứ này tiếp cận bạn."
+  },
+  "you_saw_what_was_really_happening_under_every_page_you_opened_": {
+    "message": "Bạn đã thấy điều thực sự diễn ra dưới mỗi trang bạn mở."
+  },
+  "your_impact": {
+    "message": "Tác động của bạn"
+  },
+  "your_web__lately": {
+    "message": "Web của bạn, gần đây"
   }
 }
