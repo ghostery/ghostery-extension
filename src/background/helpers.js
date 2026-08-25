@@ -15,7 +15,7 @@ import Config from '/store/config.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
-import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
+import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import { setup as adblockerSetup, updateEngines } from './adblocker/engines.js';
 import { openElementPicker } from './element-picker.js';
 
@@ -26,8 +26,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
 
     case 'openTabWithUrl':
-      chrome.tabs.create({ url: msg.url });
-      break;
+      chrome.tabs.create({ url: msg.url }).then(
+        ({ id }) => {
+          sendResponse({ id });
+        },
+        () => sendResponse({ id: null }),
+      );
+      return true;
 
     case 'openPrivateWindowWithUrl':
       chrome.windows.getAll().then((windows) => {
@@ -109,11 +114,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       return true;
 
     case 'e2e:userScriptsActive':
-      sendResponse(__CHROMIUM__ && isUserScriptsRegisterSupported());
+      sendResponse(__CHROMIUM__ && isUserScriptsSupported());
       break;
 
     case 'e2e:userScriptsRegistrations':
-      if (__CHROMIUM__ && isUserScriptsRegisterSupported()) {
+      if (__CHROMIUM__ && isUserScriptsSupported()) {
         chrome.userScripts.getScripts().then((scripts) => {
           sendResponse(scripts.map((script) => script.id));
         }, sendResponse);

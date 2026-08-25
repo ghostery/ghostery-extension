@@ -9,9 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import * as notifications from '/utils/notifications.js';
-
-const SELECTORS = [
+const WALL_SELECTORS = [
   // Based on https://github.com/AdguardTeam/AdguardFilters/blob/e5ae8e3194f8d18bdcc660d4c42282e4a96ca5b9/AnnoyancesFilter/Popups/sections/antiadblock.txt#L2044
   'ytd-watch-flexy:not([hidden]) ytd-enforcement-message-view-model > div.ytd-enforcement-message-view-model',
 
@@ -19,8 +17,10 @@ const SELECTORS = [
   'tp-yt-paper-dialog .ytd-enforcement-message-view-model',
 ];
 
+const AD_SELECTORS = ['.html5-video-player.ad-showing'];
+
 // DEBUG: Add the app selector to test the wall
-if (__DEBUG__) SELECTORS.push('ytd-app');
+if (__DEBUG__) WALL_SELECTORS.push('ytd-app');
 
 function detectWall(cb) {
   let timeout = null;
@@ -29,7 +29,7 @@ function detectWall(cb) {
     if (timeout) return;
 
     timeout = setTimeout(() => {
-      if (document.querySelector(SELECTORS)?.clientHeight > 0) {
+      if (document.querySelector(WALL_SELECTORS)?.clientHeight > 0) {
         try {
           cb();
         } catch {
@@ -55,46 +55,49 @@ function detectWall(cb) {
   });
 }
 
-async function isFeatureDisabled() {
-  const { options, youtubeDontAsk } = await chrome.storage.local.get(['options', 'youtubeDontAsk']);
+function detectAd(cb) {
+  let adShowing = false;
 
-  if (
-    // User's choice to not show the wall
-    youtubeDontAsk ||
-    // Terms not accepted or paused
-    !options ||
-    !options.terms ||
-    // IMPORTANT: to avoid referencing the file, the `GLOBAL_PAUSE_ID`
-    // is used as is, instead from the `/store/options.js` file
-    !!options.paused['<all_urls>'] ||
-    !!options.paused['www.youtube.com'] ||
-    !!options.paused['youtube.com']
-  ) {
-    return true;
-  }
+  const check = () => {
+    const showing = !!document.querySelector(AD_SELECTORS);
 
-  return false;
+    if (showing !== adShowing) {
+      adShowing = showing;
+
+      // Call the callback with 1 second delay to avoid glitch with YouTube UI being created
+      if (showing) setTimeout(cb, 1000);
+    }
+  };
+
+  const observer = new MutationObserver(check);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributeFilter: ['class'],
+    });
+
+    check();
+  });
 }
 
 if (!chrome.extension.inIncognitoContext) {
-  (async () => {
-    if (await isFeatureDisabled()) return;
-
-    detectWall(async () => {
-      if (await isFeatureDisabled()) return;
-      chrome.runtime.sendMessage({
-        action: notifications.OPEN_ACTION,
-        id: 'youtube',
-        params: { url: window.location.href },
-      });
+  if (__CHROMIUM__) {
+    detectAd(() => {
+      chrome.runtime.sendMessage({ action: 'youtube:ads' });
     });
+  }
+
+  detectWall(() => {
+    chrome.runtime.sendMessage({ action: 'youtube:wall' });
 
     window.addEventListener(
       'yt-navigate-start',
       () => {
-        chrome.runtime.sendMessage({ action: notifications.CLOSE_ACTION });
+        chrome.runtime.sendMessage({ action: 'youtube:navigate' });
       },
-      true,
+      { once: true, capture: true },
     );
-  })();
+  });
 }

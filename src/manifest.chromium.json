@@ -141,7 +141,10 @@
       "use_dynamic_url": true
     },
     {
-      "resources": ["pages/notifications/youtube.html"],
+      "resources": [
+        "pages/notifications/youtube-wall.html",
+        "pages/notifications/youtube-ads.html"
+      ],
       "matches": ["*://www.youtube.com/*"],
       "use_dynamic_url": true
     }

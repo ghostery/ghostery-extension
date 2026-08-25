@@ -20,6 +20,7 @@ import {
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
+  setUserScriptsAllowed,
 } from '../utils.js';
 
 async function setCustomFiltersInput(lines) {
@@ -196,6 +197,18 @@ describe('Custom Filters', function () {
     await expect($('h1')).toHaveText('100%, escaped');
   });
 
+  describe('remote filter list', function () {
+    if (browser.isChromium) {
+      before(() => setUserScriptsAllowed(true));
+      after(() => setUserScriptsAllowed(false));
+    }
+
+  describe('remote filter list', function () {
+    if (browser.isChromium) {
+      before(() => setUserScriptsAllowed(true));
+      after(() => setUserScriptsAllowed(false));
+    }
+
   it('applies a remote filter list', async function () {
     // The element is visible before the filter list is applied. The previous
     // test's filter update can still be settling in the engine, so retry the
@@ -205,39 +218,40 @@ describe('Custom Filters', function () {
       '#filter-list was not displayed before applying the remote filter list',
     );
 
-    // Add the filter list served by the local test server
-    await addCustomFilterList(`${PAGE_URL}filter-list.txt`);
+      // Add the filter list served by the local test server
+      await addCustomFilterList(`${PAGE_URL}filter-list.txt`);
 
-    // The list name parsed from its `! Title:` metadata is shown in the UI
-    await expect(getExtensionElement('component:custom-filters:filter-lists')).toHaveText(
-      expect.stringContaining('E2E Test Filter List'),
-    );
+      // The list name parsed from its `! Title:` metadata is shown in the UI
+      await expect(getExtensionElement('component:custom-filters:filter-lists')).toHaveText(
+        expect.stringContaining('E2E Test Filter List'),
+      );
 
-    // The cosmetic rule from the list hides the element
-    await browser.url(PAGE_URL);
-    await expect($('#filter-list')).not.toBeDisplayed();
+      // The cosmetic rule from the list hides the element
+      await browser.url(PAGE_URL);
+      await expect($('#filter-list')).not.toBeDisplayed();
 
-    // The network rule from the list blocks the tracker request
-    await browser.url('ghostery:panel');
-    await getExtensionElement('button:detailed-view').click();
-    await expect(
-      getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
-    ).toBeDisplayed();
+      // The network rule from the list blocks the tracker request
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:detailed-view').click();
+      await expect(
+        getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
+      ).toBeDisplayed();
 
-    // Remove the filter list and verify the element is visible again
-    await browser.url('ghostery:settings');
-    await getExtensionElement('button:additional-filters').click();
-    await getExtensionElement('button:custom-filters:remove-filter-list').click();
-    await waitForIdleBackgroundTasks();
+      // Remove the filter list and verify the element is visible again
+      await browser.url('ghostery:settings');
+      await getExtensionElement('button:additional-filters').click();
+      await getExtensionElement('button:custom-filters:remove-filter-list').click();
+      await waitForIdleBackgroundTasks();
 
-    await browser.url(PAGE_URL);
-    await expect($('#filter-list')).toBeDisplayed();
+      await browser.url(PAGE_URL);
+      await expect($('#filter-list')).toBeDisplayed();
 
-    // The network rule no longer blocks the tracker request
-    await browser.url('ghostery:panel');
-    await getExtensionElement('button:detailed-view').click();
-    await expect(
-      getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
-    ).not.toBeDisplayed();
+      // The network rule no longer blocks the tracker request
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:detailed-view').click();
+      await expect(
+        getExtensionElement('icon:tracker:www.filter-list-tracker.test:blocked'),
+      ).not.toBeDisplayed();
+    });
   });
 });

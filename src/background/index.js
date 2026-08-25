@@ -31,6 +31,7 @@ import './notifications.js';
 import './serp.js';
 import './report-issue.js';
 import './pause-assistant.js';
+import './youtube.js';
 
 import './whats-new.js';
 

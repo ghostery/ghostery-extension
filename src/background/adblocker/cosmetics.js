@@ -21,7 +21,7 @@ import FilteringDebug from '/store/filtering-debug.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
-import { isUserScriptsRegisterSupported } from '/utils/user-scripts.js';
+import { isUserScriptsSupported } from '/utils/user-scripts.js';
 
 import { tabStats } from '../stats.js';
 
@@ -49,7 +49,7 @@ const scriptletGlobals = {
   warOrigin: chrome.runtime.getURL('/rule_resources/redirects/empty').slice(0, -6),
 };
 
-const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsRegisterSupported();
+const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsSupported();
 
 // On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
 // same document, so scriptlets would run twice. We remember the documentIds we have already
