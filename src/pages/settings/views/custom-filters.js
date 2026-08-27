@@ -17,6 +17,7 @@ import CustomFilters from '/store/custom-filters.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
+import { isSafari } from '/utils/browser-info.js';
 import { CUSTOM_FILTERS_MAX_DYNAMIC_RULES } from '/utils/dnr.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 
@@ -69,8 +70,8 @@ export default {
   input: ({ customFilters }, value) =>
     value ?? ((store.ready(customFilters) && customFilters.text) || ''),
   filterList: store(FilterList, { draft: true }),
-  userScripts: {
-    value: isUserScriptsSupported,
+  filterListsEnabled: {
+    value: __FIREFOX__ || isSafari() ? true : isUserScriptsSupported,
     connect: (host, key, invalidate) => {
       // Re-check the support after the user potentially enables "Allow user
       // scripts" in the browser settings and returns to the tab
@@ -78,7 +79,14 @@ export default {
       return () => window.removeEventListener('focus', invalidate);
     },
   },
-  render: ({ options, customFilters, managedConfig, input, filterList, userScripts }) => html`
+  render: ({
+    options,
+    customFilters,
+    managedConfig,
+    input,
+    filterList,
+    filterListsEnabled,
+  }) => html`
     <template layout="contents">
       <settings-toggle
         value="${options.customFilters.enabled}"
@@ -186,8 +194,7 @@ export default {
                 </ui-text>
               </div>
               ${
-                __CHROMIUM__ &&
-                !userScripts &&
+                !filterListsEnabled &&
                 html`
                   <div
                     layout="column gap:0.5"
@@ -206,8 +213,8 @@ export default {
               }
               <div
                 layout="column gap:2"
-                inert="${__CHROMIUM__ && !userScripts}"
-                style="${{ opacity: __CHROMIUM__ && !userScripts ? 0.5 : undefined }}"
+                inert="${!filterListsEnabled}"
+                style="${{ opacity: !filterListsEnabled ? 0.5 : undefined }}"
               >
                 <form layout="row gap items:start" data-qa="form:custom-filters:filter-list">
                   <ui-input error="${store.error(filterList)}" layout="grow">
