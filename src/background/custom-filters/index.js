@@ -13,7 +13,7 @@ import { store, msg } from 'hybrids';
 
 import { parseFilters, FilterType } from '@ghostery/adblocker';
 
-import { isSafari } from '/utils/browser-info.js';
+import { isWebkit } from '/utils/browser-info.js';
 import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -123,7 +123,7 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
   setup.pending && (await setup.pending);
 
   const customFilters = await store.resolve(CustomFilters);
-  const filterListsEnabled = __FIREFOX__ || isSafari() || isUserScriptsSupported();
+  const filterListsEnabled = __FIREFOX__ || isWebkit() || isUserScriptsSupported();
 
   // The user input is the primary source - the parse errors are reported back.
   // Remote lists are parsed with their own trusted scriptlets setting,

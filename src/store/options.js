@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
-import { isOpera, isSafari } from '/utils/browser-info.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 import { findParentDomain } from '/utils/domains.js';
 
 import CustomFilters from './custom-filters.js';
@@ -74,7 +74,7 @@ const Options = {
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
-  ...(__FIREFOX__ || !isSafari() ? { trackerCount: true } : {}),
+  ...(__FIREFOX__ || !isWebkit() ? { trackerCount: true } : {}),
   pauseAssistant: true,
 
   // Onboarding
@@ -123,7 +123,7 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (__FIREFOX__ || (!isSafari() && !isOpera())) {
+      if (__FIREFOX__ || (!isWebkit() && !isOpera())) {
         return manage(options);
       }
 

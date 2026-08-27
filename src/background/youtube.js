@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import Options, { getPausedDetails } from '/store/options.js';
 
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
-import { isSafari } from '/utils/browser-info.js';
+import { isWebkit } from '/utils/browser-info.js';
 
 import { openNotification, closeNotification } from './notifications.js';
 
@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
     case 'youtube:ads': {
       console.log('[youtube] Ad detected while playing a video');
       (async () => {
-        if (__CHROMIUM__ && !isSafari() && !isUserScriptsSupported()) {
+        if (__CHROMIUM__ && !isWebkit() && !isUserScriptsSupported()) {
           const options = await store.resolve(Options);
 
           if (__DEBUG__ || !getPausedDetails(options, hostname)) {

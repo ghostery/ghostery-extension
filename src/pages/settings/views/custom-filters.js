@@ -17,7 +17,7 @@ import CustomFilters from '/store/custom-filters.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
 
-import { isSafari } from '/utils/browser-info.js';
+import { isWebkit } from '/utils/browser-info.js';
 import { CUSTOM_FILTERS_MAX_DYNAMIC_RULES } from '/utils/dnr.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 
@@ -71,7 +71,7 @@ export default {
     value ?? ((store.ready(customFilters) && customFilters.text) || ''),
   filterList: store(FilterList, { draft: true }),
   filterListsEnabled: {
-    value: __FIREFOX__ || isSafari() ? true : isUserScriptsSupported,
+    value: __FIREFOX__ || isWebkit() ? true : isUserScriptsSupported,
     connect: (host, key, invalidate) => {
       // Re-check the support after the user potentially enables "Allow user
       // scripts" in the browser settings and returns to the tab
