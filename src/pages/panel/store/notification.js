@@ -17,11 +17,7 @@ import Config from '/store/config.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { isEdge, isMobile, isOpera, isSafari } from '/utils/browser-info.js';
-import {
-  BECOME_A_CONTRIBUTOR_PAGE_URL,
-  PANEL_STORE_PAGE_URL,
-  SURVEY_PANEL_USAGE_URL,
-} from '/utils/urls';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL, PANEL_STORE_PAGE_URL } from '/utils/urls';
 
 import callForReviewImage from '../assets/call-for-review.svg';
 import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
@@ -71,7 +67,7 @@ const NOTIFICATIONS = {
     img: callForSurveyImage,
     type: 'image',
     text: msg`Which parts of this panel do you actually use? Anonymous, about three minutes — it decides what we simplify next.`,
-    url: SURVEY_PANEL_USAGE_URL,
+    url: 'https://blocksurvey.io/panel-user-feedback-l8ijSFaLTGuLCV2ZZSFzYg',
     action: msg`Tell us`,
   },
   zap: {
