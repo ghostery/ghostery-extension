@@ -60,25 +60,21 @@ const config = {
 
 Sentry.init(config);
 
-getBrowserInfo().then(
-  ({ token, version, os, osVersion }) => {
-    // Sentry rejects tags with empty or NaN values ("expected a non-empty value"),
-    // which discards the whole tag, so only set tags that carry a usable value.
-    const setTag = (key, value) => {
-      if (value === '' || value == null || (typeof value === 'number' && Number.isNaN(value))) {
-        return;
-      }
-      Sentry.setTag(key, value);
-    };
+// Sentry rejects tags with empty or NaN values ("expected a non-empty value"),
+// which discards the whole tag, so only set tags that carry a usable value.
+function setTag(key, value) {
+  if (value === '' || value == null || (typeof value === 'number' && Number.isNaN(value))) {
+    return;
+  }
+  Sentry.setTag(key, value);
+}
 
-    setTag('ua', token);
-    setTag('uaVersion', version);
-    setTag('os', os);
-    setTag('osVersion', osVersion);
-  },
-  // empty error handled for tests
-  () => {},
-);
+const browserInfo = getBrowserInfo();
+
+setTag('ua', browserInfo.token);
+setTag('uaVersion', browserInfo.version);
+setTag('os', browserInfo.os);
+setTag('osVersion', browserInfo.osVersion);
 
 // Do not rename this to `captureException`/`captureMessage`. Sentry's stack
 // parser (STRIP_FRAME_REGEXP = /captureMessage|captureException/) drops the

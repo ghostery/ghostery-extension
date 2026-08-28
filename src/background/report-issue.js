@@ -95,7 +95,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         const { csrf_token: csrfToken, csrf_param: csrfParam } = await csrfResponse.json();
 
         const formData = new FormData();
-        const browserInfo = await getBrowserInfo();
+        const browserInfo = getBrowserInfo();
         const { version } = chrome.runtime.getManifest();
 
         const email = msg.email || 'noreplay@ghostery.com';

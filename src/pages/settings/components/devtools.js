@@ -43,6 +43,10 @@ async function forceConfigSync(host, event) {
   await asyncAction(event, setConfig({ updatedAt: 0 }));
 }
 
+function getBackgroundNavigator() {
+  return chrome.runtime.sendMessage({ action: 'devtools:navigator' });
+}
+
 async function testConfigDomain() {
   const domain = window.prompt('Enter domain to test:', 'example.com');
   if (!domain) return;
@@ -307,6 +311,57 @@ export default {
                     `,
                   ),
                 )}
+                <div layout="column gap items:start" translate="no">
+                  <ui-text type="headline-s">Navigator</ui-text>
+                  <div layout="column gap">
+                    <div layout="column gap:0.5">
+                      <ui-text type="label-m">Page</ui-text>
+                      <ui-text type="body-s" color="secondary">
+                        <ui-text type="label-s">User agent:</ui-text>
+                        <span data-qa="text:navigator-user-agent-page">
+                          ${navigator.userAgent}
+                        </span>
+                      </ui-text>
+                      <ui-text type="body-s" color="secondary">
+                        <ui-text type="label-s">Platform:</ui-text>
+                        <span data-qa="text:navigator-platform-page">${navigator.platform}</span>
+                      </ui-text>
+                      <ui-text type="body-s" color="secondary">
+                        <ui-text type="label-s">Max touch points:</ui-text>
+                        <span data-qa="text:navigator-max-touch-points-page">
+                          ${navigator.maxTouchPoints}
+                        </span>
+                      </ui-text>
+                    </div>
+                    ${html.resolve(
+                      getBackgroundNavigator().then(
+                        (info) => html`
+                          <div layout="column gap:0.5">
+                            <ui-text type="label-m">Background</ui-text>
+                            <ui-text type="body-s" color="secondary">
+                              <ui-text type="label-s">User agent:</ui-text>
+                              <span data-qa="text:navigator-user-agent-background">
+                                ${info.userAgent}
+                              </span>
+                            </ui-text>
+                            <ui-text type="body-s" color="secondary">
+                              <ui-text type="label-s">Platform:</ui-text>
+                              <span data-qa="text:navigator-platform-background">
+                                ${info.platform}
+                              </span>
+                            </ui-text>
+                            <ui-text type="body-s" color="secondary">
+                              <ui-text type="label-s">Max touch points:</ui-text>
+                              <span data-qa="text:navigator-max-touch-points-background">
+                                ${info.maxTouchPoints}
+                              </span>
+                            </ui-text>
+                          </div>
+                        `,
+                      ),
+                    )}
+                  </div>
+                </div>
                 ${
                   __CHROMIUM__ &&
                   html`

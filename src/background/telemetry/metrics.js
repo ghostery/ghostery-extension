@@ -184,7 +184,7 @@ export default class Metrics {
     // Make sure that Globals._checkBrowserInfo() has resolved before we proceed,
     // so that we use the correct BROWSER_INFO values if we are in
     // the Ghostery Desktop or Ghostery Android browsers
-    const browserInfo = await getBrowserInfo();
+    const browserInfo = getBrowserInfo();
     const conf = await this.getConf();
 
     const frequencyString = type !== 'uninstall' ? `/${frequency}` : '';

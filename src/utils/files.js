@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import getBrowserInfo from './browser-info.js';
+import { getOS } from './browser-info.js';
 
 export function saveAs(url, filename) {
   const a = document.createElement('a');
@@ -48,7 +48,7 @@ export async function download({
   // Safari on iOS does not support downloading blobs,
   // but it can handle data URLs, so we convert the blob to a data URL in that case.
   if (__CHROMIUM__) {
-    const { os } = await getBrowserInfo();
+    const os = getOS();
 
     if (os === 'ios' || os === 'ipados') {
       const fileReader = new FileReader();
