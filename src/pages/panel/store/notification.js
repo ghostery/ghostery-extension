@@ -20,7 +20,6 @@ import { isEdge, isMobile, isOpera, isSafari } from '/utils/browser-info.js';
 import {
   BECOME_A_CONTRIBUTOR_PAGE_URL,
   PANEL_STORE_PAGE_URL,
-  SURVEY_PANEL_NOTIFICATION_URL,
   SURVEY_PANEL_USAGE_URL,
 } from '/utils/urls';
 
@@ -69,13 +68,6 @@ const NOTIFICATIONS = {
     action: msg`Become a Contributor`,
   },
   survey: {
-    img: callForSurveyImage,
-    type: 'image',
-    text: msg`We're considering a new way to support YouTube creators while keeping your web ad-free. Should we build it?`,
-    url: SURVEY_PANEL_NOTIFICATION_URL,
-    action: msg`Take the 2-Minute Survey`,
-  },
-  panelUsageSurvey: {
     img: callForSurveyImage,
     type: 'image',
     text: msg`Which parts of this panel do you actually use? Anonymous, about three minutes — it decides what we simplify next.`,
