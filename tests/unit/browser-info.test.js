@@ -316,9 +316,21 @@ describe('iOS', () => {
       },
     ));
 
-  // TODO: Get the page data for Edge on iOS
-  test.skip('Edge in the page', () => {});
-
-  // TODO: Get the service worker data for Edge on iOS
-  test.skip('Edge in the service worker', () => {});
+  test('Edge in the page & service worker', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'edge-ios-background',
+        userAgent:
+          'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) EdgiOS/152.0.4191.49',
+        platform: 'iPhone',
+        maxTouchPoints: 5,
+      },
+      {
+        os: 'ios',
+        isWebkit: true,
+        name: 'edge',
+        version: 152,
+        osVersion: '18.7',
+      },
+    ));
 });
