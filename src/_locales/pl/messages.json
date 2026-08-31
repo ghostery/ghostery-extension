@@ -1111,15 +1111,15 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Zawiesza ochronę prywatności globalnie na 1 dzień."
   },
-  "take_the_2_minute_survey": {
-    "message": "Wypełnij 2-minutową ankietę"
-  },
   "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
     "message": "Naucz ich tych 3 kroków, aby blokować reklamy za pomocą Ghostery Zap"
   },
   "telemetry": {
     "message": "Telemetria",
     "description": "Tracker category name"
+  },
+  "tell_us": {
+    "message": "Powiedz nam"
   },
   "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
     "message": "Powiedz nam, co poszło nie tak na tej stronie, a my to sprawdzimy."
@@ -1343,9 +1343,6 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wiemy, że polegasz na Ghostery, aby płynnie korzystać z YouTube. Dopóki nie pojawi się bardziej wyrafinowane rozwiązanie, oto tymczasowa poprawka."
   },
-  "we_re_considering_a_new_way_to_support_youtube_creators_while_keeping_your_web_ad_free__should_we_build_it_": {
-    "message": "Rozważamy nowy sposób wspierania twórców YouTube przy jednoczesnym zachowaniu sieci bez reklam. Czy powinniśmy go stworzyć?"
-  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Cieszymy się, że Ghostery zdobyło Twoje serce! Pomóż innym nas znaleźć - to zajmie tylko chwilę."
   },
@@ -1378,6 +1375,9 @@
   },
   "when_enabled__your_browser_sends_a_signal_to_websites_asking_them_not_to_sell_or_share_your_personal_data_for_advertising__in_line_with_privacy_laws_like_those_in_california_and_the_eu_": {
     "message": "Po włączeniu przeglądarka wysyła sygnał do stron internetowych z prośbą o nieudostępnianie ani nieprzekazywanie Twoich danych osobowych w celach reklamowych, zgodnie z przepisami o ochronie prywatności, takimi jak te obowiązujące w Kalifornii i UE."
+  },
+  "which_parts_of_this_panel_do_you_actually_use__anonymous__about_three_minutes___it_decides_what_we_simplify_next_": {
+    "message": "Z których części tego panelu faktycznie korzystasz? Anonimowo, około trzech minut — to zdecyduje, co uprościmy w następnej kolejności."
   },
   "while_you_browsed__ghostery_kept_watch_on_these___and_shut_them_out_": {
     "message": "Podczas przeglądania Ghostery obserwowało je – i blokowało."
