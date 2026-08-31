@@ -16,6 +16,7 @@ import {
   setCustomFilters,
   disableCustomFilters,
   waitForIdleBackgroundTasks,
+  reloadUntilActive,
   switchFrame,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -196,9 +197,13 @@ describe('Custom Filters', function () {
   });
 
   it('applies a remote filter list', async function () {
-    // The element is visible before the filter list is applied
-    await browser.url(PAGE_URL);
-    await expect($('#filter-list')).toBeDisplayed();
+    // The element is visible before the filter list is applied. The previous
+    // test's filter update can still be settling in the engine, so retry the
+    // navigation instead of asserting on the first load.
+    await reloadUntilActive(
+      () => $('#filter-list').isDisplayed(),
+      '#filter-list was not displayed before applying the remote filter list',
+    );
 
     // Add the filter list served by the local test server
     await addCustomFilterList(`${PAGE_URL}filter-list.txt`);
