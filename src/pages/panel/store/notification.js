@@ -12,6 +12,8 @@
 import { store, msg } from 'hybrids';
 import { FLAG_PANEL_NOTIFICATION_SURVEY } from '@ghostery/config';
 
+import { lang } from '/ui/labels.js';
+
 import Options from '/store/options.js';
 import Config from '/store/config.js';
 
@@ -63,12 +65,14 @@ const NOTIFICATIONS = {
     url: `${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=panel-becomeacontributor`,
     action: msg`Become a Contributor`,
   },
+  // INFO: The survey notification is only shown to users with English language preference,
+  // so we don't need to translate the text and action fields.
   survey: {
     img: callForSurveyImage,
     type: 'image',
-    text: msg`Which parts of this panel do you actually use? Anonymous, about three minutes — it decides what we simplify next.`,
+    text: 'Which parts of this panel do you actually use? Anonymous, about three minutes — it decides what we simplify next.',
     url: 'https://blocksurvey.io/panel-user-feedback-l8ijSFaLTGuLCV2ZZSFzYg',
-    action: msg`Tell us`,
+    action: 'Tell us',
   },
   zap: {
     img: zapImage,
@@ -104,7 +108,7 @@ const Notification = {
 
     // Survey notification
     const config = await store.resolve(Config);
-    if (config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
+    if (lang === 'en' && config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
       return NOTIFICATIONS.survey;
     }
 
