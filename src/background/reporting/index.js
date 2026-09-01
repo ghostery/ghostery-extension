@@ -9,10 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { store } from 'hybrids';
 import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
 import * as OptionsObserver from '/utils/options-observer.js';
-import { isFirefox } from '/utils/browser-info.js';
+
+import ManagedConfig from '/store/managed-config.js';
 
 import config from './config.js';
 import communication from './communication.js';
@@ -36,7 +38,7 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 OptionsObserver.addListener('terms', async function reporting(terms) {
-  if (terms && !isFirefox()) {
+  if (terms && (__CHROMIUM__ || (await store.resolve(ManagedConfig).disableOnboarding))) {
     if (webRequestReporter) {
       webRequestReporter.init().catch((e) => {
         console.warn(
