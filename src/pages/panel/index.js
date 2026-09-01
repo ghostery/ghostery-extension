@@ -27,6 +27,12 @@ if (isWhatsNew) {
   (chrome.action || chrome.browserAction).setPopup({
     popup: chrome.runtime.getURL('/pages/panel/index.html'),
   });
+} else {
+  // Ping telemetry 'engaged' signal on panel being opened by the user
+  chrome.runtime.sendMessage({ action: 'telemetry:ping', event: 'engaged' });
+
+  // Sync options with background
+  chrome.runtime.sendMessage({ action: 'syncOptions' });
 }
 
 // Mount the app
@@ -41,12 +47,6 @@ mount(document.body, {
     </template>
   `,
 });
-
-// Ping telemetry on panel open
-chrome.runtime.sendMessage({ action: 'telemetry:ping', event: 'engaged' });
-
-// Sync options with background
-chrome.runtime.sendMessage({ action: 'syncOptions' });
 
 // This code keeps the services worker alive while the panel is open to ensure that
 // pausing the website triggers an update keeping the old value of the option.
