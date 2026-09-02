@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Блокировка временно приостановлена, и только на этой странице. Для достижения наилучших результатов рассмотрите возможность приостановки других блокировщиков рекламы."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "Для их блокировки требуется разрешение браузера, которое по умолчанию отключено. Предоставив его, вы расширите возможности Ghostery на YouTube."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Блокирует дополнительные объявления, трекеры и всплывающие окна, специфичные для языка посещаемых вами веб-сайтов. Включайте только те языки, которые вам нужны, чтобы избежать замедления работы браузера."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "Адрес электронной почты (необязательно)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "Включите <strong>«Разрешить пользовательские скрипты»</strong> в настройках расширения и обновите страницу."
+  },
   "enable_ad_blocking_now": {
     "message": "Включить блокировку рекламы"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "Пропало!"
   },
+  "grant_permission": {
+    "message": "Предоставить разрешение"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "хеши потенциально уникального идентификатора в параметрах запросов"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "Вручную настроено"
+  },
+  "maybe_later": {
+    "message": "Может быть, позже"
   },
   "menu": {
     "message": "Меню"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "Ваш веб в последнее время"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "На YouTube показывается реклама?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube блокирует тебе просмотр видео без рекламы?"

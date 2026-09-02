@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Blocage temporairement suspendu — uniquement sur cette page. Pensez à désactiver d’autres bloqueurs pour de meilleurs résultats."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "Pour les bloquer, une autorisation du navigateur désactivée par défaut est nécessaire. Une fois accordée, Ghostery pourra en faire bien plus sur YouTube."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Bloque des publicités supplémentaires, des trackers et des pop-ups spécifiques à la langue des sites web que vous visitez. Activez uniquement les langues dont vous avez besoin pour éviter de ralentir votre navigateur."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "Adresse e-mail (facultative)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "Activez <strong>« Autoriser les scripts utilisateur »</strong> dans les paramètres de votre extension et actualisez la page."
+  },
   "enable_ad_blocking_now": {
     "message": "Activer le blocage des publicités maintenant"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "Parti !"
   },
+  "grant_permission": {
+    "message": "Accorder l’autorisation"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "empreintes de hachage d'identifiants potentiellement uniques dans les paramètres de requêtes"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "Ajusté manuellement"
+  },
+  "maybe_later": {
+    "message": "Peut-être plus tard"
   },
   "menu": {
     "message": "Menu"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "Votre web, ces derniers temps"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "Des publicités passent sur YouTube ?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube t'empêche de regarder des vidéos sans publicité ?"

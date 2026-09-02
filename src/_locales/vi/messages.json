@@ -177,6 +177,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Việc chặn đã tạm thời bị dừng, và chỉ trên trang này. Hãy cân nhắc tạm dừng các trình chặn quảng cáo khác để có kết quả tốt nhất."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "Để chặn chúng, bạn cần cấp một quyền của trình duyệt đang bị tắt theo mặc định. Sau khi bạn cấp quyền này, Ghostery có thể làm được nhiều hơn nữa trên YouTube."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blocks additional ads, trackers, and pop-ups specific to the language of websites you visit. Enable only the languages you need to avoid slowing down your browser."
   },
@@ -377,6 +380,9 @@
   "email_address__optional_": {
     "message": "Địa chỉ email (không bắt buộc)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "Bật <strong>“Cho phép tập lệnh của người dùng”</strong> trong phần cài đặt tiện ích mở rộng rồi làm mới trang."
+  },
   "enable_ad_blocking_now": {
     "message": "Enable Ad Blocking Now"
   },
@@ -550,6 +556,9 @@
   "gone_": {
     "message": "Biến mất!"
   },
+  "grant_permission": {
+    "message": "Cấp quyền"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hashes of potentially unique identifier in requests parameters"
   },
@@ -685,6 +694,9 @@
   },
   "manually_adjusted": {
     "message": "Điều chỉnh thủ công"
+  },
+  "maybe_later": {
+    "message": "Để sau"
   },
   "menu": {
     "message": "Menu"
@@ -1294,6 +1306,9 @@
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "Sự đóng góp của bạn giúp xây dựng một internet riêng tư và an toàn hơn cho toàn bộ cộng đồng Ghostery."
+  },
+  "youtube_ads_getting_through_": {
+    "message": "Quảng cáo YouTube vẫn xuất hiện?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube chặn bạn xem video không có quảng cáo?"

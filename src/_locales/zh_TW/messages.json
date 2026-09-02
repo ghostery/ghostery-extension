@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "暫時停止封鎖，僅限於此頁面。為獲得最佳效果，請考慮暫停其他廣告攔截器。"
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "要封鎖這些廣告，需要一項預設為關閉的瀏覽器權限。授予權限後，Ghostery 就能在 YouTube 上發揮更多功能。"
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "阻擋您所訪問網站語言特定的額外廣告、追蹤器和彈出視窗。僅啟用您需要的語言，以避免減慢瀏覽器速度。."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "電子郵件地址（選填）"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "在擴充功能設定中啟用<strong>「允許使用者指令碼」</strong>，然後重新整理頁面。"
+  },
   "enable_ad_blocking_now": {
     "message": "立即啟用廣告攔截功能"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "不見了！"
   },
+  "grant_permission": {
+    "message": "授予權限"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "請求參數中潛在唯一識別碼的雜湊值"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "手動調整"
+  },
+  "maybe_later": {
+    "message": "稍後再說"
   },
   "menu": {
     "message": "選單"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "您最近的網路活動"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "YouTube 廣告仍會出現嗎？"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 阻止您觀看無廣告的影片？"

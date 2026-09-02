@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "이 페이지에서 차단이 일시중지되었습니다. 다른 광고 차단기도 비활성화하면 문제 해결에 도움이 될 수 있습니다."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "차단하려면 기본적으로 비활성화되어 있는 브라우저 권한이 필요합니다. 권한을 부여하면 Ghostery가 YouTube에서 더 많은 기능을 수행할 수 있습니다."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "사용하시는 언어의 웹 사이트들에 한해 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는 걸 방지할 수 있습니다."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "이메일 주소 (선택 사항)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "확장 프로그램 설정에서 <strong>‘사용자 스크립트 허용’</strong>을 활성화하고 페이지를 새로고침하세요."
+  },
   "enable_ad_blocking_now": {
     "message": "지금 광고 차단 사용"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "제거되었습니다!"
   },
+  "grant_permission": {
+    "message": "권한 부여"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "요청 매개변수에 포함된 잠재적 고유 식별자의 해시"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "수동으로 조정됨"
+  },
+  "maybe_later": {
+    "message": "나중에"
   },
   "menu": {
     "message": "메뉴"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "최근 웹 활동"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "YouTube 광고가 표시되나요?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"
