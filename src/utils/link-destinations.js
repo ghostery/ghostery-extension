@@ -175,7 +175,7 @@ function bingDestinations() {
 
     try {
       // Two leading characters mark the encoding, they are not part of it
-      return atob(param.slice(2)) || null;
+      return httpUrl(atob(param.slice(2)));
     } catch {
       return null;
     }
