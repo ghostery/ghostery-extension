@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { isGloballyPaused } from '/store/options.js';
-import { isSafari } from '/utils/browser-info.js';
+import { isWebkit } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
 import { parseWithCache } from '/utils/request.js';
@@ -83,11 +83,11 @@ const SERP_TRACKING_CONTENT_SCRIPT_ID = 'serp-tracking-prevention';
 // no navigation is reported for until it is shown. Registering the script
 // leaves that to the browser instead of racing it.
 //
-// Except on Safari, which wipes the content scripts declared in the manifest
+// Except on WebKit, which wipes the content scripts declared in the manifest
 // when a script is registered (FB12817504, the reason for the `executeScript`
-// approach in the first place - see #1278). Safari does not prerender, so
+// approach in the first place - see #1278). WebKit does not prerender, so
 // injecting on navigation stays sufficient there.
-if (isSafari()) {
+if (isWebkit()) {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
     if (!details.url.match(SERP_URL_REGEXP)) return;
 
