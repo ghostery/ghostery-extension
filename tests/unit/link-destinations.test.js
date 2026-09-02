@@ -67,6 +67,13 @@ describe('link destinations', () => {
       }
     });
 
+    it('ignores a spelled-out destination that is not an http(s) URL', () => {
+      for (const param of ['url', 'q']) {
+        const target = encodeURIComponent('javascript:alert(1)');
+        assert.equal(resolve('', `https://${RENDER_DATA_PAGE}/url?${param}=${target}`), null);
+      }
+    });
+
     it('leaves links that already point at their destination alone', () => {
       assert.equal(resolve('', `https://${RENDER_DATA_PAGE}/search?q=a+query`), null);
       assert.equal(resolve(renderDataScript(), `https://example.com/goto?url=${TOKEN}`), null);
@@ -218,6 +225,10 @@ describe('link destinations', () => {
     it('leaves the link alone when it cannot be decoded', () => {
       assert.equal(resolve(`https://${ENCODED_LINK_PAGE}/ck/a?u=a1!!not-base64`), null);
       assert.equal(resolve(`https://${ENCODED_LINK_PAGE}/ck/a?other=1`), null);
+    });
+
+    it('ignores a decoded destination that is not an http(s) URL', () => {
+      assert.equal(resolve(encoded('javascript:alert(1)')), null);
     });
 
     it('leaves links that already point at their destination alone', () => {

@@ -147,7 +147,7 @@ function googleDestinations(doc) {
 
     switch (pathname) {
       case '/url':
-        return searchParams.get('url') || searchParams.get('q');
+        return httpUrl(searchParams.get('url') || searchParams.get('q'));
 
       case '/goto': {
         const [, token] = search.match(TOKEN_REGEXP) || [];
