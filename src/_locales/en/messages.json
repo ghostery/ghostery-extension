@@ -26,6 +26,9 @@
   "about": {
     "message": "About"
   },
+  "actions": {
+    "message": "Actions"
+  },
   "active": {
     "message": "Active"
   },
@@ -149,6 +152,9 @@
   "back": {
     "message": "Back"
   },
+  "background": {
+    "message": "Background"
+  },
   "because_no_two_people_surf_alike__we_re_giving_you_the_power_to_pick_how_you_want_to_experience_the_web_": {
     "message": "Because no two people surf alike, we're giving you the power to pick how you want to experience the web."
   },
@@ -258,6 +264,9 @@
   },
   "clear_history": {
     "message": "Clear history"
+  },
+  "clear_storage": {
+    "message": "Clear storage"
   },
   "cleared_quietly__so_your_web_stayed_yours_": {
     "message": "Cleared quietly, so your web stayed yours."
@@ -737,6 +746,9 @@
   "manually_adjusted": {
     "message": "Manually Adjusted"
   },
+  "max_touch_points_": {
+    "message": "Max touch points:"
+  },
   "menu": {
     "message": "Menu"
   },
@@ -889,6 +901,9 @@
   },
   "pin_it_here": {
     "message": "Pin it here"
+  },
+  "platform_": {
+    "message": "Platform:"
   },
   "please_describe_the_issue_you_re_experiencing": {
     "message": "Please describe the issue you’re experiencing"
@@ -1302,6 +1317,9 @@
   },
   "urls_observed": {
     "message": "URLs observed"
+  },
+  "user_agent_": {
+    "message": "User agent:"
   },
   "utilities": {
     "message": "Utilities",
