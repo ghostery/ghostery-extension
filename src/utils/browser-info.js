@@ -94,42 +94,47 @@ export function isOculus() {
 export function isWebkit() {
   if (__FIREFOX__) return false;
 
-  // Edge on iPadOS has OS detected as `ios`
-  if (isSafari() || getOS() === 'ios') return true;
+  // Safari on all platforms is WebKit
+  if (isSafari()) return true;
 
-  return false;
+  // All browsers on iOS/iPadOS are WebKit, so we can use the OS to identify them
+  const os = getOS();
+  return os === 'ios' || os === 'ipados';
+}
+
+export function isMobile() {
+  const os = getOS();
+  return os === 'android' || os === 'ios' || os === 'ipados';
 }
 
 export function getOS() {
   // Make sure that undefined operating systems don't mess with stuff like .includes()
-  const platform = getUA().os?.name?.toLowerCase() || '';
+  const os = getUA().os?.name?.toLowerCase() || '';
 
-  if (platform.includes('mac')) {
+  if (os.includes('mac')) {
+    // All iOS/iPadOS browsers use WebKit and can spoof a Mac desktop user-agent on iPadOS.
+    if (navigator.maxTouchPoints > 1) return 'ipados';
     return 'mac';
-  } else if (platform.includes('win')) {
+  } else if (os.includes('win')) {
     return 'win';
-  } else if (platform.includes('android')) {
+  } else if (os.includes('android')) {
     return 'android';
-  } else if (platform.includes('ios')) {
+  } else if (os.includes('ios')) {
+    if (navigator.platform?.toLocaleLowerCase() === 'ipad') return 'ipados';
     return 'ios';
-  } else if (platform.includes('chromium os')) {
+  } else if (os.includes('chromium os')) {
     return 'cros';
-  } else if (platform.includes('bsd')) {
+  } else if (os.includes('bsd')) {
     return 'openbsd';
-  } else if (platform.includes('linux')) {
+  } else if (os.includes('linux')) {
     return 'linux';
   }
 
   return 'other';
 }
 
-export function isMobile() {
-  const os = getOS();
-  return os === 'android' || os === 'ios';
-}
-
 let browserInfo = null;
-export default async function getBrowserInfo() {
+export default function getBrowserInfo() {
   if (browserInfo) return browserInfo;
 
   const ua = getUA();
@@ -142,15 +147,6 @@ export default async function getBrowserInfo() {
     os: getOS(),
     osVersion: ua.os.version || '',
   };
-
-  if (
-    __CHROMIUM__ &&
-    browserInfo.os === 'mac' &&
-    chrome.runtime.getPlatformInfo &&
-    (await chrome.runtime.getPlatformInfo()).os === 'ios'
-  ) {
-    browserInfo.os = 'ipados';
-  }
 
   return browserInfo;
 }

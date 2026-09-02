@@ -67,6 +67,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       console.debug('[helpers] Received "keepAlive" message');
       break;
 
+    case 'devtools:navigator':
+      sendResponse({
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        maxTouchPoints: navigator.maxTouchPoints,
+      });
+      break;
+
     // Messages for e2e tests
 
     case 'e2e:idle':
