@@ -246,13 +246,36 @@ describe('link destinations', () => {
 
   describe('isResultPage()', () => {
     it('knows a result page by its host, whichever country it is served from', () => {
-      for (const hostname of ['www.google.com', 'google.pl', 'www.google.co.uk', 'www.bing.com']) {
+      for (const hostname of [
+        'www.google.com',
+        'google.pl',
+        'www.google.co.uk',
+        'www.google.com.au',
+        'www.google.cat',
+        'www.bing.com',
+        'cn.bing.com',
+      ]) {
         assert.equal(isResultPage(hostname), true, hostname);
       }
     });
 
     it('is not fooled by a host that merely carries the name', () => {
-      for (const hostname of ['github.com', 'notgoogle.com', 'google.com.example.net']) {
+      for (const hostname of [
+        'github.com',
+        'notgoogle.com',
+        'google.example.com',
+        'google.example.net',
+        'bing.example.com',
+        'bing.example.net',
+        'google.com.example.net',
+        'google.co.com',
+      ]) {
+        assert.equal(isResultPage(hostname), false, hostname);
+      }
+    });
+
+    it('does not take other products on a subdomain for result pages', () => {
+      for (const hostname of ['mail.google.com', 'docs.google.com', 'scholar.google.com']) {
         assert.equal(isResultPage(hostname), false, hostname);
       }
     });

@@ -12,9 +12,15 @@
 // Result pages route their links through themselves to record where visitors
 // go, and each hides the destination its own way. A page is only ever read by
 // the function named for it here.
+//
+// A country edition is served from google.<com|cat|cc> or google.co(m).<cc>;
+// subdomains other than www are other products (mail, docs), not result pages.
 const RESULT_PAGES = [
-  { host: /(^|\.)google\.[a-z]+(\.[a-z]+)?$/, linkDestinations: googleDestinations },
-  { host: /(^|\.)bing\.[a-z]+(\.[a-z]+)?$/, linkDestinations: bingDestinations },
+  {
+    host: /^(www\.)?google\.(com|cat|[a-z]{2}|com?\.[a-z]{2})$/,
+    linkDestinations: googleDestinations,
+  },
+  { host: /^(www|cn)\.bing\.com$/, linkDestinations: bingDestinations },
 ];
 
 export function scanDocumentLinkData(doc = document) {
