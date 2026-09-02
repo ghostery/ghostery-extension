@@ -11,6 +11,7 @@
 
 import { drawWheel } from '/ui/wheel.js';
 import { isFromExtensionFrame } from '/utils/messaging.js';
+import { scanDocumentLinkData } from '/utils/link-destinations.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 
@@ -101,29 +102,12 @@ function setupTrackersPreview(popupUrl) {
   const elements = [...window.document.querySelectorAll(SELECTORS)].filter((el) => !el.dataset.wtm);
 
   if (elements.length) {
+    const getDestination = scanDocumentLinkData();
+
     const links = elements.map((el) => {
       el.dataset.wtm = 1;
 
-      if (el.hostname === window.location.hostname) {
-        const url = new URL(el.href);
-
-        // Google
-        if (url.pathname === '/url') {
-          return url.searchParams.get('url') || url.searchParams.get('q');
-        }
-
-        // Bing
-        if (url.pathname === '/ck/a' && url.searchParams.has('u')) {
-          try {
-            const base64Str = url.searchParams.get('u').slice(2);
-            return atob(base64Str) || '';
-          } catch {
-            return '';
-          }
-        }
-      }
-
-      return el.href;
+      return getDestination(el) || el.href;
     });
 
     chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
@@ -210,6 +194,12 @@ window.addEventListener('message', (message) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+function setup() {
   setupTrackersPreview(chrome.runtime.getURL('pages/trackers-preview/index.html'));
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setup);
+} else {
+  setup();
+}
