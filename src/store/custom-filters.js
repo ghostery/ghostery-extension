@@ -24,7 +24,6 @@ const CustomFilters = {
   networkFilters: 0,
   cosmeticFilters: 0,
   dnrRules: 0,
-  userScripts: false,
   errors: [String],
   [store.connect]: {
     cache: false,

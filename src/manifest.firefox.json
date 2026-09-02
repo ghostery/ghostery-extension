@@ -96,7 +96,8 @@
   "web_accessible_resources": [
     "pages/trackers-preview/index.html",
     "pages/element-picker/index.html",
-    "pages/notifications/youtube.html",
+    "pages/notifications/youtube-wall.html",
+    "pages/notifications/youtube-ads.html",
     "pages/notifications/pause-assistant.html",
     "pages/notifications/pause-resume.html",
     "pages/notifications/review.html",

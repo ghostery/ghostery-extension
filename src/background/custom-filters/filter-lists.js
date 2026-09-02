@@ -11,6 +11,7 @@
 
 import { store } from 'hybrids';
 
+import { isWebkit } from '/utils/browser-info.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 
 import Options from '/store/options.js';
@@ -97,7 +98,7 @@ export async function fetchListText(url) {
 export async function fetchFilterList(url) {
   // On Chromium remote filter lists require the User Scripts API,
   // which is only available when "Allow user scripts" is enabled
-  if (__CHROMIUM__ && !isUserScriptsSupported()) {
+  if (__CHROMIUM__ && !isWebkit() && !isUserScriptsSupported()) {
     throw new Error(
       'Enable "Allow user scripts" in the browser settings to fetch remote filter list',
     );
@@ -135,7 +136,7 @@ export async function refreshFilterLists({ cache = true } = {}) {
   // On Chromium remote filter lists require the User Scripts API - skip the
   // refresh when it is not available to avoid pointless fetches and confusing
   // "Failed update" errors (the UI shows a dedicated warning instead).
-  if (__CHROMIUM__ && !isUserScriptsSupported()) return false;
+  if (__CHROMIUM__ && !isWebkit() && !isUserScriptsSupported()) return false;
 
   const options = await store.resolve(Options);
   if (!options.customFilters.enabled) return false;

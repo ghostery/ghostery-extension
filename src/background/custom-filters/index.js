@@ -13,6 +13,7 @@ import { store, msg } from 'hybrids';
 
 import { parseFilters, FilterType } from '@ghostery/adblocker';
 
+import { isWebkit } from '/utils/browser-info.js';
 import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -122,14 +123,14 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
   setup.pending && (await setup.pending);
 
   const customFilters = await store.resolve(CustomFilters);
-  const userScripts = !__CHROMIUM__ || isUserScriptsSupported();
+  const filterListsEnabled = __FIREFOX__ || isWebkit() || isUserScriptsSupported();
 
   // The user input is the primary source - the parse errors are reported back.
   // Remote lists are parsed with their own trusted scriptlets setting,
   // and their unsupported filters are silently skipped.
   const sources = [{ text: customFilters.text, trustedScriptlets, primary: true }];
 
-  if (userScripts) {
+  if (filterListsEnabled) {
     for (const [url, { enabled, trustedScriptlets: urlTrustedScriptlets }] of Object.entries(
       filterLists,
     )) {
@@ -228,7 +229,6 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
     networkFilters: engine.getFilters().networkFilters.length,
     cosmeticFilters: engine.getFilters().cosmeticFilters.length,
     dnrRules: dnrRules?.length || 0,
-    userScripts,
     errors,
   });
 
@@ -278,20 +278,6 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
     if (value.enabled && !(await engines.init(engines.CUSTOM_ENGINE))) {
       await rebuildCustomFilters(value);
       await reloadMainEngine();
-    }
-
-    // The browser-level "Allow user scripts" toggle (Chromium) has no event, so
-    // detect a change by comparing the state used at the last rebuild. When it
-    // toggles, rebuild to add or remove remote lists (rebuild persists the state).
-    if (__CHROMIUM__ && value.enabled) {
-      const customFilters = await store.resolve(CustomFilters);
-
-      if (customFilters.userScripts !== isUserScriptsSupported()) {
-        await rebuildCustomFilters(value);
-        await reloadMainEngine();
-
-        return;
-      }
     }
 
     // No need to proceed with other checks on startup
