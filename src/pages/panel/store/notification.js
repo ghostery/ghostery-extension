@@ -70,7 +70,7 @@ const NOTIFICATIONS = {
   survey: {
     img: callForSurveyImage,
     type: 'image',
-    text: 'Which parts of this panel do you actually use? Anonymous, about three minutes — it decides what we simplify next.',
+    text: 'Which parts of this panel do you actually use? It takes about three minutes - and decides what we simplify next.',
     url: 'https://blocksurvey.io/panel-user-feedback-l8ijSFaLTGuLCV2ZZSFzYg',
     action: 'Tell us',
   },
