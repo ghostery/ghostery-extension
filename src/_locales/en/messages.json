@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Blocking has been paused temporarily, and only on this page. Consider pausing other adblockers for best results."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "Blocking them needs a browser permission that’s off by default. Once you grant it, Ghostery can do a lot more on YouTube."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blocks additional ads, trackers, and pop-ups specific to the language of websites you visit. Enable only the languages you need to avoid slowing down your browser."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "Email address (optional)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "Enable <strong>“Allow User Scripts”</strong> in your extension settings and refresh the page."
+  },
   "enable_ad_blocking_now": {
     "message": "Enable Ad Blocking Now"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "Gone!"
   },
+  "grant_permission": {
+    "message": "Grant permission"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hashes of potentially unique identifier in requests parameters"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "Manually Adjusted"
+  },
+  "maybe_later": {
+    "message": "Maybe later"
   },
   "menu": {
     "message": "Menu"
@@ -1438,6 +1450,9 @@
   },
   "your_web__lately": {
     "message": "Your web, lately"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "YouTube ads getting through?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube blocking you from watching ad-free videos?"

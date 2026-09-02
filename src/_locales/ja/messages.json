@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "ブロックは一時的に停止されており、このページのみで適用されています。最良の結果を得るために、他の広告ブロッカーも一時停止することを検討してください。"
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "これらをブロックするには、デフォルトで無効になっているブラウザの権限が必要です。権限を付与すると、Ghostery は YouTube でさらに多くのことができるようになります。"
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "追加の広告、トラッカー、ポップアップを、訪問するウェブサイトの言語に特化してブロックします。ブラウザの速度低下を避けるために、必要な言語のみを有効にしてください。"
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "メールアドレス（任意）"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "拡張機能の設定で <strong>「ユーザースクリプトを許可」</strong> を有効にし、ページを更新してください。"
+  },
   "enable_ad_blocking_now": {
     "message": "広告ブロッキングを今すぐ有効化"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "消えました！"
   },
+  "grant_permission": {
+    "message": "権限を付与"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "リクエストパラメータ内の潜在的にユニークな識別子のハッシュ"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "手動で調整済み"
+  },
+  "maybe_later": {
+    "message": "後で"
   },
   "menu": {
     "message": "メニュー"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "最近のあなたのウェブ"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "YouTube で広告が表示されますか？"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTubeが広告なし動画の視聴をブロック？"

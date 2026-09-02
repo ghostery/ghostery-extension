@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "Blokowanie zostało tymczasowo wstrzymane i dotyczy tylko tej strony. Aby uzyskać najlepsze wyniki, rozważ wstrzymanie innych blokad reklam."
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "Ich blokowanie wymaga uprawnienia przeglądarki, które jest domyślnie wyłączone. Po jego przyznaniu Ghostery może zrobić znacznie więcej w YouTube."
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blokuje dodatkowe reklamy, trackery i wyskakujące okienka specyficzne dla języka odwiedzanych stron internetowych. Włącz tylko te języki, które są Ci potrzebne, aby uniknąć spowolnienia przeglądarki."
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "Adres e-mail (opcjonalnie)"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "Włącz opcję <strong>„Zezwalaj na skrypty użytkownika”</strong> w ustawieniach rozszerzenia i odśwież stronę."
+  },
   "enable_ad_blocking_now": {
     "message": "Włącz teraz blokowanie reklam"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "Zniknęło!"
   },
+  "grant_permission": {
+    "message": "Przyznaj uprawnienie"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hasze potencjalnie unikalnych identyfikatorów w parametrach żądań"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "Dostosowano ręcznie"
+  },
+  "maybe_later": {
+    "message": "Może później"
   },
   "menu": {
     "message": "Menu"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "Twoja sieć, ostatnio"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "Reklamy w YouTube nadal się wyświetlają?"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube blokuje Ci możliwość oglądania filmów bez reklam?"

@@ -201,6 +201,9 @@
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
     "message": "阻止功能已暂时暂停，并且仅在此页面上暂停。为了获得最佳效果，请考虑暂停其他广告拦截器。"
   },
+  "blocking_them_needs_a_browser_permission_that_s_off_by_default__once_you_grant_it__ghostery_can_do_a_lot_more_on_youtube_": {
+    "message": "要拦截这些广告，需要一项默认关闭的浏览器权限。授予该权限后，Ghostery 就能在 YouTube 上发挥更多作用。"
+  },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "阻止特定于您访问的网站语言的额外广告、跟踪器和弹出窗口。仅启用您需要的语言，以避免减慢浏览器速度。"
   },
@@ -413,6 +416,9 @@
   "email_address__optional_": {
     "message": "电子邮件地址（可选）"
   },
+  "enable__strong__allow_user_scripts___strong__in_your_extension_settings_and_refresh_the_page_": {
+    "message": "在扩展程序设置中启用<strong>“允许用户脚本”</strong>，然后刷新页面。"
+  },
   "enable_ad_blocking_now": {
     "message": "立即启用广告拦截功能"
   },
@@ -592,6 +598,9 @@
   "gone_": {
     "message": "消失了！"
   },
+  "grant_permission": {
+    "message": "授予权限"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "请求参数中可能唯一标识符的哈希值"
   },
@@ -736,6 +745,9 @@
   },
   "manually_adjusted": {
     "message": "手动调整"
+  },
+  "maybe_later": {
+    "message": "以后再说"
   },
   "menu": {
     "message": "菜单"
@@ -1444,6 +1456,9 @@
   },
   "your_web__lately": {
     "message": "您最近的上网情况"
+  },
+  "youtube_ads_getting_through_": {
+    "message": "YouTube 广告仍会出现？"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 禁止您观看无广告视频？"
