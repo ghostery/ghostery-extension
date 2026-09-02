@@ -14,7 +14,6 @@ import { store } from 'hybrids';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { isGloballyPaused } from '/store/options.js';
-import { isWebkit } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
 import { parseWithCache } from '/utils/request.js';
@@ -83,69 +82,42 @@ const SERP_TRACKING_CONTENT_SCRIPT_ID = 'serp-tracking-prevention';
 // no navigation is reported for until it is shown. Registering the script
 // leaves that to the browser instead of racing it.
 //
-// Except on WebKit, which wipes the content scripts declared in the manifest
-// when a script is registered (FB12817504, the reason for the `executeScript`
-// approach in the first place - see #1278). WebKit does not prerender, so
-// injecting on navigation stays sufficient there.
-if (isWebkit()) {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
-    if (!details.url.match(SERP_URL_REGEXP)) return;
+// Registering once wiped Safari's manifest-declared content scripts
+// (FB12817504, the reason for the `executeScript` approach in #1278);
+// verified fixed on Safari 18.6, the minimum supported version.
+OptionsObserver.addListener(async function serpTrackingPrevention(options, lastOptions) {
+  const enabled = options.serpTrackingPrevention && !isGloballyPaused(options);
 
-    const options = await store.resolve(Options);
-    if (!options.serpTrackingPrevention || isGloballyPaused(options)) return;
+  if (lastOptions) {
+    const wasEnabled = lastOptions.serpTrackingPrevention && !isGloballyPaused(lastOptions);
+    if (enabled === wasEnabled) return;
+  }
 
-    chrome.scripting.executeScript(
+  const registered = (
+    await chrome.scripting.getRegisteredContentScripts({
+      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
+    })
+  ).length;
+
+  if (registered) {
+    await chrome.scripting.unregisterContentScripts({
+      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
+    });
+  }
+
+  if (enabled) {
+    await chrome.scripting.registerContentScripts([
       {
-        injectImmediately: true,
-        world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
-        target: {
-          tabId: details.tabId,
-          frameIds: [details.frameId],
-        },
-        files: ['/content_scripts/prevent-serp-tracking.js'],
+        id: SERP_TRACKING_CONTENT_SCRIPT_ID,
+        js: ['/content_scripts/prevent-serp-tracking.js'],
+        // Result pages are served from a domain per country, and a match
+        // pattern cannot wildcard a top level domain. What they do share is
+        // `/search` in the path; the domain itself is checked in the script.
+        matches: ['*://*/search*', '*://*/*/search*'],
+        allFrames: true,
+        runAt: 'document_start',
+        persistAcrossSessions: true,
       },
-      () => {
-        if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError);
-        }
-      },
-    );
-  });
-} else {
-  OptionsObserver.addListener(async function serpTrackingPrevention(options, lastOptions) {
-    const enabled = options.serpTrackingPrevention && !isGloballyPaused(options);
-
-    if (lastOptions) {
-      const wasEnabled = lastOptions.serpTrackingPrevention && !isGloballyPaused(lastOptions);
-      if (enabled === wasEnabled) return;
-    }
-
-    const registered = (
-      await chrome.scripting.getRegisteredContentScripts({
-        ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
-      })
-    ).length;
-
-    if (registered) {
-      await chrome.scripting.unregisterContentScripts({
-        ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
-      });
-    }
-
-    if (enabled) {
-      await chrome.scripting.registerContentScripts([
-        {
-          id: SERP_TRACKING_CONTENT_SCRIPT_ID,
-          js: ['/content_scripts/prevent-serp-tracking.js'],
-          // Result pages are served from a domain per country, and a match
-          // pattern cannot wildcard a top level domain. What they do share is
-          // `/search` in the path; the domain itself is checked in the script.
-          matches: ['*://*/search*', '*://*/*/search*'],
-          allFrames: true,
-          runAt: 'document_start',
-          persistAcrossSessions: true,
-        },
-      ]);
-    }
-  });
-}
+    ]);
+  }
+});
