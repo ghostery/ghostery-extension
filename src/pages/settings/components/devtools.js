@@ -311,7 +311,7 @@ export default {
                     `,
                   ),
                 )}
-                <div layout="column gap items:start" translate="no">
+                <div layout="column gap items:start">
                   <ui-text type="headline-s">Navigator</ui-text>
                   <div layout="column gap">
                     <div layout="column gap:0.5">
@@ -336,7 +336,7 @@ export default {
                     ${html.resolve(
                       getBackgroundNavigator().then(
                         (info) => html`
-                          <div layout="column gap:0.5">
+                          <div layout="column gap:0.5" translate="no">
                             <ui-text type="label-m">Background</ui-text>
                             <ui-text type="body-s" color="secondary">
                               <ui-text type="label-s">User agent:</ui-text>
