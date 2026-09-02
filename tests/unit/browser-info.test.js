@@ -255,27 +255,24 @@ describe('iPad', () => {
       },
     ));
 
-  // TODO: Replace with real data from the extension
-  test('Edge in the page', () =>
+  // Edge on iPadOS spoofs a Mac desktop user-agent, and reports the same data in the page and the service worker
+  test('Edge in the page & service worker', () =>
     assertBrowserInfo(
       {
         caseName: 'edge-ipad',
         userAgent:
-          'Mozilla/5.0 (iPad; CPU OS 26_6_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) EdgiOS/151.0.4129.96 Version/26.0 Mobile/15E148 Safari/604.1',
-        platform: 'iPad',
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) EdgiOS/152.0.4191.49',
+        platform: 'MacIntel',
         maxTouchPoints: 5,
       },
       {
         os: 'ipados',
         isWebkit: true,
         name: 'edge',
-        version: 151,
-        osVersion: '26.6.0',
+        version: 152,
+        osVersion: '10.15.7',
       },
     ));
-
-  // TODO: Get the service worker data for Edge on iPadOS
-  test.skip('Edge in the service worker', () => {});
 
   // TODO: Replace with real data from the extension
   test('Chrome in the page', () =>

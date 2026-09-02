@@ -112,8 +112,8 @@ export function getOS() {
   const os = getUA().os?.name?.toLowerCase() || '';
 
   if (os.includes('mac')) {
-    // Safari on iPadOS spoofs a Mac desktop user-agent. Detect that before the macOS branch.
-    if (isSafari() && navigator.maxTouchPoints > 1) return 'ipados';
+    // All iOS/iPadOS browsers use WebKit and can spoof a Mac desktop user-agent on iPadOS.
+    if (navigator.maxTouchPoints > 1) return 'ipados';
     return 'mac';
   } else if (os.includes('win')) {
     return 'win';
