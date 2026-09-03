@@ -4,8 +4,9 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-      day: 'friday'
-      time: '07:00'
+      day: 'monday'
+      time: '08:00'
+      timezone: 'Europe/Warsaw'
     open-pull-requests-limit: 99
     groups:
       adblocker:
