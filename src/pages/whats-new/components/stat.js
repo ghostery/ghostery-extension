@@ -54,8 +54,8 @@ export default {
 
     :host([type="activities"]) #icon { color: var(--color-wtm-secondary); }
     :host([type="blocked"]) #icon { color: var(--color-danger-secondary); }
-    :host([type="pages"]) #icon { color: var(--color-category-cdn); }
-    :host([type="cookies"]) #icon { color: var(--color-warning-secondary); }
+    :host([type="pages"]) #icon { color: var(--color-warning-secondary); }
+    :host([type="cookies"]) #icon { color: var(--color-warning-primary); }
     :host([type="consents"]) #icon { color: var(--color-success-secondary); }
     :host([type="modified"]) #icon { color: var(--color-brand-secondary); }
 

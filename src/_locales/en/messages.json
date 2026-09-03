@@ -237,10 +237,6 @@
   "category": {
     "message": "Category"
   },
-  "cdn": {
-    "message": "CDN",
-    "description": "Tracker category name"
-  },
   "changes_application_color_theme_": {
     "message": "Changes application color theme."
   },
@@ -282,10 +278,6 @@
   },
   "collapse": {
     "message": "Collapse"
-  },
-  "comments": {
-    "message": "Comments",
-    "description": "Tracker category name"
   },
   "consent_managed": {
     "message": "Consent managed"
@@ -408,10 +400,6 @@
   },
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "Eliminates ads on websites for safe and fast browsing."
-  },
-  "email": {
-    "message": "Email",
-    "description": "Tracker category name"
   },
   "email_address__optional_": {
     "message": "Email address (optional)"
@@ -1125,10 +1113,6 @@
   },
   "teach_them_these_3_steps_to_block_ads_with_ghostery_zap": {
     "message": "Teach them these 3 steps to block ads with Ghostery Zap"
-  },
-  "telemetry": {
-    "message": "Telemetry",
-    "description": "Tracker category name"
   },
   "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
     "message": "Tell us what went wrong on this page and we’ll look into it."
