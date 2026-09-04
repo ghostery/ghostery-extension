@@ -103,9 +103,10 @@ const Options = {
   // Filters update timestamp
   filtersUpdatedAt: 0,
 
-  // What's new: the announced minor version, and whether the recap page was already shown.
+  // What's new: the announced minor version, whether the recap popup was auto-opened,
+  // and whether the recap page was already shown.
   // It starts as shown, so fresh installations have nothing to catch up on
-  whatsNew: { version: '', shown: true },
+  whatsNew: { version: '', popup: false, shown: true },
 
   [store.connect]: {
     async get() {

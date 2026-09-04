@@ -238,10 +238,10 @@ export default class Metrics {
         buildQueryPair('sm', conf.options.blockAnnoyances ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.options.blockTrackers ? '1' : '0') +
-        // What's New announced version and whether the recap page was shown
+        // What's New announced version, whether the recap popup was auto-opened, and whether the recap page was shown
         buildQueryPair(
           'wn',
-          `${conf.options.whatsNew.version}-${conf.options.whatsNew.shown ? '1' : '0'}`,
+          `${conf.options.whatsNew.version}-${conf.options.whatsNew.popup ? '1' : '0'}-${conf.options.whatsNew.shown ? '1' : '0'}`,
         ) +
         // Page views yesterday (-1=undefined, 0=none, 1=<10, 2=>=10)
         // prettier-ignore
