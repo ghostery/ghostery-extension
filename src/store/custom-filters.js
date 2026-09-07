@@ -28,19 +28,8 @@ const CustomFilters = {
   [store.connect]: {
     cache: false,
     async get() {
-      let { customFilters } = await chrome.storage.local.get(['customFilters']);
-
-      // TODO: Remove migration from `customFiltersInput` after releasing this version
-      if (!customFilters) {
-        const { customFiltersInput } = await chrome.storage.local.get(['customFiltersInput']);
-        if (customFiltersInput !== undefined) {
-          customFilters = { text: customFiltersInput };
-          await chrome.storage.local.set({ customFilters });
-          await chrome.storage.local.remove('customFiltersInput');
-        }
-      }
-
-      return customFilters || {};
+      const { customFilters = {} } = await chrome.storage.local.get(['customFilters']);
+      return customFilters;
     },
     async set(_, values) {
       await chrome.storage.local.set({
