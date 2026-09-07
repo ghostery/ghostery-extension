@@ -11,7 +11,7 @@
 import { browser, expect } from '@wdio/globals';
 
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   setCustomFilters,
   setAdditionalFiltersToggle,
@@ -45,7 +45,7 @@ async function waitForNavigation() {
 }
 
 describe('Redirect Protection', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(() => setCustomFilters([`||${PAGE_DOMAIN}^$document`]));
 
   after(() => disableCustomFilters());
@@ -197,7 +197,7 @@ describe('Redirect Protection', function () {
 // for type-less filters via @ghostery/adblocker's FROM_ANY mask; we now skip
 // those matches in src/background/adblocker/network.js.
 describe('Type-less filter does not affect main_frame', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(() => setCustomFilters([`||${PAGE_DOMAIN}^`]));
   after(() => disableCustomFilters());
 

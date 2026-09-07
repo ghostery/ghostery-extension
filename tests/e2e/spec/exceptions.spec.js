@@ -11,7 +11,7 @@
 import { browser, expect } from '@wdio/globals';
 
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   TRACKER_IDS,
   waitForIdleBackgroundTasks,
@@ -20,7 +20,7 @@ import {
 } from '../utils.js';
 
 describe('Exceptions', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   const TRACKER_ID = TRACKER_IDS[0];
 

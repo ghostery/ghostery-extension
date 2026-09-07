@@ -10,7 +10,7 @@
  */
 import { browser, expect } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   waitForIdleBackgroundTasks,
   setCustomFilters,
@@ -47,7 +47,7 @@ async function waitForRegistrationDrop() {
 
 if (browser.isChromium) {
   describe('Scriptlet registration refresh', function () {
-    before(enableExtension);
+    before(setupExtension);
 
     before(async function () {
       await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`]);

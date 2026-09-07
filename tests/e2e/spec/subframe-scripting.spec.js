@@ -10,7 +10,7 @@
  */
 import { browser, expect } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   setCustomFilters,
   disableCustomFilters,
   reloadUntilActive,
@@ -78,7 +78,7 @@ const ensureFiltersActive = () =>
   );
 
 describe('Subframe scriptlet injection', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(async () => {
     await setCustomFilters([
       `${PAGE_DOMAIN}>>##+js(set, __ghostery_subframe__, true)`,

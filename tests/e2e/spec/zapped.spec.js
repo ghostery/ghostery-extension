@@ -12,7 +12,7 @@
 import { browser, expect, $ } from '@wdio/globals';
 
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
@@ -47,7 +47,7 @@ async function toggleZapInPanel(type) {
 }
 
 describe('ZAP Mode', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   before(() => setFilteringMode('zap'));
   after(() => setFilteringMode('ghostery'));

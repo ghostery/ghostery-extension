@@ -11,7 +11,7 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   setPrivacyToggle,
   setAdditionalFiltersToggle,
@@ -25,7 +25,7 @@ import {
 } from '../utils.js';
 
 describe('Main Features', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   describe('Never-consent', function () {
     const WEBSITE_URL = 'https://www.onetrust.com/';

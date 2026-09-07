@@ -10,7 +10,7 @@
  */
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   getExtensionPageURL,
   reloadExtension,
@@ -18,7 +18,7 @@ import {
 } from '../utils.js';
 
 describe("What's new", function () {
-  before(enableExtension);
+  before(setupExtension);
 
   it('shows the panel notification and recap page', async function () {
     // Debug builds announce the recap on every reload of the unpacked extension

@@ -23,7 +23,7 @@ export default {
         <header layout="row center padding:top:2" layout@1280px="absolute top:3 left:3 padding:0;">
           <ui-icon name="logo-with-slogan"></ui-icon>
         </header>
-        <div layout="grow row content:center padding:3:1:4">
+        <div layout="grow row content:center padding:3:1:4" layout@1280px="padding:7:1:4">
           <div layout="column items:center grow">
             <slot></slot>
           </div>

@@ -49,16 +49,17 @@ export default {
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="body-m">Welcome to Ghostery</ui-text>
-          <ui-text type="display-m">Enable Ghostery to get started</ui-text>
+          ${__FIREFOX__ && html`<ui-text type="display-m">Enable Ghostery to get started</ui-text>`}
+          ${__CHROMIUM__ && html`<ui-text type="display-m" layout="padding:0:4">Setup Ghostery to get started</ui-text>`}
         </section>
         <div layout="column gap:2">
           <ui-text type="display-2xs" layout="block:center">
             Your Community‑Powered Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
-            <onboarding-feature icon="onboarding-adblocking"> Ad-Blocking </onboarding-feature>
-            <onboarding-feature icon="onboarding-anti-tracking"> Anti-Tracking </onboarding-feature>
-            <onboarding-feature icon="onboarding-never-consent"> Never-Consent </onboarding-feature>
+            <onboarding-feature icon="onboarding-adblocking">Ad-Blocking</onboarding-feature>
+            <onboarding-feature icon="onboarding-anti-tracking">Anti-Tracking</onboarding-feature>
+            <onboarding-feature icon="onboarding-never-consent">Never-Consent</onboarding-feature>
           </div>
         </div>
         <div layout="column gap:2">
@@ -106,23 +107,37 @@ export default {
           </ui-text>
         </div>
         <div layout="column gap:2">
-          <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-            <a href="${router.url(modesEnabled ? Modes : Success)}" onclick="${acceptTerms}">
-              Enable Ghostery
-            </a>
-          </ui-button>
-          <onboarding-error-card layout="margin:top">
-            <ui-text type="body-s" color="danger-secondary" layout="block:center">
-              With Ghostery disabled, only the basic functionality of naming trackers is available.
-            </ui-text>
-            <ui-button type="outline-danger" data-qa="button:skip">
-              <a href="${router.url(Skip)}">Keep Disabled</a>
-            </ui-button>
-          </onboarding-error-card>
+          ${
+            __FIREFOX__ &&
+            html`
+              <ui-button type="success" layout="height:5.5" data-qa="button:enable">
+                <a href="${router.url(modesEnabled ? Modes : Success)}" onclick="${acceptTerms}">
+                  Enable Ghostery
+                </a>
+              </ui-button>
+              <onboarding-error-card layout="margin:top">
+                <ui-text type="body-s" color="danger-secondary" layout="block:center">
+                  With Ghostery disabled, only the basic functionality of naming trackers is
+                  available.
+                </ui-text>
+                <ui-button type="outline-danger" data-qa="button:skip">
+                  <a href="${router.url(Skip)}">Keep Disabled</a>
+                </ui-button>
+              </onboarding-error-card>
+            `
+          }
+          ${
+            __CHROMIUM__ &&
+            html`
+              <ui-button type="success" layout="height:5.5" data-qa="button:enable">
+                <a href="${router.url(modesEnabled ? Modes : Success)}">Continue</a>
+              </ui-button>
+            `
+          }
         </div>
       </ui-card>
       <ui-button type="transparent" layout="self:center">
-        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank"> Terms & Conditions </a>
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">Terms & Conditions</a>
       </ui-button>
     </template>
   `,

@@ -10,26 +10,39 @@
  */
 
 import { browser, expect } from '@wdio/globals';
-import { enableExtension, getExtensionElement, setCookieInBrowserContext } from '../utils.js';
+import { setupExtension, getExtensionElement, sendMessage } from '../utils.js';
+
+async function setAttribution(values) {
+  await browser.url('ghostery:onboarding');
+  const mainHandle = await browser.getWindowHandle();
+
+  const { handle: pageHandle } = await browser.newWindow('https://www.ghostery.com/');
+
+  await browser.execute(function (v) {
+    sessionStorage.setItem('attribution', v);
+  }, values);
+
+  await browser.switchWindow(mainHandle);
+  await sendMessage({ action: 'e2e:captureAttribution' });
+
+  await browser.switchToWindow(pageHandle);
+  await browser.closeWindow();
+
+  await browser.switchToWindow(mainHandle);
+}
 
 describe('Onboarding', function () {
-  before(async () => {
-    await setCookieInBrowserContext(
-      'https://www.ghostery.com/',
-      'attribution',
-      's=source&c=campaign',
-    );
-  });
+  if (browser.isFirefox) {
+    it('keeps ghostery disabled', async function () {
+      await browser.url('ghostery:onboarding');
 
-  it('keeps ghostery disabled', async function () {
-    await browser.url('ghostery:onboarding');
+      await getExtensionElement('button:skip').click();
+      await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
-    await getExtensionElement('button:skip').click();
-    await expect(getExtensionElement('view:skip')).toBeDisplayed();
-
-    await browser.url('ghostery:panel');
-    await expect(getExtensionElement('button:enable')).toBeDisplayed();
-  });
+      await browser.url('ghostery:panel');
+      await expect(getExtensionElement('button:enable')).toBeDisplayed();
+    });
+  }
 
   if (browser.isChromium) {
     it('shows the dialog with Privacy Policy', async function () {
@@ -41,12 +54,14 @@ describe('Onboarding', function () {
     });
   }
 
-  it('enables ghostery', enableExtension);
+  it('enables ghostery', setupExtension);
 
-  it('captures attribution from ghostery.com cookie', async () => {
+  it('captures attribution from ghostery.com sessionStorage', async () => {
+    await setAttribution('s=source&c=campaign');
+
     await browser.url('ghostery:settings');
 
-    await expect(getExtensionElement('text:utm-source')).toHaveText('source_c');
+    await expect(getExtensionElement('text:utm-source')).toHaveText('source');
     await expect(getExtensionElement('text:utm-campaign')).toHaveText('campaign');
   });
 });

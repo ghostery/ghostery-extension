@@ -10,7 +10,7 @@
  */
 import { browser, expect } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   setCookieInBrowserContext,
   setToggle,
@@ -22,7 +22,7 @@ import {
 describe('Clear Browsing Data', () => {
   const COOKIE_NAME = 'test-cookie';
 
-  before(enableExtension);
+  before(setupExtension);
 
   beforeEach(async () => {
     await setCookieInBrowserContext(PAGE_URL, COOKIE_NAME, 'test-value');

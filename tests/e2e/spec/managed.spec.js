@@ -12,7 +12,7 @@
 import { browser, expect, $ } from '@wdio/globals';
 
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   sendMessage,
   reloadExtension,
@@ -31,7 +31,7 @@ async function setManagedConfig(config = {}) {
 }
 
 describe('Managed Configuration', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(() =>
     setManagedConfig({
       disableUserControl: true,
