@@ -10,9 +10,7 @@
  */
 
 import { html, msg, router, store } from 'hybrids';
-import { FLAG_MODES } from '@ghostery/config';
 
-import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
@@ -43,12 +41,10 @@ export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
   },
-  config: store(Config),
   managedConfig: store(ManagedConfig),
   feedback: true,
-  mode: ({ config, managedConfig }) =>
-    store.ready(config, managedConfig) && config.hasFlag(FLAG_MODES) && !managedConfig.disableModes,
-  render: ({ feedback, mode }) => html`
+  modesEnabled: ({ managedConfig }) => store.ready(managedConfig) && !managedConfig.disableModes,
+  render: ({ feedback, modesEnabled }) => html`
     <template layout="column gap:2 width:::375px">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
@@ -111,7 +107,7 @@ export default {
         </div>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-            <a href="${router.url(mode ? Modes : Success)}" onclick="${acceptTerms}">
+            <a href="${router.url(modesEnabled ? Modes : Success)}" onclick="${acceptTerms}">
               Enable Ghostery
             </a>
           </ui-button>

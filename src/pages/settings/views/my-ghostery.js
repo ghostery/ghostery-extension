@@ -10,12 +10,10 @@
  */
 
 import { html, msg, store } from 'hybrids';
-import { FLAG_MODES } from '@ghostery/config';
 
 import modeGhosteryScreenshotUrl from '/ui/assets/lottie-mode-default.json?url';
 import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
 
-import Config from '/store/config.js';
 import ManagedConfig from '/store/managed-config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 
@@ -47,10 +45,9 @@ function updateMode(value) {
 
 export default {
   options: store(Options),
-  config: store(Config),
   managedConfig: store(ManagedConfig),
   importStatus: undefined,
-  render: ({ options, config, managedConfig, importStatus }) => html`
+  render: ({ options, managedConfig, importStatus }) => html`
     <template layout="contents">
       <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
@@ -59,7 +56,6 @@ export default {
           </div>
           <div layout="column gap:4">
             ${
-              config.hasFlag(FLAG_MODES) &&
               !managedConfig.disableModes &&
               html`
                 <settings-option icon="ghosty-m">

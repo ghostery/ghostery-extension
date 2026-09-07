@@ -9,34 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
-import { FLAG_MODES } from '@ghostery/config';
-
-import Config from '/store/config.js';
-import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
+import { MODE_ZAP } from '/store/options.js';
 
 import { isWebkit } from '/utils/browser-info.js';
 import { getDynamicRulesIds, PAUSED_ID_RANGE, PAUSED_RULE_PRIORITY } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-
-// Clear filtering mode and zapped data if the flag is removed
-store.observe(Config, async (_, config, lastConfig) => {
-  if (lastConfig?.hasFlag(FLAG_MODES) && !config.hasFlag(FLAG_MODES)) {
-    // Clear out DNR rules related to zap mode
-    const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds,
-    });
-
-    // Reset filtering mode and zapped data
-    await store.set(Options, {
-      mode: MODE_DEFAULT,
-      zapped: null,
-    });
-
-    console.log(`[zapped] Filtering mode flag removed, resetting filtering mode and zapped data`);
-  }
-});
 
 if (__CHROMIUM__) {
   OptionsObserver.addListener(async function zapped(options, lastOptions) {
