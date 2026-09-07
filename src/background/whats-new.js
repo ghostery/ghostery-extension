@@ -35,7 +35,7 @@ async function openPanel() {
   if (!options.terms || options.whatsNew.version === version) return;
 
   const { notifications } = options.panel;
-  await store.set(options, { whatsNew: { version, shown: !notifications } });
+  await store.set(options, { whatsNew: { version, popup: false, shown: !notifications } });
 
   const managedConfig = await store.resolve(ManagedConfig);
   if (managedConfig.disableUserControl || !notifications) return;
@@ -49,6 +49,8 @@ async function openPanel() {
     // Point the popup at the recap view for this single open, then restore the default
     await chromeAction.setPopup({ popup: `${PANEL_URL}?whatsNew` });
     await chromeAction.openPopup();
+
+    await store.set(options, { whatsNew: { popup: true } });
 
     console.log('[whats-new] Opening the panel with the recap view...');
   } catch (e) {
