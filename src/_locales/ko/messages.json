@@ -241,6 +241,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "마음이 바뀌셨나요?"
+  },
   "changes_application_color_theme_": {
     "message": "애플리케이션 색상 테마를 변경합니다."
   },
@@ -302,6 +305,9 @@
   },
   "contact_support": {
     "message": "지원팀에 문의하기"
+  },
+  "continue": {
+    "message": "계속"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHub에서 Ghostery 트래커 데이터베이스에 기여하기"
@@ -1043,6 +1049,9 @@
   "settings_sync": {
     "message": "설정 동기화"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "시작하려면 Ghostery를 설정하세요"
+  },
   "setup_successful": {
     "message": "설정을 끝마쳤습니다"
   },
@@ -1302,6 +1311,9 @@
   },
   "uninstall": {
     "message": "제거"
+  },
+  "uninstall_ghostery": {
+    "message": "Ghostery 제거"
   },
   "update_now": {
     "message": "지금 업데이트"

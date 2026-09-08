@@ -241,6 +241,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "気が変わりましたか？"
+  },
   "changes_application_color_theme_": {
     "message": "アプリケーションのカラーテーマを変更します。"
   },
@@ -302,6 +305,9 @@
   },
   "contact_support": {
     "message": "お問い合わせ先"
+  },
+  "continue": {
+    "message": "続行"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHubのGhosteryトラッカーデータベースに貢献する"
@@ -1043,6 +1049,9 @@
   "settings_sync": {
     "message": "同期設定"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "はじめるにはGhosteryを設定してください"
+  },
   "setup_successful": {
     "message": "セットアップ成功"
   },
@@ -1302,6 +1311,9 @@
   },
   "uninstall": {
     "message": "アンインストール"
+  },
+  "uninstall_ghostery": {
+    "message": "Ghosteryをアンインストール"
   },
   "update_now": {
     "message": "今すぐ更新"
