@@ -241,6 +241,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "Vous avez changé d'avis ?"
+  },
   "changes_application_color_theme_": {
     "message": "Modifie le thème de couleur de l'application."
   },
@@ -302,6 +305,9 @@
   },
   "contact_support": {
     "message": "Contacter l'assistance"
+  },
+  "continue": {
+    "message": "Continuer"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribuer à la base de données de trackers de Ghostery sur Github"
@@ -1043,6 +1049,9 @@
   "settings_sync": {
     "message": "Synchronisation des paramètres"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "Configurez Ghostery pour commencer"
+  },
   "setup_successful": {
     "message": "Configuration réussie"
   },
@@ -1302,6 +1311,9 @@
   },
   "uninstall": {
     "message": "Désinstaller"
+  },
+  "uninstall_ghostery": {
+    "message": "Désinstaller Ghostery"
   },
   "update_now": {
     "message": "Mettre à jour maintenant"

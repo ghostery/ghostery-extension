@@ -241,6 +241,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "Передумали?"
+  },
   "changes_application_color_theme_": {
     "message": "Изменяет цветовую тему приложения."
   },
@@ -302,6 +305,9 @@
   },
   "contact_support": {
     "message": "Связаться с поддержкой"
+  },
+  "continue": {
+    "message": "Продолжить"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Поддержать базу данных трекеров от Ghostery на Github"
@@ -1043,6 +1049,9 @@
   "settings_sync": {
     "message": "Синхронизация настроек"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "Настройте Ghostery, чтобы начать работу"
+  },
   "setup_successful": {
     "message": "Настройка завершена"
   },
@@ -1302,6 +1311,9 @@
   },
   "uninstall": {
     "message": "Удалить"
+  },
+  "uninstall_ghostery": {
+    "message": "Удалить Ghostery"
   },
   "update_now": {
     "message": "Обновить сейчас"

@@ -217,6 +217,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "Bạn đã đổi ý?"
+  },
   "changes_application_color_theme_": {
     "message": "Thay đổi chủ đề màu của ứng dụng."
   },
@@ -269,6 +272,9 @@
   },
   "contact_support": {
     "message": "Liên hệ hỗ trợ"
+  },
+  "continue": {
+    "message": "Tiếp tục"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribute to Ghostery Tracker Database on Github"
@@ -968,6 +974,9 @@
   "settings_sync": {
     "message": "Đồng bộ cài đặt"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "Thiết lập Ghostery để bắt đầu"
+  },
   "setup_successful": {
     "message": "Thiết lập thành công"
   },
@@ -1182,6 +1191,9 @@
   },
   "uninstall": {
     "message": "Gỡ cài đặt"
+  },
+  "uninstall_ghostery": {
+    "message": "Gỡ cài đặt Ghostery"
   },
   "update_now": {
     "message": "Cập nhật bây giờ"

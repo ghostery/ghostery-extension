@@ -241,6 +241,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changed_your_mind_": {
+    "message": "改變主意了嗎？"
+  },
   "changes_application_color_theme_": {
     "message": "更改應用程式的顏色主題。"
   },
@@ -302,6 +305,9 @@
   },
   "contact_support": {
     "message": "聯絡支援"
+  },
+  "continue": {
+    "message": "繼續"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "在 Github 上為 Ghostery Tracker Database 貢獻"
@@ -1043,6 +1049,9 @@
   "settings_sync": {
     "message": "設定同步"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "設定 Ghostery 以開始使用"
+  },
   "setup_successful": {
     "message": "設定成功"
   },
@@ -1302,6 +1311,9 @@
   },
   "uninstall": {
     "message": "解除安裝"
+  },
+  "uninstall_ghostery": {
+    "message": "解除安裝 Ghostery"
   },
   "update_now": {
     "message": "現在更新"
