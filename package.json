@@ -27,13 +27,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/chrome": "^0.2.8",
-    "@wdio/browser-runner": "^9.31.5",
-    "@wdio/cli": "^9.31.5",
+    "@types/chrome": "^0.2.9",
+    "@wdio/browser-runner": "^9.31.6",
+    "@wdio/cli": "^9.31.6",
     "@wdio/globals": "^9.31.1",
-    "@wdio/mocha-framework": "^9.31.1",
+    "@wdio/mocha-framework": "^9.31.6",
     "@wdio/spec-reporter": "^9.31.2",
-    "eslint": "^10.9.1",
+    "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "globals": "^17.12.0",
@@ -43,17 +43,17 @@
     "web-ext": "^10.6.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^16.36.0",
+    "@duckduckgo/autoconsent": "^16.38.0",
     "@ghostery/adblocker": "^2.18.2",
     "@ghostery/adblocker-content": "^2.18.2",
     "@ghostery/adblocker-extended-selectors": "^2.18.2",
     "@ghostery/adblocker-webextension": "^2.18.2",
-    "@ghostery/config": "^0.0.17",
+    "@ghostery/config": "^0.0.18",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
-    "@ghostery/urlfilter2dnr": "^2.0.4",
+    "@ghostery/urlfilter2dnr": "^2.1.0",
     "@github/relative-time-element": "^5.3.1",
     "@sentry/browser": "^10.73.0",
-    "@whotracksme/reporting": "^12.0.0",
+    "@whotracksme/reporting": "^12.1.0",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.14.1",
     "csv-stringify": "^6.8.3",
@@ -62,7 +62,7 @@
     "lottie-web": "^5.13.0",
     "minixxh": "^0.4.0",
     "plotly.js-basic-dist": "^4.0.0",
-    "tldts-experimental": "^7.4.11"
+    "tldts-experimental": "^7.4.12"
   },
   "overrides": {
     "yauzl": "3.4.0"
