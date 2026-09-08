@@ -43,6 +43,44 @@ function visit(hostname, ...scripts) {
 const renderDataScript = (token = TOKEN, destination = DESTINATION, trailing = '') =>
   `x,"/goto?url\\u003d${token}"${trailing}],["${destination}","a title"],y`;
 
+const varint = (value) => {
+  const bytes = [];
+
+  do {
+    const byte = value % 128;
+    value = Math.floor(value / 128);
+    bytes.push(value ? byte | 0x80 : byte);
+  } while (value);
+
+  return bytes;
+};
+
+const bytesField = (number, payload) => [
+  ...varint(number * 8 + 2),
+  ...varint(payload.length),
+  ...payload,
+];
+const text = (value) => [...Buffer.from(value)];
+
+// A varint, a fixed64, a fixed32 and another string, none of them wanted
+const OTHER_FIELDS = [0x10, 0x05, 0x21, ...Array(8).fill(0), 0x2d, ...Array(4).fill(0)].concat(
+  bytesField(7, text('<b>a</b> title')),
+);
+
+const aboutThisResultRequest = (link, destination, otherFields = []) =>
+  Buffer.from([
+    ...bytesField(1, text(link)),
+    ...otherFields,
+    ...bytesField(3, bytesField(1024, [...otherFields, ...bytesField(6, text(destination))])),
+  ]).toString('base64url');
+
+const aboutThisResultScript = (
+  token = TOKEN,
+  destination = DESTINATION,
+  request = aboutThisResultRequest(`/goto?url=${token}`, destination),
+) =>
+  `x,"/goto?url\\u003d${token}",[null,"/search/about-this-result?origin\\u003dwww.google.com\\u0026req\\u003d${request}\\u0026hl\\u003den"],y`;
+
 describe('link destinations', () => {
   describe('a page that carries its results as data', () => {
     const wrapped = `https://${RENDER_DATA_PAGE}/goto?url=${TOKEN}`;
@@ -111,6 +149,51 @@ describe('link destinations', () => {
 
     it('tolerates extra fields trailing the token', () => {
       assert.equal(resolve(renderDataScript(TOKEN, DESTINATION, ',null,3')), DESTINATION);
+    });
+
+    describe('through its "about this result" request', () => {
+      it('resolves a wrapped link', () => {
+        assert.equal(resolve(aboutThisResultScript()), DESTINATION);
+      });
+
+      it('resolves a result the older layout no longer describes', () => {
+        const script = `${aboutThisResultScript()},["/goto?url\\u003d${TOKEN}","a title"]`;
+
+        assert.equal(resolve(script), DESTINATION);
+      });
+
+      it('skips the fields of the request it has no use for', () => {
+        const request = aboutThisResultRequest(`/goto?url=${TOKEN}`, DESTINATION, OTHER_FIELDS);
+
+        assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), DESTINATION);
+      });
+
+      it('reads the request however its parameter is escaped', () => {
+        assert.equal(resolve(aboutThisResultScript().replace('req\\u003d', 'req=')), DESTINATION);
+      });
+
+      it('leaves a link alone when its request cannot be read', () => {
+        const truncated = aboutThisResultRequest(`/goto?url=${TOKEN}`, DESTINATION).slice(0, -12);
+
+        for (const request of [
+          'A',
+          'AAAA',
+          Buffer.from([0x0a, 0xff]).toString('base64url'),
+          truncated,
+        ]) {
+          assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), null, request);
+        }
+      });
+
+      it('ignores a request that does not describe a wrapped link', () => {
+        const request = aboutThisResultRequest('https://example.com/', DESTINATION);
+
+        assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), null);
+      });
+
+      it('ignores a destination that is not an http(s) URL', () => {
+        assert.equal(resolve(aboutThisResultScript(TOKEN, 'javascript:alert(1)')), null);
+      });
     });
 
     describe('while the page is still streaming in', () => {
