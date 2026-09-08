@@ -37,6 +37,11 @@ function acceptTerms(host, event) {
   );
 }
 
+function uninstall(host, event) {
+  event.preventDefault();
+  chrome.management.uninstallSelf({ showConfirmDialog: true });
+}
+
 export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
@@ -132,6 +137,17 @@ export default {
               <ui-button type="success" layout="height:5.5" data-qa="button:enable">
                 <a href="${router.url(modesEnabled ? Modes : Success)}">Continue</a>
               </ui-button>
+              ${
+                chrome.management?.uninstallSelf &&
+                html`
+                  <ui-text type="body-xs" color="tertiary" layout="block:center" underline>
+                    Changed your mind?
+                    <a href="#" onclick="${uninstall}" data-qa="button:uninstall"
+                      >Uninstall Ghostery</a
+                    >
+                  </ui-text>
+                `
+              }
             `
           }
         </div>
