@@ -11,7 +11,7 @@
 import { browser, expect } from '@wdio/globals';
 
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   loadThirdPartyScript,
   setToggle,
@@ -25,7 +25,7 @@ async function setDistractionToggle(name, value) {
 }
 
 describe('Distractions', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   after(() => setDistractionToggle('signInWithGoogle', false));
 

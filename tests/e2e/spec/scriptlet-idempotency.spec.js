@@ -10,7 +10,7 @@
  */
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   setCustomFilters,
   disableCustomFilters,
   setUserScriptsAllowed,
@@ -139,7 +139,7 @@ function idempotencyChecks() {
 }
 
 describe('Scriptlet injection idempotency', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(async () => {
     await setCustomFilters([
       `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,

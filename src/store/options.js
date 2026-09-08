@@ -78,7 +78,7 @@ const Options = {
   pauseAssistant: true,
 
   // Onboarding
-  terms: false,
+  terms: __CHROMIUM__ ? true : false,
   feedback: true,
   onboarding: false,
 

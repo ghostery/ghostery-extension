@@ -18,6 +18,7 @@ import { hasWTMStats } from '/utils/wtm-stats';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import { setup as adblockerSetup, updateEngines } from './adblocker/engines.js';
 import { openElementPicker } from './element-picker.js';
+import { captureAttribution } from './telemetry/index.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -127,6 +128,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
       sendResponse([]);
       break;
+
+    case 'e2e:captureAttribution':
+      captureAttribution().then(() => {
+        sendResponse('done');
+        console.debug('[helpers] "captureAttribution" finished');
+      }, sendResponse);
+      return true;
   }
 
   return false;

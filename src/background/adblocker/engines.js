@@ -168,10 +168,13 @@ export const setup = asyncSetup('adblocker', [
       await reloadMainEngine();
     }
 
+    // Re-resolve `filtersUpdatedAt` as the above `reloadMainEngine` call might have updated it
+    const { filtersUpdatedAt } = await store.resolve(Options);
+
     // Update engine filters:
     // * when engines changed, so there might be re-enabled engines with outdated filters
     // * when filters are outdated (older than 1 hour)
-    if (enginesChanged || options.filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
+    if (enginesChanged || filtersUpdatedAt < Date.now() - UPDATE_ENGINES_DELAY) {
       await updateEngines();
     }
   }),

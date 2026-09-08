@@ -10,7 +10,7 @@
  */
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   setAdditionalFiltersToggle,
   setCustomFilters,
@@ -59,7 +59,7 @@ async function getCustomFiltersErrorsText() {
 }
 
 describe('Custom Filters', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(async () => {
     await setCustomFilters([
       `${PAGE_DOMAIN}###custom-filter`,

@@ -72,7 +72,9 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
   // Wait for setup to finish initializing the runner
   setup.pending && (await setup.pending);
 
-  if (runner.isJustInstalled()) {
+  // In debug builds, skip the automatic capture and let `e2e:captureAttribution`
+  // trigger it once the test has finished its setup.
+  if (!__DEBUG__ && runner.isJustInstalled()) {
     await runner.setUTMs(await detectAttribution());
   }
 
@@ -85,6 +87,11 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }, lastOp
     if (feedback) runner.ping('active');
   }
 });
+
+export async function captureAttribution() {
+  setup.pending && (await setup.pending);
+  await runner.setUTMs(await detectAttribution());
+}
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   setup.pending && (await setup.pending);

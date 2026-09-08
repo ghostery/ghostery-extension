@@ -9,10 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { browser, expect, $ } from '@wdio/globals';
-import { enableExtension, getExtensionElement } from '../utils.js';
+import { setupExtension, getExtensionElement } from '../utils.js';
 
 describe('Panel', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   it('opens licenses page', async function () {
     await browser.url('ghostery:panel');

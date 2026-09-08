@@ -13,7 +13,7 @@ import { browser, expect, $ } from '@wdio/globals';
 
 import {
   dismissPageNotification,
-  enableExtension,
+  setupExtension,
   expectNoPageNotification,
   sendMessage,
   setWhoTracksMeToggle,
@@ -31,7 +31,7 @@ describe('Pause Assistant', function () {
     await waitForIdleBackgroundTasks();
   }
 
-  before(enableExtension);
+  before(setupExtension);
 
   before(async () => {
     await browser.url('ghostery:panel');

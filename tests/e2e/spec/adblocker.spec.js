@@ -10,7 +10,7 @@
  */
 import { browser, expect } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   setToggle,
   waitForIdleBackgroundTasks,
   setCustomFilters,
@@ -88,7 +88,7 @@ async function test(filters) {
 }
 
 describe('Adblocker Capabilities', function () {
-  before(enableExtension);
+  before(setupExtension);
   before(async () => {
     // Disable all community filters to ensure the pure adblocker capability
     // Community filters often ship generic hides to special hostnames like

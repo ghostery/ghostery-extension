@@ -10,14 +10,14 @@
  */
 import { expect, browser } from '@wdio/globals';
 import {
-  enableExtension,
+  setupExtension,
   getExtensionElement,
   getExtensionPageURL,
   setWhoTracksMeToggle,
 } from '../utils.js';
 
 describe('WhoTracksMe', function () {
-  before(enableExtension);
+  before(setupExtension);
 
   describe('Trackers Preview', function () {
     it('displays trackers stats', async function () {

@@ -344,24 +344,27 @@ async function dismissNotifications() {
   await expectNoPageNotification(PAGE_URL, 'review');
 }
 
-export async function enableExtension() {
-  if (enableExtension.done) return;
+export async function setupExtension() {
+  if (setupExtension.done) return;
 
   await browser.url('ghostery:onboarding');
 
   if (await getExtensionElement('view:success').isDisplayed()) {
+    setupExtension.done = true;
     return;
   }
 
-  await getExtensionElement('button:enable').click();
-  await getExtensionElement('button:filtering-mode:ghostery').click();
+  if (browser.isFirefox) {
+    await getExtensionElement('button:enable').click();
+    await getExtensionElement('button:filtering-mode:ghostery').click();
 
-  await expect(getExtensionElement('view:success')).toBeDisplayed();
-  await waitForIdleBackgroundTasks();
+    await expect(getExtensionElement('view:success')).toBeDisplayed();
+    await waitForIdleBackgroundTasks();
+  }
 
   await dismissNotifications();
 
-  enableExtension.done = true;
+  setupExtension.done = true;
 }
 
 // Loads a third-party `<script>` from the page context and reports whether
