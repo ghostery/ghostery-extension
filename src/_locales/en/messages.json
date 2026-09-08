@@ -237,6 +237,9 @@
   "category": {
     "message": "Category"
   },
+  "changed_your_mind_": {
+    "message": "Changed your mind?"
+  },
   "changes_application_color_theme_": {
     "message": "Changes application color theme."
   },
@@ -294,6 +297,9 @@
   },
   "contact_support": {
     "message": "Contact support"
+  },
+  "continue": {
+    "message": "Continue"
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Contribute to Ghostery Tracker Database on Github"
@@ -1031,6 +1037,9 @@
   "settings_sync": {
     "message": "Settings Sync"
   },
+  "setup_ghostery_to_get_started": {
+    "message": "Setup Ghostery to get started"
+  },
   "setup_successful": {
     "message": "Setup Successful"
   },
@@ -1283,6 +1292,9 @@
   },
   "uninstall": {
     "message": "Uninstall"
+  },
+  "uninstall_ghostery": {
+    "message": "Uninstall Ghostery"
   },
   "update_now": {
     "message": "Update Now"
