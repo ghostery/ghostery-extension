@@ -68,7 +68,7 @@
     "yauzl": "3.4.0"
   },
   "dataDependencies": {
-    "redirect-resources": "72c839c618de08f8320ee16407c01ab2f9bbba8ebe05ff9c548edd3bbdd39987",
+    "redirect-resources": "9b4e1ba15e0973984c6990b6e8ba3b9b46903223287fdae2871a9283243f83b8",
     "wtm-bloomfilter": "2026-09-07",
     "wtm-stats": "468f6e211a307f5f20d1d95c478ddd89efdb9b6b"
   },
