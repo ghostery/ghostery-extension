@@ -127,4 +127,4 @@ export async function captureError(error, { critical = false, once = false } = {
 }
 
 // Debug tools
-(globalThis.ghostery ??= {}).errors = { captureException: captureError };
+(globalThis.ghostery ??= {}).errors = { captureError };
