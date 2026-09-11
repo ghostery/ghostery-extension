@@ -11,7 +11,7 @@
 
 import { drawWheel } from '/ui/wheel.js';
 import { isFromExtensionFrame } from '/utils/messaging.js';
-import { scanDocumentLinkData } from '/utils/link-destinations.js';
+import { getDestination } from '/utils/link-destinations.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 
@@ -99,17 +99,23 @@ const SELECTORS = [
 ].join(', ');
 
 function setupTrackersPreview(popupUrl) {
-  const elements = [...window.document.querySelectorAll(SELECTORS)].filter((el) => !el.dataset.wtm);
+  const elements = [];
+  const links = [];
+
+  for (const el of window.document.querySelectorAll(SELECTORS)) {
+    if (el.dataset.wtm) continue;
+
+    // A link that gives no destination away yet is left unmarked for a later
+    // pass, once it is rewritten to where it leads
+    const destination = getDestination(el);
+    if (!destination) continue;
+
+    el.dataset.wtm = 1;
+    elements.push(el);
+    links.push(destination);
+  }
 
   if (elements.length) {
-    const getDestination = scanDocumentLinkData();
-
-    const links = elements.map((el) => {
-      el.dataset.wtm = 1;
-
-      return getDestination(el) || el.href;
-    });
-
     chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
       if (chrome.runtime.lastError) {
         console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
@@ -153,18 +159,6 @@ function setupTrackersPreview(popupUrl) {
         }
       });
     });
-
-    const observer = new MutationObserver((mutations) => {
-      if (mutations.some((m) => m.addedNodes.length)) {
-        observer.disconnect();
-        setTimeout(() => setupTrackersPreview(popupUrl), 500);
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
   }
 }
 
@@ -195,7 +189,26 @@ window.addEventListener('message', (message) => {
 });
 
 function setup() {
-  setupTrackersPreview(chrome.runtime.getURL('pages/trackers-preview/index.html'));
+  const popupUrl = chrome.runtime.getURL('pages/trackers-preview/index.html');
+  let timeout = null;
+
+  setupTrackersPreview(popupUrl);
+
+  // New results and links rewritten to their destination both call for another pass
+  new MutationObserver((mutations) => {
+    if (timeout) return;
+    if (!mutations.some((m) => m.addedNodes.length || m.type === 'attributes')) return;
+
+    timeout = setTimeout(() => {
+      timeout = null;
+      setupTrackersPreview(popupUrl);
+    }, 500);
+  }).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['href'],
+  });
 }
 
 if (document.readyState === 'loading') {
