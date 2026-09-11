@@ -89,6 +89,10 @@
       "run_at": "background_execute_script"
     },
     {
+      "js": ["content_scripts/prevent-serp-targets.js"],
+      "run_at": "background_execute_script"
+    },
+    {
       "js": ["content_scripts/element-picker.js"],
       "run_at": "background_execute_script"
     }
