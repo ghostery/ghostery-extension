@@ -12,330 +12,153 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { isResultPage, scanDocumentLinkData } from '../../src/utils/link-destinations.js';
+import { isResultPage, getDestination } from '../../src/utils/link-destinations.js';
 
-const RENDER_DATA_PAGE = 'www.google.com';
-const ENCODED_LINK_PAGE = 'www.bing.com';
+const GOOGLE = 'www.google.com';
+const BING = 'www.bing.com';
 
-const TOKEN = 'aResultTokenLongEnoughToPass';
 const DESTINATION = 'https://example.com/a-result';
 
-const element = (href, attributes = {}) => ({
-  href,
-  hostname: new URL(href).hostname,
-  getAttribute: (name) => attributes[name] ?? null,
-});
+// The parts of an anchor element that are read
+const element = (href, attributes = {}) => {
+  const { protocol, hostname, pathname } = new URL(href);
 
-const documentWith = (...scripts) => ({
-  querySelectorAll: () => scripts.map((text) => ({ textContent: text })),
-});
-
-function onPage(hostname) {
-  global.window = { location: { hostname } };
-}
-
-function visit(hostname, ...scripts) {
-  onPage(hostname);
-
-  return scanDocumentLinkData(documentWith(...scripts));
-}
-
-const renderDataScript = (token = TOKEN, destination = DESTINATION, trailing = '') =>
-  `x,"/goto?url\\u003d${token}"${trailing}],["${destination}","a title"],y`;
-
-const varint = (value) => {
-  const bytes = [];
-
-  do {
-    const byte = value % 128;
-    value = Math.floor(value / 128);
-    bytes.push(value ? byte | 0x80 : byte);
-  } while (value);
-
-  return bytes;
+  return {
+    href,
+    protocol,
+    hostname,
+    pathname,
+    getAttribute: (name) => attributes[name] ?? null,
+  };
 };
 
-const bytesField = (number, payload) => [
-  ...varint(number * 8 + 2),
-  ...varint(payload.length),
-  ...payload,
-];
-const text = (value) => [...Buffer.from(value)];
+function onPage(hostname) {
+  global.window = { location: { hostname, href: `https://${hostname}/search?q=a+query` } };
+}
 
-// A varint, a fixed64, a fixed32 and another string, none of them wanted
-const OTHER_FIELDS = [0x10, 0x05, 0x21, ...Array(8).fill(0), 0x2d, ...Array(4).fill(0)].concat(
-  bytesField(7, text('<b>a</b> title')),
-);
+function resolve(hostname, href, attributes) {
+  onPage(hostname);
 
-const aboutThisResultRequest = (link, destination, otherFields = []) =>
-  Buffer.from([
-    ...bytesField(1, text(link)),
-    ...otherFields,
-    ...bytesField(3, bytesField(1024, [...otherFields, ...bytesField(6, text(destination))])),
-  ]).toString('base64url');
-
-const aboutThisResultScript = (
-  token = TOKEN,
-  destination = DESTINATION,
-  request = aboutThisResultRequest(`/goto?url=${token}`, destination),
-) =>
-  `x,"/goto?url\\u003d${token}",[null,"/search/about-this-result?origin\\u003dwww.google.com\\u0026req\\u003d${request}\\u0026hl\\u003den"],y`;
+  return getDestination(element(href, attributes));
+}
 
 describe('link destinations', () => {
-  describe('a page that carries its results as data', () => {
-    const wrapped = `https://${RENDER_DATA_PAGE}/goto?url=${TOKEN}`;
-
-    const resolve = (scripts, href = wrapped) =>
-      visit(RENDER_DATA_PAGE, ...[scripts].flat())(element(href));
-
-    it('resolves a wrapped link through the render data', () => {
-      assert.equal(resolve(renderDataScript()), DESTINATION);
+  describe('a link to its destination', () => {
+    it('is left as it is', () => {
+      assert.equal(resolve(GOOGLE, DESTINATION), DESTINATION);
+      assert.equal(resolve(BING, DESTINATION), DESTINATION);
     });
 
-    it('leaves a link alone when the page does not describe its token', () => {
-      assert.equal(resolve('nothing to index here'), null);
+    it('resolves to nothing when it is not an http(s) link', () => {
+      assert.equal(resolve(GOOGLE, 'javascript:void(0)'), null);
+      assert.equal(resolve(GOOGLE, 'mailto:a@example.com'), null);
+    });
+  });
+
+  describe('a link within the page', () => {
+    it('resolves to nothing unless it wraps a destination', () => {
+      assert.equal(resolve(GOOGLE, `https://${GOOGLE}/search?q=a+query`), null);
+      assert.equal(resolve(GOOGLE, `https://${GOOGLE}/`), null);
     });
 
-    it('reads a destination spelled out in the query string', () => {
-      const target = 'https://example.com/spelled-out';
+    it('leaves a token to be resolved elsewhere', () => {
+      assert.equal(resolve(GOOGLE, `https://${GOOGLE}/goto?url=aResultTokenLongEnough`), null);
+    });
 
+    it('treats a link into another search host the same', () => {
+      assert.equal(resolve('www.google.pl', `https://${GOOGLE}/goto?url=aResultToken`), null);
+      assert.equal(resolve(GOOGLE, `https://google.com/goto?url=aResultToken`), null);
+      assert.equal(resolve('www.google.pl', `https://${GOOGLE}/url?q=${DESTINATION}`), DESTINATION);
+      assert.equal(resolve(BING, `https://cn.bing.com/`), null);
+    });
+  });
+
+  describe('a destination spelled out in the query string', () => {
+    it('is read from either parameter', () => {
       for (const param of ['url', 'q']) {
-        const href = `https://${RENDER_DATA_PAGE}/url?${param}=${encodeURIComponent(target)}`;
-        assert.equal(resolve('', href), target);
+        const href = `https://${GOOGLE}/url?${param}=${encodeURIComponent(DESTINATION)}`;
+        assert.equal(resolve(GOOGLE, href), DESTINATION);
       }
     });
 
-    it('ignores a spelled-out destination that is not an http(s) URL', () => {
+    it('is ignored when it is not an http(s) URL', () => {
       for (const param of ['url', 'q']) {
         const target = encodeURIComponent('javascript:alert(1)');
-        assert.equal(resolve('', `https://${RENDER_DATA_PAGE}/url?${param}=${target}`), null);
+        assert.equal(resolve(GOOGLE, `https://${GOOGLE}/url?${param}=${target}`), null);
       }
     });
 
-    it('leaves links that already point at their destination alone', () => {
-      assert.equal(resolve('', `https://${RENDER_DATA_PAGE}/search?q=a+query`), null);
-      assert.equal(resolve(renderDataScript(), `https://example.com/goto?url=${TOKEN}`), null);
+    it('is only read from the page it belongs to', () => {
+      // On another host the wrapper is a link like any other
+      const href = `https://example.net/url?url=${encodeURIComponent(DESTINATION)}`;
+      assert.equal(resolve(GOOGLE, href), href);
+    });
+  });
+
+  describe('a destination encoded into the link', () => {
+    const encoded = (value = DESTINATION) =>
+      `https://${BING}/ck/a?u=a1${Buffer.from(value).toString('base64')}`;
+
+    it('is decoded', () => {
+      assert.equal(resolve(BING, encoded()), DESTINATION);
     });
 
-    it('matches a token carrying padding or extra parameters', () => {
-      for (const suffix of ['', '=', '%3D', '&ved=abc', '%3D%3D&ved=abc']) {
-        assert.equal(
-          resolve(renderDataScript(), `${wrapped}${suffix}`),
-          DESTINATION,
-          `suffix: ${JSON.stringify(suffix)}`,
-        );
-      }
+    it('is left alone when it cannot be decoded', () => {
+      assert.equal(resolve(BING, `https://${BING}/ck/a?u=a1!!not-base64`), null);
+      assert.equal(resolve(BING, `https://${BING}/ck/a?other=1`), null);
     });
 
-    it('ignores tokens too short to be real', () => {
-      const short = 'tooShort';
+    it('is ignored when it is not an http(s) URL', () => {
+      assert.equal(resolve(BING, encoded('javascript:alert(1)')), null);
+    });
+  });
+
+  describe('an ad', () => {
+    const LANDING_PAGE = 'https://advertiser.example/offer?utm_campaign=x';
+    const clickTracker = (adurl, path = '/aclk') =>
+      `https://ads.example${path}?ai=abc&gclid=xyz&adurl=${encodeURIComponent(adurl)}`;
+
+    it('follows the click tracker the page swaps the link for', () => {
+      const shown = 'https://advertiser.example/';
+
+      assert.equal(resolve(GOOGLE, shown, { 'data-rw': clickTracker(LANDING_PAGE) }), LANDING_PAGE);
+    });
+
+    it('follows a click tracker used as the link itself', () => {
+      assert.equal(resolve(GOOGLE, clickTracker(LANDING_PAGE)), LANDING_PAGE);
+      assert.equal(resolve(GOOGLE, clickTracker(LANDING_PAGE, '/pagead/aclk')), LANDING_PAGE);
+    });
+
+    it('follows a click tracker on the page itself', () => {
+      const href = `https://${GOOGLE}/aclk?adurl=${encodeURIComponent(LANDING_PAGE)}`;
+
+      assert.equal(resolve(GOOGLE, href), LANDING_PAGE);
+    });
+
+    it('keeps the link when the landing page is withheld', () => {
+      const shown = 'https://advertiser.example/';
+
+      assert.equal(resolve(GOOGLE, shown, { 'data-rw': clickTracker('') }), shown);
+      assert.equal(resolve(GOOGLE, shown, { 'data-rw': 'https://ads.example/aclk?ai=abc' }), shown);
+      assert.equal(resolve(GOOGLE, shown, { 'data-rw': 'not a url' }), shown);
+    });
+
+    it('ignores a landing page that is not an http(s) URL', () => {
+      const shown = 'https://advertiser.example/';
 
       assert.equal(
-        resolve(renderDataScript(short), `https://${RENDER_DATA_PAGE}/goto?url=${short}`),
-        null,
+        resolve(GOOGLE, shown, { 'data-rw': clickTracker('javascript:alert(1)') }),
+        shown,
       );
     });
 
-    it('ignores a destination that is not an http(s) URL', () => {
-      assert.equal(resolve(renderDataScript(TOKEN, 'ftp://example.com/x')), null);
-      assert.equal(resolve(renderDataScript(TOKEN, 'https://not a url')), null);
+    it('only follows an actual click tracker', () => {
+      // A destination that merely carries an "adurl" of its own is not one
+      const decoy = 'https://advertiser.example/landing?adurl=https://elsewhere.example/';
+
+      assert.equal(resolve(GOOGLE, decoy), decoy);
+      assert.equal(resolve(GOOGLE, DESTINATION, { 'data-rw': decoy }), DESTINATION);
     });
-
-    it('unescapes a destination out of the render data', () => {
-      const escaped = 'https://example.com/a\\u003db\\u0026c\\u003dd';
-
-      assert.equal(resolve(renderDataScript(TOKEN, escaped)), 'https://example.com/a=b&c=d');
-    });
-
-    it('tolerates extra fields trailing the token', () => {
-      assert.equal(resolve(renderDataScript(TOKEN, DESTINATION, ',null,3')), DESTINATION);
-    });
-
-    describe('through its "about this result" request', () => {
-      it('resolves a wrapped link', () => {
-        assert.equal(resolve(aboutThisResultScript()), DESTINATION);
-      });
-
-      it('resolves a result the older layout no longer describes', () => {
-        const script = `${aboutThisResultScript()},["/goto?url\\u003d${TOKEN}","a title"]`;
-
-        assert.equal(resolve(script), DESTINATION);
-      });
-
-      it('skips the fields of the request it has no use for', () => {
-        const request = aboutThisResultRequest(`/goto?url=${TOKEN}`, DESTINATION, OTHER_FIELDS);
-
-        assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), DESTINATION);
-      });
-
-      it('reads the request however its parameter is escaped', () => {
-        assert.equal(resolve(aboutThisResultScript().replace('req\\u003d', 'req=')), DESTINATION);
-      });
-
-      it('leaves a link alone when its request cannot be read', () => {
-        const truncated = aboutThisResultRequest(`/goto?url=${TOKEN}`, DESTINATION).slice(0, -12);
-
-        for (const request of [
-          'A',
-          'AAAA',
-          Buffer.from([0x0a, 0xff]).toString('base64url'),
-          truncated,
-        ]) {
-          assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), null, request);
-        }
-      });
-
-      it('ignores a request that does not describe a wrapped link', () => {
-        const request = aboutThisResultRequest('https://example.com/', DESTINATION);
-
-        assert.equal(resolve(aboutThisResultScript(TOKEN, DESTINATION, request)), null);
-      });
-
-      it('ignores a destination that is not an http(s) URL', () => {
-        assert.equal(resolve(aboutThisResultScript(TOKEN, 'javascript:alert(1)')), null);
-      });
-    });
-
-    describe('while the page is still streaming in', () => {
-      const OTHER_TOKEN = TOKEN.replace('aResult', 'bResult');
-      const OTHER_DESTINATION = 'https://example.com/b-result';
-      const otherWrapped = `https://${RENDER_DATA_PAGE}/goto?url=${OTHER_TOKEN}`;
-
-      const streaming = (textContent) => {
-        onPage(RENDER_DATA_PAGE);
-
-        const script = { textContent };
-        return [script, { querySelectorAll: () => [script] }];
-      };
-
-      it('reads a script that was still empty on an earlier pass', () => {
-        const [script, doc] = streaming('');
-
-        scanDocumentLinkData(doc);
-        script.textContent = renderDataScript();
-
-        assert.equal(scanDocumentLinkData(doc)(element(wrapped)), DESTINATION);
-      });
-
-      it('reads the rest of a script that has grown since', () => {
-        const [script, doc] = streaming(renderDataScript());
-
-        scanDocumentLinkData(doc);
-        script.textContent += renderDataScript(OTHER_TOKEN, OTHER_DESTINATION);
-
-        const getDestination = scanDocumentLinkData(doc);
-
-        assert.equal(getDestination(element(otherWrapped)), OTHER_DESTINATION);
-        assert.equal(getDestination(element(wrapped)), DESTINATION);
-      });
-
-      it('leaves a script alone once it stops growing', () => {
-        const [script, doc] = streaming(renderDataScript());
-
-        scanDocumentLinkData(doc);
-        script.textContent = renderDataScript(OTHER_TOKEN, OTHER_DESTINATION);
-
-        const getDestination = scanDocumentLinkData(doc);
-
-        assert.equal(getDestination(element(otherWrapped)), null);
-        assert.equal(getDestination(element(wrapped)), DESTINATION);
-      });
-    });
-
-    describe('ads', () => {
-      const LANDING_PAGE = 'https://advertiser.example/offer?utm_campaign=x';
-      const clickTracker = (adurl, path = '/aclk') =>
-        `https://ads.example${path}?ai=abc&gclid=xyz&adurl=${encodeURIComponent(adurl)}`;
-
-      const adLink = (attributes, href = wrapped) =>
-        visit(RENDER_DATA_PAGE)(element(href, attributes));
-
-      it('follows the click tracker the page swaps the link for', () => {
-        assert.equal(adLink({ 'data-rw': clickTracker(LANDING_PAGE) }), LANDING_PAGE);
-      });
-
-      it('follows a click tracker used as the link itself', () => {
-        assert.equal(adLink({}, clickTracker(LANDING_PAGE)), LANDING_PAGE);
-        assert.equal(adLink({}, clickTracker(LANDING_PAGE, '/pagead/aclk')), LANDING_PAGE);
-      });
-
-      it('leaves the link alone when the landing page is withheld', () => {
-        assert.equal(adLink({ 'data-rw': clickTracker('') }), null);
-        assert.equal(adLink({ 'data-rw': 'https://ads.example/aclk?ai=abc' }), null);
-        assert.equal(adLink({ 'data-rw': 'not a url' }), null);
-      });
-
-      it('ignores a landing page that is not an http(s) URL', () => {
-        assert.equal(adLink({ 'data-rw': clickTracker('javascript:alert(1)') }), null);
-      });
-
-      it('only follows an actual click tracker', () => {
-        // A destination that merely carries an "adurl" of its own is not one
-        const decoy = 'https://advertiser.example/landing?adurl=https://elsewhere.example/';
-
-        assert.equal(adLink({}, decoy), null);
-        assert.equal(adLink({ 'data-rw': decoy }), null);
-      });
-
-      it('prefers its landing page over a token the page reuses elsewhere', () => {
-        const getDestination = visit(RENDER_DATA_PAGE, renderDataScript());
-
-        const el = element(wrapped, { 'data-rw': clickTracker(LANDING_PAGE) });
-
-        assert.equal(getDestination(el), LANDING_PAGE);
-      });
-
-      it('falls back to the index when the landing page is withheld', () => {
-        const getDestination = visit(RENDER_DATA_PAGE, renderDataScript());
-
-        const el = element(wrapped, { 'data-rw': clickTracker('') });
-
-        assert.equal(getDestination(el), DESTINATION);
-      });
-    });
-  });
-
-  describe('a page that encodes the destination into the link', () => {
-    const encoded = (value = DESTINATION) =>
-      `https://${ENCODED_LINK_PAGE}/ck/a?u=a1${Buffer.from(value).toString('base64')}`;
-
-    const resolve = (href) => visit(ENCODED_LINK_PAGE)(element(href));
-
-    it('decodes the destination', () => {
-      assert.equal(resolve(encoded()), DESTINATION);
-    });
-
-    it('leaves the link alone when it cannot be decoded', () => {
-      assert.equal(resolve(`https://${ENCODED_LINK_PAGE}/ck/a?u=a1!!not-base64`), null);
-      assert.equal(resolve(`https://${ENCODED_LINK_PAGE}/ck/a?other=1`), null);
-    });
-
-    it('ignores a decoded destination that is not an http(s) URL', () => {
-      assert.equal(resolve(encoded('javascript:alert(1)')), null);
-    });
-
-    it('leaves links that already point at their destination alone', () => {
-      assert.equal(resolve(`https://${ENCODED_LINK_PAGE}/search?q=a+query`), null);
-      assert.equal(resolve(`https://example.com/ck/a?u=a1${btoa(DESTINATION)}`), null);
-    });
-  });
-
-  it('reads a page only the way that page is written', () => {
-    const onRenderData = visit(RENDER_DATA_PAGE, renderDataScript());
-    const encodedLink = `https://${RENDER_DATA_PAGE}/ck/a?u=a1${btoa(DESTINATION)}`;
-
-    assert.equal(onRenderData(element(encodedLink)), null);
-
-    const onEncodedLink = visit(ENCODED_LINK_PAGE, renderDataScript());
-    const wrappedLink = `https://${ENCODED_LINK_PAGE}/goto?url=${TOKEN}`;
-
-    assert.equal(onEncodedLink(element(wrappedLink)), null);
-  });
-
-  it('resolves nothing on a page it does not know', () => {
-    const getDestination = visit('search.example', renderDataScript());
-
-    assert.equal(getDestination(element(`https://search.example/goto?url=${TOKEN}`)), null);
   });
 
   describe('isResultPage()', () => {
@@ -363,23 +186,18 @@ describe('link destinations', () => {
         'bing.example.net',
         'google.com.example.net',
         'google.co.com',
+        'mail.google.com',
       ]) {
         assert.equal(isResultPage(hostname), false, hostname);
       }
     });
 
-    it('does not take other products on a subdomain for result pages', () => {
-      for (const hostname of ['mail.google.com', 'docs.google.com', 'scholar.google.com']) {
-        assert.equal(isResultPage(hostname), false, hostname);
-      }
+    it('reads the current page when not told otherwise', () => {
+      onPage(GOOGLE);
+      assert.equal(isResultPage(), true);
+
+      onPage('example.com');
+      assert.equal(isResultPage(), false);
     });
-  });
-
-  it('ignores elements without a string href', () => {
-    const getDestination = visit(RENDER_DATA_PAGE);
-
-    for (const href of [undefined, null, {}, { baseVal: '/goto?url=x' }]) {
-      assert.equal(getDestination({ href, getAttribute: () => null }), null);
-    }
   });
 });

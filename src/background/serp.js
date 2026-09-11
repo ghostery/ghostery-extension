@@ -99,11 +99,7 @@ OptionsObserver.addListener(async function serpTrackingPrevention(options, lastO
     })
   ).length;
 
-  if (registered) {
-    await chrome.scripting.unregisterContentScripts({
-      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
-    });
-  }
+  if (enabled === !!registered) return;
 
   if (enabled) {
     await chrome.scripting.registerContentScripts([
@@ -119,6 +115,10 @@ OptionsObserver.addListener(async function serpTrackingPrevention(options, lastO
         persistAcrossSessions: true,
       },
     ]);
+  } else {
+    await chrome.scripting.unregisterContentScripts({
+      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
+    });
   }
 });
 
@@ -185,40 +185,4 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 
   return false;
-});
-
-const SERP_TARGETS_CONTENT_SCRIPT_ID = 'prevent-serp-targets';
-
-OptionsObserver.addListener(async function serpTargets(options, lastOptions) {
-  const enabled = options.serpTrackingPrevention && !isGloballyPaused(options);
-
-  if (lastOptions) {
-    const wasEnabled = lastOptions.serpTrackingPrevention && !isGloballyPaused(lastOptions);
-    if (enabled === wasEnabled) return;
-  }
-
-  const registered = !!(
-    await chrome.scripting.getRegisteredContentScripts({
-      ids: [SERP_TARGETS_CONTENT_SCRIPT_ID],
-    })
-  ).length;
-
-  if (enabled === registered) return;
-
-  if (enabled) {
-    await chrome.scripting.registerContentScripts([
-      {
-        id: SERP_TARGETS_CONTENT_SCRIPT_ID,
-        js: ['/content_scripts/prevent-serp-targets.js'],
-        matches: ['*://*/search*', '*://*/*/search*'],
-        allFrames: true,
-        runAt: 'document_start',
-        persistAcrossSessions: true,
-      },
-    ]);
-  } else {
-    await chrome.scripting.unregisterContentScripts({
-      ids: [SERP_TARGETS_CONTENT_SCRIPT_ID],
-    });
-  }
 });
