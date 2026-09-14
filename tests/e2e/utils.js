@@ -24,17 +24,21 @@ export const ADBLOCKING_URL_SELECTOR = '[data-ad-name]';
 
 export const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
-let BASE_URL = '';
+// @wdio/mocha-framework reloads spec files with a cache-busting query string,
+// so each spec file's copy of this module is a separate instance from the one
+// wdio.conf.js imports. Store this on `globalThis` so every copy shares it.
+const BASE_URL_KEY = Symbol.for('ghostery.e2e.baseUrl');
 export function setExtensionBaseUrl(url) {
-  BASE_URL = url;
+  globalThis[BASE_URL_KEY] = url;
 }
 
 export function getExtensionPageURL(page, file = 'index.html') {
-  if (!BASE_URL) {
+  const baseUrl = globalThis[BASE_URL_KEY];
+  if (!baseUrl) {
     throw new Error('Base URL is not set');
   }
 
-  return `${BASE_URL}/${page}/${file}`;
+  return `${baseUrl}/${page}/${file}`;
 }
 
 export function getExtensionElement(id, query) {
@@ -134,7 +138,7 @@ export async function getUserScriptsRegistrations() {
 
 // Chrome gates chrome.userScripts behind the per-extension "Allow user scripts" toggle.
 export async function setUserScriptsAllowed(value) {
-  const extensionId = new URL(BASE_URL).hostname;
+  const extensionId = new URL(globalThis[BASE_URL_KEY]).hostname;
   await browser.url(`chrome://extensions/?id=${extensionId}`);
 
   const toggle = await $('>>>#allow-user-scripts');
