@@ -131,6 +131,10 @@ const SERP_TARGETS_LIMIT = 5000;
 // Writes are serialized so that concurrent pages do not overwrite each other
 let serpTargetsPending = Promise.resolve();
 
+function isHttpUrl(value) {
+  return typeof value === 'string' && /^https?:\/\//.test(value);
+}
+
 async function loadSerpTargets() {
   const { [SERP_TARGETS_STORAGE_KEY]: entries = [] } =
     await chrome.storage.session.get(SERP_TARGETS_STORAGE_KEY);
@@ -143,7 +147,10 @@ function recordSerpTargets(entries) {
       const map = await loadSerpTargets();
 
       for (const [id, url] of Object.entries(entries)) {
-        if (typeof url !== 'string' || !/^https?:\/\//.test(url)) continue;
+        // A page sends null to withdraw an ambiguous id. It stays withdrawn:
+        // the same results will read the same on the next page too.
+        if (map.get(id) === null) continue;
+        if (url !== null && !isHttpUrl(url)) continue;
 
         // Re-inserting moves a known result to the end, so the oldest go first
         map.delete(id);
