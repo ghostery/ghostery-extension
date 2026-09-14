@@ -61,6 +61,10 @@ async function resolve() {
     if (el.href !== destination) el.href = destination;
     dropSwap(el);
 
+    // Do not record destinations on the search engine itself (e.g. a Bing search URL):
+    // the rewritten link would still be opaque and get looked up again on every pass
+    if (isResultPage(new URL(destination).hostname)) continue;
+
     const id = getResultId(el);
     if (!id || recorded.has(id)) continue;
 
@@ -98,7 +102,10 @@ async function resolve() {
 
   for (const el of opaque) {
     const destination = destinations.get(getResultId(el));
-    if (destination) {
+
+    // Only write if the value changes: setting href, even to the same value,
+    // triggers the MutationObserver again, which would cause an endless loop
+    if (destination && el.href !== destination) {
       el.href = destination;
       dropSwap(el);
     }
