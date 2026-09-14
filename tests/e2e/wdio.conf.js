@@ -259,10 +259,11 @@ export const config = {
       console.error('Error while setting up test environment', e);
 
       // close the browser session
-      await browser.deleteSession();
+      await browser.deleteSession().catch(() => {});
 
-      // send a signal to the parent process to stop the tests
-      process.kill(process.pid, 'SIGTERM');
+      // Re-throw so `before` rejects and @wdio/runner aborts the worker
+      // before running any spec files.
+      throw e;
     }
   },
 };
