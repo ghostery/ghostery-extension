@@ -81,8 +81,11 @@ describe('Custom Filters', function () {
   it('disables custom filters by toggle', async function () {
     await setAdditionalFiltersToggle('custom-filters', false);
 
-    await browser.url(PAGE_URL);
-    await expect($('#custom-filter')).toBeDisplayed();
+    // Disabling custom filters reaches the engine asynchronously; retry until the cosmetic filter stops hiding it.
+    await reloadUntilActive(
+      () => $('#custom-filter').isDisplayed(),
+      '#custom-filter never became visible after disabling custom filters',
+    );
 
     await browser.url('ghostery:panel');
     await getExtensionElement('button:detailed-view').click();
