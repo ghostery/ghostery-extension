@@ -99,11 +99,7 @@ OptionsObserver.addListener(async function serpTrackingPrevention(options, lastO
     })
   ).length;
 
-  if (registered) {
-    await chrome.scripting.unregisterContentScripts({
-      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
-    });
-  }
+  if (enabled === !!registered) return;
 
   if (enabled) {
     await chrome.scripting.registerContentScripts([
@@ -119,5 +115,74 @@ OptionsObserver.addListener(async function serpTrackingPrevention(options, lastO
         persistAcrossSessions: true,
       },
     ]);
+  } else {
+    await chrome.scripting.unregisterContentScripts({
+      ids: [SERP_TRACKING_CONTENT_SCRIPT_ID],
+    });
   }
+});
+
+// Result destinations for the session, keyed by the id a result page derives
+// from how a result reads (see the content script). Pages that link results
+// outright record them; pages that hide them behind `/goto` tokens look them up.
+const SERP_TARGETS_STORAGE_KEY = 'serpTargetsMap';
+const SERP_TARGETS_LIMIT = 5000;
+
+// Writes are serialized so that concurrent pages do not overwrite each other
+let serpTargetsPending = Promise.resolve();
+
+async function loadSerpTargets() {
+  const { [SERP_TARGETS_STORAGE_KEY]: entries = [] } =
+    await chrome.storage.session.get(SERP_TARGETS_STORAGE_KEY);
+  return new Map(entries);
+}
+
+function recordSerpTargets(entries) {
+  serpTargetsPending = serpTargetsPending
+    .then(async () => {
+      const map = await loadSerpTargets();
+
+      for (const [id, url] of Object.entries(entries)) {
+        if (typeof url !== 'string' || !/^https?:\/\//.test(url)) continue;
+
+        // Re-inserting moves a known result to the end, so the oldest go first
+        map.delete(id);
+        map.set(id, url);
+      }
+
+      while (map.size > SERP_TARGETS_LIMIT) {
+        map.delete(map.keys().next().value);
+      }
+
+      await chrome.storage.session.set({ [SERP_TARGETS_STORAGE_KEY]: [...map] });
+    })
+    .catch((e) => console.error('[serp] Failed to record targets', e));
+}
+
+async function resolveSerpTargets(ids) {
+  const map = await loadSerpTargets();
+  const resolved = {};
+
+  for (const id of ids) {
+    const url = map.get(id);
+    if (url) resolved[id] = url;
+  }
+
+  return resolved;
+}
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === 'serp:record-targets') {
+    if (msg.entries && typeof msg.entries === 'object') recordSerpTargets(msg.entries);
+    return false;
+  }
+
+  if (msg.action === 'serp:resolve-targets') {
+    resolveSerpTargets(Array.isArray(msg.ids) ? msg.ids : []).then(sendResponse, () =>
+      sendResponse({}),
+    );
+    return true;
+  }
+
+  return false;
 });
