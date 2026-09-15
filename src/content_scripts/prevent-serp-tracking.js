@@ -39,12 +39,17 @@ function normalize(text) {
 // Set below, once the page turns out to be a result page.
 let searchContext = '';
 
-// A result link reads its title, site name and displayed URL; an image link
-// spells the same out in its label. Hashed to keep the stored keys short.
+// Attributes that place the link in the layout, and so tell apart two links
+// that read the same (e.g. "Wikipedia" leading to an article and to its home)
+const LAYOUT_ATTRIBUTES = ['id', 'class', 'style'];
+
+// A link is identified by where it sits and what it reads; an image link
+// spells the latter out in its label. Hashed to keep the stored keys short.
 function getResultId(el) {
+  const layout = LAYOUT_ATTRIBUTES.map((name) => el.getAttribute(name) || '').join('\n');
   const text = normalize(el.textContent) || normalize(el.getAttribute('aria-label'));
 
-  return text ? hash(`${searchContext}\n${text}`) : null;
+  return text ? hash(`${searchContext}\n${layout}\n${text}`) : null;
 }
 
 // What was sent for each id: its destination, or null once the same id turned
