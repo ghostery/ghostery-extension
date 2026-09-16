@@ -135,7 +135,9 @@ export default {
             __CHROMIUM__ &&
             html`
               <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-                <a href="${router.url(modesEnabled ? Modes : Success)}">Continue</a>
+                <a href="${router.url(modesEnabled ? Modes : Success)}" onclick="${acceptTerms}">
+                  Continue
+                </a>
               </ui-button>
               ${
                 chrome.management?.uninstallSelf &&
