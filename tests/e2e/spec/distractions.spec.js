@@ -50,4 +50,27 @@ describe('Distractions', function () {
       );
     });
   });
+
+  describe('Notifications', function () {
+    after(() => setDistractionToggle('notifications', false));
+
+    it('leaves the notification prompt untouched when the toggle is disabled', async function () {
+      await setDistractionToggle('notifications', false);
+
+      await browser.url(PAGE_URL);
+
+      await expect(await browser.execute(() => window.Notification.permission)).not.toBe('denied');
+    });
+
+    it('blocks the notification prompt when the toggle is enabled', async function () {
+      await setDistractionToggle('notifications', true);
+
+      await browser.url(PAGE_URL);
+
+      await expect(await browser.execute(() => window.Notification.permission)).toBe('denied');
+      await expect(await browser.execute(() => window.Notification.requestPermission())).toBe(
+        'denied',
+      );
+    });
+  });
 });

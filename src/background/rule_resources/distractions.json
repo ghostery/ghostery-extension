@@ -35,6 +35,10 @@
     "addons.mozilla.org##.DownloadFirefoxButton",
     "addons.opera.com###overlay"
   ],
+  "notifications": [
+    "##+js(trusted-set-constant, Notification.permission, json:\"denied\")",
+    "##+js(trusted-override-element-method, Notification.requestPermission, , json:\"denied\", as, resolved)"
+  ],
   "socialWidgets": [
     "##.sharedaddy",
     "##.share-buttons",
