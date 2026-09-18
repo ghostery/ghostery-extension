@@ -38,6 +38,21 @@ export default {
   typeLabel: ({ filterType, type }) =>
     `${FilterType[filterType].toLowerCase()}${type ? ` (${type})` : ''}`,
 
+  // Lists percent-encode scriptlet arguments, which are decoded before injection.
+  // Empty unless decoding changes the filter, so the UI can skip it.
+  decodedFilter: ({ filter }) => {
+    const start = filter.indexOf('+js(');
+    if (start === -1) return '';
+
+    try {
+      const decoded =
+        filter.slice(0, start + 4) + decodeURIComponent(filter.slice(start + 4, -1)) + ')';
+      return decoded !== filter ? decoded : '';
+    } catch {
+      return '';
+    }
+  },
+
   [store.connect]: {
     get: (id) => storage.find((item) => item.id === id),
     set: (id, values) => {

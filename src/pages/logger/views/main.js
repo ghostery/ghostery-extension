@@ -234,9 +234,22 @@ export default {
                   >
                     <ui-text type="body-s" color="tertiary"> ${log.time} </ui-text>
                     <ui-text type="body-s" color="secondary"> ${log.typeLabel} </ui-text>
-                    <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
-                      >${log.filter}</ui-text
-                    >
+                    ${
+                      log.decodedFilter
+                        ? html`
+                            <ui-tooltip position="bottom" wrap delay="0.5" autohide="0">
+                              <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
+                                >${log.filter}</ui-text
+                              >
+                              <div slot="content" layout="width::400px">${log.decodedFilter}</div>
+                            </ui-tooltip>
+                          `
+                        : html`
+                            <ui-text ellipsis color="${log.exception ? 'tertiary' : 'primary'}"
+                              >${log.filter}</ui-text
+                            >
+                          `
+                    }
                     <div layout="row gap:0.5">
                       ${
                         log.exception &&

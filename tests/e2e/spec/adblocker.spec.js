@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { browser, expect } from '@wdio/globals';
+import { $, browser, expect } from '@wdio/globals';
 import {
   setupExtension,
   setToggle,
@@ -288,6 +288,47 @@ describe('Adblocker Capabilities', function () {
           window.mainWorldProbe === true
         );
       }, 'MAIN and ISOLATED scriptlets did not both apply on the same page');
+    });
+  });
+
+  describe('Scriptlet arguments', function () {
+    it('decodes percent-encoded arguments', async function () {
+      // Lists percent-encode characters that would otherwise split the argument list.
+      await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-a')).toHaveText('a,b"c');
+    });
+  });
+
+  describe('Scriptlet exceptions', function () {
+    it('cancels the matching injection only', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, zzz)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, zzz)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      // The unexcepted filter proves the scriptlets ran before the assertion below
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
+    });
+
+    it('cancels an injection with percent-encoded arguments', async function () {
+      // Exceptions match on the stored selector, so both sides must keep the arguments as written.
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
     });
   });
 });
