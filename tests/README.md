@@ -67,7 +67,7 @@ Ghostery is installed and enabled in the Ghostery filtering mode.
 
 The cookie pop-up is hidden.
 
-### Never-Consent - Global Privacy Control
+### Never-Consent - Global Privacy Control 🤖
 
 > When Global Privacy Control is enabled, the browser should send the GPC signal to websites
 
@@ -217,7 +217,7 @@ On the test pages, trackers are not blocked or modified, ads are visible.
 
 On the test page, the text has been modified.
 
-### Browser Redirect Protection
+### Browser Redirect Protection 🤖
 
 > When Browser Redirect Protection is enabled, the browser should stop before loading a page blocked by Ghostery and show an alert
 
@@ -240,7 +240,7 @@ The page is blocked and the Security Alert is shown.
 
 1. Repeat steps 7-8 and click "Proceed" button instead of "Back". `TEST PAGE` (https://example.com/) is open.
 
-### Browser Redirect Protection - Real tracker
+### Browser Redirect Protection - Real tracker 🤖
 
 > Browser Redirect Protection should stop navigation to a known tracker domain without any custom filter
 
@@ -305,7 +305,9 @@ Search result links lead directly to the pages.
 
 Not available in Zap mode. Every rule below is a separate test. All rules are OFF by default.
 
-#### Sign in with Google
+#### Sign in with Google 🤖
+
+The end-to-end test is synthetic - it checks that the script is blocked, without using a real Google site.
 
 1. Sign in to a Google account in the browser.
 2. Open website `TEST PAGE` (https://stackoverflow.com/).
@@ -371,7 +373,7 @@ Browser promotions are hidden.
 
 An exception is added to the tracker. URLs are not blocked or modified, only observed.
 
-### Websites - Add exception
+### Websites - Add exception 🤖
 
 > A website added in Ghostery Settings becomes an exception - Ghostery is paused on it for the selected time frame
 
@@ -436,7 +438,7 @@ The elements are hidden and the exceptions can be cleared.
 3. Go with scenario 2. Change "Step 4" to: Check "Block similar Elements" instead of using a slider to get more elements picked.
 4. In both scenarios, test the "Trash Can" button on the list of websites to clear the list. Change step 8 into: "click trash can button to clear the list".
 
-### BOB
+### Browsing Assistant 🤖
 
 > Confirm that system works and can be triggered manually.
 
@@ -454,11 +456,11 @@ The elements are hidden and the exceptions can be cleared.
 Adding one of the points below creates a separate, full testing scenario.
 
 1. Add more than one website to the test domain list (see step 3b) and confirm correct behavior.
-2. Change step 5 to: Go to the "Websites" tab in "Ghostery settings" and confirm that the website you are testing is there. Clear the list manually. Start the testing process from STEP 1. Confirm that BOB triggers with popup stating that Ghostery is Paused.
+2. Change step 5 to: Go to the "Websites" tab in "Ghostery settings" and confirm that the website you are testing is there. Clear the list manually. Start the testing process from STEP 1. Confirm that the Browsing Assistant triggers with popup stating that Ghostery is Paused.
 3. Repeat the testing process for Germany, UK and USA using VPN.
-4. Check if the link to the blog shown in the BOB popup is active.
+4. Check if the link to the blog shown in the Browsing Assistant popup is active.
 
-BOB is working and pop-ups are triggering.
+The Browsing Assistant is working and pop-ups are triggering.
 
 ## Additional features
 
@@ -706,7 +708,7 @@ Ghostery works in Zap mode.
 
 ## Zap features
 
-### Zap - Website not zapped
+### Zap - Website not zapped 🤖
 
 > Before zapping, Ghostery should only observe the test page, without blocking anything
 
@@ -719,7 +721,7 @@ Ghostery works in Zap mode.
 
 On the test page, ads and cookie pop-ups are visible. Trackers are only observed.
 
-### Zap - Zap a website
+### Zap - Zap a website 🤖
 
 > Clicking the "ZAP ADS!" button should enable all Ghostery features on the test page
 
@@ -735,7 +737,7 @@ On the test page, ads and cookie pop-ups are visible. Trackers are only observed
 
 Ghostery is active on the test page. Ads and cookie pop-ups are blocked.
 
-### Zap - Other websites stay inactive
+### Zap - Other websites stay inactive 🤖
 
 > Zapping one website should not enable Ghostery on other websites
 
@@ -746,7 +748,7 @@ Ghostery is active on the test page. Ads and cookie pop-ups are blocked.
 
 Ghostery is active only on the zapped website.
 
-### Zap - Settings on a website not zapped
+### Zap - Settings on a website not zapped 🤖
 
 > Features turned ON in Ghostery Settings should have no effect on a website that is not zapped
 
@@ -757,7 +759,7 @@ Ghostery is active only on the zapped website.
 
 Settings are applied only after the website is zapped.
 
-### Zap - Show ads
+### Zap - Show ads 🤖
 
 > Clicking the "Show ads" button should disable Ghostery on the zapped test page
 
@@ -772,7 +774,7 @@ Settings are applied only after the website is zapped.
 
 Ghostery is inactive on the test page again.
 
-### Zap - Websites - Add website
+### Zap - Websites - Add website 🤖
 
 > A website added in Ghostery Settings in Zap mode should be zapped
 
@@ -811,7 +813,7 @@ The Ghostery Zap page is open.
 
 ## Part 1 features in Zap mode
 
-### Zap - Part 1 features on a zapped website
+### Zap - Part 1 features on a zapped website 🤖
 
 > After zapping, all features should work the same way as in the Ghostery mode
 
