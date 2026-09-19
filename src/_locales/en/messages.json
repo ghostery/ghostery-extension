@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "Better habits make a better web."
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "Block \"Allow notifications?\" prompts used to spam you with unwanted alerts. Only applies to new prompts — sites you already allowed will still be able to send notifications. Note that this blocks notification prompts on all websites."
+  },
   "block_ads": {
     "message": "Block ads"
   },
@@ -797,6 +800,9 @@
   },
   "none": {
     "message": "None"
+  },
+  "notification_prompts": {
+    "message": "Notification prompts"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "Now you can hide sign-in prompts, short-video feeds, social widgets and the rest of the noise – Ghostery clears them so your pages stay focused on what you came for."

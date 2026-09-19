@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import { parseFilters } from '@ghostery/adblocker';
+import { CosmeticFilter, parseFilters } from '@ghostery/adblocker';
 import { xxh32 } from 'minixxh/xxh32';
 
 import Options from '/store/options.js';
@@ -38,6 +38,17 @@ function getFiltersChecksum(filters) {
   return xxh32(bytes, 0, bytes.length).toString(16);
 }
 
+const GENERIC_SCRIPTLET_PREFIX = '##+js(';
+
+// The parser rejects scriptlets without a domain, while the engine matches them
+// as generic rules, so parse with a placeholder host and drop the domain constraint.
+function parseGenericScriptlet(line) {
+  const filter = CosmeticFilter.parse(`ghostery.invalid${line}`, true);
+  return (
+    filter && new CosmeticFilter({ mask: filter.mask, selector: filter.selector, rawLine: line })
+  );
+}
+
 async function updateDistractions(distractions) {
   const filters = await fetchFilters();
 
@@ -62,9 +73,16 @@ async function updateDistractions(distractions) {
 
   const baseConfig = await engines.getConfig();
   const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(
-    enabledFilters.join('\n'),
+    enabledFilters.filter((line) => !line.startsWith(GENERIC_SCRIPTLET_PREFIX)).join('\n'),
     { ...baseConfig, debug: true },
   );
+
+  for (const line of enabledFilters) {
+    if (!line.startsWith(GENERIC_SCRIPTLET_PREFIX)) continue;
+
+    const filter = parseGenericScriptlet(line);
+    if (filter) cosmeticFilters.push(filter);
+  }
 
   if (__CHROMIUM__) {
     const removeRuleIds = await getDynamicRulesIds(DISTRACTIONS_ID_RANGE);

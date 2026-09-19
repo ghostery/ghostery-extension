@@ -108,7 +108,7 @@ async function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const args = [scriptletGlobals, ...parsed.args];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Direct-domain scriptlets get registered (document_start); a per-hostname registration

@@ -45,6 +45,12 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
+// wdio's own `element.scrollIntoView()` relies on html/body overscroll, which our
+// views don't use, so run the native DOM method in the browser context instead.
+export async function scrollIntoView(el, options = { block: 'center' }) {
+  await browser.execute((element, opts) => element.scrollIntoView(opts), el, options);
+}
+
 async function sendRawMessage(msg) {
   if ((await browser.getUrl()).startsWith('http')) {
     throw new Error('Message can only be sent from the extension context');
@@ -147,10 +153,8 @@ export async function setUserScriptsAllowed(value) {
   // The toggle sits outside of the viewport in chrome://extensions, so a native
   // click is rejected. `#allow-user-scripts` is an `extensions-toggle-row`,
   // which reacts only to a click on the `cr-toggle` inside its shadow root.
-  await browser.execute((el) => {
-    el.scrollIntoView({ block: 'center' });
-    (el.shadowRoot?.querySelector('cr-toggle') || el).click();
-  }, toggle);
+  await scrollIntoView(toggle);
+  await browser.execute((el) => (el.shadowRoot?.querySelector('cr-toggle') || el).click(), toggle);
 
   await browser.waitUntil(async () => (await toggle.getProperty('checked')) === value, {
     timeout: 5000,
@@ -165,6 +169,8 @@ export async function setToggle(name, value) {
   const toggle = await getExtensionElement(`toggle:${name}`);
 
   if ((await toggle.getProperty('value')) !== value) {
+    await scrollIntoView(toggle);
+
     const desc = await toggle.$('span');
 
     if (await desc.isExisting()) {
