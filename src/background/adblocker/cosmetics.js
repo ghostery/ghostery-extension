@@ -77,8 +77,8 @@ function rememberInjectedDocument(documentId) {
 }
 
 // Filter lists percent-encode characters like "," that would otherwise split arguments,
-// which the adblocker's own injection template decodes as well. Arguments may still hold
-// a bare "%", so fall back to the raw value instead of throwing on a malformed sequence.
+// which the adblocker's own injection template decodes as well. A malformed sequence
+// falls back to the raw value, as throwing here would abort the injection for the page.
 function decodeArgument(arg) {
   try {
     return decodeURIComponent(arg);

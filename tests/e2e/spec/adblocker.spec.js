@@ -292,13 +292,16 @@ describe('Adblocker Capabilities', function () {
   });
 
   describe('Scriptlet arguments', function () {
-    it('decodes percent-encoded arguments', async function () {
-      // Lists percent-encode characters that would otherwise split the argument list.
-      await setCustomFilters([`${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`]);
+    it('keeps arguments literal and unescapes commas', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, b\\,c"d)`,
+      ]);
 
       await browser.url(PAGE_URL);
 
-      await expect($('#rpnt-a')).toHaveText('a,b"c');
+      await expect($('#rpnt-a')).toHaveText('a%2Cb');
+      await expect($('#rpnt-b')).toHaveText('b,c"d');
     });
   });
 
@@ -317,11 +320,24 @@ describe('Adblocker Capabilities', function () {
       await expect($('#rpnt-a')).toHaveText('aaa');
     });
 
-    it('cancels an injection with percent-encoded arguments', async function () {
-      // Exceptions match on the stored selector, so both sides must keep the arguments as written.
+    it('cancels an injection with arguments that need encoding', async function () {
       await setCustomFilters([
-        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`,
-        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a%2Cb%22c)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
+    });
+
+    it('cancels an injection with an exception copied from the logger', async function () {
+      // The logger shows the stored selector, where arguments are percent-encoded
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a%2Fb%3Ac)`,
         `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
       ]);
 
