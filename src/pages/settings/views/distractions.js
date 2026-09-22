@@ -42,6 +42,12 @@ const DISTRACTIONS = [
     description: msg`Hide browser prompts that interrupt your browsing.`,
     websites: ['google.com', 'bing.com', 'microsoft.com'],
   },
+  {
+    id: 'notifications',
+    title: msg`Notification prompts`,
+    description: msg`Block "Allow notifications?" prompts used to spam you with unwanted alerts. Only applies to new prompts — sites you already allowed will still be able to send notifications. Note that this blocks notification prompts on all websites.`,
+    websites: [msg`all websites`],
+  },
 ];
 
 function filterDistractions(query, filter, options) {
