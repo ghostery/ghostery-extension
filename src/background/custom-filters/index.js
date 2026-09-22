@@ -31,7 +31,7 @@ import { encodeScriptletFilters } from './scriptlets.js';
 
 // Bump when filters must be re-parsed because the engine's serialized
 // representation changed - the persisted engine is then rebuilt from source.
-const ENGINE_REVISION = '3';
+const ENGINE_REVISION = '2';
 
 function isTrustedScriptInject(scriptName) {
   return (
