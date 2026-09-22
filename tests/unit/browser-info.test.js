@@ -331,3 +331,120 @@ describe('iOS', () => {
       },
     ));
 });
+
+// Chrome freezes the platform version in the ChromeOS user-agent at `14541.0.0`
+// (UA reduction), so it carries no usable build number. Bowser's CrOS branch
+// reports only `name`, which is why `osVersion` is empty for every case below.
+describe('ChromeOS', () => {
+  test('Chrome in the page', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'chrome-cros-page',
+        userAgent:
+          'Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'Linux x86_64',
+        maxTouchPoints: 0,
+      },
+      {
+        os: 'cros',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: '',
+      },
+    ));
+
+  test('Chrome in the background', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'chrome-cros-background',
+        userAgent:
+          'Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'Linux x86_64',
+        maxTouchPoints: undefined,
+      },
+      {
+        os: 'cros',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: '',
+      },
+    ));
+
+  // Touchscreen Chromebooks must not be diverted to `ipados` by `maxTouchPoints`
+  test('Chrome on a touchscreen device', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'chrome-cros-touch',
+        userAgent:
+          'Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'Linux x86_64',
+        maxTouchPoints: 5,
+      },
+      {
+        os: 'cros',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: '',
+      },
+    ));
+
+  test('Chrome on an ARM device', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'chrome-cros-arm',
+        userAgent:
+          'Mozilla/5.0 (X11; CrOS aarch64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'Linux aarch64',
+        maxTouchPoints: 0,
+      },
+      {
+        os: 'cros',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: '',
+      },
+    ));
+});
+
+// `Bowser.parse()` throws on an empty user agent and matches nothing on exotic
+// ones. Both must degrade to the same inert values rather than taking down
+// `getBrowserInfo()` and dropping the telemetry ping along with it.
+describe('Unknown user agent', () => {
+  test('empty user agent', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'empty-ua',
+        userAgent: '',
+        platform: '',
+        maxTouchPoints: 0,
+      },
+      {
+        os: 'other',
+        isWebkit: false,
+        name: '',
+        version: NaN,
+        osVersion: '',
+      },
+    ));
+
+  test('unrecognized user agent', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'unrecognized-ua',
+        userAgent: 'Mozilla/5.0',
+        platform: '',
+        maxTouchPoints: 0,
+      },
+      {
+        os: 'other',
+        isWebkit: false,
+        name: '',
+        version: NaN,
+        osVersion: '',
+      },
+    ));
+});

@@ -11,12 +11,26 @@
 
 import Bowser from 'bowser';
 
+// Bowser throws on an empty user agent, and it can return no match at all for
+// exotic platforms. Keep the parsed shape stable so callers can rely on it.
+const UNKNOWN_UA = {
+  browser: { name: '', version: '' },
+  os: { name: '', version: '' },
+  platform: {},
+  engine: {},
+};
+
 // we cache the UA as it used by many modules that need it on file load
 let ua;
 function getUA() {
   if (ua) return ua;
 
-  ua = Bowser.parse(navigator.userAgent);
+  try {
+    ua = Bowser.parse(navigator.userAgent);
+  } catch {
+    ua = UNKNOWN_UA;
+  }
+
   return ua;
 }
 
@@ -122,10 +136,9 @@ export function getOS() {
   } else if (os.includes('ios')) {
     if (navigator.platform?.toLocaleLowerCase() === 'ipad') return 'ipados';
     return 'ios';
-  } else if (os.includes('chromium os')) {
+  } else if (os.includes('chrome os')) {
+    // Bowser reports ChromeOS as `Chrome OS`
     return 'cros';
-  } else if (os.includes('bsd')) {
-    return 'openbsd';
   } else if (os.includes('linux')) {
     return 'linux';
   }
