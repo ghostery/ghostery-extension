@@ -27,6 +27,7 @@ import { setup, reloadMainEngine } from '../adblocker/engines.js';
 
 import { updateDNRRules } from './dnr.js';
 import { cleanupFilterLists, refreshFilterLists } from './filter-lists.js';
+import { encodeScriptletFilters } from './scriptlets.js';
 
 // Bump when filters must be re-parsed because the engine's serialized
 // representation changed - the persisted engine is then rebuilt from source.
@@ -95,7 +96,7 @@ async function collectFilters(text, { trustedScriptlets }) {
 
   return {
     networkFilters,
-    cosmeticFilters: acceptedCosmeticFilters,
+    cosmeticFilters: encodeScriptletFilters(acceptedCosmeticFilters, preprocessors),
     preprocessors,
     errors,
   };
