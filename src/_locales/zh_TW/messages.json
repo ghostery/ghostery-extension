@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "良好的習慣造就更好的網路。"
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "阻止用於向您推送大量無用提醒的「允許通知？」提示。僅對新提示生效——您先前已允許的網站仍可傳送通知。請注意，此功能會阻止所有網站的通知提示。"
+  },
   "block_ads": {
     "message": "阻止廣告"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "無"
+  },
+  "notification_prompts": {
+    "message": "通知提示"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "現在您可以隱藏登入提示、短影音內容、社群小工具以及其他惱人的資訊——Ghostery 會清除這些內容，讓您的頁面專注於您想看的內容。"

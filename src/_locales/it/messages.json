@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "Abitudini migliori creano un web migliore."
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "Blocca le richieste “Consentire le notifiche?” usate per inondarti di avvisi indesiderati. Si applica solo alle nuove richieste: i siti che hai già autorizzato potranno comunque inviare notifiche. Tieni presente che questa opzione blocca le richieste di notifica su tutti i siti web."
+  },
   "block_ads": {
     "message": "Blocca pubblicità"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "Nessuno"
+  },
+  "notification_prompts": {
+    "message": "Richieste di notifica"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "Ora puoi nascondere i prompt di accesso, i feed di brevi video, i widget social e tutto il resto del rumore – Ghostery li elimina in modo che le tue pagine rimangano focalizzate su ciò che cercavi."

@@ -759,6 +759,9 @@
   "none": {
     "message": "Không"
   },
+  "notification_prompts": {
+    "message": "Lời nhắc thông báo"
+  },
   "observed_activities": {
     "message": "Các hoạt động được quan sát"
   },
@@ -1354,6 +1357,9 @@
   },
   "better_habits_make_a_better_web_": {
     "message": "Thói quen tốt hơn tạo nên một web tốt hơn."
+  },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "Chặn các lời nhắc “Cho phép thông báo?” được dùng để gửi cho bạn hàng loạt cảnh báo không mong muốn. Chỉ áp dụng cho các lời nhắc mới – những trang web bạn đã cho phép vẫn có thể gửi thông báo. Lưu ý rằng tùy chọn này chặn lời nhắc thông báo trên tất cả các trang web."
   },
   "cleared_quietly__so_your_web_stayed_yours_": {
     "message": "Đã xóa âm thầm, để web của bạn vẫn là của bạn."
