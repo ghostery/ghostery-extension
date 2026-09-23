@@ -81,7 +81,7 @@ function platformSpecificSettings() {
     navigator.userAgent.includes('YaBrowser') // same release channel as Opera
   ) {
     return {
-      ALLOWED_COUNTRY_CODES: ['us', 'de', 'ru', 'fr', 'pl', 'gb', 'br', 'ca', 'ua', 'nl', 'es'],
+      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr', 'pl', 'gb', 'br', 'ca', 'ua', 'nl', 'es'],
       PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-opera-desktop/patterns.json`,
       CHANNEL: 'opera',
     };
@@ -93,7 +93,6 @@ function platformSpecificSettings() {
       ALLOWED_COUNTRY_CODES: [
         'us',
         'de',
-        'ru',
         'fr',
         'pl',
         'gb',
@@ -125,7 +124,6 @@ function platformSpecificSettings() {
         'nl',
         'ca',
         'in',
-        'ru',
         'it',
         'pl',
         'au',
@@ -172,7 +170,6 @@ function platformSpecificSettings() {
         'nl',
         'ca',
         'in',
-        'ru',
         'it',
         'pl',
         'au',
