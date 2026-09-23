@@ -76,6 +76,17 @@ function rememberInjectedDocument(documentId) {
   chrome.storage.session.set({ [INJECTED_DOCUMENTS_KEY]: [...injectedDocuments] }).catch(() => {});
 }
 
+// Filter lists percent-encode characters like "," that would otherwise split arguments,
+// which the adblocker's own injection template decodes as well. A malformed sequence
+// falls back to the raw value, as throwing here would abort the injection for the page.
+function decodeArgument(arg) {
+  try {
+    return decodeURIComponent(arg);
+  } catch {
+    return arg;
+  }
+}
+
 async function injectScriptlets(filters, hostname, details) {
   // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
   // local frames (about:blank, srcdoc), so their documents are injected per-frame.
@@ -108,7 +119,7 @@ async function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map((arg) => decodeURIComponent(arg))];
+    const args = [scriptletGlobals, ...parsed.args.map(decodeArgument)];
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Direct-domain scriptlets get registered (document_start); a per-hostname registration

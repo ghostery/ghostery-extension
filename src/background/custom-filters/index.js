@@ -27,26 +27,16 @@ import { setup, reloadMainEngine } from '../adblocker/engines.js';
 
 import { updateDNRRules } from './dnr.js';
 import { cleanupFilterLists, refreshFilterLists } from './filter-lists.js';
+import { encodeScriptletFilters } from './scriptlets.js';
+
+// Bump when filters must be re-parsed because the engine's serialized
+// representation changed - the persisted engine is then rebuilt from source.
+const ENGINE_REVISION = '2';
 
 function isTrustedScriptInject(scriptName) {
   return (
     scriptName === 'rpnt' || scriptName === 'replace-node-text' || scriptName.startsWith('trusted-')
   );
-}
-
-function encodeScriptletArguments(filter) {
-  if (!filter.isScriptInject() || !filter.selector) {
-    return;
-  }
-
-  const parsed = filter.parseScript();
-  if (!parsed || !parsed.name) {
-    return;
-  }
-
-  const encodedArgs = parsed.args.map((arg) => encodeURIComponent(arg));
-  filter.selector = [parsed.name, ...encodedArgs].join(', ');
-  filter.scriptletDetails = undefined;
 }
 
 function findLineNumber(text, line) {
@@ -104,13 +94,9 @@ async function collectFilters(text, { trustedScriptlets }) {
     return true;
   });
 
-  for (const filter of acceptedCosmeticFilters) {
-    encodeScriptletArguments(filter);
-  }
-
   return {
     networkFilters,
-    cosmeticFilters: acceptedCosmeticFilters,
+    cosmeticFilters: encodeScriptletFilters(acceptedCosmeticFilters, preprocessors),
     preprocessors,
     errors,
   };
@@ -178,6 +164,7 @@ async function rebuildCustomFilters({ trustedScriptlets, filterLists }) {
     networkFilters,
     cosmeticFilters,
     preprocessors,
+    lists: { revision: ENGINE_REVISION },
   });
 
   let dnrRules = __CHROMIUM__ ? [] : null;
@@ -274,10 +261,15 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
 
   // Background startup
   if (!lastValue) {
-    // Custom filters are enabled, but the engine is not initialized
-    if (value.enabled && !(await engines.init(engines.CUSTOM_ENGINE))) {
-      await rebuildCustomFilters(value);
-      await reloadMainEngine();
+    // Custom filters are enabled, but the engine is missing or built by an
+    // older version of the extension
+    if (value.enabled) {
+      const engine = await engines.init(engines.CUSTOM_ENGINE);
+
+      if (!engine || engine.lists.get('revision') !== ENGINE_REVISION) {
+        await rebuildCustomFilters(value);
+        await reloadMainEngine();
+      }
     }
 
     // No need to proceed with other checks on startup

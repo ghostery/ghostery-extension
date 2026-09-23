@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { browser, expect } from '@wdio/globals';
+import { $, browser, expect } from '@wdio/globals';
 import {
   setupExtension,
   setToggle,
@@ -288,6 +288,63 @@ describe('Adblocker Capabilities', function () {
           window.mainWorldProbe === true
         );
       }, 'MAIN and ISOLATED scriptlets did not both apply on the same page');
+    });
+  });
+
+  describe('Scriptlet arguments', function () {
+    it('keeps arguments literal and unescapes commas', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a%2Cb)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, b\\,c"d)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-a')).toHaveText('a%2Cb');
+      await expect($('#rpnt-b')).toHaveText('b,c"d');
+    });
+  });
+
+  describe('Scriptlet exceptions', function () {
+    it('cancels the matching injection only', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, zzz)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, zzz)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      // The unexcepted filter proves the scriptlets ran before the assertion below
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
+    });
+
+    it('cancels an injection with arguments that need encoding', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
+    });
+
+    it('cancels an injection with an exception copied from the logger', async function () {
+      // The logger shows the stored selector, where arguments are percent-encoded
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, a/b:c)`,
+        `${PAGE_DOMAIN}#@#+js(rpnt, rpnt-marker, aaa, a%2Fb%3Ac)`,
+        `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, yyy)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+
+      await expect($('#rpnt-b')).toHaveText('yyy');
+      await expect($('#rpnt-a')).toHaveText('aaa');
     });
   });
 });
