@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "より良い習慣が、より良いウェブを創る。"
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "不要な通知を大量に送りつけるために使われる「通知を許可しますか？」というプロンプトをブロックします。新しいプロンプトにのみ適用され、すでに許可したサイトは引き続き通知を送信できます。この設定はすべてのウェブサイトで通知プロンプトをブロックします。"
+  },
   "block_ads": {
     "message": "広告をブロック"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "なし"
+  },
+  "notification_prompts": {
+    "message": "通知プロンプト"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "サインインのプロンプト、ショート動画フィード、ソーシャルウィジェット、その他のノイズを非表示にできるようになりました – Ghosteryがこれらをクリアし、目的のページに集中できます。"

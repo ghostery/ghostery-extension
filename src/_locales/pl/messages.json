@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "Lepsze nawyki tworzą lepszą sieć."
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "Blokuj prośby „Zezwolić na powiadomienia?”, które służą do zasypywania Cię niechcianymi alertami. Dotyczy to tylko nowych próśb – witryny, którym już udzielono zgody, nadal będą mogły wysyłać powiadomienia. Pamiętaj, że ta opcja blokuje prośby o powiadomienia na wszystkich stronach."
+  },
   "block_ads": {
     "message": "Blokuj reklamy"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "Brak"
+  },
+  "notification_prompts": {
+    "message": "Prośby o powiadomienia"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "Teraz możesz ukryć monity logowania, krótkie filmy, widżety społecznościowe i resztę szumu – Ghostery je usuwa, dzięki czemu Twoje strony skupiają się na tym, po co na nie wszedłeś."

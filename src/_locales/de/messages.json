@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "Bessere Gewohnheiten machen ein besseres Web."
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "Blockiert Anfragen wie „Benachrichtigungen zulassen?“, mit denen du mit unerwünschten Hinweisen zugespammt wirst. Gilt nur für neue Anfragen – Websites, denen du es bereits erlaubt hast, können weiterhin Benachrichtigungen senden. Beachte, dass dies Benachrichtigungsanfragen auf allen Websites blockiert."
+  },
   "block_ads": {
     "message": "Werbung blockieren"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "Keine"
+  },
+  "notification_prompts": {
+    "message": "Benachrichtigungsanfragen"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "Jetzt kannst du Anmeldeaufforderungen, Kurzvideo-Feeds, Social-Media-Widgets und andere Ablenkungen ausblenden – Ghostery räumt sie aus dem Weg, damit du dich auf das konzentrieren kannst, weswegen du gekommen bist."

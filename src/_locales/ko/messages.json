@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "더 나은 습관이 더 나은 웹을 만듭니다."
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "원치 않는 알림을 쏟아내는 데 사용되는 “알림을 허용하시겠습니까?” 프롬프트를 차단합니다. 새로운 프롬프트에만 적용되며, 이미 허용한 사이트는 계속 알림을 보낼 수 있습니다. 이 설정은 모든 웹사이트에서 알림 프롬프트를 차단합니다."
+  },
   "block_ads": {
     "message": "광고 차단"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "없음"
+  },
+  "notification_prompts": {
+    "message": "알림 프롬프트"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "이제 로그인 메시지, 짧은 동영상 피드, 소셜 위젯 및 기타 방해 요소를 숨길 수 있습니다 – Ghostery가 이러한 요소를 제거하여 페이지가 사용자가 원하는 콘텐츠에 집중할 수 있도록 합니다."

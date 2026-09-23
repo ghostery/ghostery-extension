@@ -167,6 +167,9 @@
   "better_habits_make_a_better_web_": {
     "message": "更好的习惯，更好的网络。"
   },
+  "block__allow_notifications___prompts_used_to_spam_you_with_unwanted_alerts__only_applies_to_new_prompts___sites_you_already_allowed_will_still_be_able_to_send_notifications__note_that_this_blocks_notification_prompts_on_all_websites_": {
+    "message": "拦截用于向您推送大量无用提醒的“允许通知？”提示。仅对新提示生效——您此前已允许的网站仍可发送通知。请注意，此功能会拦截所有网站的通知提示。"
+  },
   "block_ads": {
     "message": "拦截广告"
   },
@@ -809,6 +812,9 @@
   },
   "none": {
     "message": "无"
+  },
+  "notification_prompts": {
+    "message": "通知提示"
   },
   "now_you_can_hide_sign_in_prompts__short_video_feeds__social_widgets_and_the_rest_of_the_noise___ghostery_clears_them_so_your_pages_stay_focused_on_what_you_came_for_": {
     "message": "现在，您可以隐藏登录提示、短视频源、社交小部件以及其他干扰信息——Ghostery 会清除它们，让您的页面专注于您所需要的内容。"
