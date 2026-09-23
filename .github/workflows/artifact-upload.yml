@@ -3,7 +3,6 @@ name: Artifact Upload
 on:
   pull_request:
     types:
-      - opened
       - reopened
       - synchronize
       - labeled
@@ -14,7 +13,9 @@ concurrency:
 
 jobs:
   artifact-upload:
-    if: contains(github.event.pull_request.labels.*.name, 'package')
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'package') &&
+      (github.event.action != 'labeled' || github.event.label.name == 'package')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
