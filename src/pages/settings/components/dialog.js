@@ -15,20 +15,13 @@ function close(host) {
   host.shadowRoot.querySelector('a').click();
 }
 
+// The dialog fills its view element, which the settings page styles.css turns into
+// the overlay - the view element is the only part of the dialog in the document tree,
+// so it is the only one the router's view transition can capture and animate
 export default {
-  open: {
-    value: false,
-    reflect: true,
-    connect(host, key) {
-      const timeout = setTimeout(() => {
-        host[key] = true;
-      });
-      return () => clearTimeout(timeout);
-    },
-  },
   closable: false,
   render: ({ closable }) => html`
-    <template layout="row center fixed inset padding layer:400">
+    <template layout="row center absolute inset:0 padding">
       <div id="backdrop" layout="absolute inset:0" onclick="${close}"></div>
       <div
         id="dialog"
@@ -57,30 +50,18 @@ export default {
       </div>
     </template>
   `.css`
+    :host {
+      pointer-events: auto;
+    }
+
     #dialog {
       border: none;
       border-radius: 16px;
       background: var(--background-primary);
-      transform: translateY(-60px);
-      opacity: 0;
-      transition: transform 200ms cubic-bezier(0.4, 0.15, 0, 1), opacity 200ms ease;
-      will-change: transform, opacity;
-    }
-
-    :host([open]) #dialog {
-      transform: translateY(0);
-      opacity: 1;
     }
 
     #backdrop {
       background: var(--component-custom-token-modal-overlay);
-      opacity: 0;
-      transition: all 200ms;
-      will-change: opacity;
-    }
-
-    :host([open]) #backdrop {
-      opacity: 1;
     }
   `,
 };
