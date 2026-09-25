@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  main: ({ render }) => render().querySelector('main'),
+  main: ({ render }) => render().querySelector('#main'),
   render: () =>
     html`
       <template
@@ -30,9 +30,9 @@ export default {
         >
           <slot name="nav"></slot>
         </nav>
-        <main layout="column grow height::0" layout@992px="area::2">
+        <div id="main" layout="column grow height::0" layout@992px="area::2">
           <slot></slot>
-        </main>
+        </div>
       </template>
     `.css`
     :host {
@@ -132,7 +132,7 @@ export default {
         pointer-events: none;
       }
 
-      main {
+      #main {
         background: linear-gradient(90deg, var(--shadow-dialog) -120px, transparent 35px);
       }
     }
