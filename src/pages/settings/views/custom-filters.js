@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, store } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
 
 import { longDateFormatter, numberFormatter } from '/ui/labels.js';
 
@@ -23,6 +23,8 @@ import { isUserScriptsSupported } from '/utils/user-scripts.js';
 
 import FilterList from '../store/filter-list.js';
 import { asyncAction } from '../utils/actions.js';
+
+import CustomFiltersRemoveFilterList from './custom-filters-remove-filter-list.js';
 
 async function update(host, event) {
   asyncAction(
@@ -43,10 +45,6 @@ async function addFilterList(host, event) {
   await store.set(host.options, {
     customFilters: { filterLists: { [url]: { enabled: true } } },
   });
-}
-
-function removeFilterList(url) {
-  return ({ options }) => store.set(options, { customFilters: { filterLists: { [url]: null } } });
 }
 
 function toggleFilterList(url, key) {
@@ -329,8 +327,8 @@ export default {
                                   </div>
                                 </label>
                                 <ui-action>
-                                  <button
-                                    onclick="${removeFilterList(url)}"
+                                  <a
+                                    href="${router.url(CustomFiltersRemoveFilterList, { url })}"
                                     data-qa="button:custom-filters:remove-filter-list"
                                     layout="row gap:0.5 items:center padding:0.25"
                                   >
@@ -340,7 +338,7 @@ export default {
                                       color="tertiary"
                                     ></ui-icon>
                                     <ui-text type="body-s">Remove</ui-text>
-                                  </button>
+                                  </a>
                                 </ui-action>
                               </div>
                             </div>

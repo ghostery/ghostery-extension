@@ -238,6 +238,7 @@ describe('Custom Filters', function () {
       await browser.url('ghostery:settings');
       await getExtensionElement('button:additional-filters').click();
       await getExtensionElement('button:custom-filters:remove-filter-list').click();
+      await getExtensionElement('button:custom-filters:remove-filter-list:confirm').click();
       await waitForIdleBackgroundTasks();
 
       await browser.url(PAGE_URL);
