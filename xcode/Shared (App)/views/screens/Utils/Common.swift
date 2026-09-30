@@ -42,8 +42,20 @@ enum Colors {
     static let labelsTertiary = Color(hex: "#3C3C434D")
     static let foregroungTertiary = Color(hex: "#636568")
     static let foregroundSecondary = Color(hex: "#3F4146")
+    static let foregroundQuaternary = Color(hex: "#88898C")
     static let bgBrandSolid = Color(hex: "#00AEF0")
     static let bgBrandSecondary = Color(hex: "#DAF3FF")
+    static let bgPrimary = Color.white
+    static let bgSecondary = Color(hex: "#F2F4F7")
+    static let bgTertiary = Color(hex: "#E0E2E5")
+    static let borderPrimary = Color(hex: "#E0E2E5")
+    static let borderSecondary = Color(hex: "#B9BBBE")
+    static let borderBrandSolid = Color(hex: "#0077CC")
+    static let foregroundOnBrand = Color.white
+    static let shadowButton = Color.black.opacity(0.06)
+    static let shadowCard = Color.black.opacity(0.06)
+    static let shadowPanel = Color.black.opacity(0.2)
+    static let shadowSmall = Color(hex: "#0A0D12").opacity(0.1)
 }
 
 enum Icons {
@@ -61,4 +73,36 @@ enum Icons {
     static let ghosterySmallGray = "GhosterySmallLogoGray"
     static let click = "Click"
     static let checkmark = "Checkmark"
+
+    static let homeLogo = "HomeLogo"
+    static let homeHeaderProtection = "HomeHeaderProtection"
+    static let homeAppStore = "HomeAppStore"
+    static let homeChevronRight = "HomeChevronRight"
+    static let homeNavHome = "HomeNavHome"
+    static let homeNavLearn = "HomeNavLearn"
+    static let homeNavContribute = "HomeNavContribute"
+    static let homeNavSettings = "HomeNavSettings"
+    static let homeNavSupport = "HomeNavSupport"
+    static let browserSafari = "BrowserSafari"
+    static let browserFirefox = "BrowserFirefox"
+    static let browserChrome = "BrowserChrome"
+    static let browserEdge = "BrowserEdge"
+    static let learningZoneHeader = "LearningZoneHeader"
+    static let learningZoneNewsletter = "LearningZoneNewsletter"
+    static let arrowRight = "ArrowRightSmall"
+    static let contributeHeader = "ContributeHeader"
+    static let contributionDonate = "ContributionDonate"
+    static let contributionShop = "ContributionShop"
+    static let contributionShare = "ContributionShare"
+    static let settingsHeader = "SettingsHeader"
+    static let supportHeader = "SupportHeader"
+    static let supportTracker = "SupportTracker"
+    static let supportFeedback = "SupportFeedback"
+    static let supportContact = "SupportContact"
+    static let bannerReview = "BannerReview"
+    static let bannerHelp = "BannerHelp"
+    static let bannerChevronRight = "BannerChevronRight"
+    static let dialogClose = "DialogClose"
+    static let qrCode = "QRCode"
+    static let qrCodeLogo = "QRCodeLogo"
 }

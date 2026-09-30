@@ -39,21 +39,12 @@ struct GhosteryApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self)
     var appDelegate
   
-    @State private var theme = Theme.light
-
     var body: some Scene {
         WindowGroup {
-          ZStack(alignment: .center) {
-            IntroView(openInWebView: openInWebView)
-          }
-          .preferredColorScheme(theme == .light ? .light : .dark)
-          .frame(width: 400, height: 820)
-          .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
-              for window in NSApplication.shared.windows {
-                  window.standardWindowButton(.zoomButton)?.isEnabled = false
-              }
-          })
+          MainView()
         }
+        .windowStyle(.hiddenTitleBar)
+        .windowResizability(.contentSize)
     }
 
     func openInWebView(url: URL) {
