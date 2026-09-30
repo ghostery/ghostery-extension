@@ -9,10 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, store } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
 
 import ManagedConfig from '/store/managed-config.js';
 import Options from '/store/options.js';
+
+import CustomFiltersRemoveFilterList from './custom-filters-remove-filter-list.js';
 
 export function getAdditionalFiltersLabel(options) {
   const labels = [];
@@ -33,6 +35,7 @@ export function getAdditionalFiltersLabel(options) {
 }
 
 export default {
+  [router.connect]: { stack: [CustomFiltersRemoveFilterList] },
   options: store(Options),
   managedConfig: store(ManagedConfig),
   render: ({ options, managedConfig }) => html`

@@ -12,7 +12,7 @@
 import { html, msg, store, router } from 'hybrids';
 import { ACTION_PAUSE_ASSISTANT } from '@ghostery/config';
 
-import Config, { dismissAction } from '/store/config.js';
+import Config from '/store/config.js';
 import Options, { MODE_DEFAULT, MODE_ZAP, GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
@@ -21,37 +21,22 @@ import { numberFormatter } from '/ui/labels.js';
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
+import WebsiteRemove, { SCOPE_FULL } from './website-remove.js';
 import WebsitesAdd from './websites-add.js';
 import Whotracksme from './whotracksme.js';
 
-function revokeCallback(item) {
-  return ({ options }, event) => {
+function removeCallback(domain) {
+  return (host, event) => {
+    // The trash button is nested in the link to the website details
     event.preventDefault();
     event.stopPropagation();
 
-    const exceptions = Array.from(item.exceptions).reduce((acc, id) => {
-      const exception = options.exceptions[id];
-      const domains = exception.domains.filter((d) => d !== item.id);
-
-      acc[id] = exception.global || domains.length > 0 ? { ...exception, domains } : null;
-
-      return acc;
-    }, {});
-
-    if (item.assist) dismissAction(item.id, ACTION_PAUSE_ASSISTANT);
-
-    store.set(ElementPickerSelectors, { hostnames: { [item.id]: null } });
-
-    if (options.mode === MODE_DEFAULT) {
-      store.set(options, { paused: { [item.id]: null }, exceptions });
-    } else if (options.mode === MODE_ZAP) {
-      store.set(options, { zapped: { [item.id]: null }, exceptions });
-    }
+    router.navigate(WebsiteRemove, { domain, scope: SCOPE_FULL });
   };
 }
 
 export default {
-  [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
+  [router.connect]: { stack: [WebsiteDetails, WebsitesAdd, WebsiteRemove] },
   config: store(Config),
   options: store(Options),
   elementPickerSelectors: store(ElementPickerSelectors),
@@ -198,8 +183,9 @@ export default {
                               html`
                                 <ui-action>
                                   <button
+                                    onclick="${removeCallback(item.id)}"
+                                    layout="padding:1.5 margin:-1.5"
                                     layout@768px="order:1 row center"
-                                    onclick="${revokeCallback(item)}"
                                     data-qa="button:website:trash:${item.id}"
                                   >
                                     <ui-icon
@@ -263,8 +249,9 @@ export default {
                             <ui-text type="label-l" ellipsis>${item.id}</ui-text>
                             <ui-action>
                               <button
+                                onclick="${removeCallback(item.id)}"
+                                layout="padding:1.5 margin:-1.5"
                                 layout@768px="order:1 row center"
-                                onclick="${revokeCallback(item)}"
                                 data-qa="button:website:trash:${item.id}"
                               >
                                 <ui-icon name="trash" layout="size:3" color="tertiary"></ui-icon>

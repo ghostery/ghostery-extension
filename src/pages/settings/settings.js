@@ -106,7 +106,7 @@ export default {
               </div>
             </div>
           </settings-card>
-          <div layout="column grow height::0 view:main layer">${stack}</div>
+          <main layout="column grow height::0 view:main layer">${stack}</main>
         </settings-layout>
       </template>
     `.use(html.transition),

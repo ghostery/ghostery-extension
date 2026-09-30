@@ -106,6 +106,7 @@ describe('Exceptions', function () {
     // Remove the website exception
 
     await trashButton.click();
+    await getExtensionElement('button:website:remove:confirm').click();
     await waitForIdleBackgroundTasks();
 
     // Check that the tracker is now marked as blocked in the panel

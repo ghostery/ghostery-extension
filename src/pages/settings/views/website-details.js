@@ -24,6 +24,7 @@ import { PAUSE_ASSISTANT_LEARN_MORE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
+import WebsiteRemove, { SCOPE_PAUSE } from './website-remove.js';
 
 function removeDomain(tracker) {
   return ({ options, domain }) => exceptions.toggleDomain(options, tracker.id, domain);
@@ -64,7 +65,7 @@ async function clearElementPickerSelectors(host) {
 
 export default {
   [router.connect]: {
-    stack: () => [TrackerDetails],
+    stack: () => [TrackerDetails, WebsiteRemove],
     replace: true,
   },
   domain: '',
@@ -105,14 +106,13 @@ export default {
                   !paused.managed &&
                   html`
                     <ui-action>
-                      <button layout@768px="order:1">
-                        <ui-icon
-                          name="trash"
-                          layout="size:2.5"
-                          color="tertiary"
-                          onclick="${revokePaused}"
-                        ></ui-icon>
-                      </button>
+                      <a
+                        href="${router.url(WebsiteRemove, { domain, scope: SCOPE_PAUSE })}"
+                        layout@768px="order:1"
+                        data-qa="button:website:trash"
+                      >
+                        <ui-icon name="trash" layout="size:2.5" color="tertiary"></ui-icon>
+                      </a>
                     </ui-action>
                   `
                 }
