@@ -21,6 +21,10 @@ Object.defineProperty(global, 'navigator', {
   value: {
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
+    // `language`/`languages` are required by hybrids' localize module, which
+    // reads them as soon as `hybrids` is imported.
+    language: 'en-US',
+    languages: ['en-US'],
     brave: undefined,
   },
   writable: true,
