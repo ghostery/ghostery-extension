@@ -601,6 +601,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery 使用這些資訊來提供其社群驅動的隱私功能，確保不會收集個人資訊，例如密碼、瀏覽歷史和頁面內容。"
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery 將重新開始在此網站上進行封鎖。其例外情況和已封鎖元素將維持不變。"
+  },
   "global_privacy_control": {
     "message": "全球隱私權控制"
   },
@@ -679,6 +682,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "這可能會讓您登出帳戶。"
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "其保護狀態、例外情況和已封鎖元素將重設為預設值。"
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "其規則將停止套用。您可以隨時透過其網址重新新增。"
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名性保護的頁面顯示報告"
@@ -974,11 +983,23 @@
   "remove": {
     "message": "移除"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "要從您的清單中移除 <strong>$${0}</strong> 嗎？"
+  },
   "remove_distractions": {
     "message": "移除干擾"
   },
+  "remove_filter_list": {
+    "message": "移除篩選清單"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "移除侵入式提示和介面雜亂，提供更簡潔的瀏覽體驗。"
+  },
+  "remove_this_filter_list_": {
+    "message": "要移除此篩選清單嗎？"
+  },
+  "remove_website": {
+    "message": "移除網站"
   },
   "repeat_for_most_visited_websites": {
     "message": "重複此步驟以處理最常造訪的網站"
@@ -997,6 +1018,12 @@
   },
   "resume": {
     "message": "恢復"
+  },
+  "resume_protection": {
+    "message": "恢復保護"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "要恢復 <strong>$${0}</strong> 上的保護嗎？"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "揭示網路表面下隱藏的真相。透過 WhoTracks.Me，您可以揭開每個追蹤者背後的身份。"

@@ -601,6 +601,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery利用这些信息提供其社区驱动的隐私功能，确保不会收集个人信息，例如密码、浏览历史和页面内容。"
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery 将重新开始在此网站上进行拦截。其例外和被阻止的元素将保持不变。"
+  },
   "global_privacy_control": {
     "message": "全球隐私控制"
   },
@@ -679,6 +682,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "这可能会导致您退出账户。"
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "其保护状态、例外和被阻止的元素将重置为默认值。"
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "其规则将停止应用。您可以随时通过其网址重新添加。"
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名保护的页面显示报告"
@@ -974,11 +983,23 @@
   "remove": {
     "message": "移除"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "要从您的列表中移除 <strong>$${0}</strong> 吗？"
+  },
   "remove_distractions": {
     "message": "移除干扰"
   },
+  "remove_filter_list": {
+    "message": "移除过滤列表"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "移除侵扰性提示和界面杂乱，带来更整洁的浏览体验。"
+  },
+  "remove_this_filter_list_": {
+    "message": "要移除此过滤列表吗？"
+  },
+  "remove_website": {
+    "message": "移除网站"
   },
   "repeat_for_most_visited_websites": {
     "message": "对访问量最大的网站重复此操作"
@@ -997,6 +1018,12 @@
   },
   "resume": {
     "message": "继续"
+  },
+  "resume_protection": {
+    "message": "恢复保护"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "要恢复 <strong>$${0}</strong> 上的保护吗？"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "揭示互联网表面之下隐藏的内容。通过WhoTracks.Me，您可以揭开每个追踪器背后的身份。"

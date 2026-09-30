@@ -601,6 +601,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery utilise ces informations pour fournir ses fonctionnalités de confidentialité alimentées par la communauté, garantissant que les informations personnelles—telles que les mots de passe, l'historique de navigation et le contenu des pages—ne sont jamais collectées."
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery recommencera à bloquer sur ce site. Ses exceptions et éléments bloqués restent inchangés."
+  },
   "global_privacy_control": {
     "message": "Contrôle global de la confidentialité"
   },
@@ -679,6 +682,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "Cela pourrait vous déconnecter de vos comptes"
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "Son statut de protection, ses exceptions et ses éléments bloqués seront réinitialisés par défaut."
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "Ses règles ne seront plus appliquées. Vous pouvez la rajouter à tout moment avec son URL."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "rapports protégés par k-anonymat des affichages de page"
@@ -974,11 +983,23 @@
   "remove": {
     "message": "Supprimer"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "Supprimer <strong>$${0}</strong> de votre liste ?"
+  },
   "remove_distractions": {
     "message": "Supprimer les distractions"
   },
+  "remove_filter_list": {
+    "message": "Supprimer la liste de filtres"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Supprimez les invites intrusives et les éléments encombrants."
+  },
+  "remove_this_filter_list_": {
+    "message": "Supprimer cette liste de filtres ?"
+  },
+  "remove_website": {
+    "message": "Supprimer le site Web"
   },
   "repeat_for_most_visited_websites": {
     "message": "Répétez l'opération pour les sites web les plus visités"
@@ -997,6 +1018,12 @@
   },
   "resume": {
     "message": "Reprendre"
+  },
+  "resume_protection": {
+    "message": "Reprendre la protection"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "Reprendre la protection sur <strong>$${0}</strong> ?"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Révèle ce qui est caché sous la surface d'Internet. Avec WhoTracks.Me, vous pouvez découvrir les identités derrière chaque tracker."

@@ -601,6 +601,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery가 이 사이트에서 다시 차단을 시작합니다. 예외 및 차단된 요소는 그대로 유지됩니다."
+  },
   "global_privacy_control": {
     "message": "글로벌 개인 정보 보호 제어"
   },
@@ -679,6 +682,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "계정에서 로그아웃될 수 있습니다."
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "보호 상태, 예외 및 차단된 요소가 기본값으로 재설정됩니다."
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "해당 규칙이 더 이상 적용되지 않습니다. URL을 사용하여 언제든지 다시 추가할 수 있습니다."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity로 보호된 페이지 보고서 표시"
@@ -974,11 +983,23 @@
   "remove": {
     "message": "제거"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "목록에서 <strong>$${0}</strong>을(를) 제거하시겠습니까?"
+  },
   "remove_distractions": {
     "message": "방해 요소 제거"
   },
+  "remove_filter_list": {
+    "message": "필터 목록 제거"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "방해되는 메시지와 복잡한 인터페이스를 제거하여 더 깔끔한 브라우징 환경을 만드세요."
+  },
+  "remove_this_filter_list_": {
+    "message": "이 필터 목록을 제거하시겠습니까?"
+  },
+  "remove_website": {
+    "message": "웹 사이트 제거"
   },
   "repeat_for_most_visited_websites": {
     "message": "가장 많이 방문한 웹사이트에 대해 반복"
@@ -997,6 +1018,12 @@
   },
   "resume": {
     "message": "다시 시작"
+  },
+  "resume_protection": {
+    "message": "보호 다시 시작"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "<strong>$${0}</strong>에서 보호를 다시 시작하시겠습니까?"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "인터넷의 표면 아래 숨겨진 것을 드러냅니다. WhoTracks.Me를 사용하면 모든 추적기 뒤에 숨겨진 신원을 밝혀낼 수 있습니다."

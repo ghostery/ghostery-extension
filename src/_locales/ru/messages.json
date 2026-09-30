@@ -601,6 +601,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery использует эту информацию для предоставления функций конфиденциальности, основанных на сообществе, гарантируя, что личная информация, такая как пароли, история просмотров и содержимое страниц, никогда не собирается."
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery снова начнет блокировку на этом сайте. Его исключения и заблокированные элементы останутся без изменений."
+  },
   "global_privacy_control": {
     "message": "Глобальный контроль конфиденциальности"
   },
@@ -679,6 +682,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "Это может привести к выходу из ваших аккаунтов."
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "Его статус защиты, исключения и заблокированные элементы будут сброшены до значений по умолчанию."
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "Его правила перестанут применяться. Вы можете снова добавить его в любое время по URL-адресу."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-анонимные защищенные отчеты о показах страниц"
@@ -974,11 +983,23 @@
   "remove": {
     "message": "Удалить"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "Удалить <strong>$${0}</strong> из вашего списка?"
+  },
   "remove_distractions": {
     "message": "Убрать отвлекающие факторы"
   },
+  "remove_filter_list": {
+    "message": "Удалить список фильтров"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Удалите навязчивые подсказки и беспорядок в интерфейсе для более чистого просмотра."
+  },
+  "remove_this_filter_list_": {
+    "message": "Удалить этот список фильтров?"
+  },
+  "remove_website": {
+    "message": "Удалить веб-сайт"
   },
   "repeat_for_most_visited_websites": {
     "message": "Повторите для наиболее посещаемых сайтов"
@@ -997,6 +1018,12 @@
   },
   "resume": {
     "message": "Возобновить"
+  },
+  "resume_protection": {
+    "message": "Возобновить защиту"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "Возобновить защиту на <strong>$${0}</strong>?"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Раскрывает то, что скрыто под поверхностью интернета. С WhoTracks.Me вы можете узнать, кто стоит за каждым трекером."
