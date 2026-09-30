@@ -556,6 +556,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery sử dụng thông tin này để cung cấp các tính năng bảo mật dựa trên cộng đồng của mình, đảm bảo rằng thông tin cá nhân—chẳng hạn như mật khẩu, lịch sử duyệt web và nội dung trang—không bao giờ bị thu thập."
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery sẽ bắt đầu chặn lại trên trang web này. Các ngoại lệ và phần tử bị chặn của trang vẫn được giữ nguyên."
+  },
   "global_privacy_control": {
     "message": "Kiểm soát Quyền riêng tư Toàn cầu"
   },
@@ -631,6 +634,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "Bạn có thể bị đăng xuất khỏi các tài khoản của mình."
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "Trạng thái bảo vệ, các ngoại lệ và phần tử bị chặn của trang sẽ được đặt lại về mặc định."
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "Các quy tắc của danh sách sẽ ngừng được áp dụng. Bạn có thể thêm lại bất cứ lúc nào bằng URL của nó."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity protected reports of page shows"
@@ -905,8 +914,17 @@
   "remove": {
     "message": "Xóa"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "Xóa <strong>$${0}</strong> khỏi danh sách của bạn?"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Loại bỏ các lời nhắc gây phiền nhiễu và giao diện lộn xộn để có trải nghiệm duyệt web gọn gàng hơn."
+  },
+  "remove_this_filter_list_": {
+    "message": "Xóa danh sách bộ lọc này?"
+  },
+  "remove_website": {
+    "message": "Xóa trang web"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Thay thế biểu tượng Ghostery trên thanh công cụ của trình duyệt bằng bánh xe theo dõi."
@@ -922,6 +940,12 @@
   },
   "resume": {
     "message": "Tiếp tục"
+  },
+  "resume_protection": {
+    "message": "Tiếp tục bảo vệ"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "Tiếp tục bảo vệ trên <strong>$${0}</strong>?"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Tiết lộ những gì ẩn dưới bề mặt internet. Với WhoTracks.Me, bạn có thể khám phá danh tính đằng sau mọi trình theo dõi."
@@ -1405,6 +1429,9 @@
   },
   "remove_distractions": {
     "message": "Loại bỏ phiền nhiễu"
+  },
+  "remove_filter_list": {
+    "message": "Xóa danh sách bộ lọc"
   },
   "repeat_for_most_visited_websites": {
     "message": "Lặp lại cho các trang web bạn truy cập nhiều nhất"
