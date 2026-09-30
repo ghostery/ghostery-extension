@@ -41,8 +41,9 @@ export default {
             <ui-text type="label-s" ellipsis>${name || url}</ui-text>
             ${name && html`<ui-text type="body-s" color="secondary" ellipsis>${url}</ui-text>`}
           </div>
-          <ui-text type="body-m" color="secondary">
-            Are you sure you want to remove this filter list? Its rules will no longer be applied.
+          <ui-text type="body-m" color="secondary">Remove this filter list?</ui-text>
+          <ui-text type="body-s" color="tertiary">
+            Its rules will stop applying. You can add it again anytime with its URL.
           </ui-text>
           <div layout="grid:2 gap">
             <ui-button>

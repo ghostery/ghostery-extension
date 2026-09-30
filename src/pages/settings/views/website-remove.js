@@ -76,20 +76,19 @@ export default {
             scope === SCOPE_PAUSE
               ? html`
                   <ui-text type="body-m" color="secondary">
-                    ${msg.html`Are you sure you want to resume protection for the <strong>${shortDomain}</strong> website?`}
+                    ${msg.html`Resume protection on <strong>${shortDomain}</strong>?`}
                   </ui-text>
                   <ui-text type="body-s" color="tertiary">
-                    Ghostery will resume blocking on it, while its exceptions and blocked elements
-                    stay untouched.
+                    Ghostery will start blocking on this site again. Its exceptions and blocked
+                    elements stay as they are.
                   </ui-text>
                 `
               : html`
                   <ui-text type="body-m" color="secondary">
-                    ${msg.html`Are you sure you want to remove the <strong>${shortDomain}</strong> website?`}
+                    ${msg.html`Remove <strong>${shortDomain}</strong> from your list?`}
                   </ui-text>
                   <ui-text type="body-s" color="tertiary">
-                    Its protection status, exceptions and blocked elements will be restored to the
-                    default settings.
+                    Its protection status, exceptions and blocked elements will be reset to default.
                   </ui-text>
                 `
           }
@@ -98,7 +97,9 @@ export default {
               <a href="${router.backUrl()}" tabindex="2">Cancel</a>
             </ui-button>
             <ui-button type="danger" data-qa="button:website:remove:confirm">
-              <button type="submit" tabindex="1">Remove</button>
+              <button type="submit" tabindex="1">
+                ${scope === SCOPE_PAUSE ? html`Resume` : html`Remove`}
+              </button>
             </ui-button>
           </div>
         </form>
