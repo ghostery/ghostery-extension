@@ -589,6 +589,9 @@
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery uses this information to provide its community-powered privacy features, ensuring that personal information—such as passwords, browsing history, and page content—is never collected."
   },
+  "ghostery_will_start_blocking_on_this_site_again__its_exceptions_and_blocked_elements_stay_as_they_are_": {
+    "message": "Ghostery will start blocking on this site again. Its exceptions and blocked elements stay as they are."
+  },
   "global_privacy_control": {
     "message": "Global Privacy Control"
   },
@@ -667,6 +670,12 @@
   },
   "it_might_sign_you_out_of_your_accounts_": {
     "message": "It might sign you out of your accounts."
+  },
+  "its_protection_status__exceptions_and_blocked_elements_will_be_reset_to_default_": {
+    "message": "Its protection status, exceptions and blocked elements will be reset to default."
+  },
+  "its_rules_will_stop_applying__you_can_add_it_again_anytime_with_its_url_": {
+    "message": "Its rules will stop applying. You can add it again anytime with its URL."
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity protected reports of page shows"
@@ -962,11 +971,23 @@
   "remove": {
     "message": "Remove"
   },
+  "remove__strong_@_0___strong__from_your_list_": {
+    "message": "Remove <strong>$${0}</strong> from your list?"
+  },
   "remove_distractions": {
     "message": "Remove distractions"
   },
+  "remove_filter_list": {
+    "message": "Remove Filter List"
+  },
   "remove_intrusive_prompts_and_interface_clutter_for_a_cleaner_browsing_experience_": {
     "message": "Remove intrusive prompts and interface clutter for a cleaner browsing experience."
+  },
+  "remove_this_filter_list_": {
+    "message": "Remove this filter list?"
+  },
+  "remove_website": {
+    "message": "Remove Website"
   },
   "repeat_for_most_visited_websites": {
     "message": "Repeat for most visited websites"
@@ -985,6 +1006,12 @@
   },
   "resume": {
     "message": "Resume"
+  },
+  "resume_protection": {
+    "message": "Resume Protection"
+  },
+  "resume_protection_on__strong_@_0___strong__": {
+    "message": "Resume protection on <strong>$${0}</strong>?"
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
