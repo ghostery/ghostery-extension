@@ -30,7 +30,7 @@ struct SubscriptionListViewRow: View {
         .padding(.horizontal, 5)
 #endif
         .onAppear { getGrouSubscriptionInfo() }
-        .onChange(of: storeHelper.purchasedProducts) { _ in getGrouSubscriptionInfo() }
+        .onChange(of: storeHelper.purchasedProducts) { getGrouSubscriptionInfo() }
     }
 
     /// Gets all the subscription groups from the list of subscription products.
