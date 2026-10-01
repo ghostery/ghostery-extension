@@ -27,6 +27,7 @@ import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
 import { contentScripts } from './content-scripts.js';
+import { buildScriptletsCode } from './scriptlets-code.js';
 import { FramesHierarchy } from './ancestors.js';
 
 function resolveInjectionTarget(details) {
@@ -100,7 +101,7 @@ async function injectScriptlets(filters, hostname, details) {
     }
   }
 
-  const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  const scriptletsByWorld = { MAIN: [], ISOLATED: [] };
   const injections = [];
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -119,16 +120,18 @@ async function injectScriptlets(filters, hostname, details) {
     }
 
     const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map(decodeArgument)];
+    const args = parsed.args.map(decodeArgument);
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Direct-domain scriptlets get registered (document_start); a per-hostname registration
     // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
+    // Registered scriptlets go into one code block per world (scriptlets-code.js), so they share scriptletGlobals and the natives that safeSelf() captures
     if (useRegistry && !filter.hasSubframeConstraint()) {
-      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
+      scriptletsByWorld[declaredWorld].push({ func, args });
       continue;
     }
 
+    // Each per-frame injection is a separate script, so it gets its own copy of the globals
     injections.push(
       chrome.scripting
         .executeScript({
@@ -136,7 +139,7 @@ async function injectScriptlets(filters, hostname, details) {
           world: declaredWorld,
           target: resolveInjectionTarget(details),
           func,
-          args,
+          args: [scriptletGlobals, ...args],
         })
         .catch((e) => {
           console.warn(e);
@@ -146,9 +149,14 @@ async function injectScriptlets(filters, hostname, details) {
   }
 
   if (useRegistry) {
-    if (scriptletsByWorld.MAIN || scriptletsByWorld.ISOLATED) {
+    const codeByWorld = {
+      MAIN: buildScriptletsCode(scriptletGlobals, scriptletsByWorld.MAIN),
+      ISOLATED: buildScriptletsCode(scriptletGlobals, scriptletsByWorld.ISOLATED),
+    };
+
+    if (codeByWorld.MAIN || codeByWorld.ISOLATED) {
       if (!contentScripts.isRegistered(hostname)) {
-        contentScripts.register(hostname, scriptletsByWorld);
+        contentScripts.register(hostname, codeByWorld);
       }
     } else {
       contentScripts.unregister(hostname);
