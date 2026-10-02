@@ -27,6 +27,7 @@ import './context-menu.js';
 import './paused.js';
 import './zapped.js';
 import './stats.js';
+import './icon.js';
 import './notifications.js';
 import './serp.js';
 import './report-issue.js';

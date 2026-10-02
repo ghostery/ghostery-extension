@@ -33,14 +33,14 @@ export default {
   stats: store(TabStats),
   managedConfig: store(ManagedConfig),
   trackerId: '',
-  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.id === trackerId),
+  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.key === trackerId),
   exceptionStatus: ({ options, stats, tracker }) =>
-    exceptions.getStatus(options, tracker.id, stats.hostname),
+    exceptions.getStatus(options, tracker.key, stats.hostname),
   exceptionLabel: ({ options, stats, tracker }) =>
-    exceptions.getLabel(options, tracker.id, stats.hostname),
+    exceptions.getLabel(options, tracker.key, stats.hostname),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
-    `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
+    `https://www.ghostery.com/whotracksme/trackers/${tracker.key}`,
   paused: ({ options, stats }) =>
     store.ready(options, stats) && !!getPausedDetails(options, stats.hostname),
   render: ({
@@ -82,7 +82,7 @@ export default {
                   : html`<ui-button layout="width:full height:auto:6">
                       <a
                         href="${router.url(ProtectionStatus, {
-                          trackerId: tracker.id,
+                          trackerId: tracker.key,
                         })}"
                         layout="row gap padding:0:1.5"
                       >
@@ -103,7 +103,7 @@ export default {
                   <ui-button layout="width:6 height:auto:6">
                     <a
                       href="${chrome.runtime.getURL(
-                        `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
+                        `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.key}`,
                       )}"
                       onclick="${openHref}"
                     >
