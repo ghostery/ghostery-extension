@@ -8,11 +8,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { mount, router, html } from 'hybrids';
+import { mount, router, html, store } from 'hybrids';
 
 import '/ui/index.js';
 
+import TabStats from '/store/tab-stats.js';
 import { getBrowser, getOS } from '/utils/browser-info.js';
+import { getCurrentTab } from '/utils/tabs.js';
 
 import './elements.js';
 import './styles.css';
@@ -35,9 +37,13 @@ if (isWhatsNew) {
   chrome.runtime.sendMessage({ action: 'syncOptions' });
 }
 
+// The views get the stats of the current tab from the router params
+const tab = await getCurrentTab();
+
 // Mount the app
 mount(document.body, {
-  stack: router(isWhatsNew ? [WhatsNew, Main] : [Main]),
+  stack: router(isWhatsNew ? [WhatsNew, Main] : [Main], { params: ['stats'] }),
+  stats: store(TabStats, { id: () => tab?.id }),
   browserName: { value: getBrowser().name, reflect: true },
   platformName: { value: getOS(), reflect: true },
   render: ({ stack }) => html`

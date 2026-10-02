@@ -459,10 +459,10 @@ export default {
                                     <ui-text type="body-s">
                                       <a
                                         href="${router.url(TrackerDetails, {
-                                          trackerId: tracker.id,
+                                          trackerId: tracker.key,
                                         })}"
                                         layout="row items:center gap:0.5 padding:0.5:0"
-                                        data-qa="button:tracker:${tracker.id}"
+                                        data-qa="button:tracker:${tracker.key}"
                                       >
                                         <ui-tooltip>
                                           <span slot="content"> View activity details </span>
@@ -476,7 +476,7 @@ export default {
                                           html`<ui-icon
                                             name="block-s"
                                             color="danger-primary"
-                                            data-qa="icon:tracker:${tracker.id}:blocked"
+                                            data-qa="icon:tracker:${tracker.key}:blocked"
                                           ></ui-icon>`
                                         }
                                         ${
@@ -484,7 +484,7 @@ export default {
                                           html`<ui-icon
                                             name="eye"
                                             color="brand-primary"
-                                            data-qa="icon:tracker:${tracker.id}:modified"
+                                            data-qa="icon:tracker:${tracker.key}:modified"
                                           ></ui-icon>`
                                         }
                                       </a>
@@ -498,14 +498,14 @@ export default {
                                         <ui-action-button layout="shrink:0 width:4.5">
                                           <a
                                             href="${router.url(ProtectionStatus, {
-                                              trackerId: tracker.id,
+                                              trackerId: tracker.key,
                                             })}"
                                             layout="row center relative"
-                                            data-qa="button:tracker:protection-status:${tracker.id}"
+                                            data-qa="button:tracker:protection-status:${tracker.key}"
                                           >
                                             <panel-protection-status-icon
                                               options="${options}"
-                                              trackerId="${tracker.id}"
+                                              trackerId="${tracker.key}"
                                               hostname="${stats.hostname}"
                                             ></panel-protection-status-icon>
                                           </a>

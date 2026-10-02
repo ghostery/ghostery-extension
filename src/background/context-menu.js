@@ -12,8 +12,9 @@
 import { store, msg } from 'hybrids';
 
 import Options, { MODE_ZAP } from '/store/options.js';
+import TabStats from '/store/tab-stats.js';
 import { openTabWithUrl } from '/utils/tabs.js';
-import { tabStats } from './stats.js';
+
 import { openElementPicker } from './element-picker.js';
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
@@ -163,8 +164,13 @@ if (chrome.contextMenus) {
     });
   });
 
+  async function getTabHostname(tabId) {
+    const stats = await store.resolve(TabStats, tabId).catch(() => null);
+    return stats?.hostname;
+  }
+
   async function resumeSite(tab) {
-    const hostname = tabStats.get(tab.id)?.hostname;
+    const hostname = await getTabHostname(tab.id);
     if (!hostname) return;
 
     const options = await store.resolve(Options);
@@ -175,7 +181,7 @@ if (chrome.contextMenus) {
   }
 
   async function zapSite(tab) {
-    const hostname = tabStats.get(tab.id)?.hostname;
+    const hostname = await getTabHostname(tab.id);
     if (!hostname) return;
 
     const options = await store.resolve(Options);
@@ -186,7 +192,7 @@ if (chrome.contextMenus) {
   }
 
   async function unzapSite(tab) {
-    const hostname = tabStats.get(tab.id)?.hostname;
+    const hostname = await getTabHostname(tab.id);
     if (!hostname) return;
 
     const options = await store.resolve(Options);
@@ -197,7 +203,7 @@ if (chrome.contextMenus) {
   }
 
   async function pauseSite(tab, id) {
-    const hostname = tabStats.get(tab.id)?.hostname;
+    const hostname = await getTabHostname(tab.id);
     if (!hostname) return;
 
     const options = await store.resolve(Options);
@@ -233,7 +239,7 @@ if (chrome.contextMenus) {
   }
 
   async function openWebsiteSettings(tab) {
-    const hostname = tabStats.get(tab.id)?.hostname;
+    const hostname = await getTabHostname(tab.id);
     const url = SETTINGS_URL + '#@settings-website-details?domain=' + (hostname || '');
 
     await openTabWithUrl(url);
@@ -284,7 +290,7 @@ if (chrome.contextMenus) {
 
     if (!options.contextMenu) return;
 
-    const hostname = tabStats.get(tabId)?.hostname;
+    const hostname = await getTabHostname(tabId);
     const isZapMode = options.mode === MODE_ZAP;
 
     let isPaused = false;

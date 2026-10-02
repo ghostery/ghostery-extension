@@ -11,31 +11,49 @@
 
 import { store } from 'hybrids';
 
-import AutoSyncingMap from '/utils/map.js';
-import { getCurrentTab } from '/utils/tabs.js';
+import { sortCategories } from '/ui/categories.js';
 
 import Organization from './organization.js';
 
+// Stats are saved per tab, and removed when the tab is closed (or the browser restarts)
+const STORAGE_KEY_PREFIX = 'tabStats:';
+
+// The background is the only context writing the stats, and it keeps
+// the latest values in memory, so it must not follow the storage changes
+let isWriter = false;
+
+// The organization is saved by its id, so it is resolved when the stats are read
+function serialize(stats) {
+  return JSON.parse(
+    JSON.stringify(stats, (key, value) => (key === 'organization' ? value?.id : value)),
+  );
+}
+
+// Trackers are not enumerable, as the same tracker has different stats in each tab
 const Tracker = {
-  id: true,
+  key: '',
   name: '',
   category: '',
   categoryDescription: '',
   organization: Organization,
+  // Saved separately, as the listed requests are limited, and the oldest ones are removed
   blocked: false,
   modified: false,
-  requests: [{ url: '', blocked: false, modified: false }],
+  requests: [{ requestId: '', url: '', blocked: false, modified: false }],
   requestsCount: 0,
   requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
   requestsModified: ({ requests }) => requests.filter((r) => r.modified),
   requestsObserved: ({ requests }) => requests.filter((r) => !r.blocked && !r.modified),
 };
 
-let tab = undefined;
-
 const TabStats = {
+  id: true,
   domain: '',
   hostname: '',
+  url: '',
+  createdAt: 0,
+  updatedAt: 0,
+  incognito: false,
   trackers: [Tracker],
 
   displayHostname: ({ hostname }) => {
@@ -78,23 +96,37 @@ const TabStats = {
   },
 
   [store.connect]: {
-    async get() {
-      // Resolve tab info
-      tab ||= await getCurrentTab();
+    async get(id) {
+      const key = STORAGE_KEY_PREFIX + id;
+      const { [key]: stats } = await chrome.storage.session.get(key);
 
-      const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
+      // Trackers are displayed in the order of their categories
+      stats?.trackers.sort(sortCategories((t) => t.category));
 
-      if (!tabStats) {
-        throw new Error('No stats for current tab');
-      }
+      return stats ?? null;
+    },
+    set(id, values) {
+      isWriter = true;
 
-      return tabStats;
+      // A new instance is created without the id argument, but its values have it
+      const key = STORAGE_KEY_PREFIX + (id ?? values.id);
+
+      (values
+        ? chrome.storage.session.set({ [key]: serialize(values) })
+        : chrome.storage.session.remove(key)
+      ).catch((e) => console.error('[tab-stats] Failed to save stats', e));
+
+      return values;
     },
   },
 };
 
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes['tabStats:v1']) store.clear(TabStats, false);
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (isWriter || areaName !== 'session') return;
+
+  if (Object.keys(changes).some((key) => key.startsWith(STORAGE_KEY_PREFIX))) {
+    store.clear(TabStats, false);
+  }
 });
 
 export default TabStats;
