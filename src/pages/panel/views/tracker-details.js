@@ -15,6 +15,7 @@ import * as labels from '/ui/labels.js';
 import Options, { getPausedDetails } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 import ManagedConfig from '/store/managed-config.js';
+import Organization from '/store/organization.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import { openHref } from '/utils/tabs.js';
@@ -33,20 +34,23 @@ export default {
   stats: store(TabStats),
   managedConfig: store(ManagedConfig),
   trackerId: '',
-  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.id === trackerId),
+  tracker: ({ stats, trackerId }) => stats.trackers[trackerId],
+  // Unidentified trackers have no organization
+  organization: store(Organization, { id: ({ tracker }) => tracker.organization || undefined }),
   exceptionStatus: ({ options, stats, tracker }) =>
-    exceptions.getStatus(options, tracker.id, stats.hostname),
+    exceptions.getStatus(options, tracker.key, stats.hostname),
   exceptionLabel: ({ options, stats, tracker }) =>
-    exceptions.getLabel(options, tracker.id, stats.hostname),
+    exceptions.getLabel(options, tracker.key, stats.hostname),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
-    `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
+    `https://www.ghostery.com/whotracksme/trackers/${tracker.key}`,
   paused: ({ options, stats }) =>
     store.ready(options, stats) && !!getPausedDetails(options, stats.hostname),
   render: ({
     options,
     managedConfig,
     tracker,
+    organization,
     exceptionStatus,
     exceptionLabel,
     wtmUrl,
@@ -82,7 +86,7 @@ export default {
                   : html`<ui-button layout="width:full height:auto:6">
                       <a
                         href="${router.url(ProtectionStatus, {
-                          trackerId: tracker.id,
+                          trackerId: tracker.key,
                         })}"
                         layout="row gap padding:0:1.5"
                       >
@@ -103,7 +107,7 @@ export default {
                   <ui-button layout="width:6 height:auto:6">
                     <a
                       href="${chrome.runtime.getURL(
-                        `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
+                        `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.key}`,
                       )}"
                       onclick="${openHref}"
                     >
@@ -117,13 +121,13 @@ export default {
           `
         }
         ${
-          (store.ready(tracker.organization) || wtmUrl) &&
+          (store.ready(organization) || wtmUrl) &&
           html`
             <div layout="column gap:0.5">
               ${
-                store.ready(tracker.organization) &&
-                tracker.organization.description &&
-                html`<ui-text type="body-s">${cleanUp(tracker.organization?.description)}</ui-text>`
+                store.ready(organization) &&
+                organization.description &&
+                html`<ui-text type="body-s">${cleanUp(organization.description)}</ui-text>`
               }
               ${
                 wtmUrl &&
@@ -186,14 +190,14 @@ export default {
             `
           }
           ${
-            store.ready(tracker.organization) &&
-            tracker.organization.country &&
+            store.ready(organization) &&
+            organization.country &&
             html`
               <ui-icon name="pin"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-s">Country</ui-text>
                 <ui-text type="body-s" color="secondary" ellipsis layout="padding margin:-1">
-                  ${labels.regions.of(tracker.organization.country) || tracker.organization.country}
+                  ${labels.regions.of(organization.country) || organization.country}
                 </ui-text>
               </div>
             `
@@ -217,10 +221,10 @@ export default {
             `
           }
           ${
-            store.ready(tracker.organization) &&
+            store.ready(organization) &&
             html`
               ${
-                tracker.organization.websiteUrl &&
+                organization.websiteUrl &&
                 html`
                   <ui-icon name="globe"></ui-icon>
                   <div layout="column gap">
@@ -232,15 +236,15 @@ export default {
                       underline
                       layout="padding margin:-1"
                     >
-                      <a href="${tracker.organization.websiteUrl}" onclick="${openHref}">
-                        ${tracker.organization.websiteUrl}
+                      <a href="${organization.websiteUrl}" onclick="${openHref}">
+                        ${organization.websiteUrl}
                       </a>
                     </ui-text>
                   </div>
                 `
               }
               ${
-                tracker.organization.privacyPolicy &&
+                organization.privacyPolicy &&
                 html`
                   <ui-icon name="privacy"></ui-icon>
                   <div layout="column gap">
@@ -252,15 +256,15 @@ export default {
                       underline
                       layout="padding margin:-1"
                     >
-                      <a href="${tracker.organization.privacyPolicy}" onclick="${openHref}">
-                        ${tracker.organization.privacyPolicy}
+                      <a href="${organization.privacyPolicy}" onclick="${openHref}">
+                        ${organization.privacyPolicy}
                       </a>
                     </ui-text>
                   </div>
                 `
               }
               ${
-                tracker.organization.contact &&
+                organization.contact &&
                 html`
                   <ui-icon name="mail"></ui-icon>
                   <div layout="column gap">
@@ -274,11 +278,11 @@ export default {
                     >
                       <a
                         href="${
-                          tracker.organization.contact.startsWith('http') ? '' : 'mailto:'
-                        }${tracker.organization.contact}"
+                          organization.contact.startsWith('http') ? '' : 'mailto:'
+                        }${organization.contact}"
                         onclick="${openHref}"
                       >
-                        ${tracker.organization.contact}
+                        ${organization.contact}
                       </a>
                     </ui-text>
                   </div>

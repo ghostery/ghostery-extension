@@ -123,7 +123,7 @@ if (__FIREFOX__) {
         }
       }
 
-      updateTabStats(details.tabId, [request]);
+      updateTabStats(details.tabId, request);
 
       return result;
     },
@@ -141,7 +141,7 @@ if (__FIREFOX__) {
       const htmlFilters = engine.getHtmlFilters(request);
       if (htmlFilters.length !== 0) {
         request.modified = true;
-        updateTabStats(details.tabId, [request]);
+        updateTabStats(details.tabId, request);
         filterRequestHTML(chrome.webRequest.filterResponseData, request, htmlFilters);
       }
 

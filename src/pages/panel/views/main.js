@@ -194,8 +194,10 @@ export default {
   managedConfig: store(ManagedConfig),
   elementPickerSelectors: store(ElementPickerSelectors),
   resources: store(Resources),
-  paused: ({ options, stats }) =>
-    store.ready(options, stats) && getPausedDetails(options, stats.hostname),
+  // Stats are empty (without hostname) for the pages without them
+  hasStats: ({ stats }) => store.ready(stats) && !!stats.hostname,
+  paused: ({ options, stats, hasStats }) =>
+    store.ready(options) && hasStats && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) => store.ready(options) && isGloballyPaused(options),
   contentBlocksSelectors: ({ elementPickerSelectors, stats }) =>
     (store.ready(stats, elementPickerSelectors) &&
@@ -211,6 +213,7 @@ export default {
   render: ({
     options,
     stats,
+    hasStats,
     notification,
     managedConfig,
     paused,
@@ -228,7 +231,7 @@ export default {
             html`
               <ui-header>
                 ${
-                  store.ready(stats) &&
+                  hasStats &&
                   (managedConfig.disableUserControl || (options.mode === MODE_ZAP && paused)) &&
                   html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`
                 }
@@ -256,7 +259,7 @@ export default {
                 }
               </ui-header>
               ${
-                store.ready(stats) &&
+                hasStats &&
                 !managedConfig.disableUserControl &&
                 (options.mode !== MODE_ZAP || !paused) &&
                 html`
@@ -330,7 +333,7 @@ export default {
           }
           ${
             options.terms &&
-            store.ready(stats) &&
+            hasStats &&
             !managedConfig.disableUserControl &&
             (options.mode === MODE_DEFAULT || globalPause) &&
             html`
@@ -386,7 +389,7 @@ export default {
           }
           ${
             options.terms &&
-            store.ready(stats) &&
+            hasStats &&
             !managedConfig.disableUserControl &&
             options.mode === MODE_ZAP &&
             !globalPause &&
@@ -414,7 +417,7 @@ export default {
           }
           <panel-container>
             ${
-              store.ready(stats)
+              hasStats
                 ? html`
                     <ui-stats
                       categories="${stats.topCategories}"
@@ -459,10 +462,10 @@ export default {
                                     <ui-text type="body-s">
                                       <a
                                         href="${router.url(TrackerDetails, {
-                                          trackerId: tracker.id,
+                                          trackerId: tracker.key,
                                         })}"
                                         layout="row items:center gap:0.5 padding:0.5:0"
-                                        data-qa="button:tracker:${tracker.id}"
+                                        data-qa="button:tracker:${tracker.key}"
                                       >
                                         <ui-tooltip>
                                           <span slot="content"> View activity details </span>
@@ -476,7 +479,7 @@ export default {
                                           html`<ui-icon
                                             name="block-s"
                                             color="danger-primary"
-                                            data-qa="icon:tracker:${tracker.id}:blocked"
+                                            data-qa="icon:tracker:${tracker.key}:blocked"
                                           ></ui-icon>`
                                         }
                                         ${
@@ -484,7 +487,7 @@ export default {
                                           html`<ui-icon
                                             name="eye"
                                             color="brand-primary"
-                                            data-qa="icon:tracker:${tracker.id}:modified"
+                                            data-qa="icon:tracker:${tracker.key}:modified"
                                           ></ui-icon>`
                                         }
                                       </a>
@@ -498,14 +501,14 @@ export default {
                                         <ui-action-button layout="shrink:0 width:4.5">
                                           <a
                                             href="${router.url(ProtectionStatus, {
-                                              trackerId: tracker.id,
+                                              trackerId: tracker.key,
                                             })}"
                                             layout="row center relative"
-                                            data-qa="button:tracker:protection-status:${tracker.id}"
+                                            data-qa="button:tracker:protection-status:${tracker.key}"
                                           >
                                             <panel-protection-status-icon
                                               options="${options}"
-                                              trackerId="${tracker.id}"
+                                              trackerId="${tracker.key}"
                                               hostname="${stats.hostname}"
                                             ></panel-protection-status-icon>
                                           </a>

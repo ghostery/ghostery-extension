@@ -32,16 +32,24 @@ async function setup({ existing = false, options = {} } = {}) {
   // The active tab of the focused window
   const current = { tabId: 1 };
 
+  const Options = {};
+  const TabStats = {};
+
   moduleMocks.push(
     mock.module('hybrids', {
       exports: {
-        store: { resolve: async () => ({ contextMenu: true, terms: true, ...options }) },
+        store: {
+          resolve: async (Model, id) => {
+            if (Model === TabStats) return tabStats.get(id) ?? { hostname: '' };
+            return { contextMenu: true, terms: true, ...options };
+          },
+        },
         msg: (strings) => strings.join(''),
       },
     }),
-    mock.module('/store/options.js', { exports: { default: {}, MODE_ZAP: 'zap' } }),
+    mock.module('/store/options.js', { exports: { default: Options, MODE_ZAP: 'zap' } }),
+    mock.module('/store/tab-stats.js', { exports: { default: TabStats } }),
     mock.module('/utils/tabs.js', { exports: { openTabWithUrl() {} } }),
-    mock.module('../../src/background/stats.js', { exports: { tabStats } }),
     mock.module('../../src/background/element-picker.js', {
       exports: { openElementPicker() {} },
     }),
