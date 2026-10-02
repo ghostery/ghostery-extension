@@ -19,11 +19,11 @@ import TabStats from '/store/tab-stats.js';
 import * as exceptions from '/utils/exceptions.js';
 
 function toggleDomain({ options, stats, tracker }) {
-  return exceptions.toggleDomain(options, tracker.id, stats.hostname);
+  return exceptions.toggleDomain(options, tracker.key, stats.hostname);
 }
 
 function toggleGlobal({ options, tracker }) {
-  return exceptions.toggleGlobal(options, tracker.id);
+  return exceptions.toggleGlobal(options, tracker.key);
 }
 
 export default {
@@ -31,13 +31,13 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   trackerId: '',
-  tracker: ({ stats, trackerId }) => stats.trackers.find((t) => t.id === trackerId),
+  tracker: ({ stats, trackerId }) => stats.trackers[trackerId],
   exceptionStatus: ({ options, stats, tracker }) =>
-    exceptions.getStatus(options, tracker.id, stats.hostname),
+    exceptions.getStatus(options, tracker.key, stats.hostname),
   exceptionLabel: ({ options, stats, tracker }) =>
-    exceptions.getLabel(options, tracker.id, stats.hostname),
+    exceptions.getLabel(options, tracker.key, stats.hostname),
   domainStatus: ({ options, stats, tracker }) =>
-    options.exceptions[tracker.id]?.domains.some((d) => stats.hostname.includes(d)),
+    options.exceptions[tracker.key]?.domains.some((d) => stats.hostname.includes(d)),
   render: ({ stats, tracker, exceptionStatus, exceptionLabel, domainStatus }) => html`
     <template layout="column">
       <panel-dialog>
