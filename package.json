@@ -57,7 +57,7 @@
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.14.1",
     "csv-stringify": "^6.8.3",
-    "hybrids": "^9.2.0",
+    "hybrids": "^9.2.1",
     "idb": "^8.0.3",
     "lottie-web": "^5.13.0",
     "minixxh": "^0.4.0",
