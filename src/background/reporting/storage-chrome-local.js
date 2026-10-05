@@ -16,6 +16,8 @@ const NEEDS_SAFARI_WORKAROUND = isWebkit();
 // Safari falsely shares [] and {} within an object after loading it from
 // chrome.storage.local. A write to one of them then also changes the others.
 // A JSON deep-copy breaks up this false-sharing.
+//
+// Note: should be fixed in future WebKit versions: https://github.com/WebKit/WebKit/pull/75922
 function fixSafariStorageAliasing(value) {
   if (value === undefined) return value;
   return JSON.parse(JSON.stringify(value));
