@@ -117,11 +117,12 @@ export const config = {
           // Clean up replaced original path
           rmSync(wdio.FIREFOX_PATH, { force: true });
 
+          // Updating closes the extension pages, so leave the onboarding page before
+          await browser.url('about:debugging#/runtime/this-firefox');
+
           // Replace extension files with the source
           const extension = readFileSync(`${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`);
           await browser.installAddOn(extension.toString('base64'), true);
-
-          await browser.url('about:debugging#/runtime/this-firefox');
 
           await expect($('.extension-backgroundscript__status')).toHaveElementClass(
             expect.stringContaining('extension-backgroundscript__status--running'),
