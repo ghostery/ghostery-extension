@@ -87,7 +87,7 @@ function decodeArgument(arg) {
   }
 }
 
-async function injectScriptlets(filters, hostname, details) {
+async function injectScriptlets(filters, hostname, domain, details) {
   // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
   // local frames (about:blank, srcdoc), so their documents are injected per-frame.
   const useRegistry = __FIREFOX__ || (USER_SCRIPTS && !details.localFrame);
@@ -125,8 +125,11 @@ async function injectScriptlets(filters, hostname, details) {
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Direct-domain scriptlets get registered (document_start); a per-hostname registration
-    // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
-    const registered = useRegistry && !filter.hasSubframeConstraint();
+    // can't reach a cross-origin child, so an ancestor-only (>>) match injects per-frame below.
+    // A filter carrying both kinds of domains that matched this frame directly is registered
+    // with the others, so the frame keeps a single scope.
+    const registered =
+      useRegistry && (!filter.hasSubframeConstraint() || filter.match(hostname, domain));
 
     calls[registered ? 'register' : 'execute'][declaredWorld].push({ scriptlet, args });
   }
@@ -332,7 +335,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details);
+      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, domain, details);
     }
 
     if (scriptletsOnly) {
