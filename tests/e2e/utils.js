@@ -61,8 +61,14 @@ async function sendRawMessage(msg) {
   await browser.pause(100);
 
   return browser.execute(async function (msg) {
+    const api = window.chrome || window.browser;
+
+    // Storage calls run in order, so this resolves after the writes started by the page
+    // (e.g. by a clicked toggle), and after they notify the background about the update
+    await api.storage.local.get('options');
+
     console.log('[e2e] Sending message to background:', msg);
-    const result = await (window.chrome || window.browser).runtime.sendMessage(JSON.parse(msg));
+    const result = await api.runtime.sendMessage(JSON.parse(msg));
     console.log('[e2e] Received response from background:', result);
     return result;
   }, JSON.stringify(msg));
@@ -77,6 +83,16 @@ export async function sendMessage(msg) {
 
 export async function waitForIdleBackgroundTasks() {
   await sendMessage({ action: 'e2e:idle' });
+}
+
+// Settings dialogs close only after saving the change, so leaving the page
+// before that could drop it - wait until the dialog is gone
+export async function confirmDialog(id) {
+  const button = getExtensionElement(id);
+  await button.click();
+
+  await expect(button).not.toExist();
+  await waitForIdleBackgroundTasks();
 }
 
 export async function reloadExtension() {

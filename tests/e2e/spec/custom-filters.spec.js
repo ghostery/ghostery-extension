@@ -12,6 +12,7 @@ import { browser, expect, $ } from '@wdio/globals';
 import {
   setupExtension,
   getExtensionElement,
+  confirmDialog,
   setAdditionalFiltersToggle,
   setCustomFilters,
   disableCustomFilters,
@@ -81,18 +82,21 @@ describe('Custom Filters', function () {
   it('disables custom filters by toggle', async function () {
     await setAdditionalFiltersToggle('custom-filters', false);
 
-    // Disabling custom filters reaches the engine asynchronously; retry until the cosmetic filter stops hiding it.
-    await reloadUntilActive(
-      () => $('#custom-filter').isDisplayed(),
-      '#custom-filter never became visible after disabling custom filters',
-    );
+    // Re-enable even if the test fails, as all next tests depend on it
+    try {
+      // Disabling custom filters reaches the engine asynchronously; retry until the cosmetic filter stops hiding it.
+      await reloadUntilActive(
+        () => $('#custom-filter').isDisplayed(),
+        '#custom-filter never became visible after disabling custom filters',
+      );
 
-    await browser.url('ghostery:panel');
-    await getExtensionElement('button:detailed-view').click();
+      await browser.url('ghostery:panel');
+      await getExtensionElement('button:detailed-view').click();
 
-    await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
-
-    await setAdditionalFiltersToggle('custom-filters', true);
+      await expect(getExtensionElement('icon:tracker:facebook_connect:blocked')).toBeDisplayed();
+    } finally {
+      await setAdditionalFiltersToggle('custom-filters', true);
+    }
   });
 
   it('supports custom network filter', async function () {
@@ -238,8 +242,7 @@ describe('Custom Filters', function () {
       await browser.url('ghostery:settings');
       await getExtensionElement('button:additional-filters').click();
       await getExtensionElement('button:custom-filters:remove-filter-list').click();
-      await getExtensionElement('button:custom-filters:remove-filter-list:confirm').click();
-      await waitForIdleBackgroundTasks();
+      await confirmDialog('button:custom-filters:remove-filter-list:confirm');
 
       await browser.url(PAGE_URL);
       await expect($('#filter-list')).toBeDisplayed();

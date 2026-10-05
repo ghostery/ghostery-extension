@@ -64,6 +64,9 @@ export function addListener(...args) {
 
 let queues = new Set();
 export async function waitForIdle() {
+  // The observers are queued only when the fetch resolves
+  await store.resolve(Options);
+
   for (const queue of queues) await queue;
 }
 
