@@ -119,7 +119,7 @@ export const config = {
 
           // Replace extension files with the source
           const extension = readFileSync(`${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`);
-          browser.installAddOn(extension.toString('base64'), true);
+          await browser.installAddOn(extension.toString('base64'), true);
 
           await browser.url('about:debugging#/runtime/this-firefox');
 

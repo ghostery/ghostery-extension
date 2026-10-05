@@ -13,6 +13,7 @@ import { browser, expect } from '@wdio/globals';
 import {
   setupExtension,
   getExtensionElement,
+  confirmDialog,
   TRACKER_IDS,
   waitForIdleBackgroundTasks,
   PAGE_DOMAIN,
@@ -106,8 +107,7 @@ describe('Exceptions', function () {
     // Remove the website exception
 
     await trashButton.click();
-    await getExtensionElement('button:website:remove:confirm').click();
-    await waitForIdleBackgroundTasks();
+    await confirmDialog('button:website:remove:confirm');
 
     // Check that the tracker is now marked as blocked in the panel
 
