@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets from '@ghostery/scriptlets';
+import scriptlets, { compose, run } from '@ghostery/scriptlets';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -101,6 +101,9 @@ async function injectScriptlets(filters, hostname, details) {
   }
 
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  // The scriptlets of a world share one scope, so dependencies such as safeSelf() and its
+  // cache are declared once (as in uBO) instead of once per scriptlet.
+  const calls = { register: { MAIN: [], ISOLATED: [] }, execute: { MAIN: [], ISOLATED: [] } };
   const injections = [];
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -118,30 +121,48 @@ async function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
-    const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map(decodeArgument)];
+    const args = parsed.args.map(decodeArgument);
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
     // Direct-domain scriptlets get registered (document_start); a per-hostname registration
     // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
-    if (useRegistry && !filter.hasSubframeConstraint()) {
-      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      continue;
+    const registered = useRegistry && !filter.hasSubframeConstraint();
+
+    calls[registered ? 'register' : 'execute'][declaredWorld].push({ scriptlet, args });
+  }
+
+  for (const world of ['MAIN', 'ISOLATED']) {
+    if (calls.register[world].length) {
+      scriptletsByWorld[world] = compose(calls.register[world], scriptletGlobals);
     }
+    if (calls.execute[world].length === 0) continue;
+
+    const target = resolveInjectionTarget(details);
+    // chrome.userScripts takes code; chrome.scripting only a function with JSON arguments, so it
+    // gets run(), which declares every scriptlet once and calls the requested ones.
+    const injection = USER_SCRIPTS
+      ? chrome.userScripts.execute({
+          injectImmediately: true,
+          world: world === 'ISOLATED' ? 'USER_SCRIPT' : 'MAIN',
+          target,
+          js: [{ code: compose(calls.execute[world], scriptletGlobals) }],
+        })
+      : chrome.scripting.executeScript({
+          injectImmediately: true,
+          world,
+          target,
+          func: run,
+          args: [
+            scriptletGlobals,
+            calls.execute[world].map(({ scriptlet, args }) => [scriptlet.fn, ...args]),
+          ],
+        });
 
     injections.push(
-      chrome.scripting
-        .executeScript({
-          injectImmediately: true,
-          world: declaredWorld,
-          target: resolveInjectionTarget(details),
-          func,
-          args,
-        })
-        .catch((e) => {
-          console.warn(e);
-          return null;
-        }),
+      injection.catch((e) => {
+        console.warn(e);
+        return null;
+      }),
     );
   }
 
