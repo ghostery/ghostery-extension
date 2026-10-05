@@ -9,6 +9,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { isWebkit } from '/utils/browser-info.js';
+
+const NEEDS_SAFARI_WORKAROUND = isWebkit();
+
+// Safari falsely shares [] and {} within an object after loading it from
+// chrome.storage.local. A write to one of them then also changes the others.
+// A JSON deep-copy breaks up this false-sharing.
+//
+// Note: should be fixed in future WebKit versions: https://github.com/WebKit/WebKit/pull/75922
+function fixSafariStorageAliasing(value) {
+  if (value === undefined) return value;
+  return JSON.parse(JSON.stringify(value));
+}
+
 /**
  * A simple key-value storage built ontop of chrome.storage.local. If you need
  * to support more specific uses cases, use IndexedDBKeyValueStore instead.
@@ -34,6 +48,9 @@ export default class StorageLocal {
   async get(key) {
     const prefixedKey = this.namespace + key;
     const result = await chrome.storage.local.get(prefixedKey);
+    if (NEEDS_SAFARI_WORKAROUND) {
+      return fixSafariStorageAliasing(result[prefixedKey]);
+    }
     return result[prefixedKey];
   }
 
