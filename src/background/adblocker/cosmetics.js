@@ -51,6 +51,11 @@ const scriptletGlobals = {
 
 const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsSupported();
 
+// Registered scripts and chrome.userScripts.execute() take code, chrome.scripting.executeScript()
+// a function with JSON arguments; all of them get run() with the frame's calls.
+const runPrefix = `(${run})(${JSON.stringify(scriptletGlobals)}, `;
+const runCode = (calls) => `${runPrefix}${JSON.stringify(calls)});`;
+
 // On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
 // same document, so scriptlets would run twice. We remember the documentIds we have already
 // injected into (proved by executeScript's result) and skip a repeat. The in-memory set gives
@@ -124,20 +129,13 @@ async function injectScriptlets(filters, hostname, domain, details) {
     const args = parsed.args.map(decodeArgument);
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-    // Direct-domain scriptlets get registered (document_start); a per-hostname registration
-    // can't reach a cross-origin child, so an ancestor-only (>>) match injects per-frame below.
-    // A filter carrying both kinds of domains that matched this frame directly is registered
-    // with the others, so the frame keeps a single scope.
-    const registered =
-      useRegistry && (!filter.hasSubframeConstraint() || filter.match(hostname, domain));
+    // A filter matching this frame by its own hostname is registered (document_start); a
+    // per-hostname registration can't reach a cross-origin child, so an ancestor-only (>>)
+    // match injects per-frame below.
+    const registered = useRegistry && filter.match(hostname, domain);
 
     calls[registered ? 'register' : 'execute'][declaredWorld].push([scriptlet.fn, ...args]);
   }
-
-  // Registered scripts and chrome.userScripts.execute() take code, chrome.scripting.executeScript()
-  // a function with JSON arguments; all of them get run() with the frame's calls.
-  const runCode = (list) =>
-    `(${run})(${JSON.stringify(scriptletGlobals)}, ${JSON.stringify(list)});`;
 
   for (const world of ['MAIN', 'ISOLATED']) {
     if (calls.register[world].length) {
