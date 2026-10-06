@@ -127,6 +127,9 @@ export const config = {
       browserVersion: 'stable',
       cacheDir: '.wdio',
       'moz:firefoxOptions': {
+        // macOS 27 denies a Firefox spawned by a terminal its own Application Support directory,
+        // so a launcher that starts it through LaunchServices can be given here.
+        ...(process.env.E2E_FIREFOX_BINARY && { binary: process.env.E2E_FIREFOX_BINARY }),
         // Firefox 153+ blocks WebDriver navigation to moz-extension:// and
         // about:debugging pages unless system access is explicitly allowed.
         args: ['--remote-allow-system-access'].concat(
