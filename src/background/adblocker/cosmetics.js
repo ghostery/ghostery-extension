@@ -51,8 +51,7 @@ const scriptletGlobals = {
 
 const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsSupported();
 
-// Registered scripts and chrome.userScripts.execute() take code, chrome.scripting.executeScript()
-// a function with JSON arguments; all of them get run() with the frame's calls.
+// Registered scripts take code, so run() is serialized once; executeScript() takes it as is.
 const runPrefix = `(${run})(${JSON.stringify(scriptletGlobals)}, `;
 const runCode = (calls) => `${runPrefix}${JSON.stringify(calls)});`;
 
@@ -143,27 +142,19 @@ async function injectScriptlets(filters, hostname, domain, details) {
     }
     if (calls.execute[world].length === 0) continue;
 
-    const target = resolveInjectionTarget(details);
-    const injection = USER_SCRIPTS
-      ? chrome.userScripts.execute({
-          injectImmediately: true,
-          world: world === 'ISOLATED' ? 'USER_SCRIPT' : 'MAIN',
-          target,
-          js: [{ code: runCode(calls.execute[world]) }],
-        })
-      : chrome.scripting.executeScript({
+    injections.push(
+      chrome.scripting
+        .executeScript({
           injectImmediately: true,
           world,
-          target,
+          target: resolveInjectionTarget(details),
           func: run,
           args: [scriptletGlobals, calls.execute[world]],
-        });
-
-    injections.push(
-      injection.catch((e) => {
-        console.warn(e);
-        return null;
-      }),
+        })
+        .catch((e) => {
+          console.warn(e);
+          return null;
+        }),
     );
   }
 
