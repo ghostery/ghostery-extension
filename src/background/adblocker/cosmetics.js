@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets, { compose, run } from '@ghostery/scriptlets';
+import scriptlets, { run } from '@ghostery/scriptlets';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -131,34 +131,34 @@ async function injectScriptlets(filters, hostname, domain, details) {
     const registered =
       useRegistry && (!filter.hasSubframeConstraint() || filter.match(hostname, domain));
 
-    calls[registered ? 'register' : 'execute'][declaredWorld].push({ scriptlet, args });
+    calls[registered ? 'register' : 'execute'][declaredWorld].push([scriptlet.fn, ...args]);
   }
+
+  // Registered scripts and chrome.userScripts.execute() take code, chrome.scripting.executeScript()
+  // a function with JSON arguments; all of them get run() with the frame's calls.
+  const runCode = (list) =>
+    `(${run})(${JSON.stringify(scriptletGlobals)}, ${JSON.stringify(list)});`;
 
   for (const world of ['MAIN', 'ISOLATED']) {
     if (calls.register[world].length) {
-      scriptletsByWorld[world] = compose(calls.register[world], scriptletGlobals);
+      scriptletsByWorld[world] = runCode(calls.register[world]);
     }
     if (calls.execute[world].length === 0) continue;
 
     const target = resolveInjectionTarget(details);
-    // chrome.userScripts takes code; chrome.scripting only a function with JSON arguments, so it
-    // gets run(), which declares every scriptlet once and calls the requested ones.
     const injection = USER_SCRIPTS
       ? chrome.userScripts.execute({
           injectImmediately: true,
           world: world === 'ISOLATED' ? 'USER_SCRIPT' : 'MAIN',
           target,
-          js: [{ code: compose(calls.execute[world], scriptletGlobals) }],
+          js: [{ code: runCode(calls.execute[world]) }],
         })
       : chrome.scripting.executeScript({
           injectImmediately: true,
           world,
           target,
           func: run,
-          args: [
-            scriptletGlobals,
-            calls.execute[world].map(({ scriptlet, args }) => [scriptlet.fn, ...args]),
-          ],
+          args: [scriptletGlobals, calls.execute[world]],
         });
 
     injections.push(
