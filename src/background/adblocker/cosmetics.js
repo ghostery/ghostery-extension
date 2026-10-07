@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import scriptlets from '@ghostery/scriptlets';
+import scriptlets, { run } from '@ghostery/scriptlets';
 import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
@@ -51,6 +51,10 @@ const scriptletGlobals = {
 
 const USER_SCRIPTS = __CHROMIUM__ && isUserScriptsSupported();
 
+// Registered scripts take code, so run() is serialized once; executeScript() takes it as is.
+const runPrefix = `(${run})(${JSON.stringify(scriptletGlobals)}, `;
+const runCode = (calls) => `${runPrefix}${JSON.stringify(calls)});`;
+
 // On Chromium both webNavigation.onCommitted and webRequest.onResponseStarted fire for the
 // same document, so scriptlets would run twice. We remember the documentIds we have already
 // injected into (proved by executeScript's result) and skip a repeat. The in-memory set gives
@@ -87,7 +91,7 @@ function decodeArgument(arg) {
   }
 }
 
-async function injectScriptlets(filters, hostname, details) {
+async function injectScriptlets(filters, hostname, domain, details) {
   // Unlike Firefox's contentScripts (matchAboutBlank), chrome.userScripts cannot reach
   // local frames (about:blank, srcdoc), so their documents are injected per-frame.
   const useRegistry = __FIREFOX__ || (USER_SCRIPTS && !details.localFrame);
@@ -101,6 +105,9 @@ async function injectScriptlets(filters, hostname, details) {
   }
 
   const scriptletsByWorld = { MAIN: '', ISOLATED: '' };
+  // The scriptlets of a world share one scope, so dependencies such as safeSelf() and its
+  // cache are declared once (as in uBO) instead of once per scriptlet.
+  const calls = { register: { MAIN: [], ISOLATED: [] }, execute: { MAIN: [], ISOLATED: [] } };
   const injections = [];
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -118,25 +125,31 @@ async function injectScriptlets(filters, hostname, details) {
       continue;
     }
 
-    const func = scriptlet.func;
-    const args = [scriptletGlobals, ...parsed.args.map(decodeArgument)];
+    const args = parsed.args.map(decodeArgument);
     const declaredWorld = scriptlet.world === 'ISOLATED' ? 'ISOLATED' : 'MAIN';
 
-    // Direct-domain scriptlets get registered (document_start); a per-hostname registration
-    // can't reach a cross-origin child, so subframe-constrained ones inject per-frame below.
-    if (useRegistry && !filter.hasSubframeConstraint()) {
-      scriptletsByWorld[declaredWorld] += `(${func.toString()})(...${JSON.stringify(args)});\n`;
-      continue;
+    // A filter matching this frame by its own hostname is registered (document_start); a
+    // per-hostname registration can't reach a cross-origin child, so an ancestor-only (>>)
+    // match injects per-frame below.
+    const registered = useRegistry && filter.match(hostname, domain);
+
+    calls[registered ? 'register' : 'execute'][declaredWorld].push([scriptlet.fn, ...args]);
+  }
+
+  for (const world of ['MAIN', 'ISOLATED']) {
+    if (calls.register[world].length) {
+      scriptletsByWorld[world] = runCode(calls.register[world]);
     }
+    if (calls.execute[world].length === 0) continue;
 
     injections.push(
       chrome.scripting
         .executeScript({
           injectImmediately: true,
-          world: declaredWorld,
+          world,
           target: resolveInjectionTarget(details),
-          func,
-          args,
+          func: run,
+          args: [scriptletGlobals, calls.execute[world]],
         })
         .catch((e) => {
           console.warn(e);
@@ -311,7 +324,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, details);
+      injectScriptlets(scriptletsEnabled ? scriptFilters : [], hostname, domain, details);
     }
 
     if (scriptletsOnly) {
