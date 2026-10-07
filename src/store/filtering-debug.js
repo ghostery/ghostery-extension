@@ -23,15 +23,11 @@ const FilteringDebug = {
   autoconsent: true,
   [store.connect]: {
     async get() {
-      if (!chrome.storage.session) return {};
-
       const { [STORAGE_KEY]: values = {} } = await chrome.storage.session.get([STORAGE_KEY]);
       return values;
     },
     async set(_, values) {
-      if (chrome.storage.session) {
-        await chrome.storage.session.set({ [STORAGE_KEY]: values });
-      }
+      await chrome.storage.session.set({ [STORAGE_KEY]: values });
       return values;
     },
   },
