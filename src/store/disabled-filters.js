@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const STORAGE_KEY = 'disabledFilters';
 
 const DisabledFilters = {
@@ -21,7 +23,7 @@ const DisabledFilters = {
       return values;
     },
     async set(_, values) {
-      await chrome.storage.local.set({ [STORAGE_KEY]: values });
+      await chrome.storage.local.set({ [STORAGE_KEY]: safeForStorage(values) });
       return values;
     },
   },

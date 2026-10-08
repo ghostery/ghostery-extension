@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const CustomFilters = {
   text: '',
   filterLists: store.record({
@@ -32,10 +34,7 @@ const CustomFilters = {
       return customFilters;
     },
     async set(_, values) {
-      await chrome.storage.local.set({
-        // Firefox does not serialize correctly objects with getters
-        customFilters: __FIREFOX__ ? JSON.parse(JSON.stringify(values)) : values,
-      });
+      await chrome.storage.local.set({ customFilters: safeForStorage(values) });
 
       return values;
     },

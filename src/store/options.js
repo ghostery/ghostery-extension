@@ -14,6 +14,7 @@ import { store } from 'hybrids';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 import { findParentDomain } from '/utils/domains.js';
+import { safeForStorage } from '/utils/storage.js';
 
 import CustomFilters from './custom-filters.js';
 import ManagedConfig from './managed-config.js';
@@ -133,11 +134,7 @@ const Options = {
     async set(_, options) {
       options = options || {};
 
-      await chrome.storage.local.set({
-        options:
-          // Firefox does not serialize correctly objects with getters
-          __FIREFOX__ ? JSON.parse(JSON.stringify(options)) : options,
-      });
+      await chrome.storage.local.set({ options: safeForStorage(options) });
 
       // Send update message to another contexts (background page / panel / options)
       await chrome.runtime
