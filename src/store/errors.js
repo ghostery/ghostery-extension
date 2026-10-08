@@ -10,6 +10,8 @@
  */
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const Errors = {
   onceIds: store.record(0),
   [store.connect]: {
@@ -18,7 +20,7 @@ const Errors = {
       return errors;
     },
     async set(_, errors) {
-      await chrome.storage.local.set({ errors });
+      await chrome.storage.local.set({ errors: safeForStorage(errors) });
       return errors;
     },
   },

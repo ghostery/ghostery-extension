@@ -11,6 +11,14 @@
 
 const STORAGE_TEST_KEY = `__storage_test__${Date.now()}`;
 
+// Firefox does not save the values of getters (e.g. records of the store models),
+// so the value is cloned first, which turns the getters into plain values.
+// It applies only to storage.local, as storage.session and storage.sync keep the values.
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1791512
+export function safeForStorage(value) {
+  return __FIREFOX__ ? structuredClone(value) : value;
+}
+
 export async function checkStorage() {
   try {
     await chrome.storage.local.set({ [STORAGE_TEST_KEY]: 'test' });
