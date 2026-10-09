@@ -86,14 +86,7 @@ export function drawWheel(ctx, size, categories, { useScale = true, grayscale = 
 }
 
 export function getOffscreenImageData(size, categories, options) {
-  let canvas;
-  try {
-    canvas = new OffscreenCanvas(size, size);
-  } catch {
-    canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-  }
+  const canvas = new OffscreenCanvas(size, size);
   const ctx = canvas.getContext('2d');
   drawWheel(ctx, size, categories, { useScale: false, ...options });
 

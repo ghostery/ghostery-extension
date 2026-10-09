@@ -14,7 +14,7 @@
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
 
-export const storage = chrome.storage.session || chrome.storage.local;
+export const storage = chrome.storage.session;
 
 export default class AutoSyncingMap {
   static async get(storageKey, key) {
