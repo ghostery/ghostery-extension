@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const Config = {
   enabled: true,
   updatedAt: 0,
@@ -79,9 +81,7 @@ const Config = {
     async set(_, values) {
       values ||= {};
 
-      await chrome.storage.local.set({
-        config: __FIREFOX__ ? JSON.parse(JSON.stringify(values)) : values,
-      });
+      await chrome.storage.local.set({ config: safeForStorage(values) });
       return values;
     },
   },

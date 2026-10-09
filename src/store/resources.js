@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const Resources = {
   checksums: store.record(''), // Engine and dynamic DNR lists file checksums
   autoconsent: store.record(0), // Timestamps of Opt-out domains resolved by autoconsent
@@ -18,9 +20,7 @@ const Resources = {
   [store.connect]: {
     get: async () => chrome.storage.local.get('resources').then(({ resources = {} }) => resources),
     set: async (_, values) => {
-      await chrome.storage.local.set({
-        resources: __FIREFOX__ ? JSON.parse(JSON.stringify(values)) : values,
-      });
+      await chrome.storage.local.set({ resources: safeForStorage(values) });
 
       return values;
     },

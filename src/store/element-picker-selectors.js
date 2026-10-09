@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const ElementPickerSelectors = {
   hostnames: store.record([String]),
   [store.connect]: {
@@ -21,9 +23,7 @@ const ElementPickerSelectors = {
       return elementPickerSelectors;
     },
     set: async (id, values) => {
-      await chrome.storage.local.set({
-        elementPickerSelectors: __FIREFOX__ ? JSON.parse(JSON.stringify(values)) : values,
-      });
+      await chrome.storage.local.set({ elementPickerSelectors: safeForStorage(values) });
 
       return values;
     },

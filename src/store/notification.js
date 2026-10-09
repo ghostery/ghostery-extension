@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 async function loadFromStorage() {
   const { notifications } = await chrome.storage.local.get('notifications');
   return notifications || {};
@@ -27,7 +29,7 @@ const Notification = {
     },
     async set(id, values) {
       const notifications = await loadFromStorage();
-      notifications[values.id] = values;
+      notifications[values.id] = safeForStorage(values);
 
       await chrome.storage.local.set({ notifications });
 

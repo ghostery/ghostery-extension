@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import { safeForStorage } from '/utils/storage.js';
+
 const STORAGE_KEY = 'filteringDebug';
 
 // Session-scoped overrides; `true` means the capability is enabled (the default).
@@ -27,7 +29,7 @@ const FilteringDebug = {
       return values;
     },
     async set(_, values) {
-      await chrome.storage.session.set({ [STORAGE_KEY]: values });
+      await chrome.storage.session.set({ [STORAGE_KEY]: safeForStorage(values) });
       return values;
     },
   },
