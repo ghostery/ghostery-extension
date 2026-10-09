@@ -15,6 +15,7 @@ import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
 import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
+import TabStats from '/store/tab-stats.js';
 import DisabledFilters from '/store/disabled-filters.js';
 import FilteringDebug from '/store/filtering-debug.js';
 
@@ -22,8 +23,6 @@ import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
-
-import { tabStats } from '../stats.js';
 
 import { setup } from './engines.js';
 import { contentScripts } from './content-scripts.js';
@@ -244,15 +243,19 @@ async function injectCosmetics(details, config) {
   }
 
   const options = store.get(Options);
-  // Checking the request url hostname
+
+  // Paused or not zapped hostname
   if (getPausedDetails(options, hostname)) {
     return false;
   }
 
   // Checking the tab hostname to cover local iframes without a proper URL (about:blank, data:, etc.)
-  const tabHostname = tabStats.get(tabId)?.hostname;
-  if (tabHostname && getPausedDetails(options, tabHostname)) {
-    return false;
+  // or iframes with different hostname than the tab's
+  if (frameId !== 0) {
+    const { hostname: tabHostname } = await store.resolve(TabStats, tabId);
+    if (tabHostname && getPausedDetails(options, tabHostname)) {
+      return false;
+    }
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);

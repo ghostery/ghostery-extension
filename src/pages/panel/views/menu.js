@@ -91,6 +91,7 @@ export default {
 
               ${
                 store.ready(stats) &&
+                stats.hostname &&
                 html`
                   <panel-menu-item href="${router.url(ReportCategory)}" icon="report" internal>
                     Report an issue
