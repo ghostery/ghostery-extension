@@ -49,10 +49,16 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     const options = await store.resolve(Options);
 
     if (options.wtmSerpReport) {
+      // Target the committed document rather than the tab - Chromium prerenders
+      // search pages in the background of a tab, which still shows another page
+      // (e.g. chrome://newtab), so injecting into the tab would hit that page.
+      const target =
+        __CHROMIUM__ && details.documentId
+          ? { tabId: details.tabId, documentIds: [details.documentId] }
+          : { tabId: details.tabId, frameIds: [details.frameId] };
+
       chrome.scripting.insertCSS({
-        target: {
-          tabId: details.tabId,
-        },
+        target,
         css: trackersPreviewCSS,
       });
 
@@ -60,9 +66,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
         {
           injectImmediately: true,
           world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
-          target: {
-            tabId: details.tabId,
-          },
+          target,
           files: ['/content_scripts/trackers-preview.js'],
         },
         () => {
