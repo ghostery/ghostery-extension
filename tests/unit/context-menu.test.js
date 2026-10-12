@@ -24,21 +24,24 @@ afterEach(() => {
   globalThis.chrome = originalChrome;
 });
 
-async function setup({ existing = false } = {}) {
+async function setup({ existing = false, options = {} } = {}) {
   const menus = new Map();
   const listeners = {};
   const errors = [];
+  const tabStats = new Map();
+  // The active tab of the focused window
+  const current = { tabId: 1 };
 
   moduleMocks.push(
     mock.module('hybrids', {
       exports: {
-        store: { resolve: async () => ({ contextMenu: true, terms: true }) },
+        store: { resolve: async () => ({ contextMenu: true, terms: true, ...options }) },
         msg: (strings) => strings.join(''),
       },
     }),
     mock.module('/store/options.js', { exports: { default: {}, MODE_ZAP: 'zap' } }),
     mock.module('/utils/tabs.js', { exports: { openTabWithUrl() {} } }),
-    mock.module('../../src/background/stats.js', { exports: { tabStats: new Map() } }),
+    mock.module('../../src/background/stats.js', { exports: { tabStats } }),
     mock.module('../../src/background/element-picker.js', {
       exports: { openElementPicker() {} },
     }),
@@ -70,8 +73,13 @@ async function setup({ existing = false } = {}) {
       onClicked: { addListener() {} },
     },
     tabs: {
+      query: async () => [{ id: current.tabId }],
       onActivated: { addListener: (fn) => (listeners.activated = fn) },
       onUpdated: { addListener: (fn) => (listeners.updated = fn) },
+    },
+    windows: {
+      WINDOW_ID_NONE: -1,
+      onFocusChanged: { addListener: (fn) => (listeners.focusChanged = fn) },
     },
   };
 
@@ -84,7 +92,7 @@ async function setup({ existing = false } = {}) {
     chrome.contextMenus.create.mock.resetCalls();
   }
 
-  return { menus, listeners, errors };
+  return { menus, listeners, errors, tabStats, current };
 }
 
 describe('context menu', () => {
@@ -126,12 +134,107 @@ describe('context menu', () => {
     const { menus, listeners, errors } = await setup();
 
     listeners.activated({ tabId: 1 });
-    listeners.updated(1, { status: 'complete' });
+    listeners.updated(1, { status: 'complete' }, { id: 1, active: true });
     await setImmediate();
 
     assert.equal(chrome.contextMenus.removeAll.mock.callCount(), 1);
     assert.equal(chrome.contextMenus.create.mock.callCount(), MENUS_COUNT);
     assert.equal(menus.get('ghostery').visible, true);
     assert.deepEqual(errors, []);
+  });
+
+  describe('with a paused site in the active tab', () => {
+    // Tab 1: paused site, tab 2: background tab, tab 3: active tab of a different window
+    async function setupPaused() {
+      const result = await setup({
+        existing: true,
+        options: { paused: { 'paused.com': { revokeAt: 0 } } },
+      });
+
+      result.tabStats.set(1, { hostname: 'paused.com' });
+      result.tabStats.set(2, { hostname: 'other.com' });
+      result.tabStats.set(3, { hostname: 'other.com' });
+
+      result.listeners.activated({ tabId: 1 });
+      await setImmediate();
+
+      return result;
+    }
+
+    function assertPaused(menus, paused) {
+      assert.equal(menus.get('ghostery:pause').visible, !paused);
+      assert.equal(menus.get('ghostery:resume').visible, paused);
+      assert.equal(menus.get('ghostery:element-picker').enabled, !paused);
+    }
+
+    it('shows the paused state', async () => {
+      const { menus, errors } = await setupPaused();
+
+      assertPaused(menus, true);
+      assert.deepEqual(errors, []);
+    });
+
+    it('keeps the state when a background tab completes loading', async () => {
+      const { menus, listeners, errors } = await setupPaused();
+
+      listeners.updated(2, { status: 'complete' }, { id: 2, active: false });
+      await setImmediate();
+
+      assertPaused(menus, true);
+      assert.deepEqual(errors, []);
+    });
+
+    it('keeps the state when the active tab of a different window completes loading', async () => {
+      const { menus, listeners, errors } = await setupPaused();
+
+      listeners.updated(3, { status: 'complete' }, { id: 3, active: true });
+      await setImmediate();
+
+      assertPaused(menus, true);
+      assert.deepEqual(errors, []);
+    });
+
+    it('keeps the state when a tab of a different window is activated', async () => {
+      const { menus, listeners, errors } = await setupPaused();
+
+      listeners.activated({ tabId: 3 });
+      await setImmediate();
+
+      assertPaused(menus, true);
+      assert.deepEqual(errors, []);
+    });
+
+    it('updates the state when the active tab completes loading', async () => {
+      const { menus, listeners, tabStats, errors } = await setupPaused();
+
+      tabStats.set(1, { hostname: 'other.com' });
+      listeners.updated(1, { status: 'complete' }, { id: 1, active: true });
+      await setImmediate();
+
+      assertPaused(menus, false);
+      assert.deepEqual(errors, []);
+    });
+
+    it('updates the state when a different window gets the focus', async () => {
+      const { menus, listeners, current, errors } = await setupPaused();
+
+      current.tabId = 3;
+      listeners.focusChanged(2);
+      await setImmediate();
+
+      assertPaused(menus, false);
+      assert.deepEqual(errors, []);
+    });
+
+    it('ignores the focus change when no window has the focus', async () => {
+      const { menus, listeners, current, errors } = await setupPaused();
+
+      current.tabId = 3;
+      listeners.focusChanged(chrome.windows.WINDOW_ID_NONE);
+      await setImmediate();
+
+      assertPaused(menus, true);
+      assert.deepEqual(errors, []);
+    });
   });
 });
