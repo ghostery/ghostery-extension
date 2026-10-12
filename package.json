@@ -58,7 +58,7 @@
     "bowser": "^2.14.1",
     "csv-stringify": "^6.9.0",
     "hybrids": "^9.2.1",
-    "idb": "^8.0.3",
+    "idb": "^8.0.4",
     "lottie-web": "^5.13.0",
     "minixxh": "^0.4.0",
     "plotly.js-basic-dist": "^4.1.1",
