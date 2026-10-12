@@ -33,135 +33,177 @@ const ID_WEBSITE_SETTINGS = 'ghostery:website-settings';
 const ID_DISABLE_CONTEXT_MENU = 'ghostery:disable-context-menu';
 
 if (chrome.contextMenus) {
-  chrome.runtime.onInstalled.addListener(() => {
-    chrome.contextMenus.removeAll(async () => {
-      chrome.contextMenus.create({
-        id: ID_PARENT,
-        title: 'Ghostery',
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-        enabled: false,
-        visible: false,
-      });
+  let pendingCreation = null;
 
-      chrome.contextMenus.create({
-        id: ID_PAUSE,
-        parentId: ID_PARENT,
-        title: msg`Pause on this site`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
+  function createMenus() {
+    if (!pendingCreation) {
+      pendingCreation = recreateMenus().finally(() => {
+        pendingCreation = null;
       });
+    }
 
-      chrome.contextMenus.create({
-        id: ID_PAUSE_HOUR,
-        parentId: ID_PAUSE,
-        title: msg`1 hour`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
+    return pendingCreation;
+  }
 
-      chrome.contextMenus.create({
-        id: ID_PAUSE_DAY,
-        parentId: ID_PAUSE,
-        title: msg`1 day`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
+  async function recreateMenus() {
+    await chrome.contextMenus.removeAll();
 
-      chrome.contextMenus.create({
-        id: ID_PAUSE_ALWAYS,
-        parentId: ID_PAUSE,
-        title: msg`Always`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
+    const created = [];
+    const create = (properties) => {
+      created.push(
+        new Promise((resolve, reject) => {
+          chrome.contextMenus.create(properties, () => {
+            const error = chrome.runtime.lastError;
+            if (error) reject(new Error(error.message));
+            else resolve();
+          });
+        }),
+      );
+    };
 
-      chrome.contextMenus.create({
-        id: ID_RESUME,
-        parentId: ID_PARENT,
-        title: msg`Resume`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-        visible: false,
-      });
-
-      chrome.contextMenus.create({
-        id: ID_ZAP_ENABLE,
-        parentId: ID_PARENT,
-        title: msg`Block ads`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-        visible: false,
-      });
-
-      chrome.contextMenus.create({
-        id: ID_ZAP_DISABLE,
-        parentId: ID_PARENT,
-        title: msg`Show ads`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-        visible: false,
-      });
-
-      chrome.contextMenus.create({
-        id: `${ID_SEPARATOR}-1`,
-        parentId: ID_PARENT,
-        type: 'separator',
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: ID_ELEMENT_PICKER,
-        parentId: ID_PARENT,
-        title: `${msg`Hide content block`}...`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: ID_WEBSITE_SETTINGS,
-        parentId: ID_PARENT,
-        title: `${msg`Open website settings`}...`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: `${ID_SEPARATOR}-2`,
-        parentId: ID_PARENT,
-        type: 'separator',
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: ID_SETTINGS,
-        parentId: ID_PARENT,
-        title: `${msg`Open settings`}...`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: `${ID_SEPARATOR}-3`,
-        parentId: ID_PARENT,
-        type: 'separator',
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      chrome.contextMenus.create({
-        id: ID_DISABLE_CONTEXT_MENU,
-        parentId: ID_PARENT,
-        title: msg`Disable context menu`,
-        contexts: ['all'],
-        documentUrlPatterns: ['http://*/*', 'https://*/*'],
-      });
-
-      console.info('[context-menu] Context menu created...');
+    create({
+      id: ID_PARENT,
+      title: 'Ghostery',
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      enabled: false,
+      visible: false,
     });
+
+    create({
+      id: ID_PAUSE,
+      parentId: ID_PARENT,
+      title: msg`Pause on this site`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_PAUSE_HOUR,
+      parentId: ID_PAUSE,
+      title: msg`1 hour`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_PAUSE_DAY,
+      parentId: ID_PAUSE,
+      title: msg`1 day`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_PAUSE_ALWAYS,
+      parentId: ID_PAUSE,
+      title: msg`Always`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_RESUME,
+      parentId: ID_PARENT,
+      title: msg`Resume`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    create({
+      id: ID_ZAP_ENABLE,
+      parentId: ID_PARENT,
+      title: msg`Block ads`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    create({
+      id: ID_ZAP_DISABLE,
+      parentId: ID_PARENT,
+      title: msg`Show ads`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+      visible: false,
+    });
+
+    create({
+      id: `${ID_SEPARATOR}-1`,
+      parentId: ID_PARENT,
+      type: 'separator',
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_ELEMENT_PICKER,
+      parentId: ID_PARENT,
+      title: `${msg`Hide content block`}...`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_WEBSITE_SETTINGS,
+      parentId: ID_PARENT,
+      title: `${msg`Open website settings`}...`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: `${ID_SEPARATOR}-2`,
+      parentId: ID_PARENT,
+      type: 'separator',
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_SETTINGS,
+      parentId: ID_PARENT,
+      title: `${msg`Open settings`}...`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: `${ID_SEPARATOR}-3`,
+      parentId: ID_PARENT,
+      type: 'separator',
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    create({
+      id: ID_DISABLE_CONTEXT_MENU,
+      parentId: ID_PARENT,
+      title: msg`Disable context menu`,
+      contexts: ['all'],
+      documentUrlPatterns: ['http://*/*', 'https://*/*'],
+    });
+
+    await Promise.all(created);
+
+    console.info('[context-menu] Context menu created...');
+  }
+
+  chrome.runtime.onInstalled.addListener(() => {
+    createMenus().catch(console.error);
   });
+
+  // Safari does not persist menus across browser restarts, so they are
+  // recreated when the first visibility update finds them missing
+  async function updateParent(properties) {
+    try {
+      await chrome.contextMenus.update(ID_PARENT, properties);
+    } catch {
+      await createMenus();
+      await chrome.contextMenus.update(ID_PARENT, properties);
+    }
+  }
 
   async function resumeSite(tab) {
     const hostname = tabStats.get(tab.id)?.hostname;
@@ -277,7 +319,7 @@ if (chrome.contextMenus) {
 
     const options = await store.resolve(Options);
 
-    await chrome.contextMenus.update(ID_PARENT, {
+    await updateParent({
       visible: options.contextMenu,
       enabled: options.terms,
     });
