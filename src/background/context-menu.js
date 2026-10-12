@@ -354,13 +354,26 @@ if (chrome.contextMenus) {
       .catch(console.error);
   }
 
-  chrome.tabs.onActivated.addListener(({ tabId }) => {
-    updateVisibility(tabId).catch(console.error);
+  // Menus are global, so they show the state
+  // of the active tab in the focused window only
+  async function updateCurrentTab() {
+    const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    if (tab) await updateVisibility(tab.id);
+  }
+
+  chrome.tabs.onActivated.addListener(() => {
+    updateCurrentTab().catch(console.error);
   });
 
-  chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-    if (changeInfo.status === 'complete') {
-      updateVisibility(tabId).catch(console.error);
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete' && tab.active) {
+      updateCurrentTab().catch(console.error);
+    }
+  });
+
+  chrome.windows?.onFocusChanged.addListener((windowId) => {
+    if (windowId !== chrome.windows.WINDOW_ID_NONE) {
+      updateCurrentTab().catch(console.error);
     }
   });
 }
