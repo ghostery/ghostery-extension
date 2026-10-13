@@ -8,57 +8,57 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { browser, expect, $ } from '@wdio/globals';
+import { browser, expect } from '@wdio/globals';
 import {
   setupExtension,
   setCustomFilters,
   disableCustomFilters,
   setUserScriptsAllowed,
   isUserScriptsPathActive,
-  switchFrame,
+  getFrame,
   PAGE_DOMAIN,
   PAGE_URL,
 } from '../utils.js';
 
-function readMarker(id) {
-  return browser.execute((el) => document.getElementById(el)?.textContent, id);
+function readMarker(id, context = browser) {
+  return context.execute((el) => document.getElementById(el)?.textContent, id);
 }
 
-async function expectRanExactlyOnce(id, expected) {
+async function expectRanExactlyOnce(id, expected, context = browser) {
   try {
-    await browser.waitUntil(async () => (await readMarker(id)) === expected, {
+    await browser.waitUntil(async () => (await readMarker(id, context)) === expected, {
       timeout: 5000,
     });
   } catch {
     throw new Error(
-      `marker "${id}" was not rewritten exactly once: ${JSON.stringify(await readMarker(id))}`,
+      `marker "${id}" was not rewritten exactly once: ${JSON.stringify(await readMarker(id, context))}`,
     );
   }
 
   // Give any further overlapping triggers a chance to (incorrectly) run again.
   await browser.pause(500);
-  await expect(await readMarker(id)).toBe(expected);
+  await expect(await readMarker(id, context)).toBe(expected);
 }
 
 // A MAIN-world-only wrap of the page's `JSON.stringify`; each extra wrap adds a `+` ("aaa++").
-function readStringifyMarker() {
-  return browser.execute(() => JSON.parse(JSON.stringify({ marker: 'aaa' })).marker);
+function readStringifyMarker(context = browser) {
+  return context.execute(() => JSON.parse(JSON.stringify({ marker: 'aaa' })).marker);
 }
 
-async function expectMainWorldRanExactlyOnce() {
+async function expectMainWorldRanExactlyOnce(context = browser) {
   try {
-    await browser.waitUntil(async () => (await readStringifyMarker()) === 'aaa+', {
+    await browser.waitUntil(async () => (await readStringifyMarker(context)) === 'aaa+', {
       timeout: 5000,
     });
   } catch {
     throw new Error(
-      `MAIN-world scriptlet did not wrap JSON.stringify exactly once: ${JSON.stringify(await readStringifyMarker())}`,
+      `MAIN-world scriptlet did not wrap JSON.stringify exactly once: ${JSON.stringify(await readStringifyMarker(context))}`,
     );
   }
 
   // Give any further overlapping triggers a chance to (incorrectly) run again.
   await browser.pause(500);
-  await expect(await readStringifyMarker()).toBe('aaa+');
+  await expect(await readStringifyMarker(context)).toBe('aaa+');
 }
 
 // Custom filter updates reach the engine asynchronously; reload until the scriptlet is live.
@@ -90,10 +90,7 @@ function idempotencyChecks() {
     await browser.url(PAGE_URL);
     await expectRanExactlyOnce('rpnt-a', 'aaa+');
 
-    await switchFrame($('#iframe-static'));
-    await expectRanExactlyOnce('rpnt-a', 'aaa+');
-
-    await browser.switchFrame(null);
+    await expectRanExactlyOnce('rpnt-a', 'aaa+', await getFrame('#iframe-static'));
   });
 
   it('injects a MAIN-world scriptlet exactly once per document, including after reload', async function () {
@@ -108,10 +105,7 @@ function idempotencyChecks() {
     await browser.url(PAGE_URL);
     await expectMainWorldRanExactlyOnce();
 
-    await switchFrame($('#iframe-static'));
-    await expectMainWorldRanExactlyOnce();
-
-    await browser.switchFrame(null);
+    await expectMainWorldRanExactlyOnce(await getFrame('#iframe-static'));
   });
 
   it('injects a MAIN-world scriptlet exactly once into local frames (about:blank, srcdoc)', async function () {
@@ -130,11 +124,8 @@ function idempotencyChecks() {
     });
 
     for (const id of ['iframe-blank', 'iframe-srcdoc']) {
-      await switchFrame($(`#${id}`));
-      await expectMainWorldRanExactlyOnce();
+      await expectMainWorldRanExactlyOnce(await getFrame(`#${id}`));
     }
-
-    await browser.switchFrame(null);
   });
 }
 

@@ -116,6 +116,9 @@ export const config = {
   ],
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
   logLevel: argv.debug ? 'error' : 'silent',
+  // WebdriverIO v10 makes `$` throw when a selector matches more than one element.
+  // Tests rely on `$` returning the first match (e.g. multiple heroes in the whats-new page).
+  strictSelectors: false,
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
     retries: 2,

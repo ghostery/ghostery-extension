@@ -18,7 +18,7 @@ import {
   disableCustomFilters,
   waitForIdleBackgroundTasks,
   reloadUntilActive,
-  switchFrame,
+  getFrame,
   PAGE_DOMAIN,
   PAGE_URL,
   setUserScriptsAllowed,
@@ -122,16 +122,10 @@ describe('Custom Filters', function () {
     await browser.url(PAGE_URL);
     await expect($('#custom-filter')).not.toBeDisplayed();
 
-    await switchFrame($('#iframe-static'));
-    await expect($('#custom-filter')).not.toBeDisplayed();
-
-    await switchFrame($('#iframe-dynamic'));
-    await expect($('#custom-filter')).not.toBeDisplayed();
-
-    await switchFrame($('#iframe-local'));
-    await expect($('#custom-filter')).not.toBeDisplayed();
-
-    await browser.switchFrame(null);
+    for (const id of ['iframe-static', 'iframe-dynamic', 'iframe-local']) {
+      const frame = await getFrame(`#${id}`);
+      await expect(frame.$('#custom-filter')).not.toBeDisplayed();
+    }
   });
 
   it('supports scriptlet filter', async function () {
