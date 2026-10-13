@@ -25,46 +25,47 @@ const SAME_ORIGIN_PROBE_URL = `${PAGE_URL}subframe-probe.html`;
 const SUBDOMAIN_PROBE_URL = `http://sub.${PAGE_DOMAIN}:${PAGE_PORT}/subframe-probe.html`;
 
 function probeSubframe(src, { expectScriptlet = true, expectMarker = null, quietMs = 1000 } = {}) {
-  return browser.executeAsync(
-    (src, expectScriptlet, expectMarker, quietMs, done) => {
-      const markers = new Set();
-      let subframeScriptlet = false;
-      let settled = false;
-      let quietTimer = null;
+  return browser.execute(
+    (src, expectScriptlet, expectMarker, quietMs) =>
+      new Promise((done) => {
+        const markers = new Set();
+        let subframeScriptlet = false;
+        let settled = false;
+        let quietTimer = null;
 
-      const conditionMet = () =>
-        (!expectScriptlet || subframeScriptlet) &&
-        (expectMarker == null || markers.has(expectMarker));
+        const conditionMet = () =>
+          (!expectScriptlet || subframeScriptlet) &&
+          (expectMarker == null || markers.has(expectMarker));
 
-      const settle = () => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(quietTimer);
-        done({ subframeScriptlet, markers: [...markers] });
-      };
-
-      window.addEventListener('message', (event) => {
-        if (!event.data || event.data.__subframeProbe !== true) return;
-        let changed = false;
-        if (event.data.subframeScriptlet && !subframeScriptlet) {
-          subframeScriptlet = true;
-          changed = true;
-        }
-        if (event.data.marker != null && !markers.has(event.data.marker)) {
-          markers.add(event.data.marker);
-          changed = true;
-        }
-        // Restart the quiet window on genuinely new state so a late double injection extends it.
-        if (changed && conditionMet()) {
+        const settle = () => {
+          if (settled) return;
+          settled = true;
           clearTimeout(quietTimer);
-          quietTimer = setTimeout(settle, quietMs);
-        }
-      });
+          done({ subframeScriptlet, markers: [...markers] });
+        };
 
-      const iframe = document.createElement('iframe');
-      iframe.src = src;
-      document.body.appendChild(iframe);
-    },
+        window.addEventListener('message', (event) => {
+          if (!event.data || event.data.__subframeProbe !== true) return;
+          let changed = false;
+          if (event.data.subframeScriptlet && !subframeScriptlet) {
+            subframeScriptlet = true;
+            changed = true;
+          }
+          if (event.data.marker != null && !markers.has(event.data.marker)) {
+            markers.add(event.data.marker);
+            changed = true;
+          }
+          // Restart the quiet window on genuinely new state so a late double injection extends it.
+          if (changed && conditionMet()) {
+            clearTimeout(quietTimer);
+            quietTimer = setTimeout(settle, quietMs);
+          }
+        });
+
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        document.body.appendChild(iframe);
+      }),
     src,
     expectScriptlet,
     expectMarker,

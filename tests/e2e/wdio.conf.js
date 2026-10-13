@@ -116,6 +116,9 @@ export const config = {
   ],
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
   logLevel: argv.debug ? 'error' : 'silent',
+  // WebdriverIO v10 makes `$` throw when a selector matches more than one element.
+  // Tests rely on `$` returning the first match (e.g. multiple heroes in the whats-new page).
+  strictSelectors: false,
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
     retries: 2,
@@ -259,6 +262,31 @@ export const config = {
 
         return result;
       });
+
+      // The settings page renders inside view transitions, which take all hit-testing
+      // while they run - Firefox rejects a click in that time as intercepted by <html>
+      browser.overwriteCommand(
+        'click',
+        async function (fn, ...args) {
+          await this.waitForExist();
+
+          await browser.waitUntil(
+            () =>
+              browser
+                .execute((el) => !el.ownerDocument.activeViewTransition, this)
+                // Privileged pages (e.g. about:debugging) do not allow running scripts
+                .catch(() => true),
+            {
+              timeout: 5000,
+              interval: 50,
+              timeoutMsg: `View transition did not finish before clicking ${this.selector}`,
+            },
+          );
+
+          return fn.call(this, ...args);
+        },
+        { attachToElement: true },
+      );
     } catch (e) {
       console.error('Error while setting up test environment', e);
 

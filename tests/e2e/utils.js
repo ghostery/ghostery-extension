@@ -222,9 +222,9 @@ export async function setWhoTracksMeToggle(name, value) {
   await setToggle(name, value);
 }
 
-export async function expectAdsBlocked() {
-  const adSlot = await $(ADBLOCKING_GLOBAL_SELECTOR);
-  const dataAd = await $(ADBLOCKING_URL_SELECTOR);
+export async function expectAdsBlocked(context = browser) {
+  const adSlot = await context.$(ADBLOCKING_GLOBAL_SELECTOR);
+  const dataAd = await context.$(ADBLOCKING_URL_SELECTOR);
 
   await expect(adSlot).toExist();
   await expect(dataAd).toExist();
@@ -268,16 +268,13 @@ export async function disableCustomFilters() {
   await setAdditionalFiltersToggle('custom-filters', false);
 }
 
-export async function switchFrame(frameElement) {
-  await browser.switchFrame(null);
+// WebdriverIO v10 does not switch the session into frames - commands run on
+// the browsing context returned for the frame of the current top-level page.
+export async function getFrame(target) {
+  const handle = await browser.getWindowHandle();
+  const page = (await browser.browsingContexts()).find((context) => context.contextId === handle);
 
-  // Using `el.waitForExist()` when targeting iframes in Shadow DOM
-  // throws an error about not found context after using this function
-  if (!(await frameElement.isExisting())) {
-    await frameElement.waitForExist({ timeout: 5000 });
-  }
-
-  await browser.switchFrame(frameElement);
+  return page.frame(target);
 }
 
 export async function setCookieInBrowserContext(url, name, value = '') {
@@ -316,35 +313,31 @@ export async function expectNoPageNotification(url, notificationId) {
 
 export async function dismissPageNotification(page, id, action = 'button:dismiss') {
   await expectPageNotification(page, id);
-  const iframe = await getNotificationIframe(id);
-
-  await switchFrame(iframe);
+  const frame = await getFrame(getNotificationIframe(id));
 
   // FYI: Firefox has a bug where clicking a button in an iframe
   // that is inside a Shadow DOM does not work by using `el.click()`,
-  // but works when using `browser.execute()` to click the button.
+  // but works when using `execute()` to click the button.
   // For the consistency and to avoid switching between different
-  // methods of clicking, we use `browser.execute()` in both browsers.
+  // methods of clicking, we use `execute()` in both browsers.
   if (action === 'dialog:close') {
-    await browser.execute(function () {
+    await frame.execute(function () {
       const dialog = document.querySelector('ui-notification-dialog');
       dialog.shadowRoot.querySelector('button').click();
     });
   } else {
-    await browser.waitUntil(async () => await getExtensionElement(action).isExisting(), {
+    await browser.waitUntil(async () => await frame.$(`[data-qa="${action}"]`).isExisting(), {
       timeout: 5000,
       timeoutMsg: `Dismiss button for ${id} notification did not appear`,
     });
 
-    await browser.execute(function (action) {
+    await frame.execute(function (action) {
       document.querySelector(`[data-qa="${action}"]`).click();
     }, action);
   }
 
   // Allow to complete the dismiss action in the background process and remove the iframe
   await browser.pause(1000);
-
-  await browser.switchFrame(null);
 
   await browser.waitUntil(async () => !(await getNotificationIframe(id).isExisting()), {
     timeout: 5000,

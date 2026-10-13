@@ -17,7 +17,7 @@ import {
   setAdditionalFiltersToggle,
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
-  switchFrame,
+  getFrame,
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
   TRACKER_IDS,
@@ -88,9 +88,8 @@ describe('Main Features', function () {
       expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
 
       // Sub-frame — each frame has its own navigator, so injection must reach it
-      await switchFrame($('#iframe-static'));
-      expect(await browser.execute(() => navigator.globalPrivacyControl)).toBe(true);
-      await browser.switchFrame(null);
+      const frame = await getFrame('#iframe-static');
+      expect(await frame.execute(() => navigator.globalPrivacyControl)).toBe(true);
 
       // Disabling never-consent must unregister the content script,
       // so pages loaded afterwards no longer see the patched value
@@ -114,19 +113,11 @@ describe('Main Features', function () {
       await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
       await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
 
-      await switchFrame($('#iframe-static'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
-
-      await switchFrame($('#iframe-dynamic'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
-
-      await switchFrame($('#iframe-local'));
-      await expect($(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
-      await expect($(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
-
-      await browser.switchFrame(null);
+      for (const id of ['iframe-static', 'iframe-dynamic', 'iframe-local']) {
+        const frame = await getFrame(`#${id}`);
+        await expect(frame.$(ADBLOCKING_GLOBAL_SELECTOR)).toBeDisplayed();
+        await expect(frame.$(ADBLOCKING_URL_SELECTOR)).toBeDisplayed();
+      }
     });
 
     describe('block ads on different frames', function () {
@@ -138,24 +129,15 @@ describe('Main Features', function () {
       it('main frame of the page', expectAdsBlocked);
 
       it('subframe of the page', async function () {
-        await switchFrame($('#iframe-static'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
+        await expectAdsBlocked(await getFrame('#iframe-static'));
       });
 
       it('dynamic subframe of the page', async function () {
-        await switchFrame($('#iframe-dynamic'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
+        await expectAdsBlocked(await getFrame('#iframe-dynamic'));
       });
 
       it('local subframe of the page', async function () {
-        await switchFrame($('#iframe-local'));
-        await expectAdsBlocked();
-
-        await browser.switchFrame(null);
+        await expectAdsBlocked(await getFrame('#iframe-local'));
       });
     });
 
