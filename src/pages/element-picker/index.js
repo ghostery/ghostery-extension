@@ -21,7 +21,8 @@ import '/ui/index.js';
 import './elements.js';
 import './styles.css';
 
-const hostname = new URLSearchParams(window.location.search).get('hostname');
+// Hostname of the page, taken from the origin of the content script message
+let hostname = '';
 
 function sendMessage(type, data) {
   window.parent.postMessage({ type, ...data }, '*');
@@ -54,9 +55,20 @@ function slide(host, event) {
   });
 }
 
+// The browser sets the message origin, so the page cannot spoof it
+function getHostname(origin) {
+  try {
+    return new URL(origin).hostname;
+  } catch {
+    return '';
+  }
+}
+
 async function hide(host) {
   host.state = 'hidden';
   sendMessage('gh:element-picker:hide');
+
+  if (!hostname) return;
 
   const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
   const list = elementPickerSelectors.hostnames[hostname] || [];
@@ -71,6 +83,8 @@ async function hide(host) {
 async function back(host) {
   host.state = 'configure';
   sendMessage('gh:element-picker:back');
+
+  if (!hostname) return;
 
   const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
   let list = elementPickerSelectors.hostnames[hostname] || [];
@@ -113,7 +127,7 @@ mount(document.body, {
               Hide content block
             </ui-text>`
           }
-          <ui-button type="transparent" onclick="${close}">
+          <ui-button type="transparent" onclick="${close}" data-qa="button:close">
             <button layout="padding:0:1">
               <ui-icon name="close" color="tertiary"></ui-icon>
             </button>
@@ -177,10 +191,10 @@ mount(document.body, {
               }
             </element-picker-container>
             <element-picker-footer>
-              <ui-button onclick="${reselect}">
+              <ui-button onclick="${reselect}" data-qa="button:reselect">
                 <button>Reselect</button>
               </ui-button>
-              <ui-button type="danger" onclick="${hide}">
+              <ui-button type="danger" onclick="${hide}" data-qa="button:hide">
                 <button>Hide</button>
               </ui-button>
             </element-picker-footer>
@@ -200,10 +214,10 @@ mount(document.body, {
               </div>
             </div>
             <element-picker-footer>
-              <ui-button onclick="${back}">
+              <ui-button onclick="${back}" data-qa="button:back">
                 <button>Back</button>
               </ui-button>
-              <ui-button type="primary" onclick="${close}">
+              <ui-button type="primary" onclick="${close}" data-qa="button:done">
                 <button>Done</button>
               </ui-button>
             </element-picker-footer>
@@ -214,6 +228,7 @@ mount(document.body, {
     connect: (host) => {
       window.addEventListener('message', (event) => {
         if (event.data?.type === 'gh:element-picker:selector') {
+          hostname = getHostname(event.origin);
           host.state = 'configure';
           Object.assign(host, event.data);
         }

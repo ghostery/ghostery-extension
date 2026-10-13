@@ -26,6 +26,22 @@ export async function openElementPicker(tabId) {
   });
 }
 
+// Makes one plain hiding filter for one hostname. Rejects any other
+// filter syntax: scriptlets, styles, extended selectors, extra lines.
+export function toCosmeticFilter(hostname, selector) {
+  if (!/^[a-z0-9.-]+$/i.test(hostname)) return null;
+
+  const { cosmeticFilters, networkFilters } = parseFilters(`${hostname}##${selector}`);
+  const [filter] = cosmeticFilters;
+
+  // Expect exactly one cosmetic filter
+  if (!filter || cosmeticFilters.length > 1 || networkFilters.length > 0) return null;
+  if (filter.isScriptInject() || filter.isExtended()) return null;
+  if (filter.hasCustomStyle() || filter.isHtmlFiltering()) return null;
+
+  return filter;
+}
+
 // Observe element picker selectors to update the adblocker engine
 store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   let entries = Object.entries(model.hostnames);
@@ -39,20 +55,23 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   }
 
   if (entries.length) {
-    const elementPickerFilters = entries.reduce((acc, [hostname, selectors]) => {
-      for (const selector of selectors) {
-        acc.push(`${hostname}##${selector}`);
-      }
-      return acc;
-    }, []);
+    const cosmeticFilters = [];
 
-    const { cosmeticFilters } = parseFilters(elementPickerFilters.join('\n'));
+    for (const [hostname, selectors] of entries) {
+      for (const selector of selectors) {
+        const filter = toCosmeticFilter(hostname, selector);
+        if (filter) {
+          cosmeticFilters.push(filter);
+        } else {
+          console.warn(`[element-picker] Rejected selector for "${hostname}":`, selector);
+        }
+      }
+    }
+
     await engines.create(engines.ELEMENT_PICKER_ENGINE, { cosmeticFilters });
 
     console.log(
-      `[element-picker] Engine updated with ${
-        elementPickerFilters.length
-      } selectors for ${entries.length} hostnames`,
+      `[element-picker] Engine updated with ${cosmeticFilters.length} selectors for ${entries.length} hostnames`,
     );
   } else {
     engines.remove(engines.ELEMENT_PICKER_ENGINE);
