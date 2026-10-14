@@ -14,6 +14,7 @@ import { stringify } from 'csv-stringify/browser/esm/sync';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+import Organization from '/store/organization.js';
 
 import { isWebkit } from '/utils/browser-info.js';
 import { download } from '/utils/files.js';
@@ -29,7 +30,8 @@ async function downloadReport(host, event) {
 
   const report = [];
   for (const tracker of host.trackers) {
-    const organization = tracker.organization && (await store.resolve(tracker.organization));
+    const organization =
+      tracker.organization && (await store.resolve(Organization, tracker.organization));
 
     const organizationName = organization?.name ?? '';
 
@@ -59,7 +61,9 @@ export default {
   type: '', // 'blocked' | 'modified'
   options: store(Options),
   stats: store(TabStats),
-  trackers: ({ type, stats }) => stats.trackers.filter((t) => t[type]),
+  // Trackers are listed in the order of their categories
+  trackers: ({ type, stats }) =>
+    stats.groupedTrackers.flatMap(([, trackers]) => trackers.filter((t) => t[type])),
   render: ({ type, stats, trackers }) => html`
     <template layout="column">
       <panel-dialog header>

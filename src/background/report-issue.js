@@ -15,13 +15,12 @@ import { FLAGS } from '@ghostery/config';
 import Config from '/store/config.js';
 import Options, { getReportOptions } from '/store/options.js';
 import Resources from '/store/resources.js';
+import TabStats from '/store/tab-stats.js';
 
 import getBrowserInfo from '/utils/browser-info.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { parseWithCache } from '/utils/request.js';
-
-import { tabStats } from './stats.js';
 
 async function getMetadata(tab) {
   let result = '\n------\n';
@@ -57,8 +56,9 @@ async function getMetadata(tab) {
     '\n';
 
   // Add page trackers
-  const trackers = tabStats.get(tab.id)?.trackers.map((t) => t.id);
-  if (trackers) {
+  const stats = await store.resolve(TabStats, tab.id);
+  const trackers = Object.keys(stats.trackers);
+  if (trackers.length) {
     result += `\nTrackers(${trackers.length}):\n* ${trackers.join('\n* ')}`;
   }
 

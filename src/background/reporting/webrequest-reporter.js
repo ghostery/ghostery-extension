@@ -65,7 +65,7 @@ if (chrome.webRequest) {
         });
         request.modified = true;
 
-        updateTabStats(state.tabId, [request]);
+        updateTabStats(state.tabId, request);
       },
     });
 

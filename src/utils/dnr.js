@@ -107,3 +107,21 @@ export function getRedirectProtectionRules(rules) {
 
   return result;
 }
+
+// Returns URLs of the requests matched by the rules since the timestamp.
+// Only Safari returns the details of the requests matched by the rules.
+export async function getMatchedRequestUrls(tabId, minTimeStamp) {
+  if (!chrome.declarativeNetRequest.getMatchedRules) return [];
+
+  try {
+    const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({
+      tabId,
+      minTimeStamp,
+    });
+
+    return rulesMatchedInfo.filter((info) => info.request?.url).map((info) => info.request.url);
+  } catch (e) {
+    console.error('[dnr] Failed to get matched rules', e);
+    return [];
+  }
+}

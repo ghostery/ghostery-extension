@@ -11,32 +11,42 @@
 
 import { store } from 'hybrids';
 
-import AutoSyncingMap from '/utils/map.js';
-import { getCurrentTab } from '/utils/tabs.js';
+import { sortCategories } from '/ui/categories.js';
+import { safeForStorage } from '/utils/storage.js';
 
-import Organization from './organization.js';
+// Stats are saved per tab, and removed when the tab is closed (or the browser restarts)
+const STORAGE_KEY_PREFIX = 'tabStats:';
 
-const Tracker = {
-  id: true,
-  name: '',
-  category: '',
-  categoryDescription: '',
-  organization: Organization,
-  blocked: false,
-  modified: false,
-  requests: [{ url: '', blocked: false, modified: false }],
-  requestsCount: 0,
-  requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
-  requestsModified: ({ requests }) => requests.filter((r) => r.modified),
-  requestsObserved: ({ requests }) => requests.filter((r) => !r.blocked && !r.modified),
-};
-
-let tab = undefined;
+// The background is the only context writing the stats, and it keeps
+// the latest values in memory, so it must not follow the storage changes
+let isWriter = false;
 
 const TabStats = {
+  id: true,
   domain: '',
   hostname: '',
-  trackers: [Tracker],
+  url: '',
+  createdAt: 0,
+  updatedAt: 0,
+  incognito: false,
+
+  // Trackers by their keys
+  trackers: store.record({
+    key: '',
+    name: '',
+    category: '',
+    categoryDescription: '',
+    // Resolved only by the views displaying the organization
+    organization: '',
+    // Saved separately, as the listed requests are limited, and the oldest ones are removed
+    blocked: false,
+    modified: false,
+    requests: [{ requestId: '', url: '', blocked: false, modified: false }],
+    requestsCount: 0,
+    requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
+    requestsModified: ({ requests }) => requests.filter((r) => r.modified),
+    requestsObserved: ({ requests }) => requests.filter((r) => !r.blocked && !r.modified),
+  }),
 
   displayHostname: ({ hostname }) => {
     hostname = hostname.replace(/^www\./, '');
@@ -44,20 +54,25 @@ const TabStats = {
   },
 
   trackersBlocked: ({ trackers }) =>
-    trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
+    Object.values(trackers).reduce((acc, { blocked }) => acc + Number(blocked), 0),
   trackersModified: ({ trackers }) =>
-    trackers.reduce((acc, { modified }) => acc + Number(modified), 0),
+    Object.values(trackers).reduce((acc, { modified }) => acc + Number(modified), 0),
+
+  // Trackers are displayed in the order of their categories
   groupedTrackers: ({ trackers }) =>
     Object.entries(
-      trackers.reduce(
+      Object.values(trackers).reduce(
         (categories, tracker) => ({
           ...categories,
           [tracker.category]: [...(categories[tracker.category] || []), tracker],
         }),
         {},
       ),
-    ),
-  categories: ({ trackers }) => trackers.map((t) => t.category),
+    ).sort(sortCategories(([category]) => category)),
+  categories: ({ trackers }) =>
+    Object.values(trackers)
+      .map((t) => t.category)
+      .sort(sortCategories()),
   topCategories: ({ categories }) => {
     const counts = Object.entries(
       categories.reduce((acc, category) => {
@@ -78,23 +93,33 @@ const TabStats = {
   },
 
   [store.connect]: {
-    async get() {
-      // Resolve tab info
-      tab ||= await getCurrentTab();
+    async get(id) {
+      const key = STORAGE_KEY_PREFIX + id;
+      const { [key]: stats } = await chrome.storage.session.get(key);
 
-      const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
+      return stats ?? {};
+    },
+    set(id, values) {
+      isWriter = true;
 
-      if (!tabStats) {
-        throw new Error('No stats for current tab');
-      }
+      const key = STORAGE_KEY_PREFIX + id;
 
-      return tabStats;
+      (values
+        ? chrome.storage.session.set({ [key]: safeForStorage(values) })
+        : chrome.storage.session.remove(key)
+      ).catch((e) => console.error('[tab-stats] Failed to save stats', e));
+
+      return values ?? { id };
     },
   },
 };
 
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes['tabStats:v1']) store.clear(TabStats, false);
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (isWriter || areaName !== 'session') return;
+
+  if (Object.keys(changes).some((key) => key.startsWith(STORAGE_KEY_PREFIX))) {
+    store.clear(TabStats, false);
+  }
 });
 
 export default TabStats;
