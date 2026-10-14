@@ -13,7 +13,11 @@ import { browser, expect, $, $$ } from '@wdio/globals';
 
 import { setupExtension, getExtensionPageURL, reloadUntilActive, PAGE_URL } from '../utils.js';
 
-const POPUP_SELECTOR = 'gh-element-picker-popup';
+// Match by prefix, since the tag name is randomized
+const POPUP_SELECTOR = () =>
+  Array.from(document.documentElement.children).filter((el) =>
+    el.localName.startsWith('gh-element-picker-popup-'),
+  );
 const POPUP_URL = 'pages/element-picker/index.html';
 
 // Runs a function in a new extension page tab, then returns to the current tab

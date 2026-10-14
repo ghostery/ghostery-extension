@@ -146,7 +146,8 @@ function delay(ms) {
 const pickers = [];
 const pickersTargets = new WeakMap();
 const pickerTagName = `gh-element-picker-${Math.random().toString(36).slice(2)}`;
-const popupTagName = 'gh-element-picker-popup';
+const popupTagPrefix = 'gh-element-picker-popup-';
+const popupTagName = popupTagPrefix + Math.random().toString(36).slice(2);
 
 function renderPickers(selector, force = false) {
   const elements = selector ? Array.from(document.querySelectorAll(selector)) : [];
@@ -190,7 +191,9 @@ function renderPickers(selector, force = false) {
 // The popup lives in a closed shadow root: the page cannot read the iframe URL,
 // get its window, or post messages to it
 function setupPopup() {
-  if (document.querySelector(popupTagName)) return null;
+  // Each run has a new name, so match the prefix
+  const children = Array.from(document.documentElement.children);
+  if (children.some((el) => el.localName.startsWith(popupTagPrefix))) return null;
 
   const container = document.createElement(popupTagName);
   container.setAttribute('style', POPUP_STYLES);
