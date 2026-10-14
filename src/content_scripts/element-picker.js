@@ -146,6 +146,8 @@ function delay(ms) {
 const pickers = [];
 const pickersTargets = new WeakMap();
 const pickerTagName = `gh-element-picker-${Math.random().toString(36).slice(2)}`;
+const popupTagPrefix = 'gh-element-picker-popup-';
+const popupTagName = popupTagPrefix + Math.random().toString(36).slice(2);
 
 function renderPickers(selector, force = false) {
   const elements = selector ? Array.from(document.querySelectorAll(selector)) : [];
@@ -186,24 +188,27 @@ function renderPickers(selector, force = false) {
   });
 }
 
+// The popup lives in a closed shadow root: the page cannot read the iframe URL,
+// get its window, or post messages to it
 function setupPopup() {
-  const src =
-    chrome.runtime.getURL('pages/element-picker/index.html') +
-    `?hostname=${encodeURIComponent(window.location.hostname)}`;
+  // Each run has a new name, so match the prefix
+  const children = Array.from(document.documentElement.children);
+  if (children.some((el) => el.localName.startsWith(popupTagPrefix))) return null;
 
-  const existingPopup = document.querySelector(`iframe[src="${src}"]`);
-  if (existingPopup) return null;
-
-  const container = document.createElement(pickerTagName);
+  const container = document.createElement(popupTagName);
   container.setAttribute('style', POPUP_STYLES);
+  const shadowRoot = container.attachShadow({ mode: 'closed' });
 
   const iframe = document.createElement('iframe');
-  Object.assign(iframe, { src, style: POPUP_IFRAME_STYLES });
-  container.appendChild(iframe);
+  Object.assign(iframe, {
+    src: chrome.runtime.getURL('pages/element-picker/index.html'),
+    style: POPUP_IFRAME_STYLES,
+  });
+  shadowRoot.appendChild(iframe);
 
-  const draggable = document.createElement(pickerTagName);
+  const draggable = document.createElement('div');
   draggable.setAttribute('style', POPUP_DRAGGABLE_STYLES);
-  container.appendChild(draggable);
+  shadowRoot.appendChild(draggable);
 
   document.documentElement.appendChild(container);
 
@@ -260,7 +265,7 @@ function setupPopup() {
   draggable.addEventListener('mousedown', startEventListener);
   draggable.addEventListener('touchstart', startEventListener);
 
-  return iframe;
+  return { container, iframe };
 }
 
 function getElementArea(element) {
@@ -277,13 +282,13 @@ function getElementArea(element) {
   let sliderValue = 1;
   let similar = false;
 
-  const iframe = setupPopup();
-  if (!iframe) {
+  const popup = setupPopup();
+  if (!popup) {
     console.warn('Element picker popup already running.');
     return;
   }
 
-  const container = iframe.parentElement;
+  const { container, iframe } = popup;
   const globalStyles = document.createElement('style');
   globalStyles.textContent = GLOBAL_STYLES;
   document.head.appendChild(globalStyles);
@@ -368,7 +373,7 @@ function getElementArea(element) {
     targetEl = el.nearestViewportElement || el;
 
     if (
-      el !== iframe &&
+      el !== container &&
       el.tagName.toLowerCase() !== pickerTagName &&
       el !== document.documentElement &&
       el !== document.body
@@ -512,7 +517,7 @@ function getElementArea(element) {
   const closeElementPicker = () => {
     renderPickers();
 
-    iframe.parentElement.remove();
+    container.remove();
     overlayEl?.remove();
 
     if (globalStyles.textContent === GLOBAL_STYLES) {

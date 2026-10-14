@@ -10,9 +10,9 @@
  */
 
 import { store } from 'hybrids';
-import { parseFilters } from '@ghostery/adblocker';
 
 import * as engines from '/utils/engines.js';
+import { toCosmeticFilter } from '/utils/element-picker.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import { setup, reloadMainEngine } from './adblocker/engines.js';
@@ -39,20 +39,23 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   }
 
   if (entries.length) {
-    const elementPickerFilters = entries.reduce((acc, [hostname, selectors]) => {
-      for (const selector of selectors) {
-        acc.push(`${hostname}##${selector}`);
-      }
-      return acc;
-    }, []);
+    const cosmeticFilters = [];
 
-    const { cosmeticFilters } = parseFilters(elementPickerFilters.join('\n'));
+    for (const [hostname, selectors] of entries) {
+      for (const selector of selectors) {
+        const filter = toCosmeticFilter(hostname, selector);
+        if (filter) {
+          cosmeticFilters.push(filter);
+        } else {
+          console.warn(`[element-picker] Rejected selector for "${hostname}":`, selector);
+        }
+      }
+    }
+
     await engines.create(engines.ELEMENT_PICKER_ENGINE, { cosmeticFilters });
 
     console.log(
-      `[element-picker] Engine updated with ${
-        elementPickerFilters.length
-      } selectors for ${entries.length} hostnames`,
+      `[element-picker] Engine updated with ${cosmeticFilters.length} selectors for ${entries.length} hostnames`,
     );
   } else {
     engines.remove(engines.ELEMENT_PICKER_ENGINE);
