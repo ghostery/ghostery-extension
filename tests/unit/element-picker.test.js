@@ -9,23 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { after, describe, it, mock } from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-const moduleMocks = [
-  mock.module('hybrids', { exports: { store: { observe() {}, resolve() {} } } }),
-  mock.module('/utils/engines.js', { exports: {} }),
-  mock.module('/store/element-picker-selectors.js', { exports: { default: {} } }),
-  mock.module('../../src/background/adblocker/engines.js', {
-    exports: { setup: {}, reloadMainEngine() {} },
-  }),
-];
-
-const { toCosmeticFilter } = await import('../../src/background/element-picker.js');
-
-after(() => {
-  for (const moduleMock of moduleMocks) moduleMock.restore();
-});
+import { toCosmeticFilter } from '../../src/utils/element-picker.js';
 
 describe('toCosmeticFilter', () => {
   it('accepts a plain selector for a hostname', () => {

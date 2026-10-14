@@ -10,9 +10,9 @@
  */
 
 import { store } from 'hybrids';
-import { parseFilters } from '@ghostery/adblocker';
 
 import * as engines from '/utils/engines.js';
+import { toCosmeticFilter } from '/utils/element-picker.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import { setup, reloadMainEngine } from './adblocker/engines.js';
@@ -24,22 +24,6 @@ export async function openElementPicker(tabId) {
     target: { tabId },
     files: ['/content_scripts/element-picker.js'],
   });
-}
-
-// Makes one plain hiding filter for one hostname. Rejects any other
-// filter syntax: scriptlets, styles, extended selectors, extra lines.
-export function toCosmeticFilter(hostname, selector) {
-  if (!/^[a-z0-9.-]+$/i.test(hostname)) return null;
-
-  const { cosmeticFilters, networkFilters } = parseFilters(`${hostname}##${selector}`);
-  const [filter] = cosmeticFilters;
-
-  // Expect exactly one cosmetic filter
-  if (!filter || cosmeticFilters.length > 1 || networkFilters.length > 0) return null;
-  if (filter.isScriptInject() || filter.isExtended()) return null;
-  if (filter.hasCustomStyle() || filter.isHtmlFiltering()) return null;
-
-  return filter;
 }
 
 // Observe element picker selectors to update the adblocker engine
