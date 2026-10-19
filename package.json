@@ -40,7 +40,7 @@
     "license-report": "^6.8.6",
     "prettier": "^3.9.9",
     "vite": "^8.3.4",
-    "web-ext": "^10.7.0"
+    "web-ext": "^10.8.0"
   },
   "dependencies": {
     "@duckduckgo/autoconsent": "^16.49.0",
