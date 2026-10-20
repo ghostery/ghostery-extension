@@ -216,6 +216,10 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
   // and then we have to keep the stats
   if (details.url === PANEL_URL) return;
 
+  // Chromium prerenders pages in the background of the tab (e.g. Google's search warm-up page),
+  // and fires onCommitted again with the "active" lifecycle when the page is displayed
+  if (details.documentLifecycle === 'prerender') return;
+
   if (details.tabId > -1 && details.parentFrameId === -1) {
     const { tabId } = details;
     const request = Request.fromRequestDetails(details);
