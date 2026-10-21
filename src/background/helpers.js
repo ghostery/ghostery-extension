@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 
 import Config from '/store/config.js';
+import Options from '/store/options.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
@@ -104,6 +105,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
         sendResponse('done');
         console.debug('[helpers] "setConfigDomains" finished');
+      }, sendResponse);
+      return true;
+
+    case 'e2e:clearExceptions':
+      store.resolve(Options).then(async (options) => {
+        const exceptions = {};
+
+        for (const id of Object.keys(options.exceptions)) {
+          exceptions[id] = null;
+        }
+
+        await store.set(Options, { exceptions });
+
+        sendResponse('done');
+        console.debug('[helpers] "clearExceptions" finished');
       }, sendResponse);
       return true;
 
