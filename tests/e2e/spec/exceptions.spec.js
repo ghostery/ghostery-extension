@@ -15,6 +15,7 @@ import {
   getExtensionElement,
   confirmDialog,
   TRACKER_IDS,
+  sendMessage,
   waitForIdleBackgroundTasks,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -22,6 +23,14 @@ import {
 
 describe('Exceptions', function () {
   before(setupExtension);
+
+  // A failed attempt can leave the tracker trusted, which would fail
+  // all retries and the next specs expecting the tracker to be blocked
+  afterEach(async () => {
+    await browser.url('ghostery:panel');
+    await sendMessage({ action: 'e2e:clearExceptions' });
+    await waitForIdleBackgroundTasks();
+  });
 
   const TRACKER_ID = TRACKER_IDS[0];
 

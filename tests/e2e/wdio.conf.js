@@ -124,6 +124,13 @@ export const config = {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
     retries: 2,
   },
+  // Mocha reports only the error of the last attempt, so errors of the retried
+  // attempts are logged to show where a flaky test failed in the first place
+  afterTest: (test, context, { error, passed }) => {
+    if (!passed && context.test.currentRetry() < context.test.retries()) {
+      console.warn(`[retry] ${context.test.fullTitle()} - ${error.stack}`);
+    }
+  },
   maxInstances: 1,
   capabilities: [
     {
