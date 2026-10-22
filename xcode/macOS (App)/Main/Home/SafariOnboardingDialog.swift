@@ -36,11 +36,11 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let skip = "Skip"
-  static let title = "Enable Ghostery Privacy Ad Block for Safari"
-  static let enabledTitle = "Your Safari is protected with Ghostery"
-  static let enabledDescription = "Ghostery is actively blocking trackers, stopping annoying ads, and protecting your online privacy in the background."
-  static let done = "Done"
+  static let skip = String(localized: "Skip", comment: "Button closing the steps to enable the extension")
+  static let title = String(localized: "Enable Ghostery Privacy Ad Block for Safari", comment: "Ghostery Privacy Ad Block is the name of the extension")
+  static let enabledTitle = String(localized: "Your Safari is protected with Ghostery")
+  static let enabledDescription = String(localized: "Ghostery is actively blocking trackers, stopping annoying ads, and protecting your online privacy in the background.")
+  static let done = String(localized: "Done", comment: "Button closing the dialog")
 }
 
 /// The steps to enable the extension, replaced with the confirmation

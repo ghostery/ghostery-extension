@@ -43,13 +43,13 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Privacy,\nexplained simply."
-  static let description = "Privacy shouldn’t be complicated. Explore our guides, follow the latest privacy news, and discover how to make the web work better for you."
-  static let digestBadge = "The latest Privacy Digest"
-  static let digestTitle = "What’s happening in privacy right now?"
-  static let digestAction = "Read the latest Privacy Digest"
-  static let blogBadge = "From the Ghostery Blog"
-  static let blogAction = "Read the post"
+  static let title = String(localized: "Privacy,\nexplained simply.", comment: "Title of the Learning Zone section, in two lines")
+  static let description = String(localized: "Privacy shouldn’t be complicated. Explore our guides, follow the latest privacy news, and discover how to make the web work better for you.")
+  static let digestBadge = String(localized: "The latest Privacy Digest", comment: "Privacy Digest is the name of Ghostery’s newsletter")
+  static let digestTitle = String(localized: "What’s happening in privacy right now?")
+  static let digestAction = String(localized: "Read the latest Privacy Digest", comment: "Privacy Digest is the name of Ghostery’s newsletter")
+  static let blogBadge = String(localized: "From the Ghostery Blog")
+  static let blogAction = String(localized: "Read the post", comment: "Button opening the post of the Ghostery Blog")
 }
 
 fileprivate enum URLs {
@@ -64,13 +64,13 @@ fileprivate extension AppTextStyle {
 
 fileprivate let newsletterArticle = LearningArticle(
   id: "newsletter",
-  badge: "Stay in the know",
+  badge: String(localized: "Stay in the know", comment: "Title of the card about Ghostery’s newsletter"),
   image: Image(decorative: Icons.learningZoneNewsletter),
-  title: "Stay in the know",
-  subtitle: "Privacy tips, news & insights—straight to your inbox.",
-  description: "Get Ghostery’s Privacy Digest every two weeks. We curate the privacy stories worth knowing about and share practical ways to stay safer and more informed online.",
-  actionTitle: "Sign up",
-  note: "No spam. Just useful privacy news and tips."
+  title: String(localized: "Stay in the know", comment: "Title of the card about Ghostery’s newsletter"),
+  subtitle: String(localized: "Privacy tips, news & insights—straight to your inbox."),
+  description: String(localized: "Get Ghostery’s Privacy Digest every two weeks. We curate the privacy stories worth knowing about and share practical ways to stay safer and more informed online.", comment: "Privacy Digest is the name of Ghostery’s newsletter"),
+  actionTitle: String(localized: "Sign up", comment: "Button opening the page where the user signs up for the newsletter"),
+  note: String(localized: "No spam. Just useful privacy news and tips.")
 )
 
 struct LearningZoneView: View {
@@ -137,13 +137,12 @@ struct LearningZoneView: View {
     )
   }
 
-  // In the style of the design, and for the day of the item, which is the
-  // day of its time in UTC, as on the website
+  // Like "October 21, 2026" in English, and for the day of the item, which
+  // is the day of its time in UTC, as on the website
   private static let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.timeZone = TimeZone(identifier: "UTC")
-    formatter.dateFormat = "MMMM d, yyyy"
+    formatter.setLocalizedDateFormatFromTemplate("MMMMdyyyy")
     return formatter
   }()
 }

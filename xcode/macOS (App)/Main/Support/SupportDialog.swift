@@ -30,8 +30,8 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Help & feedback"
-  static let description = "The Ghostery team reads every message."
+  static let title = String(localized: "Help & feedback", comment: "Title of the Support dialog")
+  static let description = String(localized: "The Ghostery team reads every message.")
 }
 
 fileprivate enum URLs {
@@ -44,25 +44,25 @@ fileprivate let options = [
   SupportOption(
     id: "contact",
     icon: Icons.supportContact,
-    title: "Something not working?",
-    description: "Ghostery missing from a browser, or not behaving as expected? Our team will help.",
-    actionTitle: "Contact support",
+    title: String(localized: "Something not working?"),
+    description: String(localized: "Ghostery missing from a browser, or not behaving as expected? Our team will help."),
+    actionTitle: String(localized: "Contact support"),
     action: .open(URLs.support)
   ),
   SupportOption(
     id: "feedback",
     icon: Icons.supportFeedback,
-    title: "How’s it going?",
-    description: "A few quick questions about setting up and using Ghostery on your Mac.",
-    actionTitle: "Share feedback",
+    title: String(localized: "How’s it going?", comment: "Title of the card with the link to the feedback survey"),
+    description: String(localized: "A few quick questions about setting up and using Ghostery on your Mac."),
+    actionTitle: String(localized: "Share feedback"),
     action: .open(URLs.survey)
   ),
   SupportOption(
     id: "tracker",
     icon: Icons.supportTracker,
-    title: "Found an unknown tracker?",
-    description: "Report it to us to help keep the tracker database up to date.",
-    actionTitle: "Submit a tracker",
+    title: String(localized: "Found an unknown tracker?"),
+    description: String(localized: "Report it to us to help keep the tracker database up to date."),
+    actionTitle: String(localized: "Submit a tracker"),
     action: .open(URLs.submitTracker)
   ),
 ]
@@ -95,11 +95,14 @@ struct SupportDialog: View {
       }
       .foregroundColor(Colors.foregroundPrimary)
 
+      // The cards stretch to the tallest one, so their buttons line up
       HStack(alignment: .top, spacing: Constants.optionsSpacing) {
         ForEach(options) { option in
           SupportOptionCard(option: option, action: { performAction(option.action) })
+            .frame(maxHeight: .infinity)
         }
       }
+      .fixedSize(horizontal: false, vertical: true)
     }
     .padding(.top, Constants.topPadding)
     .padding(.bottom, Constants.bottomPadding)
@@ -139,9 +142,9 @@ struct SupportOptionCard: View {
           .fixedSize(horizontal: false, vertical: true)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
-      // As tall as two lines of the title and three of the description,
-      // so the buttons line up
-      .frame(height: Constants.optionTextHeight, alignment: .top)
+      // At least as tall as two lines of the title and three of the
+      // description, and longer texts make the card taller
+      .frame(minHeight: Constants.optionTextHeight, maxHeight: .infinity, alignment: .top)
 
       Button(action: action) {
         Text(option.actionTitle)
@@ -149,7 +152,7 @@ struct SupportOptionCard: View {
       .buttonStyle(AppButtonStyle(kind: .secondary))
     }
     .padding(Constants.optionPadding)
-    .frame(maxWidth: .infinity)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .cardBackground(cornerRadius: Constants.optionCornerRadius)
     .singleActionAccessibility(label: [option.title, option.description, option.actionTitle])
   }

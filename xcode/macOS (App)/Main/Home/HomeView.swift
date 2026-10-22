@@ -49,29 +49,37 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Protect your privacy.\nBlock trackers."
-  static let description = "Ghostery helps you take control of your data across the web."
-  static let installHeader = "Install Ghostery in your browser"
-  static let detectedBrowsers = "Detected browsers: "
-  static let nextBrowsers = "Next"
-  static let enabled = "Enabled"
-  static let moreOptions = "More options"
-  static let disableInSafari = "Disable Ghostery in Safari"
-  static let viewInstructions = "View instructions"
-  static let openSystemSettings = "Open System Settings"
+  static let title = String(localized: "Protect your privacy.\nBlock trackers.", comment: "Title of the Home section, in two lines")
+  static let description = String(localized: "Ghostery helps you take control of your data across the web.")
+  static let installHeader = String(localized: "Install Ghostery in your browser")
+  static let nextBrowsers = String(localized: "Next", comment: "Button scrolling to the next cards of the browsers")
+  static let enabled = String(localized: "Enabled", comment: "State of Ghostery in a browser")
+  static let moreOptions = String(localized: "More options")
+  static let disableInSafari = String(localized: "Disable Ghostery in Safari")
+  static let viewInstructions = String(localized: "View instructions", comment: "Button showing the steps to enable or disable Ghostery in Safari")
+  static let openSystemSettings = String(localized: "Open System Settings", comment: "System Settings is the name of the macOS app")
+
+  static func detectedBrowsers(_ count: Int) -> String {
+    String(localized: "Detected browsers: \(count)", comment: "Number of the browsers found on the Mac, Safari included")
+  }
 
   /// Steps to allow the access, with the names of the apps as the settings show them
   static func accessAlert(browsers: [String], appNames: [String]) -> Text {
-    let bold = AppTextStyle.labelM.font
+    let bold = AppTextStyle.labelS.font
     let ghostery = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Ghostery"
-    let names = ListFormatter.localizedString(byJoining: browsers)
-    // Like "A, B, and C", as the list of the browsers, with each name in bold
-    let boldAppNames = appNames.enumerated().reduce(Text("")) { text, item in
-      let isLast = item.offset == appNames.count - 1
-      let separator = item.offset == 0 ? "" : !isLast ? ", " : appNames.count > 2 ? ", and " : " and "
-      return Text("\(text)\(separator)\(Text(item.element).font(bold))")
+    let names = browsers.formatted(.list(type: .and))
+    // Like "A, B, and C", in the language of the app, with each name in bold
+    var boldAppNames = AttributedString(appNames.formatted(.list(type: .and)))
+    var start = boldAppNames.startIndex
+    for name in appNames {
+      guard let range = boldAppNames[start...].range(of: name) else { continue }
+      boldAppNames[range].swiftUI.font = bold
+      start = range.upperBound
     }
-    return Text("To check if Ghostery is enabled in \(names), open System Settings, click \(Text(ghostery).font(bold)), and turn on \(boldAppNames).")
+    return Text(
+      "To check if Ghostery is enabled in \(names), open System Settings, click \(Text(ghostery).font(bold)), and turn on \(Text(boldAppNames)).",
+      comment: "Shown when the app can't read the data of the browsers. The first placeholder is the list of the browsers, the second one the name of the app, and the last one the list of the browsers, as named in System Settings, which is the name of the macOS app."
+    )
   }
 }
 
@@ -80,33 +88,33 @@ fileprivate let homeBrowsers = [
   HomeBrowser(
     kind: .safari,
     icon: Icons.browserSafari,
-    description: "Follow these simple steps to enable Ghostery in Safari.",
-    enabledDescription: "Ghostery works correctly in Safari.",
+    description: String(localized: "Follow these simple steps to enable Ghostery in Safari."),
+    enabledDescription: String(localized: "Ghostery works correctly in Safari."),
     actionTitle: Strings.viewInstructions,
     isPrimary: true
   ),
   HomeBrowser(
     kind: .external(.firefox),
     icon: Icons.browserFirefox,
-    description: "Install Ghostery addon from the Firefox\nAdd-ons store.",
-    enabledDescription: "Ghostery works correctly in Firefox.",
-    actionTitle: "Install in Firefox",
+    description: String(localized: "Install Ghostery addon from the Firefox\nAdd-ons store.", comment: "The line break keeps the name of the store together, and can be left out"),
+    enabledDescription: String(localized: "Ghostery works correctly in Firefox."),
+    actionTitle: String(localized: "Install in Firefox"),
     isPrimary: false
   ),
   HomeBrowser(
     kind: .external(.chrome),
     icon: Icons.browserChrome,
-    description: "Install Ghostery extension from the Chrome web store.",
-    enabledDescription: "Ghostery works correctly in Chrome.",
-    actionTitle: "Install in Chrome",
+    description: String(localized: "Install Ghostery extension from the Chrome web store."),
+    enabledDescription: String(localized: "Ghostery works correctly in Chrome."),
+    actionTitle: String(localized: "Install in Chrome"),
     isPrimary: false
   ),
   HomeBrowser(
     kind: .external(.edge),
     icon: Icons.browserEdge,
-    description: "Install Ghostery extension from the Edge Add-ons.",
-    enabledDescription: "Ghostery works correctly in Edge.",
-    actionTitle: "Install in Edge",
+    description: String(localized: "Install Ghostery extension from the Edge Add-ons."),
+    enabledDescription: String(localized: "Ghostery works correctly in Edge."),
+    actionTitle: String(localized: "Install in Edge"),
     isPrimary: false
   ),
 ]
@@ -184,7 +192,7 @@ struct HomeView: View {
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundPrimary)
         .accessibilityAddTraits(.isHeader)
-      Text(Strings.detectedBrowsers + String(browsers.count))
+      Text(Strings.detectedBrowsers(browsers.count))
         .textStyle(.labelS)
         .foregroundColor(Colors.foregroungTertiary)
     }
@@ -196,6 +204,7 @@ struct HomeView: View {
   private var browsersCarousel: some View {
     ScrollViewReader { proxy in
       ScrollView(.horizontal, showsIndicators: false) {
+        // The cards stretch to the tallest one, so their buttons line up
         HStack(alignment: .top, spacing: Constants.carouselSpacing) {
           ForEach(browsers) { browser in
             HomeBrowserCard(
@@ -206,8 +215,10 @@ struct HomeView: View {
               // Only Safari has options so far
               showMenu: browser.kind == .safari ? { menuBrowserID = browser.id } : nil
             )
+            .frame(maxHeight: .infinity)
           }
         }
+        .fixedSize(horizontal: false, vertical: true)
         .onGeometryChange(for: CGFloat.self) { geometry in
           geometry.frame(in: .named(Constants.carouselCoordinateSpace)).minX
         } action: { minX in
@@ -364,7 +375,8 @@ struct HomeBrowserCard: View {
           .fixedSize(horizontal: false, vertical: true)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
-      .frame(height: Constants.cardTextHeight, alignment: .top)
+      // Longer texts make the card taller
+      .frame(minHeight: Constants.cardTextHeight, maxHeight: .infinity, alignment: .top)
       .accessibilityElement(children: .combine)
 
       if isEnabled {
@@ -378,6 +390,7 @@ struct HomeBrowserCard: View {
     }
     .padding(Constants.cardPadding)
     .frame(width: Constants.cardWidth)
+    .frame(maxHeight: .infinity)
     .cardBackground(cornerRadius: Constants.cardCornerRadius)
     .modifier(HomeBrowserCardAccessibility(browser: browser, isEnabled: isEnabled, hasMenu: showMenu != nil))
   }
@@ -413,12 +426,12 @@ private struct HomeAccessAlert: View {
         .renderingMode(.template)
         .foregroundColor(Colors.warning600)
       message
-        .textStyle(.bodyM)
+        .textStyle(.bodyS)
         .foregroundColor(Colors.foregroundPrimary)
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxWidth: .infinity, alignment: .leading)
       Button(Strings.openSystemSettings, action: action)
-        .buttonStyle(AppButtonStyle(kind: .secondary, size: .small))
+        .buttonStyle(AppButtonStyle(kind: .warning, size: .small))
     }
     .padding(Constants.alertPadding)
     .background(shape.fill(Colors.bgWarningPrimary))

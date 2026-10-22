@@ -29,9 +29,9 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Become a contributor"
-  static let description = "Help Ghostery fight for a web where privacy is a basic human right."
-  static let subtitle = "As a Contributor, you’ll support the development of the entire Ghostery Privacy Suite"
+  static let title = String(localized: "Become a contributor", comment: "Title of the Contribute section")
+  static let description = String(localized: "Help Ghostery fight for a web where privacy is a basic human right.")
+  static let subtitle = String(localized: "As a Contributor, you’ll support the development of the entire Ghostery Privacy Suite", comment: "Ghostery Privacy Suite is the name of all Ghostery’s products")
 }
 
 fileprivate enum URLs {
@@ -44,9 +44,9 @@ fileprivate enum URLs {
 fileprivate let subscriptionItem = Contribution(
   id: "donate",
   image: Icons.contributionSubscribed,
-  title: "You're amazing!",
-  description: "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!",
-  actionTitle: "Manage subscription",
+  title: String(localized: "You're amazing!", comment: "Shown to users with a monthly or yearly donation"),
+  description: String(localized: "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"),
+  actionTitle: String(localized: "Manage subscription", comment: "Opens the subscriptions of the user in the App Store"),
   action: .open(URLs.manageSubscription),
   isPrimary: false
 )
@@ -55,18 +55,18 @@ fileprivate let otherItems = [
   Contribution(
     id: "shop",
     image: Icons.contributionShop,
-    title: "Wear your belief",
-    description: "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world",
-    actionTitle: "Visit Ghostery Shop",
+    title: String(localized: "Wear your belief", comment: "Title of the card about the shop with Ghostery’s clothes and accessories"),
+    description: String(localized: "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world"),
+    actionTitle: String(localized: "Visit Ghostery Shop"),
     action: .open(URLs.shop),
     isPrimary: false
   ),
   Contribution(
     id: "share",
     image: Icons.contributionShare,
-    title: "Spread the word",
-    description: "Receiving all this help is crucial to Ghostery’s existence. We welcome everyone to our growing community!",
-    actionTitle: "Spread the word",
+    title: String(localized: "Spread the word", comment: "Title and button of the card about telling others about Ghostery"),
+    description: String(localized: "Receiving all this help is crucial to Ghostery’s existence. We welcome everyone to our growing community!"),
+    actionTitle: String(localized: "Spread the word", comment: "Title and button of the card about telling others about Ghostery"),
     action: .showDialog(.spreadTheWord),
     isPrimary: false
   ),
@@ -121,9 +121,9 @@ struct BecomeContributorView: View {
     Contribution(
       id: "donate",
       image: Icons.contributionDonate,
-      title: "Support our mission",
-      description: "Every contribution, big or small, is invaluable to our mission and future.",
-      actionTitle: "Donate now",
+      title: String(localized: "Support our mission", comment: "Title of the card about donations"),
+      description: String(localized: "Every contribution, big or small, is invaluable to our mission and future."),
+      actionTitle: String(localized: "Donate now"),
       action: .perform { showsDonation = true },
       isPrimary: true
     )
