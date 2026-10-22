@@ -43,14 +43,23 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let back = "Back"
-  static let title = "Enable Ghostery Privacy\nAd Block for Safari"
-  static let enabledTitle = "Ghostery Privacy Ad Block\nis enabled for Safari"
-  static let stepsHeader = "How to enable Ghostery"
-  static let enableStepsHeader = "How to enable Ghostery in Safari"
-  static let disableStepsHeader = "How to disable Ghostery in Safari"
-  static let openSettings = "Open Settings"
-  static let uninstallWarning = "Warning: The Uninstall option will remove the app from your entire system.\nDon’t use it if you want to keep using Ghostery in other browsers."
+  static let back = String(localized: "Back", comment: "Button going back to the previous page")
+  static let title = String(localized: "Enable Ghostery Privacy\nAd Block for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+  static let enabledTitle = String(localized: "Ghostery Privacy Ad Block\nis enabled for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+  static let stepsHeader = String(localized: "How to enable Ghostery")
+  static let enableStepsHeader = String(localized: "How to enable Ghostery in Safari")
+  static let disableStepsHeader = String(localized: "How to disable Ghostery in Safari")
+  static let openSettings = String(localized: "Open Settings", comment: "Button opening the extension settings of Safari")
+  static let uninstallWarning = String(localized: "Warning: The Uninstall option will remove the app from your entire system.\nDon’t use it if you want to keep using Ghostery in other browsers.", comment: "Uninstall is the name of the button in the extension settings of Safari")
+  static let expanded = String(localized: "Expanded", comment: "State of a list of steps, for assistive technologies")
+  static let collapsed = String(localized: "Collapsed", comment: "State of a list of steps, for assistive technologies")
+
+  // The parts between ** are in bold
+  static let openExtensionSettings = LocalizedStringResource("Open Safari extension **settings**.", comment: "Step of the instructions, with the part between ** in bold")
+  static let selectCheckbox = LocalizedStringResource("Select the checkbox next to **Ghostery**.", comment: "Step of the instructions, with the part between ** in bold")
+  static let allowOnEveryWebsite = LocalizedStringResource("Enable permission to **Always Allow on Every Website**.", comment: "Step of the instructions, with the part between ** in bold. Always Allow on Every Website is the name of the option in Safari.")
+  static let uncheckCheckbox = LocalizedStringResource("Uncheck the checkbox next to **Ghostery** under Installed Apps.", comment: "Step of the instructions, with the part between ** in bold")
+  static let goBack = LocalizedStringResource("Go back to this app.", comment: "Last step of the instructions")
 }
 
 struct SafariInstructionsView: View {
@@ -127,18 +136,12 @@ struct SafariInstructionsView: View {
   }
 
   private var disableSteps: some View {
-    let bold = AppTextStyle.labelL.font
-
-    return SafariInstructionsSteps {
-      SafariInstructionsStep(number: 1, text: Text("Open Safari extension \(Text("settings").font(bold))."), action: (
+    SafariInstructionsSteps {
+      SafariInstructionsStep(number: 1, text: Strings.openExtensionSettings, action: (
         Strings.openSettings, SafariExtension.showSettings
       ))
-      SafariInstructionsStep(
-        number: 2,
-        text: Text("Uncheck the checkbox next to \(Text("Ghostery").font(bold)) under Installed Apps."),
-        note: Strings.uninstallWarning
-      )
-      SafariInstructionsStep(number: 3, text: Text("Go back to this app."))
+      SafariInstructionsStep(number: 2, text: Strings.uncheckCheckbox, note: Strings.uninstallWarning)
+      SafariInstructionsStep(number: 3, text: Strings.goBack)
     }
     .padding(.horizontal, Constants.stepsHorizontalPadding)
   }
@@ -147,15 +150,13 @@ struct SafariInstructionsView: View {
 /// Steps to enable the extension in Safari, also shown by the onboarding
 struct SafariEnableSteps: View {
   var body: some View {
-    let bold = AppTextStyle.labelL.font
-
     SafariInstructionsSteps {
-      SafariInstructionsStep(number: 1, text: Text("Open Safari extension \(Text("settings").font(bold))."), action: (
+      SafariInstructionsStep(number: 1, text: Strings.openExtensionSettings, action: (
         Strings.openSettings, SafariExtension.showSettings
       ))
-      SafariInstructionsStep(number: 2, text: Text("Select the checkbox next to \(Text("Ghostery").font(bold))."))
-      SafariInstructionsStep(number: 3, text: Text("Enable permission to \(Text("Always Allow on Every Website").font(bold))."))
-      SafariInstructionsStep(number: 4, text: Text("Go back to this app."))
+      SafariInstructionsStep(number: 2, text: Strings.selectCheckbox)
+      SafariInstructionsStep(number: 3, text: Strings.allowOnEveryWebsite)
+      SafariInstructionsStep(number: 4, text: Strings.goBack)
     }
   }
 }
@@ -191,7 +192,7 @@ private struct SafariInstructionsSection<Steps: View>: View {
       }
       .buttonStyle(.plain)
       .accessibilityAddTraits(.isHeader)
-      .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+      .accessibilityValue(isExpanded ? Strings.expanded : Strings.collapsed)
       .modifier(SafariInstructionsStepsHeaderPadding())
 
       if isExpanded {
@@ -213,7 +214,8 @@ private struct SafariInstructionsSteps<Content: View>: View {
 
 private struct SafariInstructionsStep: View {
   let number: Int
-  let text: Text
+  /// The parts between ** are in bold
+  let text: LocalizedStringResource
   var action: (title: String, perform: () -> Void)?
   /// Shown below the text of the step
   var note: String?
@@ -228,7 +230,7 @@ private struct SafariInstructionsStep: View {
           .frame(width: Constants.stepNumberSize, height: Constants.stepNumberSize)
           .background(Circle().fill(Colors.bgBrandSecondary))
         VStack(alignment: .leading, spacing: Constants.stepTextSpacing) {
-          text
+          Text(text, boldFont: AppTextStyle.labelL.font)
             .textStyle(.bodyL)
             .foregroundColor(Colors.foregroundPrimary)
           if let note {

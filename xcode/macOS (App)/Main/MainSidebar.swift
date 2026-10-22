@@ -23,7 +23,7 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let support = "Support"
+  static let support = String(localized: "Support", comment: "Button opening the dialog with the ways to get help and give feedback")
 }
 
 struct MainSidebar: View {

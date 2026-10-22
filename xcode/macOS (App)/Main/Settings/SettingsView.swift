@@ -19,12 +19,12 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Ghostery Settings"
-  static let description = "Manage your privacy settings and control how your data is tracked online."
-  static let launchAtStartup = "Launch Ghostery automatically at startup"
-  static let launchAtStartupDescription = "Ensures your privacy is protected from the moment you go online. This seamless protection blocks trackers and unwanted ads without any extra effort, helping you browse faster and more securely right from startup."
-  static let keepMenuBarIcon = "Keep app icon in the macOS Menu Bar"
-  static let keepMenuBarIconDescription = "Keep the app icon in your macOS menu bar to quickly access Ghostery’s privacy controls and notifications, ensuring you stay informed and in control of your online tracking at all times."
+  static let title = String(localized: "Ghostery Settings", comment: "Title of the Settings section")
+  static let description = String(localized: "Manage your privacy settings and control how your data is tracked online.")
+  static let launchAtStartup = String(localized: "Launch Ghostery automatically at startup", comment: "Setting opening the app when the user logs in")
+  static let launchAtStartupDescription = String(localized: "Ensures your privacy is protected from the moment you go online. This seamless protection blocks trackers and unwanted ads without any extra effort, helping you browse faster and more securely right from startup.")
+  static let keepMenuBarIcon = String(localized: "Keep app icon in the macOS Menu Bar", comment: "Setting showing the icon of the app in the menu bar")
+  static let keepMenuBarIconDescription = String(localized: "Keep the app icon in your macOS menu bar to quickly access Ghostery’s privacy controls and notifications, ensuring you stay informed and in control of your online tracking at all times.")
 }
 
 struct SettingsView: View {
