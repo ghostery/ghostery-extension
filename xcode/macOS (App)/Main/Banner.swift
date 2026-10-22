@@ -46,10 +46,13 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let otherDeviceTitle = "Want to use this app on another device?"
-  static let otherDeviceDescription = "Scan the QR code to install the app on your phone or tablet."
-  static let scanQRCode = "Scan QR Code"
-  static let page = "Page %ld of %ld"
+  static let otherDeviceTitle = String(localized: "Want to use this app on another device?")
+  static let otherDeviceDescription = String(localized: "Scan the QR code to install the app on your phone or tablet.")
+  static let scanQRCode = String(localized: "Scan QR Code", comment: "Button opening the dialog with the QR code")
+
+  static func page(_ number: Int, of count: Int) -> String {
+    String(localized: "Page \(number) of \(count)", comment: "Dot of the pagination below the banner, for assistive technologies")
+  }
 }
 
 /// Item shown by the banner
@@ -85,15 +88,15 @@ fileprivate let bannerItems: [BannerItem] = [
   .notification(BannerNotification(
     id: "review",
     icon: Icons.bannerReview,
-    text: "Enjoying Ghostery?",
-    actionTitle: "Rate it on App Store",
+    text: String(localized: "Enjoying Ghostery?"),
+    actionTitle: String(localized: "Rate it on App Store"),
     action: .open(URLs.review)
   )),
   .notification(BannerNotification(
     id: "help",
     icon: Icons.bannerHelp,
-    text: "Having trouble using Ghostery?",
-    actionTitle: "Get Help",
+    text: String(localized: "Having trouble using Ghostery?"),
+    actionTitle: String(localized: "Get Help", comment: "Opens the dialog with the ways to get help"),
     action: .showDialog(.support)
   )),
 ]
@@ -113,8 +116,8 @@ struct Banner: View {
     .notification(BannerNotification(
       id: "launch-at-login",
       icon: Icons.bannerLaunch,
-      text: "Want Ghostery to start automatically when you log in?",
-      actionTitle: "Launch at startup",
+      text: String(localized: "Want Ghostery to start automatically when you log in?"),
+      actionTitle: String(localized: "Launch at startup", comment: "Turns on the setting opening the app when the user logs in"),
       action: .perform {
         settings.setLaunchesAtLogin(true)
         // The item is removed, so the next one takes its place
@@ -260,7 +263,7 @@ struct Banner: View {
               .contentShape(Rectangle())
           }
           .buttonStyle(.plain)
-          .accessibilityLabel(String(format: Strings.page, itemIndex + 1, items.count))
+          .accessibilityLabel(Strings.page(itemIndex + 1, of: items.count))
           .accessibilityAddTraits(isCurrent ? .isSelected : [])
         }
       }
@@ -343,7 +346,9 @@ struct OtherDeviceBannerItem: View {
         }
       }
       .buttonStyle(AppButtonStyle(kind: .secondary))
-      .frame(width: Constants.buttonWidth)
+      // Wider for the longer titles of some languages
+      .frame(minWidth: Constants.buttonWidth)
+      .fixedSize()
     }
     .padding(Constants.padding)
     // Read as one element, with the action of its button, whose title

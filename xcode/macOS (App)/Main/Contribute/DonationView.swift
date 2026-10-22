@@ -55,20 +55,20 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let back = "Back"
-  static let restore = "Restore donation"
-  static let title = "Choose the most convenient method to support Ghostery"
-  static let description = "Support our mission and help us develop even stronger protection against trackers and ads, making the web safer for everyone."
-  static let monthly = "Monthly"
-  static let yearly = "Yearly donation"
-  static let oneTime = "One-time donation"
-  static let donate = "Donate"
-  static let eula = "EULA"
-  static let terms = "Terms of Use"
-  static let privacy = "Privacy Policy"
-  static let failedTitle = "Donation failed"
-  static let failedMessage = "The App Store couldn’t complete the donation. Please try again later."
-  static let ok = "OK"
+  static let back = String(localized: "Back", comment: "Button going back to the previous page")
+  static let restore = String(localized: "Restore donation", comment: "Button restoring the monthly or yearly donations made with the Apple Account of the user")
+  static let title = String(localized: "Choose the most convenient method to support Ghostery")
+  static let description = String(localized: "Support our mission and help us develop even stronger protection against trackers and ads, making the web safer for everyone.")
+  static let monthly = String(localized: "Monthly", comment: "Option for a donation made every month")
+  static let yearly = String(localized: "Yearly donation", comment: "Option for a donation made every year")
+  static let oneTime = String(localized: "One-time donation", comment: "Option for a single donation")
+  static let donate = String(localized: "Donate", comment: "Button making the selected donation")
+  static let eula = String(localized: "EULA", comment: "Link to the End User License Agreement")
+  static let terms = String(localized: "Terms of Use")
+  static let privacy = String(localized: "Privacy Policy")
+  static let failedTitle = String(localized: "Donation failed")
+  static let failedMessage = String(localized: "The App Store couldn’t complete the donation. Please try again later.")
+  static let ok = String(localized: "OK", comment: "Button closing the alert")
 }
 
 fileprivate enum URLs {
@@ -247,7 +247,7 @@ struct DonationView: View {
   }
 
   private var legalSeparator: some View {
-    Text("•")
+    Text(verbatim: "•")
       .foregroundColor(Colors.foregroundQuaternary)
       .accessibilityHidden(true)
   }

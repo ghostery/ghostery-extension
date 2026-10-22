@@ -23,10 +23,10 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let home = "Home"
-  static let learningZone = "Learning Zone"
-  static let contribute = "Contribute"
-  static let settings = "Settings"
+  static let home = String(localized: "Home", comment: "Section of the main window")
+  static let learningZone = String(localized: "Learning Zone", comment: "Section of the main window, with articles about privacy")
+  static let contribute = String(localized: "Contribute", comment: "Section of the main window, with the ways to support Ghostery")
+  static let settings = String(localized: "Settings", comment: "Section of the main window")
 }
 
 /// Sections of the main window, in the order of the sidebar

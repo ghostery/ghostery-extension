@@ -44,16 +44,16 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Hundreds of contributors are building the Ghostery Privacy Suite with us"
-  static let description = "Receiving all this help is crucial to Ghostery’s existence. We welcome everyone to our growing community!"
-  static let share = "Spread the word:"
-  static let shareOnFacebook = "Share on Facebook"
-  static let shareOnX = "Share on X"
-  static let shareOnLinkedin = "Share on LinkedIn"
-  static let copy = "Copy to clipboard"
-  static let copied = "Copied"
-  static let shareByEmail = "Share by email"
-  static let message = "Browse the web safer, faster & with less ads.\nGet Ghostery for your browser."
+  static let title = String(localized: "Hundreds of contributors are building the Ghostery Privacy Suite with us", comment: "Ghostery Privacy Suite is the name of all Ghostery’s products")
+  static let description = String(localized: "Receiving all this help is crucial to Ghostery’s existence. We welcome everyone to our growing community!")
+  static let share = String(localized: "Spread the word:", comment: "Shown above the buttons sharing Ghostery")
+  static let shareOnFacebook = String(localized: "Share on Facebook")
+  static let shareOnX = String(localized: "Share on X", comment: "X is the social network formerly known as Twitter")
+  static let shareOnLinkedin = String(localized: "Share on LinkedIn")
+  static let copy = String(localized: "Copy to clipboard")
+  static let copied = String(localized: "Copied", comment: "Shown after the message is copied to the clipboard")
+  static let shareByEmail = String(localized: "Share by email")
+  static let message = String(localized: "Browse the web safer, faster & with less ads.\nGet Ghostery for your browser.", comment: "Message shared with the link to Ghostery, in two lines")
 }
 
 fileprivate enum URLs {

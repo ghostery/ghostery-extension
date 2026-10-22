@@ -24,6 +24,8 @@ extension Colors {
   // Warning palette, as in the extension's styles
   static let bgWarningPrimary = Color(hex: "#FFF2D9")
   static let borderWarningPrimary = Color(hex: "#FEDF89")
+  static let borderWarningSolid = Color(hex: "#DC6803")
+  static let foregroundWarningPrimary = Color(hex: "#B54708")
   static let warning600 = Color(hex: "#DC6803")
   static let foregroundOnBrand = Color.white
   static let shadowButton = Color.black.opacity(0.06)
