@@ -21,9 +21,9 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = "Use this app on another device"
-  static let description = "Scan the QR code to install the app on your phone or tablet."
-  static let qrCode = "QR code"
+  static let title = String(localized: "Use this app on another device")
+  static let description = String(localized: "Scan the QR code to install the app on your phone or tablet.")
+  static let qrCode = String(localized: "QR code", comment: "Description of the QR code image, for assistive technologies")
 }
 
 struct OtherDeviceDialog: View {

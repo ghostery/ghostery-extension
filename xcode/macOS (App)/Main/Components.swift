@@ -50,9 +50,9 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let toggleOn = "ON"
-  static let toggleOff = "OFF"
-  static let close = "Close"
+  static let toggleOn = String(localized: "ON", comment: "State of a switch, shown next to it")
+  static let toggleOff = String(localized: "OFF", comment: "State of a switch, shown next to it")
+  static let close = String(localized: "Close", comment: "Button closing a dialog")
 }
 
 // MARK: - Typography
@@ -124,6 +124,8 @@ struct AppButtonStyle: ButtonStyle {
   enum Kind {
     case primary
     case secondary
+    /// Secondary, in the colors of a warning, for the action of an alert
+    case warning
   }
 
   enum Size {
@@ -140,24 +142,33 @@ struct AppButtonStyle: ButtonStyle {
 
   func makeBody(configuration: ButtonStyleConfiguration) -> some View {
     let shape = RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
+    let colors = self.colors
 
     configuration.label
       .textStyle(.labelM)
-      .foregroundColor(kind == .primary ? Colors.foregroundOnBrand : Colors.foregroundBrandPrimary)
+      .foregroundColor(colors.label)
       .lineLimit(1)
       .padding(.horizontal, Constants.buttonHorizontalPadding)
       .frame(maxWidth: size == .small ? nil : .infinity)
       .frame(height: height)
       .background(
         shape
-          .fill(kind == .primary ? Colors.bgBrandSolid : Colors.bgPrimary)
+          .fill(colors.fill)
           .shadow(color: Colors.shadowButton, radius: Constants.buttonShadowRadius, y: Constants.buttonShadowY)
       )
       .overlay(
-        shape.strokeBorder(kind == .primary ? Color.clear : Colors.borderBrandSolid, lineWidth: Constants.borderLineWidth)
+        shape.strokeBorder(colors.border, lineWidth: Constants.borderLineWidth)
       )
       .contentShape(shape)
       .opacity(configuration.isPressed ? Constants.buttonPressedOpacity : 1)
+  }
+
+  private var colors: (label: Color, fill: Color, border: Color) {
+    switch kind {
+    case .primary: return (Colors.foregroundOnBrand, Colors.bgBrandSolid, .clear)
+    case .secondary: return (Colors.foregroundBrandPrimary, Colors.bgPrimary, Colors.borderBrandSolid)
+    case .warning: return (Colors.foregroundWarningPrimary, Colors.bgPrimary, Colors.borderWarningSolid)
+    }
   }
 
   private var height: CGFloat {
@@ -192,7 +203,8 @@ struct AppToggleStyle: ToggleStyle {
         .contentShape(Rectangle())
       }
       .buttonStyle(.plain)
-      .frame(width: Constants.toggleStateWidth, alignment: .leading)
+      // Wider for the longer states of some languages
+      .frame(minWidth: Constants.toggleStateWidth, alignment: .leading)
       .padding(.top, Constants.toggleTopPadding)
     }
     // Assistive technologies get a single toggle, named by its label
@@ -212,6 +224,21 @@ struct AppToggleStyle: ToggleStyle {
           .padding(Constants.toggleKnobPadding)
       }
       .animation(.easeInOut(duration: Constants.toggleAnimationDuration), value: isOn)
+  }
+}
+
+// MARK: - Texts
+
+extension Text {
+  /// Translated text whose parts between ** are in the bold font, like
+  /// the names of the buttons and options it refers to
+  init(_ resource: LocalizedStringResource, boldFont: Font) {
+    var string = AttributedString(localized: resource)
+    for run in string.runs where run.inlinePresentationIntent?.contains(.stronglyEmphasized) == true {
+      string[run.range].swiftUI.font = boldFont
+      string[run.range].inlinePresentationIntent = nil
+    }
+    self.init(string)
   }
 }
 
