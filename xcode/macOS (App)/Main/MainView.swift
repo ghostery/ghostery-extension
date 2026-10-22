@@ -21,50 +21,6 @@ fileprivate enum Constants {
   static let dialogAnimationDuration: Double = 0.2
 }
 
-fileprivate enum Strings {
-  // You can translate your strings here
-  static let home = String(localized: "Home", comment: "Section of the main window")
-  static let learningZone = String(localized: "Learning Zone", comment: "Section of the main window, with articles about privacy")
-  static let contribute = String(localized: "Contribute", comment: "Section of the main window, with the ways to support Ghostery")
-  static let settings = String(localized: "Settings", comment: "Section of the main window")
-}
-
-/// Sections of the main window, in the order of the sidebar
-enum MainSection: String, CaseIterable, Identifiable {
-  case home
-  case learningZone
-  case contribute
-  case settings
-
-  var id: Self { self }
-
-  /// Section opened by a link to the app, like the one of the settings
-  /// page of the extension in Safari
-  init?(url: URL) {
-    guard url.scheme == "ghosteryapp" else { return nil }
-    // The extension links only to the contribution page so far
-    self = .contribute
-  }
-
-  var title: String {
-    switch self {
-    case .home: return Strings.home
-    case .learningZone: return Strings.learningZone
-    case .contribute: return Strings.contribute
-    case .settings: return Strings.settings
-    }
-  }
-
-  var icon: String {
-    switch self {
-    case .home: return Icons.homeNavHome
-    case .learningZone: return Icons.homeNavLearn
-    case .contribute: return Icons.homeNavContribute
-    case .settings: return Icons.homeNavSettings
-    }
-  }
-}
-
 /// Section requested by a link to the app, handled by the app delegate,
 /// until the main window shows it
 @MainActor
@@ -73,48 +29,6 @@ final class AppLinks {
   static let shared = AppLinks()
 
   var section: MainSection?
-}
-
-/// Dialogs shown over the sections of the main window
-enum MainDialog {
-  case support
-  case otherDevice
-  case spreadTheWord
-  case safariOnboarding
-  case safariEnabled
-}
-
-/// What a button of a card or a banner does
-enum MainAction {
-  /// Opens the link in the browser
-  case open(URL)
-  case showDialog(MainDialog)
-  /// Changes the view showing the button, like showing its subpage
-  case perform(@MainActor () -> Void)
-}
-
-/// Performs the action of a button, called like a function, as SwiftUI's
-/// own actions
-struct PerformAction: Equatable {
-  fileprivate let showDialog: (MainDialog) -> Void
-  fileprivate let openURL: OpenURLAction
-
-  @MainActor
-  func callAsFunction(_ action: MainAction) {
-    switch action {
-    case .open(let url): openURL(url)
-    case .showDialog(let dialog): showDialog(dialog)
-    case .perform(let perform): perform()
-    }
-  }
-
-  // Every action goes through the state of the main window, so a new one
-  // doesn't need to update the views reading it
-  static func == (lhs: Self, rhs: Self) -> Bool { true }
-}
-
-extension EnvironmentValues {
-  @Entry var performAction = PerformAction(showDialog: { _ in }, openURL: OpenURLAction { _ in .systemAction })
 }
 
 struct MainView: View {

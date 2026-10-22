@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "contribution-donate-wide.svg",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "contribution-donate.svg",
+      "idiom" : "mac"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
+  }
+}
