@@ -194,7 +194,7 @@ struct HomeView: View {
         .accessibilityAddTraits(.isHeader)
       Text(Strings.detectedBrowsers(browsers.count))
         .textStyle(.labelS)
-        .foregroundColor(Colors.foregroungTertiary)
+        .foregroundColor(Colors.foregroundTertiary)
     }
     .padding(.leading, Constants.browsersHeaderLeadingPadding)
     .padding(.trailing, Constants.browsersHeaderTrailingPadding)

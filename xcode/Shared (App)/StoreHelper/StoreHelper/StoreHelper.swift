@@ -142,23 +142,48 @@ public class StoreHelper: ObservableObject {
             return KeychainHelper.count(for: productId) > 0
         }
 
-        guard let currentEntitlement = await Transaction.currentEntitlement(for: productId) else {
-            return false  // There's no transaction for the product, so it hasn't been purchased
+        // There's no transaction for the product when it hasn't been purchased, and there can be more than one,
+        // like when the user also has the product through Family Sharing
+        var isPurchased = false
+        for currentEntitlement in await currentEntitlements(for: productId) {
+
+            // See if the transaction passed StoreKit's automatic verification
+            let result = checkVerificationResult(result: currentEntitlement)
+            if !result.verified {
+                StoreLog.transaction(.transactionValidationFailure, productId: result.transaction.productID)
+                throw StoreException.transactionVerificationFailed
+            }
+
+            // Make sure our internal set of purchase pids is in-sync with the App Store
+            await updatePurchasedIdentifiers(result.transaction)
+
+            // See if the App Store has revoked the users access to the product (e.g. because of a refund).
+            // If this transaction represents a subscription, see if the user upgraded to a higher-level subscription.
+            if result.transaction.revocationDate == nil && !result.transaction.isUpgraded {
+                isPurchased = true
+            }
         }
 
-        // See if the transaction passed StoreKit's automatic verification
-        let result = checkVerificationResult(result: currentEntitlement)
-        if !result.verified {
-            StoreLog.transaction(.transactionValidationFailure, productId: result.transaction.productID)
-            throw StoreException.transactionVerificationFailed
+        return isPurchased
+    }
+
+    /// Requests the latest transactions that entitle the user to a product from the App Store.
+    /// - Parameter productId: The `ProductId` of the product.
+    /// - Returns: Returns the transactions, which are empty if the product hasn't been purchased.
+    @MainActor private func currentEntitlements(for productId: ProductId) async -> [VerificationResult<Transaction>] {
+
+        #if os(macOS)
+        // Before macOS 15.4, StoreKit gives only the latest one of them
+        guard #available(macOS 15.4, *) else {
+            return await Transaction.currentEntitlement(for: productId).map { [$0] } ?? []
         }
+        #endif
 
-        // Make sure our internal set of purchase pids is in-sync with the App Store
-        await updatePurchasedIdentifiers(result.transaction)
-
-        // See if the App Store has revoked the users access to the product (e.g. because of a refund).
-        // If this transaction represents a subscription, see if the user upgraded to a higher-level subscription.
-        return result.transaction.revocationDate == nil && !result.transaction.isUpgraded
+        var entitlements: [VerificationResult<Transaction>] = []
+        for await entitlement in Transaction.currentEntitlements(for: productId) {
+            entitlements.append(entitlement)
+        }
+        return entitlements
     }
 
     /// Requests the most recent transaction for a product from the App Store and determines if it has been previously purchased.
