@@ -43,8 +43,9 @@ struct QRCodeImage: View {
       if hasLogo {
         GeometryReader { proxy in
           // The circle of the logo covers the modules below it
-          Image(decorative: Icons.qrCodeLogo)
+          Image(.qrCodeLogo)
             .resizable()
+            .accessibilityHidden(true)
             .frame(width: proxy.size.width * Constants.logoSize, height: proxy.size.height * Constants.logoSize)
             .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
         }
@@ -161,9 +162,7 @@ private struct QRCodeShape: Shape {
   }
 }
 
-struct QRCodeImage_Previews: PreviewProvider {
-  static var previews: some View {
-    QRCodeImage(url: URL(string: "https://www.ghostery.com")!)
-      .frame(width: 200, height: 200)
-  }
+#Preview {
+  QRCodeImage(url: URL(string: "https://www.ghostery.com")!)
+    .frame(width: 200, height: 200)
 }
