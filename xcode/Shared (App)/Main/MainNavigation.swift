@@ -5,7 +5,8 @@
 //  Sections of the app, its dialogs, and the actions of its buttons. Both
 //  apps have the same ones, except for Settings, whose options are only for
 //  the macOS app. Each shows them in its own way: the macOS app in the
-//  sidebar of its window, and the iOS app in its tab bar.
+//  sidebar of its window, and the iOS app in its tab bar, both followed by
+//  the button opening the Support dialog.
 //
 
 import SwiftUI
@@ -18,6 +19,7 @@ fileprivate enum Strings {
   #if os(macOS)
   static let settings = String(localized: "Settings", comment: "Section of the main window")
   #endif
+  static let support = String(localized: "Support", comment: "Button opening the dialog with the ways to get help and give feedback")
 }
 
 /// Sections of the app, in the order of the sidebar and of the tab bar
@@ -50,20 +52,26 @@ enum MainSection: String, CaseIterable, Identifiable {
     }
   }
 
-  var icon: String {
+  var icon: ImageResource {
     switch self {
-    case .home: return Icons.homeNavHome
-    case .learningZone: return Icons.homeNavLearn
-    case .contribute: return Icons.homeNavContribute
+    case .home: return .homeNavHome
+    case .learningZone: return .homeNavLearn
+    case .contribute: return .homeNavContribute
     #if os(macOS)
-    case .settings: return Icons.homeNavSettings
+    case .settings: return .homeNavSettings
     #endif
     }
   }
 }
 
+/// Button opening the Support dialog, after the sections
+enum SupportButton {
+  static let title = Strings.support
+  static let icon = ImageResource.homeNavSupport
+}
+
 /// Dialogs shown over the sections
-enum MainDialog {
+enum MainDialog: String {
   case support
   case otherDevice
   case spreadTheWord
@@ -83,10 +91,11 @@ enum MainAction {
 /// Performs the action of a button, called like a function, as SwiftUI's
 /// own actions
 struct PerformAction: Equatable {
-  private let showDialog: (MainDialog) -> Void
-  private let openURL: OpenURLAction
+  private let showDialog: @MainActor (MainDialog) -> Void
+  private let openURL: OpenURLAction?
 
-  init(showDialog: @escaping (MainDialog) -> Void, openURL: OpenURLAction) {
+  /// Without the actions of the root view, it does nothing, like in previews
+  init(showDialog: @escaping @MainActor (MainDialog) -> Void = { _ in }, openURL: OpenURLAction? = nil) {
     self.showDialog = showDialog
     self.openURL = openURL
   }
@@ -94,7 +103,7 @@ struct PerformAction: Equatable {
   @MainActor
   func callAsFunction(_ action: MainAction) {
     switch action {
-    case .open(let url): openURL(url)
+    case .open(let url): openURL?(url)
     case .showDialog(let dialog): showDialog(dialog)
     case .perform(let perform): perform()
     }
@@ -106,5 +115,5 @@ struct PerformAction: Equatable {
 }
 
 extension EnvironmentValues {
-  @Entry var performAction = PerformAction(showDialog: { _ in }, openURL: OpenURLAction { _ in .systemAction })
+  @Entry var performAction = PerformAction()
 }

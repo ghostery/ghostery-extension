@@ -9,11 +9,6 @@
 import SwiftUI
 
 fileprivate enum Constants {
-  static let dialogBlurRadius: CGFloat = 8
-  static let dialogBackdropOpacity: Double = 0.5
-  static let dialogMargin: CGFloat = 16
-  static let dialogAnimationDuration: Double = 0.2
-
   // Lights of the background on iPhones: blurred circles, placed for
   // a screen of the design's size
   static let backgroundSize = CGSize(width: 402, height: 874)
@@ -40,11 +35,7 @@ struct MainView: View {
   // saved to the scene storage, so the views it shows are updated.
   @SceneStorage("MainView.section") private var restoredSection = MainSection.home
   @State private var section = MainSection.home
-  @State private var dialog: MainDialog?
-  // Whether the app checked if it should show the onboarding, which it
-  // does only when it opens for the first time
-  @AppStorage("MainView.safariOnboardingChecked") private var isSafariOnboardingChecked = false
-  @Environment(\.openURL) private var openURL
+  @State private var dialogs = DialogPresenter()
 
   var body: some View {
     GeometryReader { proxy in
@@ -55,31 +46,25 @@ struct MainView: View {
           MainTabBar(
             selection: $section,
             bottomSafeAreaInset: proxy.safeAreaInsets.bottom,
-            onSupport: { showDialog(.support) }
+            onSupport: { dialogs.show(.support) }
           )
         }
         // A dialog covers the sections and the tab bar
-        .disabled(dialog != nil)
-        .accessibilityHidden(dialog != nil)
-        .blur(radius: dialog != nil ? Constants.dialogBlurRadius : 0)
-        .overlay {
-          if let dialog {
-            dialogView(dialog)
-          }
-        }
-        // For the buttons of the sections and of the dialogs
-        .environment(\.performAction, PerformAction(showDialog: showDialog, openURL: openURL))
+        .dialogHost(dialogs)
     }
     .background(MainBackground())
     .preferredColorScheme(.light)
-    .task { await showSafariOnboardingIfNeeded() }
-    .onAppear { section = restoredSection }
+    // The text grows with the size chosen by the user up to the largest one
+    // before the accessibility sizes, which the layouts don't fit
+    .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+    .task { await dialogs.showSafariOnboardingIfNeeded() }
+    .onAppear { section = DebugLaunch.section ?? restoredSection }
     .onChange(of: section) { restoredSection = section }
     // Links to the app, like the one of the settings page of the extension
     // in Safari, show a section
     .onOpenURL { url in
       guard let section = MainSection(url: url) else { return }
-      dialog = nil
+      dialogs.dismiss()
       self.section = section
     }
   }
@@ -94,72 +79,6 @@ struct MainView: View {
     case .contribute:
       BecomeContributorView()
     }
-  }
-
-  // The dialog over a frosted backdrop, which closes it when tapped
-  private func dialogView(_ dialog: MainDialog) -> some View {
-    ZStack {
-      Colors.bgPrimary
-        .opacity(Constants.dialogBackdropOpacity)
-        .ignoresSafeArea()
-        .contentShape(Rectangle())
-        .onTapGesture { closeDialog() }
-        .accessibilityHidden(true)
-      Group {
-        switch dialog {
-        case .support:
-          SupportDialog(onClose: closeDialog)
-        case .otherDevice:
-          OtherDeviceDialog(onClose: closeDialog)
-        case .spreadTheWord:
-          SpreadTheWordDialog(onClose: closeDialog)
-        case .safariOnboarding:
-          SafariOnboardingDialog(onClose: closeDialog, onEnabled: { showDialog(.safariEnabled) })
-        case .safariEnabled:
-          SafariEnabledDialog(onClose: closeDialog)
-        }
-      }
-      .padding(Constants.dialogMargin)
-      // The escape gesture of VoiceOver closes it
-      .accessibilityAction(.escape, closeDialog)
-    }
-    .transition(.opacity)
-  }
-
-  private func showDialog(_ dialog: MainDialog) {
-    withAnimation(.easeOut(duration: Constants.dialogAnimationDuration)) {
-      self.dialog = dialog
-    }
-  }
-
-  private func closeDialog() {
-    withAnimation(.easeOut(duration: Constants.dialogAnimationDuration)) {
-      dialog = nil
-    }
-  }
-
-  // Shows the steps to enable the extension, unless it's enabled already.
-  // When Safari can't tell, it's checked again the next time.
-  private func showSafariOnboardingIfNeeded() async {
-    #if DEBUG
-    // Debug builds show it on every launch, to make working on it easier
-    let isChecked = false
-    #else
-    let isChecked = isSafariOnboardingChecked
-    #endif
-    guard !isChecked, let isEnabled = await safariExtensionState() else { return }
-
-    isSafariOnboardingChecked = true
-    if !isEnabled {
-      showDialog(.safariOnboarding)
-    }
-  }
-
-  // When Safari doesn't tell the state, the extension is taken as disabled,
-  // so the steps are shown once
-  private func safariExtensionState() async -> Bool? {
-    guard SafariExtension.isStateAvailable else { return false }
-    return await SafariExtension.shared.refresh()
   }
 }
 
@@ -212,9 +131,6 @@ private struct MainBackground: View {
   }
 }
 
-struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainView()
-      .environment(Donations())
-  }
+#Preview {
+  MainView()
 }

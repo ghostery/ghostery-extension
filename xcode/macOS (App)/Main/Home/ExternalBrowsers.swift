@@ -19,7 +19,7 @@ fileprivate enum Constants {
   static let filesAndFoldersSettingsURL = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_FilesAndFolders")!
 }
 
-fileprivate let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Ghostery", category: "ExternalBrowsers")
+fileprivate let logger = Logger(category: "ExternalBrowsers")
 
 enum ExternalBrowser: String, CaseIterable, Codable, Identifiable {
   case firefox
@@ -213,7 +213,7 @@ actor ExternalBrowserDetector {
       return firefoxProfiles(in: profilesURL).contains { profile in
         guard isFirefoxProfile(profile, lastOpenedBy: appURL) else { return false }
         return browser.extensionIDs.contains { id in
-          readJSON(profile.appending(path: "extensions.json")) { isFirefoxExtensionEnabled($0, id: id) } == true
+          readJSON(profile.appending(path: "extensions.json")) { BrowserProfiles.isFirefoxExtensionEnabled($0, id: id) } == true
         }
       }
     case .chrome, .edge:
@@ -228,13 +228,8 @@ actor ExternalBrowserDetector {
   // The profiles of profiles.ini, and the ones in the folder of profiles,
   // as the profile manager of Firefox doesn't list all of them there
   private func firefoxProfiles(in profilesURL: URL) -> [URL] {
-    var profiles: [URL] = []
-
     let sections = readINI(profilesURL.appending(path: "profiles.ini")) ?? []
-    for section in sections {
-      guard let path = section["Path"] else { continue }
-      profiles.append(section["IsRelative"] == "1" ? profilesURL.appending(path: path) : URL(fileURLWithPath: path))
-    }
+    var profiles = BrowserProfiles.firefoxProfiles(listedIn: sections, profilesURL: profilesURL)
 
     let folder = profilesURL.appending(path: "Profiles", directoryHint: .isDirectory)
     if let urls = try? FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil) {
@@ -246,36 +241,19 @@ actor ExternalBrowserDetector {
     return paths.map { URL(fileURLWithPath: $0, isDirectory: true) }
   }
 
-  // Firefox Nightly and Developer Edition share the profiles with Firefox,
-  // and each profile keeps the location of the app which opened it last
   private func isFirefoxProfile(_ profile: URL, lastOpenedBy appURL: URL) -> Bool {
     let sections = readINI(profile.appending(path: "compatibility.ini")) ?? []
-    guard let platformPath = sections.lazy.compactMap({ $0["LastPlatformDir"] }).first else { return false }
-    return platformPath.hasPrefix(appURL.standardizedFileURL.path + "/")
+    return BrowserProfiles.isFirefoxProfile(compatibility: sections, lastOpenedBy: appURL)
   }
 
-  /// The sections of the INI file, with their keys and values
   private func readINI(_ url: URL) -> [[String: String]]? {
     readFile(url) { data in
-      guard let text = String(data: data, encoding: .utf8) else { return nil }
-
-      var sections: [[String: String]] = []
-      for line in text.components(separatedBy: .newlines) {
-        let line = line.trimmingCharacters(in: .whitespaces)
-        if line.hasPrefix("[") {
-          sections.append([:])
-        } else if let separator = line.firstIndex(of: "="), !sections.isEmpty {
-          sections[sections.count - 1][String(line[..<separator])] = String(line[line.index(after: separator)...])
-        }
-      }
-      return sections
+      String(data: data, encoding: .utf8).map(BrowserProfiles.parseINI)
     }
   }
 
   private func chromiumProfiles(in profilesURL: URL) -> [URL] {
-    let names = readJSON(profilesURL.appending(path: "Local State")) { json in
-      ((json["profile"] as? [String: Any])?["info_cache"] as? [String: Any]).map { Array($0.keys) }
-    }
+    let names = readJSON(profilesURL.appending(path: "Local State")) { BrowserProfiles.chromiumProfileNames(localState: $0) }
     return (names ?? ["Default"]).map { profilesURL.appending(path: $0, directoryHint: .isDirectory) }
   }
 
@@ -283,7 +261,7 @@ actor ExternalBrowserDetector {
     // The settings of extensions are in the secure file, and older
     // versions of the browsers kept them in the other one
     for name in ["Secure Preferences", "Preferences"] {
-      if let isEnabled = readJSON(profile.appending(path: name), parse: { isChromiumExtensionEnabled($0, id: id) }) {
+      if let isEnabled = readJSON(profile.appending(path: name), parse: { BrowserProfiles.isChromiumExtensionEnabled($0, id: id) }) {
         return isEnabled
       }
     }
@@ -317,33 +295,4 @@ actor ExternalBrowserDetector {
       (try? JSONSerialization.jsonObject(with: data) as? [String: Any]).flatMap(parse)
     }
   }
-}
-
-/// Whether the extension is enabled, or nil when it isn't installed
-fileprivate func isFirefoxExtensionEnabled(_ json: [String: Any], id: String) -> Bool? {
-  guard let addons = json["addons"] as? [[String: Any]],
-        let addon = addons.first(where: { $0["id"] as? String == id }) else { return nil }
-
-  return addon["active"] as? Bool == true
-    && addon["userDisabled"] as? Bool != true
-    && addon["appDisabled"] as? Bool != true
-    && addon["embedderDisabled"] as? Bool != true
-}
-
-/// Whether the extension is enabled, or nil when it isn't installed
-fileprivate func isChromiumExtensionEnabled(_ json: [String: Any], id: String) -> Bool? {
-  guard let settings = (json["extensions"] as? [String: Any])?["settings"] as? [String: Any],
-        let extensionSettings = settings[id] as? [String: Any] else { return nil }
-
-  // A list of reasons, which used to be a bit mask, and older versions also
-  // keep a state, of which 1 is enabled
-  switch extensionSettings["disable_reasons"] {
-  case let reasons as [Any] where !reasons.isEmpty: return false
-  case let reasons as Int where reasons != 0: return false
-  default: break
-  }
-  if let state = extensionSettings["state"] as? Int {
-    return state == 1
-  }
-  return true
 }

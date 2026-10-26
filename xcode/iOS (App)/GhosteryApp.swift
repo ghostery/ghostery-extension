@@ -9,13 +9,14 @@ import SwiftUI
 
 @main
 struct GhosteryApp: App {
-  // Created at the launch, to handle the transactions of the App Store
-  @State private var donations = Donations()
+  init() {
+    // Handles the transactions of the App Store from the launch
+    Donations.shared.start()
+  }
 
   var body: some Scene {
     WindowGroup {
       MainView()
-        .environment(donations)
     }
   }
 }

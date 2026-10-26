@@ -10,7 +10,6 @@ import SwiftUI
 
 fileprivate enum Constants {
   static let borderColor = Color(hex: "#CCE8F5")
-  static let borderLineWidth: CGFloat = 1
   // Light along the top edge of the tabs
   static let highlightRadius: CGFloat = 1.5
   static let highlightY: CGFloat = 2
@@ -21,13 +20,8 @@ fileprivate enum Constants {
   static let screenEdgeBottomPadding: CGFloat = 16
 }
 
-fileprivate enum Strings {
-  // You can translate your strings here
-  static let support = String(localized: "Support", comment: "Button opening the dialog with the ways to get help and give feedback")
-}
-
 /// Sizes of the tab bar, which is larger on iPads
-fileprivate struct MainTabBarLayout {
+fileprivate struct MainTabBarLayout: PlatformLayout {
   var tabWidth: CGFloat
   var tabHeight: CGFloat
   /// Around the tabs, inside their bar
@@ -69,12 +63,12 @@ struct MainTabBar: View {
   var bottomSafeAreaInset: CGFloat
   var onSupport: () -> Void
 
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @CurrentLayout private var layout: MainTabBarLayout
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @Namespace private var namespace
 
   var body: some View {
-    let layout = horizontalSizeClass == .regular ? MainTabBarLayout.tablet : .phone
+    let layout = self.layout
 
     HStack(spacing: layout.spacing) {
       tabs(layout)
@@ -99,7 +93,7 @@ struct MainTabBar: View {
             .shadow(.inner(color: .white, radius: Constants.highlightRadius, y: Constants.highlightY))
         )
     )
-    .overlay(Capsule().strokeBorder(Constants.borderColor, lineWidth: Constants.borderLineWidth))
+    .overlay(Capsule().strokeBorder(Constants.borderColor, lineWidth: Borders.width))
     // The white background moves to the selected tab
     .animation(reduceMotion ? nil : .easeInOut(duration: Constants.selectionAnimationDuration), value: selection)
     // Read as a tab bar, which tells the position of each tab
@@ -134,13 +128,13 @@ struct MainTabBar: View {
 
   private func supportButton(_ layout: MainTabBarLayout) -> some View {
     Button(action: onSupport) {
-      Image(Icons.homeNavSupport)
+      Image(SupportButton.icon)
         .frame(width: layout.supportButtonSize, height: layout.supportButtonSize)
         .background(RadialGradient.support(size: layout.supportButtonSize))
         .clipShape(Circle())
         .contentShape(Circle())
     }
     .buttonStyle(.plain)
-    .accessibilityLabel(Strings.support)
+    .accessibilityLabel(SupportButton.title)
   }
 }
