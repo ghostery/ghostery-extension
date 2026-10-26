@@ -11,7 +11,7 @@ import SafariServices
 import OSLog
 import UIKit
 
-fileprivate let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Ghostery", category: "SafariExtension")
+fileprivate let logger = Logger(category: "SafariExtension")
 #endif
 
 @MainActor
@@ -19,7 +19,7 @@ fileprivate let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Ghos
 final class SafariExtension {
   static let shared = SafariExtension()
 
-  private static let identifier = Bundle.main.bundleIdentifier! + ".safari"
+  nonisolated private static let identifier = Bundle.main.bundleIdentifier! + ".safari"
   private static let isEnabledKey = "SafariExtension.isEnabled"
 
   /// Whether the extension is turned on in the settings of Safari. The last
@@ -27,21 +27,28 @@ final class SafariExtension {
   /// after one.
   private(set) var isEnabled = UserDefaults.standard.bool(forKey: isEnabledKey)
 
-  #if os(iOS)
-  /// Whether Safari tells the app the state, which it does since iOS 26.2.
-  /// Before, the extension stays disabled for the app.
+  /// Whether Safari tells the app the state, which it does on the Mac, and
+  /// on iPhones and iPads since iOS 26.2. Before, the extension stays
+  /// disabled for the app.
   static var isStateAvailable: Bool {
+    #if os(iOS)
     if #available(iOS 26.2, *) { return true }
     return false
+    #else
+    return true
+    #endif
   }
 
-  /// Whether the app can open the settings of the extension, which it can
-  /// since iOS 26.2. Before, it opens its own settings instead.
+  /// Whether the app can open the settings of the extension, which it can on
+  /// the Mac, and since iOS 26.2. Before, it opens its own settings instead.
   static var canShowSettings: Bool {
+    #if os(iOS)
     if #available(iOS 26.2, *) { return true }
     return false
+    #else
+    return true
+    #endif
   }
-  #endif
 
   // Safari doesn't notify apps about changes of its settings
   @ObservationIgnored private let periodicRefresh = PeriodicRefresh(every: .seconds(1)) {
@@ -60,6 +67,8 @@ final class SafariExtension {
   /// Keeps the state up to date until the calling task is cancelled, like
   /// the task of a view, as the user can change it in Safari at any time
   func monitor() async {
+    // Without the state, there's nothing to refresh
+    guard Self.isStateAvailable else { return }
     await periodicRefresh.run()
   }
 
@@ -82,21 +91,16 @@ final class SafariExtension {
     return state
   }
 
-  private static func requestState() async -> Bool? {
+  // The async versions, as the SDKs declare that the completion handlers
+  // are called on the main thread, but Safari calls them on other threads,
+  // which Swift stops the app for
+  nonisolated private static func requestState() async -> Bool? {
     #if os(macOS)
-    await withCheckedContinuation { continuation in
-      SFSafariExtensionManager.getStateOfSafariExtension(withIdentifier: identifier) { state, error in
-        continuation.resume(returning: error == nil ? state?.isEnabled : nil)
-      }
-    }
+    try? await SFSafariExtensionManager.stateOfSafariExtension(withIdentifier: identifier).isEnabled
     #else
     // Safari tells apps since iOS 26.2
     guard #available(iOS 26.2, *) else { return nil }
-    return await withCheckedContinuation { continuation in
-      SFSafariExtensionManager.getStateOfExtension(withIdentifier: identifier) { state, error in
-        continuation.resume(returning: error == nil ? state?.isEnabled : nil)
-      }
-    }
+    return try? await SFSafariExtensionManager.stateOfExtension(withIdentifier: identifier).isEnabled
     #endif
   }
 

@@ -32,8 +32,6 @@ fileprivate enum Constants {
   static let tagSpacing: CGFloat = 6
   static let tagRowSpacing: CGFloat = 4
   static let tagMaxRows = 2
-
-  static let borderLineWidth: CGFloat = 1
 }
 
 fileprivate enum Strings {
@@ -43,6 +41,7 @@ fileprivate enum Strings {
   static let digestAction = String(localized: "Read the latest Privacy Digest", comment: "Privacy Digest is the name of Ghostery’s newsletter")
   static let blogBadge = String(localized: "From the Ghostery Blog")
   static let blogAction = String(localized: "Read the post", comment: "Button opening the post of the Ghostery Blog")
+  static let newsletterTitle = String(localized: "Stay in the know", comment: "Title of the card about Ghostery’s newsletter")
 }
 
 fileprivate enum URLs {
@@ -52,14 +51,15 @@ fileprivate enum URLs {
 
 fileprivate extension AppTextStyle {
   // The website's style of the tags
-  static let tag = AppTextStyle(size: 12, weight: .regular, lineHeight: 18)
+  static let tag = AppTextStyle(size: 12, weight: .regular, lineHeight: 18, relativeTo: .footnote)
 }
 
 fileprivate let newsletterArticle = LearningArticle(
   id: "newsletter",
-  badge: String(localized: "Stay in the know", comment: "Title of the card about Ghostery’s newsletter"),
-  image: Image(decorative: Icons.learningZoneNewsletter),
-  title: String(localized: "Stay in the know", comment: "Title of the card about Ghostery’s newsletter"),
+  // The same as the title, as in the design
+  badge: Strings.newsletterTitle,
+  image: Image(.learningZoneNewsletter),
+  title: Strings.newsletterTitle,
   subtitle: String(localized: "Privacy tips, news & insights—straight to your inbox."),
   description: String(localized: "Get Ghostery’s Privacy Digest every two weeks. We curate the privacy stories worth knowing about and share practical ways to stay safer and more informed online.", comment: "Privacy Digest is the name of Ghostery’s newsletter"),
   actionTitle: String(localized: "Sign up", comment: "Button opening the page where the user signs up for the newsletter"),
@@ -67,7 +67,7 @@ fileprivate let newsletterArticle = LearningArticle(
 )
 
 /// Sizes of the cards, which differ between the Mac, iPhones and iPads
-struct LearningCardLayout {
+struct LearningCardLayout: PlatformLayout {
   /// Whether the image is above the texts, rather than before them
   var isImageAbove: Bool
   var padding: CGFloat
@@ -120,11 +120,12 @@ struct LearningCardLayout {
 /// Cards of the Learning Zone. The fetched items are shown only once
 /// they're fetched with their images.
 struct LearningArticleList: View {
-  var layout: LearningCardLayout
-
+  @CurrentLayout private var layout: LearningCardLayout
   @Environment(\.openURL) private var openURL
 
   var body: some View {
+    let layout = self.layout
+
     VStack(spacing: Constants.articlesSpacing) {
       if let edition = LearningZoneContent.digestEdition.value {
         LearningArticleCard(article: digestArticle(edition), layout: layout) {
@@ -185,7 +186,7 @@ struct LearningArticleList: View {
 
 // MARK: - Article card
 
-struct LearningArticle: Identifiable {
+private struct LearningArticle: Identifiable {
   let id: String
   let badge: String
   let image: Image
@@ -197,7 +198,7 @@ struct LearningArticle: Identifiable {
   var note: String? = nil
 }
 
-struct LearningArticleCard: View {
+private struct LearningArticleCard: View {
   let article: LearningArticle
   let layout: LearningCardLayout
   var action: () -> Void
@@ -250,7 +251,7 @@ struct LearningArticleCard: View {
         HStack(spacing: 0) {
           Text(article.actionTitle)
             .padding(.horizontal, Constants.buttonLabelPadding)
-          Image(Icons.arrowRight)
+          Image(.arrowRightSmall)
         }
       }
       .buttonStyle(AppButtonStyle(kind: .secondary, size: .small))
@@ -276,7 +277,7 @@ struct LearningArticleCard: View {
             .padding(.bottom, Constants.badgeBottomPadding)
         }
       badge
-        .overlay(Capsule().strokeBorder(Color.black.opacity(Constants.badgeBorderOpacity), lineWidth: Constants.borderLineWidth))
+        .overlay(Capsule().strokeBorder(Color.black.opacity(Constants.badgeBorderOpacity), lineWidth: Borders.width))
         .padding(.bottom, Constants.badgeBottomPadding)
     }
     // Without a width, as wide as the card
@@ -290,6 +291,7 @@ struct LearningArticleCard: View {
       .overlay {
         article.image
           .resizable()
+          .accessibilityHidden(true)
           .scaledToFill()
       }
       .clipped()

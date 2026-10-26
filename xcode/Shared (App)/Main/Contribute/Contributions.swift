@@ -18,20 +18,21 @@ fileprivate enum Constants {
   #endif
 }
 
+fileprivate enum Strings {
+  // You can translate your strings here
+  static let spreadTheWord = String(localized: "Spread the word", comment: "Title and button of the card about telling others about Ghostery")
+}
+
 fileprivate enum URLs {
   static let shop = URL(string: "https://www.ghostery.com/shop")!.tagged(campaign: "contribute")
   // Subscriptions page of the App Store
-  #if os(macOS)
-  static let manageSubscription = URL(string: "macappstores://apps.apple.com/account/subscriptions")!
-  #else
-  static let manageSubscription = URL(string: "itms-apps://apps.apple.com/account/subscriptions")!
-  #endif
+  static let manageSubscription = URL.appStore("account/subscriptions")
 }
 
 // Replaces the donation while the user has a monthly or yearly one
 fileprivate let subscriptionItem = Contribution(
   id: "donate",
-  image: Icons.contributionSubscribed,
+  image: .contributionSubscribed,
   imageBackground: Color(hex: "#00BCF3"),
   title: String(localized: "You're amazing!", comment: "Shown to users with a monthly or yearly donation"),
   description: String(localized: "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"),
@@ -43,7 +44,7 @@ fileprivate let subscriptionItem = Contribution(
 fileprivate let otherItems = [
   Contribution(
     id: "shop",
-    image: Icons.contributionShop,
+    image: .contributionShop,
     title: String(localized: "Wear your belief", comment: "Title of the card about the shop with Ghostery’s clothes and accessories"),
     description: String(localized: "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world"),
     actionTitle: String(localized: "Visit Ghostery Shop"),
@@ -52,17 +53,17 @@ fileprivate let otherItems = [
   ),
   Contribution(
     id: "share",
-    image: Icons.contributionShare,
-    title: String(localized: "Spread the word", comment: "Title and button of the card about telling others about Ghostery"),
-    description: String(localized: "Receiving all this help is crucial to Ghostery’s existence. We welcome everyone to our growing community!"),
-    actionTitle: String(localized: "Spread the word", comment: "Title and button of the card about telling others about Ghostery"),
+    image: .contributionShare,
+    title: Strings.spreadTheWord,
+    description: SpreadTheWordDialog.description,
+    actionTitle: Strings.spreadTheWord,
     action: .showDialog(.spreadTheWord),
     isPrimary: false
   ),
 ]
 
 /// Sizes of the cards, which differ between the Mac, iPhones and iPads
-struct ContributionCardLayout {
+struct ContributionCardLayout: PlatformLayout {
   /// Whether the cards are in a row, rather than one below the other
   var isRow: Bool
   /// Whether the image is before the texts, rather than above them
@@ -129,25 +130,19 @@ struct ContributionCardLayout {
 /// Cards of the ways to contribute, in a row on the Mac, and one below the
 /// other on iPhones and iPads
 struct ContributionList: View {
-  var layout: ContributionCardLayout
-  var onDonate: () -> Void
+  var onDonate: @MainActor () -> Void
 
+  @CurrentLayout private var layout: ContributionCardLayout
   @Environment(\.performAction) private var performAction
-  @Environment(Donations.self) private var donations
+  private var donations: Donations { .shared }
 
   var body: some View {
-    let stack = layout.isRow
-      ? AnyLayout(HStackLayout(alignment: .top, spacing: Constants.cardsSpacing))
-      : AnyLayout(VStackLayout(spacing: Constants.cardsSpacing))
+    let layout = self.layout
+    let contributions = [donations.isSubscribed ? subscriptionItem : donateItem] + otherItems
 
-    // The cards stretch to the tallest one, so their buttons line up
-    stack {
-      ForEach([donations.isSubscribed ? subscriptionItem : donateItem] + otherItems) { contribution in
-        ContributionCard(contribution: contribution, layout: layout, action: { performAction(contribution.action) })
-          .frame(maxHeight: .infinity)
-      }
+    CardStack(data: contributions, isRow: layout.isRow, spacing: Constants.cardsSpacing) { contribution in
+      ContributionCard(contribution: contribution, layout: layout, action: { performAction(contribution.action) })
     }
-    .fixedSize(horizontal: false, vertical: true)
     // A subscription can expire while the app runs
     .task { await donations.refreshSubscription() }
   }
@@ -155,7 +150,7 @@ struct ContributionList: View {
   private var donateItem: Contribution {
     Contribution(
       id: "donate",
-      image: Icons.contributionDonate,
+      image: .contributionDonate,
       title: String(localized: "Support our mission", comment: "Title of the card about donations"),
       description: String(localized: "Every contribution, big or small, is invaluable to our mission and future."),
       actionTitle: String(localized: "Donate now"),
@@ -167,9 +162,9 @@ struct ContributionList: View {
 
 // MARK: - Contribution card
 
-struct Contribution: Identifiable {
+private struct Contribution: Identifiable {
   let id: String
-  let image: String
+  let image: ImageResource
   /// Around the image on iPhones and iPads, when it has no wider version
   /// for their cards
   var imageBackground: Color? = nil
@@ -180,7 +175,7 @@ struct Contribution: Identifiable {
   let isPrimary: Bool
 }
 
-struct ContributionCard: View {
+private struct ContributionCard: View {
   let contribution: Contribution
   let layout: ContributionCardLayout
   var action: () -> Void
@@ -235,8 +230,9 @@ struct ContributionCard: View {
         if let background = contribution.imageBackground {
           // In the middle, fading into its background on the sides
           background.overlay {
-            Image(decorative: contribution.image)
+            Image(contribution.image)
               .resizable()
+              .accessibilityHidden(true)
               .scaledToFit()
               .mask(
                 LinearGradient(
@@ -262,8 +258,9 @@ struct ContributionCard: View {
   }
 
   private var filledImage: some View {
-    Image(decorative: contribution.image)
+    Image(contribution.image)
       .resizable()
+      .accessibilityHidden(true)
       .scaledToFill()
   }
 }

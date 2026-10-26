@@ -14,7 +14,7 @@ fileprivate enum Keys {
   static let showsMenuBarIcon = "AppSettings.showsMenuBarIcon"
 }
 
-fileprivate let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Ghostery", category: "AppSettings")
+fileprivate let logger = Logger(category: "AppSettings")
 
 @MainActor
 @Observable
@@ -86,7 +86,7 @@ final class MenuBarIcon: NSObject {
       if newValue, item == nil {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = item.button {
-          button.image = NSImage(named: Icons.menuBarIcon)
+          button.image = NSImage(resource: .menuBarIcon)
           button.target = self
           button.action = #selector(showWindow)
           button.toolTip = "Ghostery"

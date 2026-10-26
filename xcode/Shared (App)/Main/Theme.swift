@@ -2,7 +2,9 @@
 //  Theme.swift
 //  Ghostery
 //
-//  Colors and images of the app, shared by its macOS and iOS versions.
+//  Colors and borders of the app, shared by its macOS and iOS versions. Its
+//  images are in the asset catalogs, which Xcode makes symbols for, like
+//  Image(.homeLogo).
 //
 
 import SwiftUI
@@ -71,6 +73,11 @@ enum Colors {
   static let shadowSmall = Color(hex: "#0A0D12").opacity(0.1)
 }
 
+enum Borders {
+  /// Of the thin borders of the cards, buttons and other parts of the views
+  static let width: CGFloat = 1
+}
+
 extension RadialGradient {
   /// Background of the round button opening the Support dialog, in the blue
   /// of Ghostery getting darker away from its top leading part
@@ -90,58 +97,3 @@ extension RadialGradient {
   }
 }
 
-enum Icons {
-  static let homeLogo = "HomeLogo"
-  static let homeHeaderProtection = "HomeHeaderProtection"
-  static let homeAppStore = "HomeAppStore"
-  static let homeChevronRight = "HomeChevronRight"
-  static let homeMore = "HomeMore"
-  static let homeMoreHover = "HomeMoreHover"
-  static let homeBack = "HomeBack"
-  static let homeCheck = "HomeCheck"
-  static let homeChevronDown = "HomeChevronDown"
-  static let homeChevronUp = "HomeChevronUp"
-  static let homeWarning = "HomeWarning"
-  static let menuBarIcon = "MenuBarIcon"
-  static let bannerLaunch = "BannerLaunch"
-  static let safariInstructionsHeader = "SafariInstructionsHeader"
-  static let safariInstructionsCheck = "SafariInstructionsCheck"
-  static let safariInstructionsReturn = "SafariInstructionsReturn"
-  static let safariOnboarding = "SafariOnboarding"
-  static let safariOnboardingEnabled = "SafariOnboardingEnabled"
-  static let homeNavHome = "HomeNavHome"
-  static let homeNavLearn = "HomeNavLearn"
-  static let homeNavContribute = "HomeNavContribute"
-  static let homeNavSettings = "HomeNavSettings"
-  static let homeNavSupport = "HomeNavSupport"
-  static let browserSafari = "BrowserSafari"
-  static let browserFirefox = "BrowserFirefox"
-  static let browserChrome = "BrowserChrome"
-  static let browserEdge = "BrowserEdge"
-  static let learningZoneHeader = "LearningZoneHeader"
-  static let learningZoneNewsletter = "LearningZoneNewsletter"
-  static let arrowRight = "ArrowRightSmall"
-  static let contributeHeader = "ContributeHeader"
-  static let contributionDonate = "ContributionDonate"
-  static let contributionShop = "ContributionShop"
-  static let contributionShare = "ContributionShare"
-  static let contributionSubscribed = "ContributionSubscribed"
-  static let shareHeader = "ShareHeader"
-  static let shareFacebook = "ShareFacebook"
-  static let shareX = "ShareX"
-  static let shareLinkedin = "ShareLinkedin"
-  static let shareCopy = "ShareCopy"
-  static let shareCopied = "ShareCopied"
-  static let shareMail = "ShareMail"
-  static let shareSystem = "ShareSystem"
-  static let settingsHeader = "SettingsHeader"
-  static let supportHeader = "SupportHeader"
-  static let supportTracker = "SupportTracker"
-  static let supportFeedback = "SupportFeedback"
-  static let supportContact = "SupportContact"
-  static let bannerReview = "BannerReview"
-  static let bannerHelp = "BannerHelp"
-  static let bannerChevronRight = "BannerChevronRight"
-  static let dialogClose = "DialogClose"
-  static let qrCodeLogo = "QRCodeLogo"
-}

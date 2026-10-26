@@ -9,59 +9,20 @@ import SwiftUI
 import UIKit
 
 fileprivate enum Constants {
-  // Between the header of the browsers and them
-  static let browsersPhoneSpacing: CGFloat = 8
-  static let browsersTabletSpacing: CGFloat = 16
-
   static let iconSize: CGFloat = 40
   // The browser's logo leaves a margin of the circle around it
   static let iconPadding: CGFloat = 4.44
   static let cornerRadius: CGFloat = 12
 
-  // On iPhones, the browsers are rows, one below the other
-  static let rowsSpacing: CGFloat = 4
-  static let rowHorizontalPadding: CGFloat = 8
-  static let rowVerticalPadding: CGFloat = 12
-  static let rowSpacing: CGFloat = 8
-  static let rowTextSpacing: CGFloat = 4
-  // The descriptions wrap as in the design, also next to shorter buttons
-  static let rowDescriptionWidth: CGFloat = 192
-  // Added to the padding of the button, as in the design
-  static let rowButtonLabelPadding: CGFloat = 4
-
-  // On iPads, the browsers are cards, next to each other
-  static let cardsSpacing: CGFloat = 16
-  static let cardPadding: CGFloat = 24
-  static let cardSpacing: CGFloat = 18
-  static let cardTextSpacing: CGFloat = 8
-  static let cardButtonLabelPadding: CGFloat = 8
-
-  // As tall as the buttons of the rows and the cards, with the label as
-  // far from the edges as their titles
-  static let enabledRowHeight: CGFloat = 32
-  static let enabledRowLabelPadding: CGFloat = 12
-  static let enabledCardHeight: CGFloat = 48
-  static let enabledCardLabelPadding: CGFloat = 20
   static let enabledSpacing: CGFloat = 4
   static let enabledCornerRadius: CGFloat = 8
-  static let borderLineWidth: CGFloat = 1
 }
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = String(localized: "Protect your privacy.\nBlock trackers.", comment: "Title of the Home section, in two lines")
-  static let description = String(localized: "Ghostery helps you take control of your data across the web.")
-  static let installHeader = String(localized: "Install Ghostery in your browser")
-  static let safariDescription = String(localized: "Follow these simple steps to enable Ghostery in Safari.")
-  static let safariEnabledDescription = String(localized: "Ghostery works correctly in Safari.")
-  static let edgeDescription = String(localized: "Install Ghostery extension from the Edge Add-ons.")
   static let instructions = String(localized: "Instructions", comment: "Button showing the steps to enable Ghostery in Safari")
   static let install = String(localized: "Install", comment: "Button opening the App Store, to install the browser")
   static let open = String(localized: "Open", comment: "Button opening the browser installed on the device, to use Ghostery in it")
-  static let enabled = String(localized: "Enabled", comment: "State of Ghostery in a browser")
-  static let moreOptions = String(localized: "More options")
-  static let disableInSafari = String(localized: "Disable Ghostery in Safari")
-  static let viewInstructions = String(localized: "View instructions", comment: "Button showing the steps to enable or disable Ghostery in Safari")
 }
 
 fileprivate enum URLs {
@@ -70,14 +31,78 @@ fileprivate enum URLs {
   static let edge = URL(string: "https://www.ghostery.com/download/edge-mobile")!.tagged(campaign: "home")
 }
 
+/// Sizes of the browsers, which are rows one below the other on iPhones,
+/// and cards next to each other on iPads
+fileprivate struct HomeBrowserLayout: PlatformLayout {
+  /// Between the header of the browsers and them
+  var headerSpacing: CGFloat
+  /// Whether the browsers are next to each other, rather than one below
+  /// the other
+  var isRow: Bool
+  var spacing: CGFloat
+  /// Whether the logo is above the texts, rather than before them
+  var isIconAbove: Bool
+  var padding: EdgeInsets
+  /// Between the logo, the texts and the button
+  var contentSpacing: CGFloat
+  /// Between the name and the description
+  var textSpacing: CGFloat
+  var nameStyle: AppTextStyle
+  var descriptionStyle: AppTextStyle
+  /// Of the description, so it wraps as in the design, also next to shorter
+  /// buttons
+  var descriptionWidth: CGFloat?
+  var buttonSize: AppButtonStyle.Size
+  /// Added to the padding of the button, as in the design
+  var buttonLabelPadding: CGFloat
+  /// Of the state of Ghostery where it's enabled, as tall as the button, with
+  /// the label as far from the edges as its title
+  var enabledHeight: CGFloat
+  var enabledLabelPadding: CGFloat
+
+  static let phone = HomeBrowserLayout(
+    headerSpacing: 8,
+    isRow: false,
+    spacing: 4,
+    isIconAbove: false,
+    padding: EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8),
+    contentSpacing: 8,
+    textSpacing: 4,
+    nameStyle: .labelL,
+    descriptionStyle: .bodyS,
+    descriptionWidth: 192,
+    buttonSize: .small,
+    buttonLabelPadding: 4,
+    enabledHeight: 32,
+    enabledLabelPadding: 12
+  )
+  static let tablet = HomeBrowserLayout(
+    headerSpacing: 16,
+    isRow: true,
+    spacing: 16,
+    isIconAbove: true,
+    padding: EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 24),
+    contentSpacing: 18,
+    textSpacing: 8,
+    nameStyle: .headlineM,
+    descriptionStyle: .bodyL,
+    descriptionWidth: nil,
+    buttonSize: .large,
+    buttonLabelPadding: 8,
+    enabledHeight: 48,
+    enabledLabelPadding: 20
+  )
+}
+
 /// Microsoft Edge, which opens the links of its own scheme. Apps can check if
 /// it's installed, as the scheme is in LSApplicationQueriesSchemes of the app.
 fileprivate enum Edge {
   private static let scheme = "microsoft-edge-https"
 
+  /// Checked when the views are created, which is on the main thread
   static var isInstalled: Bool {
     guard let url = URL(string: "\(scheme)://www.ghostery.com") else { return false }
-    return UIApplication.shared.canOpenURL(url)
+    return MainActor.assumeIsolated { UIApplication.shared.canOpenURL(url) }
   }
 
   /// The link, opened in Edge
@@ -89,10 +114,11 @@ fileprivate enum Edge {
 }
 
 struct HomeView: View {
-  private let safari = SafariExtension.shared
-  @State private var showsSafariInstructions = false
+  private var safari: SafariExtension { .shared }
+  @State private var showsSafariInstructions = DebugLaunch.opens(.safariInstructions)
   // The user can install Edge while the app is in the background
   @State private var isEdgeInstalled = Edge.isInstalled
+  @CurrentLayout private var layout: HomeBrowserLayout
   @Environment(\.scenePhase) private var scenePhase
 
   var body: some View {
@@ -117,23 +143,20 @@ struct HomeView: View {
   }
 
   private var home: some View {
-    SectionScrollView { layout in
-      SectionHeader(title: Strings.title, description: Strings.description, layout: layout)
+    SectionScrollView {
+      SectionHeader(title: SectionStrings.Home.title, description: SectionStrings.Home.description)
 
-      Text(Strings.installHeader)
+      Text(SectionStrings.Home.installHeader)
         .textStyle(.labelL)
         .foregroundColor(Colors.foregroundPrimary)
         .accessibilityAddTraits(.isHeader)
-        .padding(.bottom, layout.isTablet ? Constants.browsersTabletSpacing : Constants.browsersPhoneSpacing)
+        .padding(.bottom, layout.headerSpacing)
 
-      if layout.isTablet {
-        browserCards
-      } else {
-        browserRows
+      CardStack(data: browsers, isRow: layout.isRow, spacing: layout.spacing) { browser in
+        HomeBrowserCard(browser: browser, layout: layout)
       }
-
+    } footer: {
       Banner()
-        .padding(.top, layout.bannerTopPadding)
     }
   }
 
@@ -144,47 +167,28 @@ struct HomeView: View {
       HomeBrowser(
         id: "safari",
         name: "Safari",
-        icon: Icons.browserSafari,
-        description: Strings.safariDescription,
-        enabledDescription: Strings.safariEnabledDescription,
+        icon: .browserSafari,
+        description: SectionStrings.Home.safariDescription,
+        enabledDescription: SectionStrings.Home.safariEnabledDescription,
         actionTitle: Strings.instructions,
         action: .perform { showsSafariInstructions = true },
         isPrimary: true,
         isEnabled: safari.isEnabled,
         menuItems: [
-          HomeBrowserMenuItem(title: Strings.disableInSafari, action: .perform { SafariExtension.showSettings() }),
-          HomeBrowserMenuItem(title: Strings.viewInstructions, action: .perform { showsSafariInstructions = true }),
+          HomeBrowserMenuItem(title: SectionStrings.Home.disableInSafari, action: .perform { SafariExtension.showSettings() }),
+          HomeBrowserMenuItem(title: SectionStrings.Home.viewInstructions, action: .perform { showsSafariInstructions = true }),
         ]
       ),
       HomeBrowser(
         id: "edge",
         name: "Edge",
-        icon: Icons.browserEdge,
-        description: Strings.edgeDescription,
+        icon: .browserEdge,
+        description: SectionStrings.Home.edgeDescription,
         actionTitle: isEdgeInstalled ? Strings.open : Strings.install,
         action: .open(isEdgeInstalled ? Edge.link(URLs.edge) : URLs.edge),
         isPrimary: false
       ),
     ]
-  }
-
-  private var browserRows: some View {
-    VStack(spacing: Constants.rowsSpacing) {
-      ForEach(browsers) { browser in
-        HomeBrowserRow(browser: browser)
-      }
-    }
-  }
-
-  private var browserCards: some View {
-    // The cards stretch to the tallest one, so their buttons line up
-    HStack(alignment: .top, spacing: Constants.cardsSpacing) {
-      ForEach(browsers) { browser in
-        HomeBrowserCard(browser: browser)
-          .frame(maxHeight: .infinity)
-      }
-    }
-    .fixedSize(horizontal: false, vertical: true)
   }
 }
 
@@ -194,7 +198,7 @@ struct HomeView: View {
 private struct HomeBrowser: Identifiable {
   let id: String
   let name: String
-  let icon: String
+  let icon: ImageResource
   let description: String
   /// Shown instead of the description when Ghostery is enabled in the browser
   var enabledDescription: String? = nil
@@ -218,94 +222,54 @@ private struct HomeBrowserMenuItem: Identifiable {
   var id: String { title }
 }
 
-/// Row of a browser, as on iPhones
-private struct HomeBrowserRow: View {
-  let browser: HomeBrowser
-
-  @Environment(\.performAction) private var performAction
-
-  var body: some View {
-    HStack(spacing: Constants.rowSpacing) {
-      HomeBrowserIcon(icon: browser.icon)
-
-      VStack(alignment: .leading, spacing: Constants.rowTextSpacing) {
-        Text(browser.name)
-          .textStyle(.labelL)
-          .foregroundColor(Colors.foregroundPrimary)
-        Text(browser.currentDescription)
-          .textStyle(.bodyS)
-          .foregroundColor(Colors.foregroundSecondary)
-          .fixedSize(horizontal: false, vertical: true)
-          .frame(maxWidth: Constants.rowDescriptionWidth, alignment: .leading)
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-
-      if browser.isEnabled {
-        HomeBrowserEnabledState(
-          menuItems: browser.menuItems,
-          height: Constants.enabledRowHeight,
-          labelPadding: Constants.enabledRowLabelPadding
-        )
-      } else {
-        Button {
-          performAction(browser.action)
-        } label: {
-          Text(browser.actionTitle)
-            .padding(.horizontal, Constants.rowButtonLabelPadding)
-        }
-        .buttonStyle(AppButtonStyle(kind: browser.isPrimary ? .primary : .secondary, size: .small))
-        .fixedSize()
-      }
-    }
-    .padding(.horizontal, Constants.rowHorizontalPadding)
-    .padding(.vertical, Constants.rowVerticalPadding)
-    .cardBackground(cornerRadius: Constants.cornerRadius)
-    .modifier(HomeBrowserAccessibility(browser: browser))
-  }
-}
-
-/// Card of a browser, as on iPads
+/// Browser with its button, in a row on iPhones, and in a card on iPads
 private struct HomeBrowserCard: View {
   let browser: HomeBrowser
+  let layout: HomeBrowserLayout
 
   @Environment(\.performAction) private var performAction
 
   var body: some View {
-    VStack(alignment: .leading, spacing: Constants.cardSpacing) {
+    let stack = layout.isIconAbove
+      ? AnyLayout(VStackLayout(alignment: .leading, spacing: layout.contentSpacing))
+      : AnyLayout(HStackLayout(spacing: layout.contentSpacing))
+
+    stack {
       HomeBrowserIcon(icon: browser.icon)
 
-      VStack(alignment: .leading, spacing: Constants.cardTextSpacing) {
+      VStack(alignment: .leading, spacing: layout.textSpacing) {
         Text(browser.name)
-          .textStyle(.headlineM)
+          .textStyle(layout.nameStyle)
           .foregroundColor(Colors.foregroundPrimary)
         Text(browser.currentDescription)
-          .textStyle(.bodyL)
+          .textStyle(layout.descriptionStyle)
           .foregroundColor(Colors.foregroundSecondary)
           .fixedSize(horizontal: false, vertical: true)
+          .frame(maxWidth: layout.descriptionWidth, alignment: .leading)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
-      // Longer texts make the card taller
-      .frame(maxHeight: .infinity, alignment: .top)
+      // Longer texts make the cards taller
+      .frame(maxHeight: layout.isIconAbove ? .infinity : nil, alignment: .top)
 
       if browser.isEnabled {
         HomeBrowserEnabledState(
           menuItems: browser.menuItems,
-          height: Constants.enabledCardHeight,
-          labelPadding: Constants.enabledCardLabelPadding
+          height: layout.enabledHeight,
+          labelPadding: layout.enabledLabelPadding
         )
       } else {
         Button {
           performAction(browser.action)
         } label: {
           Text(browser.actionTitle)
-            .padding(.horizontal, Constants.cardButtonLabelPadding)
+            .padding(.horizontal, layout.buttonLabelPadding)
         }
-        .buttonStyle(AppButtonStyle(kind: browser.isPrimary ? .primary : .secondary, size: .large))
+        .buttonStyle(AppButtonStyle(kind: browser.isPrimary ? .primary : .secondary, size: layout.buttonSize))
         .fixedSize()
       }
     }
-    .padding(Constants.cardPadding)
-    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    .padding(layout.padding)
+    .frame(maxWidth: .infinity, maxHeight: layout.isIconAbove ? .infinity : nil, alignment: .topLeading)
     .cardBackground(cornerRadius: Constants.cornerRadius)
     .modifier(HomeBrowserAccessibility(browser: browser))
   }
@@ -313,11 +277,12 @@ private struct HomeBrowserCard: View {
 
 /// Logo of a browser, on a white circle
 private struct HomeBrowserIcon: View {
-  let icon: String
+  let icon: ImageResource
 
   var body: some View {
-    Image(decorative: icon)
+    Image(icon)
       .resizable()
+      .accessibilityHidden(true)
       .scaledToFit()
       .padding(Constants.iconPadding)
       .frame(width: Constants.iconSize, height: Constants.iconSize)
@@ -338,12 +303,12 @@ private struct HomeBrowserEnabledState: View {
     let shape = RoundedRectangle(cornerRadius: Constants.enabledCornerRadius)
 
     HStack(spacing: Constants.enabledSpacing) {
-      Text(Strings.enabled)
+      Text(SectionStrings.Home.enabled)
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundSuccessPrimary)
         .lineLimit(1)
         .padding(.horizontal, labelPadding)
-        .frame(height: height)
+        .frame(minHeight: height)
         .background(shape.fill(Colors.bgSuccessPrimary))
 
       if !menuItems.isEmpty {
@@ -352,13 +317,14 @@ private struct HomeBrowserEnabledState: View {
             Button(item.title) { performAction(item.action) }
           }
         } label: {
-          Image(decorative: Icons.homeMore)
+          Image(.homeMore)
+            .accessibilityHidden(true)
             .frame(width: height, height: height)
             .background(shape.fill(Colors.bgPrimary))
-            .overlay(shape.strokeBorder(Colors.borderSecondary, lineWidth: Constants.borderLineWidth))
+            .overlay(shape.strokeBorder(Colors.borderSecondary, lineWidth: Borders.width))
             .contentShape(shape)
         }
-        .accessibilityLabel(Strings.moreOptions)
+        .accessibilityLabel(SectionStrings.Home.moreOptions)
       }
     }
     .fixedSize()
@@ -382,8 +348,6 @@ private struct HomeBrowserAccessibility: ViewModifier {
   }
 }
 
-struct HomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    HomeView()
-  }
+#Preview {
+  HomeView()
 }

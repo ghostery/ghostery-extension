@@ -5,9 +5,24 @@
 //  Donations through the App Store, offered by the Contribute section.
 //
 
-import Combine
 import Observation
 import StoreKit
+
+fileprivate enum Constants {
+  // Products of the donations in the App Store, which Products.storekit also
+  // has for the testing in Xcode
+  static let productIDs = [
+    "com.ghostery.subscription.plus.onetime.small",
+    "com.ghostery.subscription.plus.onetime.medium",
+    "com.ghostery.subscription.plus.onetime.large",
+    "com.ghostery.subscription.plus.month.small",
+    "com.ghostery.subscription.plus.month.medium",
+    "com.ghostery.subscription.plus.month.large",
+    "com.ghostery.subscription.plus.year.small",
+    "com.ghostery.subscription.plus.year.medium",
+    "com.ghostery.subscription.plus.year.large",
+  ]
+}
 
 /// How often a donation is made, each with its own set of products
 enum DonationPeriod: CaseIterable, Identifiable {
@@ -38,44 +53,60 @@ enum DonationResult {
   case failed
 }
 
-/// Products of the donations, and their purchases. One instance should live
-/// as long as the app, as it handles the transactions of the App Store.
+/// Products of the donations, and their purchases. It handles the
+/// transactions of the App Store from the launch of the app.
 @MainActor
 @Observable
 final class Donations {
+  static let shared = Donations()
+
   private(set) var isDonating = false
   private(set) var isRestoring = false
   /// Whether the user has an active monthly or yearly donation
   private(set) var isSubscribed = false
-  /// Loaded from the App Store after the start
-  private var products: [Product] = []
+  /// Of each period, from the smallest donation, loaded from the App Store
+  /// after the start
+  private var products: [DonationPeriod: [Product]] = [:]
 
-  @ObservationIgnored private let storeHelper = StoreHelper()
-  @ObservationIgnored private var storeHelperChanges: Set<AnyCancellable> = []
+  @ObservationIgnored private var transactionUpdates: Task<Void, Never>?
+  @ObservationIgnored private var isLoadingProducts = false
 
-  init() {
-    // The store helper changes them on the main actor
-    storeHelper.$products
-      .sink { [weak self] products in
-        MainActor.assumeIsolated { self?.products = products ?? [] }
+  private init() {}
+
+  /// Finishes the transactions of the App Store which the app didn't finish
+  /// yet, like the ones of donations approved with Ask to Buy, and loads the
+  /// products. Called when the app launches.
+  func start() {
+    guard transactionUpdates == nil else { return }
+
+    transactionUpdates = Task {
+      for await result in Transaction.updates {
+        // The ones StoreKit can't verify are left unfinished
+        if case .verified(let transaction) = result {
+          await transaction.finish()
+        }
+        await refreshSubscription()
       }
-      .store(in: &storeHelperChanges)
-    // Updated by the transactions of the App Store, also at the start
-    storeHelper.$purchasedProducts
-      .sink { [weak self] _ in
-        Task { await self?.refreshSubscription() }
-      }
-      .store(in: &storeHelperChanges)
+    }
+    Task { await refreshSubscription() }
+    Task { await loadProducts() }
   }
 
-  /// Whether the products are loaded from the App Store
-  var isLoaded: Bool { !products.isEmpty }
+  /// Loads the products from the App Store, unless they're loaded already
+  func loadProducts() async {
+    guard products.isEmpty, !isLoadingProducts else { return }
+    isLoadingProducts = true
+    defer { isLoadingProducts = false }
+
+    guard let loaded = try? await Product.products(for: Constants.productIDs), !loaded.isEmpty else { return }
+    products = Dictionary(uniqueKeysWithValues: DonationPeriod.allCases.map { period in
+      (period, loaded.filter(period.includes).sorted { $0.price < $1.price })
+    })
+  }
 
   /// Products of the period, from the smallest donation
   func products(for period: DonationPeriod) -> [Product] {
-    products
-      .filter(period.includes)
-      .sorted { $0.price < $1.price }
+    products[period] ?? []
   }
 
   /// Product selected at first, in the middle of the amounts
@@ -86,18 +117,26 @@ final class Donations {
 
   /// Shows the payment sheet of the App Store
   func donate(_ product: Product) async -> DonationResult {
-    guard !isDonating else { return .failed }
+    // One donation at a time
+    guard !isDonating else { return .cancelled }
+    guard AppStore.canMakePayments else { return .failed }
     isDonating = true
     defer { isDonating = false }
 
     do {
-      switch try await storeHelper.purchase(product).purchaseState {
-      case .purchased:
+      switch try await product.purchase() {
+      case .success(.verified(let transaction)):
+        await transaction.finish()
         await refreshSubscription()
         return .donated
-      case .pending: return .pending
-      case .cancelled: return .cancelled
-      default: return .failed
+      case .success(.unverified):
+        return .failed
+      case .pending:
+        return .pending
+      case .userCancelled:
+        return .cancelled
+      @unknown default:
+        return .failed
       }
     } catch {
       return .failed

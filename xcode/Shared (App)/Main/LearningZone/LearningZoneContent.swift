@@ -8,28 +8,11 @@
 
 import Observation
 import os
-import SwiftUI
 #if os(macOS)
 import AppKit
-
-/// Image of a fetched item, as decoded on the platform
-typealias PlatformImage = NSImage
 #else
 import UIKit
-
-/// Image of a fetched item, as decoded on the platform
-typealias PlatformImage = UIImage
 #endif
-
-extension Image {
-  init(platformImage: PlatformImage) {
-    #if os(macOS)
-    self.init(nsImage: platformImage)
-    #else
-    self.init(uiImage: platformImage)
-    #endif
-  }
-}
 
 fileprivate enum Constants {
   static let digestEditionsURL = URL(string: "https://www.ghostery.com/privacy-digest/editions.json")!
@@ -63,8 +46,8 @@ struct BlogPost {
 /// an item or its image leaves the item out, so its card isn't shown rather
 /// than shown broken.
 enum LearningZoneContent {
-  static let digestEdition = FetchedItem("the latest Privacy Digest", fetch: fetchLatestDigestEdition)
-  static let blogPost = FetchedItem("the latest blog post", fetch: fetchLatestBlogPost)
+  @MainActor static let digestEdition = FetchedItem("the latest Privacy Digest", fetch: fetchLatestDigestEdition)
+  @MainActor static let blogPost = FetchedItem("the latest blog post", fetch: fetchLatestBlogPost)
 
   /// Fetches the items which weren't fetched recently
   @MainActor
@@ -74,7 +57,7 @@ enum LearningZoneContent {
     _ = await (digestEditionRefresh, blogPostRefresh)
   }
 
-  static let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Ghostery", category: "LearningZone")
+  static let logger = Logger(category: "LearningZone")
 
   private static func fetchLatestDigestEdition() async throws -> PrivacyDigestEdition {
     // Editions are listed newest first, also the scheduled ones, which
@@ -166,6 +149,7 @@ enum LearningZoneContent {
 }
 
 /// Item fetched from ghostery.com, which is nil until it's fetched
+@MainActor
 @Observable
 final class FetchedItem<Value> {
   private(set) var value: Value?
@@ -181,7 +165,6 @@ final class FetchedItem<Value> {
   }
 
   /// Fetches the item, unless it was fetched recently
-  @MainActor
   func refresh() async {
     if let fetchedAt, Date.now.timeIntervalSince(fetchedAt) < Constants.refreshInterval { return }
     guard !isFetching else { return }

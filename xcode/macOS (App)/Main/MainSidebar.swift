@@ -16,12 +16,6 @@ fileprivate enum Constants {
   static let shadowRadius: CGFloat = 20
   static let shadowY: CGFloat = 8
   static let shadowOpacity: Double = 0.12
-  static let borderLineWidth: CGFloat = 1
-}
-
-fileprivate enum Strings {
-  // You can translate your strings here
-  static let support = String(localized: "Support", comment: "Button opening the dialog with the ways to get help and give feedback")
 }
 
 struct MainSidebar: View {
@@ -37,22 +31,22 @@ struct MainSidebar: View {
       Spacer(minLength: 0)
 
       Button(action: onSupport) {
-        Image(Icons.homeNavSupport)
+        Image(SupportButton.icon)
           .frame(width: Constants.itemSize, height: Constants.itemSize)
           .background(RadialGradient.support(size: Constants.itemSize))
           .clipShape(Circle())
           .contentShape(Circle())
       }
       .buttonStyle(.plain)
-      .help(Strings.support)
-      .accessibilityLabel(Strings.support)
+      .help(SupportButton.title)
+      .accessibilityLabel(SupportButton.title)
     }
     .padding(Constants.innerPadding)
     .frame(width: Constants.width)
     .frame(maxHeight: .infinity)
     .background(LinearGradient(colors: [Colors.bgTertiary, Color.white], startPoint: .top, endPoint: .bottom))
     .clipShape(Capsule())
-    .overlay(Capsule().strokeBorder(Color.white, lineWidth: Constants.borderLineWidth))
+    .overlay(Capsule().strokeBorder(Color.white, lineWidth: Borders.width))
     .shadow(
       color: Color.black.opacity(Constants.shadowOpacity),
       radius: Constants.shadowRadius,
