@@ -37,7 +37,7 @@ fileprivate enum URLs {
 
 fileprivate let contactOption = SupportOption(
   id: "contact",
-  icon: Icons.supportContact,
+  icon: .supportContact,
   title: String(localized: "Something not working?"),
   description: String(localized: "Ghostery missing from a browser, or not behaving as expected? Our team will help."),
   actionTitle: String(localized: "Contact support"),
@@ -48,7 +48,7 @@ fileprivate let contactOption = SupportOption(
 // About the Mac app, so there's no survey for the iOS app yet
 fileprivate let feedbackOption = SupportOption(
   id: "feedback",
-  icon: Icons.supportFeedback,
+  icon: .supportFeedback,
   title: String(localized: "How’s it going?", comment: "Title of the card with the link to the feedback survey"),
   description: String(localized: "A few quick questions about setting up and using Ghostery on your Mac."),
   actionTitle: String(localized: "Share feedback"),
@@ -58,7 +58,7 @@ fileprivate let feedbackOption = SupportOption(
 
 fileprivate let trackerOption = SupportOption(
   id: "tracker",
-  icon: Icons.supportTracker,
+  icon: .supportTracker,
   title: String(localized: "Found an unknown tracker?"),
   description: String(localized: "Report it to us to help keep the tracker database up to date."),
   actionTitle: String(localized: "Submit a tracker"),
@@ -72,7 +72,7 @@ fileprivate let options = [contactOption, trackerOption]
 #endif
 
 /// Sizes of the dialog, which differ between the Mac, iPhones and iPads
-fileprivate struct SupportDialogLayout {
+fileprivate struct SupportDialogLayout: PlatformLayout {
   var width: CGFloat
   var topPadding: CGFloat
   var bottomPadding: CGFloat
@@ -135,7 +135,7 @@ fileprivate struct SupportDialogLayout {
 
 /// Sizes of an option, whose icon is above its texts in the cards in a row,
 /// and before them in the cards one below the other
-struct SupportOptionLayout {
+private struct SupportOptionLayout {
   var isIconBeside: Bool
   var iconSize: CGFloat
   /// Of the image of the icon, which is otherwise as large as it's drawn
@@ -168,10 +168,8 @@ struct SupportOptionLayout {
 struct SupportDialog: View {
   var onClose: () -> Void
 
+  @CurrentLayout private var layout: SupportDialogLayout
   @Environment(\.performAction) private var performAction
-  #if os(iOS)
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-  #endif
 
   var body: some View {
     let layout = self.layout
@@ -181,17 +179,10 @@ struct SupportDialog: View {
     }
   }
 
-  private var layout: SupportDialogLayout {
-    #if os(macOS)
-    .mac
-    #else
-    horizontalSizeClass == .regular ? .tablet : .phone
-    #endif
-  }
-
   private func content(_ layout: SupportDialogLayout) -> some View {
     VStack(spacing: 0) {
-      Image(decorative: Icons.supportHeader)
+      Image(.supportHeader)
+        .accessibilityHidden(true)
         .frame(width: Constants.imageWidth, height: Constants.imageHeight)
         .padding(.bottom, layout.imageSpacing)
 
@@ -208,18 +199,9 @@ struct SupportDialog: View {
       .foregroundColor(Colors.foregroundPrimary)
       .padding(.bottom, layout.optionsTopSpacing)
 
-      let stack = layout.areOptionsInRow
-        ? AnyLayout(HStackLayout(alignment: .top, spacing: Constants.optionsSpacing))
-        : AnyLayout(VStackLayout(spacing: Constants.optionsSpacing))
-
-      // The cards stretch to the tallest one, so their buttons line up
-      stack {
-        ForEach(options) { option in
-          SupportOptionCard(option: option, layout: layout.option, action: { performAction(option.action) })
-            .frame(maxHeight: .infinity)
-        }
+      CardStack(data: options, isRow: layout.areOptionsInRow, spacing: Constants.optionsSpacing) { option in
+        SupportOptionCard(option: option, layout: layout.option, action: { performAction(option.action) })
       }
-      .fixedSize(horizontal: false, vertical: true)
     }
     .padding(.top, layout.topPadding)
     .padding(.bottom, layout.bottomPadding)
@@ -229,16 +211,16 @@ struct SupportDialog: View {
 
 // MARK: - Option card
 
-struct SupportOption: Identifiable {
+private struct SupportOption: Identifiable {
   let id: String
-  let icon: String
+  let icon: ImageResource
   let title: String
   let description: String
   let actionTitle: String
   let action: MainAction
 }
 
-struct SupportOptionCard: View {
+private struct SupportOptionCard: View {
   let option: SupportOption
   let layout: SupportOptionLayout
   var action: () -> Void
@@ -271,11 +253,13 @@ struct SupportOptionCard: View {
   private var icon: some View {
     Group {
       if let size = layout.iconImageSize {
-        Image(decorative: option.icon)
+        Image(option.icon)
           .resizable()
+          .accessibilityHidden(true)
           .frame(width: size, height: size)
       } else {
-        Image(decorative: option.icon)
+        Image(option.icon)
+          .accessibilityHidden(true)
       }
     }
     .frame(width: layout.iconSize, height: layout.iconSize)
@@ -299,9 +283,7 @@ struct SupportOptionCard: View {
   }
 }
 
-struct SupportDialog_Previews: PreviewProvider {
-  static var previews: some View {
-    SupportDialog(onClose: {})
-      .padding(40)
-  }
+#Preview {
+  SupportDialog(onClose: {})
+    .padding(40)
 }

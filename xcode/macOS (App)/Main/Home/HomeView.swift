@@ -20,43 +20,21 @@ fileprivate enum Constants {
   static let carouselButtonTrailingPadding: CGFloat = 6
   static let carouselCoordinateSpace = "HomeView.carousel"
 
-  static let cardWidth: CGFloat = 180
-  static let cardPadding: CGFloat = 16
-  static let cardSpacing: CGFloat = 16
-  static let cardCornerRadius: CGFloat = 12
-  static let cardIconSize: CGFloat = 64
-  static let cardTextHeight: CGFloat = 92
-  static let cardTextSpacing: CGFloat = 4
-
-  static let cardActionsSpacing: CGFloat = 4
-  static let cardActionHeight: CGFloat = 40
-  static let cardActionCornerRadius: CGFloat = 8
-
   static let alertTopPadding: CGFloat = 16
   static let alertPadding: CGFloat = 12
   static let alertSpacing: CGFloat = 12
   static let alertCornerRadius: CGFloat = 12
 
+  // Between the button and the menu below it
   static let menuOffset: CGFloat = 1
-  static let menuPadding: CGFloat = 12
-  static let menuSpacing: CGFloat = 12
-  static let menuCornerRadius: CGFloat = 8
 
-  static let borderLineWidth: CGFloat = 1
   static let buttonShadowRadius: CGFloat = 4
   static let buttonShadowY: CGFloat = 3
 }
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = String(localized: "Protect your privacy.\nBlock trackers.", comment: "Title of the Home section, in two lines")
-  static let description = String(localized: "Ghostery helps you take control of your data across the web.")
-  static let installHeader = String(localized: "Install Ghostery in your browser")
   static let nextBrowsers = String(localized: "Next", comment: "Button scrolling to the next cards of the browsers")
-  static let enabled = String(localized: "Enabled", comment: "State of Ghostery in a browser")
-  static let moreOptions = String(localized: "More options")
-  static let disableInSafari = String(localized: "Disable Ghostery in Safari")
-  static let viewInstructions = String(localized: "View instructions", comment: "Button showing the steps to enable or disable Ghostery in Safari")
   static let openSystemSettings = String(localized: "Open System Settings", comment: "System Settings is the name of the macOS app")
 
   static func detectedBrowsers(_ count: Int) -> String {
@@ -87,15 +65,15 @@ fileprivate enum Strings {
 fileprivate let homeBrowsers = [
   HomeBrowser(
     kind: .safari,
-    icon: Icons.browserSafari,
-    description: String(localized: "Follow these simple steps to enable Ghostery in Safari."),
-    enabledDescription: String(localized: "Ghostery works correctly in Safari."),
-    actionTitle: Strings.viewInstructions,
+    icon: .browserSafari,
+    description: SectionStrings.Home.safariDescription,
+    enabledDescription: SectionStrings.Home.safariEnabledDescription,
+    actionTitle: SectionStrings.Home.viewInstructions,
     isPrimary: true
   ),
   HomeBrowser(
     kind: .external(.firefox),
-    icon: Icons.browserFirefox,
+    icon: .browserFirefox,
     description: String(localized: "Install Ghostery addon from the Firefox\nAdd-ons store.", comment: "The line break keeps the name of the store together, and can be left out"),
     enabledDescription: String(localized: "Ghostery works correctly in Firefox."),
     actionTitle: String(localized: "Install in Firefox"),
@@ -103,7 +81,7 @@ fileprivate let homeBrowsers = [
   ),
   HomeBrowser(
     kind: .external(.chrome),
-    icon: Icons.browserChrome,
+    icon: .browserChrome,
     description: String(localized: "Install Ghostery extension from the Chrome web store."),
     enabledDescription: String(localized: "Ghostery works correctly in Chrome."),
     actionTitle: String(localized: "Install in Chrome"),
@@ -111,8 +89,8 @@ fileprivate let homeBrowsers = [
   ),
   HomeBrowser(
     kind: .external(.edge),
-    icon: Icons.browserEdge,
-    description: String(localized: "Install Ghostery extension from the Edge Add-ons."),
+    icon: .browserEdge,
+    description: SectionStrings.Home.edgeDescription,
     enabledDescription: String(localized: "Ghostery works correctly in Edge."),
     actionTitle: String(localized: "Install in Edge"),
     isPrimary: false
@@ -120,9 +98,9 @@ fileprivate let homeBrowsers = [
 ]
 
 struct HomeView: View {
-  private let safari = SafariExtension.shared
-  private let externalBrowsers = ExternalBrowserStates.shared
-  @State private var showsSafariInstructions = false
+  private var safari: SafariExtension { .shared }
+  private var externalBrowsers: ExternalBrowserStates { .shared }
+  @State private var showsSafariInstructions = DebugLaunch.opens(.safariInstructions)
   @State private var menuBrowserID: HomeBrowser.Kind?
   @State private var carouselWidth: CGFloat = 0
   /// How far the cards are scrolled
@@ -158,10 +136,9 @@ struct HomeView: View {
   private var home: some View {
     SectionScrollView {
       SectionHeader(
-        title: Strings.title,
-        description: Strings.description,
-        descriptionStyle: .bodyL,
-        image: Icons.homeHeaderProtection
+        title: SectionStrings.Home.title,
+        description: SectionStrings.Home.description,
+        image: .homeHeaderProtection
       )
       browsersHeader
       browsersCarousel
@@ -188,7 +165,7 @@ struct HomeView: View {
 
   private var browsersHeader: some View {
     VStack(alignment: .leading, spacing: Constants.browsersHeaderSpacing) {
-      Text(Strings.installHeader)
+      Text(SectionStrings.Home.installHeader)
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundPrimary)
         .accessibilityAddTraits(.isHeader)
@@ -204,21 +181,16 @@ struct HomeView: View {
   private var browsersCarousel: some View {
     ScrollViewReader { proxy in
       ScrollView(.horizontal, showsIndicators: false) {
-        // The cards stretch to the tallest one, so their buttons line up
-        HStack(alignment: .top, spacing: Constants.carouselSpacing) {
-          ForEach(browsers) { browser in
-            HomeBrowserCard(
-              browser: browser,
-              isEnabled: isEnabled(browser),
-              isMenuShown: menuBrowserID == browser.id,
-              action: { action(for: browser) },
-              // Only Safari has options so far
-              showMenu: browser.kind == .safari ? { menuBrowserID = browser.id } : nil
-            )
-            .frame(maxHeight: .infinity)
-          }
+        CardStack(data: browsers, isRow: true, spacing: Constants.carouselSpacing) { browser in
+          HomeBrowserCard(
+            browser: browser,
+            isEnabled: isEnabled(browser),
+            isMenuShown: menuBrowserID == browser.id,
+            action: { action(for: browser) },
+            // Only Safari has options so far
+            showMenu: browser.kind == .safari ? { menuBrowserID = browser.id } : nil
+          )
         }
-        .fixedSize(horizontal: false, vertical: true)
         .onGeometryChange(for: CGFloat.self) { geometry in
           geometry.frame(in: .named(Constants.carouselCoordinateSpace)).minX
         } action: { minX in
@@ -240,14 +212,14 @@ struct HomeView: View {
   // Of all the cards, with the spaces between them and the margins
   private var cardsWidth: CGFloat {
     let count = CGFloat(browsers.count)
-    return count * Constants.cardWidth + max(count - 1, 0) * Constants.carouselSpacing
+    return count * HomeBrowserCard.width + max(count - 1, 0) * Constants.carouselSpacing
       + 2 * Constants.carouselHorizontalPadding
   }
 
   // Scrolls to the card after the first one shown, and from the last ones
   // back to the first one
   private func showNextBrowsers(with proxy: ScrollViewProxy) {
-    let step = Constants.cardWidth + Constants.carouselSpacing
+    let step = HomeBrowserCard.width + Constants.carouselSpacing
     let isAtEnd = carouselOffset >= cardsWidth - carouselWidth - 1
     let index = isAtEnd ? 0 : min(Int(carouselOffset / step) + 1, browsers.count - 1)
 
@@ -258,14 +230,14 @@ struct HomeView: View {
 
   private func nextBrowsersButton(action: @escaping () -> Void) -> some View {
     Button(action: action) {
-      Image(Icons.homeChevronRight)
+      Image(.homeChevronRight)
         .frame(width: Constants.carouselButtonSize, height: Constants.carouselButtonSize)
         .background(
           Circle()
             .fill(Colors.bgPrimary)
             .shadow(color: Colors.shadowButton, radius: Constants.buttonShadowRadius, y: Constants.buttonShadowY)
         )
-        .overlay(Circle().strokeBorder(Colors.borderSecondary, lineWidth: Constants.borderLineWidth))
+        .overlay(Circle().strokeBorder(Colors.borderSecondary, lineWidth: Borders.width))
         .contentShape(Circle())
     }
     .buttonStyle(.plain)
@@ -292,8 +264,8 @@ struct HomeView: View {
   private func menuItems(for browser: HomeBrowser) -> [HomeBrowserMenu.Item] {
     guard browser.kind == .safari else { return [] }
     return [
-      HomeBrowserMenu.Item(title: Strings.disableInSafari, action: SafariExtension.showSettings),
-      HomeBrowserMenu.Item(title: Strings.viewInstructions, action: { showsSafariInstructions = true }),
+      HomeBrowserMenu.Item(title: SectionStrings.Home.disableInSafari, action: SafariExtension.showSettings),
+      HomeBrowserMenu.Item(title: SectionStrings.Home.viewInstructions, action: { showsSafariInstructions = true }),
     ]
   }
 
@@ -324,93 +296,7 @@ struct HomeView: View {
   }
 }
 
-// MARK: - Browser card
-
-struct HomeBrowser: Identifiable {
-  enum Kind: Hashable {
-    case safari
-    case external(ExternalBrowser)
-  }
-
-  let kind: Kind
-  let icon: String
-  let description: String
-  /// Shown instead of the description when Ghostery is enabled in the browser
-  let enabledDescription: String
-  let actionTitle: String
-  let isPrimary: Bool
-
-  var id: Kind { kind }
-
-  var name: String {
-    switch kind {
-    case .safari: return "Safari"
-    case .external(let externalBrowser): return externalBrowser.name
-    }
-  }
-}
-
-struct HomeBrowserCard: View {
-  let browser: HomeBrowser
-  /// Whether Ghostery is enabled in the browser
-  var isEnabled: Bool
-  var isMenuShown: Bool
-  var action: () -> Void
-  /// Shows the options for the enabled state, nil when there are none
-  var showMenu: (() -> Void)?
-
-  var body: some View {
-    VStack(alignment: .leading, spacing: Constants.cardSpacing) {
-      Image(decorative: browser.icon)
-        .frame(width: Constants.cardIconSize, height: Constants.cardIconSize)
-        .background(Circle().fill(Color.white))
-
-      VStack(alignment: .leading, spacing: Constants.cardTextSpacing) {
-        Text(browser.name)
-          .textStyle(.headlineS)
-          .foregroundColor(Colors.foregroundPrimary)
-        Text(isEnabled ? browser.enabledDescription : browser.description)
-          .textStyle(.bodyS)
-          .foregroundColor(Colors.foregroundSecondary)
-          .fixedSize(horizontal: false, vertical: true)
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      // Longer texts make the card taller
-      .frame(minHeight: Constants.cardTextHeight, maxHeight: .infinity, alignment: .top)
-      .accessibilityElement(children: .combine)
-
-      if isEnabled {
-        enabledActions
-      } else {
-        Button(action: action) {
-          Text(browser.actionTitle)
-        }
-        .buttonStyle(AppButtonStyle(kind: browser.isPrimary ? .primary : .secondary))
-      }
-    }
-    .padding(Constants.cardPadding)
-    .frame(width: Constants.cardWidth)
-    .frame(maxHeight: .infinity)
-    .cardBackground(cornerRadius: Constants.cardCornerRadius)
-    .modifier(HomeBrowserCardAccessibility(browser: browser, isEnabled: isEnabled, hasMenu: showMenu != nil))
-  }
-
-  private var enabledActions: some View {
-    HStack(spacing: Constants.cardActionsSpacing) {
-      Text(Strings.enabled)
-        .textStyle(.labelM)
-        .foregroundColor(Colors.foregroundSuccessPrimary)
-        .frame(maxWidth: .infinity)
-        .frame(height: Constants.cardActionHeight)
-        .background(
-          RoundedRectangle(cornerRadius: Constants.cardActionCornerRadius).fill(Colors.bgSuccessPrimary)
-        )
-      if let showMenu {
-        HomeBrowserMoreButton(isMenuShown: isMenuShown, action: showMenu)
-      }
-    }
-  }
-}
+// MARK: - Access alert
 
 /// Shown below the cards when the state of Ghostery in some of the browsers
 /// can't be checked, with the action which opens the settings to fix it
@@ -422,8 +308,9 @@ private struct HomeAccessAlert: View {
     let shape = RoundedRectangle(cornerRadius: Constants.alertCornerRadius)
 
     HStack(spacing: Constants.alertSpacing) {
-      Image(decorative: Icons.homeWarning)
+      Image(.homeWarning)
         .renderingMode(.template)
+        .accessibilityHidden(true)
         .foregroundColor(Colors.warning600)
       message
         .textStyle(.bodyS)
@@ -435,117 +322,14 @@ private struct HomeAccessAlert: View {
     }
     .padding(Constants.alertPadding)
     .background(shape.fill(Colors.bgWarningPrimary))
-    .overlay(shape.strokeBorder(Colors.borderWarningPrimary, lineWidth: Constants.borderLineWidth))
+    .overlay(shape.strokeBorder(Colors.borderWarningPrimary, lineWidth: Borders.width))
     .padding(.top, Constants.alertTopPadding)
     .padding(.horizontal, Constants.carouselHorizontalPadding)
     .accessibilityElement(children: .combine)
   }
 }
 
-/// Opens the menu of a card, which is shown below it
-private struct HomeBrowserMoreButton: View {
-  var isMenuShown: Bool
-  var action: () -> Void
-
-  @State private var isHovered = false
-
-  var body: some View {
-    let shape = RoundedRectangle(cornerRadius: Constants.cardActionCornerRadius)
-    let isHighlighted = isHovered || isMenuShown
-
-    Button(action: action) {
-      Image(decorative: isHighlighted ? Icons.homeMoreHover : Icons.homeMore)
-        .frame(width: Constants.cardActionHeight, height: Constants.cardActionHeight)
-        .background(shape.fill(Colors.bgPrimary))
-        .overlay(
-          shape.strokeBorder(
-            isHighlighted ? Colors.borderTertiary : Colors.borderSecondary,
-            lineWidth: Constants.borderLineWidth
-          )
-        )
-        .contentShape(shape)
-    }
-    .buttonStyle(.plain)
-    .onHover { isHovered = $0 }
-    .help(Strings.moreOptions)
-    .accessibilityLabel(Strings.moreOptions)
-    .anchorPreference(key: HomeBrowserMenuAnchor.self, value: .bounds) { isMenuShown ? $0 : nil }
-  }
-}
-
-/// A card with a single button is read as one element, with the action of
-/// the button, whose title the combined label leaves out. With more buttons,
-/// they're read separately, and without any, it's read as one element too.
-private struct HomeBrowserCardAccessibility: ViewModifier {
-  let browser: HomeBrowser
-  let isEnabled: Bool
-  let hasMenu: Bool
-
-  func body(content: Content) -> some View {
-    if isEnabled && hasMenu {
-      content
-        .accessibilityElement(children: .contain)
-    } else if isEnabled {
-      content
-        .singleActionAccessibility(label: [browser.name, browser.enabledDescription, Strings.enabled])
-    } else {
-      content
-        .singleActionAccessibility(label: [browser.name, browser.description, browser.actionTitle])
-    }
-  }
-}
-
-// MARK: - Browser menu
-
-/// Bounds of the button whose menu is shown
-private struct HomeBrowserMenuAnchor: PreferenceKey {
-  static let defaultValue: Anchor<CGRect>? = nil
-
-  static func reduce(value: inout Anchor<CGRect>?, nextValue: () -> Anchor<CGRect>?) {
-    value = value ?? nextValue()
-  }
-}
-
-struct HomeBrowserMenu: View {
-  struct Item: Identifiable {
-    let title: String
-    let action: () -> Void
-
-    var id: String { title }
-  }
-
-  let items: [Item]
-  var onSelect: () -> Void
-
-  var body: some View {
-    let shape = RoundedRectangle(cornerRadius: Constants.menuCornerRadius)
-
-    VStack(alignment: .leading, spacing: Constants.menuSpacing) {
-      ForEach(items) { item in
-        Button {
-          onSelect()
-          item.action()
-        } label: {
-          Text(item.title)
-            .textStyle(.labelM)
-            .foregroundColor(Colors.foregroundPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-      }
-    }
-    .padding(Constants.menuPadding)
-    .fixedSize()
-    .background(shape.fill(Colors.bgPrimary))
-    .overlay(shape.strokeBorder(Colors.borderSecondary, lineWidth: Constants.borderLineWidth))
-    .accessibilityElement(children: .contain)
-  }
-}
-
-struct HomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    HomeView()
-      .frame(width: 736, height: 668)
-  }
+#Preview {
+  HomeView()
+    .frame(width: 736, height: 668)
 }

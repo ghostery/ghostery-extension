@@ -37,8 +37,6 @@ fileprivate enum Constants {
   static let spinnerTurnDuration: TimeInterval = 0.8
 
   static let legalSpacing: CGFloat = 12
-
-  static let borderLineWidth: CGFloat = 1
 }
 
 fileprivate enum Strings {
@@ -76,7 +74,7 @@ extension DonationPeriod {
 
 /// Sizes of the donation options, which differ between the Mac, iPhones and
 /// iPads
-struct DonationLayout {
+struct DonationLayout: PlatformLayout {
   /// Of the card, which is otherwise as wide as the page
   var maxWidth: CGFloat?
   var padding: EdgeInsets
@@ -156,16 +154,19 @@ struct DonationLayout {
 /// Card with the periods and the amounts of the donations, and the button
 /// making the selected one
 struct DonationOptions: View {
-  var layout: DonationLayout
   var onDonated: () -> Void
 
-  @Environment(Donations.self) private var donations
+  @CurrentLayout private var layout: DonationLayout
+  private var donations: Donations { .shared }
 
   @State private var period = DonationPeriod.monthly
   @State private var selectedProductID: Product.ID?
   @State private var showsFailure = false
 
   var body: some View {
+    let layout = self.layout
+    let selectedProduct = self.selectedProduct
+
     VStack(spacing: layout.spacing) {
       VStack(spacing: Constants.textSpacing) {
         Text(Strings.title)
@@ -182,7 +183,7 @@ struct DonationOptions: View {
       .fixedSize(horizontal: false, vertical: true)
 
       periods
-      amounts
+      amounts(selectedProduct: selectedProduct)
 
       Button {
         guard let product = selectedProduct else { return }
@@ -214,6 +215,8 @@ struct DonationOptions: View {
     } message: {
       Text(Strings.failedMessage)
     }
+    // Loaded when the app starts, and again when that failed, like offline
+    .task { await donations.loadProducts() }
   }
 
   private var selectedProduct: Product? {
@@ -249,7 +252,7 @@ struct DonationOptions: View {
   }
 
   @ViewBuilder
-  private var amounts: some View {
+  private func amounts(selectedProduct: Product?) -> some View {
     let products = donations.products(for: period)
 
     if products.isEmpty {
@@ -259,11 +262,13 @@ struct DonationOptions: View {
     } else {
       HStack(spacing: Constants.amountsSpacing) {
         ForEach(products) { product in
+          let isSelected = product.id == selectedProduct?.id
+
           Button(product.displayPrice) {
             selectedProductID = product.id
           }
-          .buttonStyle(DonationAmountStyle(isSelected: product.id == selectedProduct?.id, isFilling: layout.areAmountsFilling))
-          .accessibilityAddTraits(product.id == selectedProduct?.id ? .isSelected : [])
+          .buttonStyle(DonationAmountStyle(isSelected: isSelected, isFilling: layout.areAmountsFilling))
+          .accessibilityAddTraits(isSelected ? .isSelected : [])
         }
       }
     }
@@ -286,7 +291,7 @@ struct DonationRestoreButton: View {
   /// Around the title, where the button can also be tapped
   var hitPadding: CGFloat = 0
 
-  @Environment(Donations.self) private var donations
+  private var donations: Donations { .shared }
 
   var body: some View {
     Button {
@@ -343,7 +348,7 @@ private struct DonationRadio: View {
       Circle()
         .fill(Colors.bgPrimary)
         .shadow(color: Colors.shadowButton, radius: Constants.radioShadowRadius, y: Constants.radioShadowY)
-        .overlay(Circle().strokeBorder(Colors.borderSecondary, lineWidth: Constants.borderLineWidth))
+        .overlay(Circle().strokeBorder(Colors.borderSecondary, lineWidth: Borders.width))
         .frame(width: Constants.radioSize, height: Constants.radioSize)
     }
   }
@@ -373,9 +378,9 @@ private struct DonationAmountStyle: ButtonStyle {
           .shadow(color: isSelected ? Colors.shadowCard : .clear, radius: Constants.amountShadowRadius, y: Constants.amountShadowY)
       )
       .overlay(
-        shape.strokeBorder(isSelected ? Colors.borderBrandSolid : Colors.borderPrimary, lineWidth: Constants.borderLineWidth)
+        shape.strokeBorder(isSelected ? Colors.borderBrandSolid : Colors.borderPrimary, lineWidth: Borders.width)
       )
       .contentShape(shape)
-      .opacity(configuration.isPressed ? 0.8 : 1)
+      .opacity(configuration.isPressed ? AppButtonStyle.pressedOpacity : 1)
   }
 }

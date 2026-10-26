@@ -9,8 +9,6 @@
 import SwiftUI
 
 fileprivate enum Constants {
-  static let width: CGFloat = 480
-  static let topPadding: CGFloat = 64
   static let imageSize: CGFloat = 80
   // Centers the ghost, as its image includes the shadow below it
   static let stepsImageOffset: CGFloat = 4
@@ -29,52 +27,88 @@ fileprivate enum Constants {
 fileprivate enum Strings {
   // You can translate your strings here
   static let skip = String(localized: "Skip", comment: "Button closing the steps to enable the extension")
-  static let title = String(localized: "Enable Ghostery Privacy\nAd Block for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+  #if os(macOS)
+  static let title = String(localized: "Enable Ghostery Privacy Ad Block for Safari", comment: "Ghostery Privacy Ad Block is the name of the extension")
+  #else
+  static let title = SectionStrings.SafariInstructions.title
+  #endif
   static let enabledTitle = String(localized: "Your Safari is protected with Ghostery")
   static let enabledDescription = String(localized: "Ghostery is actively blocking trackers, stopping annoying ads, and protecting your online privacy in the background.")
   static let done = String(localized: "Done", comment: "Button closing the dialog")
 }
 
-/// Sizes of the dialogs, which are larger on iPads
-fileprivate struct SafariDialogLayout {
+/// Sizes of the dialogs, which differ between the Mac, iPhones and iPads
+fileprivate struct SafariDialogLayout: PlatformLayout {
+  var width: CGFloat
   var horizontalPadding: CGFloat
   var spacing: CGFloat
   var titleStyle: AppTextStyle
+  /// Of the steps, which are as small as on iPhones also on iPads, to fit
+  /// in the dialog
+  var steps: SafariStepLayout
+  var stepsTopPadding: CGFloat
   var stepsBottomPadding: CGFloat
   /// Below the button closing the dialog, when it ends with it
   var buttonBottomPadding: CGFloat
+  var enabledTopPadding: CGFloat
+  var enabledHorizontalPadding: CGFloat
+  var enabledTitleStyle: AppTextStyle
   /// Of the texts of the confirmation, so they wrap as in the design
   var enabledTitleWidth: CGFloat
   var enabledDescriptionStyle: AppTextStyle
   var enabledDescriptionWidth: CGFloat
 
+  #if os(macOS)
+  static let mac = SafariDialogLayout(
+    width: 560,
+    horizontalPadding: 40,
+    spacing: 24,
+    titleStyle: .headlineS,
+    steps: .mac,
+    stepsTopPadding: 39,
+    stepsBottomPadding: 40,
+    buttonBottomPadding: 81,
+    enabledTopPadding: 79,
+    enabledHorizontalPadding: 0,
+    enabledTitleStyle: .displayS,
+    enabledTitleWidth: 280,
+    enabledDescriptionStyle: .bodyM,
+    enabledDescriptionWidth: 394
+  )
+  #else
   static let phone = SafariDialogLayout(
+    width: 480,
     horizontalPadding: 16,
     spacing: 24,
     titleStyle: .headlineS,
+    steps: .phone,
+    stepsTopPadding: 64,
     stepsBottomPadding: 16,
     buttonBottomPadding: 40,
+    enabledTopPadding: 64,
+    enabledHorizontalPadding: 16,
+    enabledTitleStyle: .headlineS,
     enabledTitleWidth: 239,
     enabledDescriptionStyle: .bodyM,
     enabledDescriptionWidth: 285
   )
   static let tablet = SafariDialogLayout(
+    width: 480,
     horizontalPadding: 40,
     spacing: 32,
     titleStyle: .headlineM,
+    steps: .phone,
+    stepsTopPadding: 64,
     stepsBottomPadding: 64,
     buttonBottomPadding: 64,
+    enabledTopPadding: 64,
+    enabledHorizontalPadding: 40,
+    enabledTitleStyle: .headlineM,
     enabledTitleWidth: 285,
     enabledDescriptionStyle: .bodyL,
     enabledDescriptionWidth: 400
   )
-}
-
-extension SafariDialogLayout {
-  /// The layout for the width of the window
-  init(_ horizontalSizeClass: UserInterfaceSizeClass?) {
-    self = horizontalSizeClass == .regular ? .tablet : .phone
-  }
+  #endif
 }
 
 /// The steps to enable the extension, replaced with the confirmation
@@ -83,18 +117,19 @@ struct SafariOnboardingDialog: View {
   var onClose: () -> Void
   var onEnabled: () -> Void
 
-  private let safari = SafariExtension.shared
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @CurrentLayout private var layout: SafariDialogLayout
+  private var safari: SafariExtension { .shared }
 
   var body: some View {
-    let layout = SafariDialogLayout(horizontalSizeClass)
+    let layout = self.layout
     // Without the state, the app can't tell when the extension is enabled,
     // so the dialog ends with the button closing it, instead of skipping it
     let isStateAvailable = SafariExtension.isStateAvailable
 
-    AppDialog(width: Constants.width, closeTitle: Strings.skip, onClose: isStateAvailable ? onClose : nil) {
+    AppDialog(width: layout.width, closeTitle: Strings.skip, onClose: isStateAvailable ? onClose : nil) {
       VStack(spacing: layout.spacing) {
-        Image(decorative: Icons.safariOnboarding)
+        Image(.safariOnboarding)
+          .accessibilityHidden(true)
           .overlay(alignment: .topLeading) {
             AppSpinner(
               color: Colors.bgBrandSolid,
@@ -116,14 +151,13 @@ struct SafariOnboardingDialog: View {
           .fixedSize(horizontal: false, vertical: true)
           .accessibilityAddTraits(.isHeader)
 
-        // As small as on iPhones also on iPads, to fit in the dialog
-        SafariEnableSteps(layout: .phone)
+        SafariEnableSteps(layout: layout.steps)
 
         if !isStateAvailable {
           DoneButton(action: onClose)
         }
       }
-      .padding(.top, Constants.topPadding)
+      .padding(.top, layout.stepsTopPadding)
       .padding(.bottom, isStateAvailable ? layout.stepsBottomPadding : layout.buttonBottomPadding)
       .padding(.horizontal, layout.horizontalPadding)
     }
@@ -139,20 +173,21 @@ struct SafariOnboardingDialog: View {
 struct SafariEnabledDialog: View {
   var onClose: () -> Void
 
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @CurrentLayout private var layout: SafariDialogLayout
 
   var body: some View {
-    let layout = SafariDialogLayout(horizontalSizeClass)
+    let layout = self.layout
 
-    AppDialog(width: Constants.width, onClose: onClose) {
+    AppDialog(width: layout.width, onClose: onClose) {
       VStack(spacing: layout.spacing) {
         // The image includes the shadow below the circle
-        Image(decorative: Icons.safariOnboardingEnabled)
+        Image(.safariOnboardingEnabled)
+          .accessibilityHidden(true)
           .frame(width: Constants.imageSize, height: Constants.imageSize, alignment: .top)
 
         VStack(spacing: Constants.enabledTextSpacing) {
           Text(Strings.enabledTitle)
-            .textStyle(layout.titleStyle)
+            .textStyle(layout.enabledTitleStyle)
             .foregroundColor(Colors.foregroundPrimary)
             .frame(maxWidth: layout.enabledTitleWidth)
             .accessibilityAddTraits(.isHeader)
@@ -167,9 +202,9 @@ struct SafariEnabledDialog: View {
         DoneButton(action: onClose)
       }
       .frame(maxWidth: .infinity)
-      .padding(.top, Constants.topPadding)
+      .padding(.top, layout.enabledTopPadding)
       .padding(.bottom, layout.buttonBottomPadding)
-      .padding(.horizontal, layout.horizontalPadding)
+      .padding(.horizontal, layout.enabledHorizontalPadding)
     }
   }
 }
@@ -184,11 +219,12 @@ private struct DoneButton: View {
   }
 }
 
-struct SafariOnboardingDialog_Previews: PreviewProvider {
-  static var previews: some View {
-    SafariOnboardingDialog(onClose: {}, onEnabled: {})
-      .padding(16)
-    SafariEnabledDialog(onClose: {})
-      .padding(16)
-  }
+#Preview("Onboarding") {
+  SafariOnboardingDialog(onClose: {}, onEnabled: {})
+    .padding(40)
+}
+
+#Preview("Enabled") {
+  SafariEnabledDialog(onClose: {})
+    .padding(40)
 }
