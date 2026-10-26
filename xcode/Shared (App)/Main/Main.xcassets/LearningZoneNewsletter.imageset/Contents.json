@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "learn-newsletter-wide.svg",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "learn-newsletter.svg",
+      "idiom" : "mac"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
+  }
+}
