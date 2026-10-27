@@ -20,6 +20,8 @@ import Config from '/store/config.js';
 import { isSerpSupported } from '/utils/opera.js';
 import { isEdge, isMobile, isOpera, isSafari } from '/utils/browser-info.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL, PANEL_STORE_PAGE_URL } from '/utils/urls';
+import { REVIEW_NOTIFICATION_DELAY } from '/utils/notifications.js';
+import * as telemetry from '/utils/telemetry.js';
 
 import callForReviewImage from '../assets/call-for-review.svg';
 import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
@@ -106,28 +108,26 @@ const Notification = {
     // Disabled in-panel notifications
     if (!panel.notifications) return null;
 
+    const pool = [NOTIFICATIONS.zap, NOTIFICATIONS.contribution];
+
+    // Review notification for users with the extension installed for at least 30 days
+    const { installDate } = await telemetry.getStorage();
+    if (installDate && Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
+      pool.push(NOTIFICATIONS.review);
+    }
+
     // Survey notification
     const config = await store.resolve(Config);
     if (lang === 'en' && config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
-      return NOTIFICATIONS.survey;
+      pool.push(NOTIFICATIONS.survey);
     }
-
-    // Zap notification
-    // TODO: Re-enable notifications below when we decide to move Zap notification
-    // to the list of notifications that are shown to users
-    if (randomize <= 1) return NOTIFICATIONS.zap;
 
     // Edge mobile notification for Edge desktop users
     if (__CHROMIUM__ && isEdge() && !isMobile()) {
-      return NOTIFICATIONS.edgeMobile;
+      pool.push(NOTIFICATIONS.edgeMobile);
     }
 
-    // Randomly show review notification (50% chance)
-    if (randomize < 0.5) {
-      return NOTIFICATIONS.review;
-    }
-
-    return NOTIFICATIONS.contribution;
+    return pool[Math.floor(randomize * pool.length)];
   },
 };
 

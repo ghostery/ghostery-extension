@@ -138,8 +138,6 @@ if (
   Review notification after 30 days
 */
 
-const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
-
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (!details.url.startsWith('http') || details.frameId !== 0) return;
 
@@ -149,7 +147,10 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   const config = await store.resolve(Config);
   if (!config.hasFlag(FLAG_NOTIFICATION_REVIEW)) return;
 
-  if (__DEBUG__ || Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
+  if (
+    __DEBUG__ ||
+    Date.now() - new Date(installDate).getTime() >= notifications.REVIEW_NOTIFICATION_DELAY
+  ) {
     openNotification({
       id: 'review',
       tabId: details.tabId,
