@@ -24,13 +24,6 @@ import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { $, $$ } from '@wdio/globals';
 
-// Pin geckodriver to 0.36.0 — when installing an extension via base64
-// (installAddOn API), the file is removed from the filesystem after install,
-// causing issues like broken extension reload and content scripts not loading.
-// v0.37.0 made this worse; 0.36.0 is the last known good version.
-// TODO: check https://github.com/mozilla/geckodriver/issues/2248 and remove the pin once fixed.
-process.env.GECKODRIVER_VERSION = '0.36.0';
-
 import { setupTestPage } from './page/server.js';
 
 import { getExtensionPageURL, setExtensionBaseUrl, PAGE_PORT, PAGE_URL } from './utils.js';
@@ -137,15 +130,15 @@ export const config = {
       browserName: 'firefox',
       browserVersion: 'stable',
       cacheDir: '.wdio',
+      // Firefox 153+ blocks WebDriver navigation to moz-extension:// and
+      // about:debugging pages unless system access is explicitly allowed.
+      // Since geckodriver 0.37.1 it must be enabled by the geckodriver flag.
+      'wdio:geckodriverOptions': { allowSystemAccess: true },
       'moz:firefoxOptions': {
         // macOS 27 denies a Firefox spawned by a terminal its own Application Support directory,
         // so a launcher that starts it through LaunchServices can be given here.
         ...(process.env.E2E_FIREFOX_BINARY && { binary: process.env.E2E_FIREFOX_BINARY }),
-        // Firefox 153+ blocks WebDriver navigation to moz-extension:// and
-        // about:debugging pages unless system access is explicitly allowed.
-        args: ['--remote-allow-system-access'].concat(
-          argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
-        ),
+        args: argv.debug ? [] : ['-headless', '--width=1024', '--height=768'],
         prefs: {
           'browser.cache.disk.enable': false,
           'browser.cache.memory.enable': false,
