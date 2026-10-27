@@ -108,18 +108,18 @@ const Notification = {
     // Disabled in-panel notifications
     if (!panel.notifications) return null;
 
+    // Survey notification
+    const config = await store.resolve(Config);
+    if (lang === 'en' && config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
+      return NOTIFICATIONS.survey;
+    }
+
     const pool = [NOTIFICATIONS.zap, NOTIFICATIONS.contribution];
 
     // Review notification for users with the extension installed for at least 30 days
     const { installDate } = await telemetry.getStorage();
     if (installDate && Date.now() - new Date(installDate).getTime() >= REVIEW_NOTIFICATION_DELAY) {
       pool.push(NOTIFICATIONS.review);
-    }
-
-    // Survey notification
-    const config = await store.resolve(Config);
-    if (lang === 'en' && config.hasFlag(FLAG_PANEL_NOTIFICATION_SURVEY)) {
-      pool.push(NOTIFICATIONS.survey);
     }
 
     // Edge mobile notification for Edge desktop users
