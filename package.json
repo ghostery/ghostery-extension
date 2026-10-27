@@ -39,7 +39,7 @@
     "globals": "^17.13.0",
     "license-report": "^6.8.6",
     "prettier": "^3.9.10",
-    "vite": "^8.3.4",
+    "vite": "^8.3.5",
     "web-ext": "^10.8.0"
   },
   "dependencies": {
