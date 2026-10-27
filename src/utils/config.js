@@ -67,13 +67,6 @@ export function filter(item) {
 
     const extensionVersion = chrome.runtime.getManifest().version;
 
-    // Version check (legacy, same as minVersion)
-    // Checks that the extension version is equal or higher
-    // TODO: Remove when no active usage of version check is left
-    if (check && typeof item.filter.version === 'string') {
-      item.filter.minVersion = item.filter.version;
-    }
-
     // minVersion check
     // Checks that the extension version is equal or higher than minVersion
     if (check && typeof item.filter.minVersion === 'string') {
