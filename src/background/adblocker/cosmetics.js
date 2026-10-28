@@ -11,9 +11,7 @@
 
 import { store } from 'hybrids';
 import scriptlets, { run } from '@ghostery/scriptlets';
-import { FLAG_SUBFRAME_SCRIPTING } from '@ghostery/config';
 
-import { resolveFlag } from '/store/config.js';
 import Options, { getPausedDetails } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 import DisabledFilters from '/store/disabled-filters.js';
@@ -211,8 +209,6 @@ function injectStyles(styles, details) {
     });
 }
 
-const SUBFRAME_SCRIPTING = resolveFlag(FLAG_SUBFRAME_SCRIPTING);
-
 const framesHierarchy = new FramesHierarchy();
 framesHierarchy.handleWebWorkerStart();
 framesHierarchy.handleWebextensionEvents();
@@ -267,7 +263,7 @@ async function injectCosmetics(details, config) {
   const extendedCSSEnabled = !debugReady || debug.cosmeticsExtendedCSS;
 
   let ancestors;
-  if (SUBFRAME_SCRIPTING.enabled && !scriptletsOnly) {
+  if (!scriptletsOnly) {
     if (typeof parentFrameId === 'number') {
       framesHierarchy.updateAncestry(
         { tabId, frameId, parentFrameId, documentId },
