@@ -24,6 +24,9 @@ export const CLEAR_ACTION = 'notifications:clear';
 export const RESIZE_WINDOW_EVENT = 'ghostery:notifications:resize';
 export const CLOSE_WINDOW_EVENT = 'ghostery:notifications:close';
 
+// Minimum time since installation to show the review notification
+export const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
+
 /*
  * Setup the notification page to send messages to the parent window
  */
