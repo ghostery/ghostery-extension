@@ -85,6 +85,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     // Messages for e2e tests
 
     case 'e2e:idle':
+      // Extension pages announce saved options after the storage is updated, so the
+      // message can come after this one - read them again to not miss the change
+      store.clear(Options, false);
+
       Promise.all([OptionsObserver.waitForIdle(), adblockerSetup.pending]).then(() => {
         sendResponse('done');
         console.debug('[helpers] "idleOptionsObservers" finished');

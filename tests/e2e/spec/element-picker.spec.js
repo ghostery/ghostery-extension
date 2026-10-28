@@ -36,14 +36,17 @@ async function runInExtensionPage(fn, ...args) {
 }
 
 // Opens the picker on the test page, like the panel does
-function openElementPicker() {
-  return runInExtensionPage(async function (pageUrl) {
+async function openElementPicker() {
+  await runInExtensionPage(async function (pageUrl) {
     const api = window.chrome || window.browser;
     const tabs = await api.tabs.query({});
     const tab = tabs.find((t) => t.url?.startsWith(pageUrl));
 
     await api.runtime.sendMessage({ action: 'openElementPicker', tabId: tab.id });
   }, PAGE_URL);
+
+  // The selected element is sent to the popup only once, so it must be loaded before
+  await waitForPopupButton('button:close');
 }
 
 function getStoredHostnames() {
