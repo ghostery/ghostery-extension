@@ -233,6 +233,21 @@ export async function expectAdsBlocked(context = browser) {
   await expect(dataAd).not.toBeDisplayed();
 }
 
+// The save button shows "..." until the background responds, and stays disabled
+// for a while after that only to display the result, so it is not waited for
+export async function saveCustomFilters() {
+  const saveButton = await getExtensionElement('button:custom-filters:save');
+  await saveButton.click();
+
+  await expect(saveButton).toHaveElementProperty('disabled', true);
+  await browser.waitUntil(
+    async () => (await saveButton.getProperty('textContent')).trim() !== '...',
+    { timeout: 15000, timeoutMsg: 'Custom filters were not saved' },
+  );
+
+  await waitForIdleBackgroundTasks();
+}
+
 export async function setCustomFilters(filters) {
   await setAdditionalFiltersToggle('custom-filters', true);
 
@@ -254,13 +269,7 @@ export async function setCustomFilters(filters) {
     filters.join('\n'),
   );
 
-  const saveButton = await getExtensionElement('button:custom-filters:save');
-  await saveButton.click();
-
-  await expect(saveButton).toHaveElementProperty('disabled', true);
-  await expect(saveButton).toHaveElementProperty('disabled', false, { wait: 15000 });
-
-  await waitForIdleBackgroundTasks();
+  await saveCustomFilters();
 }
 
 export async function disableCustomFilters() {

@@ -15,6 +15,7 @@ import {
   confirmDialog,
   setAdditionalFiltersToggle,
   setCustomFilters,
+  saveCustomFilters,
   disableCustomFilters,
   waitForIdleBackgroundTasks,
   reloadUntilActive,
@@ -37,8 +38,7 @@ async function setCustomFiltersInput(lines) {
     lines.join('\n'),
   );
 
-  await getExtensionElement('button:custom-filters:save').click();
-  await waitForIdleBackgroundTasks();
+  await saveCustomFilters();
 }
 
 async function addCustomFilterList(url) {

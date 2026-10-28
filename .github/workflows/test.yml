@@ -34,10 +34,14 @@ jobs:
       - name: Unit Tests
         run: npm run test:unit
 
-  e2e-chrome:
+  e2e-chrome-group:
+    name: e2e-chrome (${{ matrix.group }})
     runs-on: ubuntu-latest
-    needs: unit
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [1, 2]
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -46,11 +50,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests with flags
-        run: npm run wdio -- --target=chrome
+        run: npm run wdio -- --target=chrome --group=${{ matrix.group }}
+
+  # Required status check, which passes only if all spec groups pass
+  e2e-chrome:
+    runs-on: ubuntu-latest
+    needs: e2e-chrome-group
+    if: always()
+    steps:
+      - run: test "${{ needs.e2e-chrome-group.result }}" = "success"
 
   e2e-chrome-update:
     runs-on: ubuntu-latest
-    needs: unit
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
@@ -62,10 +73,14 @@ jobs:
       - name: Run tests after updating the extension
         run: npm run wdio:update -- --target=chrome
 
-  e2e-firefox:
+  e2e-firefox-group:
+    name: e2e-firefox (${{ matrix.group }})
     runs-on: ubuntu-latest
-    needs: unit
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [1, 2]
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -74,11 +89,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests with flags
-        run: npm run wdio -- --target=firefox
+        run: npm run wdio -- --target=firefox --group=${{ matrix.group }}
+
+  # Required status check, which passes only if all spec groups pass
+  e2e-firefox:
+    runs-on: ubuntu-latest
+    needs: e2e-firefox-group
+    if: always()
+    steps:
+      - run: test "${{ needs.e2e-firefox-group.result }}" = "success"
 
   e2e-firefox-update:
     runs-on: ubuntu-latest
-    needs: unit
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5

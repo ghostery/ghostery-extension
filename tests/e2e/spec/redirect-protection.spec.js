@@ -17,6 +17,7 @@ import {
   setAdditionalFiltersToggle,
   setToggle,
   disableCustomFilters,
+  waitForIdleBackgroundTasks,
   PAGE_DOMAIN,
   PAGE_URL,
   REDIRECT_PAGE_URL,
@@ -141,6 +142,9 @@ describe('Redirect Protection', function () {
       await expect(
         getExtensionElement('component:redirect-protection:empty-state'),
       ).toBeDisplayed();
+
+      // Exceptions are applied to the redirect rules asynchronously
+      await waitForIdleBackgroundTasks();
     });
 
     describe('Settings page exceptions management', function () {
@@ -156,6 +160,8 @@ describe('Redirect Protection', function () {
         await expect(
           getExtensionElement(`item:redirect-protection:exception:${PAGE_DOMAIN}`),
         ).toBeDisplayed();
+
+        await waitForIdleBackgroundTasks();
       });
 
       it('navigates directly when exception is added', async function () {
@@ -170,6 +176,8 @@ describe('Redirect Protection', function () {
         await expect(
           getExtensionElement('component:redirect-protection:empty-state'),
         ).toBeDisplayed();
+
+        await waitForIdleBackgroundTasks();
       });
 
       it('redirects again after exception is removed', async function () {
