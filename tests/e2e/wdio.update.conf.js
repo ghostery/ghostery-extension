@@ -28,7 +28,7 @@ export const config = {
   ...wdio.config,
   // We include only main features, which can be affected by the extension update. It speed up the tests
   // and avoid long living session issues (especially in Firefox) that can cause false positives in CI
-  specs: [wdio.MAIN_SPECS],
+  specs: [wdio.SPEC_GROUPS.core],
   exclude: [
     // The onboarding spec must be skipped as the extension is already installed and enabled
     './spec/onboarding.spec.js',

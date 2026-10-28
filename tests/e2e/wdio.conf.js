@@ -11,11 +11,11 @@
 
 /*
  * Usage:
- *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--group=1,2] [--debug] [--clean]
+ *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--group=core,features] [--debug] [--clean]
  *
  * Options:
  *   --target: comma separated list of browsers to run the tests on (default: firefox,chrome)
- *   --group: comma separated list of spec groups to run (default: all)
+ *   --group: comma separated list of spec groups to run (default: core,features)
  *   --debug: run the tests in debug mode (default: false)
  *   --clean: clean the build artifacts before running the tests (default: false)
  */
@@ -82,21 +82,20 @@ export function buildForChrome() {
   }
 }
 
-// Main features, which are also tested after updating the extension
-export const MAIN_SPECS = [
-  'spec/onboarding.spec.js',
-  'spec/managed.spec.js',
-  'spec/main.spec.js',
-  'spec/zapped.spec.js',
-  'spec/adblocker.spec.js',
-];
-
-// Each group runs in a separate browser session, and on CI in a separate job,
-// so the groups should take a similar time to run
-const SPEC_GROUPS = [
-  [...MAIN_SPECS, 'spec/exceptions.spec.js', 'spec/custom-filters.spec.js'],
+// Each group runs in a separate browser session, and on CI in a separate job
+export const SPEC_GROUPS = {
+  // Main features, which are also tested after updating the extension
+  core: [
+    'spec/onboarding.spec.js',
+    'spec/managed.spec.js',
+    'spec/main.spec.js',
+    'spec/zapped.spec.js',
+    'spec/adblocker.spec.js',
+  ],
   // The rest explicitly defined (a pattern would match main features too)
-  [
+  features: [
+    'spec/exceptions.spec.js',
+    'spec/custom-filters.spec.js',
     'spec/distractions.spec.js',
     'spec/element-picker.spec.js',
     'spec/scriptlet-idempotency.spec.js',
@@ -108,10 +107,10 @@ const SPEC_GROUPS = [
     'spec/whotracksme.spec.js',
     'spec/whats-new.spec.js',
   ],
-];
+};
 
 export const config = {
-  specs: argv.group ? argv.group.map((group) => SPEC_GROUPS[group - 1]) : SPEC_GROUPS,
+  specs: argv.group ? argv.group.map((group) => SPEC_GROUPS[group]) : Object.values(SPEC_GROUPS),
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
   logLevel: argv.debug ? 'error' : 'silent',
   // WebdriverIO v10 makes `$` throw when a selector matches more than one element.
