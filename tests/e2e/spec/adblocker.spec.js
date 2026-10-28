@@ -31,32 +31,20 @@ async function togglePrivacyFeatures(value) {
   await waitForIdleBackgroundTasks();
 }
 
-async function collectTestPageResponse() {
-  let response;
-
-  for (let i = 0; i < 4; i++) {
-    response = await browser.execute(function () {
-      if (
-        typeof suite === 'undefined' ||
-        suite.collection.expected !== suite.collection.reports.length
-      ) {
-        return false;
-      }
-      return suite.collection.reports;
-    });
-
-    if (response === false) {
-      await new Promise(function (resolve) {
-        setTimeout(function () {
-          resolve(null);
-        }, 1000);
-      });
-    } else {
-      return response;
-    }
-  }
-
-  return false;
+function collectTestPageResponse() {
+  return browser.waitUntil(
+    () =>
+      browser.execute(function () {
+        if (
+          typeof suite === 'undefined' ||
+          suite.collection.expected !== suite.collection.reports.length
+        ) {
+          return false;
+        }
+        return suite.collection.reports;
+      }),
+    { timeout: 4000, interval: 100, timeoutMsg: 'Test page did not collect all reports' },
+  );
 }
 
 async function test(filters) {

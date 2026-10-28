@@ -11,10 +11,11 @@
 
 /*
  * Usage:
- *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--debug] [--clean]
+ *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--group=1,2] [--debug] [--clean]
  *
  * Options:
  *   --target: comma separated list of browsers to run the tests on (default: firefox,chrome)
+ *   --group: comma separated list of spec groups to run (default: all)
  *   --debug: run the tests in debug mode (default: false)
  *   --clean: clean the build artifacts before running the tests (default: false)
  */
@@ -81,33 +82,36 @@ export function buildForChrome() {
   }
 }
 
-export const config = {
-  specs: [
-    // Main features
-    [
-      'spec/onboarding.spec.js',
-      'spec/managed.spec.js',
-      'spec/main.spec.js',
-      'spec/zapped.spec.js',
-      'spec/adblocker.spec.js',
-    ],
-    // The rest explicitly defined (a pattern would match main features too)
-    [
-      'spec/exceptions.spec.js',
-      'spec/custom-filters.spec.js',
-      'spec/distractions.spec.js',
-      'spec/element-picker.spec.js',
-      'spec/scriptlet-idempotency.spec.js',
-      'spec/scriptlet-refresh.spec.js',
-      'spec/subframe-scripting.spec.js',
-      'spec/redirect-protection.spec.js',
-      'spec/clear-browsing-data.spec.js',
-      'spec/panel.spec.js',
-      'spec/pause-assistant.spec.js',
-      'spec/whotracksme.spec.js',
-      'spec/whats-new.spec.js',
-    ],
+// Main features, which are also tested after updating the extension
+export const MAIN_SPECS = [
+  'spec/onboarding.spec.js',
+  'spec/managed.spec.js',
+  'spec/main.spec.js',
+  'spec/zapped.spec.js',
+  'spec/adblocker.spec.js',
+];
+
+// Each group runs in a separate browser session, and on CI in a separate job,
+// so the groups should take a similar time to run
+const SPEC_GROUPS = [
+  [...MAIN_SPECS, 'spec/exceptions.spec.js', 'spec/custom-filters.spec.js'],
+  // The rest explicitly defined (a pattern would match main features too)
+  [
+    'spec/distractions.spec.js',
+    'spec/element-picker.spec.js',
+    'spec/scriptlet-idempotency.spec.js',
+    'spec/subframe-scripting.spec.js',
+    'spec/redirect-protection.spec.js',
+    'spec/clear-browsing-data.spec.js',
+    'spec/panel.spec.js',
+    'spec/pause-assistant.spec.js',
+    'spec/whotracksme.spec.js',
+    'spec/whats-new.spec.js',
   ],
+];
+
+export const config = {
+  specs: argv.group ? argv.group.map((group) => SPEC_GROUPS[group - 1]) : SPEC_GROUPS,
   reporters: [['spec', { showPreface: false, realtimeReporting: !process.env.GITHUB_ACTIONS }]],
   logLevel: argv.debug ? 'error' : 'silent',
   // WebdriverIO v10 makes `$` throw when a selector matches more than one element.
