@@ -16,7 +16,7 @@ import {
   setCustomFilters,
   setAdditionalFiltersToggle,
   setToggle,
-  disableCustomFilters,
+  clearCustomFilters,
   waitForIdleBackgroundTasks,
   PAGE_DOMAIN,
   PAGE_URL,
@@ -49,7 +49,7 @@ describe('Redirect Protection', function () {
   before(setupExtension);
   before(() => setCustomFilters([`||${PAGE_DOMAIN}^$document`]));
 
-  after(() => disableCustomFilters());
+  after(() => clearCustomFilters());
 
   it('is enabled by default', async function () {
     await openRedirectSettings();
@@ -207,7 +207,7 @@ describe('Redirect Protection', function () {
 describe('Type-less filter does not affect main_frame', function () {
   before(setupExtension);
   before(() => setCustomFilters([`||${PAGE_DOMAIN}^`]));
-  after(() => disableCustomFilters());
+  after(() => clearCustomFilters());
 
   it('does not redirect when redirect protection is enabled', async function () {
     await browser.url('ghostery:settings');

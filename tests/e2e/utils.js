@@ -274,9 +274,12 @@ export async function setCustomFilters(filters) {
   await saveCustomFilters();
 }
 
-export async function disableCustomFilters() {
-  await setCustomFilters([]);
-  await setAdditionalFiltersToggle('custom-filters', false);
+// It only resets the state for the next specs, so it skips the settings page
+export async function clearCustomFilters() {
+  await browser.url('ghostery:panel');
+
+  await sendMessage({ action: 'e2e:clearCustomFilters' });
+  await waitForIdleBackgroundTasks();
 }
 
 // WebdriverIO v10 does not switch the session into frames - commands run on

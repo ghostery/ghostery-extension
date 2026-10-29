@@ -12,7 +12,7 @@ import { browser, expect } from '@wdio/globals';
 import {
   setupExtension,
   setCustomFilters,
-  disableCustomFilters,
+  clearCustomFilters,
   reloadUntilActive,
   PAGE_DOMAIN,
   PAGE_PORT,
@@ -88,7 +88,7 @@ describe('Subframe scriptlet injection', function () {
     await ensureFiltersActive();
   });
 
-  after(disableCustomFilters);
+  after(clearCustomFilters);
 
   it('injects a subframe (>>) scriptlet into a cross-origin child frame', async function () {
     await browser.url(PAGE_URL);

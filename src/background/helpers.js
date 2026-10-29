@@ -18,6 +18,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import { hasWTMStats } from '/utils/wtm-stats';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import { setup as adblockerSetup, updateEngines } from './adblocker/engines.js';
+import { updateCustomFilters } from './custom-filters/index.js';
 import { openElementPicker } from './element-picker.js';
 import { captureAttribution } from './telemetry/index.js';
 
@@ -125,6 +126,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         sendResponse('done');
         console.debug('[helpers] "clearExceptions" finished');
       }, sendResponse);
+      return true;
+
+    case 'e2e:clearCustomFilters':
+      updateCustomFilters('')
+        .then(() => store.set(Options, { customFilters: { enabled: false } }))
+        .then(() => {
+          sendResponse('done');
+          console.debug('[helpers] "clearCustomFilters" finished');
+        }, sendResponse);
       return true;
 
     case 'e2e:managedConfig':

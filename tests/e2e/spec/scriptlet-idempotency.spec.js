@@ -14,7 +14,7 @@ import {
   getExtensionElement,
   waitForIdleBackgroundTasks,
   setCustomFilters,
-  disableCustomFilters,
+  clearCustomFilters,
   setUserScriptsAllowed,
   setPrivacyToggle,
   isUserScriptsPathActive,
@@ -164,7 +164,7 @@ describe('Scriptlet injection idempotency', function () {
     await ensureScriptletActive();
   });
 
-  after(disableCustomFilters);
+  after(clearCustomFilters);
 
   // "Allow user scripts" is switched at most once to each state, as switching it reloads the
   // extension. The userScripts path goes first, so it can reuse the setting if it is allowed
