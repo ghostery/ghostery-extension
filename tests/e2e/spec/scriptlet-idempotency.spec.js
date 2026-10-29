@@ -95,6 +95,12 @@ async function ensureScriptletActive() {
   );
 }
 
+const IDEMPOTENCY_FILTERS = [
+  `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
+  `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
+  `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
+];
+
 // A duplicate run compounds into a visible "++": `rpnt` (ISOLATED) rewrites DOM text, and
 // `trusted-replace-outbound-text` (MAIN) rewrites the page's own `JSON.stringify` output.
 function idempotencyChecks() {
@@ -154,28 +160,14 @@ function idempotencyChecks() {
 describe('Scriptlet injection idempotency', function () {
   before(setupExtension);
   before(async () => {
-    await setCustomFilters([
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, aaa, aaa+)`,
-      `${PAGE_DOMAIN}##+js(rpnt, rpnt-marker, bbb, bbb+)`,
-      `${PAGE_DOMAIN}##+js(trusted-replace-outbound-text, JSON.stringify, aaa, aaa+)`,
-    ]);
+    await setCustomFilters(IDEMPOTENCY_FILTERS);
     await ensureScriptletActive();
   });
 
   after(disableCustomFilters);
 
-  describe('via the legacy injection path', function () {
-    before(async function () {
-      if (browser.isChromium) {
-        await setUserScriptsAllowed(false);
-        await ensureScriptletActive();
-        await expect(await isUserScriptsPathActive()).toBe(false);
-      }
-    });
-
-    idempotencyChecks();
-  });
-
+  // "Allow user scripts" is switched once to each state, as switching it reloads the extension.
+  // It starts with the userScripts path, as the custom filters spec leaves it allowed
   describe('via chrome.userScripts', function () {
     before(async function () {
       if (!browser.isChromium) this.skip();
@@ -183,10 +175,6 @@ describe('Scriptlet injection idempotency', function () {
       await setUserScriptsAllowed(true);
       await ensureScriptletActive();
       await expect(await isUserScriptsPathActive()).toBe(true);
-    });
-
-    after(async function () {
-      if (browser.isChromium) await setUserScriptsAllowed(false);
     });
 
     idempotencyChecks();
@@ -271,5 +259,20 @@ describe('Scriptlet injection idempotency', function () {
         await expect(await readMarker('rpnt-b')).toBe('bbb');
       });
     });
+  });
+
+  // Switches "Allow user scripts" off, so it is left as the default for the next specs
+  describe('via the legacy injection path', function () {
+    before(async function () {
+      if (browser.isChromium) {
+        await setUserScriptsAllowed(false);
+        // The registration refresh tests replace the filters
+        await setCustomFilters(IDEMPOTENCY_FILTERS);
+        await ensureScriptletActive();
+        await expect(await isUserScriptsPathActive()).toBe(false);
+      }
+    });
+
+    idempotencyChecks();
   });
 });

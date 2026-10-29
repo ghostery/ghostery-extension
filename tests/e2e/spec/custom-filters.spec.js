@@ -199,10 +199,9 @@ describe('Custom Filters', function () {
   });
 
   describe('remote filter list', function () {
-    if (browser.isChromium) {
-      before(() => setUserScriptsAllowed(true));
-      after(() => setUserScriptsAllowed(false));
-    }
+    // Left allowed for the scriptlet idempotency spec, which runs next and switches it off
+    // (switching it reloads the extension)
+    if (browser.isChromium) before(() => setUserScriptsAllowed(true));
 
     it('applies a remote filter list', async function () {
       // The element is visible before the filter list is applied. The previous
