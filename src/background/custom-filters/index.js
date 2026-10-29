@@ -313,19 +313,23 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
   }
 });
 
+export async function updateCustomFilters(text) {
+  await store.set(CustomFilters, { text });
+
+  // Rebuild custom filters (the result is saved for the settings page)
+  const options = await store.resolve(Options);
+  await rebuildCustomFilters(options.customFilters);
+
+  // Reload the main engine to apply changes in the new filters
+  await reloadMainEngine();
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   switch (message.action) {
     case 'customFilters:updateRules': {
       (async () => {
         try {
-          await store.set(CustomFilters, { text: message.input });
-
-          // Rebuild custom filters and return the result to the settings page
-          const options = await store.resolve(Options);
-          await rebuildCustomFilters(options.customFilters);
-
-          // Reload the main engine to apply changes in the new filters
-          await reloadMainEngine();
+          await updateCustomFilters(message.input);
 
           sendResponse(msg`Filter rules have been updated`);
         } catch (e) {

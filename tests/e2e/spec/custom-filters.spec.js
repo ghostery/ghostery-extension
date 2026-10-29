@@ -16,7 +16,7 @@ import {
   setAdditionalFiltersToggle,
   setCustomFilters,
   saveCustomFilters,
-  disableCustomFilters,
+  clearCustomFilters,
   waitForIdleBackgroundTasks,
   reloadUntilActive,
   getFrame,
@@ -77,7 +77,7 @@ describe('Custom Filters', function () {
     ]);
   });
 
-  after(disableCustomFilters);
+  after(clearCustomFilters);
 
   it('disables custom filters by toggle', async function () {
     await setAdditionalFiltersToggle('custom-filters', false);

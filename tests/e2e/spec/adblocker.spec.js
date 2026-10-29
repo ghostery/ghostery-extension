@@ -14,7 +14,7 @@ import {
   setToggle,
   waitForIdleBackgroundTasks,
   setCustomFilters,
-  disableCustomFilters,
+  clearCustomFilters,
   PAGE_DOMAIN,
   PAGE_URL,
 } from '../utils.js';
@@ -87,7 +87,7 @@ describe('Adblocker Capabilities', function () {
 
   after(async () => {
     await togglePrivacyFeatures(true);
-    await disableCustomFilters();
+    await clearCustomFilters();
   });
 
   describe('All platforms', function () {
