@@ -163,6 +163,8 @@ export async function setUserScriptsAllowed(value) {
   const extensionId = new URL(globalThis[BASE_URL_KEY]).hostname;
   await browser.url(`chrome://extensions/?id=${extensionId}`);
 
+  // Switching the toggle reloads the extension, so it is skipped when it is already set.
+  // Specs set the state they need, and leave it, so the next spec can reuse it
   const toggle = await $('>>>#allow-user-scripts');
   if ((await toggle.getProperty('checked')) === value) return;
 

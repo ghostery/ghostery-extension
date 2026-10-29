@@ -199,8 +199,7 @@ describe('Custom Filters', function () {
   });
 
   describe('remote filter list', function () {
-    // Left allowed for the scriptlet idempotency spec, which runs next and switches it off
-    // (switching it reloads the extension)
+    // Not switched back, so a next spec needing it doesn't have to reload the extension
     if (browser.isChromium) before(() => setUserScriptsAllowed(true));
 
     it('applies a remote filter list', async function () {
