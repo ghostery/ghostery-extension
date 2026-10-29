@@ -95,10 +95,11 @@ export const SPEC_GROUPS = {
   // The rest explicitly defined (a pattern would match main features too)
   features: [
     'spec/exceptions.spec.js',
+    // Must run one after another, as they share the "Allow user scripts" setting
     'spec/custom-filters.spec.js',
+    'spec/scriptlet-idempotency.spec.js',
     'spec/distractions.spec.js',
     'spec/element-picker.spec.js',
-    'spec/scriptlet-idempotency.spec.js',
     'spec/subframe-scripting.spec.js',
     'spec/redirect-protection.spec.js',
     'spec/clear-browsing-data.spec.js',
