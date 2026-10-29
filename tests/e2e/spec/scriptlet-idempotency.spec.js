@@ -166,8 +166,8 @@ describe('Scriptlet injection idempotency', function () {
 
   after(disableCustomFilters);
 
-  // "Allow user scripts" is switched once to each state, as switching it reloads the extension.
-  // It starts with the userScripts path, as the custom filters spec leaves it allowed
+  // "Allow user scripts" is switched at most once to each state, as switching it reloads the
+  // extension. The userScripts path goes first, so it can reuse the setting if it is allowed
   describe('via chrome.userScripts', function () {
     before(async function () {
       if (!browser.isChromium) this.skip();
@@ -261,7 +261,7 @@ describe('Scriptlet injection idempotency', function () {
     });
   });
 
-  // Switches "Allow user scripts" off, so it is left as the default for the next specs
+  // Goes last, so "Allow user scripts" is left off as by default
   describe('via the legacy injection path', function () {
     before(async function () {
       if (browser.isChromium) {
