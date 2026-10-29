@@ -210,6 +210,10 @@ async function flushTabStatsToDailyStats(stats) {
 
 const PANEL_URL = chrome.runtime.getURL('pages/panel/index.html');
 
+// The browser can report the commit after the page has started its requests,
+// so the page is timed from its main frame request (if it is observed)
+const navigationStarts = new Map();
+
 // Setup stats for the tab when a user navigates to a new page
 chrome.webNavigation.onCommitted.addListener(async (details) => {
   // The panel can be opened in the same tab only by e2e tests
@@ -231,13 +235,16 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     store.resolve(stats).then(flushTabStatsToDailyStats);
 
     if (request.isHttp || request.isHttps) {
+      const createdAt = navigationStarts.get(tabId) ?? details.timeStamp;
+      navigationStarts.delete(tabId);
+
       const currentStats = await store.set(stats, {
         hostname: request.hostname,
         domain: request.domain,
         url: request.url,
         // Records are merged on set, so an empty object would keep the previous trackers
         trackers: null,
-        createdAt: details.timeStamp,
+        createdAt,
       });
       const tab = await chrome.tabs.get(details.tabId).catch(() => null);
       if (tab?.incognito) await store.set(currentStats, { incognito: true });
@@ -251,7 +258,15 @@ if (__CHROMIUM__ && chrome.webRequest) {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (details.tabId < 0 || details.type === 'main_frame') return;
+      if (details.tabId < 0) return;
+
+      if (details.type === 'main_frame') {
+        // Prerendered pages are committed again when displayed, so they are timed from that
+        if (details.documentLifecycle !== 'prerender') {
+          navigationStarts.set(details.tabId, details.timeStamp);
+        }
+        return;
+      }
 
       const request = Request.fromRequestDetails(details);
       updateTabStats(details.tabId, request);
@@ -290,6 +305,8 @@ if (__CHROMIUM__ && chrome.webRequest) {
 }
 
 chrome.tabs.onRemoved.addListener(async (tabId) => {
+  navigationStarts.delete(tabId);
+
   const stats = await store.resolve(TabStats, tabId);
 
   // Removed first, so the stats don't stay in the storage if the daily stats fail
