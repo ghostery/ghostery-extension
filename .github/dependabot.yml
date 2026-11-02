@@ -4,8 +4,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
-      day: 'monday'
-      time: '08:00'
+      day: 'wednesday'
+      time: '09:00'
       timezone: 'Europe/Warsaw'
     open-pull-requests-limit: 99
     groups:
