@@ -139,8 +139,9 @@ store.observe(TabStats, (id, stats, lastStats) => {
   // Model ids are strings, but the extension APIs require the tab id to be an integer
   const tabId = Number(id);
 
-  if (stats.createdAt !== lastStats?.createdAt) {
-    // A new page, or the stats loaded from the storage
+  if (!lastStats?.hostname || stats.createdAt !== lastStats.createdAt) {
+    // A new page, or the stats loaded from the storage (the stats of a page
+    // loaded before its tab was created start at 0, as the empty ones)
     updateIcon(tabId, true);
   } else if (stats.categories.length !== lastStats.categories.length) {
     // We need to update the icon only if new categories were added
