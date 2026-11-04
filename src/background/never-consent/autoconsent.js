@@ -21,6 +21,12 @@ import Resources from '/store/resources.js';
 import FilteringDebug from '/store/filtering-debug.js';
 import { parseWithCache } from '/utils/request.js';
 
+// Maps the user's automatic action to autoconsent's heuristic level
+const HEURISTIC_MODES = {
+  optOut: 'reject',
+  optIn: 'tier2',
+};
+
 async function initialize(msg, sender) {
   const [options, config, debug] = await Promise.all([
     store.resolve(Options),
@@ -58,6 +64,11 @@ async function initialize(msg, sender) {
           config: {
             autoAction: options.autoconsent.autoAction,
             enableCosmeticRules: false,
+            // Heuristic fallback for popups not covered by rules. 'reject' only
+            // clicks reject buttons; 'tier2' also clicks acknowledge/accept.
+            heuristicMode: HEURISTIC_MODES[options.autoconsent.autoAction] || 'off',
+            enableHeuristicHitTest: true,
+            enablePopupMutationObserver: true,
           },
         },
         { frameId },
