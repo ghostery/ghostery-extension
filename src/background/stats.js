@@ -214,6 +214,33 @@ const PANEL_URL = chrome.runtime.getURL('pages/panel/index.html');
 // so the page is timed from its main frame request (if it is observed)
 const navigationStarts = new Map();
 
+async function setupTabStats(tabId, url, timeStamp) {
+  const request = Request.fromRequestDetails({ url });
+  const stats = store.get(TabStats, tabId);
+
+  // store.get() is synchronous, so for updating previous
+  // page stats we need to resolve it first
+  store.resolve(stats).then(flushTabStatsToDailyStats);
+
+  if (request.isHttp || request.isHttps) {
+    const createdAt = navigationStarts.get(tabId) ?? timeStamp;
+    navigationStarts.delete(tabId);
+
+    const currentStats = await store.set(stats, {
+      hostname: request.hostname,
+      domain: request.domain,
+      url: request.url,
+      // Records are merged on set, so an empty object would keep the previous trackers
+      trackers: null,
+      createdAt,
+    });
+    const tab = await chrome.tabs.get(tabId).catch(() => null);
+    if (tab?.incognito) await store.set(currentStats, { incognito: true });
+  } else {
+    await store.set(stats, null);
+  }
+}
+
 // Setup stats for the tab when a user navigates to a new page
 chrome.webNavigation.onCommitted.addListener(async (details) => {
   // The panel can be opened in the same tab only by e2e tests
@@ -225,34 +252,21 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
   if (details.documentLifecycle === 'prerender') return;
 
   if (details.tabId > -1 && details.parentFrameId === -1) {
-    const { tabId } = details;
-    const request = Request.fromRequestDetails(details);
-
-    const stats = store.get(TabStats, tabId);
-
-    // store.get() is synchronous, so for updating previous
-    // page stats we need to resolve it first
-    store.resolve(stats).then(flushTabStatsToDailyStats);
-
-    if (request.isHttp || request.isHttps) {
-      const createdAt = navigationStarts.get(tabId) ?? details.timeStamp;
-      navigationStarts.delete(tabId);
-
-      const currentStats = await store.set(stats, {
-        hostname: request.hostname,
-        domain: request.domain,
-        url: request.url,
-        // Records are merged on set, so an empty object would keep the previous trackers
-        trackers: null,
-        createdAt,
-      });
-      const tab = await chrome.tabs.get(details.tabId).catch(() => null);
-      if (tab?.incognito) await store.set(currentStats, { incognito: true });
-    } else {
-      await store.set(stats, null);
-    }
+    await setupTabStats(details.tabId, details.url, details.timeStamp);
   }
 });
+
+if (__CHROMIUM__ && isWebkit()) {
+  // Safari doesn't report the navigation of a page preloaded from the address bar suggestions
+  // (Preload Top Hit), and on iOS, it replaces the tab with a new one with the page already loaded
+  chrome.tabs.onCreated.addListener(async (tab) => {
+    if (tab.status !== 'complete' || !/^https?:/.test(tab.url)) return;
+
+    // The tab is new, so all requests reported for it belong to the page,
+    // also the ones made before the event is received (e.g. while the background wakes up)
+    await setupTabStats(tab.id, tab.url, 0);
+  });
+}
 
 if (__CHROMIUM__ && chrome.webRequest) {
   // Gather stats for requests that are not main_frame
