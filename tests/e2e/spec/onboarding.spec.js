@@ -10,13 +10,14 @@
  */
 
 import { browser, expect } from '@wdio/globals';
-import { setupExtension, getExtensionElement, sendMessage } from '../utils.js';
+import { setupExtension, getExtensionElement, sendMessage, openExternalURL } from '../utils.js';
 
 async function setAttribution(values) {
   await browser.url('ghostery:onboarding');
 
   // The new window does not take over the session, so `browser` stays on the onboarding page
-  const page = await browser.newWindow('https://www.ghostery.com/');
+  const page = await browser.newWindow('about:blank');
+  await openExternalURL('https://www.ghostery.com/', page);
 
   await page.execute(function (v) {
     sessionStorage.setItem('attribution', v);

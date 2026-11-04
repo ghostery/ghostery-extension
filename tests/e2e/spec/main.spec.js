@@ -18,6 +18,7 @@ import {
   waitForIdleBackgroundTasks,
   expectAdsBlocked,
   getFrame,
+  openExternalURL,
   ADBLOCKING_GLOBAL_SELECTOR,
   ADBLOCKING_URL_SELECTOR,
   TRACKER_IDS,
@@ -33,7 +34,7 @@ describe('Main Features', function () {
 
     it('displays consent popup', async function () {
       await setPrivacyToggle('never-consent', false);
-      await browser.url(WEBSITE_URL);
+      await openExternalURL(WEBSITE_URL);
 
       // In some regions the cmp element might not be loaded at all
       // so we only check if the CMP is visible if the element exists
@@ -44,12 +45,12 @@ describe('Main Features', function () {
     });
 
     it('closes the consent popup', async function () {
-      await browser.url(WEBSITE_URL);
+      await openExternalURL(WEBSITE_URL);
       // Let the never-consent take effect
       await browser.pause(2000);
 
       // Never-consent can left the cmp structure until next page load
-      await browser.url(WEBSITE_URL);
+      await openExternalURL(WEBSITE_URL);
 
       // In some regions the cmp element might not be loaded at all
       // so we only check if the CMP is visible if the element exists
@@ -198,7 +199,7 @@ describe('Main Features', function () {
     it('shows the ads on the page', async function () {
       await setAdditionalFiltersToggle('regional-filters', false);
 
-      await browser.url(WEBSITE_URL);
+      await openExternalURL(WEBSITE_URL);
       await expect($(SELECTOR)).toBeDisplayed();
 
       await setAdditionalFiltersToggle('regional-filters', true);
@@ -216,7 +217,7 @@ describe('Main Features', function () {
       // Allow engines to reload
       await waitForIdleBackgroundTasks();
 
-      await browser.url(WEBSITE_URL);
+      await openExternalURL(WEBSITE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
