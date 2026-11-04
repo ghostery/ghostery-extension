@@ -142,6 +142,86 @@ describe('Mac', () => {
     ));
 });
 
+// Touchscreen Macs report touch points like iPadOS, which also sends a Mac user-agent.
+// Blink and Gecko browsers must not be diverted to `ipados`, as iPadOS browsers use WebKit.
+describe('Mac with touchscreen', () => {
+  test('Chrome in the page', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'desktop-chrome-touch-page',
+        userAgent:
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'MacIntel',
+        maxTouchPoints: 5,
+      },
+      {
+        os: 'mac',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: '10.15.7',
+      },
+    ));
+
+  test('Edge in the page', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'edge-mac-touch-page',
+        userAgent:
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0',
+        platform: 'MacIntel',
+        maxTouchPoints: 5,
+      },
+      {
+        os: 'mac',
+        isWebkit: false,
+        name: 'edge',
+        version: 151,
+        osVersion: '10.15.7',
+      },
+    ));
+
+  test('Firefox in the page & background', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'firefox-mac-touch',
+        firefox: true,
+        userAgent:
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:154.0) Gecko/20100101 Firefox/154.0',
+        platform: 'MacIntel',
+        maxTouchPoints: 5,
+      },
+      {
+        os: 'mac',
+        isWebkit: false,
+        name: 'firefox',
+        version: 154,
+        osVersion: '10.15',
+      },
+    ));
+});
+
+describe('Windows', () => {
+  // Touch support is checked only for Mac user-agents
+  test('Chrome on a touchscreen device', () =>
+    assertBrowserInfo(
+      {
+        caseName: 'chrome-win-touch',
+        userAgent:
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36',
+        platform: 'Win32',
+        maxTouchPoints: 10,
+      },
+      {
+        os: 'win',
+        isWebkit: false,
+        name: 'chrome',
+        version: 152,
+        osVersion: 'NT 10.0',
+      },
+    ));
+});
+
 describe('Android', () => {
   test('Firefox in the page', () =>
     assertBrowserInfo(

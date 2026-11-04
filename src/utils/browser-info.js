@@ -127,7 +127,15 @@ export function getOS() {
 
   if (os.includes('mac')) {
     // All iOS/iPadOS browsers use WebKit and can spoof a Mac desktop user-agent on iPadOS.
-    if (navigator.maxTouchPoints > 1) return 'ipados';
+    // Touch support alone is not enough, as there are touchscreen Macs - Blink and Gecko
+    // browsers run only on a real Mac. Bowser reports Edge on iPadOS as EdgeHTML, so
+    // the desktop engines are excluded instead of requiring WebKit.
+    // Safari on a touchscreen Mac is still detected as `ipados` - it sends the same user-agent
+    // and touch points as on iPad, so do not use `ipados` to switch features from macOS.
+    const engine = getUA().engine.name;
+    if (navigator.maxTouchPoints > 1 && engine !== 'Blink' && engine !== 'Gecko') {
+      return 'ipados';
+    }
     return 'mac';
   } else if (os.includes('win')) {
     return 'win';

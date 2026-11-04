@@ -37,6 +37,20 @@ function saveOrOpenTab(url, filename, forceNewTab = false) {
   return saveAs(url, filename);
 }
 
+// Safari on iOS/iPadOS does not support downloading blobs, but it can handle data URLs.
+async function isBlobDownloadSupported() {
+  const os = getOS();
+  if (os !== 'ios' && os !== 'ipados') return true;
+
+  // Safari on a touchscreen Mac is detected as iPadOS (the same user-agent and touch points),
+  // so the platform info, which is set by the browser build, has the final word.
+  try {
+    return (await chrome.runtime.getPlatformInfo()).os === 'mac';
+  } catch {
+    return false;
+  }
+}
+
 export async function download({
   data,
   filename,
@@ -45,24 +59,18 @@ export async function download({
 }) {
   const blob = new Blob([data], { type });
 
-  // Safari on iOS does not support downloading blobs,
-  // but it can handle data URLs, so we convert the blob to a data URL in that case.
-  if (__CHROMIUM__) {
-    const os = getOS();
+  if (__CHROMIUM__ && !(await isBlobDownloadSupported())) {
+    const fileReader = new FileReader();
 
-    if (os === 'ios' || os === 'ipados') {
-      const fileReader = new FileReader();
+    return new Promise((resolve, reject) => {
+      fileReader.onload = () => {
+        saveOrOpenTab(fileReader.result, filename, forceNewTab);
+        resolve();
+      };
 
-      return new Promise((resolve, reject) => {
-        fileReader.onload = () => {
-          saveOrOpenTab(fileReader.result, filename, forceNewTab);
-          resolve();
-        };
-
-        fileReader.onerror = reject;
-        fileReader.readAsDataURL(blob);
-      });
-    }
+      fileReader.onerror = reject;
+      fileReader.readAsDataURL(blob);
+    });
   }
 
   const url = URL.createObjectURL(blob);
