@@ -31,11 +31,11 @@ enum SectionStrings {
 
   enum LearningZone {
     #if os(macOS)
-    static let title = String(localized: "Privacy,\nexplained simply.", comment: "Title of the Learning Zone section, in two lines")
+    static let title = String(localized: "Stay one step ahead\nof advertisers.", comment: "Title of the Learning Zone section, in two lines")
     #else
-    static let title = String(localized: "Privacy, explained simply.", comment: "Title of the Learning Zone section, in one line")
+    static let title = String(localized: "Stay one step ahead of advertisers.", comment: "Title of the Learning Zone section, in one line")
     #endif
-    static let description = String(localized: "Privacy shouldn’t be complicated. Explore our guides, follow the latest privacy news, and discover how to make the web work better for you.")
+    static let description = String(localized: "Privacy news and guides from the Ghostery team: ads, tracking, and how to take back your browser.")
   }
 
   enum Contribute {
