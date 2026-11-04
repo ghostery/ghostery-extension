@@ -45,6 +45,28 @@ export function getExtensionElement(id, query) {
   return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
+// Real pages can be unavailable for a while on CI, longer than the retries
+// of a whole test take, so loading them is retried with a delay
+const EXTERNAL_URL_ATTEMPTS = 3;
+const EXTERNAL_URL_RETRY_DELAY = 5000;
+
+// `browser.url()` always loads the page in the first tab, so a browsing context
+// returned by `browser.newWindow()` can be passed to load it there instead
+export async function openExternalURL(url, context) {
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      return await (context ? context.navigate(url) : browser.url(url));
+    } catch (e) {
+      if (attempt === EXTERNAL_URL_ATTEMPTS) throw e;
+
+      console.warn(
+        `[retry] ${url} did not load (attempt ${attempt} of ${EXTERNAL_URL_ATTEMPTS}) - ${e.message}`,
+      );
+      await browser.pause(EXTERNAL_URL_RETRY_DELAY);
+    }
+  }
+}
+
 // wdio's own `element.scrollIntoView()` relies on html/body overscroll, which our
 // views don't use, so run the native DOM method in the browser context instead.
 export async function scrollIntoView(el, options = { block: 'center' }) {
