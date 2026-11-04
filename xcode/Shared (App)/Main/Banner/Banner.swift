@@ -65,7 +65,7 @@ struct BannerLayout: PlatformLayout {
   /// rather than after them
   var isButtonBelowTexts: Bool
   var buttonSize: AppButtonStyle.Size
-  /// Around the title of the button, which follows its icon
+  /// Around the title of the button, added to its own padding
   var buttonTitlePadding: EdgeInsets
   var paginationTopPadding: CGFloat
 

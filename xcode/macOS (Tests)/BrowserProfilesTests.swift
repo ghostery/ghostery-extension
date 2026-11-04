@@ -128,10 +128,22 @@ private func jsonObject(_ text: String) throws -> [String: Any] {
     #expect(BrowserProfiles.isChromiumExtensionEnabled(json, id: id) == isEnabled)
   }
 
+  @Test(arguments: [
+    (#"{"disable_reasons": []}"#, true),
+    (#"{"disable_reasons": [1]}"#, false),
+  ])
+  func readsTheStateOfTheExtensionInOpera(settings: String, isEnabled: Bool) throws {
+    let json = try jsonObject(#"{"extensions": {"opsettings": {"\#(id)": \#(settings), "other": {"disable_reasons": []}}}}"#)
+
+    #expect(BrowserProfiles.isChromiumExtensionEnabled(json, id: id) == isEnabled)
+  }
+
   @Test func leavesOutTheExtensionWhenItIsNotInstalled() throws {
     let json = try jsonObject(#"{"extensions": {"settings": {"other": {"state": 1}}}}"#)
+    let operaJSON = try jsonObject(#"{"extensions": {"opsettings": {"other": {"disable_reasons": []}}}}"#)
 
     #expect(BrowserProfiles.isChromiumExtensionEnabled(json, id: id) == nil)
+    #expect(BrowserProfiles.isChromiumExtensionEnabled(operaJSON, id: id) == nil)
     #expect(BrowserProfiles.isChromiumExtensionEnabled([:], id: id) == nil)
   }
 }

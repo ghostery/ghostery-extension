@@ -1,6 +1,83 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld/%lld protected" : {
+      "comment" : "Number of the browsers in which Ghostery is enabled, of all the browsers found on the Mac, Safari included",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld geschützt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld protegidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld protégés"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld protetti"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保護中：%lld/%lld"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld 보호 중"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronione: %lld/%lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld protegidos"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Защищено: %lld/%lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã bảo vệ %lld/%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已保护 %lld/%lld"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已保護 %lld/%lld"
+          }
+        }
+      }
+    },
     "A few quick questions about setting up and using Ghostery on your Mac." : {
       "localizations" : {
         "de" : {
@@ -73,6 +150,468 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "關於在 Mac 上設定和使用 Ghostery 的幾個簡短問題。"
+          }
+        }
+      }
+    },
+    "Active" : {
+      "comment" : "State of Ghostery in a browser in which it's enabled",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiv"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actif"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有効"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "활성"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktywne"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Активно"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoạt động"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "运行中"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "運作中"
+          }
+        }
+      }
+    },
+    "Add to Brave" : {
+      "comment" : "Button opening Ghostery in the Chrome Web Store, from which Brave installs extensions",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a Brave"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à Brave"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi a Brave"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Braveに追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brave에 추가"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj do Brave"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm vào Brave"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加到 Brave"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增至 Brave"
+          }
+        }
+      }
+    },
+    "Add to Chrome" : {
+      "comment" : "Button opening Ghostery in the Chrome Web Store",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a Chrome"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à Chrome"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi a Chrome"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chromeに追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chrome에 추가"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj do Chrome"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm vào Chrome"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加到 Chrome"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增至 Chrome"
+          }
+        }
+      }
+    },
+    "Add to Edge" : {
+      "comment" : "Button opening Ghostery in the Edge Add-ons store",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a Edge"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à Edge"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi a Edge"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edgeに追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edge에 추가"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj do Edge"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm vào Edge"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加到 Edge"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增至 Edge"
+          }
+        }
+      }
+    },
+    "Add to Firefox" : {
+      "comment" : "Button opening Ghostery in the Firefox Add-ons store",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a Firefox"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à Firefox"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi a Firefox"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefoxに追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefox에 추가"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj do Firefoksa"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm vào Firefox"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加到 Firefox"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增至 Firefox"
+          }
+        }
+      }
+    },
+    "Add to Opera" : {
+      "comment" : "Button opening Ghostery in the Opera Add-ons store",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a Opera"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à Opera"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi a Opera"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operaに追加"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opera에 추가"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj do Opery"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm vào Opera"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加到 Opera"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增至 Opera"
           }
         }
       }
@@ -385,6 +924,160 @@
         }
       }
     },
+    "Block ads, trackers\n& cookie pop-ups\nin every browser." : {
+      "comment" : "Title of the Home section, in three lines",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werbung, Tracker\n& Cookie-Pop-ups\nin jedem Browser\nblockieren."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquea anuncios,\nrastreadores y avisos\nde cookies en todos\ntus navegadores."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquez pubs, trackers\net bannières de cookies\ndans tout navigateur."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocca pubblicità,\ntracker e popup dei\ncookie in ogni browser."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告、トラッカー、\nCookieポップアップを\n全ブラウザでブロック。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고, 트래커, 쿠키 팝업을\n모든 브라우저에서\n차단하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blokuj reklamy, trackery\ni komunikaty o cookies\nw każdej przeglądarce."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueie anúncios,\nrastreadores e pop-ups\nde cookies em qualquer\nnavegador."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Блокируйте рекламу,\nтрекеры и\nуведомления о cookie\nв любом браузере."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chặn quảng cáo,\ntrình theo dõi và cửa sổ\nbật lên cookie trên\nmọi trình duyệt."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在每个浏览器中\n拦截广告、跟踪器\n和 Cookie 弹窗。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在每個瀏覽器中\n阻擋廣告、追蹤器\n和 Cookie 彈跳視窗。"
+          }
+        }
+      }
+    },
+    "Blocking ads, trackers and cookie pop-ups." : {
+      "comment" : "Description of a browser in which Ghostery is enabled",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werbung, Tracker und\nCookie-Pop-ups werden blockiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueando anuncios, rastreadores y ventanas emergentes de cookies."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocage des publicités, des trackers et des bannières de cookies."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocca pubblicità, tracker e popup dei cookie."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "広告、トラッカー、Cookieポップアップをブロック。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고, 트래커, 쿠키 팝업을 차단하고 있습니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blokuje reklamy, trackery i komunikaty o plikach cookies."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueando anúncios, rastreadores e pop-ups de cookies."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Блокирует рекламу, трекеры и уведомления о файлах cookie."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang chặn quảng cáo, trình theo dõi và cửa sổ bật lên cookie."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在拦截广告、跟踪器和 Cookie 弹窗。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在阻擋廣告、追蹤器和 Cookie 彈跳視窗。"
+          }
+        }
+      }
+    },
     "Browse the web safer, faster & with less ads.\nGet Ghostery for your browser." : {
       "comment" : "Message shared with the link to Ghostery, in two lines",
       "localizations" : {
@@ -688,6 +1381,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已收合"
+          }
+        }
+      }
+    },
+    "Come back to the Ghostery app." : {
+      "comment" : "Last step of the instructions",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kehre zur Ghostery-App zurück."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vuelve a la app Ghostery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenez dans l’app Ghostery."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Torna all’app Ghostery."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghosteryアプリに戻ります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery 앱으로 돌아옵니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wróć do aplikacji Ghostery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volte para o app Ghostery."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вернитесь в приложение Ghostery."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quay lại ứng dụng Ghostery."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回 Ghostery 应用。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回 Ghostery App。"
           }
         }
       }
@@ -1075,155 +1845,79 @@
         }
       }
     },
-    "Detected browsers: %lld" : {
-      "comment" : "Number of the browsers found on the Mac, Safari included",
+    "Disable Ghostery" : {
+      "comment" : "Option of the Safari card, opening the settings of Safari where the user turns off the extension",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erkannte Browser: %lld"
+            "value" : "Ghostery deaktivieren"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navegadores detectados: %lld"
+            "value" : "Desactivar Ghostery"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navigateurs détectés : %lld"
+            "value" : "Désactiver Ghostery"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Browser rilevati: %lld"
+            "value" : "Disattiva Ghostery"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "検出されたブラウザ：%lld"
+            "value" : "Ghosteryを無効にする"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "감지된 브라우저: %lld"
+            "value" : "Ghostery 비활성화"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wykryte przeglądarki: %lld"
+            "value" : "Wyłącz Ghostery"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navegadores detectados: %lld"
+            "value" : "Desativar o Ghostery"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Найдено браузеров: %lld"
+            "value" : "Отключить Ghostery"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trình duyệt được phát hiện: %lld"
+            "value" : "Tắt Ghostery"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "检测到的浏览器：%lld"
+            "value" : "停用 Ghostery"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "偵測到的瀏覽器：%lld"
-          }
-        }
-      }
-    },
-    "Disable Ghostery in Safari" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery in Safari deaktivieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactivar Ghostery en Safari"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactiver Ghostery dans Safari"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disattiva Ghostery in Safari"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SafariでGhosteryを無効にする"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Safari에서 Ghostery 비활성화"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wyłącz Ghostery w Safari"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desativar o Ghostery no Safari"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отключить Ghostery в Safari"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tắt Ghostery trong Safari"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 Safari 中停用 Ghostery"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 Safari 中停用 Ghostery"
+            "value" : "停用 Ghostery"
           }
         }
       }
@@ -1453,83 +2147,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "捐款失敗"
-          }
-        }
-      }
-    },
-    "Done" : {
-      "comment" : "Button closing the dialog",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fertig"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listo"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terminé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fine"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完了"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "완료"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gotowe"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Concluído"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Готово"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Xong"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完成"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完成"
           }
         }
       }
@@ -1765,156 +2382,79 @@
         }
       }
     },
-    "Enable “Allow Extension” toggle" : {
+    "Enable “Allow Extension” toggle." : {
       "comment" : "Step of the instructions. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aktiviere den Schalter „Erweiterung erlauben“"
+            "value" : "Aktiviere den Schalter „Erweiterung erlauben“."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activa la opción “Permitir extensión”"
+            "value" : "Activa la opción “Permitir extensión”."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activez l’option « Autoriser l’extension »"
+            "value" : "Activez l’option « Autoriser l’extension »."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva l’opzione “Consenti estensione”"
+            "value" : "Attiva l’opzione “Consenti estensione”."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「機能拡張を許可」をオンにします"
+            "value" : "「機能拡張を許可」をオンにします。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "‘확장 프로그램 허용’을 켭니다"
+            "value" : "‘확장 프로그램 허용’을 켭니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz przełącznik „Pozwól na rozszerzenie”"
+            "value" : "Włącz przełącznik „Pozwól na rozszerzenie”."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ative a opção “Permitir Extensão”"
+            "value" : "Ative a opção “Permitir Extensão”."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Включите «Использование расширения»"
+            "value" : "Включите «Использование расширения»."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bật “Cho phép phần mở rộng”"
+            "value" : "Bật “Cho phép phần mở rộng”."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开“允许扩展”开关"
+            "value" : "打开“允许扩展”开关。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啟「允許延伸功能」開關"
-          }
-        }
-      }
-    },
-    "Enabled" : {
-      "comment" : "State of Ghostery in a browser",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activado"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attivo"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "有効"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "활성화됨"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Włączone"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ativado"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Включено"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Đã bật"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已启用"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已啟用"
+            "value" : "開啟「允許延伸功能」開關。"
           }
         }
       }
@@ -2683,158 +3223,6 @@
         }
       }
     },
-    "Ghostery helps you take control of your data across the web." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mit Ghostery behältst du im gesamten Web die Kontrolle über deine Daten."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery te ayuda a tomar el control de tus datos en toda la web."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery vous aide à reprendre le contrôle de vos données sur tout le Web."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery ti aiuta a prendere il controllo dei tuoi dati in tutto il web."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghosteryなら、ウェブ全体であなたのデータを自分でコントロールできます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery로 웹 전반에서 내 데이터를 직접 관리하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery pomaga ci przejąć kontrolę nad swoimi danymi w całej sieci."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Ghostery ajuda você a assumir o controle dos seus dados em toda a web."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery помогает вам контролировать свои данные во всем интернете."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery giúp bạn kiểm soát dữ liệu của mình trên khắp web."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 帮助您在整个网络中掌控自己的数据。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 協助您在整個網路上掌控自己的資料。"
-          }
-        }
-      }
-    },
-    "Ghostery is actively blocking trackers, stopping annoying ads, and protecting your online privacy in the background." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery blockiert im Hintergrund aktiv Tracker, stoppt lästige Werbung und schützt deine Privatsphäre im Netz."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery bloquea activamente los rastreadores, detiene los anuncios molestos y protege tu privacidad en línea en segundo plano."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery bloque activement les trackers, arrête les publicités gênantes et protège votre vie privée en ligne en arrière-plan."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery blocca attivamente i tracker, ferma le pubblicità fastidiose e protegge la tua privacy online in background."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghosteryはバックグラウンドでトラッカーをブロックし、煩わしい広告を止め、オンラインのプライバシーを守っています。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery가 백그라운드에서 트래커를 차단하고, 성가신 광고를 막고, 온라인 개인정보를 보호하고 있습니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery aktywnie blokuje w tle trackery, zatrzymuje irytujące reklamy i chroni twoją prywatność w sieci."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Ghostery está bloqueando ativamente rastreadores, impedindo anúncios irritantes e protegendo sua privacidade online em segundo plano."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery в фоновом режиме блокирует трекеры, останавливает назойливую рекламу и защищает вашу конфиденциальность в интернете."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery đang tích cực chặn trình theo dõi, ngăn quảng cáo phiền phức và bảo vệ quyền riêng tư trực tuyến của bạn trong nền."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 正在后台主动拦截跟踪器、阻止烦人的广告，并保护您的在线隐私。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 正在背景主動阻擋追蹤器、擋下惱人的廣告，並保護您的線上隱私。"
-          }
-        }
-      }
-    },
     "Ghostery missing from a browser, or not behaving as expected? Our team will help." : {
       "localizations" : {
         "de" : {
@@ -3065,459 +3453,79 @@
         }
       }
     },
-    "Ghostery works correctly in Chrome." : {
+    "Got it" : {
+      "comment" : "Button closing the dialog",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery funktioniert in Chrome einwandfrei."
+            "value" : "Verstanden"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery funciona correctamente en Chrome."
+            "value" : "Entendido"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery fonctionne correctement dans Chrome."
+            "value" : "J’ai compris"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery funziona correttamente in Chrome."
+            "value" : "Ho capito"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GhosteryはChromeで正常に動作しています。"
+            "value" : "OK"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery가 Chrome에서 정상적으로 작동합니다."
+            "value" : "확인"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery działa poprawnie w przeglądarce Chrome."
+            "value" : "Rozumiem"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O Ghostery funciona corretamente no Chrome."
+            "value" : "Entendi"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery правильно работает в Chrome."
+            "value" : "Понятно"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery hoạt động bình thường trong Chrome."
+            "value" : "Đã hiểu"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 在 Chrome 中运行正常。"
+            "value" : "知道了"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 在 Chrome 中運作正常。"
-          }
-        }
-      }
-    },
-    "Ghostery works correctly in Edge." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funktioniert in Edge einwandfrei."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funciona correctamente en Edge."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery fonctionne correctement dans Edge."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funziona correttamente in Edge."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GhosteryはEdgeで正常に動作しています。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery가 Edge에서 정상적으로 작동합니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery działa poprawnie w przeglądarce Edge."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Ghostery funciona corretamente no Edge."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery правильно работает в Edge."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery hoạt động bình thường trong Edge."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Edge 中运行正常。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Edge 中運作正常。"
-          }
-        }
-      }
-    },
-    "Ghostery works correctly in Firefox." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funktioniert in Firefox einwandfrei."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funciona correctamente en Firefox."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery fonctionne correctement dans Firefox."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funziona correttamente in Firefox."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GhosteryはFirefoxで正常に動作しています。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery가 Firefox에서 정상적으로 작동합니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery działa poprawnie w przeglądarce Firefox."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Ghostery funciona corretamente no Firefox."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery правильно работает в Firefox."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery hoạt động bình thường trong Firefox."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Firefox 中运行正常。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Firefox 中運作正常。"
-          }
-        }
-      }
-    },
-    "Ghostery works correctly in Safari." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funktioniert in Safari einwandfrei."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funciona correctamente en Safari."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery fonctionne correctement dans Safari."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery funziona correttamente in Safari."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GhosteryはSafariで正常に動作しています。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery가 Safari에서 정상적으로 작동합니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery działa poprawnie w Safari."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O Ghostery funciona corretamente no Safari."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery правильно работает в Safari."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery hoạt động bình thường trong Safari."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Safari 中运行正常。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 在 Safari 中運作正常。"
-          }
-        }
-      }
-    },
-    "Go back to this app." : {
-      "comment" : "Last step of the instructions",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kehre zu dieser App zurück."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vuelve a esta app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Revenez dans cette app."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Torna a questa app."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "このアプリに戻ります。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "이 앱으로 돌아옵니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wróć do tej aplikacji."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volte para este app."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Вернитесь в это приложение."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quay lại ứng dụng này."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "返回此应用。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "返回此 App。"
-          }
-        }
-      }
-    },
-    "Having trouble using Ghostery?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Probleme mit Ghostery?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Tienes problemas con Ghostery?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous rencontrez des problèmes avec Ghostery ?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Problemi con Ghostery?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghosteryの使用でお困りですか？"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 사용에 문제가 있나요?"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masz problem z Ghostery?"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Problemas para usar o Ghostery?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Проблемы с Ghostery?"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gặp sự cố khi dùng Ghostery?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ghostery 时遇到问题？"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ghostery 時遇到問題？"
+            "value" : "知道了"
           }
         }
       }
@@ -4134,79 +4142,79 @@
         }
       }
     },
-    "In Permissions section select “Allow” for all websites" : {
+    "In Permissions section select “Allow” for all websites." : {
       "comment" : "Step of the instructions. Permissions and Allow are the names of the section and the option in the settings of Safari on iPhones, as the settings show them in the language.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle unter „Zugriffsrechte“ für alle Websites „Erlauben“"
+            "value" : "Wähle unter „Zugriffsrechte“ für alle Websites „Erlauben“."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En la sección “Permisos”, selecciona “Permitir” para todos los sitios web"
+            "value" : "En la sección “Permisos”, selecciona “Permitir” para todos los sitios web."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dans la section « Autorisations », choisissez « Autoriser » pour tous les sites web"
+            "value" : "Dans la section « Autorisations », choisissez « Autoriser » pour tous les sites web."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nella sezione “Permessi”, seleziona “Consenti” per tutti i siti web"
+            "value" : "Nella sezione “Permessi”, seleziona “Consenti” per tutti i siti web."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「アクセス権」で、すべてのWebサイトに「許可」を選択します"
+            "value" : "「アクセス権」で、すべてのWebサイトに「許可」を選択します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "‘권한’에서 모든 웹사이트에 대해 ‘허용’을 선택합니다"
+            "value" : "‘권한’에서 모든 웹사이트에 대해 ‘허용’을 선택합니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "W sekcji „Uprawnienia” wybierz „Pozwól” dla wszystkich witryn"
+            "value" : "W sekcji „Uprawnienia” wybierz „Pozwól” dla wszystkich witryn."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Na seção “Permissões”, selecione “Permitir” para todos os sites"
+            "value" : "Na seção “Permissões”, selecione “Permitir” para todos os sites."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "В разделе «Права доступа» выберите «Разрешить» для всех сайтов"
+            "value" : "В разделе «Права доступа» выберите «Разрешить» для всех сайтов."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trong mục “Quyền”, chọn “Cho phép” cho tất cả trang web"
+            "value" : "Trong mục “Quyền”, chọn “Cho phép” cho tất cả trang web."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在“权限”部分，为所有网站选择“允许”"
+            "value" : "在“权限”部分，为所有网站选择“允许”。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在「權限」部分，為所有網站選擇「允許」"
+            "value" : "在「權限」部分，為所有網站選擇「允許」。"
           }
         }
       }
@@ -4284,539 +4292,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "安裝"
-          }
-        }
-      }
-    },
-    "Install Ghostery addon from the Firefox\nAdd-ons store." : {
-      "comment" : "The line break keeps the name of the store together, and can be left out",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installiere das Ghostery-Add-on aus dem Add-on-Store von Firefox."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instala el complemento de Ghostery desde la tienda de complementos de Firefox."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installez le module Ghostery depuis le site des modules complémentaires Firefox."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa il componente aggiuntivo Ghostery dallo store dei componenti aggiuntivi di Firefox."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FirefoxアドオンストアからGhosteryのアドオンをインストールします。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefox 부가 기능 스토어에서 Ghostery 부가 기능을 설치하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zainstaluj dodatek Ghostery ze sklepu z dodatkami do Firefoksa."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instale o complemento do Ghostery pela loja de complementos do Firefox."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установите дополнение Ghostery из каталога дополнений Firefox."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài tiện ích Ghostery từ cửa hàng tiện ích của Firefox."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从 Firefox 附加组件商店安装 Ghostery 附加组件。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "從 Firefox 附加元件商店安裝 Ghostery 附加元件。"
-          }
-        }
-      }
-    },
-    "Install Ghostery extension from the Chrome web store." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installiere die Ghostery-Erweiterung aus dem Chrome Web Store."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instala la extensión de Ghostery desde Chrome Web Store."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installez l’extension Ghostery depuis le Chrome Web Store."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa l’estensione Ghostery dal Chrome Web Store."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ChromeウェブストアからGhosteryの拡張機能をインストールします。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chrome 웹 스토어에서 Ghostery 확장 프로그램을 설치하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zainstaluj rozszerzenie Ghostery z Chrome Web Store."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instale a extensão do Ghostery pela Chrome Web Store."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установите расширение Ghostery из интернет-магазина Chrome."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài tiện ích mở rộng Ghostery từ Cửa hàng Chrome trực tuyến."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从 Chrome 网上应用店安装 Ghostery 扩展程序。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "從 Chrome 線上應用程式商店安裝 Ghostery 擴充功能。"
-          }
-        }
-      }
-    },
-    "Install Ghostery extension from the Edge Add-ons." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installiere die Ghostery-Erweiterung aus den Edge-Add-ons."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instala la extensión de Ghostery desde los complementos de Edge."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installez l’extension Ghostery depuis les modules complémentaires d’Edge."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa l’estensione Ghostery dai componenti aggiuntivi di Edge."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edgeアドオンから、Ghosteryの拡張機能をインストールします。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edge 추가 기능에서 Ghostery 확장 프로그램을 설치하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zainstaluj rozszerzenie Ghostery ze sklepu z dodatkami do Edge."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instale a extensão do Ghostery pelos Complementos do Edge."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установите расширение Ghostery из каталога надстроек Edge."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài tiện ích mở rộng Ghostery từ trang Tiện ích bổ sung của Edge."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从 Edge 加载项商店安装 Ghostery 扩展。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "從 Edge 附加元件安裝 Ghostery 擴充功能。"
-          }
-        }
-      }
-    },
-    "Install Ghostery in your browser" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installiere Ghostery in deinem Browser"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instala Ghostery en tu navegador"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installez Ghostery dans votre navigateur"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa Ghostery nel tuo browser"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ブラウザにGhosteryをインストール"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "브라우저에 Ghostery 설치하기"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zainstaluj Ghostery w przeglądarce"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instale o Ghostery no seu navegador"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установите Ghostery в свой браузер"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài Ghostery vào trình duyệt của bạn"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在浏览器中安装 Ghostery"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在瀏覽器中安裝 Ghostery"
-          }
-        }
-      }
-    },
-    "Install in Chrome" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar en Chrome"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter à Chrome"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa in Chrome"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chromeに追加"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chrome에 설치"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dodaj do Chrome"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar no Chrome"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установить"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài vào Chrome"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安装到 Chrome"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安裝到 Chrome"
-          }
-        }
-      }
-    },
-    "Install in Edge" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar en Edge"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter à Edge"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa in Edge"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edgeに追加"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edge에 설치"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dodaj do Edge"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar no Edge"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установить"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài vào Edge"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安装到 Edge"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安裝到 Edge"
-          }
-        }
-      }
-    },
-    "Install in Firefox" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar en Firefox"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter à Firefox"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installa in Firefox"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefoxに追加"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefox에 설치"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dodaj do Firefoksa"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar no Firefox"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Установить"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài vào Firefox"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安装到 Firefox"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安裝到 Firefox"
           }
         }
       }
@@ -6049,6 +5524,391 @@
         }
       }
     },
+    "One app for all your browsers. Free, open source, and advertisers can’t pay to get through." : {
+      "comment" : "Advertisers can’t pay Ghostery to let their ads through",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine App für alle deine Browser. Kostenlos und Open Source – Werbetreibende können sich nicht freikaufen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una app para todos tus navegadores. Gratis, de código abierto y ningún anunciante puede pagar para colarse."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une seule app pour tous vos navigateurs. Gratuite, open source, et aucun annonceur ne peut payer pour passer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un’unica app per tutti i tuoi browser. Gratuita, open source e nessun inserzionista può pagare per passare."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ひとつのアプリで、すべてのブラウザに対応。無料でオープンソース。広告主がお金を払ってブロックを回避することはできません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모든 브라우저를 위한 하나의 앱. 무료 오픈 소스이며, 광고주가 돈을 내도 차단을 피할 수 없습니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jedna aplikacja do wszystkich twoich przeglądarek. Darmowa, open source, a reklamodawcy nie mogą zapłacić, by się przebić."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um app para todos os seus navegadores. Gratuito, de código aberto, e nenhum anunciante pode pagar para passar."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одно приложение для всех ваших браузеров. Бесплатное, с открытым исходным кодом, и рекламодатели не могут купить себе исключение."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Một ứng dụng cho mọi trình duyệt của bạn. Miễn phí, mã nguồn mở và nhà quảng cáo không thể trả tiền để lọt qua."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一个应用，适用于您的所有浏览器。免费、开源，广告商也无法花钱绕过拦截。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一個 App，適用於您的所有瀏覽器。免費、開放原始碼，廣告商也無法花錢繞過阻擋。"
+          }
+        }
+      }
+    },
+    "One click in\nEdge Add-ons." : {
+      "comment" : "The line break keeps the name of the store together, and can be left out",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit einem Klick in den\nEdge-Add-ons."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con un solo clic en los\ncomplementos de Edge."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En un clic sur les modules complémentaires d’Edge."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic nei componenti aggiuntivi di Edge."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edgeアドオンから\nワンクリックで追加。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edge 추가 기능에서\n클릭 한 번으로 추가하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jedno kliknięcie w sklepie z dodatkami do Edge."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com um clique nos\nComplementos do Edge."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Один клик в каталоге надстроек Edge."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉ một cú nhấp trong\ntrang Tiện ích bổ sung của Edge."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Edge 加载项商店\n一键添加。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Edge 附加元件\n一鍵新增。"
+          }
+        }
+      }
+    },
+    "One click in\nFirefox Add-ons." : {
+      "comment" : "The line break keeps the name of the store together, and can be left out",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit einem Klick in den\nFirefox-Add-ons."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con un solo clic en los\ncomplementos de Firefox."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En un clic sur les modules complémentaires Firefox."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic nei componenti aggiuntivi di Firefox."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefoxアドオンから\nワンクリックで追加。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefox 부가 기능에서\n클릭 한 번으로 추가하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jedno kliknięcie w sklepie z dodatkami do Firefoksa."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com um clique na loja de complementos do Firefox."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Один клик в каталоге дополнений Firefox."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉ một cú nhấp trong cửa hàng tiện ích của Firefox."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Firefox 附加组件商店\n一键添加。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Firefox 附加元件商店\n一鍵新增。"
+          }
+        }
+      }
+    },
+    "One click in\nOpera Add-ons." : {
+      "comment" : "The line break keeps the name of the store together, and can be left out",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit einem Klick in den\nOpera-Add-ons."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con un solo clic en los\ncomplementos de Opera."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En un clic sur les modules complémentaires Opera."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic nei componenti aggiuntivi di Opera."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operaアドオンから\nワンクリックで追加。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opera 애드온에서\n클릭 한 번으로 추가하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jedno kliknięcie w sklepie z dodatkami do Opery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com um clique na loja de complementos do Opera."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Один клик в каталоге дополнений Opera."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉ một cú nhấp trong cửa hàng tiện ích của Opera."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Opera 附加组件商店\n一键添加。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Opera 附加元件商店\n一鍵新增。"
+          }
+        }
+      }
+    },
+    "One click in the\nChrome Web Store." : {
+      "comment" : "The line break keeps the name of the store together, and can be left out",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit einem Klick im\nChrome Web Store."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con un solo clic en\nChrome Web Store."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En un clic sur le\nChrome Web Store."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic nel\nChrome Web Store."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chromeウェブストアから\nワンクリックで追加。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chrome 웹 스토어에서\n클릭 한 번으로 추가하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jedno kliknięcie\nw Chrome Web Store."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com um clique na\nChrome Web Store."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Один клик\nв интернет-магазине Chrome."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉ một cú nhấp trong\nCửa hàng Chrome\ntrực tuyến."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Chrome 网上应用店\n一键添加。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Chrome 線上應用程式\n商店一鍵新增。"
+          }
+        }
+      }
+    },
     "One-time donation" : {
       "comment" : "Option for a single donation",
       "localizations" : {
@@ -6280,79 +6140,79 @@
         }
       }
     },
-    "Open Safari settings" : {
+    "Open Safari settings." : {
       "comment" : "Step of the instructions, next to the button opening the settings",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne die Safari-Einstellungen"
+            "value" : "Öffne die Safari-Einstellungen."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abre los ajustes de Safari"
+            "value" : "Abre los ajustes de Safari."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrez les réglages de Safari"
+            "value" : "Ouvrez les réglages de Safari."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri le impostazioni di Safari"
+            "value" : "Apri le impostazioni di Safari."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safariの設定を開きます"
+            "value" : "Safariの設定を開きます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safari 설정을 엽니다"
+            "value" : "Safari 설정을 엽니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otwórz ustawienia Safari"
+            "value" : "Otwórz ustawienia Safari."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abra os ajustes do Safari"
+            "value" : "Abra os ajustes do Safari."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откройте настройки Safari"
+            "value" : "Откройте настройки Safari."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở cài đặt Safari"
+            "value" : "Mở cài đặt Safari."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开 Safari 设置"
+            "value" : "打开 Safari 设置。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打開 Safari 設定"
+            "value" : "打開 Safari 設定。"
           }
         }
       }
@@ -6434,79 +6294,79 @@
         }
       }
     },
-    "Open Settings and go to Apps › Safari › Extensions" : {
+    "Open Settings and go to Apps › Safari › Extensions." : {
       "comment" : "Step of the instructions on iPhones and iPads where the app can't open the settings of Safari, next to the button opening the Settings app. Apps, Safari and Extensions are the names of the pages in the Settings app, as it shows them in the language.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne die Einstellungen und gehe zu Apps › Safari › Erweiterungen"
+            "value" : "Öffne die Einstellungen und gehe zu Apps › Safari › Erweiterungen."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abre Ajustes y ve a Apps › Safari › Extensiones"
+            "value" : "Abre Ajustes y ve a Apps › Safari › Extensiones."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrez Réglages et accédez à Apps › Safari › Extensions"
+            "value" : "Ouvrez Réglages et accédez à Apps › Safari › Extensions."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Impostazioni e vai su App › Safari › Estensioni"
+            "value" : "Apri Impostazioni e vai su App › Safari › Estensioni."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定を開いて、アプリ › Safari › 機能拡張 の順に進みます"
+            "value" : "設定を開いて、アプリ › Safari › 機能拡張 の順に進みます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "설정을 열고 앱 › Safari › 확장 프로그램으로 이동합니다"
+            "value" : "설정을 열고 앱 › Safari › 확장 프로그램으로 이동합니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otwórz Ustawienia i przejdź do Aplikacje › Safari › Rozszerzenia"
+            "value" : "Otwórz Ustawienia i przejdź do Aplikacje › Safari › Rozszerzenia."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abra Ajustes e vá em Apps › Safari › Extensões"
+            "value" : "Abra Ajustes e vá em Apps › Safari › Extensões."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откройте Настройки и перейдите в Приложения › Safari › Расширения"
+            "value" : "Откройте Настройки и перейдите в Приложения › Safari › Расширения."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở Cài đặt và đi tới Ứng dụng › Safari › Phần mở rộng"
+            "value" : "Mở Cài đặt và đi tới Ứng dụng › Safari › Phần mở rộng."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开“设置”，前往 App › Safari › 扩展"
+            "value" : "打开“设置”，前往 App › Safari › 扩展。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打開「設定」，前往 App › Safari › 延伸功能"
+            "value" : "打開「設定」，前往 App › Safari › 延伸功能。"
           }
         }
       }
@@ -7053,83 +6913,6 @@
         }
       }
     },
-    "Protect your privacy.\nBlock trackers." : {
-      "comment" : "Title of the Home section, in two lines",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schütze deine Daten.\nBlockiere Tracker."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protege tu privacidad.\nBloquea rastreadores."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protégez vos données.\nBloquez les trackers."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proteggi i tuoi dati.\nBlocca i tracker."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシーを守る。\nトラッカーをブロック。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "개인정보를 지키고\n트래커를 차단하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chroń prywatność.\nBlokuj trackery."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proteja seus dados.\nBloqueie rastreadores."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Защитите данные.\nБлокируйте трекеры."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bảo vệ quyền riêng tư.\nChặn trình theo dõi."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保护您的隐私。\n拦截跟踪器。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保護您的隱私。\n阻擋追蹤器。"
-          }
-        }
-      }
-    },
     "QR code" : {
       "comment" : "Description of the QR code image, for assistive technologies",
       "localizations" : {
@@ -7207,78 +6990,156 @@
         }
       }
     },
-    "Rate it on App Store" : {
+    "Questions, ideas, or a tracker we missed?" : {
+      "comment" : "Above “Get Help”. The tracker is one which the app doesn't block yet.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Im App Store bewerten"
+            "value" : "Fragen, Ideen oder ein Tracker, den wir übersehen haben?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valorar en el App Store"
+            "value" : "¿Preguntas, ideas o un rastreador que se nos escapó?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noter sur l’App Store"
+            "value" : "Des questions, des idées ou un tracker qui nous a échappé ?"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valuta su App Store"
+            "value" : "Domande, idee o un tracker che ci è sfuggito?"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App Storeで評価する"
+            "value" : "ご質問やご意見、見逃しているトラッカーはありませんか？"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App Store에서 평가하기"
+            "value" : "질문이나 아이디어, 저희가 놓친 트래커가 있나요?"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oceń w App Store"
+            "value" : "Pytania, pomysły albo tracker, który przeoczyliśmy?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avaliar na App Store"
+            "value" : "Dúvidas, ideias ou um rastreador que nos escapou?"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Оценить в App Store"
+            "value" : "Вопросы, идеи или трекер, который мы пропустили?"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đánh giá trên App Store"
+            "value" : "Câu hỏi, ý tưởng hay trình theo dõi chúng tôi bỏ sót?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App Store 评分"
+            "value" : "有疑问、想法，或发现了我们漏掉的跟踪器？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App Store 評分"
+            "value" : "有疑問、想法，或發現了我們漏掉的追蹤器？"
+          }
+        }
+      }
+    },
+    "Rate Ghostery on App Store" : {
+      "comment" : "Below “Enjoying Ghostery?”, opens the page writing a review of the app in the App Store",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery im App Store bewerten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valorar Ghostery en el App Store"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noter Ghostery sur l’App Store"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valuta Ghostery su App Store"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App StoreでGhosteryを評価する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Store에서 Ghostery 평가하기"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oceń Ghostery w App Store"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avaliar o Ghostery na App Store"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценить Ghostery в App Store"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đánh giá Ghostery trên App Store"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 App Store 为 Ghostery 评分"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 App Store 為 Ghostery 評分"
           }
         }
       }
@@ -7513,6 +7374,83 @@
         }
       }
     },
+    "Remove Ghostery" : {
+      "comment" : "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery entfernen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar Ghostery"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer Ghostery"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi Ghostery"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghosteryを削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery 제거"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń Ghostery"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remover o Ghostery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить Ghostery"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gỡ Ghostery"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除 Ghostery"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除 Ghostery"
+          }
+        }
+      }
+    },
     "Report it to us to help keep the tracker database up to date." : {
       "localizations" : {
         "de" : {
@@ -7666,79 +7604,79 @@
         }
       }
     },
-    "Return to Ghostery app" : {
-      "comment" : "Last step of the instructions",
+    "Safari is ad-free now" : {
+      "comment" : "Title of the dialog shown once the extension is enabled in Safari",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kehre zur Ghostery-App zurück"
+            "value" : "Safari ist jetzt werbefrei"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuelve a la app Ghostery"
+            "value" : "Safari ya está libre de anuncios"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Revenez dans l’app Ghostery"
+            "value" : "Safari est désormais sans publicité"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Torna all’app Ghostery"
+            "value" : "Safari ora è senza pubblicità"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghosteryアプリに戻ります"
+            "value" : "Safariが広告なしに"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 앱으로 돌아옵니다"
+            "value" : "이제 Safari에 광고가 없습니다"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wróć do aplikacji Ghostery"
+            "value" : "Safari jest teraz wolne od reklam"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Volte para o app Ghostery"
+            "value" : "O Safari agora está sem anúncios"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вернитесь в приложение Ghostery"
+            "value" : "Теперь в Safari нет рекламы"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quay lại ứng dụng Ghostery"
+            "value" : "Safari giờ đã không còn quảng cáo"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "返回 Ghostery 应用"
+            "value" : "Safari 现已无广告"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "返回 Ghostery App"
+            "value" : "Safari 現已無廣告"
           }
         }
       }
@@ -7968,6 +7906,160 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "掃描 QR 碼，在平板電腦或電腦上安裝此 App。"
+          }
+        }
+      }
+    },
+    "Scan to block them on your phone and tablet. Free." : {
+      "comment" : "Below “Seeing ads on your phone?”. “Them” are the ads, and the app is free.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannen und sie auf Smartphone und Tablet blockieren. Kostenlos."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanea para bloquearlos en tu teléfono y tableta. Gratis."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannez pour les bloquer sur votre téléphone et votre tablette. Gratuit."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scansiona per bloccarla su telefono e tablet. Gratis."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキャンして、スマホとタブレットでブロック。無⁠料⁠です。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스캔하여 휴대폰과 태블릿에서 차단하세요. 무료입니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeskanuj, aby blokować je na telefonie i tablecie. Za darmo."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escaneie para bloqueá-los no celular e no tablet. Grátis."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отсканируйте и блокируйте её на телефоне и планшете. Бесплатно."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quét mã để chặn quảng cáo trên điện thoại và máy tính bảng. Miễn phí."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "扫码即可在手机和平板上拦截广告。免费。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "掃描即可在手機和平板上阻擋廣告。免費。"
+          }
+        }
+      }
+    },
+    "Seeing ads on your phone?" : {
+      "comment" : "Title of the dialog with the QR code, which installs the app on iPhones and iPads",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werbung auf deinem Smartphone?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Ves anuncios en tu teléfono?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des pubs sur votre téléphone ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vedi pubblicità sul tuo telefono?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スマホで広告が表示されますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "휴대폰에 광고가 보이나요?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widzisz reklamy na telefonie?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vendo anúncios no celular?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видите рекламу на телефоне?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn thấy quảng cáo trên điện thoại?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手机上看到广告了吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手機上看到廣告了嗎？"
           }
         }
       }
@@ -9815,6 +9907,83 @@
         }
       }
     },
+    "Trackers and cookie pop-ups are blocked too. Open any website to see the difference." : {
+      "comment" : "Description of the dialog shown once the extension is enabled in Safari",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auch Tracker und Cookie-Pop-ups werden blockiert. Öffne eine beliebige Website, um den Unterschied zu sehen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "También se bloquean los rastreadores y las ventanas emergentes de cookies. Abre cualquier sitio web para ver la diferencia."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les trackers et les bannières de cookies sont aussi bloqués. Ouvrez n’importe quel site web pour voir la différence."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anche tracker e popup dei cookie vengono bloccati. Apri un sito web qualsiasi per vedere la differenza."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トラッカーやCookieポップアップもブロックされます。好きなウェブサイトを開いて、違いを確かめてみてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "트래커와 쿠키 팝업도 차단됩니다. 아무 웹사이트나 열어 차이를 확인해 보세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trackery i komunikaty o plikach cookies też są blokowane. Otwórz dowolną stronę, aby zobaczyć różnicę."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rastreadores e pop-ups de cookies também são bloqueados. Abra qualquer site para ver a diferença."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Трекеры и уведомления о файлах cookie тоже блокируются. Откройте любой сайт, чтобы увидеть разницу."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trình theo dõi và cửa sổ bật lên cookie cũng bị chặn. Hãy mở bất kỳ trang web nào để thấy sự khác biệt."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跟踪器和 Cookie 弹窗也会被拦截。打开任意网站，看看有何不同。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追蹤器和 Cookie 彈跳視窗也會被阻擋。開啟任一網站，看看有何不同。"
+          }
+        }
+      }
+    },
     "Uncheck the checkbox next to **Ghostery** under Installed Apps." : {
       "comment" : "Step of the instructions, with the part between ** in bold",
       "localizations" : {
@@ -10733,78 +10902,79 @@
         }
       }
     },
-    "Your Safari is protected with Ghostery" : {
+    "Your browsers:" : {
+      "comment" : "Header of the browsers in which Ghostery can be used",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dein Safari ist mit Ghostery geschützt"
+            "value" : "Deine Browser:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu Safari está protegido con Ghostery"
+            "value" : "Tus navegadores:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre Safari est protégé par Ghostery"
+            "value" : "Vos navigateurs :"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il tuo Safari è protetto da Ghostery"
+            "value" : "I tuoi browser:"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "あなたのSafariはGhosteryで保護されています"
+            "value" : "お使いのブラウザ："
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safari가 Ghostery로 보호되고 있습니다"
+            "value" : "내 브라우저:"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Twoje Safari jest chronione przez Ghostery"
+            "value" : "Twoje przeglądarki:"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seu Safari está protegido pelo Ghostery"
+            "value" : "Seus navegadores:"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ваш Safari защищен Ghostery"
+            "value" : "Ваши браузеры:"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safari của bạn đã được Ghostery bảo vệ"
+            "value" : "Trình duyệt của bạn:"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您的 Safari 已受 Ghostery 保护"
+            "value" : "您的浏览器："
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您的 Safari 已受到 Ghostery 保護"
+            "value" : "您的瀏覽器："
           }
         }
       }

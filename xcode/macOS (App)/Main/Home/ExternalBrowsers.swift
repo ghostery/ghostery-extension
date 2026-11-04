@@ -14,6 +14,10 @@ fileprivate enum Constants {
   // Redirects to the extension store of the browser which opens it
   static let extensionStoreURL = URL(string: "https://www.ghostery.com/downloads/extension")!.tagged(campaign: "home")
 
+  // The longest wait for the browser to come to the front, as it can take
+  // a few seconds to launch
+  static let launchTimeout: Duration = .seconds(10)
+
   // Privacy & Security, Files and Folders, where the user allows the app
   // to access the data of the browsers
   static let filesAndFoldersSettingsURL = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_FilesAndFolders")!
@@ -21,36 +25,74 @@ fileprivate enum Constants {
 
 fileprivate let logger = Logger(category: "ExternalBrowsers")
 
+/// The extension stores from which the browsers install Ghostery, which has
+/// a different ID in each
+fileprivate enum ExtensionStore {
+  case chromeWebStore
+  case edgeAddons
+  case operaAddons
+  case firefoxAddons
+
+  var extensionID: String {
+    switch self {
+    case .chromeWebStore: return "mlomiejdfkolichcflejclcbmpeaniij"
+    case .edgeAddons: return "fclbdkbhjlgkbpfldjodgjncejkkjcme"
+    case .operaAddons: return "bbkekonodcdmedgffkkbgmnnekbainbg"
+    case .firefoxAddons: return "firefox@ghostery.com"
+    }
+  }
+
+  /// The page of Ghostery, which has the button removing it when it's
+  /// installed in the browser opening the page. Opera Add-ons only shows
+  /// that it is, and the user removes it in the extensions page of Opera.
+  var removalPageURL: URL {
+    switch self {
+    case .chromeWebStore: return URL(string: "https://chromewebstore.google.com/detail/\(extensionID)")!
+    case .edgeAddons: return URL(string: "https://microsoftedge.microsoft.com/addons/detail/\(extensionID)")!
+    case .operaAddons: return URL(string: "https://addons.opera.com/extensions/details/ghostery/")!
+    case .firefoxAddons: return URL(string: "https://addons.mozilla.org/firefox/addon/ghostery/")!
+    }
+  }
+}
+
 enum ExternalBrowser: String, CaseIterable, Codable, Identifiable {
-  case firefox
+  // By popularity, as the app lists them
   case chrome
   case edge
+  case firefox
+  case opera
+  case brave
 
   var id: Self { self }
 
   var name: String {
     switch self {
-    case .firefox: return "Firefox"
     case .chrome: return "Chrome"
     case .edge: return "Edge"
+    case .firefox: return "Firefox"
+    case .opera: return "Opera"
+    case .brave: return "Brave"
     }
   }
 
   var bundleIdentifier: String {
     switch self {
-    case .firefox: return "org.mozilla.firefox"
     case .chrome: return "com.google.Chrome"
     case .edge: return "com.microsoft.edgemac"
+    case .firefox: return "org.mozilla.firefox"
+    case .opera: return "com.operasoftware.Opera"
+    case .brave: return "com.brave.Browser"
     }
   }
 
-  /// The IDs of Ghostery in the extension stores the browser installs from,
-  /// as Edge can install extensions from the Chrome Web Store too
-  fileprivate var extensionIDs: [String] {
+  /// The extension stores the browser installs Ghostery from, as Edge and
+  /// Opera can install extensions from the Chrome Web Store too
+  fileprivate var extensionStores: [ExtensionStore] {
     switch self {
-    case .firefox: return ["firefox@ghostery.com"]
-    case .chrome: return ["mlomiejdfkolichcflejclcbmpeaniij"]
-    case .edge: return ["fclbdkbhjlgkbpfldjodgjncejkkjcme", "mlomiejdfkolichcflejclcbmpeaniij"]
+    case .chrome, .brave: return [.chromeWebStore]
+    case .edge: return [.edgeAddons, .chromeWebStore]
+    case .firefox: return [.firefoxAddons]
+    case .opera: return [.operaAddons, .chromeWebStore]
     }
   }
 
@@ -58,9 +100,11 @@ enum ExternalBrowser: String, CaseIterable, Codable, Identifiable {
   /// only read the ones listed in its entitlements, so update both together.
   fileprivate var profilesPath: String {
     switch self {
-    case .firefox: return "Library/Application Support/Firefox"
     case .chrome: return "Library/Application Support/Google/Chrome"
     case .edge: return "Library/Application Support/Microsoft Edge"
+    case .firefox: return "Library/Application Support/Firefox"
+    case .opera: return "Library/Application Support/com.operasoftware.Opera"
+    case .brave: return "Library/Application Support/BraveSoftware/Brave-Browser"
     }
   }
 
@@ -75,18 +119,54 @@ enum ExternalBrowser: String, CaseIterable, Codable, Identifiable {
     return name.hasSuffix(".app") ? String(name.dropLast(4)) : name
   }
 
-  /// Opens the page of Ghostery in the extension store of the browser
-  func openExtensionStore() {
+  /// Opens the page of Ghostery in the extension store of the browser, and
+  /// returns once the browser is in front of the app
+  @MainActor
+  func openExtensionStore() async {
     guard let appURL else { return }
 
-    NSWorkspace.shared.open(
-      [Constants.extensionStoreURL],
-      withApplicationAt: appURL,
-      configuration: NSWorkspace.OpenConfiguration()
-    ) { _, error in
-      if let error {
-        logger.error("Opening the extension store in \(self.rawValue, privacy: .public) failed: \(String(describing: error), privacy: .public)")
-      }
+    // The browser comes to the front by taking it from the app, which can
+    // happen before the system reports back
+    let deactivations = NotificationCenter.default.notifications(named: NSApplication.didResignActiveNotification)
+    do {
+      _ = try await NSWorkspace.shared.open(
+        [Constants.extensionStoreURL],
+        withApplicationAt: appURL,
+        configuration: NSWorkspace.OpenConfiguration()
+      )
+    } catch {
+      logger.error("Opening the extension store in \(self.rawValue, privacy: .public) failed: \(String(describing: error), privacy: .public)")
+      return
+    }
+    guard NSApp.isActive else { return }
+
+    // For a browser which isn't running, the system reports back right after
+    // it starts, while it comes to the front when it finishes launching
+    let inFront = Task {
+      for await _ in deactivations { return }
+    }
+    let timeout = Task {
+      try? await Task.sleep(for: Constants.launchTimeout)
+      inFront.cancel()
+    }
+    await inFront.value
+    timeout.cancel()
+  }
+
+  /// Opens the page of Ghostery in the extension store it was installed
+  /// from, which has the button removing it, apart from Opera Add-ons. The
+  /// pages of the browser where the user manages its extensions can't be
+  /// opened, as the system doesn't pass their URLs from the sandbox of the app.
+  @MainActor
+  func openRemovalPage() async {
+    guard let appURL,
+      let url = await ExternalBrowserDetector.shared.enabledExtensionStore(in: self)?.removalPageURL
+    else { return }
+
+    do {
+      _ = try await NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: NSWorkspace.OpenConfiguration())
+    } catch {
+      logger.error("Opening the removal page in \(self.rawValue, privacy: .public) failed: \(String(describing: error), privacy: .public)")
     }
   }
 
@@ -180,16 +260,27 @@ actor ExternalBrowserDetector {
     for browser in ExternalBrowser.allCases {
       guard let appURL = browser.appURL else { continue }
 
-      let profilesURL = homeURL.appending(path: browser.profilesPath, directoryHint: .isDirectory)
+      let profilesURL = profilesURL(of: browser)
       if !canReadProfiles(of: browser, in: profilesURL) {
         states[browser] = .noAccess
-      } else if isGhosteryEnabled(in: browser, profilesURL: profilesURL, appURL: appURL) {
+      } else if enabledExtensionStore(in: browser, profilesURL: profilesURL, appURL: appURL) != nil {
         states[browser] = .enabled
       } else {
         states[browser] = .notEnabled
       }
     }
     return states
+  }
+
+  /// The extension store from which Ghostery enabled in the browser was
+  /// installed, or nil when it isn't enabled
+  fileprivate func enabledExtensionStore(in browser: ExternalBrowser) -> ExtensionStore? {
+    guard let appURL = browser.appURL else { return nil }
+    return enabledExtensionStore(in: browser, profilesURL: profilesURL(of: browser), appURL: appURL)
+  }
+
+  private func profilesURL(of browser: ExternalBrowser) -> URL {
+    homeURL.appending(path: browser.profilesPath, directoryHint: .isDirectory)
   }
 
   // Since macOS 27, the system protects the profiles of the browsers, and
@@ -207,21 +298,25 @@ actor ExternalBrowserDetector {
     }
   }
 
-  private func isGhosteryEnabled(in browser: ExternalBrowser, profilesURL: URL, appURL: URL) -> Bool {
+  // Of the first profile in which it's enabled
+  private func enabledExtensionStore(in browser: ExternalBrowser, profilesURL: URL, appURL: URL) -> ExtensionStore? {
     switch browser {
     case .firefox:
-      return firefoxProfiles(in: profilesURL).contains { profile in
-        guard isFirefoxProfile(profile, lastOpenedBy: appURL) else { return false }
-        return browser.extensionIDs.contains { id in
-          readJSON(profile.appending(path: "extensions.json")) { BrowserProfiles.isFirefoxExtensionEnabled($0, id: id) } == true
+      for profile in firefoxProfiles(in: profilesURL) where isFirefoxProfile(profile, lastOpenedBy: appURL) {
+        let store = browser.extensionStores.first { store in
+          readJSON(profile.appending(path: "extensions.json")) { BrowserProfiles.isFirefoxExtensionEnabled($0, id: store.extensionID) } == true
         }
+        if let store { return store }
       }
-    case .chrome, .edge:
-      return chromiumProfiles(in: profilesURL).contains { profile in
-        browser.extensionIDs.contains { id in
-          isExtensionEnabled(inChromiumProfile: profile, id: id)
+      return nil
+    case .chrome, .edge, .opera, .brave:
+      for profile in chromiumProfiles(in: profilesURL) {
+        let store = browser.extensionStores.first { store in
+          isExtensionEnabled(inChromiumProfile: profile, id: store.extensionID)
         }
+        if let store { return store }
       }
+      return nil
     }
   }
 
@@ -258,6 +353,11 @@ actor ExternalBrowserDetector {
   }
 
   private func isExtensionEnabled(inChromiumProfile profile: URL, id: String) -> Bool {
+    // The preferences can keep the settings of an extension after it's
+    // removed, like Edge does, while its folder is deleted right away
+    let folder = profile.appending(path: "Extensions", directoryHint: .isDirectory).appending(path: id, directoryHint: .isDirectory)
+    guard FileManager.default.fileExists(atPath: folder.path) else { return false }
+
     // The settings of extensions are in the secure file, and older
     // versions of the browsers kept them in the other one
     for name in ["Secure Preferences", "Preferences"] {

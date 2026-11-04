@@ -11,15 +11,15 @@ import Foundation
 enum SectionStrings {
   // You can translate your strings here
   enum Home {
-    static let title = String(localized: "Protect your privacy.\nBlock trackers.", comment: "Title of the Home section, in two lines")
-    static let description = String(localized: "Ghostery helps you take control of your data across the web.")
-    static let installHeader = String(localized: "Install Ghostery in your browser")
+    static let title = String(localized: "Block ads, trackers\n& cookie pop-ups\nin every browser.", comment: "Title of the Home section, in three lines")
+    static let description = String(localized: "One app for all your browsers. Free, open source, and advertisers can’t pay to get through.", comment: "Advertisers can’t pay Ghostery to let their ads through")
+    static let browsersHeader = String(localized: "Your browsers:", comment: "Header of the browsers in which Ghostery can be used")
     static let safariDescription = String(localized: "Follow these simple steps to enable Ghostery in Safari.")
-    static let safariEnabledDescription = String(localized: "Ghostery works correctly in Safari.")
-    static let edgeDescription = String(localized: "Install Ghostery extension from the Edge Add-ons.")
-    static let enabled = String(localized: "Enabled", comment: "State of Ghostery in a browser")
+    static let enabledDescription = String(localized: "Blocking ads, trackers and cookie pop-ups.", comment: "Description of a browser in which Ghostery is enabled")
+    static let edgeDescription = String(localized: "One click in\nEdge Add-ons.", comment: "The line break keeps the name of the store together, and can be left out")
+    static let active = String(localized: "Active", comment: "State of Ghostery in a browser in which it's enabled")
     static let moreOptions = String(localized: "More options")
-    static let disableInSafari = String(localized: "Disable Ghostery in Safari")
+    static let disableGhostery = String(localized: "Disable Ghostery", comment: "Option of the Safari card, opening the settings of Safari where the user turns off the extension")
     static let viewInstructions = String(localized: "View instructions", comment: "Button showing the steps to enable or disable Ghostery in Safari")
   }
 
