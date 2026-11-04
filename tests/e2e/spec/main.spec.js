@@ -193,13 +193,13 @@ describe('Main Features', function () {
   });
 
   describe('Regional Filters', function () {
-    const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
-    const SELECTOR = '.a-re';
+    // A generic cosmetic filter, which is only in the Polish filter list
+    const SELECTOR = '.reklama-gora';
 
     it('shows the ads on the page', async function () {
       await setAdditionalFiltersToggle('regional-filters', false);
 
-      await openExternalURL(WEBSITE_URL);
+      await browser.url(PAGE_URL);
       await expect($(SELECTOR)).toBeDisplayed();
 
       await setAdditionalFiltersToggle('regional-filters', true);
@@ -217,7 +217,8 @@ describe('Main Features', function () {
       // Allow engines to reload
       await waitForIdleBackgroundTasks();
 
-      await openExternalURL(WEBSITE_URL);
+      await browser.url(PAGE_URL);
+      await expect($(SELECTOR)).toExist();
       await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
