@@ -36,9 +36,12 @@ fileprivate enum Strings {
   // You can translate your strings here
   static let nextBrowsers = String(localized: "Next", comment: "Button scrolling to the next cards of the browsers")
   static let openSystemSettings = String(localized: "Open System Settings", comment: "System Settings is the name of the macOS app")
+  // Of Chrome, and of Brave, which installs extensions from the same store
+  static let chromeWebStoreDescription = String(localized: "One click in the\nChrome Web Store.", comment: "The line break keeps the name of the store together, and can be left out")
+  static let removeGhostery = String(localized: "Remove Ghostery", comment: "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it")
 
-  static func detectedBrowsers(_ count: Int) -> String {
-    String(localized: "Detected browsers: \(count)", comment: "Number of the browsers found on the Mac, Safari included")
+  static func protectedBrowsers(_ count: Int, of total: Int) -> String {
+    String(localized: "\(count)/\(total) protected", comment: "Number of the browsers in which Ghostery is enabled, of all the browsers found on the Mac, Safari included")
   }
 
   /// Steps to allow the access, with the names of the apps as the settings show them
@@ -61,38 +64,55 @@ fileprivate enum Strings {
   }
 }
 
-// Safari, and the other browsers, shown when they're found in the system
+// Safari, and the other browsers by popularity, shown when they're found in
+// the system
 fileprivate let homeBrowsers = [
   HomeBrowser(
     kind: .safari,
     icon: .browserSafari,
     description: SectionStrings.Home.safariDescription,
-    enabledDescription: SectionStrings.Home.safariEnabledDescription,
+    enabledDescription: SectionStrings.Home.enabledDescription,
     actionTitle: SectionStrings.Home.viewInstructions,
     isPrimary: true
   ),
   HomeBrowser(
-    kind: .external(.firefox),
-    icon: .browserFirefox,
-    description: String(localized: "Install Ghostery addon from the Firefox\nAdd-ons store.", comment: "The line break keeps the name of the store together, and can be left out"),
-    enabledDescription: String(localized: "Ghostery works correctly in Firefox."),
-    actionTitle: String(localized: "Install in Firefox"),
-    isPrimary: false
-  ),
-  HomeBrowser(
     kind: .external(.chrome),
     icon: .browserChrome,
-    description: String(localized: "Install Ghostery extension from the Chrome web store."),
-    enabledDescription: String(localized: "Ghostery works correctly in Chrome."),
-    actionTitle: String(localized: "Install in Chrome"),
+    description: Strings.chromeWebStoreDescription,
+    enabledDescription: SectionStrings.Home.enabledDescription,
+    actionTitle: String(localized: "Add to Chrome", comment: "Button opening Ghostery in the Chrome Web Store"),
     isPrimary: false
   ),
   HomeBrowser(
     kind: .external(.edge),
     icon: .browserEdge,
     description: SectionStrings.Home.edgeDescription,
-    enabledDescription: String(localized: "Ghostery works correctly in Edge."),
-    actionTitle: String(localized: "Install in Edge"),
+    enabledDescription: SectionStrings.Home.enabledDescription,
+    actionTitle: String(localized: "Add to Edge", comment: "Button opening Ghostery in the Edge Add-ons store"),
+    isPrimary: false
+  ),
+  HomeBrowser(
+    kind: .external(.firefox),
+    icon: .browserFirefox,
+    description: String(localized: "One click in\nFirefox Add-ons.", comment: "The line break keeps the name of the store together, and can be left out"),
+    enabledDescription: SectionStrings.Home.enabledDescription,
+    actionTitle: String(localized: "Add to Firefox", comment: "Button opening Ghostery in the Firefox Add-ons store"),
+    isPrimary: false
+  ),
+  HomeBrowser(
+    kind: .external(.opera),
+    icon: .browserOpera,
+    description: String(localized: "One click in\nOpera Add-ons.", comment: "The line break keeps the name of the store together, and can be left out"),
+    enabledDescription: SectionStrings.Home.enabledDescription,
+    actionTitle: String(localized: "Add to Opera", comment: "Button opening Ghostery in the Opera Add-ons store"),
+    isPrimary: false
+  ),
+  HomeBrowser(
+    kind: .external(.brave),
+    icon: .browserBrave,
+    description: Strings.chromeWebStoreDescription,
+    enabledDescription: SectionStrings.Home.enabledDescription,
+    actionTitle: String(localized: "Add to Brave", comment: "Button opening Ghostery in the Chrome Web Store, from which Brave installs extensions"),
     isPrimary: false
   ),
 ]
@@ -102,6 +122,8 @@ struct HomeView: View {
   private var externalBrowsers: ExternalBrowserStates { .shared }
   @State private var showsSafariInstructions = DebugLaunch.opens(.safariInstructions)
   @State private var menuBrowserID: HomeBrowser.Kind?
+  /// Of the browsers opening the extension store, whose buttons wait for it
+  @State private var openingBrowserIDs: Set<HomeBrowser.Kind> = []
   @State private var carouselWidth: CGFloat = 0
   /// How far the cards are scrolled
   @State private var carouselOffset: CGFloat = 0
@@ -165,11 +187,11 @@ struct HomeView: View {
 
   private var browsersHeader: some View {
     VStack(alignment: .leading, spacing: Constants.browsersHeaderSpacing) {
-      Text(SectionStrings.Home.installHeader)
+      Text(SectionStrings.Home.browsersHeader)
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundPrimary)
         .accessibilityAddTraits(.isHeader)
-      Text(Strings.detectedBrowsers(browsers.count))
+      Text(Strings.protectedBrowsers(browsers.filter(isEnabled).count, of: browsers.count))
         .textStyle(.labelS)
         .foregroundColor(Colors.foregroundTertiary)
     }
@@ -185,10 +207,10 @@ struct HomeView: View {
           HomeBrowserCard(
             browser: browser,
             isEnabled: isEnabled(browser),
+            isLoading: openingBrowserIDs.contains(browser.id),
             isMenuShown: menuBrowserID == browser.id,
             action: { action(for: browser) },
-            // Only Safari has options so far
-            showMenu: browser.kind == .safari ? { menuBrowserID = browser.id } : nil
+            showMenu: { menuBrowserID = browser.id }
           )
         }
         .onGeometryChange(for: CGFloat.self) { geometry in
@@ -257,16 +279,34 @@ struct HomeView: View {
   private func action(for browser: HomeBrowser) {
     switch browser.kind {
     case .safari: showsSafariInstructions = true
-    case .external(let externalBrowser): externalBrowser.openExtensionStore()
+    case .external(let externalBrowser):
+      openingBrowserIDs.insert(browser.id)
+      Task {
+        // Buttons take the click which brings their window to the front, so
+        // the second click of a double-click waits too, as it can come when
+        // the browser is already in front
+        let doubleClickEnd = ContinuousClock.now + .seconds(NSEvent.doubleClickInterval)
+        await externalBrowser.openExtensionStore()
+        try? await Task.sleep(until: doubleClickEnd)
+        openingBrowserIDs.remove(browser.id)
+      }
     }
   }
 
   private func menuItems(for browser: HomeBrowser) -> [HomeBrowserMenu.Item] {
-    guard browser.kind == .safari else { return [] }
-    return [
-      HomeBrowserMenu.Item(title: SectionStrings.Home.disableInSafari, action: SafariExtension.showSettings),
-      HomeBrowserMenu.Item(title: SectionStrings.Home.viewInstructions, action: { showsSafariInstructions = true }),
-    ]
+    switch browser.kind {
+    case .safari:
+      return [
+        HomeBrowserMenu.Item(title: SectionStrings.Home.disableGhostery, action: SafariExtension.showSettings),
+        HomeBrowserMenu.Item(title: SectionStrings.Home.viewInstructions, action: { showsSafariInstructions = true }),
+      ]
+    case .external(let externalBrowser):
+      return [
+        HomeBrowserMenu.Item(title: Strings.removeGhostery) {
+          Task { await externalBrowser.openRemovalPage() }
+        },
+      ]
+    }
   }
 
   // The menu is aligned to the trailing edge of the button below which it's shown

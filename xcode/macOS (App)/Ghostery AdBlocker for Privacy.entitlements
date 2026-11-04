@@ -10,9 +10,11 @@
 		<true />
 		<key>com.apple.security.temporary-exception.files.home-relative-path.read-only</key>
 		<array>
+			<string>/Library/Application Support/BraveSoftware/Brave-Browser/</string>
 			<string>/Library/Application Support/Firefox/</string>
 			<string>/Library/Application Support/Google/Chrome/</string>
 			<string>/Library/Application Support/Microsoft Edge/</string>
+			<string>/Library/Application Support/com.operasoftware.Opera/</string>
 		</array>
 	</dict>
 </plist>
