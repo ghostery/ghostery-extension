@@ -25,7 +25,8 @@ fileprivate enum Constants {
 
 /// Edition of the Privacy Digest, with its cover image
 struct PrivacyDigestEdition {
-  let displayName: String
+  /// Of the edition in its year, unless ghostery.com can't tell it
+  let number: Int?
   let publishedAt: Date
   let tags: [String]
   let url: URL
@@ -67,13 +68,12 @@ enum LearningZoneContent {
       throw LearningZoneError.noItem
     }
 
-    let displayName = edition.displayName.trimmed
-    guard !displayName.isEmpty, edition.url.scheme == "https" else {
+    guard edition.url.scheme == "https" else {
       throw LearningZoneError.invalidItem
     }
 
     return PrivacyDigestEdition(
-      displayName: displayName,
+      number: edition.editionNumber.flatMap { $0 > 0 ? $0 : nil },
       publishedAt: edition.publishedAt,
       tags: (edition.tags ?? []).map(\.trimmed).filter { !$0.isEmpty },
       url: edition.url,
@@ -192,7 +192,7 @@ private enum LearningZoneError: Error {
 
 /// Edition as listed by ghostery.com/privacy-digest/editions.json
 private struct EditionData: Decodable {
-  let displayName: String
+  let editionNumber: Int?
   let publishedAt: Date
   let tags: [String]?
   let imageUrl: URL?
