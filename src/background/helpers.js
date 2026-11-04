@@ -15,6 +15,7 @@ import Config from '/store/config.js';
 import Options from '/store/options.js';
 
 import * as OptionsObserver from '/utils/options-observer.js';
+import getBrowserInfo from '/utils/browser-info.js';
 import { hasWTMStats } from '/utils/wtm-stats';
 import { isUserScriptsSupported } from '/utils/user-scripts.js';
 import { setup as adblockerSetup, updateEngines } from './adblocker/engines.js';
@@ -80,6 +81,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         userAgent: navigator.userAgent,
         platform: navigator.platform,
         maxTouchPoints: navigator.maxTouchPoints,
+        os: getBrowserInfo().os,
+        token: getBrowserInfo().token,
       });
       break;
 

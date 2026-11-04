@@ -9,14 +9,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { getOS } from '/utils/browser-info.js';
+
 const URL_INFIX = __STAGING__ ? 'staging-patterns/' : '';
 
 function platformSpecificSettings() {
-  if (
-    /iPad|iPhone|iPod/.test(navigator.platform) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-  ) {
-    // Ghostery extension for Safari on iOS and other Apple mobile devices
+  const os = getOS();
+
+  if (os === 'ios') {
+    // Ghostery extension for Safari on iOS (iPhone)
     return {
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
       PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-safari-ios/patterns.json`,
@@ -25,11 +26,14 @@ function platformSpecificSettings() {
   }
 
   if (
-    /Safari/i.test(navigator.userAgent) &&
-    /Apple Computer/.test(navigator.vendor) &&
-    !/Mobi|Android/i.test(navigator.userAgent)
+    // Browsers on iPadOS send a Mac desktop user-agent, so websites serve them desktop pages.
+    // It also covers Safari on a touchscreen Mac, which is detected as iPadOS.
+    os === 'ipados' ||
+    (/Safari/i.test(navigator.userAgent) &&
+      /Apple Computer/.test(navigator.vendor) &&
+      !/Mobi|Android/i.test(navigator.userAgent))
   ) {
-    // Ghostery extension for Safari on MacOS (Desktop)
+    // Ghostery extension for Safari on macOS and iPadOS (Desktop)
     return {
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
       PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-safari-desktop/patterns.json`,

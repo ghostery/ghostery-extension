@@ -24,6 +24,7 @@ import Notification from '/store/notification.js';
 import Resources from '/store/resources.js';
 import FilteringDebug from '/store/filtering-debug.js';
 import * as telemetry from '/utils/telemetry.js';
+import getBrowserInfo from '/utils/browser-info.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
@@ -332,6 +333,16 @@ export default {
                           ${navigator.maxTouchPoints}
                         </span>
                       </ui-text>
+                      <ui-text type="body-s" color="secondary">
+                        <ui-text type="label-s">OS:</ui-text>
+                        <span data-qa="text:navigator-os-page">${getBrowserInfo().os}</span>
+                      </ui-text>
+                      <ui-text type="body-s" color="secondary">
+                        <ui-text type="label-s">Browser:</ui-text>
+                        <span data-qa="text:navigator-browser-token-page">
+                          ${getBrowserInfo().token || 'N/A'}
+                        </span>
+                      </ui-text>
                     </div>
                     ${html.resolve(
                       getBackgroundNavigator().then(
@@ -354,6 +365,16 @@ export default {
                               <ui-text type="label-s">Max touch points:</ui-text>
                               <span data-qa="text:navigator-max-touch-points-background">
                                 ${info.maxTouchPoints}
+                              </span>
+                            </ui-text>
+                            <ui-text type="body-s" color="secondary">
+                              <ui-text type="label-s">OS:</ui-text>
+                              <span data-qa="text:navigator-os-background">${info.os}</span>
+                            </ui-text>
+                            <ui-text type="body-s" color="secondary">
+                              <ui-text type="label-s">Browser token:</ui-text>
+                              <span data-qa="text:navigator-browser-token-background">
+                                ${info.token || 'N/A'}
                               </span>
                             </ui-text>
                           </div>
