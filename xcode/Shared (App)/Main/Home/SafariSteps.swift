@@ -34,18 +34,17 @@ fileprivate enum Constants {
 fileprivate enum Strings {
   // You can translate your strings here
   static let openSettings = String(localized: "Open Settings", comment: "Button opening the extension settings of Safari")
+  static let goBack = LocalizedStringResource("Come back to the Ghostery app.", comment: "Last step of the instructions")
   #if os(macOS)
   // The parts between ** are in bold
   static let openExtensionSettings = LocalizedStringResource("Open Safari extension **settings**.", comment: "Step of the instructions, with the part between ** in bold")
   static let selectCheckbox = LocalizedStringResource("Select the checkbox next to **Ghostery**.", comment: "Step of the instructions, with the part between ** in bold")
   static let allowOnEveryWebsite = LocalizedStringResource("Enable permission to **Always Allow on Every Website**.", comment: "Step of the instructions, with the part between ** in bold. Always Allow on Every Website is the name of the option in Safari.")
-  static let goBack = LocalizedStringResource("Go back to this app.", comment: "Last step of the instructions")
   #else
-  static let openSafariSettings = String(localized: "Open Safari settings", comment: "Step of the instructions, next to the button opening the settings")
-  static let goToSafariSettings = String(localized: "Open Settings and go to Apps › Safari › Extensions", comment: "Step of the instructions on iPhones and iPads where the app can't open the settings of Safari, next to the button opening the Settings app. Apps, Safari and Extensions are the names of the pages in the Settings app, as it shows them in the language.")
-  static let allowExtension = String(localized: "Enable “Allow\u{00A0}Extension” toggle", comment: "Step of the instructions. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.")
-  static let allowAllWebsites = String(localized: "In Permissions section select “Allow” for all websites", comment: "Step of the instructions. Permissions and Allow are the names of the section and the option in the settings of Safari on iPhones, as the settings show them in the language.")
-  static let goBack = String(localized: "Return to Ghostery app", comment: "Last step of the instructions")
+  static let openSafariSettings = String(localized: "Open Safari settings.", comment: "Step of the instructions, next to the button opening the settings")
+  static let goToSafariSettings = String(localized: "Open Settings and go to Apps › Safari › Extensions.", comment: "Step of the instructions on iPhones and iPads where the app can't open the settings of Safari, next to the button opening the Settings app. Apps, Safari and Extensions are the names of the pages in the Settings app, as it shows them in the language.")
+  static let allowExtension = String(localized: "Enable “Allow\u{00A0}Extension” toggle.", comment: "Step of the instructions. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.")
+  static let allowAllWebsites = String(localized: "In Permissions section select “Allow” for all websites.", comment: "Step of the instructions. Permissions and Allow are the names of the section and the option in the settings of Safari on iPhones, as the settings show them in the language.")
   static let allow = String(localized: "Allow", comment: "Option in the settings of Safari on iPhones, as the settings show it in the language. Shown in the picture next to the step selecting it.")
   #endif
 }

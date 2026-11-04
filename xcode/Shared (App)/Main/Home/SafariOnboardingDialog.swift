@@ -32,9 +32,9 @@ fileprivate enum Strings {
   #else
   static let title = SectionStrings.SafariInstructions.title
   #endif
-  static let enabledTitle = String(localized: "Your Safari is protected with Ghostery")
-  static let enabledDescription = String(localized: "Ghostery is actively blocking trackers, stopping annoying ads, and protecting your online privacy in the background.")
-  static let done = String(localized: "Done", comment: "Button closing the dialog")
+  static let enabledTitle = String(localized: "Safari is ad-free now", comment: "Title of the dialog shown once the extension is enabled in Safari")
+  static let enabledDescription = String(localized: "Trackers and cookie pop-ups are blocked too. Open any website to see the difference.", comment: "Description of the dialog shown once the extension is enabled in Safari")
+  static let gotIt = String(localized: "Got it", comment: "Button closing the dialog")
 }
 
 /// Sizes of the dialogs, which differ between the Mac, iPhones and iPads
@@ -213,7 +213,7 @@ private struct DoneButton: View {
   var action: () -> Void
 
   var body: some View {
-    Button(Strings.done, action: action)
+    Button(Strings.gotIt, action: action)
       .buttonStyle(AppButtonStyle(kind: .primary, size: .large))
       .frame(width: Constants.doneButtonWidth)
   }

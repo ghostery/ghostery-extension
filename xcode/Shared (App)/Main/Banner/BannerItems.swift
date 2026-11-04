@@ -12,9 +12,7 @@ fileprivate enum Constants {
   // Of the banner, which the focus ring and the highlight of an item follow
   static let bannerCornerRadius: CGFloat = 12
 
-  // After the texts, as on the Mac
-  static let buttonWidth: CGFloat = 160
-  // Below the texts, as on iPhones and iPads
+  // Of the button below the texts, as on iPhones and iPads
   static let buttonTopSpacing: CGFloat = 16
 
   static let iconSize: CGFloat = 56
@@ -24,6 +22,11 @@ fileprivate enum Constants {
 fileprivate enum Strings {
   // You can translate your strings here
   static let otherDeviceTitle = String(localized: "Want to use this app on another device?")
+  #if os(macOS)
+  static let otherDeviceDescription = String(localized: "Scan the QR code to install the app on your phone or tablet.")
+  #else
+  static let otherDeviceDescription = String(localized: "Scan the QR code to install the app on your tablet or desktop.")
+  #endif
   static let scanQRCode = String(localized: "Scan QR Code", comment: "Button opening the dialog with the QR code")
 }
 
@@ -71,13 +74,13 @@ fileprivate let commonItems: [BannerItem] = [
     id: "review",
     icon: .bannerReview,
     text: String(localized: "Enjoying Ghostery?"),
-    actionTitle: String(localized: "Rate it on App Store"),
+    actionTitle: String(localized: "Rate Ghostery on App Store", comment: "Below “Enjoying Ghostery?”, opens the page writing a review of the app in the App Store"),
     action: .open(URLs.review)
   )),
   .notification(BannerNotification(
     id: "help",
     icon: .bannerHelp,
-    text: String(localized: "Having trouble using Ghostery?"),
+    text: String(localized: "Questions, ideas, or a tracker we missed?", comment: "Above “Get Help”. The tracker is one which the app doesn't block yet."),
     actionTitle: String(localized: "Get Help", comment: "Opens the dialog with the ways to get help"),
     action: .showDialog(.support)
   )),
@@ -136,13 +139,11 @@ private struct OtherDeviceBannerItem: View {
         texts
           .frame(maxWidth: .infinity, alignment: .leading)
         button
-          // Wider for the longer titles of some languages
-          .frame(minWidth: Constants.buttonWidth)
           .fixedSize()
       }
     }
     .padding(layout.padding)
-    .singleActionAccessibility(label: [Strings.otherDeviceTitle, OtherDeviceDialog.description, Strings.scanQRCode])
+    .singleActionAccessibility(label: [Strings.otherDeviceTitle, Strings.otherDeviceDescription, Strings.scanQRCode])
   }
 
   private var texts: some View {
@@ -150,7 +151,7 @@ private struct OtherDeviceBannerItem: View {
       Text(Strings.otherDeviceTitle)
         .textStyle(layout.titleStyle)
         .foregroundColor(Colors.foregroundPrimary)
-      Text(OtherDeviceDialog.description)
+      Text(Strings.otherDeviceDescription)
         .textStyle(layout.descriptionStyle)
         .foregroundColor(Colors.foregroundSecondary)
         .fixedSize(horizontal: false, vertical: true)
@@ -159,11 +160,8 @@ private struct OtherDeviceBannerItem: View {
 
   private var button: some View {
     Button(action: action) {
-      HStack(spacing: 0) {
-        Image(.homeAppStore)
-        Text(Strings.scanQRCode)
-          .padding(layout.buttonTitlePadding)
-      }
+      Text(Strings.scanQRCode)
+        .padding(layout.buttonTitlePadding)
     }
     .buttonStyle(AppButtonStyle(kind: .secondary, size: layout.buttonSize))
   }

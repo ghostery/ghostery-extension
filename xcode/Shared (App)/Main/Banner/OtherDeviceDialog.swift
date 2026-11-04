@@ -23,10 +23,11 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = String(localized: "Use this app on another device")
   #if os(macOS)
-  static let description = String(localized: "Scan the QR code to install the app on your phone or tablet.")
+  static let title = String(localized: "Seeing ads on your phone?", comment: "Title of the dialog with the QR code, which installs the app on iPhones and iPads")
+  static let description = String(localized: "Scan to block them on your phone and tablet. Free.", comment: "Below “Seeing ads on your phone?”. “Them” are the ads, and the app is free.")
   #else
+  static let title = String(localized: "Use this app on another device")
   static let description = String(localized: "Scan the QR code to install the app on your tablet or desktop.")
   static let copyLink = String(localized: "Copy link", comment: "Button copying the link installing the app to the clipboard")
   static let shareLink = String(localized: "Share link", comment: "Button sharing the link installing the app")
@@ -55,7 +56,7 @@ fileprivate struct OtherDeviceDialogLayout: PlatformLayout {
     bottomPadding: 82,
     titleStyle: .headlineS,
     descriptionStyle: .bodyM,
-    textWidth: 285
+    textWidth: 337
   )
   #else
   static let phone = OtherDeviceDialogLayout(
@@ -82,8 +83,6 @@ fileprivate struct OtherDeviceDialogLayout: PlatformLayout {
 struct OtherDeviceDialog: View {
   /// Page installing the app on the device, which the QR codes open
   static let url = URL(string: "https://www.ghostery.com/downloads/extension")!.tagged(campaign: "banner")
-  /// Below the title, and in the item of the banner opening the dialog
-  static let description = Strings.description
 
   var onClose: () -> Void
 

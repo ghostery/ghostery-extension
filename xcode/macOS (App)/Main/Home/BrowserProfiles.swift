@@ -61,8 +61,12 @@ enum BrowserProfiles {
   /// Whether the extension is enabled, by the preferences of a profile of
   /// a Chromium browser, or nil when it isn't installed
   static func isChromiumExtensionEnabled(_ json: [String: Any], id: String) -> Bool? {
-    guard let settings = (json["extensions"] as? [String: Any])?["settings"] as? [String: Any],
-          let extensionSettings = settings[id] as? [String: Any] else { return nil }
+    guard let extensions = json["extensions"] as? [String: Any] else { return nil }
+    // Opera keeps the same settings under its own key
+    let extensionSettings = ["settings", "opsettings"].lazy
+      .compactMap { (extensions[$0] as? [String: Any])?[id] as? [String: Any] }
+      .first
+    guard let extensionSettings else { return nil }
 
     // A list of reasons, which used to be a bit mask, and older versions also
     // keep a state, of which 1 is enabled

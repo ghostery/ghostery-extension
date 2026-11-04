@@ -146,7 +146,7 @@ struct HomeView: View {
     SectionScrollView {
       SectionHeader(title: SectionStrings.Home.title, description: SectionStrings.Home.description)
 
-      Text(SectionStrings.Home.installHeader)
+      Text(SectionStrings.Home.browsersHeader)
         .textStyle(.labelL)
         .foregroundColor(Colors.foregroundPrimary)
         .accessibilityAddTraits(.isHeader)
@@ -169,13 +169,13 @@ struct HomeView: View {
         name: "Safari",
         icon: .browserSafari,
         description: SectionStrings.Home.safariDescription,
-        enabledDescription: SectionStrings.Home.safariEnabledDescription,
+        enabledDescription: SectionStrings.Home.enabledDescription,
         actionTitle: Strings.instructions,
         action: .perform { showsSafariInstructions = true },
         isPrimary: true,
         isEnabled: safari.isEnabled,
         menuItems: [
-          HomeBrowserMenuItem(title: SectionStrings.Home.disableInSafari, action: .perform { SafariExtension.showSettings() }),
+          HomeBrowserMenuItem(title: SectionStrings.Home.disableGhostery, action: .perform { SafariExtension.showSettings() }),
           HomeBrowserMenuItem(title: SectionStrings.Home.viewInstructions, action: .perform { showsSafariInstructions = true }),
         ]
       ),
@@ -303,7 +303,7 @@ private struct HomeBrowserEnabledState: View {
     let shape = RoundedRectangle(cornerRadius: Constants.enabledCornerRadius)
 
     HStack(spacing: Constants.enabledSpacing) {
-      Text(SectionStrings.Home.enabled)
+      Text(SectionStrings.Home.active)
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundSuccessPrimary)
         .lineLimit(1)

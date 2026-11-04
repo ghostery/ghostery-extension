@@ -19,6 +19,12 @@ fileprivate enum Constants {
   static let cardActionsSpacing: CGFloat = 4
   static let cardActionHeight: CGFloat = 40
   static let cardActionCornerRadius: CGFloat = 8
+
+  // As in the Donate button
+  static let spinnerSize: CGFloat = 20
+  static let spinnerLineWidth: CGFloat = 4
+  static let spinnerLength: CGFloat = 0.6
+  static let spinnerTurnDuration: TimeInterval = 0.8
 }
 
 struct HomeBrowser: Identifiable {
@@ -52,10 +58,13 @@ struct HomeBrowserCard: View {
   let browser: HomeBrowser
   /// Whether Ghostery is enabled in the browser
   var isEnabled: Bool
+  /// Whether the action of the button is in progress, which shows a spinner
+  /// in place of its title, and doesn't let it be clicked again
+  var isLoading: Bool
   var isMenuShown: Bool
   var action: () -> Void
-  /// Shows the options for the enabled state, nil when there are none
-  var showMenu: (() -> Void)?
+  /// Shows the options for the enabled state
+  var showMenu: () -> Void
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.cardSpacing) {
@@ -82,21 +91,32 @@ struct HomeBrowserCard: View {
         enabledActions
       } else {
         Button(action: action) {
-          Text(browser.actionTitle)
+          if isLoading {
+            AppSpinner(
+              color: browser.isPrimary ? Colors.foregroundOnBrand : Colors.foregroundBrandPrimary,
+              lineWidth: Constants.spinnerLineWidth,
+              length: Constants.spinnerLength,
+              turnDuration: Constants.spinnerTurnDuration
+            )
+            .frame(width: Constants.spinnerSize, height: Constants.spinnerSize)
+          } else {
+            Text(browser.actionTitle)
+          }
         }
         .buttonStyle(AppButtonStyle(kind: browser.isPrimary ? .primary : .secondary))
+        .disabled(isLoading)
       }
     }
     .padding(Constants.cardPadding)
     .frame(width: Self.width)
     .frame(maxHeight: .infinity)
     .cardBackground(cornerRadius: Constants.cardCornerRadius)
-    .modifier(HomeBrowserCardAccessibility(browser: browser, isEnabled: isEnabled, hasMenu: showMenu != nil))
+    .modifier(HomeBrowserCardAccessibility(browser: browser, isEnabled: isEnabled))
   }
 
   private var enabledActions: some View {
     HStack(spacing: Constants.cardActionsSpacing) {
-      Text(SectionStrings.Home.enabled)
+      Text(SectionStrings.Home.active)
         .textStyle(.labelM)
         .foregroundColor(Colors.foregroundSuccessPrimary)
         .frame(maxWidth: .infinity)
@@ -104,9 +124,7 @@ struct HomeBrowserCard: View {
         .background(
           RoundedRectangle(cornerRadius: Constants.cardActionCornerRadius).fill(Colors.bgSuccessPrimary)
         )
-      if let showMenu {
-        HomeBrowserMoreButton(isMenuShown: isMenuShown, action: showMenu)
-      }
+      HomeBrowserMoreButton(isMenuShown: isMenuShown, action: showMenu)
     }
   }
 }
@@ -144,20 +162,16 @@ private struct HomeBrowserMoreButton: View {
 }
 
 /// A card with a single button is read as one element, with the action of
-/// the button, whose title the combined label leaves out. With more buttons,
-/// they're read separately, and without any, it's read as one element too.
+/// the button, whose title the combined label leaves out. The state and the
+/// button of the options, shown when Ghostery is enabled, are read separately.
 private struct HomeBrowserCardAccessibility: ViewModifier {
   let browser: HomeBrowser
   let isEnabled: Bool
-  let hasMenu: Bool
 
   func body(content: Content) -> some View {
-    if isEnabled && hasMenu {
+    if isEnabled {
       content
         .accessibilityElement(children: .contain)
-    } else if isEnabled {
-      content
-        .singleActionAccessibility(label: [browser.name, browser.enabledDescription, SectionStrings.Home.enabled])
     } else {
       content
         .singleActionAccessibility(label: [browser.name, browser.description, browser.actionTitle])
