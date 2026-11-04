@@ -9,7 +9,9 @@ on:
 jobs:
   release-v10:
     if: startsWith(github.ref, 'refs/tags/v10')
-    runs-on: ubuntu-latest
+    # The validate-dnr-rules binary used by scripts/patch-safari.sh is built on
+    # ubuntu-24.04 and links against its system ICU (libicuuc.so.74)
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - name: Set version
