@@ -11,10 +11,15 @@ import SwiftUI
 fileprivate enum Constants {
   static let stepsSpacing: CGFloat = 4
   static let stepCornerRadius: CGFloat = 12
-  // Between the text of a step and the note below it
-  static let noteSpacing: CGFloat = 10
-  static let notePadding: CGFloat = 12
-  static let noteCornerRadius: CGFloat = 8
+  // Between the text of a step and the warning below it
+  static let warningTopSpacing: CGFloat = 10
+  // Between the icon and the text of the warning
+  static let warningSpacing: CGFloat = 12
+  static let warningHorizontalPadding: CGFloat = 12
+  static let warningVerticalPadding: CGFloat = 8
+  static let warningCornerRadius: CGFloat = 8
+  static let warningShadowRadius: CGFloat = 6
+  static let warningShadowY: CGFloat = 4
 
   #if os(iOS)
   // Pictures of the settings of Safari, next to the steps
@@ -166,32 +171,26 @@ struct SafariInstructionsStep<Accessory: View>: View {
   let number: Int
   let text: Text
   /// Shown below the text
-  var note: String?
+  var warning: Text?
   let layout: SafariStepLayout
   @ViewBuilder var accessory: Accessory
 
   var body: some View {
     HStack(spacing: layout.accessorySpacing) {
-      // A step with a note is aligned to the top of its number
-      HStack(alignment: note == nil ? .center : .top, spacing: layout.spacing) {
+      // A step with a warning is aligned to the top of its number
+      HStack(alignment: warning == nil ? .center : .top, spacing: layout.spacing) {
         Text(String(number))
           .textStyle(layout.numberStyle)
           .foregroundColor(Colors.foregroundBrandPrimary)
           .frame(width: layout.numberSize, height: layout.numberSize)
           .background(Circle().fill(Colors.bgBrandSecondary))
-        VStack(alignment: .leading, spacing: Constants.noteSpacing) {
+        VStack(alignment: .leading, spacing: Constants.warningTopSpacing) {
           text
             .textStyle(layout.textStyle)
             .foregroundColor(Colors.foregroundPrimary)
             .fixedSize(horizontal: false, vertical: true)
-          if let note {
-            Text(note)
-              .textStyle(.bodyS)
-              .foregroundColor(Colors.foregroundSecondary)
-              .fixedSize(horizontal: false, vertical: true)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .padding(Constants.notePadding)
-              .background(RoundedRectangle(cornerRadius: Constants.noteCornerRadius).fill(Colors.bgSecondary))
+          if let warning {
+            SafariStepWarning(text: warning)
           }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -206,8 +205,35 @@ struct SafariInstructionsStep<Accessory: View>: View {
 }
 
 extension SafariInstructionsStep where Accessory == EmptyView {
-  init(number: Int, text: Text, note: String? = nil, layout: SafariStepLayout) {
-    self.init(number: number, text: text, note: note, layout: layout) { EmptyView() }
+  init(number: Int, text: Text, warning: Text? = nil, layout: SafariStepLayout) {
+    self.init(number: number, text: text, warning: warning, layout: layout) { EmptyView() }
+  }
+}
+
+/// Below the text of a step, about an option of the settings to avoid
+private struct SafariStepWarning: View {
+  let text: Text
+
+  var body: some View {
+    let shape = RoundedRectangle(cornerRadius: Constants.warningCornerRadius)
+
+    HStack(spacing: Constants.warningSpacing) {
+      Image(.safariInstructionsWarning)
+        .accessibilityHidden(true)
+      text
+        .textStyle(.bodyS)
+        .foregroundColor(Colors.foregroundPrimary)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    .padding(.horizontal, Constants.warningHorizontalPadding)
+    .padding(.vertical, Constants.warningVerticalPadding)
+    .background(
+      shape
+        .fill(Colors.bgWarningPrimary)
+        .shadow(color: Colors.shadowCard, radius: Constants.warningShadowRadius, y: Constants.warningShadowY)
+    )
+    .overlay(shape.strokeBorder(Colors.borderWarningSecondary, lineWidth: Borders.width))
   }
 }
 
