@@ -175,7 +175,7 @@ struct HomeView: View {
         isPrimary: true,
         isEnabled: safari.isEnabled,
         menuItems: [
-          HomeBrowserMenuItem(title: SectionStrings.Home.disableGhostery, action: .perform { SafariExtension.showSettings() }),
+          HomeBrowserMenuItem(title: SectionStrings.Home.disableInSafari, action: .perform { SafariExtension.showSettings() }),
           HomeBrowserMenuItem(title: SectionStrings.Home.viewInstructions, action: .perform { showsSafariInstructions = true }),
         ]
       ),

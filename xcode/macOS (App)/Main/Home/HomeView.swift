@@ -38,7 +38,10 @@ fileprivate enum Strings {
   static let openSystemSettings = String(localized: "Open System Settings", comment: "System Settings is the name of the macOS app")
   // Of Chrome, and of Brave, which installs extensions from the same store
   static let chromeWebStoreDescription = String(localized: "One click in the\nChrome Web Store.", comment: "The line break keeps the name of the store together, and can be left out")
-  static let removeGhostery = String(localized: "Remove Ghostery", comment: "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it")
+
+  static func removeFrom(_ browser: String) -> String {
+    String(localized: "Remove from \(browser)", comment: "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it. The name of the browser is like Chrome or Firefox.")
+  }
 
   static func protectedBrowsers(_ count: Int, of total: Int) -> String {
     String(localized: "\(count)/\(total) protected", comment: "Number of the browsers in which Ghostery is enabled, of all the browsers found on the Mac, Safari included")
@@ -297,12 +300,12 @@ struct HomeView: View {
     switch browser.kind {
     case .safari:
       return [
-        HomeBrowserMenu.Item(title: SectionStrings.Home.disableGhostery, action: SafariExtension.showSettings),
+        HomeBrowserMenu.Item(title: SectionStrings.Home.disableInSafari, action: SafariExtension.showSettings),
         HomeBrowserMenu.Item(title: SectionStrings.Home.viewInstructions, action: { showsSafariInstructions = true }),
       ]
     case .external(let externalBrowser):
       return [
-        HomeBrowserMenu.Item(title: Strings.removeGhostery) {
+        HomeBrowserMenu.Item(title: Strings.removeFrom(externalBrowser.name)) {
           Task { await externalBrowser.openRemovalPage() }
         },
       ]

@@ -64,6 +64,7 @@ enum Colors {
   // Warning palette
   static let bgWarningPrimary = Color(hex: "#FFF2D9")
   static let borderWarningPrimary = Color(hex: "#FEDF89")
+  static let borderWarningSecondary = Color(hex: "#FEC84B")
   static let borderWarningSolid = Color(hex: "#DC6803")
   static let foregroundWarningPrimary = Color(hex: "#B54708")
   static let warning600 = Color(hex: "#DC6803")

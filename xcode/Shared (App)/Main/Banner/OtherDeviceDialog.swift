@@ -42,7 +42,8 @@ fileprivate struct OtherDeviceDialogLayout: PlatformLayout {
   var bottomPadding: CGFloat
   var titleStyle: AppTextStyle
   var descriptionStyle: AppTextStyle
-  /// Of the texts, so they wrap as in the design
+  /// Of the texts, so they wrap as in the design. On the Mac, the
+  /// description is on one line, also in the translations.
   var textWidth: CGFloat
   #if os(iOS)
   /// Between the texts and the buttons below them
@@ -56,7 +57,7 @@ fileprivate struct OtherDeviceDialogLayout: PlatformLayout {
     bottomPadding: 82,
     titleStyle: .headlineS,
     descriptionStyle: .bodyM,
-    textWidth: 337
+    textWidth: 480
   )
   #else
   static let phone = OtherDeviceDialogLayout(
