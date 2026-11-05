@@ -19,7 +19,7 @@ enum SectionStrings {
     static let edgeDescription = String(localized: "One click in\nEdge Add-ons.", comment: "The line break keeps the name of the store together, and can be left out")
     static let active = String(localized: "Active", comment: "State of Ghostery in a browser in which it's enabled")
     static let moreOptions = String(localized: "More options")
-    static let disableGhostery = String(localized: "Disable Ghostery", comment: "Option of the Safari card, opening the settings of Safari where the user turns off the extension")
+    static let disableInSafari = String(localized: "Disable in Safari", comment: "Option of the Safari card, opening the settings of Safari where the user turns off the extension")
     static let viewInstructions = String(localized: "View instructions", comment: "Button showing the steps to enable or disable Ghostery in Safari")
   }
 

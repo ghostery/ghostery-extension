@@ -78,6 +78,83 @@
         }
       }
     },
+    "**If you click Uninstall,** Ghostery Privacy Ad Block will be deleted from your Mac, and all your browsers will lose protection." : {
+      "comment" : "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery Privacy Ad Block is the name of the app.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Wenn du auf „Deinstallieren“ klickst,** wird Ghostery Privacy Ad Block von deinem Mac gelöscht und alle deine Browser verlieren den Schutz."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Si haces clic en Desinstalar,** Ghostery Privacy Ad Block se eliminará de tu Mac y todos tus navegadores perderán la protección."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Si vous cliquez sur Désinstaller,** Ghostery Privacy Ad Block sera supprimé de votre Mac et tous vos navigateurs perdront leur protection."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Se fai clic su Disinstalla,** Ghostery Privacy Ad Block verrà eliminato dal Mac e tutti i tuoi browser perderanno la protezione."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**「アンインストール」をクリックすると**、Ghostery Privacy Ad BlockがMacから削除され、すべてのブラウザで保護が失われます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**제거를 클릭하면** Ghostery Privacy Ad Block이 Mac에서 삭제되고 모든 브라우저의 보호 기능이 사라집니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Jeśli klikniesz Odinstaluj,** Ghostery Privacy Ad Block zostanie usunięty z twojego Maca, a wszystkie twoje przeglądarki stracą ochronę."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Se você clicar em Desinstalar,** o Ghostery Privacy Ad Block será apagado do seu Mac e todos os seus navegadores perderão a proteção."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Если нажать «Удалить»,** Ghostery Privacy Ad Block будет удален с вашего Mac, и все ваши браузеры потеряют защиту."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Nếu bạn nhấp vào Gỡ cài đặt,** Ghostery Privacy Ad Block sẽ bị xóa khỏi máy Mac và tất cả trình duyệt của bạn sẽ mất khả năng bảo vệ."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**如果您点按“卸载”**，Ghostery Privacy Ad Block 将从您的 Mac 中删除，您的所有浏览器都将失去保护。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**如果您按一下「解除安裝」**，Ghostery Privacy Ad Block 將從您的 Mac 中刪除，您的所有瀏覽器都將失去保護。"
+          }
+        }
+      }
+    },
     "+%lld more" : {
       "comment" : "Last of the tags of an edition of the Privacy Digest, counting the tags which don’t fit in the card",
       "localizations" : {
@@ -1084,7 +1161,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werbung, Tracker und\nCookie-Pop-ups werden blockiert."
+            "value" : "Werbung, Tracker und Cookie-Pop-ups werden blockiert."
           }
         },
         "es" : {
@@ -1922,79 +1999,79 @@
         }
       }
     },
-    "Disable Ghostery" : {
+    "Disable in Safari" : {
       "comment" : "Option of the Safari card, opening the settings of Safari where the user turns off the extension",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery deaktivieren"
+            "value" : "In Safari deaktivieren"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desactivar Ghostery"
+            "value" : "Desactivar en Safari"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Désactiver Ghostery"
+            "value" : "Désactiver dans Safari"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disattiva Ghostery"
+            "value" : "Disattiva in Safari"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghosteryを無効にする"
+            "value" : "Safariで無効にする"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 비활성화"
+            "value" : "Safari에서 비활성화"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyłącz Ghostery"
+            "value" : "Wyłącz w Safari"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desativar o Ghostery"
+            "value" : "Desativar no Safari"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отключить Ghostery"
+            "value" : "Отключить в Safari"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tắt Ghostery"
+            "value" : "Tắt trong Safari"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "停用 Ghostery"
+            "value" : "在 Safari 中停用"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "停用 Ghostery"
+            "value" : "在 Safari 中停用"
           }
         }
       }
@@ -7454,79 +7531,79 @@
         }
       }
     },
-    "Remove Ghostery" : {
-      "comment" : "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it",
+    "Remove from %@" : {
+      "comment" : "Option of the card of a browser, opening the page of Ghostery in its extension store, which has the button removing it. The name of the browser is like Chrome or Firefox.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery entfernen"
+            "value" : "Aus %@ entfernen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quitar Ghostery"
+            "value" : "Quitar de %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supprimer Ghostery"
+            "value" : "Supprimer de %@"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovi Ghostery"
+            "value" : "Rimuovi da %@"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghosteryを削除"
+            "value" : "%@から削除"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 제거"
+            "value" : "%@에서 제거"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usuń Ghostery"
+            "value" : "Usuń z %@"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remover o Ghostery"
+            "value" : "Remover do %@"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Удалить Ghostery"
+            "value" : "Удалить из %@"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gỡ Ghostery"
+            "value" : "Gỡ khỏi %@"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "移除 Ghostery"
+            "value" : "从 %@ 中移除"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "移除 Ghostery"
+            "value" : "從 %@ 中移除"
           }
         }
       }
@@ -10064,79 +10141,79 @@
         }
       }
     },
-    "Uncheck the checkbox next to **Ghostery** under Installed Apps." : {
-      "comment" : "Step of the instructions, with the part between ** in bold",
+    "Uncheck **Ghostery AdBlocker for Privacy** in the list of installed extensions." : {
+      "comment" : "Step of the instructions, with the part between ** in bold. Ghostery AdBlocker for Privacy is the name of the extension in the settings of Safari.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deaktiviere das Markierungsfeld neben **Ghostery** unter den installierten Apps."
+            "value" : "Entferne das Häkchen bei **Ghostery AdBlocker for Privacy** in der Liste der installierten Erweiterungen."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desmarca la casilla junto a **Ghostery** en la lista de apps instaladas."
+            "value" : "Desmarca **Ghostery AdBlocker for Privacy** en la lista de extensiones instaladas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Décochez la case à côté de **Ghostery** dans la liste des apps installées."
+            "value" : "Décochez **Ghostery AdBlocker for Privacy** dans la liste des extensions installées."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deseleziona la casella accanto a **Ghostery** nell’elenco delle app installate."
+            "value" : "Deseleziona **Ghostery AdBlocker for Privacy** nell’elenco delle estensioni installate."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "インストール済みのアプリの一覧で、**Ghostery**の横にあるチェックボックスの選択を解除します。"
+            "value" : "インストール済みの機能拡張の一覧で、**Ghostery AdBlocker for Privacy**の選択を解除します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "설치된 앱 목록에서 **Ghostery** 옆의 체크박스를 선택 해제합니다."
+            "value" : "설치된 확장 프로그램 목록에서 **Ghostery AdBlocker for Privacy**를 선택 해제합니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odznacz pole wyboru obok **Ghostery** na liście zainstalowanych aplikacji."
+            "value" : "Odznacz **Ghostery AdBlocker for Privacy** na liście zainstalowanych rozszerzeń."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desmarque a caixa ao lado de **Ghostery** na lista de apps instalados."
+            "value" : "Desmarque **Ghostery AdBlocker for Privacy** na lista de extensões instaladas."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Снимите флажок рядом с **Ghostery** в списке установленных приложений."
+            "value" : "Снимите флажок рядом с **Ghostery AdBlocker for Privacy** в списке установленных расширений."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bỏ chọn hộp kiểm bên cạnh **Ghostery** trong danh sách ứng dụng đã cài đặt."
+            "value" : "Bỏ chọn **Ghostery AdBlocker for Privacy** trong danh sách tiện ích mở rộng đã cài đặt."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在已安装的应用列表中，取消勾选 **Ghostery** 旁边的复选框。"
+            "value" : "在已安装的扩展列表中，取消勾选 **Ghostery AdBlocker for Privacy**。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在已安裝的 App 列表中，取消勾選 **Ghostery** 旁邊的註記框。"
+            "value" : "在已安裝的延伸功能列表中，取消勾選 **Ghostery AdBlocker for Privacy**。"
           }
         }
       }
@@ -10522,83 +10599,6 @@
         }
       }
     },
-    "Warning: The Uninstall option will remove the app from your entire system.\nDon’t use it if you want to keep using Ghostery in other browsers." : {
-      "comment" : "Uninstall is the name of the button in the extension settings of Safari",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Achtung: Die Option „Deinstallieren“ entfernt die App von deinem gesamten System.\nVerwende sie nicht, wenn du Ghostery weiterhin in anderen Browsern nutzen möchtest."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aviso: la opción Desinstalar eliminará la app de todo tu sistema.\nNo la uses si quieres seguir usando Ghostery en otros navegadores."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attention : l’option Désinstaller supprime l’app de tout votre système.\nNe l’utilisez pas si vous voulez continuer à utiliser Ghostery dans d’autres navigateurs."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attenzione: l’opzione Disinstalla rimuove l’app da tutto il sistema.\nNon usarla se vuoi continuare a usare Ghostery in altri browser."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注意：「アンインストール」を選ぶと、システム全体からアプリが削除されます。\nほかのブラウザでGhosteryを使い続ける場合は使用しないでください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "주의: 제거 옵션을 선택하면 시스템 전체에서 앱이 삭제됩니다.\n다른 브라우저에서 Ghostery를 계속 사용하려면 이 옵션을 사용하지 마세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uwaga: opcja Odinstaluj usunie aplikację z całego systemu.\nNie używaj jej, jeśli chcesz dalej korzystać z Ghostery w innych przeglądarkach."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atenção: a opção Desinstalar remove o app de todo o sistema.\nNão a use se quiser continuar usando o Ghostery em outros navegadores."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Внимание: вариант «Удалить» удалит приложение из всей системы.\nНе используйте его, если хотите и дальше пользоваться Ghostery в других браузерах."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cảnh báo: Tùy chọn Gỡ cài đặt sẽ xóa ứng dụng khỏi toàn bộ hệ thống của bạn.\nĐừng dùng tùy chọn này nếu bạn muốn tiếp tục sử dụng Ghostery trên các trình duyệt khác."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "警告：“卸载”选项会将应用从整个系统中移除。\n如果您想继续在其他浏览器中使用 Ghostery，请勿使用此选项。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "警告：「解除安裝」選項會將 App 從整個系統中移除。\n如果您想繼續在其他瀏覽器中使用 Ghostery，請勿使用此選項。"
-          }
-        }
-      }
-    },
     "Wear your belief" : {
       "comment" : "Title of the card about the shop with Ghostery’s clothes and accessories",
       "localizations" : {
@@ -10752,78 +10752,78 @@
         }
       }
     },
-    "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world" : {
+    "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mit Kleidung und Accessoires von Ghostery machst du auch in der echten Welt auf Datenschutz im Netz aufmerksam"
+            "value" : "Mit Kleidung und Accessoires von Ghostery machst du auch in der echten Welt auf Datenschutz im Netz aufmerksam."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Con la ropa y los accesorios de Ghostery, puedes ayudar a concienciar sobre la privacidad en línea en el mundo real"
+            "value" : "Con la ropa y los accesorios de Ghostery, puedes ayudar a concienciar sobre la privacidad en línea en el mundo real."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avec les vêtements et accessoires Ghostery, contribuez à sensibiliser à la vie privée en ligne dans le monde réel"
+            "value" : "Avec les vêtements et accessoires Ghostery, contribuez à sensibiliser à la vie privée en ligne dans le monde réel."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Con l’abbigliamento e gli accessori Ghostery puoi contribuire a diffondere la consapevolezza sulla privacy online nel mondo reale"
+            "value" : "Con l’abbigliamento e gli accessori Ghostery puoi contribuire a diffondere la consapevolezza sulla privacy online nel mondo reale."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghosteryのアパレルやアクセサリーで、オンラインプライバシーの大切さを現実の世界でも広めましょう"
+            "value" : "Ghosteryのアパレルやアクセサリーで、オンラインプライバシーの大切さを現実の世界でも広めましょう。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery 의류와 액세서리로 실생활에서도 온라인 개인정보 보호에 대한 인식을 높일 수 있습니다"
+            "value" : "Ghostery 의류와 액세서리로 실생활에서도 온라인 개인정보 보호에 대한 인식을 높일 수 있습니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dzięki odzieży i akcesoriom Ghostery możesz szerzyć świadomość o prywatności w sieci także w realnym świecie"
+            "value" : "Dzięki odzieży i akcesoriom Ghostery możesz szerzyć świadomość o prywatności w sieci także w realnym świecie."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Com as roupas e acessórios do Ghostery, você ajuda a divulgar a importância da privacidade online no mundo real"
+            "value" : "Com as roupas e acessórios do Ghostery, você ajuda a divulgar a importância da privacidade online no mundo real."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "С одеждой и аксессуарами Ghostery вы поможете рассказать о конфиденциальности в интернете и в реальном мире"
+            "value" : "С одеждой и аксессуарами Ghostery вы поможете рассказать о конфиденциальности в интернете и в реальном мире."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Với trang phục và phụ kiện Ghostery, bạn có thể giúp lan tỏa nhận thức về quyền riêng tư trực tuyến trong đời thực"
+            "value" : "Với trang phục và phụ kiện Ghostery, bạn có thể giúp lan tỏa nhận thức về quyền riêng tư trực tuyến trong đời thực."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "穿上 Ghostery 服饰、用上 Ghostery 配饰，您就能在现实世界中帮助提升人们的网络隐私意识"
+            "value" : "穿上 Ghostery 服饰、用上 Ghostery 配饰，您就能在现实世界中帮助提升人们的网络隐私意识。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "穿上 Ghostery 服飾、配戴 Ghostery 配件，您就能在現實世界中幫助提升大家的網路隱私意識"
+            "value" : "穿上 Ghostery 服飾、配戴 Ghostery 配件，您就能在現實世界中幫助提升大家的網路隱私意識。"
           }
         }
       }

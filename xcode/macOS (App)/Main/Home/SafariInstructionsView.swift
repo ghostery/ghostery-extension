@@ -35,12 +35,12 @@ fileprivate enum Strings {
   static let enabledTitle = String(localized: "Ghostery Privacy Ad Block\nis enabled for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
   static let enableStepsHeader = String(localized: "How to enable Ghostery in Safari")
   static let disableStepsHeader = String(localized: "How to disable Ghostery in Safari")
-  static let uninstallWarning = String(localized: "Warning: The Uninstall option will remove the app from your entire system.\nDon’t use it if you want to keep using Ghostery in other browsers.", comment: "Uninstall is the name of the button in the extension settings of Safari")
   static let expanded = String(localized: "Expanded", comment: "State of a list of steps, for assistive technologies")
   static let collapsed = String(localized: "Collapsed", comment: "State of a list of steps, for assistive technologies")
 
-  // The part between ** is in bold
-  static let uncheckCheckbox = LocalizedStringResource("Uncheck the checkbox next to **Ghostery** under Installed Apps.", comment: "Step of the instructions, with the part between ** in bold")
+  // The parts between ** are in bold
+  static let uncheckExtension = LocalizedStringResource("Uncheck **Ghostery AdBlocker for Privacy** in the list of installed extensions.", comment: "Step of the instructions, with the part between ** in bold. Ghostery AdBlocker for Privacy is the name of the extension in the settings of Safari.")
+  static let uninstallWarning = LocalizedStringResource("**If you click Uninstall,** Ghostery Privacy Ad Block will be deleted from your Mac, and all your browsers will lose protection.", comment: "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery Privacy Ad Block is the name of the app.")
 }
 
 struct SafariInstructionsView: View {
@@ -112,8 +112,8 @@ struct SafariInstructionsView: View {
       SafariOpenSettingsStep(layout: .mac)
       SafariInstructionsStep(
         number: 2,
-        text: Text(Strings.uncheckCheckbox, boldFont: AppTextStyle.labelL.font),
-        note: Strings.uninstallWarning,
+        text: Text(Strings.uncheckExtension, boldFont: AppTextStyle.labelL.font),
+        warning: Text(Strings.uninstallWarning, boldFont: AppTextStyle.labelS.font),
         layout: .mac
       )
       SafariReturnStep(number: 3, layout: .mac)

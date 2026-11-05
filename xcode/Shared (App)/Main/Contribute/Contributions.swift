@@ -46,7 +46,7 @@ fileprivate let otherItems = [
     id: "shop",
     image: .contributionShop,
     title: String(localized: "Wear your belief", comment: "Title of the card about the shop with Ghostery’s clothes and accessories"),
-    description: String(localized: "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world"),
+    description: String(localized: "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world."),
     actionTitle: String(localized: "Visit Ghostery Shop"),
     action: .open(URLs.shop),
     isPrimary: false
