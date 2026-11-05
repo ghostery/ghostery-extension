@@ -15,6 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1210"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LargeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Gh9-Lx-c4n">
+                                <rect key="frame" x="354" y="518" width="126" height="144"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="qW3-hT-k2E"/>
+                                    <constraint firstAttribute="height" constant="144" id="Vb7-Rm-p8D"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GhosteryText" translatesAutoresizingMaskIntoConstraints="NO" id="6HG-Um-bch">
                                 <rect key="frame" x="352" y="666" width="131" height="29"/>
                             </imageView>
@@ -24,6 +31,8 @@
                         <constraints>
                             <constraint firstItem="6HG-Um-bch" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="74" id="SAc-S5-Rpb"/>
                             <constraint firstItem="6HG-Um-bch" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="l76-kj-INJ"/>
+                            <constraint firstItem="6HG-Um-bch" firstAttribute="top" secondItem="Gh9-Lx-c4n" secondAttribute="bottom" constant="4" id="Ks5-Yd-w1N"/>
+                            <constraint firstItem="Gh9-Lx-c4n" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pz2-Nf-a6Q"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -34,5 +43,6 @@
     </scenes>
     <resources>
         <image name="GhosteryText" width="131" height="29"/>
+        <image name="LargeIcon" width="256" height="256"/>
     </resources>
 </document>
