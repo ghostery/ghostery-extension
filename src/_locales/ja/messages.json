@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "デスクトップからモバイルにGhosteryを移行"
   },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "スキャンして、スマートフォンやタブレットの広告をブロック。無料です。"
+  },
   "search_distractions_or_websites___": {
     "message": "気が散るものやウェブサイトを検索..."
   },
@@ -1060,6 +1063,12 @@
   },
   "see_your_recap": {
     "message": "まとめを見る"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "他のデバイスで広告が表示されますか？"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "スマートフォンで広告が表示されますか？"
   },
   "select_distracting_element": {
     "message": "気を散らす要素を選択"
@@ -1140,6 +1149,9 @@
   },
   "something_wrong_": {
     "message": "何か問題がありますか？"
+  },
+  "start_browsing": {
+    "message": "ブラウジングを開始"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "ナビゲーションルートに関する統計レポート"

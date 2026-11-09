@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Digitalize e leve o Ghostery do desktop para o celular"
   },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "Digitalize para bloqueá-los no seu celular ou tablet. Grátis."
+  },
   "search_distractions_or_websites___": {
     "message": "Pesquisar distrações ou sites..."
   },
@@ -1060,6 +1063,12 @@
   },
   "see_your_recap": {
     "message": "Ver seu resumo"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "Vendo anúncios em outro dispositivo?"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "Vendo anúncios no seu celular?"
   },
   "select_distracting_element": {
     "message": "Selecione o elemento que distrai"
@@ -1140,6 +1149,9 @@
   },
   "something_wrong_": {
     "message": "Algo errado?"
+  },
+  "start_browsing": {
+    "message": "Começar a navegar"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "relatórios estatísticos sobre rotas de navegação"

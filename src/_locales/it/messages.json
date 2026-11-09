@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scansiona e porta Ghostery dal desktop al mobile"
   },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "Scansiona per bloccarli sul tuo telefono o tablet. Gratis."
+  },
   "search_distractions_or_websites___": {
     "message": "Cerca distrazioni o siti web..."
   },
@@ -1060,6 +1063,12 @@
   },
   "see_your_recap": {
     "message": "Vedi il tuo riepilogo"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "Vedi annunci su un altro dispositivo?"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "Vedi annunci sul tuo telefono?"
   },
   "select_distracting_element": {
     "message": "Seleziona elemento di distrazione"
@@ -1140,6 +1149,9 @@
   },
   "something_wrong_": {
     "message": "Qualcosa non va?"
+  },
+  "start_browsing": {
+    "message": "Inizia a navigare"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "rapporti statistici sui percorsi di navigazione"
