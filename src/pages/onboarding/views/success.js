@@ -118,11 +118,11 @@ export default {
                   "
                   ></div>
                   <div layout="row items:center gap" layout@520px="column">
-                    <onboarding-step number="1" icon="websites" type="brand"> </onboarding-step>
+                    <onboarding-step number="1" icon="websites" type="brand"></onboarding-step>
                     <ui-text type="label-m">Open a site</ui-text>
                   </div>
                   <div layout="row items:center gap" layout@520px="column">
-                    <onboarding-step number="2" icon="block-m" type="danger"> </onboarding-step>
+                    <onboarding-step number="2" icon="block-m" type="danger"></onboarding-step>
                     ${
                       lang === 'en'
                         ? html`<ui-text type="label-m" translate="no"> Zap ads once </ui-text>`
@@ -130,8 +130,8 @@ export default {
                     }
                   </div>
                   <div layout="row items:center gap" layout@520px="column">
-                    <onboarding-step number="3" icon="trust-m" type="success"> </onboarding-step>
-                    <ui-text type="label-m"> Site stays ad-free every time you visit </ui-text>
+                    <onboarding-step number="3" icon="trust-m" type="success"></onboarding-step>
+                    <ui-text type="label-m">Site stays ad-free every time you visit</ui-text>
                   </div>
                 </div>
                 <div layout="row center">
@@ -144,12 +144,7 @@ export default {
                 </div>
               `
             }
-            <ui-button
-              type="primary"
-              size="${isMobile() ? 'm' : 's'}"
-              layout="self:center"
-              data-qa="button:start-browsing"
-            >
+            <ui-button type="primary" layout="self:center" data-qa="button:start-browsing">
               <button onclick="${startBrowsing}">Start browsing</button>
             </ui-button>
           </section>
@@ -163,7 +158,7 @@ export default {
                 <ui-card>
                   <section layout="column center gap:3">
                     <div layout="block:center column gap" layout@520px="padding:1:2:0">
-                      <ui-text type="display-s"> Pin extension for easy access </ui-text>
+                      <ui-text type="display-s">Pin extension for easy access</ui-text>
                       <ui-text layout="padding:0:2">
                         ${msg.html`Click the puzzle icon next to the search bar and <strong>pin Ghostery</strong> to your toolbar.`}
                       </ui-text>
@@ -175,25 +170,32 @@ export default {
                     />
                   </section>
                 </ui-card>
-                <onboarding-pin-it browser="${pinExtension.type}"> Pin it here </onboarding-pin-it>
+                <onboarding-pin-it browser="${pinExtension.type}">Pin it here</onboarding-pin-it>
               `,
           )
         }
-        <ui-card>
-          <section layout="column items:center gap:3" layout@520px="padding:2:0">
-            <div layout="block:center column gap">
-              <ui-text type="display-s">
-                ${isMobile() ? msg`Seeing ads on other device?` : msg`Seeing ads on your phone?`}
-              </ui-text>
-              <ui-text color="secondary">Scan to block them on your phone or tablet. Free.</ui-text>
-            </div>
-            <img
-              src="${qrCodeImage}"
-              layout="size:20"
-              style="border-radius:8px; overflow:hidden;"
-            />
-          </section>
-        </ui-card>
+        ${
+          options.mode === MODE_DEFAULT &&
+          html`
+            <ui-card>
+              <section layout="column items:center gap:3" layout@520px="padding:2:0">
+                <div layout="block:center column gap">
+                  <ui-text type="display-s">
+                    ${isMobile() ? msg`Seeing ads on other device?` : msg`Seeing ads on your phone?`}
+                  </ui-text>
+                  <ui-text color="secondary">
+                    Scan to block them on your phone or tablet. Free.
+                  </ui-text>
+                </div>
+                <img
+                  src="${qrCodeImage}"
+                  layout="size:20"
+                  style="border-radius:8px; overflow:hidden;"
+                />
+              </section>
+            </ui-card>
+          `
+        }
       </template>
     `,
   },
