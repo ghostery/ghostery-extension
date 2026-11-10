@@ -18,6 +18,13 @@ import { getPeriod } from '/utils/whats-new.js';
 import { MergedStats } from '/store/daily-stats.js';
 import Resources from '/store/resources.js';
 
+import browserBraveIcon from '/ui/assets/browser-brave.svg';
+import browserChromeIcon from '/ui/assets/browser-chrome.svg';
+import browserEdgeIcon from '/ui/assets/browser-edge.svg';
+import browserFirefoxIcon from '/ui/assets/browser-firefox.svg';
+import browserOperaIcon from '/ui/assets/browser-opera.svg';
+import browserSafariIcon from '/ui/assets/browser-safari.svg';
+
 import assets from '../assets/index.js';
 
 const { dateFrom, dateTo } = getPeriod();
@@ -289,32 +296,32 @@ export default {
               <div layout="row:wrap center gap:0.5">
                 <whats-new-browser-link
                   name="Chrome"
-                  icon="${assets['browser-chrome']}"
+                  icon="${browserChromeIcon}"
                   href="https://chrome.google.com/webstore/detail/mlomiejdfkolichcflejclcbmpeaniij"
                 ></whats-new-browser-link>
                 <whats-new-browser-link
                   name="Firefox"
-                  icon="${assets['browser-firefox']}"
+                  icon="${browserFirefoxIcon}"
                   href="https://addons.mozilla.org/firefox/addon/ghostery/"
                 ></whats-new-browser-link>
                 <whats-new-browser-link
                   name="Safari"
-                  icon="${assets['browser-safari']}"
+                  icon="${browserSafariIcon}"
                   href="https://apps.apple.com/app/apple-store/id6504861501"
                 ></whats-new-browser-link>
                 <whats-new-browser-link
                   name="Brave"
-                  icon="${assets['browser-brave']}"
+                  icon="${browserBraveIcon}"
                   href="https://chrome.google.com/webstore/detail/mlomiejdfkolichcflejclcbmpeaniij"
                 ></whats-new-browser-link>
                 <whats-new-browser-link
                   name="Edge"
-                  icon="${assets['browser-edge']}"
+                  icon="${browserEdgeIcon}"
                   href="https://microsoftedge.microsoft.com/addons/detail/fclbdkbhjlgkbpfldjodgjncejkkjcme"
                 ></whats-new-browser-link>
                 <whats-new-browser-link
                   name="Opera"
-                  icon="${assets['browser-opera']}"
+                  icon="${browserOperaIcon}"
                   href="https://addons.opera.com/extensions/details/ghostery/"
                 ></whats-new-browser-link>
               </div>

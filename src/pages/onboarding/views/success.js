@@ -17,28 +17,30 @@ import Options, { MODE_DEFAULT, MODE_ZAP } from '/store/options.js';
 import { getBrowser, isMobile } from '/utils/browser-info.js';
 
 import modeZapScreenshotUrl from '/ui/assets/lottie-mode-zap.json?url';
+import browserBraveIcon from '/ui/assets/browser-brave.svg';
+import browserChromeIcon from '/ui/assets/browser-chrome.svg';
+import browserEdgeIcon from '/ui/assets/browser-edge.svg';
+import browserFirefoxIcon from '/ui/assets/browser-firefox.svg';
+import browserOperaIcon from '/ui/assets/browser-opera.svg';
+import browserSafariIcon from '/ui/assets/browser-safari.svg';
 
-import installedBraveImage from '../assets/installed-brave.svg';
-import installedChromeImage from '../assets/installed-chrome.svg';
-import installedEdgeImage from '../assets/installed-edge.svg';
-import installedFirefoxImage from '../assets/installed-firefox.svg';
-import installedOperaImage from '../assets/installed-opera.svg';
-import installedSafariImage from '../assets/installed-safari.svg';
+import installedImage from '../assets/installed.svg';
 import qrCodeImage from '../assets/qr-code.svg';
 
 import pinExtensionChrome from '../assets/pin-extension-chrome.jpg';
 import pinExtensionEdge from '../assets/pin-extension-edge.jpg';
 import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 
-const INSTALLED_IMAGES = {
-  brave: installedBraveImage,
-  edge: installedEdgeImage,
-  firefox: installedFirefoxImage,
-  opera: installedOperaImage,
-  safari: installedSafariImage,
+// The logo is placed over the 48px slot at (72, 9) of the 320x144 installed illustration
+const BROWSER_ICONS = {
+  brave: browserBraveIcon,
+  edge: browserEdgeIcon,
+  firefox: browserFirefoxIcon,
+  opera: browserOperaIcon,
+  safari: browserSafariIcon,
 };
 
-const installedImage = INSTALLED_IMAGES[getBrowser().name] || installedChromeImage;
+const browserIcon = BROWSER_ICONS[getBrowser().name] || browserChromeIcon;
 
 async function startBrowsing() {
   const tab = await chrome.tabs.getCurrent();
@@ -85,11 +87,13 @@ export default {
             ${
               options.mode === MODE_DEFAULT &&
               html`
-                <img
-                  src="${installedImage}"
-                  layout="self:center width:267px"
+                <div
+                  layout="relative self:center width:267px"
                   layout@520px="width:320px margin:top:2"
-                />
+                >
+                  <img src="${installedImage}" layout="block width:full" />
+                  <img src="${browserIcon}" layout="absolute top:6.25% left:22.5% width:15%" />
+                </div>
                 <div layout="column gap:0.5">
                   <ui-text type="display-s">Setup Successful</ui-text>
                   <ui-text color="secondary" layout="self:center width:::336px">
