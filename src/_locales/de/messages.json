@@ -1041,7 +1041,7 @@
     "message": "QR-Code scannen und direkt auf Android oder iPhone starten"
   },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
-    "message": "Scanne den Code, um sie auf deinem Handy oder Tablet zu blockieren. Kostenlos."
+    "message": "Scanne den QR-Code und blockiere Werbung auf deinem Handy oder Tablet. Kostenlos."
   },
   "search_distractions_or_websites___": {
     "message": "Ablenkungen oder Webseiten suchen..."
@@ -1068,7 +1068,7 @@
     "message": "Siehst du Werbung auf anderen Geräten?"
   },
   "seeing_ads_on_your_phone_": {
-    "message": "Siehst du Werbung auf deinem Handy?"
+    "message": "Genug Werbung auf deinem Handy?"
   },
   "select_distracting_element": {
     "message": "Wähle ablenkendes Element aus"
@@ -1151,7 +1151,7 @@
     "message": "Etwas nicht in Ordnung?"
   },
   "start_browsing": {
-    "message": "Lossurfen"
+    "message": "Jetzt lossurfen"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "Statistische Berichte über Navigationsrouten"
