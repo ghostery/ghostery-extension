@@ -11,7 +11,7 @@
 
 import { evalSnippets, filterCompactRules } from '@duckduckgo/autoconsent';
 import compactRules from '@duckduckgo/autoconsent/rules/compact-rules.json';
-import { ACTION_DISABLE_AUTOCONSENT } from '@ghostery/config';
+import { ACTION_DISABLE_AUTOCONSENT, FLAG_NEVER_CONSENT_HEURISTICS } from '@ghostery/config';
 
 import { store } from 'hybrids';
 
@@ -67,7 +67,9 @@ async function initialize(msg, sender) {
             // Heuristic fallback for popups not covered by rules. 'reject' only
             // clicks reject buttons; 'tier2' also clicks acknowledge/accept.
             heuristicMode: HEURISTIC_MODES[options.autoconsent.autoAction] || 'off',
-            enableHeuristicHitTest: true,
+            // Hit test also checks in-flow content, which can match non-consent
+            // UI, like "Reject all" links (duckduckgo/autoconsent#2543)
+            enableHeuristicHitTest: config.hasFlag(FLAG_NEVER_CONSENT_HEURISTICS),
             enablePopupMutationObserver: true,
           },
         },
