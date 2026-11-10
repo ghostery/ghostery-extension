@@ -1040,6 +1040,12 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "扫描并将 Ghostery 从桌面转移到移动设备"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "扫码即可在其他手机或平板电脑上拦截广告，或访问 ghostery.com，在电脑上拦截广告。免费。"
+  },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "扫码即可在手机或平板电脑上拦截广告。免费。"
+  },
   "search_distractions_or_websites___": {
     "message": "搜索干扰或网站..."
   },
@@ -1060,6 +1066,12 @@
   },
   "see_your_recap": {
     "message": "查看您的回顾"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "在其他设备上看到广告？"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "在手机上看到广告？"
   },
   "select_distracting_element": {
     "message": "选择干扰元素"
@@ -1140,6 +1152,9 @@
   },
   "something_wrong_": {
     "message": "出了什么问题？"
+  },
+  "start_browsing": {
+    "message": "开始浏览"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "浏览路径统计报告"

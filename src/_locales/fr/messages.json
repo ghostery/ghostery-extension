@@ -1040,6 +1040,12 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scannez le QR code et démarrez sur Android ou iPhone"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Scannez le QR code pour bloquer les pubs sur un autre téléphone ou une autre tablette, ou rendez-vous sur ghostery.com pour les bloquer sur votre ordinateur. Gratuit."
+  },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "Scannez le QR code pour bloquer les pubs sur votre téléphone ou votre tablette. Gratuit."
+  },
   "search_distractions_or_websites___": {
     "message": "Rechercher des distractions ou des sites web..."
   },
@@ -1060,6 +1066,12 @@
   },
   "see_your_recap": {
     "message": "Voir votre récapitulatif"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "Vous voyez des publicités sur un autre appareil ?"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "Vous voyez des pubs sur votre téléphone ?"
   },
   "select_distracting_element": {
     "message": "Sélectionner l'élément distrayant"
@@ -1140,6 +1152,9 @@
   },
   "something_wrong_": {
     "message": "Quelque chose ne va pas ?"
+  },
+  "start_browsing": {
+    "message": "Commencer à naviguer"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "rapports statistiques sur les itinéraires de navigation"

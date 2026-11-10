@@ -1040,6 +1040,12 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Сканируйте и переносите Ghostery с компьютера на мобильное устройство"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Отсканируйте, чтобы блокировать рекламу на другом телефоне или планшете, или зайдите на ghostery.com, чтобы блокировать её на компьютере. Бесплатно."
+  },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "Отсканируйте, чтобы блокировать её на телефоне или планшете. Бесплатно."
+  },
   "search_distractions_or_websites___": {
     "message": "Искать отвлекающие факторы или сайты..."
   },
@@ -1060,6 +1066,12 @@
   },
   "see_your_recap": {
     "message": "Посмотреть сводку"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "Видите рекламу на другом устройстве?"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "Видите рекламу на телефоне?"
   },
   "select_distracting_element": {
     "message": "Выберите отвлекающий элемент"
@@ -1140,6 +1152,9 @@
   },
   "something_wrong_": {
     "message": "Что-то не так?"
+  },
+  "start_browsing": {
+    "message": "Начать просмотр сайтов"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "статистические отчеты о навигационных маршрутах"

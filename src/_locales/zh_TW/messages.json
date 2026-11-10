@@ -1040,6 +1040,12 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "掃描並將 Ghostery 從桌面移至行動裝置"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "掃描即可在其他手機或平板電腦上阻擋廣告，或造訪 ghostery.com，在電腦上阻擋廣告。免費。"
+  },
+  "scan_to_block_them_on_your_phone_or_tablet__free_": {
+    "message": "掃描即可在手機或平板電腦上阻擋廣告。免費。"
+  },
   "search_distractions_or_websites___": {
     "message": "搜尋干擾或網站..."
   },
@@ -1060,6 +1066,12 @@
   },
   "see_your_recap": {
     "message": "查看您的總結"
+  },
+  "seeing_ads_on_other_device_": {
+    "message": "在其他裝置上看到廣告？"
+  },
+  "seeing_ads_on_your_phone_": {
+    "message": "在手機上看到廣告？"
   },
   "select_distracting_element": {
     "message": "選擇干擾元素"
@@ -1140,6 +1152,9 @@
   },
   "something_wrong_": {
     "message": "有問題嗎？"
+  },
+  "start_browsing": {
+    "message": "開始瀏覽"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "航行路線的統計報告"
