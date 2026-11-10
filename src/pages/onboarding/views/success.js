@@ -188,7 +188,11 @@ export default {
                     ${isMobile() ? msg`Seeing ads on other device?` : msg`Seeing ads on your phone?`}
                   </ui-text>
                   <ui-text color="secondary">
-                    Scan to block them on your phone or tablet. Free.
+                    ${
+                      isMobile()
+                        ? msg`Scan to block ads on another phone or tablet, or visit ghostery.com to block ads on your computer. Free.`
+                        : msg`Scan to block them on your phone or tablet. Free.`
+                    }
                   </ui-text>
                 </div>
                 <img

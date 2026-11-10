@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Skanuj i przenieś Ghostery z komputera na urządzenie mobilne"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Zeskanuj, aby blokować reklamy na innym telefonie lub tablecie, albo odwiedź ghostery.com, aby blokować je na komputerze. Za darmo."
+  },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
     "message": "Zeskanuj, aby blokować je na telefonie lub tablecie. Za darmo."
   },

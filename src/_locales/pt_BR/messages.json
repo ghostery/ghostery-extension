@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Digitalize e leve o Ghostery do desktop para o celular"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Digitalize para bloquear anúncios em outro celular ou tablet, ou acesse ghostery.com para bloqueá-los no seu computador. Grátis."
+  },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
     "message": "Digitalize para bloqueá-los no seu celular ou tablet. Grátis."
   },

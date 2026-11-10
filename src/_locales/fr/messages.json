@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scannez le QR code et démarrez sur Android ou iPhone"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Scannez le QR code pour bloquer les pubs sur un autre téléphone ou une autre tablette, ou rendez-vous sur ghostery.com pour les bloquer sur votre ordinateur. Gratuit."
+  },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
     "message": "Scannez le QR code pour bloquer les pubs sur votre téléphone ou votre tablette. Gratuit."
   },

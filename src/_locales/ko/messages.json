@@ -1040,6 +1040,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "데스크톱에서 모바일로 Ghostery 가져오기"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "스캔하여 다른 휴대폰이나 태블릿에서 광고를 차단하거나, ghostery.com을 방문해 컴퓨터에서 광고를 차단하세요. 무료입니다."
+  },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
     "message": "스캔하여 휴대폰이나 태블릿에서 광고를 차단하세요. 무료입니다."
   },

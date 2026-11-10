@@ -1028,6 +1028,9 @@
   "scan_and_take_ghostery_from_desktop_to_mobile": {
     "message": "Scan and take Ghostery from desktop to mobile"
   },
+  "scan_to_block_ads_on_another_phone_or_tablet__or_visit_ghostery_com_to_block_ads_on_your_computer__free_": {
+    "message": "Scan to block ads on another phone or tablet, or visit ghostery.com to block ads on your computer. Free."
+  },
   "scan_to_block_them_on_your_phone_or_tablet__free_": {
     "message": "Scan to block them on your phone or tablet. Free."
   },
