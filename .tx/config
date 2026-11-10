@@ -8,10 +8,10 @@ source_file = src/_locales/en/messages.json
 source_lang = en
 type = CHROME
 
-# Uncomment for Xcode localization files
-# [o:ghostery-inc:p:ghostery-dnr-extension:r:xcode-develop-en]
-# minimum_perc = 0
-# file_filter = xcode/en.xcloc/Localized Contents/<lang>.xliff
-# source_file = xcode/en.xcloc/Localized Contents/en.xliff
-# source_lang = en
-# type = XLIFF
+[o:ghostery-inc:p:ghostery-dnr-extension:r:xcode]
+minimum_perc = 0
+file_filter = xcode/<lang>.xcloc/Localized Contents/<lang>.xliff
+source_file = xcode/en.xcloc/Localized Contents/en.xliff
+source_lang = en
+type = XLIFF
+lang_map = pt_BR: pt-BR, zh_CN: zh-Hans, zh_TW: zh-Hant
