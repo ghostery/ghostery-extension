@@ -21,6 +21,9 @@ describe('toCosmeticFilter', () => {
       ['www.example.com', 'div.ad > span:nth-of-type(2)'],
       ['localhost', 'div, span'],
       ['127.0.0.1', '#a'],
+      ['a.com', '.a\\{b\\}'],
+      ['a.com', '[data-json="{}"]'],
+      ['a.com', "a[href*='/*']"],
     ];
 
     for (const [hostname, selector] of cases) {
@@ -50,6 +53,22 @@ describe('toCosmeticFilter', () => {
 
     for (const selector of selectors) {
       assert.equal(toCosmeticFilter('a.com', selector), null, selector);
+    }
+  });
+
+  it('rejects a selector that reaches beyond its own CSS rule', () => {
+    const selectors = [
+      'div{}*{background:url(https://b.com/)}a',
+      'div}',
+      'a[href="x',
+      "a[href='x\\'",
+      'a/*',
+      'div\\',
+      'div\rb.com##+js(aeld, click)',
+    ];
+
+    for (const selector of selectors) {
+      assert.equal(toCosmeticFilter('a.com', selector), null, JSON.stringify(selector));
     }
   });
 });
