@@ -21,7 +21,7 @@ import '/ui/index.js';
 import './elements.js';
 import './styles.css';
 
-// Hostname of the page, taken from the origin of the content script message
+// Hostname of the page, as the content script reports it
 let hostname = '';
 
 function sendMessage(type, data) {
@@ -53,15 +53,6 @@ function slide(host, event) {
   sendMessage('gh:element-picker:slider', {
     value: event.target.value,
   });
-}
-
-// The browser sets the message origin, so the page cannot spoof it
-function getHostname(origin) {
-  try {
-    return new URL(origin).hostname;
-  } catch {
-    return '';
-  }
 }
 
 async function hide(host) {
@@ -226,11 +217,15 @@ mount(document.body, {
       </template>
     `,
     connect: (host) => {
-      window.addEventListener('message', (event) => {
+      window.addEventListener('message', async (event) => {
         if (event.data?.type === 'gh:element-picker:selector') {
-          hostname = getHostname(event.origin);
+          // Any page can send this message, so it only prompts a read from the content script
+          const response = await chrome.runtime.sendMessage({ action: 'getElementPickerState' });
+          if (!response) return;
+
+          hostname = response.hostname;
           host.state = 'configure';
-          Object.assign(host, event.data);
+          Object.assign(host, response.selection);
         }
       });
     },
