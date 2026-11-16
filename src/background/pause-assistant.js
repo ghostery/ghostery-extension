@@ -111,7 +111,6 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
         id: 'pause-assistant',
         tabId: details.tabId,
         position: 'center',
-        params: { hostname },
       });
     } else {
       const options = await store.resolve(Options);
@@ -122,7 +121,6 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
         openNotification({
           id: 'pause-resume',
           tabId: details.tabId,
-          params: { domain },
           position: 'center',
         });
       }

@@ -28,10 +28,10 @@ function openBlog(slug) {
   });
 }
 
-function openPrivateWindow() {
+async function openPrivateWindow() {
   chrome.runtime.sendMessage({
     action: 'openPrivateWindowWithUrl',
-    url: new URLSearchParams(window.location.search).get('url'),
+    url: await notifications.getTabUrl(),
   });
 
   // Close the notification, but only from the current tab

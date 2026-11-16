@@ -16,14 +16,13 @@ import '/ui/index.js';
 
 import { dismissAction } from '/store/config.js';
 
-import { setupNotificationPage } from '/utils/notifications.js';
+import { getTabUrl, setupNotificationPage } from '/utils/notifications.js';
 import { PAUSE_ASSISTANT_LEARN_MORE_URL } from '/utils/urls.js';
 
-const hostname = new URLSearchParams(window.location.search).get('hostname');
 const close = setupNotificationPage(390);
 
 async function dismiss() {
-  await dismissAction(hostname, ACTION_PAUSE_ASSISTANT);
+  await dismissAction(new URL(await getTabUrl()).hostname, ACTION_PAUSE_ASSISTANT);
   close();
 }
 

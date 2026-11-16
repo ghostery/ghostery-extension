@@ -22,6 +22,9 @@ const Target = {
   [store.connect]: async () => {
     let url = '';
 
+    // The page is shown in a tab of its own, a website framing it could name any URL
+    if (window.top !== window) return {};
+
     if (__FIREFOX__) {
       const params = new URLSearchParams(window.location.search);
       const encodedUrl = params.get('url');

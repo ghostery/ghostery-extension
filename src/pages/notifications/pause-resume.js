@@ -12,16 +12,21 @@
 import { mount, html, store } from 'hybrids';
 
 import '/ui/index.js';
-import { setupNotificationPage } from '/utils/notifications.js';
+import { getTabUrl, setupNotificationPage } from '/utils/notifications.js';
 import Options from '/store/options.js';
 
 const close = setupNotificationPage(390);
-const domain = new URLSearchParams(window.location.search).get('domain');
 
 async function resume() {
-  await store.set(Options, {
-    paused: { [domain]: null },
-  });
+  const { hostname } = new URL(await getTabUrl());
+  const options = await store.resolve(Options);
+  const domain = Object.keys(options.paused).find((d) => hostname.endsWith(d));
+
+  if (options.paused[domain]?.assist) {
+    await store.set(Options, {
+      paused: { [domain]: null },
+    });
+  }
 
   close({ reload: true });
 }
