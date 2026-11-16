@@ -12,13 +12,11 @@
 import { getOS } from './browser-info.js';
 
 export async function openHref(host, event) {
-  // Firefox does not support Tabs API in iframes (Trackers Preview)
-  // Firefox Android does not allow using `window.close()` in async event listeners
-  if (__FIREFOX__ && (!chrome.tabs || getOS() === 'android')) {
+  // No Tabs API in Firefox iframes (Trackers Preview). On Firefox Android 139+, a popup
+  // with history entries cannot close itself. Let the browser open the link.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=1959610
+  if (__FIREFOX__ && (!chrome.tabs || (getOS() === 'android' && history.length > 1))) {
     event.currentTarget.target = '_blank';
-    // Timeout is required to prevent from closing the window before the anchor is opened
-    setTimeout(() => window.close(), 50);
-
     return;
   }
 
