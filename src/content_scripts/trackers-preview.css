@@ -41,10 +41,3 @@
   border-radius: 16px;
   overflow: hidden;
 }
-
-.wtm-popup-iframe-wrapper > iframe {
-  border: 0px;
-  height: 100%;
-  width: 100%;
-  border-radius: 16px;
-}

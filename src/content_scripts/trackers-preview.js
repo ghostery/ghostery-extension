@@ -10,7 +10,7 @@
  */
 
 import { drawWheel } from '/ui/wheel.js';
-import { isFromExtensionFrame } from '/utils/messaging.js';
+import { connectFrame } from '/utils/messaging.js';
 import { getDestination } from '/utils/link-destinations.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
@@ -47,8 +47,11 @@ function renderPopup(container, stats, popupUrl) {
 
   const iframe = document.createElement('iframe');
   iframe.setAttribute('src', `${popupUrl}?domain=${stats.domain}`);
+  iframe.setAttribute('style', 'border: 0; width: 100%; height: 100%; border-radius: 16px');
+  connectFrame(iframe).onmessage = onPopupMessage;
 
-  wrapper.appendChild(iframe);
+  // In a closed shadow root the page cannot read the extension URL from the iframe
+  wrapper.attachShadow({ mode: 'closed' }).appendChild(iframe);
   document.body.appendChild(wrapper);
 }
 
@@ -162,8 +165,8 @@ function setupTrackersPreview(popupUrl) {
   }
 }
 
-window.addEventListener('message', (message) => {
-  if (!isFromExtensionFrame(message) || typeof message.data !== 'string') {
+function onPopupMessage(message) {
+  if (typeof message.data !== 'string') {
     return;
   }
 
@@ -186,7 +189,7 @@ window.addEventListener('message', (message) => {
     const height = message.data.split(':')[1];
     resizePopup(height);
   }
-});
+}
 
 function setup() {
   const popupUrl = chrome.runtime.getURL('pages/trackers-preview/index.html');

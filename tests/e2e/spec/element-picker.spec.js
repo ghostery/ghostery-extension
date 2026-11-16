@@ -123,6 +123,10 @@ describe('Element Picker', function () {
   after(() => setStoredHostnames({}));
 
   it('keeps the popup out of reach of the page', async function () {
+    await browser.execute(function () {
+      window.addEventListener('message', (event) => (window.popupOrigin = event.origin));
+    });
+
     await openElementPicker();
     await openElementPicker();
 
@@ -141,9 +145,10 @@ describe('Element Picker', function () {
       return {
         iframe: document.querySelector('iframe[src*="element-picker"]') !== null,
         frames: Array.from(window.frames).filter((frame) => !canReach(frame)).length,
+        origin: window.popupOrigin ?? null,
       };
     });
-    expect(exposed).toEqual({ iframe: false, frames: 0 });
+    expect(exposed).toEqual({ iframe: false, frames: 0, origin: null });
 
     await browser.keys('Escape');
     await expect($(POPUP_SELECTOR)).not.toExist();

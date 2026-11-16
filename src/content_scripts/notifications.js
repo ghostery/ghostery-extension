@@ -10,7 +10,7 @@
  */
 
 import * as notifications from '/utils/notifications.js';
-import { isFromExtensionFrame } from '/utils/messaging.js';
+import { connectFrame } from '/utils/messaging.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
 
@@ -110,9 +110,7 @@ function mount(url, position = 'right', debug = false) {
 
   const iframe = shadowRoot.querySelector('iframe');
 
-  window.addEventListener('message', (e) => {
-    if (!isFromExtensionFrame(e)) return;
-
+  connectFrame(iframe).onmessage = (e) => {
     const type = e.data?.type;
 
     if (type === notifications.RESIZE_WINDOW_EVENT) {
@@ -150,7 +148,7 @@ function mount(url, position = 'right', debug = false) {
 
       wrapper.classList.remove('active');
     }
-  });
+  };
 
   return true;
 }

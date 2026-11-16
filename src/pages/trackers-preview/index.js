@@ -12,6 +12,7 @@
 import { define, html, store } from 'hybrids';
 
 import { sortCategories } from '/ui/categories.js';
+import { connectParent } from '/utils/messaging.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
 
@@ -25,13 +26,15 @@ import './styles.css';
 // Ensure the UI components are loaded
 import '/ui/index.js';
 
+const sendToParent = connectParent();
+
 function close() {
-  window.parent?.postMessage('WTMReportClosePopups', '*');
+  sendToParent('WTMReportClosePopups');
 }
 
 async function disable(host) {
   await store.set(host.options, { wtmSerpReport: false });
-  window.parent?.postMessage('WTMReportDisable', '*');
+  sendToParent('WTMReportDisable');
 }
 
 const domain = new URLSearchParams(window.location.search).get('domain');
@@ -134,7 +137,7 @@ define({
     `,
     observe: (host) => {
       window.requestAnimationFrame(() => {
-        window.parent?.postMessage(`WTMReportResize:${host.offsetHeight}`, '*');
+        sendToParent(`WTMReportResize:${host.offsetHeight}`);
       });
     },
   },
