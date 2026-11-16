@@ -149,6 +149,35 @@ describe('Element Picker', function () {
     await expect($(POPUP_SELECTOR)).not.toExist();
   });
 
+  it('takes no commands from a page that frames the popup', async function () {
+    // Chromium serves the popup only under a URL generated for the session
+    const popupUrl = await runInExtensionPage(function (path) {
+      return (window.chrome || window.browser).runtime.getURL(path);
+    }, POPUP_URL);
+
+    await browser.execute(function (url) {
+      const iframe = document.createElement('iframe');
+
+      iframe.addEventListener('load', () => {
+        iframe.contentWindow.postMessage(
+          { type: 'gh:element-picker:selector', selector: 'h1' },
+          '*',
+        );
+      });
+
+      iframe.src = url;
+      document.body.appendChild(iframe);
+    }, popupUrl);
+
+    await waitForPopupButton('button:close');
+    await browser.pause(1000);
+
+    const configurable = await runInPopup(function () {
+      return document.querySelector('[data-qa="button:hide"]') !== null;
+    });
+    expect(configurable).toBe(false);
+  });
+
   it('hides the selected element and keeps it hidden after reload', async function () {
     await openElementPicker();
     await hideElement('h1');

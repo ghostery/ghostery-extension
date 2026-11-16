@@ -295,17 +295,17 @@ function getElementArea(element) {
 
   const updatePopup = () => {
     if (iframe.contentWindow) {
-      iframe.contentWindow.postMessage(
-        {
-          type: 'gh:element-picker:selector',
-          selector,
-          sliderMax,
-          sliderValue,
-          similar,
-        },
-        '*',
-      );
+      iframe.contentWindow.postMessage({ type: 'gh:element-picker:selector' }, '*');
       iframe.contentWindow.focus();
+    }
+  };
+
+  const stateListener = (msg, sender, sendResponse) => {
+    if (msg.action === 'getElementPickerState') {
+      sendResponse({
+        hostname: window.location.hostname,
+        selection: { selector, sliderMax, sliderValue, similar },
+      });
     }
   };
 
@@ -526,6 +526,7 @@ function getElementArea(element) {
 
     window.removeEventListener('resize', resizeEventListener);
     window.removeEventListener('message', messageEventListener);
+    chrome.runtime.onMessage.removeListener(stateListener);
 
     document.removeEventListener('mousemove', mousemoveEventListener);
     document.removeEventListener('click', clickEventListener, true);
@@ -535,6 +536,7 @@ function getElementArea(element) {
 
   window.addEventListener('resize', resizeEventListener);
   window.addEventListener('message', messageEventListener);
+  chrome.runtime.onMessage.addListener(stateListener);
 
   document.addEventListener('mousemove', mousemoveEventListener);
   document.addEventListener('click', clickEventListener, true);

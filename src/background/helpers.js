@@ -58,6 +58,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       openElementPicker(msg.tabId).catch(console.error);
       break;
 
+    // Passed on, as the popup cannot message the content script on every platform
+    case 'getElementPickerState':
+      chrome.tabs
+        .sendMessage(sender.tab.id, msg, { frameId: 0 })
+        .then(sendResponse, () => sendResponse());
+      return true;
+
     case 'updateEngines':
       updateEngines({ cache: false }).then(() => {
         sendResponse();
