@@ -37,7 +37,9 @@ export async function openTabWithUrl(url) {
       currentWindow: true,
     });
 
-    if (tabs.length) {
+    // On Firefox Android, tabs.query may resolve with undefined here —
+    // see queryFirstTab() below for details
+    if (Array.isArray(tabs) && tabs.length) {
       await chrome.tabs.update(tabs[0].id, {
         active: true,
         url: url !== tabs[0].url ? url : undefined,
@@ -51,7 +53,26 @@ export async function openTabWithUrl(url) {
   await chrome.tabs.create({ url });
 }
 
+// NOTE: tabs.query still resolves with undefined instead of an array on Firefox
+// Android (Fenix) in extension pages not associated with a tab (e.g. the panel
+// popup) — observed on Firefox 160, even though the original bug was closed as
+// fixed in GeckoView in 2020: https://bugzilla.mozilla.org/show_bug.cgi?id=1650897
+// Normalize to null instead of throwing.
+async function queryFirstTab(queryInfo) {
+  try {
+    const tabs = await chrome.tabs.query(queryInfo);
+    return (Array.isArray(tabs) && tabs[0]) || null;
+  } catch (e) {
+    console.error('[utils|tabs] Error while querying tabs:', e, queryInfo);
+    return null;
+  }
+}
+
 export async function getCurrentTab() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  return tab || null;
+  // Try the narrow query first, then a wider one, and finally give up with null
+  return (
+    (await queryFirstTab({ active: true, currentWindow: true })) ||
+    (await queryFirstTab({ active: true })) ||
+    null
+  );
 }

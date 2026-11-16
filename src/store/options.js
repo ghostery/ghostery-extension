@@ -136,14 +136,19 @@ const Options = {
 
       await chrome.storage.local.set({ options: safeForStorage(options) });
 
-      // Send update message to another contexts (background page / panel / options)
-      await chrome.runtime
-        .sendMessage({
-          action: UPDATE_OPTIONS_ACTION_NAME,
-        })
-        .catch(() => {
-          // sendMessage may fail without potential target
-        });
+      // Send update message to another contexts (background page / panel / options).
+      // On Firefox Android the non-persistent background may be suspended and unable
+      // to receive the message, so don't block the caller on it indefinitely.
+      await Promise.race([
+        chrome.runtime
+          .sendMessage({
+            action: UPDATE_OPTIONS_ACTION_NAME,
+          })
+          .catch(() => {
+            // sendMessage may fail without potential target
+          }),
+        new Promise((resolve) => setTimeout(resolve, 1000)),
+      ]);
 
       return options;
     },

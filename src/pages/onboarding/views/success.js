@@ -43,13 +43,21 @@ const BROWSER_ICONS = {
 const browserIcon = BROWSER_ICONS[getBrowser().name] || browserChromeIcon;
 
 async function startBrowsing() {
-  const tab = await chrome.tabs.getCurrent();
+  // tabs.getCurrent() is documented to return undefined in non-tab contexts
+  // (popup, background). On Firefox Android the onboarding can run in the
+  // popup, where there is no tab to remove — fall back to window.close().
+  const tab = await chrome.tabs.getCurrent().catch(() => undefined);
 
   // On desktop, open the browser's new tab page, so the user can start browsing right away.
   // On mobile, closing the tab brings the user back to the previous tab or the tab overview.
   if (!isMobile()) await chrome.tabs.create({});
 
-  chrome.tabs.remove(tab.id);
+  if (tab && tab.id != null) {
+    chrome.tabs.remove(tab.id);
+  } else {
+    // Firefox Android does not allow window.close() in async event listeners
+    setTimeout(() => window.close(), 50);
+  }
 }
 
 async function getPinExtension() {
