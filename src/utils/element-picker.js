@@ -11,10 +11,16 @@
 
 import { parseFilters } from '@ghostery/adblocker';
 
+// The engine puts the selector into a CSS rule as it is. Outside of strings and
+// escapes, it must hold nothing that ends that rule or opens a comment.
+const QUOTED = /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\\./g;
+const UNSAFE = /[{}"'\\]|\/\*/;
+
 // Makes one plain hiding filter for one hostname. Rejects any other
 // filter syntax: scriptlets, styles, extended selectors, extra lines.
 export function toCosmeticFilter(hostname, selector) {
   if (!/^[a-z0-9.-]+$/i.test(hostname)) return null;
+  if (/\p{Cc}/u.test(selector) || UNSAFE.test(selector.replace(QUOTED, ''))) return null;
 
   const { cosmeticFilters, networkFilters } = parseFilters(`${hostname}##${selector}`);
   const [filter] = cosmeticFilters;
