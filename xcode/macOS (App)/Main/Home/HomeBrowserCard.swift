@@ -20,6 +20,12 @@ fileprivate enum Constants {
   static let cardActionHeight: CGFloat = 40
   static let cardActionCornerRadius: CGFloat = 8
 
+  // Of the button showing how to let the app check the browser, whose
+  // title takes two lines, closer to each other than in other buttons
+  static let accessTitleStyle = AppTextStyle(size: 14, weight: .semibold, lineHeight: 16, relativeTo: .subheadline)
+  static let accessTitlePadding: CGFloat = 8
+  static let accessTitleLineLimit = 2
+
   // As in the Donate button
   static let spinnerSize: CGFloat = 20
   static let spinnerLineWidth: CGFloat = 4
@@ -58,6 +64,9 @@ struct HomeBrowserCard: View {
   let browser: HomeBrowser
   /// Whether Ghostery is enabled in the browser
   var isEnabled: Bool
+  /// Whether the app can't check if Ghostery is enabled in the browser, so
+  /// the button shows how to let it, instead of installing Ghostery
+  var needsAccess: Bool
   /// Whether the action of the button is in progress, which shows a spinner
   /// in place of its title, and doesn't let it be clicked again
   var isLoading: Bool
@@ -89,6 +98,15 @@ struct HomeBrowserCard: View {
 
       if isEnabled {
         enabledActions
+      } else if needsAccess {
+        Button(action: action) {
+          Text(BrowserAccessDialog.title)
+            .textStyle(Constants.accessTitleStyle)
+            .multilineTextAlignment(.center)
+            .lineLimit(Constants.accessTitleLineLimit)
+            .padding(.horizontal, Constants.accessTitlePadding)
+        }
+        .buttonStyle(AppButtonStyle(kind: .danger))
       } else {
         Button(action: action) {
           if isLoading {
@@ -111,7 +129,11 @@ struct HomeBrowserCard: View {
     .frame(width: Self.width)
     .frame(maxHeight: .infinity)
     .cardBackground(cornerRadius: Constants.cardCornerRadius)
-    .modifier(HomeBrowserCardAccessibility(browser: browser, isEnabled: isEnabled))
+    .modifier(HomeBrowserCardAccessibility(
+      browser: browser,
+      isEnabled: isEnabled,
+      actionTitle: needsAccess ? BrowserAccessDialog.title : browser.actionTitle
+    ))
   }
 
   private var enabledActions: some View {
@@ -167,6 +189,7 @@ private struct HomeBrowserMoreButton: View {
 private struct HomeBrowserCardAccessibility: ViewModifier {
   let browser: HomeBrowser
   let isEnabled: Bool
+  let actionTitle: String
 
   func body(content: Content) -> some View {
     if isEnabled {
@@ -174,7 +197,7 @@ private struct HomeBrowserCardAccessibility: ViewModifier {
         .accessibilityElement(children: .contain)
     } else {
       content
-        .singleActionAccessibility(label: [browser.name, browser.description, browser.actionTitle])
+        .singleActionAccessibility(label: [browser.name, browser.description, actionTitle])
     }
   }
 }

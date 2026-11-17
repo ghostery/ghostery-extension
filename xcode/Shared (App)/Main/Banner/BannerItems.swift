@@ -21,7 +21,7 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let otherDeviceTitle = String(localized: "Want to use this app on another device?")
+  static let otherDeviceTitle = String(localized: "Want to use Ghostery on another device?")
   #if os(macOS)
   static let otherDeviceDescription = String(localized: "Scan the QR code to install the app on your phone or tablet.")
   #else
@@ -73,15 +73,15 @@ fileprivate let commonItems: [BannerItem] = [
   .notification(BannerNotification(
     id: "review",
     icon: .bannerReview,
-    text: String(localized: "Enjoying Ghostery?"),
-    actionTitle: String(localized: "Rate Ghostery on App Store", comment: "Below “Enjoying Ghostery?”, opens the page writing a review of the app in the App Store"),
+    text: String(localized: "Enjoying an ad-free web?"),
+    actionTitle: String(localized: "Rate us on the App Store", comment: "Below “Enjoying an ad-free web?”, opens the page writing a review of the app in the App Store"),
     action: .open(URLs.review)
   )),
   .notification(BannerNotification(
     id: "help",
     icon: .bannerHelp,
-    text: String(localized: "Questions, ideas, or a tracker we missed?", comment: "Above “Get Help”. The tracker is one which the app doesn't block yet."),
-    actionTitle: String(localized: "Get Help", comment: "Opens the dialog with the ways to get help"),
+    text: String(localized: "Questions, ideas, or a tracker we missed?", comment: "Above “Get in Touch”. The tracker is one which the app doesn't block yet."),
+    actionTitle: String(localized: "Get in Touch", comment: "Opens the dialog with the ways to get help"),
     action: .showDialog(.support)
   )),
 ]

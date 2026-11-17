@@ -211,12 +211,14 @@ final class ExternalBrowserStates {
     ExternalBrowser.allCases.filter { states[$0] != nil }
   }
 
-  var browsersWithoutAccess: [ExternalBrowser] {
-    browsers.filter { states[$0] == .noAccess }
-  }
-
   func isGhosteryEnabled(in browser: ExternalBrowser) -> Bool {
     states[browser] == .enabled
+  }
+
+  /// Whether the system doesn't let the app read the profiles of the
+  /// browser, so it can't tell if Ghostery is enabled in it
+  func needsAccess(to browser: ExternalBrowser) -> Bool {
+    states[browser] == .noAccess
   }
 
   /// Keeps the states up to date until the calling task is cancelled, like

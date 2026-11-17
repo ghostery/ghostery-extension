@@ -1309,6 +1309,83 @@
         }
       }
     },
+    "Cancel" : {
+      "comment" : "Button closing the dialog",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отменить"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hủy"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
     "Choose the most convenient method to support Ghostery" : {
       "localizations" : {
         "de" : {
@@ -2690,78 +2767,78 @@
         }
       }
     },
-    "Enjoying Ghostery?" : {
+    "Enjoying an ad-free web?" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gefällt dir Ghostery?"
+            "value" : "Gefällt dir das werbefreie Web?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Te gusta Ghostery?"
+            "value" : "¿Disfrutas de una web sin anuncios?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous appréciez Ghostery ?"
+            "value" : "Vous appréciez le web sans publicité ?"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ti piace Ghostery?"
+            "value" : "Ti piace il web senza pubblicità?"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghosteryを気に入っていただけましたか？"
+            "value" : "広告なしのウェブを楽しんでいますか？"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery가 마음에 드시나요?"
+            "value" : "광고 없는 웹을 즐기고 계신가요?"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Podoba ci się Ghostery?"
+            "value" : "Podoba ci się internet bez reklam?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Está gostando do Ghostery?"
+            "value" : "Está gostando da web sem anúncios?"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нравится Ghostery?"
+            "value" : "Нравится интернет без рекламы?"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bạn thích Ghostery chứ?"
+            "value" : "Bạn thích lướt web không quảng cáo chứ?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喜欢 Ghostery 吗？"
+            "value" : "喜欢无广告的网络吗？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喜歡 Ghostery 嗎？"
+            "value" : "喜歡無廣告的網路嗎？"
           }
         }
       }
@@ -3301,79 +3378,79 @@
         }
       }
     },
-    "Get Help" : {
+    "Get in Touch" : {
       "comment" : "Opens the dialog with the ways to get help",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hilfe erhalten"
+            "value" : "Kontakt aufnehmen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obtener ayuda"
+            "value" : "Ponte en contacto"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obtenir de l’aide"
+            "value" : "Nous contacter"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ottieni aiuto"
+            "value" : "Contattaci"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ヘルプを見る"
+            "value" : "お問い合わせ"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "도움 받기"
+            "value" : "문의하기"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uzyskaj pomoc"
+            "value" : "Skontaktuj się z nami"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obter ajuda"
+            "value" : "Fale conosco"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Получить помощь"
+            "value" : "Связаться с нами"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nhận trợ giúp"
+            "value" : "Liên hệ với chúng tôi"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "获取帮助"
+            "value" : "联系我们"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取得協助"
+            "value" : "聯絡我們"
           }
         }
       }
@@ -6918,6 +6995,83 @@
         }
       }
     },
+    "Permissions required" : {
+      "comment" : "Button of the card of a browser whose data the app can't read, so it can't tell if Ghostery is enabled in it, and title of the dialog the button opens",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Berechtigungen erforderlich"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permisos necesarios"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisations requises"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorizzazioni necessarie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "権限が必要です"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "권한 필요"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymagane uprawnienia"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permissões necessárias"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Требуются разрешения"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cần cấp quyền"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要权限"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要權限"
+          }
+        }
+      }
+    },
     "Privacy news and guides from the Ghostery team: ads, tracking, and how to take back your browser." : {
       "localizations" : {
         "de" : {
@@ -7148,7 +7302,7 @@
       }
     },
     "Questions, ideas, or a tracker we missed?" : {
-      "comment" : "Above “Get Help”. The tracker is one which the app doesn't block yet.",
+      "comment" : "Above “Get in Touch”. The tracker is one which the app doesn't block yet.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -7224,79 +7378,79 @@
         }
       }
     },
-    "Rate Ghostery on App Store" : {
-      "comment" : "Below “Enjoying Ghostery?”, opens the page writing a review of the app in the App Store",
+    "Rate us on the App Store" : {
+      "comment" : "Below “Enjoying an ad-free web?”, opens the page writing a review of the app in the App Store",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery im App Store bewerten"
+            "value" : "Bewerte uns im App Store"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valorar Ghostery en el App Store"
+            "value" : "Valóranos en el App Store"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Noter Ghostery sur l’App Store"
+            "value" : "Notez-nous sur l’App Store"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valuta Ghostery su App Store"
+            "value" : "Valutaci su App Store"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App StoreでGhosteryを評価する"
+            "value" : "App Storeで評価する"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App Store에서 Ghostery 평가하기"
+            "value" : "App Store에서 평가하기"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oceń Ghostery w App Store"
+            "value" : "Oceń nas w App Store"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avaliar o Ghostery na App Store"
+            "value" : "Avalie-nos na App Store"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Оценить Ghostery в App Store"
+            "value" : "Оцените нас в App Store"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đánh giá Ghostery trên App Store"
+            "value" : "Đánh giá chúng tôi trên App Store"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App Store 为 Ghostery 评分"
+            "value" : "在 App Store 为我们评分"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 App Store 為 Ghostery 評分"
+            "value" : "在 App Store 為我們評分"
           }
         }
       }
@@ -9981,85 +10135,85 @@
         }
       }
     },
-    "To check if Ghostery is enabled in %@, open System Settings, click %@, and turn on %@." : {
-      "comment" : "Shown when the app can't read the data of the browsers. The first placeholder is the list of the browsers, the second one the name of the app, and the last one the list of the browsers, as named in System Settings, which is the name of the macOS app.",
+    "To check if Ghostery is enabled in %@, open System Settings, select %@, and make sure %@ is toggled on." : {
+      "comment" : "Shown when the app can't read the data of a browser. The first placeholder is the name of the browser, the second one the name of the app, and the last one the name of the browser as System Settings shows it. System Settings is the name of the macOS app.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Um zu prüfen, ob Ghostery in %1$@ aktiviert ist, öffne die Systemeinstellungen, klicke auf %2$@ und aktiviere %3$@."
+            "value" : "Um zu prüfen, ob Ghostery in %1$@ aktiviert ist, öffne die Systemeinstellungen, wähle %2$@ aus und stelle sicher, dass %3$@ eingeschaltet ist."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "To check if Ghostery is enabled in %1$@, open System Settings, click %2$@, and turn on %3$@."
+            "value" : "To check if Ghostery is enabled in %1$@, open System Settings, select %2$@, and make sure %3$@ is toggled on."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Para comprobar si Ghostery está activado en %1$@, abre Ajustes del Sistema, haz clic en %2$@ y activa %3$@."
+            "value" : "Para comprobar si Ghostery está activado en %1$@, abre Ajustes del Sistema, selecciona %2$@ y asegúrate de que %3$@ esté activado."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pour vérifier si Ghostery est activé dans %1$@, ouvrez Réglages Système, cliquez sur %2$@ et activez %3$@."
+            "value" : "Pour vérifier si Ghostery est activé dans %1$@, ouvrez Réglages Système, sélectionnez %2$@ et assurez-vous que %3$@ est activé."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Per verificare se Ghostery è attivo in %1$@, apri Impostazioni di Sistema, fai clic su %2$@ e attiva %3$@."
+            "value" : "Per verificare se Ghostery è attivo in %1$@, apri Impostazioni di Sistema, seleziona %2$@ e assicurati che %3$@ sia attivo."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@でGhosteryが有効になっているか確認するには、システム設定を開いて%2$@をクリックし、%3$@をオンにしてください。"
+            "value" : "%1$@でGhosteryが有効になっているか確認するには、システム設定を開いて%2$@を選択し、%3$@がオンになっていることを確認してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@에서 Ghostery가 활성화되어 있는지 확인하려면 시스템 설정을 열고 %2$@ 항목을 클릭한 다음 %3$@ 스위치를 켜세요."
+            "value" : "%1$@에서 Ghostery가 활성화되어 있는지 확인하려면 시스템 설정을 열고 %2$@ 항목을 선택한 다음 %3$@ 스위치가 켜져 있는지 확인하세요."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aby sprawdzić, czy Ghostery jest włączone w %1$@, otwórz Ustawienia systemowe, kliknij %2$@ i włącz %3$@."
+            "value" : "Aby sprawdzić, czy Ghostery jest włączone w %1$@, otwórz Ustawienia systemowe, wybierz %2$@ i upewnij się, że przełącznik %3$@ jest włączony."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Para verificar se o Ghostery está ativado em %1$@, abra os Ajustes do Sistema, clique em %2$@ e ative %3$@."
+            "value" : "Para verificar se o Ghostery está ativado em %1$@, abra os Ajustes do Sistema, selecione %2$@ e verifique se %3$@ está ativado."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Чтобы проверить, включен ли Ghostery в %1$@, откройте Системные настройки, нажмите %2$@ и включите %3$@."
+            "value" : "Чтобы проверить, включен ли Ghostery в %1$@, откройте Системные настройки, выберите %2$@ и убедитесь, что переключатель %3$@ включен."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Để kiểm tra Ghostery có được bật trong %1$@ hay không, hãy mở Cài đặt hệ thống, bấm vào %2$@ và bật %3$@."
+            "value" : "Để kiểm tra Ghostery có được bật trong %1$@ hay không, hãy mở Cài đặt hệ thống, chọn %2$@ và đảm bảo %3$@ đã được bật."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "要检查 Ghostery 是否已在 %1$@ 中启用，请打开系统设置，点按 %2$@，然后打开 %3$@。"
+            "value" : "要检查 Ghostery 是否已在 %1$@ 中启用，请打开系统设置，选择 %2$@，然后确保 %3$@ 已打开。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "若要檢查 Ghostery 是否已在 %1$@ 中啟用，請打開系統設定，按一下 %2$@，然後開啟 %3$@。"
+            "value" : "若要檢查 Ghostery 是否已在 %1$@ 中啟用，請打開系統設定，選擇 %2$@，然後確認 %3$@ 已開啟。"
           }
         }
       }
@@ -10523,78 +10677,78 @@
         }
       }
     },
-    "Want to use this app on another device?" : {
+    "Want to use Ghostery on another device?" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diese App auf einem anderen Gerät nutzen?"
+            "value" : "Ghostery auf einem anderen Gerät nutzen?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Quieres usar esta app en otro dispositivo?"
+            "value" : "¿Quieres usar Ghostery en otro dispositivo?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous voulez utiliser cette app sur un autre appareil ?"
+            "value" : "Vous voulez utiliser Ghostery sur un autre appareil ?"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuoi usare questa app su un altro dispositivo?"
+            "value" : "Vuoi usare Ghostery su un altro dispositivo?"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このアプリを別のデバイスでも使いますか？"
+            "value" : "Ghosteryを別のデバイスでも使いますか？"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "다른 기기에서도 이 앱을 사용하시겠어요?"
+            "value" : "다른 기기에서도 Ghostery를 사용하시겠어요?"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chcesz korzystać z tej aplikacji na innym urządzeniu?"
+            "value" : "Chcesz korzystać z Ghostery na innym urządzeniu?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quer usar este app em outro dispositivo?"
+            "value" : "Quer usar o Ghostery em outro dispositivo?"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нужно приложение на другом устройстве?"
+            "value" : "Нужен Ghostery на другом устройстве?"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bạn muốn dùng ứng dụng này trên thiết bị khác?"
+            "value" : "Bạn muốn dùng Ghostery trên thiết bị khác?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "想在其他设备上使用此应用吗？"
+            "value" : "想在其他设备上使用 Ghostery 吗？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "想在其他裝置上使用此 App 嗎？"
+            "value" : "想在其他裝置上使用 Ghostery 嗎？"
           }
         }
       }

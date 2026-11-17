@@ -1178,6 +1178,9 @@
   "trackers": {
     "message": "Trackers"
   },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "Trình theo dõi và cửa sổ bật lên cookie cũng bị chặn. Hãy mở bất kỳ trang web nào để thấy sự khác biệt."
+  },
   "trackers_blocked": {
     "message": "Đã chặn trình theo dõi"
   },
@@ -1369,6 +1372,9 @@
   },
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>$${0} trình theo dõi</strong> đã bị chặn trước khi đến được với bạn – và đó thậm chí chưa phải là con số lớn nhất bên dưới"
+  },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} giờ đã không còn quảng cáo"
   },
   "a_calmer_web_isn_t_only_about_privacy__it_s_about_attention_too_": {
     "message": "Một web yên bình hơn không chỉ là về quyền riêng tư. Nó còn là về sự tập trung."

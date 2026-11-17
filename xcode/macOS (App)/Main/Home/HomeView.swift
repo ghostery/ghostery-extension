@@ -20,11 +20,6 @@ fileprivate enum Constants {
   static let carouselButtonTrailingPadding: CGFloat = 6
   static let carouselCoordinateSpace = "HomeView.carousel"
 
-  static let alertTopPadding: CGFloat = 16
-  static let alertPadding: CGFloat = 12
-  static let alertSpacing: CGFloat = 12
-  static let alertCornerRadius: CGFloat = 12
-
   // Between the button and the menu below it
   static let menuOffset: CGFloat = 1
 
@@ -35,7 +30,6 @@ fileprivate enum Constants {
 fileprivate enum Strings {
   // You can translate your strings here
   static let nextBrowsers = String(localized: "Next", comment: "Button scrolling to the next cards of the browsers")
-  static let openSystemSettings = String(localized: "Open System Settings", comment: "System Settings is the name of the macOS app")
   // Of Chrome, and of Brave, which installs extensions from the same store
   static let chromeWebStoreDescription = String(localized: "One click in the\nChrome Web Store.", comment: "The line break keeps the name of the store together, and can be left out")
 
@@ -45,25 +39,6 @@ fileprivate enum Strings {
 
   static func protectedBrowsers(_ count: Int, of total: Int) -> String {
     String(localized: "\(count)/\(total) protected", comment: "Number of the browsers in which Ghostery is enabled, of all the browsers found on the Mac, Safari included")
-  }
-
-  /// Steps to allow the access, with the names of the apps as the settings show them
-  static func accessAlert(browsers: [String], appNames: [String]) -> Text {
-    let bold = AppTextStyle.labelS.font
-    let ghostery = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Ghostery"
-    let names = browsers.formatted(.list(type: .and))
-    // Like "A, B, and C", in the language of the app, with each name in bold
-    var boldAppNames = AttributedString(appNames.formatted(.list(type: .and)))
-    var start = boldAppNames.startIndex
-    for name in appNames {
-      guard let range = boldAppNames[start...].range(of: name) else { continue }
-      boldAppNames[range].swiftUI.font = bold
-      start = range.upperBound
-    }
-    return Text(
-      "To check if Ghostery is enabled in \(names), open System Settings, click \(Text(ghostery).font(bold)), and turn on \(Text(boldAppNames)).",
-      comment: "Shown when the app can't read the data of the browsers. The first placeholder is the list of the browsers, the second one the name of the app, and the last one the list of the browsers, as named in System Settings, which is the name of the macOS app."
-    )
   }
 }
 
@@ -123,6 +98,7 @@ fileprivate let homeBrowsers = [
 struct HomeView: View {
   private var safari: SafariExtension { .shared }
   private var externalBrowsers: ExternalBrowserStates { .shared }
+  @Environment(\.performAction) private var performAction
   @State private var showsSafariInstructions = DebugLaunch.opens(.safariInstructions)
   @State private var menuBrowserID: HomeBrowser.Kind?
   /// Of the browsers opening the extension store, whose buttons wait for it
@@ -167,16 +143,6 @@ struct HomeView: View {
       )
       browsersHeader
       browsersCarousel
-      let browsersWithoutAccess = externalBrowsers.browsersWithoutAccess
-      if !browsersWithoutAccess.isEmpty {
-        HomeAccessAlert(
-          message: Strings.accessAlert(
-            browsers: browsersWithoutAccess.map(\.name),
-            appNames: browsersWithoutAccess.map { $0.appName ?? $0.name }
-          ),
-          action: ExternalBrowser.showAccessSettings
-        )
-      }
     } footer: {
       Banner()
     }
@@ -210,6 +176,7 @@ struct HomeView: View {
           HomeBrowserCard(
             browser: browser,
             isEnabled: isEnabled(browser),
+            needsAccess: needsAccess(browser),
             isLoading: openingBrowserIDs.contains(browser.id),
             isMenuShown: menuBrowserID == browser.id,
             action: { action(for: browser) },
@@ -279,9 +246,16 @@ struct HomeView: View {
     }
   }
 
+  private func needsAccess(_ browser: HomeBrowser) -> Bool {
+    guard case .external(let externalBrowser) = browser.kind else { return false }
+    return externalBrowsers.needsAccess(to: externalBrowser)
+  }
+
   private func action(for browser: HomeBrowser) {
     switch browser.kind {
     case .safari: showsSafariInstructions = true
+    case .external(let externalBrowser) where externalBrowsers.needsAccess(to: externalBrowser):
+      performAction(.showDialog(.browserAccess(externalBrowser)))
     case .external(let externalBrowser):
       openingBrowserIDs.insert(browser.id)
       Task {
@@ -336,39 +310,6 @@ struct HomeView: View {
 
   private func closeMenu() {
     menuBrowserID = nil
-  }
-}
-
-// MARK: - Access alert
-
-/// Shown below the cards when the state of Ghostery in some of the browsers
-/// can't be checked, with the action which opens the settings to fix it
-private struct HomeAccessAlert: View {
-  let message: Text
-  var action: () -> Void
-
-  var body: some View {
-    let shape = RoundedRectangle(cornerRadius: Constants.alertCornerRadius)
-
-    HStack(spacing: Constants.alertSpacing) {
-      Image(.homeWarning)
-        .renderingMode(.template)
-        .accessibilityHidden(true)
-        .foregroundColor(Colors.warning600)
-      message
-        .textStyle(.bodyS)
-        .foregroundColor(Colors.foregroundPrimary)
-        .fixedSize(horizontal: false, vertical: true)
-        .frame(maxWidth: .infinity, alignment: .leading)
-      Button(Strings.openSystemSettings, action: action)
-        .buttonStyle(AppButtonStyle(kind: .warning, size: .small))
-    }
-    .padding(Constants.alertPadding)
-    .background(shape.fill(Colors.bgWarningPrimary))
-    .overlay(shape.strokeBorder(Colors.borderWarningPrimary, lineWidth: Borders.width))
-    .padding(.top, Constants.alertTopPadding)
-    .padding(.horizontal, Constants.carouselHorizontalPadding)
-    .accessibilityElement(children: .combine)
   }
 }
 

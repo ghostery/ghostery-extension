@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "在追踪器接触到您之前，我们已阻止了 <strong>{0} 个追踪器</strong>——这甚至还不是下面最大的数字"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} 现已无广告"
+  },
   "@_0__left": {
     "message": "剩余 $${0} 个"
   },
@@ -1309,6 +1312,9 @@
   },
   "trackers": {
     "message": "跟踪器"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "跟踪器和 cookie 弹窗也会被拦截。打开任意网站，看看有何不同。"
   },
   "trackers_blocked": {
     "message": "已拦截跟踪器"

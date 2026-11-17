@@ -26,6 +26,7 @@
 		417DE83E8AA8E6F54606ADEA /* AppDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6497EC8020504433C30E8BD /* AppDialog.swift */; };
 		4329643069D013DA233B3BB9 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1066A790843D47B3077141 /* Components.swift */; };
 		809DBA2AC181605D59013C63 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334779991CEFF374F6C3AE48 /* Typography.swift */; };
+		A29D2227F5D7BF7B91D7D281 /* BrowserAccessDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F103D64E5C7CA9EDA711FEB /* BrowserAccessDialog.swift */; };
 		B6BCB7874B8332E04B09B0F0 /* AppButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5B93514A31BC5324CFCF1 /* AppButtonStyle.swift */; };
 		5BC54DDEA2BD607D29B22558 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334779991CEFF374F6C3AE48 /* Typography.swift */; };
 		987EBCD2AF35C71D57372B1D /* AppButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5B93514A31BC5324CFCF1 /* AppButtonStyle.swift */; };
@@ -177,6 +178,7 @@
 
 /* Begin PBXFileReference section */
 		0E594DDEBD1B8150448332E2 /* Contributions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributions.swift; sourceTree = "<group>"; };
+		0F103D64E5C7CA9EDA711FEB /* BrowserAccessDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserAccessDialog.swift; sourceTree = "<group>"; };
 		29387900DEBB35D5958741EC /* Main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Main.xcassets; sourceTree = "<group>"; };
 		2AD9F5D355E83BB0DE862E53 /* SafariInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariInstructionsView.swift; sourceTree = "<group>"; };
 		2FA4796632ADCE9EF0E937B4 /* ExternalBrowsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalBrowsers.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				C77274FD489BBAF23FFE5F49 /* BrowserProfiles.swift */,
 				08ECA8F65721E9344D7666DF /* HomeBrowserCard.swift */,
 				F4BE343CB45810528FF442A7 /* HomeBrowserMenu.swift */,
+				0F103D64E5C7CA9EDA711FEB /* BrowserAccessDialog.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -904,6 +907,7 @@
 				987EBCD2AF35C71D57372B1D /* AppButtonStyle.swift in Sources */,
 				CFF66100E997959CDA80B53D /* HomeBrowserCard.swift in Sources */,
 				78E20EF9C35E340E7FB24B54 /* HomeBrowserMenu.swift in Sources */,
+				A29D2227F5D7BF7B91D7D281 /* BrowserAccessDialog.swift in Sources */,
 				327DB5A1F2C4C863A2064E68 /* Banner.swift in Sources */,
 				B58EBD33F1FC3CDEC94072C3 /* OtherDeviceDialog.swift in Sources */,
 				87A8D816221F5BFCB634FD5C /* LearningZoneContent.swift in Sources */,
@@ -1014,7 +1018,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = T3NRR7XMGG;
@@ -1035,7 +1039,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 10.6.12;
+				MARKETING_VERSION = 10.6.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1081,7 +1085,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T3NRR7XMGG;
@@ -1096,7 +1100,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 10.6.12;
+				MARKETING_VERSION = 10.6.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1316,7 +1320,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1353,7 +1357,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery AdBlocker for Privacy.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1447,7 +1451,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = T3NRR7XMGG;
@@ -1469,7 +1473,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GHOSTERY_DEBUG = 1;
-				MARKETING_VERSION = 10.6.12;
+				MARKETING_VERSION = 10.6.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1588,7 +1592,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;

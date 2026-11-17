@@ -22,8 +22,8 @@ struct AppButtonStyle: ButtonStyle {
   enum Kind {
     case primary
     case secondary
-    /// Secondary, in the colors of a warning, for the action of an alert
-    case warning
+    /// Secondary, in the colors of an error, for the action fixing it
+    case danger
     /// Secondary, in gray, next to the main action
     case secondaryGray
   }
@@ -74,7 +74,7 @@ struct AppButtonStyle: ButtonStyle {
     switch kind {
     case .primary: return (Colors.foregroundOnBrand, Colors.bgBrandSolid, .clear)
     case .secondary: return (Colors.foregroundBrandPrimary, Colors.bgPrimary, Colors.borderBrandSolid)
-    case .warning: return (Colors.foregroundWarningPrimary, Colors.bgPrimary, Colors.borderWarningSolid)
+    case .danger: return (Colors.foregroundDangerPrimary, Colors.bgPrimary, Colors.borderDangerSolid)
     case .secondaryGray: return (Colors.foregroundPrimary, Colors.bgPrimary, Colors.borderSecondary)
     }
   }

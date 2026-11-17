@@ -71,12 +71,16 @@ enum SupportButton {
 }
 
 /// Dialogs shown over the sections
-enum MainDialog: String {
+enum MainDialog {
   case support
   case otherDevice
   case spreadTheWord
   case safariOnboarding
   case safariEnabled
+  #if os(macOS)
+  /// Steps to let the app check if Ghostery is enabled in the browser
+  case browserAccess(ExternalBrowser)
+  #endif
 }
 
 /// What a button of a card or a banner does

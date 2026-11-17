@@ -151,6 +151,10 @@ private struct MainDialogView: View {
       SafariOnboardingDialog(onClose: onClose, onEnabled: { onShow(.safariEnabled) })
     case .safariEnabled:
       SafariEnabledDialog(onClose: onClose)
+    #if os(macOS)
+    case .browserAccess(let browser):
+      BrowserAccessDialog(browser: browser, onClose: onClose)
+    #endif
     }
   }
 }

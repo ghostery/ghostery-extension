@@ -63,11 +63,10 @@ enum Colors {
   static let foregroundSuccessPrimary = Color(hex: "#0A7408")
   // Warning palette
   static let bgWarningPrimary = Color(hex: "#FFF2D9")
-  static let borderWarningPrimary = Color(hex: "#FEDF89")
   static let borderWarningSecondary = Color(hex: "#FEC84B")
-  static let borderWarningSolid = Color(hex: "#DC6803")
-  static let foregroundWarningPrimary = Color(hex: "#B54708")
-  static let warning600 = Color(hex: "#DC6803")
+  // Danger palette
+  static let borderDangerSolid = Color(hex: "#EB1719")
+  static let foregroundDangerPrimary = Color(hex: "#C80F11")
   static let shadowButton = Color.black.opacity(0.06)
   static let shadowCard = Color.black.opacity(0.06)
   static let shadowPanel = Color.black.opacity(0.2)
