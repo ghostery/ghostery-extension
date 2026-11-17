@@ -37,6 +37,26 @@ if (isWhatsNew) {
   chrome.runtime.sendMessage({ action: 'syncOptions' });
 }
 
+// Firefox Android 139+ lets a popup close itself only while its session history has
+// exactly one entry (https://bugzilla.mozilla.org/show_bug.cgi?id=1959610). Each router
+// navigation adds an entry, and no API can remove it again. So after a visit to the Menu,
+// `window.close()` does nothing: "Hide content block" leaves the panel open, and links
+// load inside the panel instead of a new tab.
+//
+// The router keeps its full view stack in `history.state`, so one entry is enough.
+// A push replaces the state of that entry. `history.go(-n)` drops the top n views from
+// the stack and fires `popstate`, which is what the router waits for.
+//
+// Trade-off: the Android back button now closes the panel from any view. It cannot go
+// back one view, because that needs one history entry per view.
+if (__FIREFOX__ && getOS() === 'android') {
+  history.pushState = history.replaceState;
+  history.go = (delta) => {
+    history.replaceState(history.state.slice(-delta), '');
+    dispatchEvent(new PopStateEvent('popstate'));
+  };
+}
+
 // The views get the stats of the current tab from the router params
 const tab = await getCurrentTab();
 
