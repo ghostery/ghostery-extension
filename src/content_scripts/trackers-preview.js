@@ -10,7 +10,7 @@
  */
 
 import { drawWheel } from '/ui/wheel.js';
-import { connectFrame } from '/utils/messaging.js';
+import { addMessageListener } from '/utils/messaging.js';
 import { getDestination } from '/utils/link-destinations.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
@@ -48,7 +48,7 @@ function renderPopup(container, stats, popupUrl) {
   const iframe = document.createElement('iframe');
   iframe.setAttribute('src', `${popupUrl}?domain=${stats.domain}`);
   iframe.setAttribute('style', 'border: 0; width: 100%; height: 100%; border-radius: 16px');
-  connectFrame(iframe).onmessage = onPopupMessage;
+  addMessageListener(iframe, onPopupMessage);
 
   // In a closed shadow root the page cannot read the extension URL from the iframe
   wrapper.attachShadow({ mode: 'closed' }).appendChild(iframe);

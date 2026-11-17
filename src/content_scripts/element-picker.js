@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connectFrame } from '/utils/messaging.js';
+import { addMessageListener } from '/utils/messaging.js';
 
 const PICKER_STYLES = `
   position: absolute;
@@ -532,7 +532,7 @@ function getElementArea(element) {
   };
 
   window.addEventListener('resize', resizeEventListener);
-  connectFrame(iframe).onmessage = messageEventListener;
+  addMessageListener(iframe, messageEventListener);
   chrome.runtime.onMessage.addListener(stateListener);
 
   document.addEventListener('mousemove', mousemoveEventListener);

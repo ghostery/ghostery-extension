@@ -13,14 +13,13 @@ const EXTENSION_ORIGIN = chrome.runtime.getURL('/').toLowerCase().slice(0, -1);
 
 // A window message from the frame would give the page the extension origin
 // and the frame's window, a private port gives it neither
-export function connectFrame(iframe) {
+export function addMessageListener(iframe, listener) {
   const { port1, port2 } = new MessageChannel();
+  port1.onmessage = listener;
 
   iframe.addEventListener('load', () => {
     iframe.contentWindow.postMessage(null, EXTENSION_ORIGIN, [port2]);
   });
-
-  return port1;
 }
 
 export function connectParent() {
