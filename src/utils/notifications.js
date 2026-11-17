@@ -27,6 +27,14 @@ export const CLOSE_WINDOW_EVENT = 'ghostery:notifications:close';
 // Minimum time since installation to show the review notification
 export const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
 
+// The notification's own URL cannot tell where it is shown: any website can
+// frame a notification with parameters of its choice
+export const TAB_URL_ACTION = 'notifications:tab-url';
+
+export function getTabUrl() {
+  return chrome.runtime.sendMessage({ action: TAB_URL_ACTION });
+}
+
 /*
  * Setup the notification page to send messages to the parent window
  */

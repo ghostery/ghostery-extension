@@ -35,7 +35,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
             openNotification({
               id: 'youtube-ads',
               tabId,
-              params: { url: sender.url },
               shownLimit: 5,
               delay: 60 * 60 * 1000, // 1 hour
             });
@@ -55,7 +54,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
         const options = await store.resolve(Options);
         if (getPausedDetails(options, hostname)) return;
 
-        openNotification({ id: 'youtube-wall', tabId, params: { url: sender.url } });
+        openNotification({ id: 'youtube-wall', tabId });
       })();
 
       break;

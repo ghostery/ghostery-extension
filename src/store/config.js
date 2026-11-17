@@ -96,6 +96,7 @@ export default Config;
 export async function dismissAction(domain, action) {
   const config = await store.resolve(Config);
   const id = Object.keys(config.domains).find((d) => domain.endsWith(d));
+  if (!id) return;
 
   await store.set(Config, {
     domains: { [id]: { dismiss: { [action]: true } } },

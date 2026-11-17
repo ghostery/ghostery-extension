@@ -88,11 +88,15 @@ export function closeNotification(tabId) {
 }
 
 // Listen for notification actions from content scripts
-chrome.runtime.onMessage.addListener((msg, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const tabId = sender.tab?.id;
   if (!tabId) return;
 
   switch (msg.action) {
+    case notifications.TAB_URL_ACTION: {
+      sendResponse(sender.tab.url);
+      break;
+    }
     case notifications.OPEN_ACTION: {
       openNotification({ tabId, ...msg });
       break;
