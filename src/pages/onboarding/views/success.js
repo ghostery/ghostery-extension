@@ -42,6 +42,8 @@ const BROWSER_ICONS = {
 
 const browserIcon = BROWSER_ICONS[getBrowser().name] || browserChromeIcon;
 
+const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
+
 async function startBrowsing() {
   const tab = await chrome.tabs.getCurrent();
 
@@ -49,7 +51,13 @@ async function startBrowsing() {
   // On mobile, closing the tab brings the user back to the previous tab or the tab overview.
   if (!isMobile()) await chrome.tabs.create({});
 
-  chrome.tabs.remove(tab.id);
+  if (tab) {
+    chrome.tabs.remove(tab.id);
+  } else {
+    // Popup view has no tab. Close it. If the browser refuses (see openHref in utils/tabs.js), show the panel.
+    window.close();
+    if (!window.closed) window.location.replace(PANEL_URL);
+  }
 }
 
 async function getPinExtension() {
