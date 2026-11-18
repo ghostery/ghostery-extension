@@ -2690,83 +2690,6 @@
         }
       }
     },
-    "Enable “Allow Extension” toggle." : {
-      "comment" : "Step of the instructions. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere den Schalter „Erweiterung erlauben“."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa la opción “Permitir extensión”."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez l’option « Autoriser l’extension »."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva l’opzione “Consenti estensione”."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「機能拡張を許可」をオンにします。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "‘확장 프로그램 허용’을 켭니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Włącz przełącznik „Pozwól na rozszerzenie”."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ative a opção “Permitir Extensão”."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Включите «Использование расширения»."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bật “Cho phép phần mở rộng”."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开“允许扩展”开关。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "開啟「允許延伸功能」開關。"
-          }
-        }
-      }
-    },
     "Enjoying an ad-free web?" : {
       "localizations" : {
         "de" : {
@@ -4528,83 +4451,6 @@
         }
       }
     },
-    "In Permissions section select “Allow” for all websites." : {
-      "comment" : "Step of the instructions. Permissions and Allow are the names of the section and the option in the settings of Safari on iPhones, as the settings show them in the language.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wähle unter „Zugriffsrechte“ für alle Websites „Erlauben“."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En la sección “Permisos”, selecciona “Permitir” para todos los sitios web."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dans la section « Autorisations », choisissez « Autoriser » pour tous les sites web."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nella sezione “Permessi”, seleziona “Consenti” per tutti i siti web."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「アクセス権」で、すべてのWebサイトに「許可」を選択します。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "‘권한’에서 모든 웹사이트에 대해 ‘허용’을 선택합니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "W sekcji „Uprawnienia” wybierz „Pozwól” dla wszystkich witryn."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Na seção “Permissões”, selecione “Permitir” para todos os sites."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "В разделе «Права доступа» выберите «Разрешить» для всех сайтов."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trong mục “Quyền”, chọn “Cho phép” cho tất cả trang web."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在“权限”部分，为所有网站选择“允许”。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在「權限」部分，為所有網站選擇「允許」。"
-          }
-        }
-      }
-    },
     "Install" : {
       "comment" : "Button opening the App Store, to install the browser",
       "localizations" : {
@@ -4759,79 +4605,79 @@
         }
       }
     },
-    "Join 450,000+ subscribers." : {
+    "Join 450,000+ subscribers. A new edition every two weeks." : {
       "comment" : "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schließ dich über 450.000 Abonnenten an."
+            "value" : "Schließ dich über 450.000 Abonnenten an. Alle zwei Wochen eine neue Ausgabe."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Únete a más de 450.000 suscriptores."
+            "value" : "Únete a más de 450.000 suscriptores. Una nueva edición cada dos semanas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rejoignez plus de 450 000 abonnés."
+            "value" : "Rejoignez plus de 450 000 abonnés. Une nouvelle édition toutes les deux semaines."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unisciti a oltre 450.000 iscritti."
+            "value" : "Unisciti a oltre 450.000 iscritti. Una nuova edizione ogni due settimane."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "45万人以上の購読者に加わりましょう。"
+            "value" : "45万人以上の購読者に加わりましょう。2週間ごとに新しい号をお届けします。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "45만 명 이상의 구독자와 함께하세요."
+            "value" : "45만 명 이상의 구독자와 함께하세요. 2주마다 새로운 호가 발행됩니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dołącz do ponad 450 000 subskrybentów."
+            "value" : "Dołącz do ponad 450 000 subskrybentów. Nowe wydanie co dwa tygodnie."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Junte-se a mais de 450.000 assinantes."
+            "value" : "Junte-se a mais de 450.000 assinantes. Uma nova edição a cada duas semanas."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Присоединяйтесь к более чем 450 000 подписчиков."
+            "value" : "Присоединяйтесь к более чем 450 000 подписчиков. Новый выпуск каждые две недели."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tham gia cùng hơn 450.000 người đăng ký."
+            "value" : "Tham gia cùng hơn 450.000 người đăng ký. Cứ hai tuần lại có một số mới."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入 45 万多名订阅者的行列。"
+            "value" : "加入 45 万多名订阅者的行列。每两周更新一期。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入 45 萬多名訂閱者的行列。"
+            "value" : "加入 45 萬多名訂閱者的行列。每兩週更新一期。"
           }
         }
       }
@@ -6292,6 +6138,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在 Opera 附加元件商店\n一鍵新增。"
+          }
+        }
+      }
+    },
+    "One click in Edge Add-ons." : {
+      "comment" : "Description of Edge, in which Ghostery is installed from its store, Edge Add-ons. Keep it short, it fits in one line next to the button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Klick in Edge-Add-ons."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic en la tienda de Edge."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic dans les modules d’Edge."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un clic nei componenti di Edge."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edgeアドオンですぐ追加。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edge 추가 기능에서 클릭 한 번."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeden klik w dodatkach Edge."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um clique na loja do Edge."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Один клик в каталоге Edge."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Một cú nhấp từ Tiện ích Edge."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Edge 加载项商店一键添加。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Edge 附加元件一鍵新增。"
           }
         }
       }
@@ -10295,6 +10218,83 @@
         }
       }
     },
+    "Turn on **Allow Extension**." : {
+      "comment" : "Step of the instructions, with the part between ** in bold. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviere **Erweiterung erlauben**."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa **Permitir extensión**."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez **Autoriser l’extension**."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva **Consenti estensione**."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**機能拡張を許可**をオンにします。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**확장 프로그램 허용**을 켭니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Włącz **Pozwól na rozszerzenie**."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ative **Permitir Extensão**."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включите **Использование расширения**."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bật **Cho phép phần mở rộng**."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开**允许扩展**。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開啟**允許延伸功能**。"
+          }
+        }
+      }
+    },
     "Uncheck **Ghostery AdBlocker for Privacy** in the list of installed extensions." : {
       "comment" : "Step of the instructions, with the part between ** in bold. Ghostery AdBlocker for Privacy is the name of the extension in the settings of Safari.",
       "localizations" : {
@@ -10368,6 +10368,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在已安裝的延伸功能列表中，取消勾選 **Ghostery AdBlocker for Privacy**。"
+          }
+        }
+      }
+    },
+    "Under Permissions, set All websites to Allow." : {
+      "comment" : "Step of the instructions. Permissions, All Websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setze unter „Zugriffsrechte“ „Allen Websites“ auf „Erlauben“."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En “Permisos”, establece “Todos los sitios web” en “Permitir”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous « Autorisations », réglez « Tous les sites web » sur « Autoriser »."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In “Permessi”, imposta “Tutti i siti web” su “Consenti”."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「アクセス権」で、「すべてのWebサイト」を「許可」に設定します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘권한’에서 ‘모든 웹사이트’를 ‘허용’으로 설정합니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W sekcji „Uprawnienia” ustaw „Wszystkie witryny” na „Pozwól”."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Em “Permissões”, defina “Todos os Sites” como “Permitir”."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В разделе «Права доступа» для пункта «Все сайты» выберите «Разрешить»."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trong mục “Quyền”, đặt “Tất cả trang web” thành “Cho phép”."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在“权限”下，将“所有网站”设为“允许”。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在「權限」下，將「所有網站」設為「允許」。"
           }
         }
       }

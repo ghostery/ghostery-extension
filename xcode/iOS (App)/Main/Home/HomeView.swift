@@ -23,6 +23,8 @@ fileprivate enum Strings {
   static let instructions = String(localized: "Instructions", comment: "Button showing the steps to enable Ghostery in Safari")
   static let install = String(localized: "Install", comment: "Button opening the App Store, to install the browser")
   static let open = String(localized: "Open", comment: "Button opening the browser installed on the device, to use Ghostery in it")
+  // In one line, unlike the Mac card's
+  static let edgeDescription = String(localized: "One click in Edge Add-ons.", comment: "Description of Edge, in which Ghostery is installed from its store, Edge Add-ons. Keep it short, it fits in one line next to the button.")
 }
 
 fileprivate enum URLs {
@@ -183,7 +185,7 @@ struct HomeView: View {
         id: "edge",
         name: "Edge",
         icon: .browserEdge,
-        description: SectionStrings.Home.edgeDescription,
+        description: Strings.edgeDescription,
         actionTitle: isEdgeInstalled ? Strings.open : Strings.install,
         action: .open(isEdgeInstalled ? Edge.link(URLs.edge) : URLs.edge),
         isPrimary: false

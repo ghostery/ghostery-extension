@@ -33,6 +33,7 @@ fileprivate enum Constants {
 fileprivate enum Strings {
   // You can translate your strings here
   static let enabledTitle = String(localized: "Ghostery Privacy Ad Block\nis enabled for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+  static let stepsHeader = String(localized: "How to enable Ghostery")
   static let enableStepsHeader = String(localized: "How to enable Ghostery in Safari")
   static let disableStepsHeader = String(localized: "How to disable Ghostery in Safari")
   static let expanded = String(localized: "Expanded", comment: "State of a list of steps, for assistive technologies")
@@ -63,7 +64,7 @@ struct SafariInstructionsView: View {
         }
         .padding(.top, Constants.stepsHeaderTopPadding)
       } else {
-        Text(SectionStrings.SafariInstructions.stepsHeader)
+        Text(Strings.stepsHeader)
           .textStyle(.labelM)
           .foregroundColor(Colors.foregroundPrimary)
           .accessibilityAddTraits(.isHeader)

@@ -41,8 +41,6 @@ const BROWSER_ICONS = {
 };
 
 const browserIcon = BROWSER_ICONS[getBrowser().name] || browserChromeIcon;
-
-// The detected name with a capital letter, like "Chrome"
 const browserName = getBrowser().name.replace(/^./, (letter) => letter.toUpperCase());
 
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');

@@ -64,7 +64,7 @@ fileprivate let homeBrowsers = [
   HomeBrowser(
     kind: .external(.edge),
     icon: .browserEdge,
-    description: SectionStrings.Home.edgeDescription,
+    description: String(localized: "One click in\nEdge Add-ons.", comment: "The line break keeps the name of the store together, and can be left out"),
     enabledDescription: SectionStrings.Home.enabledDescription,
     actionTitle: String(localized: "Add to Edge", comment: "Button opening Ghostery in the Edge Add-ons store"),
     isPrimary: false

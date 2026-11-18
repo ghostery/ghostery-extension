@@ -54,7 +54,7 @@ fileprivate let newsletterArticle = LearningArticle(
   id: "newsletter",
   image: Image(.learningZoneNewsletter),
   title: Strings.newsletterTitle,
-  subtitle: String(localized: "Join 450,000+ subscribers.", comment: "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter"),
+  subtitle: String(localized: "Join 450,000+ subscribers. A new edition every two weeks.", comment: "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter"),
   actionTitle: String(localized: "Subscribe for free", comment: "Button opening the page where the user subscribes to the Privacy Digest, Ghostery’s newsletter"),
   note: String(localized: "No spam. Unsubscribe anytime.", comment: "Note below the button subscribing to the Privacy Digest, Ghostery’s newsletter")
 )

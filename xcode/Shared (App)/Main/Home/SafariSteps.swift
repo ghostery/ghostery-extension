@@ -48,8 +48,8 @@ fileprivate enum Strings {
   #else
   static let openSafariSettings = String(localized: "Open Safari settings.", comment: "Step of the instructions, next to the button opening the settings")
   static let goToSafariSettings = String(localized: "Open Settings and go to Apps › Safari › Extensions.", comment: "Step of the instructions on iPhones and iPads where the app can't open the settings of Safari, next to the button opening the Settings app. Apps, Safari and Extensions are the names of the pages in the Settings app, as it shows them in the language.")
-  static let allowExtension = String(localized: "Enable “Allow\u{00A0}Extension” toggle.", comment: "Step of the instructions. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.")
-  static let allowAllWebsites = String(localized: "In Permissions section select “Allow” for all websites.", comment: "Step of the instructions. Permissions and Allow are the names of the section and the option in the settings of Safari on iPhones, as the settings show them in the language.")
+  static let allowExtension = LocalizedStringResource("Turn on **Allow\u{00A0}Extension**.", comment: "Step of the instructions, with the part between ** in bold. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.")
+  static let allowAllWebsites = String(localized: "Under Permissions, set All websites to Allow.", comment: "Step of the instructions. Permissions, All Websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.")
   static let allow = String(localized: "Allow", comment: "Option in the settings of Safari on iPhones, as the settings show it in the language. Shown in the picture next to the step selecting it.")
   #endif
 }
@@ -62,6 +62,8 @@ struct SafariStepLayout: PlatformLayout {
   var numberSize: CGFloat
   var numberStyle: AppTextStyle
   var textStyle: AppTextStyle
+  /// Of the parts of the text in bold, like the names of the options
+  var boldStyle: AppTextStyle
   /// Between the text and the button or the picture after it
   var accessorySpacing: CGFloat
   /// Added to the padding of the button opening the settings, as in the design
@@ -74,6 +76,7 @@ struct SafariStepLayout: PlatformLayout {
     numberSize: 40,
     numberStyle: .headlineS,
     textStyle: .bodyL,
+    boldStyle: .labelL,
     accessorySpacing: 16,
     buttonLabelPadding: 8
   )
@@ -84,6 +87,7 @@ struct SafariStepLayout: PlatformLayout {
     numberSize: 32,
     numberStyle: .labelL,
     textStyle: .bodyM,
+    boldStyle: .labelM,
     accessorySpacing: 8,
     buttonLabelPadding: 0
   )
@@ -93,6 +97,7 @@ struct SafariStepLayout: PlatformLayout {
     numberSize: 40,
     numberStyle: .headlineS,
     textStyle: .bodyL,
+    boldStyle: .labelL,
     accessorySpacing: 10,
     buttonLabelPadding: 0
   )
@@ -108,10 +113,10 @@ struct SafariEnableSteps: View {
     VStack(spacing: Constants.stepsSpacing) {
       SafariOpenSettingsStep(layout: layout)
       #if os(macOS)
-      SafariInstructionsStep(number: 2, text: Text(Strings.selectCheckbox, boldFont: AppTextStyle.labelL.font), layout: layout)
-      SafariInstructionsStep(number: 3, text: Text(Strings.allowOnEveryWebsite, boldFont: AppTextStyle.labelL.font), layout: layout)
+      SafariInstructionsStep(number: 2, text: Text(Strings.selectCheckbox, boldFont: layout.boldStyle.font), layout: layout)
+      SafariInstructionsStep(number: 3, text: Text(Strings.allowOnEveryWebsite, boldFont: layout.boldStyle.font), layout: layout)
       #else
-      SafariInstructionsStep(number: 2, text: Text(Strings.allowExtension), layout: layout) {
+      SafariInstructionsStep(number: 2, text: Text(Strings.allowExtension, boldFont: layout.boldStyle.font), layout: layout) {
         SwitchPicture()
       }
       SafariInstructionsStep(number: 3, text: Text(Strings.allowAllWebsites), layout: layout) {
@@ -140,7 +145,7 @@ struct SafariOpenSettingsStep: View {
 
   private var text: Text {
     #if os(macOS)
-    Text(Strings.openExtensionSettings, boldFont: AppTextStyle.labelL.font)
+    Text(Strings.openExtensionSettings, boldFont: layout.boldStyle.font)
     #else
     // When the button can't open the settings of Safari, the step tells
     // the way to them in the Settings app, which the button opens
@@ -156,7 +161,7 @@ struct SafariReturnStep: View {
 
   var body: some View {
     #if os(macOS)
-    SafariInstructionsStep(number: number, text: Text(Strings.goBack, boldFont: AppTextStyle.labelL.font), layout: layout)
+    SafariInstructionsStep(number: number, text: Text(Strings.goBack, boldFont: layout.boldStyle.font), layout: layout)
     #else
     SafariInstructionsStep(number: number, text: Text(Strings.goBack), layout: layout) {
       ReturnPicture()
