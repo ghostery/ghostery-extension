@@ -10,7 +10,7 @@
  */
 
 import { drawWheel } from '/ui/wheel.js';
-import { isFromExtensionFrame } from '/utils/messaging.js';
+import { addMessageListener } from '/utils/messaging.js';
 import { getDestination } from '/utils/link-destinations.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
@@ -27,6 +27,32 @@ function resizePopup(height) {
   [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach((popup) => {
     popup.style.height = `${height}px`;
   });
+}
+
+function onPopupMessage(message) {
+  if (typeof message.data !== 'string') {
+    return;
+  }
+
+  if (message.data === 'WTMReportClosePopups') {
+    closePopups();
+  } else if (message.data === 'WTMReportDisable') {
+    closePopups();
+
+    // Remove the wheel from the elements
+    [...document.querySelectorAll('[data-wtm]')].forEach((el) => {
+      delete el.dataset.wtm;
+    });
+
+    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach((el) => {
+      el.parentElement.removeChild(el);
+    });
+
+    chrome.runtime.sendMessage({ action: 'disableWTMReport' });
+  } else if (message.data?.startsWith('WTMReportResize')) {
+    const height = message.data.split(':')[1];
+    resizePopup(height);
+  }
 }
 
 const getTop = (el) => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
@@ -47,8 +73,11 @@ function renderPopup(container, stats, popupUrl) {
 
   const iframe = document.createElement('iframe');
   iframe.setAttribute('src', `${popupUrl}?domain=${stats.domain}`);
+  iframe.setAttribute('style', 'border: 0; width: 100%; height: 100%; border-radius: 16px');
+  addMessageListener(iframe, onPopupMessage);
 
-  wrapper.appendChild(iframe);
+  // In a closed shadow root the page cannot read the extension URL from the iframe
+  wrapper.attachShadow({ mode: 'closed' }).appendChild(iframe);
   document.body.appendChild(wrapper);
 }
 
@@ -161,32 +190,6 @@ function setupTrackersPreview(popupUrl) {
     });
   }
 }
-
-window.addEventListener('message', (message) => {
-  if (!isFromExtensionFrame(message) || typeof message.data !== 'string') {
-    return;
-  }
-
-  if (message.data === 'WTMReportClosePopups') {
-    closePopups();
-  } else if (message.data === 'WTMReportDisable') {
-    closePopups();
-
-    // Remove the wheel from the elements
-    [...document.querySelectorAll('[data-wtm]')].forEach((el) => {
-      delete el.dataset.wtm;
-    });
-
-    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach((el) => {
-      el.parentElement.removeChild(el);
-    });
-
-    chrome.runtime.sendMessage({ action: 'disableWTMReport' });
-  } else if (message.data?.startsWith('WTMReportResize')) {
-    const height = message.data.split(':')[1];
-    resizePopup(height);
-  }
-});
 
 function setup() {
   const popupUrl = chrome.runtime.getURL('pages/trackers-preview/index.html');

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { isFromExtensionFrame } from '/utils/messaging.js';
+import { addMessageListener } from '/utils/messaging.js';
 
 const PICKER_STYLES = `
   position: absolute;
@@ -441,8 +441,6 @@ function getElementArea(element) {
   /* Message Event Listener from Popup */
 
   const messageEventListener = (event) => {
-    if (!isFromExtensionFrame(event)) return;
-
     switch (event.data?.type) {
       case 'gh:element-picker:resize':
         container.style.height = `${event.data.height}px`;
@@ -525,7 +523,6 @@ function getElementArea(element) {
     }
 
     window.removeEventListener('resize', resizeEventListener);
-    window.removeEventListener('message', messageEventListener);
     chrome.runtime.onMessage.removeListener(stateListener);
 
     document.removeEventListener('mousemove', mousemoveEventListener);
@@ -535,7 +532,7 @@ function getElementArea(element) {
   };
 
   window.addEventListener('resize', resizeEventListener);
-  window.addEventListener('message', messageEventListener);
+  addMessageListener(iframe, messageEventListener);
   chrome.runtime.onMessage.addListener(stateListener);
 
   document.addEventListener('mousemove', mousemoveEventListener);
