@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "^5.5.7",
     "globals": "^17.14.0",
     "license-report": "^6.8.6",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.1",
     "vite": "^8.3.7",
     "web-ext": "^10.8.0"
   },
