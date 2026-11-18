@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connectParent } from './messaging.js';
+import { connectMessageEmitter } from './messaging.js';
 
 // Actions to be used in the background script
 export const OPEN_ACTION = 'notifications:open';
@@ -33,10 +33,10 @@ export const REVIEW_NOTIFICATION_DELAY = 30 * 24 * 60 * 60 * 1000; // 30 days
  * Setup the notification page to send messages to the parent window
  */
 export function setupNotificationPage(width = 440) {
-  const sendToParent = connectParent();
+  const emitMessage = connectMessageEmitter();
 
   const resizeObserver = new ResizeObserver(() => {
-    sendToParent({ type: RESIZE_WINDOW_EVENT, height: document.body.clientHeight, width });
+    emitMessage({ type: RESIZE_WINDOW_EVENT, height: document.body.clientHeight, width });
   });
 
   resizeObserver.observe(document.body, { box: 'border-box' });
@@ -44,7 +44,7 @@ export function setupNotificationPage(width = 440) {
 
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.action === CLEAR_ACTION && location.pathname.split('/').pop() === msg.id) {
-      sendToParent({ type: CLOSE_WINDOW_EVENT });
+      emitMessage({ type: CLOSE_WINDOW_EVENT });
     }
   });
 
@@ -52,7 +52,7 @@ export function setupNotificationPage(width = 440) {
     // In some cases await for store.set() is not enough to propagate changes
     // so we need to wait a bit before sending the message
     setTimeout(() => {
-      sendToParent({ type: CLOSE_WINDOW_EVENT, clear, reload });
+      emitMessage({ type: CLOSE_WINDOW_EVENT, clear, reload });
     }, 100);
   };
 }

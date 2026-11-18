@@ -12,7 +12,7 @@
 import { mount, html, store } from 'hybrids';
 
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
-import { connectParent } from '/utils/messaging.js';
+import { connectMessageEmitter } from '/utils/messaging.js';
 
 import selectImage from './assets/select.svg';
 import hiddenImage from './assets/hidden.svg';
@@ -25,10 +25,10 @@ import './styles.css';
 // Hostname of the page, as the content script reports it
 let hostname = '';
 
-const sendToParent = connectParent();
+const emitMessage = connectMessageEmitter();
 
 function sendMessage(type, data) {
-  sendToParent({ type, ...data });
+  emitMessage({ type, ...data });
 }
 
 function close() {

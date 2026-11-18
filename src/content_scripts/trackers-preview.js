@@ -29,6 +29,32 @@ function resizePopup(height) {
   });
 }
 
+function onPopupMessage(message) {
+  if (typeof message.data !== 'string') {
+    return;
+  }
+
+  if (message.data === 'WTMReportClosePopups') {
+    closePopups();
+  } else if (message.data === 'WTMReportDisable') {
+    closePopups();
+
+    // Remove the wheel from the elements
+    [...document.querySelectorAll('[data-wtm]')].forEach((el) => {
+      delete el.dataset.wtm;
+    });
+
+    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach((el) => {
+      el.parentElement.removeChild(el);
+    });
+
+    chrome.runtime.sendMessage({ action: 'disableWTMReport' });
+  } else if (message.data?.startsWith('WTMReportResize')) {
+    const height = message.data.split(':')[1];
+    resizePopup(height);
+  }
+}
+
 const getTop = (el) => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
 
 function renderPopup(container, stats, popupUrl) {
@@ -162,32 +188,6 @@ function setupTrackersPreview(popupUrl) {
         }
       });
     });
-  }
-}
-
-function onPopupMessage(message) {
-  if (typeof message.data !== 'string') {
-    return;
-  }
-
-  if (message.data === 'WTMReportClosePopups') {
-    closePopups();
-  } else if (message.data === 'WTMReportDisable') {
-    closePopups();
-
-    // Remove the wheel from the elements
-    [...document.querySelectorAll('[data-wtm]')].forEach((el) => {
-      delete el.dataset.wtm;
-    });
-
-    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach((el) => {
-      el.parentElement.removeChild(el);
-    });
-
-    chrome.runtime.sendMessage({ action: 'disableWTMReport' });
-  } else if (message.data?.startsWith('WTMReportResize')) {
-    const height = message.data.split(':')[1];
-    resizePopup(height);
   }
 }
 

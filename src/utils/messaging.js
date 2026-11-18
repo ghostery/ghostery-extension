@@ -22,7 +22,7 @@ export function addMessageListener(iframe, listener) {
   });
 }
 
-export function connectParent() {
+export function connectMessageEmitter() {
   const port = new Promise((resolve) => {
     window.addEventListener('message', (event) => event.ports[0] && resolve(event.ports[0]));
   });
