@@ -32,7 +32,7 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let enabledTitle = String(localized: "Ghostery Privacy Ad Block\nis enabled for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+  static let enabledTitle = String(localized: "Ghostery AdBlocker for Privacy\nis enabled in Safari", comment: "Title in two lines. Ghostery AdBlocker for Privacy is the name of the extension, kept in English.")
   static let stepsHeader = String(localized: "How to enable Ghostery")
   static let enableStepsHeader = String(localized: "How to enable Ghostery in Safari")
   static let disableStepsHeader = String(localized: "How to disable Ghostery in Safari")
@@ -41,7 +41,7 @@ fileprivate enum Strings {
 
   // The parts between ** are in bold
   static let uncheckExtension = LocalizedStringResource("Uncheck **Ghostery AdBlocker for Privacy** in the list of installed extensions.", comment: "Step of the instructions, with the part between ** in bold. Ghostery AdBlocker for Privacy is the name of the extension in the settings of Safari.")
-  static let uninstallWarning = LocalizedStringResource("**If you click Uninstall,** Ghostery Privacy Ad Block will be deleted from your Mac, and all your browsers will lose protection.", comment: "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery Privacy Ad Block is the name of the app.")
+  static let uninstallWarning = LocalizedStringResource("**If you click Uninstall,** Ghostery will be deleted from your Mac.", comment: "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery is the app.")
 }
 
 struct SafariInstructionsView: View {

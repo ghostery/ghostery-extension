@@ -78,79 +78,79 @@
         }
       }
     },
-    "**If you click Uninstall,** Ghostery Privacy Ad Block will be deleted from your Mac, and all your browsers will lose protection." : {
-      "comment" : "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery Privacy Ad Block is the name of the app.",
+    "**If you click Uninstall,** Ghostery will be deleted from your Mac." : {
+      "comment" : "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery is the app.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Wenn du auf „Deinstallieren“ klickst,** wird Ghostery Privacy Ad Block von deinem Mac gelöscht und alle deine Browser verlieren den Schutz."
+            "value" : "**Wenn du auf „Deinstallieren“ klickst,** wird Ghostery von deinem Mac gelöscht."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Si haces clic en Desinstalar,** Ghostery Privacy Ad Block se eliminará de tu Mac y todos tus navegadores perderán la protección."
+            "value" : "**Si haces clic en Desinstalar,** Ghostery se eliminará de tu Mac."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Si vous cliquez sur Désinstaller,** Ghostery Privacy Ad Block sera supprimé de votre Mac et tous vos navigateurs perdront leur protection."
+            "value" : "**Si vous cliquez sur Désinstaller,** Ghostery sera supprimé de votre Mac."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Se fai clic su Disinstalla,** Ghostery Privacy Ad Block verrà eliminato dal Mac e tutti i tuoi browser perderanno la protezione."
+            "value" : "**Se fai clic su Disinstalla,** Ghostery verrà eliminato dal Mac."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**「アンインストール」をクリックすると**、Ghostery Privacy Ad BlockがMacから削除され、すべてのブラウザで保護が失われます。"
+            "value" : "**「アンインストール」をクリックすると**、GhosteryがMacから削除されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**제거를 클릭하면** Ghostery Privacy Ad Block이 Mac에서 삭제되고 모든 브라우저의 보호 기능이 사라집니다."
+            "value" : "**제거를 클릭하면** Ghostery가 Mac에서 삭제됩니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Jeśli klikniesz Odinstaluj,** Ghostery Privacy Ad Block zostanie usunięty z twojego Maca, a wszystkie twoje przeglądarki stracą ochronę."
+            "value" : "**Jeśli klikniesz Odinstaluj,** Ghostery zostanie usunięty z twojego Maca."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Se você clicar em Desinstalar,** o Ghostery Privacy Ad Block será apagado do seu Mac e todos os seus navegadores perderão a proteção."
+            "value" : "**Se você clicar em Desinstalar,** o Ghostery será apagado do seu Mac."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Если нажать «Удалить»,** Ghostery Privacy Ad Block будет удален с вашего Mac, и все ваши браузеры потеряют защиту."
+            "value" : "**Если нажать «Удалить»,** Ghostery будет удален с вашего Mac."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Nếu bạn nhấp vào Gỡ cài đặt,** Ghostery Privacy Ad Block sẽ bị xóa khỏi máy Mac và tất cả trình duyệt của bạn sẽ mất khả năng bảo vệ."
+            "value" : "**Nếu bạn nhấp vào Gỡ cài đặt,** Ghostery sẽ bị xóa khỏi máy Mac."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**如果您点按“卸载”**，Ghostery Privacy Ad Block 将从您的 Mac 中删除，您的所有浏览器都将失去保护。"
+            "value" : "**如果您点按“卸载”**，Ghostery 将从您的 Mac 中删除。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**如果您按一下「解除安裝」**，Ghostery Privacy Ad Block 將從您的 Mac 中刪除，您的所有瀏覽器都將失去保護。"
+            "value" : "**如果您按一下「解除安裝」**，Ghostery 將從您的 Mac 中刪除。"
           }
         }
       }
@@ -2613,156 +2613,156 @@
         }
       }
     },
-    "Enable Ghostery Privacy\nAd Block for Safari" : {
-      "comment" : "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.",
+    "Enable Ghostery AdBlocker\nfor Privacy in Safari" : {
+      "comment" : "Title in two lines. Ghostery AdBlocker for Privacy is the name of the extension, kept in English.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nfür Safari aktivieren"
+            "value" : "Ghostery AdBlocker\nfor Privacy in Safari aktivieren"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activa Ghostery Privacy\nAd Block en Safari"
+            "value" : "Activa Ghostery AdBlocker\nfor Privacy en Safari"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activer Ghostery Privacy\nAd Block dans Safari"
+            "value" : "Activer Ghostery AdBlocker\nfor Privacy dans Safari"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva Ghostery Privacy\nAd Block per Safari"
+            "value" : "Attiva Ghostery AdBlocker\nfor Privacy in Safari"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery Privacy Ad Blockを\nSafariで有効にする"
+            "value" : "SafariでGhostery AdBlocker\nfor Privacyを有効にする"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safari에서 Ghostery Privacy\nAd Block 활성화"
+            "value" : "Safari에서 Ghostery\nAdBlocker for Privacy 활성화"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz Ghostery Privacy\nAd Block w Safari"
+            "value" : "Włącz Ghostery AdBlocker\nfor Privacy w Safari"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ative o Ghostery Privacy\nAd Block no Safari"
+            "value" : "Ative o Ghostery AdBlocker\nfor Privacy no Safari"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Включите Ghostery Privacy\nAd Block в Safari"
+            "value" : "Включите Ghostery\nAdBlocker for Privacy в Safari"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bật Ghostery Privacy\nAd Block cho Safari"
+            "value" : "Bật Ghostery AdBlocker\nfor Privacy trong Safari"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "为 Safari 启用\nGhostery Privacy Ad Block"
+            "value" : "在 Safari 中启用 Ghostery\nAdBlocker for Privacy"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "為 Safari 啟用\nGhostery Privacy Ad Block"
+            "value" : "在 Safari 中啟用 Ghostery\nAdBlocker for Privacy"
           }
         }
       }
     },
-    "Enable Ghostery Privacy Ad Block for Safari" : {
-      "comment" : "Ghostery Privacy Ad Block is the name of the extension",
+    "Enable Ghostery AdBlocker for Privacy in Safari" : {
+      "comment" : "Ghostery AdBlocker for Privacy is the name of the extension, kept in English.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block für Safari aktivieren"
+            "value" : "Ghostery AdBlocker for Privacy in Safari aktivieren"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activa Ghostery Privacy Ad Block en Safari"
+            "value" : "Activa Ghostery AdBlocker for Privacy en Safari"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activer Ghostery Privacy Ad Block dans Safari"
+            "value" : "Activer Ghostery AdBlocker for Privacy dans Safari"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva Ghostery Privacy Ad Block per Safari"
+            "value" : "Attiva Ghostery AdBlocker for Privacy in Safari"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SafariでGhostery Privacy Ad Blockを有効にする"
+            "value" : "SafariでGhostery AdBlocker for Privacyを有効にする"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Safari에서 Ghostery Privacy Ad Block 활성화"
+            "value" : "Safari에서 Ghostery AdBlocker for Privacy 활성화"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz Ghostery Privacy Ad Block w Safari"
+            "value" : "Włącz Ghostery AdBlocker for Privacy w Safari"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ative o Ghostery Privacy Ad Block no Safari"
+            "value" : "Ative o Ghostery AdBlocker for Privacy no Safari"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Включите Ghostery Privacy Ad Block в Safari"
+            "value" : "Включите Ghostery AdBlocker for Privacy в Safari"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bật Ghostery Privacy Ad Block cho Safari"
+            "value" : "Bật Ghostery AdBlocker for Privacy trong Safari"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "为 Safari 启用 Ghostery Privacy Ad Block"
+            "value" : "在 Safari 中启用 Ghostery AdBlocker for Privacy"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "為 Safari 啟用 Ghostery Privacy Ad Block"
+            "value" : "在 Safari 中啟用 Ghostery AdBlocker for Privacy"
           }
         }
       }
@@ -3686,6 +3686,83 @@
         }
       }
     },
+    "Ghostery AdBlocker for Privacy\nis enabled in Safari" : {
+      "comment" : "Title in two lines. Ghostery AdBlocker for Privacy is the name of the extension, kept in English.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nist in Safari aktiviert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nestá activado en Safari"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nest activé dans Safari"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nè attivo in Safari"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SafariでGhostery AdBlocker\nfor Privacyが有効です"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safari에서 Ghostery\nAdBlocker for Privacy 활성화됨"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\njest włączony w Safari"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nestá ativado no Safari"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nвключен в Safari"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\nđã được bật trong Safari"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\n已在 Safari 中启用"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery AdBlocker for Privacy\n已在 Safari 中啟用"
+          }
+        }
+      }
+    },
     "Ghostery missing from a browser, or not behaving as expected? Our team will help." : {
       "localizations" : {
         "de" : {
@@ -3758,83 +3835,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "瀏覽器中找不到 Ghostery，或運作不如預期？我們的團隊會協助您。"
-          }
-        }
-      }
-    },
-    "Ghostery Privacy Ad Block\nis enabled for Safari" : {
-      "comment" : "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nist in Safari aktiviert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nestá activado en Safari"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nest activé dans Safari"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nè attivo in Safari"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Blockは\nSafariで有効です"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block이\nSafari에서 활성화됨"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\njest włączony w Safari"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nestá ativado no Safari"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nвключен в Safari"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\nđã được bật cho Safari"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\n已在 Safari 中启用"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery Privacy Ad Block\n已在 Safari 中啟用"
           }
         }
       }

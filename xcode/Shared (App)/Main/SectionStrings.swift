@@ -24,7 +24,7 @@ enum SectionStrings {
 
   /// Page of the Home section with the steps to enable the extension
   enum SafariInstructions {
-    static let title = String(localized: "Enable Ghostery Privacy\nAd Block for Safari", comment: "Title in two lines. Ghostery Privacy Ad Block is the name of the extension.")
+    static let title = String(localized: "Enable Ghostery AdBlocker\nfor Privacy in Safari", comment: "Title in two lines. Ghostery AdBlocker for Privacy is the name of the extension, kept in English.")
   }
 
   enum LearningZone {

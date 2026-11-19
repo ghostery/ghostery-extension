@@ -28,7 +28,7 @@ fileprivate enum Strings {
   // You can translate your strings here
   static let skip = String(localized: "Skip", comment: "Button closing the steps to enable the extension")
   #if os(macOS)
-  static let title = String(localized: "Enable Ghostery Privacy Ad Block for Safari", comment: "Ghostery Privacy Ad Block is the name of the extension")
+  static let title = String(localized: "Enable Ghostery AdBlocker for Privacy in Safari", comment: "Ghostery AdBlocker for Privacy is the name of the extension, kept in English.")
   #else
   static let title = SectionStrings.SafariInstructions.title
   #endif
