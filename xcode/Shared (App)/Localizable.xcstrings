@@ -2382,6 +2382,160 @@
         }
       }
     },
+    "Don’t see your browser? On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
+      "comment" : "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Browser fehlt? Auf dem iPad erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿No ves tu navegador? En el iPad, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous ne voyez pas votre navigateur ? Sur iPad, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non vedi il tuo browser? Su iPad, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お使いのブラウザが見つかりませんか？iPadでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용하는 브라우저가 보이지 않나요? iPad에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie widzisz swojej przeglądarki? Na iPadzie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não encontrou seu navegador? No iPad, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не видите свой браузер? На iPad большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không thấy trình duyệt của bạn? Trên iPad, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有看到您的浏览器？在 iPad 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有看到您的瀏覽器？在 iPad 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
+          }
+        }
+      }
+    },
+    "Don’t see your browser? On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
+      "comment" : "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Browser fehlt? Auf dem iPhone erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿No ves tu navegador? En el iPhone, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous ne voyez pas votre navigateur ? Sur iPhone, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non vedi il tuo browser? Su iPhone, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お使いのブラウザが見つかりませんか？iPhoneでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용하는 브라우저가 보이지 않나요? iPhone에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie widzisz swojej przeglądarki? Na iPhonie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não encontrou seu navegador? No iPhone, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не видите свой браузер? На iPhone большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không thấy trình duyệt của bạn? Trên iPhone, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有看到您的浏览器？在 iPhone 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有看到您的瀏覽器？在 iPhone 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
+          }
+        }
+      }
+    },
     "Edition %lld" : {
       "comment" : "Number of the edition of the Privacy Digest, Ghostery’s newsletter, in its year",
       "localizations" : {

@@ -54,6 +54,7 @@ enum Colors {
   static let borderPrimary = Color(hex: "#E0E2E5")
   static let borderSecondary = Color(hex: "#B9BBBE")
   static let borderTertiary = Color(hex: "#88898C")
+  static let borderBrandSecondary = Color(hex: "#9ADEFF")
   static let borderBrandSolid = Color(hex: "#0077CC")
   // Brand palette
   static let brand300 = Color(hex: "#9ADEFF")

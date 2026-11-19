@@ -16,6 +16,13 @@ fileprivate enum Constants {
 
   static let enabledSpacing: CGFloat = 4
   static let enabledCornerRadius: CGFloat = 8
+
+  // Between the icon and the text of the notice below the browsers
+  static let noticeSpacing: CGFloat = 12
+  static let noticePadding: CGFloat = 12
+  static let noticeCornerRadius: CGFloat = 8
+  static let noticeShadowRadius: CGFloat = 6
+  static let noticeShadowY: CGFloat = 4
 }
 
 fileprivate enum Strings {
@@ -25,6 +32,9 @@ fileprivate enum Strings {
   static let open = String(localized: "Open", comment: "Button opening the browser installed on the device, to use Ghostery in it")
   // In one line, unlike the Mac card's
   static let edgeDescription = String(localized: "One click in Edge Add-ons.", comment: "Description of Edge, in which Ghostery is installed from its store, Edge Add-ons. Keep it short, it fits in one line next to the button.")
+  // Below the browsers, why the others aren't there
+  static let otherBrowsersOnIPhone = String(localized: "Don’t see your browser? On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used")
+  static let otherBrowsersOnIPad = String(localized: "Don’t see your browser? On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used")
 }
 
 fileprivate enum URLs {
@@ -157,6 +167,9 @@ struct HomeView: View {
       CardStack(data: browsers, isRow: layout.isRow, spacing: layout.spacing) { browser in
         HomeBrowserCard(browser: browser, layout: layout)
       }
+
+      HomeBrowsersNotice()
+        .padding(.top, layout.spacing)
     } footer: {
       Banner()
     }
@@ -330,6 +343,36 @@ private struct HomeBrowserEnabledState: View {
       }
     }
     .fixedSize()
+  }
+}
+
+/// Below the browsers, that most others don't allow extensions on the device
+private struct HomeBrowsersNotice: View {
+  var body: some View {
+    let shape = RoundedRectangle(cornerRadius: Constants.noticeCornerRadius)
+
+    HStack(spacing: Constants.noticeSpacing) {
+      Image(.homeInfo)
+        .accessibilityHidden(true)
+      Text(text)
+        .textStyle(.bodyS)
+        .foregroundColor(Colors.foregroundPrimary)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    .padding(Constants.noticePadding)
+    .background(
+      shape
+        .fill(Colors.bgBrandPrimary)
+        .shadow(color: Colors.shadowCard, radius: Constants.noticeShadowRadius, y: Constants.noticeShadowY)
+    )
+    .overlay(shape.strokeBorder(Colors.borderBrandSecondary, lineWidth: Borders.width))
+  }
+
+  // Of the device rather than of the layout, as iPads in Split View show
+  // the browsers as on iPhones
+  private var text: String {
+    UIDevice.current.userInterfaceIdiom == .pad ? Strings.otherBrowsersOnIPad : Strings.otherBrowsersOnIPhone
   }
 }
 
