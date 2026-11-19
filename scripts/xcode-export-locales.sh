@@ -21,6 +21,17 @@ done
 rm -rf ./xcode/*.xcloc
 xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode "${EXPORT_LANGUAGES[@]}"
 
+# Strings marked as not to be translated in the catalogs, like the bundle
+# names of the targets in their InfoPlist.xcstrings, are left out, as
+# Transifex doesn't say what it does with them. So are the files left
+# without strings.
+for file in ./xcode/*.xcloc/"Localized Contents"/*.xliff; do
+  perl -0pi \
+    -e 's/\n *<trans-unit [^>]*\btranslate="no"[^>]*>(?:(?!<\/trans-unit>).)*<\/trans-unit>//gs;' \
+    -e 's/\n *<file [^>]*>\s*<header>(?:(?!<\/header>).)*<\/header>\s*<body>\s*<\/body>\s*<\/file>//gs' \
+    "$file"
+done
+
 # Transifex reads the language of a translation from its file, so the
 # languages named differently there, as in lang_map of .tx/config, get
 # the codes of Transifex
