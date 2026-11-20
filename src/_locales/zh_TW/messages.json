@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>$${0} 個追蹤器</strong>在接觸到您之前就被阻擋了 – 這甚至還不是下面最大的數字"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} 現已無廣告"
+  },
   "@_0__left": {
     "message": "還剩 $${0}"
   },
@@ -1309,6 +1312,9 @@
   },
   "trackers": {
     "message": "追蹤器"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "追蹤器和 cookie 彈出視窗也會被阻擋。開啟任何網站，看看有什麼不同。"
   },
   "trackers_blocked": {
     "message": "已攔截的追蹤器"

@@ -20,7 +20,8 @@
     "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
     "locales": "npm run locales:setup && npm run locales.src",
-    "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
+    "xcode-export-locales": "./scripts/xcode-export-locales.sh",
+    "xcode-import-locales": "./scripts/xcode-import-locales.sh",
     "release": "./scripts/release.sh",
     "package": "./scripts/package.sh",
     "app-store-connect": "node scripts/app-store-connect.js"

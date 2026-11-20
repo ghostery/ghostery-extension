@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>${0} rastreadores</strong> impedidos antes que chegassem até você – e esse nem é o maior número abaixo"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} agora está sem anúncios"
+  },
   "@_0__left": {
     "message": "$${0} restante(s)"
   },
@@ -1309,6 +1312,9 @@
   },
   "trackers": {
     "message": "Rastreadores"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "Rastreadores e pop-ups de cookies também são bloqueados. Abra qualquer site para ver a diferença."
   },
   "trackers_blocked": {
     "message": "Rastreadores bloqueados"
