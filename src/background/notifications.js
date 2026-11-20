@@ -20,65 +20,72 @@ import Options from '/store/options.js';
 import { getOS, isOpera, isWebkit } from '/utils/browser-info.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
+import SeqExecutor from '/utils/seq-executor.js';
 import { checkStorage } from '/utils/storage.js';
 import * as telemetry from '/utils/telemetry.js';
 import { SURVEY_POST_ONBOARDING_URL } from '/utils/urls.js';
 
-export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
-  const options = await store.resolve(Options);
-  const managedConfig = await store.resolve(ManagedConfig);
+const executor = new SeqExecutor();
 
-  const notification = await store.resolve(Notification, id).catch(() => null);
+export function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
+  // Open notifications one by one. Parallel calls all read the shown
+  // limit before it is saved, and the notification shows in many tabs.
+  return executor.run(async () => {
+    const options = await store.resolve(Options);
+    const managedConfig = await store.resolve(ManagedConfig);
 
-  if (
-    // Terms not accepted
-    !options.terms ||
-    // Disabled notifications in managed config
-    managedConfig.disableNotifications ||
-    // Shown limit set and reached
-    (shownLimit > 0 && notification?.shown >= shownLimit) ||
-    // Delay set and notification shown recently
-    (delay && notification?.lastShownAt && Date.now() - notification.lastShownAt < delay)
-  ) {
-    return false;
-  }
+    const notification = await store.resolve(Notification, id).catch(() => null);
 
-  const url =
-    chrome.runtime.getURL(`/pages/notifications/${id}.html`) +
-    (params
-      ? `?${Object.entries(params)
-          .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-          .join('&')}`
-      : '');
-
-  try {
-    await checkStorage();
-
-    // Try to mount the notification in the specified tab
-    const mounted = await chrome.tabs.sendMessage(tabId, {
-      action: notifications.MOUNT_ACTION,
-      url,
-      position,
-      debug: __DEBUG__,
-    });
-
-    // Update notification stats if mounted successfully
-    if (mounted) {
-      await store.set(Notification, {
-        id,
-        shown: (notification?.shown || 0) + 1,
-        lastShownAt: Date.now(),
-      });
-
-      console.log(`[notifications] Opened notification "${id}" with params:`, params);
+    if (
+      // Terms not accepted
+      !options.terms ||
+      // Disabled notifications in managed config
+      managedConfig.disableNotifications ||
+      // Shown limit set and reached
+      (shownLimit > 0 && notification?.shown >= shownLimit) ||
+      // Delay set and notification shown recently
+      (delay && notification?.lastShownAt && Date.now() - notification.lastShownAt < delay)
+    ) {
+      return false;
     }
 
-    return mounted;
-  } catch (e) {
-    console.error(`[notifications] Failed to open notification "${id}" in tab:`, tabId, e);
+    const url =
+      chrome.runtime.getURL(`/pages/notifications/${id}.html`) +
+      (params
+        ? `?${Object.entries(params)
+            .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+            .join('&')}`
+        : '');
 
-    return false;
-  }
+    try {
+      await checkStorage();
+
+      // Try to mount the notification in the specified tab
+      const mounted = await chrome.tabs.sendMessage(tabId, {
+        action: notifications.MOUNT_ACTION,
+        url,
+        position,
+        debug: __DEBUG__,
+      });
+
+      // Update notification stats if mounted successfully
+      if (mounted) {
+        await store.set(Notification, {
+          id,
+          shown: (notification?.shown || 0) + 1,
+          lastShownAt: Date.now(),
+        });
+
+        console.log(`[notifications] Opened notification "${id}" with params:`, params);
+      }
+
+      return mounted;
+    } catch (e) {
+      console.error(`[notifications] Failed to open notification "${id}" in tab:`, tabId, e);
+
+      return false;
+    }
+  });
 }
 
 export function closeNotification(tabId) {
