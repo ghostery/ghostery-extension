@@ -28,7 +28,7 @@ fileprivate enum Strings {
   // You can translate your strings here
   // The name of the newsletter, which isn't translated
   static let digestLabel = "Privacy Digest"
-  static let digestTitle = String(localized: "What’s happening in privacy right now?")
+  static let digestTitle = String(localized: "The news that matters, in one read", comment: "Title of the card of the latest edition of the Privacy Digest, Ghostery’s newsletter, of which each edition gathers the news worth knowing")
   static let digestAction = String(localized: "Read the latest edition", comment: "Button opening the latest edition of the Privacy Digest, Ghostery’s newsletter")
   static func digestEdition(_ number: Int) -> String {
     String(localized: "Edition \(number)", comment: "Number of the edition of the Privacy Digest, Ghostery’s newsletter, in its year")
@@ -54,7 +54,7 @@ fileprivate let newsletterArticle = LearningArticle(
   id: "newsletter",
   image: Image(.learningZoneNewsletter),
   title: Strings.newsletterTitle,
-  subtitle: String(localized: "Join 450,000+ subscribers. A new edition every two weeks.", comment: "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter"),
+  subtitle: String(localized: "Join 450,000+ subscribers.\nA new edition every two weeks.", comment: "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter, in two lines"),
   actionTitle: String(localized: "Subscribe for free", comment: "Button opening the page where the user subscribes to the Privacy Digest, Ghostery’s newsletter"),
   note: String(localized: "No spam. Unsubscribe anytime.", comment: "Note below the button subscribing to the Privacy Digest, Ghostery’s newsletter")
 )

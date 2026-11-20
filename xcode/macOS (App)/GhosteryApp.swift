@@ -128,6 +128,7 @@ struct GhosteryApp: App {
   init() {
     // Handles the transactions of the App Store from the launch
     Donations.shared.start()
+    LearningZoneContent.prefetch()
   }
 
   var body: some Scene {

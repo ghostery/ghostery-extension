@@ -37,7 +37,7 @@ enum SectionStrings {
   }
 
   enum Contribute {
-    static let title = String(localized: "Become a contributor", comment: "Title of the Contribute section")
+    static let title = String(localized: "Become a Contributor", comment: "Title of the Contribute section. Contributor is the name of those who support Ghostery with a donation.")
     static let description = String(localized: "Help Ghostery fight for a web where privacy is a basic human right.")
     static let subtitle = String(localized: "As a Contributor, you’ll support the development of the entire Ghostery Privacy Suite", comment: "Ghostery Privacy Suite is the name of all Ghostery’s products")
   }

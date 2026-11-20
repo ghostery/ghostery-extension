@@ -15,12 +15,15 @@ import UIKit
 #endif
 
 fileprivate enum Constants {
-  static let digestEditionsURL = URL(string: "https://www.ghostery.com/privacy-digest/editions.json")!
+  static let latestDigestEditionURL = URL(string: "https://www.ghostery.com/privacy-digest/latest.json")!
   static let latestBlogPostURL = URL(string: "https://www.ghostery.com/blog/latest.json")!
   static let requestTimeout: TimeInterval = 15
   static let resourceTimeout: TimeInterval = 30
-  // How long a fetched item is shown before it's fetched again
-  static let refreshInterval: TimeInterval = 60 * 60
+  // How long a fetched item is shown before it's fetched again. Items
+  // change at most a few times a week, so they're fetched once when the
+  // app launches, and again only by an app running for days, like the
+  // macOS app with its icon in the menu bar.
+  static let refreshInterval: TimeInterval = 24 * 60 * 60
 }
 
 /// Edition of the Privacy Digest, with its cover image
@@ -50,7 +53,15 @@ enum LearningZoneContent {
   @MainActor static let digestEdition = FetchedItem("the latest Privacy Digest", fetch: fetchLatestDigestEdition)
   @MainActor static let blogPost = FetchedItem("the latest blog post", fetch: fetchLatestBlogPost)
 
-  /// Fetches the items which weren't fetched recently
+  /// Starts fetching the items when the app launches, so their cards are
+  /// ready when the Learning Zone is first shown
+  @MainActor
+  static func prefetch() {
+    Task { await refresh() }
+  }
+
+  /// Fetches the items which weren't fetched recently, or whose fetch
+  /// failed, like without a connection when the app launched
   @MainActor
   static func refresh() async {
     async let digestEditionRefresh: Void = digestEdition.refresh()
@@ -61,13 +72,7 @@ enum LearningZoneContent {
   static let logger = Logger(category: "LearningZone")
 
   private static func fetchLatestDigestEdition() async throws -> PrivacyDigestEdition {
-    // Editions are listed newest first, also the scheduled ones, which
-    // aren't sent yet. One that can't be read doesn't fail the others.
-    let editions = try await fetchJSON([Lossy<EditionData>].self, from: Constants.digestEditionsURL).compactMap(\.value)
-    guard let edition = editions.first(where: { $0.publishedAt <= .now }) else {
-      throw LearningZoneError.noItem
-    }
-
+    let edition = try await fetchJSON(EditionData.self, from: Constants.latestDigestEditionURL)
     guard edition.url.scheme == "https" else {
       throw LearningZoneError.invalidItem
     }
@@ -185,12 +190,11 @@ final class FetchedItem<Value> {
 private enum LearningZoneError: Error {
   case badResponse
   case badContentType
-  case noItem
   case invalidItem
   case invalidImage
 }
 
-/// Edition as listed by ghostery.com/privacy-digest/editions.json
+/// Latest sent edition, as given by ghostery.com/privacy-digest/latest.json
 private struct EditionData: Decodable {
   let editionNumber: Int?
   let publishedAt: Date
@@ -207,15 +211,6 @@ private struct BlogPostData: Decodable {
   let publishedAt: Date
   let imageUrl: URL?
   let url: URL
-}
-
-/// Decodes to nil instead of failing
-private struct Lossy<Value: Decodable>: Decodable {
-  let value: Value?
-
-  init(from decoder: Decoder) throws {
-    value = try? Value(from: decoder)
-  }
 }
 
 fileprivate extension String {

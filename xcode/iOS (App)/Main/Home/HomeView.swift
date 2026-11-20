@@ -23,6 +23,8 @@ fileprivate enum Constants {
   static let noticeCornerRadius: CGFloat = 8
   static let noticeShadowRadius: CGFloat = 6
   static let noticeShadowY: CGFloat = 4
+  // Above the icon, aligning it with the first line of the notice
+  static let noticeIconTopPadding: CGFloat = 1
 }
 
 fileprivate enum Strings {
@@ -33,8 +35,8 @@ fileprivate enum Strings {
   // In one line, unlike the Mac card's
   static let edgeDescription = String(localized: "One click in Edge Add-ons.", comment: "Description of Edge, in which Ghostery is installed from its store, Edge Add-ons. Keep it short, it fits in one line next to the button.")
   // Below the browsers, why the others aren't there
-  static let otherBrowsersOnIPhone = String(localized: "Don’t see your browser? On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used")
-  static let otherBrowsersOnIPad = String(localized: "Don’t see your browser? On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used")
+  static let otherBrowsersOnIPhone = LocalizedStringResource("**Don’t see your browser?** On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used, with the question between ** in bold")
+  static let otherBrowsersOnIPad = LocalizedStringResource("**Don’t see your browser?** On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery.", comment: "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used, with the question between ** in bold")
 }
 
 fileprivate enum URLs {
@@ -351,10 +353,11 @@ private struct HomeBrowsersNotice: View {
   var body: some View {
     let shape = RoundedRectangle(cornerRadius: Constants.noticeCornerRadius)
 
-    HStack(spacing: Constants.noticeSpacing) {
+    HStack(alignment: .top, spacing: Constants.noticeSpacing) {
       Image(.homeInfo)
         .accessibilityHidden(true)
-      Text(text)
+        .padding(.top, Constants.noticeIconTopPadding)
+      Text(text, boldFont: AppTextStyle.labelS.font)
         .textStyle(.bodyS)
         .foregroundColor(Colors.foregroundPrimary)
         .fixedSize(horizontal: false, vertical: true)
@@ -371,7 +374,7 @@ private struct HomeBrowsersNotice: View {
 
   // Of the device rather than of the layout, as iPads in Split View show
   // the browsers as on iPhones
-  private var text: String {
+  private var text: LocalizedStringResource {
     UIDevice.current.userInterfaceIdiom == .pad ? Strings.otherBrowsersOnIPad : Strings.otherBrowsersOnIPhone
   }
 }

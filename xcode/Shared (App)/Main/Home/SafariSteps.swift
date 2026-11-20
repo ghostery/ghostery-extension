@@ -49,7 +49,7 @@ fileprivate enum Strings {
   static let openSafariSettings = String(localized: "Open Safari settings.", comment: "Step of the instructions, next to the button opening the settings")
   static let goToSafariSettings = String(localized: "Open Settings and go to Apps › Safari › Extensions.", comment: "Step of the instructions on iPhones and iPads where the app can't open the settings of Safari, next to the button opening the Settings app. Apps, Safari and Extensions are the names of the pages in the Settings app, as it shows them in the language.")
   static let allowExtension = LocalizedStringResource("Turn on **Allow\u{00A0}Extension**.", comment: "Step of the instructions, with the part between ** in bold. Allow Extension is the name of the switch in the settings of Safari on iPhones, as the settings show it in the language. A no-break space joins its words, so it stays on one line.")
-  static let allowAllWebsites = String(localized: "Under Permissions, set All websites to Allow.", comment: "Step of the instructions. Permissions, All Websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.")
+  static let allowAllWebsites = LocalizedStringResource("Under Permissions, set **All websites** to **Allow**.", comment: "Step of the instructions, with the parts between ** in bold. Permissions, All websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.")
   static let allow = String(localized: "Allow", comment: "Option in the settings of Safari on iPhones, as the settings show it in the language. Shown in the picture next to the step selecting it.")
   #endif
 }
@@ -119,7 +119,7 @@ struct SafariEnableSteps: View {
       SafariInstructionsStep(number: 2, text: Text(Strings.allowExtension, boldFont: layout.boldStyle.font), layout: layout) {
         SwitchPicture()
       }
-      SafariInstructionsStep(number: 3, text: Text(Strings.allowAllWebsites), layout: layout) {
+      SafariInstructionsStep(number: 3, text: Text(Strings.allowAllWebsites, boldFont: layout.boldStyle.font), layout: layout) {
         AllowPicture()
       }
       #endif

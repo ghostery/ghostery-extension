@@ -1,6 +1,160 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "**Don’t see your browser?** On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
+      "comment" : "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used, with the question between ** in bold",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Dein Browser fehlt?** Auf dem iPad erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**¿No ves tu navegador?** En el iPad, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Vous ne voyez pas votre navigateur ?** Sur iPad, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Non vedi il tuo browser?** Su iPad, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**お使いのブラウザが見つかりませんか**？iPadでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**사용하는 브라우저가 보이지 않나요?** iPad에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Nie widzisz swojej przeglądarki?** Na iPadzie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Não encontrou seu navegador?** No iPad, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Не видите свой браузер?** На iPad большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Không thấy trình duyệt của bạn?** Trên iPad, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**没有看到您的浏览器**？在 iPad 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**沒有看到您的瀏覽器**？在 iPad 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
+          }
+        }
+      }
+    },
+    "**Don’t see your browser?** On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
+      "comment" : "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used, with the question between ** in bold",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Dein Browser fehlt?** Auf dem iPhone erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**¿No ves tu navegador?** En el iPhone, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Vous ne voyez pas votre navigateur ?** Sur iPhone, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Non vedi il tuo browser?** Su iPhone, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**お使いのブラウザが見つかりませんか**？iPhoneでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**사용하는 브라우저가 보이지 않나요?** iPhone에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Nie widzisz swojej przeglądarki?** Na iPhonie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Não encontrou seu navegador?** No iPhone, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Не видите свой браузер?** На iPhone большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Không thấy trình duyệt của bạn?** Trên iPhone, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**没有看到您的浏览器**？在 iPhone 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**沒有看到您的瀏覽器**？在 iPhone 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
+          }
+        }
+      }
+    },
     "**If you click Uninstall,** Ghostery will be deleted from your Mac." : {
       "comment" : "Warning below the step unchecking the extension, with the part between ** in bold. Uninstall is the name of the button in the extension settings of Safari, and Ghostery is the app.",
       "localizations" : {
@@ -1001,8 +1155,8 @@
         }
       }
     },
-    "Become a contributor" : {
-      "comment" : "Title of the Contribute section",
+    "Become a Contributor" : {
+      "comment" : "Title of the Contribute section. Contributor is the name of those who support Ghostery with a donation.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2149,160 +2303,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在 Safari 中停用"
-          }
-        }
-      }
-    },
-    "Don’t see your browser? On iPad, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
-      "comment" : "Notice below the browsers on iPads, Safari and Edge, which are the only ones in which Ghostery can be used",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein Browser fehlt? Auf dem iPad erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿No ves tu navegador? En el iPad, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous ne voyez pas votre navigateur ? Sur iPad, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non vedi il tuo browser? Su iPad, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "お使いのブラウザが見つかりませんか？iPadでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "사용하는 브라우저가 보이지 않나요? iPad에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nie widzisz swojej przeglądarki? Na iPadzie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não encontrou seu navegador? No iPad, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Не видите свой браузер? На iPad большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Không thấy trình duyệt của bạn? Trên iPad, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有看到您的浏览器？在 iPad 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "沒有看到您的瀏覽器？在 iPad 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
-          }
-        }
-      }
-    },
-    "Don’t see your browser? On iPhone, most browsers don’t allow extensions. Safari and Edge do, so use one of them to browse ad-free with Ghostery." : {
-      "comment" : "Notice below the browsers on iPhones, Safari and Edge, which are the only ones in which Ghostery can be used",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein Browser fehlt? Auf dem iPhone erlauben die meisten Browser keine Erweiterungen. Safari und Edge schon – nutze einen der beiden, um mit Ghostery werbefrei zu surfen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿No ves tu navegador? En el iPhone, la mayoría de los navegadores no permiten extensiones. Safari y Edge sí, así que usa uno de ellos para navegar sin anuncios con Ghostery."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous ne voyez pas votre navigateur ? Sur iPhone, la plupart des navigateurs n’acceptent pas les extensions. Safari et Edge les acceptent : utilisez l’un d’eux pour naviguer sans publicité avec Ghostery."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non vedi il tuo browser? Su iPhone, la maggior parte dei browser non consente le estensioni. Safari ed Edge sì, quindi usane uno per navigare senza pubblicità con Ghostery."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "お使いのブラウザが見つかりませんか？iPhoneでは、ほとんどのブラウザが機能拡張に対応していません。SafariとEdgeは対応しているので、どちらかを使ってGhosteryで広告のないブラウジングをお楽しみください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "사용하는 브라우저가 보이지 않나요? iPhone에서는 대부분의 브라우저가 확장 프로그램을 지원하지 않습니다. Safari와 Edge는 지원하므로, 둘 중 하나를 사용해 Ghostery로 광고 없이 브라우징하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nie widzisz swojej przeglądarki? Na iPhonie większość przeglądarek nie obsługuje rozszerzeń. Safari i Edge tak, więc korzystaj z jednej z nich, aby przeglądać internet bez reklam z Ghostery."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não encontrou seu navegador? No iPhone, a maioria dos navegadores não permite extensões. O Safari e o Edge permitem, então use um deles para navegar sem anúncios com o Ghostery."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Не видите свой браузер? На iPhone большинство браузеров не поддерживают расширения. Safari и Edge поддерживают, поэтому используйте один из них, чтобы просматривать сайты без рекламы с Ghostery."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Không thấy trình duyệt của bạn? Trên iPhone, hầu hết các trình duyệt không cho phép tiện ích mở rộng. Safari và Edge thì có, vì vậy hãy dùng một trong hai để duyệt web không quảng cáo với Ghostery."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有看到您的浏览器？在 iPhone 上，大多数浏览器不支持扩展。Safari 和 Edge 支持，请使用其中之一，通过 Ghostery 享受无广告浏览。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "沒有看到您的瀏覽器？在 iPhone 上，大多數瀏覽器不支援延伸功能。Safari 和 Edge 支援，請使用其中之一，透過 Ghostery 享受無廣告瀏覽。"
           }
         }
       }
@@ -4223,6 +4223,83 @@
         }
       }
     },
+    "Hoodies, tees and mugs that take online privacy into the real world." : {
+      "comment" : "Description of the card about the shop with Ghostery’s clothes and accessories",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoodies, T-Shirts und Tassen, die Datenschutz im Netz in die echte Welt bringen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sudaderas, camisetas y tazas que llevan la privacidad en línea al mundo real."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sweats, t-shirts et mugs qui font entrer la vie privée en ligne dans le monde réel."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felpe, magliette e tazze che portano la privacy online nel mondo reale."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "オンラインプライバシーを現実の世界へ広げる、パーカー、Tシャツ、マグカップ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "온라인 개인정보 보호를 현실 세계로 가져오는 후드티, 티셔츠, 머그컵."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluzy, koszulki i kubki, które przenoszą prywatność w sieci do realnego świata."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moletons, camisetas e canecas que levam a privacidade online para o mundo real."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Худи, футболки и кружки, которые переносят конфиденциальность в интернете в реальный мир."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Áo hoodie, áo thun và cốc mang quyền riêng tư trực tuyến vào đời thực."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连帽衫、T 恤和马克杯，把网络隐私带进现实世界。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連帽衫、T 恤和馬克杯，把網路隱私帶進現實世界。"
+          }
+        }
+      }
+    },
     "How to disable Ghostery in Safari" : {
       "localizations" : {
         "de" : {
@@ -4759,79 +4836,79 @@
         }
       }
     },
-    "Join 450,000+ subscribers. A new edition every two weeks." : {
-      "comment" : "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter",
+    "Join 450,000+ subscribers.\nA new edition every two weeks." : {
+      "comment" : "Subtitle of the card about the Privacy Digest, Ghostery’s newsletter, in two lines",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schließ dich über 450.000 Abonnenten an. Alle zwei Wochen eine neue Ausgabe."
+            "value" : "Schließ dich über 450.000 Abonnenten an.\nAlle zwei Wochen eine neue Ausgabe."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Únete a más de 450.000 suscriptores. Una nueva edición cada dos semanas."
+            "value" : "Únete a más de 450.000 suscriptores.\nUna nueva edición cada dos semanas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rejoignez plus de 450 000 abonnés. Une nouvelle édition toutes les deux semaines."
+            "value" : "Rejoignez plus de 450 000 abonnés.\nUne nouvelle édition toutes les deux semaines."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unisciti a oltre 450.000 iscritti. Una nuova edizione ogni due settimane."
+            "value" : "Unisciti a oltre 450.000 iscritti.\nUna nuova edizione ogni due settimane."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "45万人以上の購読者に加わりましょう。2週間ごとに新しい号をお届けします。"
+            "value" : "45万人以上の購読者に加わりましょう。\n2週間ごとに新しい号をお届けします。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "45만 명 이상의 구독자와 함께하세요. 2주마다 새로운 호가 발행됩니다."
+            "value" : "45만 명 이상의 구독자와 함께하세요.\n2주마다 새로운 호가 발행됩니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dołącz do ponad 450 000 subskrybentów. Nowe wydanie co dwa tygodnie."
+            "value" : "Dołącz do ponad 450 000 subskrybentów.\nNowe wydanie co dwa tygodnie."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Junte-se a mais de 450.000 assinantes. Uma nova edição a cada duas semanas."
+            "value" : "Junte-se a mais de 450.000 assinantes.\nUma nova edição a cada duas semanas."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Присоединяйтесь к более чем 450 000 подписчиков. Новый выпуск каждые две недели."
+            "value" : "Присоединяйтесь к более чем 450 000 подписчиков.\nНовый выпуск каждые две недели."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tham gia cùng hơn 450.000 người đăng ký. Cứ hai tuần lại có một số mới."
+            "value" : "Tham gia cùng hơn 450.000 người đăng ký.\nCứ hai tuần lại có một số mới."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入 45 万多名订阅者的行列。每两周更新一期。"
+            "value" : "加入 45 万多名订阅者的行列。\n每两周更新一期。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入 45 萬多名訂閱者的行列。每兩週更新一期。"
+            "value" : "加入 45 萬多名訂閱者的行列。\n每兩週更新一期。"
           }
         }
       }
@@ -7297,6 +7374,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "隱私權政策"
+          }
+        }
+      }
+    },
+    "Privacy you can wear" : {
+      "comment" : "Title of the card about the shop with Ghostery’s clothes and accessories",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privatsphäre zum Tragen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad para vestir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La vie privée à porter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy da indossare"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "身にまとうプライバシー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "입을 수 있는 프라이버시"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prywatność do noszenia"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidade para vestir"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приватность на себе"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quyền riêng tư để mặc"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可以穿在身上的隐私"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可以穿在身上的隱私"
           }
         }
       }
@@ -10212,6 +10366,83 @@
         }
       }
     },
+    "The news that matters, in one read" : {
+      "comment" : "Title of the card of the latest edition of the Privacy Digest, Ghostery’s newsletter, of which each edition gathers the news worth knowing",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachrichten, die zählen – in einer Ausgabe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las noticias que importan, en una lectura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’actualité qui compte, en une seule lecture"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le notizie che contano, in un’unica lettura"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大切なニュースを一度にまとめて読める"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중요한 뉴스를 한 번에 읽어 보세요"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiadomości, które się liczą, w jednej lekturze"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As notícias que importam, em uma só leitura"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Важные новости — за одно прочтение"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Những tin tức quan trọng, trong một lần đọc"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重要新闻，一次读完"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重要新聞，一次讀完"
+          }
+        }
+      }
+    },
     "To check if Ghostery is enabled in %@, open System Settings, select %@, and make sure %@ is toggled on." : {
       "comment" : "Shown when the app can't read the data of a browser. The first placeholder is the name of the browser, the second one the name of the app, and the last one the name of the browser as System Settings shows it. System Settings is the name of the macOS app.",
       "localizations" : {
@@ -10526,79 +10757,79 @@
         }
       }
     },
-    "Under Permissions, set All websites to Allow." : {
-      "comment" : "Step of the instructions. Permissions, All Websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.",
+    "Under Permissions, set **All websites** to **Allow**." : {
+      "comment" : "Step of the instructions, with the parts between ** in bold. Permissions, All websites and Allow are the names of the section, the row and the option in the settings of Safari on iPhones, as the settings show them in the language.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setze unter „Zugriffsrechte“ „Allen Websites“ auf „Erlauben“."
+            "value" : "Setze unter „Zugriffsrechte“ **Allen Websites** auf **Erlauben**."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En “Permisos”, establece “Todos los sitios web” en “Permitir”."
+            "value" : "En “Permisos”, establece **Todos los sitios web** en **Permitir**."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sous « Autorisations », réglez « Tous les sites web » sur « Autoriser »."
+            "value" : "Sous « Autorisations », réglez **Tous les sites web** sur **Autoriser**."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In “Permessi”, imposta “Tutti i siti web” su “Consenti”."
+            "value" : "In “Permessi”, imposta **Tutti i siti web** su **Consenti**."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「アクセス権」で、「すべてのWebサイト」を「許可」に設定します。"
+            "value" : "「アクセス権」で、**すべてのWebサイト**を**許可**に設定します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "‘권한’에서 ‘모든 웹사이트’를 ‘허용’으로 설정합니다."
+            "value" : "‘권한’에서 **모든 웹사이트**를 **허용**으로 설정합니다."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "W sekcji „Uprawnienia” ustaw „Wszystkie witryny” na „Pozwól”."
+            "value" : "W sekcji „Uprawnienia” ustaw **Wszystkie witryny** na **Pozwól**."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Em “Permissões”, defina “Todos os Sites” como “Permitir”."
+            "value" : "Em “Permissões”, defina **Todos os Sites** como **Permitir**."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "В разделе «Права доступа» для пункта «Все сайты» выберите «Разрешить»."
+            "value" : "В разделе «Права доступа» для пункта **Все сайты** выберите **Разрешить**."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trong mục “Quyền”, đặt “Tất cả trang web” thành “Cho phép”."
+            "value" : "Trong mục “Quyền”, đặt **Tất cả trang web** thành **Cho phép**."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在“权限”下，将“所有网站”设为“允许”。"
+            "value" : "在“权限”下，将**所有网站**设为**允许**。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在「權限」下，將「所有網站」設為「允許」。"
+            "value" : "在「權限」下，將**所有網站**設為**允許**。"
           }
         }
       }
@@ -10756,7 +10987,7 @@
         }
       }
     },
-    "Visit Ghostery Shop" : {
+    "Visit the Ghostery Shop" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -10830,7 +11061,8 @@
             "value" : "造訪 Ghostery 商店"
           }
         }
-      }
+      },
+      "comment" : "Button of the card about the shop, opening it. Ghostery Shop is its name."
     },
     "Want Ghostery to start automatically when you log in?" : {
       "localizations" : {
@@ -10980,235 +11212,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "想在其他裝置上使用 Ghostery 嗎？"
-          }
-        }
-      }
-    },
-    "Wear your belief" : {
-      "comment" : "Title of the card about the shop with Ghostery’s clothes and accessories",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeig Haltung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Viste lo que crees"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Affichez vos convictions"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Indossa i tuoi valori"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "信念を身にまとう"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "신념을 입으세요"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokaż, w co wierzysz"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vista o que você acredita"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Носите свои убеждения"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mặc niềm tin của bạn"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "穿出您的信念"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "穿出您的信念"
-          }
-        }
-      }
-    },
-    "What’s happening in privacy right now?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Was gibt es Neues beim Datenschutz?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Qué pasa ahora en la privacidad?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quoi de neuf côté vie privée ?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cosa succede oggi nel mondo della privacy?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシーの世界で今、何が起きている？"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "지금 개인정보 보호 분야의 소식은?"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Co nowego w świecie prywatności?"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O que acontece agora na privacidade?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Что нового в мире конфиденциальности?"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Có gì mới về quyền riêng tư?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隐私领域现在正在发生什么？"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隱私領域現在正發生什麼事？"
-          }
-        }
-      }
-    },
-    "With the Ghostery apparel and accessories, you can help spread awareness of online privacy in the real world." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mit Kleidung und Accessoires von Ghostery machst du auch in der echten Welt auf Datenschutz im Netz aufmerksam."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Con la ropa y los accesorios de Ghostery, puedes ayudar a concienciar sobre la privacidad en línea en el mundo real."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avec les vêtements et accessoires Ghostery, contribuez à sensibiliser à la vie privée en ligne dans le monde réel."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Con l’abbigliamento e gli accessori Ghostery puoi contribuire a diffondere la consapevolezza sulla privacy online nel mondo reale."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghosteryのアパレルやアクセサリーで、オンラインプライバシーの大切さを現実の世界でも広めましょう。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 의류와 액세서리로 실생활에서도 온라인 개인정보 보호에 대한 인식을 높일 수 있습니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dzięki odzieży i akcesoriom Ghostery możesz szerzyć świadomość o prywatności w sieci także w realnym świecie."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Com as roupas e acessórios do Ghostery, você ajuda a divulgar a importância da privacidade online no mundo real."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "С одеждой и аксессуарами Ghostery вы поможете рассказать о конфиденциальности в интернете и в реальном мире."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Với trang phục và phụ kiện Ghostery, bạn có thể giúp lan tỏa nhận thức về quyền riêng tư trực tuyến trong đời thực."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "穿上 Ghostery 服饰、用上 Ghostery 配饰，您就能在现实世界中帮助提升人们的网络隐私意识。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "穿上 Ghostery 服飾、配戴 Ghostery 配件，您就能在現實世界中幫助提升大家的網路隱私意識。"
           }
         }
       }
