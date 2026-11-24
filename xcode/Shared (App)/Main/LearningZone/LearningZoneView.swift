@@ -21,6 +21,10 @@ struct LearningZoneView: View {
     } footer: {
       Banner()
     }
+    // The Mac's window has the logo in its own title bar
+    #if os(iOS)
+    .sectionTitleBar()
+    #endif
   }
 }
 

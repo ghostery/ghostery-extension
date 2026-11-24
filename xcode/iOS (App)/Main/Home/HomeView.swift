@@ -136,12 +136,10 @@ struct HomeView: View {
   @Environment(\.scenePhase) private var scenePhase
 
   var body: some View {
-    Group {
-      if showsSafariInstructions {
-        SafariInstructionsView(onBack: { showsSafariInstructions = false })
-      } else {
-        home
-      }
+    SectionNavigation(showsSubpage: $showsSafariInstructions) {
+      home
+    } subpage: {
+      SafariInstructionsView()
     }
     .task { await safari.monitor() }
     .onChange(of: safari.isEnabled) {

@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct SafariInstructionsView: View {
-  var onBack: () -> Void
-
   // Of the steps, which are larger on iPads
   @CurrentLayout private var layout: SafariStepLayout
 
   var body: some View {
     SectionScrollView {
-      SectionHeader(title: SectionStrings.SafariInstructions.title, onBack: onBack)
+      SectionHeader(title: SectionStrings.SafariInstructions.title)
 
       SafariEnableSteps(layout: layout)
     }
@@ -23,5 +21,5 @@ struct SafariInstructionsView: View {
 }
 
 #Preview {
-  SafariInstructionsView(onBack: {})
+  SafariInstructionsView()
 }

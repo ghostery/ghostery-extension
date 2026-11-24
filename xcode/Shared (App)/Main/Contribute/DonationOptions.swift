@@ -12,6 +12,14 @@ import SwiftUI
 fileprivate enum Constants {
   static let cardCornerRadius: CGFloat = 12
 
+  #if os(macOS)
+  static let restoreHitPadding: CGFloat = 0
+  #else
+  // The button restoring the donations, in the title bar, can be tapped
+  // also around its title, as it's small
+  static let restoreHitPadding: CGFloat = 12
+  #endif
+
   static let textSpacing: CGFloat = 8
 
   static let periodsSpacing: CGFloat = 32
@@ -288,9 +296,6 @@ struct DonationOptions: View {
 
 /// Restores the monthly or yearly donations made with the Apple Account
 struct DonationRestoreButton: View {
-  /// Around the title, where the button can also be tapped
-  var hitPadding: CGFloat = 0
-
   private var donations: Donations { .shared }
 
   var body: some View {
@@ -298,10 +303,11 @@ struct DonationRestoreButton: View {
       Task { await donations.restore() }
     } label: {
       Text(Strings.restore)
-        .padding(hitPadding)
+        .padding(Constants.restoreHitPadding)
         .contentShape(Rectangle())
     }
-    .padding(-hitPadding)
+    // Takes only the space of its title
+    .padding(-Constants.restoreHitPadding)
     .disabled(donations.isRestoring)
   }
 }

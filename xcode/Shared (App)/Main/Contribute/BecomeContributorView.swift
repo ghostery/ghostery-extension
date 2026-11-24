@@ -35,10 +35,12 @@ struct BecomeContributorView: View {
   @CurrentLayout private var layout: ContributeLayout
 
   var body: some View {
-    if showsDonation {
-      DonationView(onBack: { showsDonation = false })
-    } else {
+    SectionNavigation(showsSubpage: $showsDonation) {
       contributions
+    } subpage: {
+      DonationView(onBack: { showsDonation = false })
+    } titleBarItem: {
+      DonationRestoreButton()
     }
   }
 

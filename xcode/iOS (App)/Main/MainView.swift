@@ -82,8 +82,9 @@ struct MainView: View {
   }
 }
 
-/// Light background of the app, also behind the status bar and the tab bar
-private struct MainBackground: View {
+/// Light background of the app, also behind the status bar and the tab bar.
+/// The pages on the navigation stacks of the sections have their own copy.
+struct MainBackground: View {
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   var body: some View {
