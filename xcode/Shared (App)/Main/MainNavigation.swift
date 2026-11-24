@@ -17,7 +17,7 @@ fileprivate enum Strings {
   static let learningZone = String(localized: "Learning Zone", comment: "Section of the main window, with articles about privacy")
   static let contribute = String(localized: "Contribute", comment: "Section of the main window, with the ways to support Ghostery")
   #if os(macOS)
-  static let settings = String(localized: "Settings", comment: "Section of the main window")
+  static let settings = String(localized: "Settings", comment: "Section of the main window, also the title of the section")
   #endif
   static let support = String(localized: "Support", comment: "Button opening the dialog with the ways to get help and give feedback")
 }

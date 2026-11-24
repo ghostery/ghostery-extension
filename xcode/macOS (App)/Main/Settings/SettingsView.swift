@@ -31,12 +31,11 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
   // You can translate your strings here
-  static let title = String(localized: "Ghostery Settings", comment: "Title of the Settings section")
-  static let description = String(localized: "Manage your privacy settings and control how your data is tracked online.")
-  static let launchAtStartup = String(localized: "Launch Ghostery automatically at startup", comment: "Setting opening the app when the user logs in")
-  static let launchAtStartupDescription = String(localized: "Ensures your privacy is protected from the moment you go online. This seamless protection blocks trackers and unwanted ads without any extra effort, helping you browse faster and more securely right from startup.")
-  static let keepMenuBarIcon = String(localized: "Keep app icon in the macOS Menu Bar", comment: "Setting showing the icon of the app in the menu bar")
-  static let keepMenuBarIconDescription = String(localized: "Keep the app icon in your macOS menu bar to quickly access Ghostery’s privacy controls and notifications, ensuring you stay informed and in control of your online tracking at all times.")
+  static let description = String(localized: "Choose how Ghostery runs on your Mac.")
+  static let openAtLogin = String(localized: "Open Ghostery at login", comment: "Setting opening the app when the user logs in")
+  static let openAtLoginDescription = String(localized: "Starts Ghostery when you turn on your Mac, so it’s ready from the first page you open.")
+  static let showInMenuBar = String(localized: "Show Ghostery in the menu bar", comment: "Setting showing the icon of the app in the menu bar")
+  static let showInMenuBarDescription = String(localized: "Quick access to Ghostery and its notifications.")
   static let toggleOn = String(localized: "ON", comment: "State of a switch, shown next to it")
   static let toggleOff = String(localized: "OFF", comment: "State of a switch, shown next to it")
 }
@@ -47,19 +46,20 @@ struct SettingsView: View {
 
     SectionScrollView {
       SectionHeader(
-        title: Strings.title,
+        // Named as in the sidebar
+        title: MainSection.settings.title,
         description: Strings.description,
         image: .settingsHeader
       )
       VStack(spacing: Constants.settingsSpacing) {
         SettingToggle(
-          title: Strings.launchAtStartup,
-          description: Strings.launchAtStartupDescription,
+          title: Strings.openAtLogin,
+          description: Strings.openAtLoginDescription,
           isOn: Binding(get: { settings.launchesAtLogin }, set: settings.setLaunchesAtLogin)
         )
         SettingToggle(
-          title: Strings.keepMenuBarIcon,
-          description: Strings.keepMenuBarIconDescription,
+          title: Strings.showInMenuBar,
+          description: Strings.showInMenuBarDescription,
           isOn: $settings.showsMenuBarIcon
         )
       }

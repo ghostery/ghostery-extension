@@ -38,3 +38,11 @@ for path in ./xcode/*.xcloc; do
   xcodebuild -importLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath "$file" -quiet 2>&1 |
     sed '/InfoPlist\.xcstrings: File not found in the XLIFF/d'
 done
+
+# Xcode saves the catalogs without the newline at the end, which editors
+# add back, as set in .editorconfig
+for catalog in ./xcode/*/*.xcstrings; do
+  if [ -n "$(tail -c 1 "$catalog")" ]; then
+    echo >> "$catalog"
+  fi
+done

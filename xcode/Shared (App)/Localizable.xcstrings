@@ -1007,7 +1007,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Als Förderer unterstützt du die Entwicklung der gesamten Ghostery Privacy Suite"
+            "value" : "Als Ghostery-Förderer unterstützt du die Entwicklung der gesamten Ghostery Privacy Suite"
           }
         },
         "es" : {
@@ -1161,7 +1161,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werde Förderer"
+            "value" : "Werde Ghostery-Förderer"
           }
         },
         "es" : {
@@ -1238,7 +1238,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werbung, Tracker\n& Cookie-Pop-ups\nin jedem Browser\nblockieren."
+            "value" : "Blockiere\nWerbung, Tracker\n& Cookie-Banner\nin jedem Browser."
           }
         },
         "es" : {
@@ -1315,7 +1315,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werbung, Tracker und Cookie-Pop-ups werden blockiert."
+            "value" : "Werbung, Tracker und Cookie-Banner werden blockiert."
           }
         },
         "es" : {
@@ -1392,7 +1392,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Surfe sicherer, schneller & mit weniger Werbung.\nHol dir Ghostery für deinen Browser."
+            "value" : "Surfe werbefrei, sicher und schnell.\nHol dir Ghostery für deinen Browser."
           }
         },
         "es" : {
@@ -1540,12 +1540,88 @@
         }
       }
     },
+    "Choose how Ghostery runs on your Mac." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lege fest, wie Ghostery auf deinem Mac läuft."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige cómo funciona Ghostery en tu Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez comment Ghostery fonctionne sur votre Mac."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli come funziona Ghostery sul tuo Mac."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac上でのGhosteryの動作を選択できます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac에서 Ghostery가 실행되는 방식을 선택하세요."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz, jak Ghostery działa na twoim Macu."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha como o Ghostery funciona no seu Mac."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите, как Ghostery работает на вашем Mac."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chọn cách Ghostery hoạt động trên máy Mac của bạn."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择 Ghostery 在您的 Mac 上的运行方式。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選擇 Ghostery 在您的 Mac 上的執行方式。"
+          }
+        }
+      }
+    },
     "Choose the most convenient method to support Ghostery" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle die für dich bequemste Art, Ghostery zu unterstützen"
+            "value" : "Unterstütze Ghostery so, wie es für dich am besten passt."
           }
         },
         "es" : {
@@ -1776,7 +1852,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kehre zur Ghostery-App zurück."
+            "value" : "Wechsle zurück zur Ghostery-App."
           }
         },
         "es" : {
@@ -2465,7 +2541,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spende fehlgeschlagen"
+            "value" : "Zahlung fehlgeschlagen"
           }
         },
         "es" : {
@@ -2773,7 +2849,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle die Berechtigung **Auf jeder Website immer erlauben**."
+            "value" : "Erteile die Berechtigung **Auf jeder Website immer erlauben**."
           }
         },
         "es" : {
@@ -2849,7 +2925,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gefällt dir das werbefreie Web?"
+            "value" : "Gefällt dir das Surfen ohne Werbung?"
           }
         },
         "es" : {
@@ -2916,82 +2992,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "喜歡無廣告的網路嗎？"
-          }
-        }
-      }
-    },
-    "Ensures your privacy is protected from the moment you go online. This seamless protection blocks trackers and unwanted ads without any extra effort, helping you browse faster and more securely right from startup." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schützt deine Privatsphäre ab dem Moment, in dem du online gehst. Der nahtlose Schutz blockiert Tracker und unerwünschte Werbung ohne zusätzlichen Aufwand – so surfst du direkt ab dem Start schneller und sicherer."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protege tu privacidad desde el momento en que te conectas. Esta protección continua bloquea rastreadores y anuncios no deseados sin ningún esfuerzo adicional, para que navegues más rápido y de forma más segura desde el inicio."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protège votre vie privée dès que vous vous connectez. Cette protection transparente bloque les trackers et les publicités indésirables sans effort supplémentaire, pour une navigation plus rapide et plus sûre dès le démarrage."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protegge la tua privacy dal momento in cui ti connetti. Questa protezione continua blocca tracker e pubblicità indesiderate senza alcuno sforzo, aiutandoti a navigare più velocemente e in modo più sicuro fin dall’avvio."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "オンラインになった瞬間からプライバシーを守ります。シームレスな保護により、手間をかけずにトラッカーや不要な広告をブロックし、起動直後からより速く安全にブラウズできます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "온라인에 접속하는 순간부터 개인정보를 보호합니다. 별도의 노력 없이 트래커와 원치 않는 광고를 차단하여, 시작할 때부터 더 빠르고 안전하게 브라우징할 수 있습니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chroni twoją prywatność od chwili, gdy łączysz się z internetem. Ta płynna ochrona blokuje trackery i niechciane reklamy bez dodatkowego wysiłku, dzięki czemu od samego startu przeglądasz szybciej i bezpieczniej."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protege sua privacidade desde o momento em que você fica online. Essa proteção contínua bloqueia rastreadores e anúncios indesejados sem nenhum esforço extra, para você navegar com mais rapidez e segurança desde a inicialização."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Защищает вашу конфиденциальность с момента выхода в интернет. Бесшовная защита блокирует трекеры и нежелательную рекламу без лишних усилий, чтобы вы с самого запуска пользовались интернетом быстрее и безопаснее."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bảo vệ quyền riêng tư của bạn ngay từ khi bạn lên mạng. Lớp bảo vệ liền mạch này chặn trình theo dõi và quảng cáo không mong muốn mà không cần thêm thao tác nào, giúp bạn duyệt web nhanh hơn và an toàn hơn ngay từ khi khởi động."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "从您上网的那一刻起保护您的隐私。这种无缝保护无需额外操作即可拦截跟踪器和不需要的广告，让您从启动起就能更快、更安全地浏览。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "從您上網的那一刻起保護您的隱私。無縫的保護不需要額外操作就能阻擋追蹤器和不想要的廣告，讓您一啟動就能更快、更安全地瀏覽。"
           }
         }
       }
@@ -3461,7 +3461,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kontakt aufnehmen"
+            "value" : "Schreib uns"
           }
         },
         "es" : {
@@ -3538,7 +3538,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die nächste Ausgabe des Privacy Digest\ndirekt in dein Postfach."
+            "value" : "Erhalte die nächste Ausgabe des Privacy Digest\ndirekt in dein Postfach."
           }
         },
         "es" : {
@@ -3615,7 +3615,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die nächste Ausgabe des Privacy Digest direkt in dein Postfach."
+            "value" : "Erhalte die nächste Ausgabe des Privacy Digest direkt in dein Postfach."
           }
         },
         "es" : {
@@ -3768,7 +3768,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghostery fehlt in einem Browser oder funktioniert nicht wie erwartet? Unser Team hilft dir."
+            "value" : "Ghostery fehlt in einem Browser oder funktioniert nicht wie erwartet? Unser Team hilft dir jederzeit."
           }
         },
         "es" : {
@@ -3835,83 +3835,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "瀏覽器中找不到 Ghostery，或運作不如預期？我們的團隊會協助您。"
-          }
-        }
-      }
-    },
-    "Ghostery Settings" : {
-      "comment" : "Title of the Settings section",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery-Einstellungen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustes de Ghostery"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réglages de Ghostery"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impostazioni"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghosteryの設定"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 설정"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ustawienia Ghostery"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustes do Ghostery"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Настройки Ghostery"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cài đặt Ghostery"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 设置"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery 設定"
           }
         }
       }
@@ -4075,7 +3998,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hilf Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
+            "value" : "Kämpfe mit Ghostery für ein Internet, in dem Privatsphäre ein Menschenrecht ist."
           }
         },
         "es" : {
@@ -4229,7 +4152,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hoodies, T-Shirts und Tassen, die Datenschutz im Netz in die echte Welt bringen."
+            "value" : "Hoodies, T-Shirts und Tassen, die Privatsphäre aus dem Netz in den Alltag bringen."
           }
         },
         "es" : {
@@ -4842,7 +4765,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schließ dich über 450.000 Abonnenten an.\nAlle zwei Wochen eine neue Ausgabe."
+            "value" : "Über 450.000 Menschen lesen schon mit.\nAlle zwei Wochen eine neue Ausgabe."
           }
         },
         "es" : {
@@ -4909,159 +4832,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "加入 45 萬多名訂閱者的行列。\n每兩週更新一期。"
-          }
-        }
-      }
-    },
-    "Keep app icon in the macOS Menu Bar" : {
-      "comment" : "Setting showing the icon of the app in the menu bar",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App-Symbol in der macOS-Menüleiste behalten"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantener el icono en la barra de menús de macOS"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Garder l’icône dans la barre des menus de macOS"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantieni l’icona nella barra dei menu di macOS"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOSのメニューバーにアプリのアイコンを表示"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS 메뉴 막대에 앱 아이콘 유지"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pokazuj ikonę aplikacji na pasku menu macOS"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manter o ícone do app na barra de menus do macOS"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Значок приложения в строке меню macOS"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Giữ biểu tượng ứng dụng trên thanh menu macOS"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 macOS 菜单栏中保留应用图标"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 macOS 選單列中保留 App 圖像"
-          }
-        }
-      }
-    },
-    "Keep the app icon in your macOS menu bar to quickly access Ghostery’s privacy controls and notifications, ensuring you stay informed and in control of your online tracking at all times." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behalte das App-Symbol in der macOS-Menüleiste, um schnell auf die Datenschutzfunktionen und Mitteilungen von Ghostery zuzugreifen. So bleibst du informiert und hast jederzeit die Kontrolle darüber, wie du online getrackt wirst."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantén el icono de la app en la barra de menús de macOS para acceder rápidamente a los controles de privacidad y a las notificaciones de Ghostery, y estar siempre informado y en control de cómo se te rastrea en línea."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gardez l’icône de l’app dans la barre des menus de macOS pour accéder rapidement aux commandes de confidentialité et aux notifications de Ghostery, rester informé et garder à tout moment le contrôle sur votre pistage en ligne."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantieni l’icona dell’app nella barra dei menu di macOS per accedere rapidamente ai controlli della privacy e alle notifiche di Ghostery, così resti sempre informato e hai il controllo del tracciamento online."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOSのメニューバーにアプリのアイコンを表示しておくと、Ghosteryのプライバシー設定や通知にすばやくアクセスでき、オンラインでのトラッキングを常に把握・管理できます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS 메뉴 막대에 앱 아이콘을 유지하면 Ghostery의 개인정보 보호 기능과 알림에 빠르게 접근할 수 있어, 온라인 추적을 항상 파악하고 제어할 수 있습니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ikona aplikacji na pasku menu macOS zapewnia szybki dostęp do ustawień prywatności i powiadomień Ghostery, dzięki czemu zawsze wiesz, co się dzieje, i kontrolujesz śledzenie w sieci."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantenha o ícone do app na barra de menus do macOS para acessar rapidamente os controles de privacidade e as notificações do Ghostery, e fique sempre informado e no controle do rastreamento online."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Значок приложения в строке меню macOS дает быстрый доступ к настройкам конфиденциальности и уведомлениям Ghostery, чтобы вы всегда были в курсе и контролировали отслеживание в интернете."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Giữ biểu tượng ứng dụng trên thanh menu macOS để truy cập nhanh các tùy chọn quyền riêng tư và thông báo của Ghostery, giúp bạn luôn nắm được thông tin và kiểm soát việc bị theo dõi trực tuyến."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 macOS 菜单栏中保留应用图标，即可快速访问 Ghostery 的隐私控制和通知，让您随时了解并掌控自己的在线跟踪情况。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 macOS 選單列中保留 App 圖像，即可快速取用 Ghostery 的隱私控制項目和通知，讓您隨時掌握並控制自己的線上追蹤情況。"
           }
         }
       }
@@ -5139,83 +4909,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "登入時開啟"
-          }
-        }
-      }
-    },
-    "Launch Ghostery automatically at startup" : {
-      "comment" : "Setting opening the app when the user logs in",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ghostery beim Anmelden automatisch starten"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir Ghostery automáticamente al iniciar sesión"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir Ghostery automatiquement à la connexion"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apri Ghostery automaticamente al login"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ログイン時にGhosteryを自動的に起動"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "로그인 시 Ghostery 자동 실행"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uruchamiaj Ghostery automatycznie przy logowaniu"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir o Ghostery automaticamente ao iniciar sessão"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Автоматически открывать Ghostery при входе в систему"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tự động mở Ghostery khi đăng nhập"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登录时自动启动 Ghostery"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登入時自動開啟 Ghostery"
           }
         }
       }
@@ -5370,82 +5063,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "管理訂閱"
-          }
-        }
-      }
-    },
-    "Manage your privacy settings and control how your data is tracked online." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verwalte deine Datenschutzeinstellungen und bestimme, wie deine Daten online getrackt werden."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gestiona tus ajustes de privacidad y controla cómo se rastrean tus datos en línea."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gérez vos réglages de confidentialité et contrôlez la façon dont vos données sont pistées en ligne."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gestisci le impostazioni della privacy e controlla come vengono tracciati i tuoi dati online."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシー設定を管理し、オンラインでのデータの追跡方法をコントロールできます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "개인정보 보호 설정을 관리하고 온라인에서 데이터가 추적되는 방식을 제어하세요."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zarządzaj ustawieniami prywatności i decyduj, jak twoje dane są śledzone w sieci."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gerencie seus ajustes de privacidade e controle como seus dados são rastreados online."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Управляйте конфиденциальностью и тем, как отслеживаются ваши данные в интернете."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quản lý cài đặt quyền riêng tư và kiểm soát cách dữ liệu của bạn bị theo dõi trực tuyến."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "管理您的隐私设置，掌控您的数据在网上被跟踪的方式。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "管理您的隱私設定，掌控您的資料在網路上被追蹤的方式。"
           }
         }
       }
@@ -6071,7 +5688,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eine App für alle deine Browser. Kostenlos und Open Source – Werbetreibende können sich nicht freikaufen."
+            "value" : "Eine App für alle deine Browser. Kostenlos, Open Source und ohne bezahlte Ausnahmen für Werbetreibende."
           }
         },
         "es" : {
@@ -6681,6 +6298,83 @@
         }
       }
     },
+    "Open Ghostery at login" : {
+      "comment" : "Setting opening the app when the user logs in",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery bei der Anmeldung öffnen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ghostery al iniciar sesión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Ghostery avec la session"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri Ghostery al login"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン時にGhosteryを開く"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인 시 Ghostery 열기"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwieraj Ghostery podczas logowania"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir o Ghostery no início da sessão"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открывать Ghostery при входе"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mở Ghostery khi đăng nhập"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录时打开 Ghostery"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在登入時打開 Ghostery"
+          }
+        }
+      }
+    },
     "Open Safari extension **settings**." : {
       "comment" : "Step of the instructions, with the part between ** in bold",
       "localizations" : {
@@ -7231,7 +6925,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Datenschutz-News und Ratgeber vom Ghostery-Team: Werbung, Tracking und wie du deinen Browser zurückeroberst."
+            "value" : "Aktuelles und Ratgeber vom Ghostery-Team: So behältst du Werbung und Tracking im Griff."
           }
         },
         "es" : {
@@ -7384,7 +7078,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privatsphäre zum Tragen"
+            "value" : "Privatsphäre zum Anziehen"
           }
         },
         "es" : {
@@ -7605,6 +7299,82 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "有疑問、想法，或發現了我們漏掉的追蹤器？"
+          }
+        }
+      }
+    },
+    "Quick access to Ghostery and its notifications." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schneller Zugriff auf Ghostery und seine Mitteilungen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceso rápido a Ghostery y a sus notificaciones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès rapide à Ghostery et à ses notifications."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accesso rapido a Ghostery e alle sue notifiche."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghosteryとその通知にすばやくアクセスできます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery와 알림에 빠르게 접근할 수 있습니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szybki dostęp do Ghostery i jego powiadomień."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acesso rápido ao Ghostery e às suas notificações."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Быстрый доступ к Ghostery и его уведомлениям."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Truy cập nhanh vào Ghostery và các thông báo của ứng dụng."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速访问 Ghostery 及其通知。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速取用 Ghostery 及其通知。"
           }
         }
       }
@@ -8305,7 +8075,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QR-Code scannen und die App auf Smartphone oder Tablet installieren."
+            "value" : "QR-Code scannen und die App auf Handy oder Tablet installieren."
           }
         },
         "es" : {
@@ -8458,7 +8228,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scannen und sie auf Smartphone und Tablet blockieren. Kostenlos."
+            "value" : "Einfach Code scannen und Werbung blockieren, auf Handy und Tablet. Kostenlos."
           }
         },
         "es" : {
@@ -8535,7 +8305,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werbung auf deinem Smartphone?"
+            "value" : "Werbung auf dem Handy?"
           }
         },
         "es" : {
@@ -8612,7 +8382,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aktiviere das Markierungsfeld neben **Ghostery**."
+            "value" : "Setze das Häkchen bei **Ghostery**."
           }
         },
         "es" : {
@@ -8684,7 +8454,7 @@
       }
     },
     "Settings" : {
-      "comment" : "Section of the main window",
+      "comment" : "Section of the main window, also the title of the section",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -9218,6 +8988,83 @@
         }
       }
     },
+    "Show Ghostery in the menu bar" : {
+      "comment" : "Setting showing the icon of the app in the menu bar",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ghostery in der Menüleiste anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar Ghostery en la barra de menús"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher Ghostery dans la barre des menus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra Ghostery nella barra dei menu"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メニューバーにGhosteryを表示"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메뉴 막대에 Ghostery 표시"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokazuj Ghostery na pasku menu"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar o Ghostery na barra de menus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать Ghostery в строке меню"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiển thị Ghostery trên thanh menu"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在菜单栏中显示 Ghostery"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在選單列中顯示 Ghostery"
+          }
+        }
+      }
+    },
     "Skip" : {
       "comment" : "Button closing the steps to enable the extension",
       "localizations" : {
@@ -9377,7 +9224,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erzähl es weiter"
+            "value" : "Ghostery weiterempfehlen"
           }
         },
         "es" : {
@@ -9454,7 +9301,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erzähl es weiter:"
+            "value" : "Ghostery weiterempfehlen:"
           }
         },
         "es" : {
@@ -9525,13 +9372,89 @@
         }
       }
     },
+    "Starts Ghostery when you turn on your Mac, so it’s ready from the first page you open." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startet Ghostery, sobald du deinen Mac einschaltest. So ist Ghostery ab der ersten Seite bereit, die du öffnest."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia Ghostery al encender tu Mac, para que esté listo desde la primera página que abras."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance Ghostery lorsque vous allumez votre Mac, pour qu’il soit prêt dès la première page que vous ouvrez."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvia Ghostery quando accendi il Mac, così è pronto dalla prima pagina che apri."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Macの電源を入れるとGhosteryが起動し、最初に開くページから使える状態になります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac을 켜면 Ghostery가 시작되어, 처음 여는 페이지부터 바로 준비됩니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uruchamia Ghostery po włączeniu Maca, aby był gotowy od pierwszej otwartej strony."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia o Ghostery quando você liga o Mac, para que ele esteja pronto desde a primeira página que você abrir."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запускает Ghostery при включении Mac, чтобы он был готов с первой открытой страницы."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Khởi động Ghostery khi bạn bật máy Mac, để Ghostery sẵn sàng ngay từ trang đầu tiên bạn mở."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在您开启 Mac 时启动 Ghostery，让它从您打开的第一个网页起就准备就绪。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在您開啟 Mac 時啟動 Ghostery，讓它從您打開的第一個網頁起就準備就緒。"
+          }
+        }
+      }
+    },
     "Stay one step ahead\nof advertisers." : {
       "comment" : "Title of the Learning Zone section, in two lines",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Den Werbetreibenden\neinen Schritt voraus."
+            "value" : "Sei der Werbeindustrie\neinen Schritt voraus."
           }
         },
         "es" : {
@@ -9608,7 +9531,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Den Werbetreibenden einen Schritt voraus."
+            "value" : "Sei der Werbeindustrie einen Schritt voraus."
           }
         },
         "es" : {
@@ -9991,7 +9914,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unterstütze unsere Mission und hilf uns, einen noch stärkeren Schutz vor Trackern und Werbung zu entwickeln – für ein sichereres Web für alle."
+            "value" : "Unterstütze unsere Mission und hilf uns, den Schutz vor Werbung und Trackern noch stärker zu machen, damit das Internet für alle sicherer wird."
           }
         },
         "es" : {
@@ -10143,7 +10066,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Danke, dass du Ghostery im Kampf für ein Web unterstützt, in dem Privatsphäre ein grundlegendes Menschenrecht ist!"
+            "value" : "Danke, dass du Ghostery im Kampf für ein Internet unterstützt, in dem Privatsphäre ein Menschenrecht ist!"
           }
         },
         "es" : {
@@ -10219,7 +10142,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Der App Store konnte die Spende nicht abschließen. Bitte versuche es später erneut."
+            "value" : "Der App Store konnte deine Spende nicht abschließen. Bitte versuche es später noch einmal."
           }
         },
         "es" : {
@@ -10372,7 +10295,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nachrichten, die zählen – in einer Ausgabe"
+            "value" : "Die wichtigsten Nachrichten, kompakt in einer Ausgabe"
           }
         },
         "es" : {
@@ -10532,7 +10455,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auch Tracker und Cookie-Pop-ups werden blockiert. Öffne eine beliebige Website, um den Unterschied zu sehen."
+            "value" : "Auch Tracker und Cookie-Banner werden blockiert. Öffne eine beliebige Website und sieh selbst den Unterschied."
           }
         },
         "es" : {
@@ -10609,7 +10532,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aktiviere **Erweiterung erlauben**."
+            "value" : "Schalte **Erweiterung erlauben** ein."
           }
         },
         "es" : {
@@ -10839,7 +10762,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die App auf anderen Geräten"
+            "value" : "Ghostery auf einem anderen Gerät nutzen"
           }
         },
         "es" : {
@@ -10988,6 +10911,7 @@
       }
     },
     "Visit the Ghostery Shop" : {
+      "comment" : "Button of the card about the shop, opening it. Ghostery Shop is its name.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -11061,8 +10985,7 @@
             "value" : "造訪 Ghostery 商店"
           }
         }
-      },
-      "comment" : "Button of the card about the shop, opening it. Ghostery Shop is its name."
+      }
     },
     "Want Ghostery to start automatically when you log in?" : {
       "localizations" : {
