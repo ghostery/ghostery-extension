@@ -23,6 +23,8 @@ import { BECOME_A_CONTRIBUTOR_PAGE_URL, PANEL_STORE_PAGE_URL } from '/utils/urls
 import { REVIEW_NOTIFICATION_DELAY } from '/utils/notifications.js';
 import * as telemetry from '/utils/telemetry.js';
 
+import { getPrivacyDigestNotification } from '../utils/privacy-digest.js';
+
 import callForReviewImage from '../assets/call-for-review.svg';
 import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
 import callForSurveyImage from '../assets/call-for-survey.svg';
@@ -85,12 +87,16 @@ const NOTIFICATIONS = {
   },
 };
 
+const PRIVACY_DIGEST_ON_TOP_PERIOD = 72 * 60 * 60 * 1000;
+
 const randomize = Math.random();
 
 const Notification = {
   icon: '',
   img: '',
   type: '',
+  title: '',
+  date: '',
   text: '',
   url: '',
   action: '',
@@ -114,7 +120,16 @@ const Notification = {
       return NOTIFICATIONS.survey;
     }
 
+    // A new Privacy Digest edition goes on top of other notifications
+    const privacyDigest = await getPrivacyDigestNotification();
+    if (privacyDigest && Date.now() - privacyDigest.publishedAt < PRIVACY_DIGEST_ON_TOP_PERIOD) {
+      return privacyDigest;
+    }
+
     const pool = [NOTIFICATIONS.zap, NOTIFICATIONS.contribution];
+
+    // The latest Privacy Digest edition stays in the rotation until the next one
+    if (privacyDigest) pool.push(privacyDigest);
 
     // Review notification for users with the extension installed for at least 30 days
     const { installDate } = await telemetry.getStorage();

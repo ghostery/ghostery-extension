@@ -37,6 +37,8 @@ export const PAUSE_ASSISTANT_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/bl
 export const TRACKERS_PREVIEW_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/introducing-wtm-serp-report`;
 export const DISTRACTIONS_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/distractions-remove-UI-clutter`;
 
+export const PRIVACY_DIGEST_LATEST_EDITION_URL = `https://www.${GHOSTERY_DOMAIN}/privacy-digest/latest.json`;
+
 export const ZAP_AUTORELOAD_DISABLED_HOSTNAMES = ['youtube.com'];
 
 export const SURVEY_POST_ONBOARDING_URL = `https://blocksurvey.io/install-survey-postonboarding-R6q0d5dGR9OY6202iNPmGQ?v=o`;

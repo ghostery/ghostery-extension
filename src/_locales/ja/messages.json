@@ -968,6 +968,9 @@
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
   },
+  "read_the_latest_edition": {
+    "message": "最新号を読む"
+  },
   "redirect_alert": {
     "message": "リダイレクト警告"
   },

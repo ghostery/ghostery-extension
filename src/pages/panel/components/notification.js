@@ -42,7 +42,18 @@ export default {
             `
           }
           <div layout="column gap grow">
-            <ui-text id="desc" type="body-s" color="secondary"> ${notification.text} </ui-text>
+            <div>
+              ${
+                notification.title &&
+                html`
+                  <ui-text type="label-s">
+                    ${notification.title}
+                    ${notification.date && html`<span id="date">(${notification.date})</span>`}
+                  </ui-text>
+                `
+              }
+              <ui-text id="desc" type="body-s" color="secondary"> ${notification.text} </ui-text>
+            </div>
             <ui-text id="action" type="label-s"> ${notification.action} </ui-text>
           </div>
         </a>
@@ -79,6 +90,11 @@ export default {
       border-radius: 12px;
       text-decoration: none;
       color: inherit;
+    }
+
+    #date {
+      font: var(--font-body-s);
+      color: var(--color-tertiary);
     }
 
     #action {

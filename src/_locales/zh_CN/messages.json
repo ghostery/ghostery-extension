@@ -968,6 +968,9 @@
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
+  "read_the_latest_edition": {
+    "message": "阅读最新一期"
+  },
   "redirect_alert": {
     "message": "重定向警报"
   },
