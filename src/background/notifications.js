@@ -20,11 +20,13 @@ import Options from '/store/options.js';
 import { getOS, isOpera, isWebkit } from '/utils/browser-info.js';
 import * as notifications from '/utils/notifications.js';
 import { isSerpSupported } from '/utils/opera.js';
+import sequence from '/utils/sequence.js';
 import { checkStorage } from '/utils/storage.js';
 import * as telemetry from '/utils/telemetry.js';
 import { SURVEY_POST_ONBOARDING_URL } from '/utils/urls.js';
 
-export async function openNotification({ id, tabId, shownLimit = 0, delay, params, position }) {
+// Note: use openNotification instead
+async function openNotificationUnsafe({ id, tabId, shownLimit = 0, delay, params, position }) {
   const options = await store.resolve(Options);
   const managedConfig = await store.resolve(ManagedConfig);
 
@@ -80,6 +82,8 @@ export async function openNotification({ id, tabId, shownLimit = 0, delay, param
     return false;
   }
 }
+
+export const openNotification = sequence(openNotificationUnsafe);
 
 export function closeNotification(tabId) {
   return chrome.tabs.sendMessage(tabId, {
