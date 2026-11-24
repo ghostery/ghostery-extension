@@ -14,6 +14,10 @@ import { addMessageListener } from '/utils/messaging.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
 
+// Firefox stops this script when the extension updates. A notification
+// of the old script cannot close, so the new script removes it.
+document.querySelector(WRAPPER_ELEMENT)?.remove();
+
 function mount(url, position = 'right', debug = false) {
   // Prevent showing multiple notifications at the same time
   if (document.querySelector(WRAPPER_ELEMENT)) return false;
@@ -107,6 +111,10 @@ function mount(url, position = 'right', debug = false) {
 
   shadowRoot.appendChild(template.content);
   document.documentElement.appendChild(wrapper);
+
+  // Do not keep the notification in the back/forward cache.
+  // The new script does not start in a page restored after an update.
+  window.addEventListener('pagehide', () => wrapper.remove(), { once: true });
 
   const iframe = shadowRoot.querySelector('iframe');
 
