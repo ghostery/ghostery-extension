@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>${0}개의 트래커</strong>가 사용자에게 도달하기 전에 차단되었습니다. 이 숫자는 아래에서 가장 큰 숫자도 아닙니다."
   },
+  "@_0__is_ad_free_now": {
+    "message": "이제 $${0}에서 광고가 사라졌습니다"
+  },
   "@_0__left": {
     "message": "$${0} 남음"
   },
@@ -1312,6 +1315,9 @@
   },
   "trackers": {
     "message": "트래커"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "트래커와 쿠키 팝업도 차단됩니다. 아무 웹사이트나 열어 차이를 확인해 보세요."
   },
   "trackers_blocked": {
     "message": "트래커 차단됨"

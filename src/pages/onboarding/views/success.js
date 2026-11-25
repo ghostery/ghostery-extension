@@ -42,6 +42,19 @@ const BROWSER_ICONS = {
 
 const browserIcon = BROWSER_ICONS[getBrowser().name] || browserChromeIcon;
 
+// Names of the browsers shown in the title. The others get a generic title,
+// as their names come from the user agent.
+const BROWSER_NAMES = {
+  brave: 'Brave',
+  chrome: 'Chrome',
+  edge: 'Edge',
+  firefox: 'Firefox',
+  opera: 'Opera',
+  safari: 'Safari',
+};
+
+const browserName = BROWSER_NAMES[getBrowser().name];
+
 const PANEL_URL = chrome.runtime.getURL('/pages/panel/index.html');
 
 async function startBrowsing() {
@@ -103,10 +116,16 @@ export default {
                   <img src="${browserIcon}" layout="absolute top:6.25% left:22.5% width:15%" />
                 </div>
                 <div layout="column gap:0.5">
-                  <ui-text type="display-s">Setup Successful</ui-text>
+                  <ui-text type="display-s">
+                    ${
+                      browserName
+                        ? msg`${browserName} is ad-free now`
+                        : msg`Your browser is ad-free now`
+                    }
+                  </ui-text>
                   <ui-text color="secondary" layout="self:center width:::336px">
-                    Ghostery is all set to stop trackers in their tracks and protect your privacy
-                    while browsing!
+                    Trackers and cookie pop-ups are blocked too. Open any website to see the
+                    difference.
                   </ui-text>
                 </div>
               `

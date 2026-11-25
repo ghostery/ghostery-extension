@@ -1,26 +1,15 @@
 //
 //  SafariWebExtensionHandler.swift
-//  Shared (Extension)
+//  Ghostery
 //
-//  Created by Krzysztof Jan Modras on 27.09.21.
+//  Native part of the Safari extension, which Safari requires. The extension
+//  doesn't send native messages, so a request is completed without a reply.
 //
 
 import SafariServices
-import os.log
-
-let SFExtensionMessageKey = "message"
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
-
-    func beginRequest(with context: NSExtensionContext) {
-        let item = context.inputItems[0] as! NSExtensionItem
-        let message = item.userInfo?[SFExtensionMessageKey]
-        os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
-
-        let response = NSExtensionItem()
-        response.userInfo = [ SFExtensionMessageKey: [ "Response to": message ] ]
-
-        context.completeRequest(returningItems: [response], completionHandler: nil)
-    }
-
+  func beginRequest(with context: NSExtensionContext) {
+    context.completeRequest(returningItems: nil, completionHandler: nil)
+  }
 }

@@ -15,24 +15,22 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>microsoft-edge-https</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Inter-Bold.ttf</string>
+		<string>Fonts/Inter-Regular.ttf</string>
+		<string>Fonts/Inter-SemiBold.ttf</string>
+	</array>
 	<key>SFSafariWebExtensionConverterVersion</key>
 	<string>13.0</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
-			</array>
-		</dict>
 	</dict>
 </dict>
 </plist>

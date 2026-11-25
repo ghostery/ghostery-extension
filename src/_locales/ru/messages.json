@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>$${0} трекеров</strong> остановлено до того, как они достигли вас – и это даже не самое большое число ниже"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} теперь без рекламы"
+  },
   "@_0__left": {
     "message": "$${0} left"
   },
@@ -1312,6 +1315,9 @@
   },
   "trackers": {
     "message": "Трекеры"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "Трекеры и уведомления о файлах cookie тоже блокируются. Откройте любой сайт, чтобы увидеть разницу."
   },
   "trackers_blocked": {
     "message": "Заблокированные трекеры"

@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>$${0} trackers</strong> stopped before they reached you – and that’s not even the biggest number below"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0} is ad-free now"
+  },
   "@_0__left": {
     "message": "$${0} left"
   },
@@ -540,9 +543,6 @@
   },
   "ghostery_has_nothing_to_do_on_this_page": {
     "message": "Ghostery has nothing to do on this page"
-  },
-  "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery is all set to stop trackers in their tracks and protect your privacy while browsing!"
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery is installed with limited functionality"
@@ -1088,9 +1088,6 @@
   "setup_ghostery_to_get_started": {
     "message": "Setup Ghostery to get started"
   },
-  "setup_successful": {
-    "message": "Setup Successful"
-  },
   "share_a_calmer_web": {
     "message": "Share a calmer web"
   },
@@ -1293,6 +1290,9 @@
   },
   "trackers": {
     "message": "Trackers"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "Trackers and cookie pop-ups are blocked too. Open any website to see the difference."
   },
   "trackers_blocked": {
     "message": "Trackers blocked"

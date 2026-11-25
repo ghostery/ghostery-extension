@@ -2,6 +2,9 @@
   "_strong_@_0__trackers__strong__stopped_before_they_reached_you___and_that_s_not_even_the_biggest_number_below": {
     "message": "<strong>${0}個のトラッカー</strong>があなたに到達する前にブロックされました – これは、以下の数字の中で最大ではありません"
   },
+  "@_0__is_ad_free_now": {
+    "message": "$${0}は広告なしになりました"
+  },
   "@_0__left": {
     "message": "$${0} 残"
   },
@@ -1312,6 +1315,9 @@
   },
   "trackers": {
     "message": "トラッカー"
+  },
+  "trackers_and_cookie_pop_ups_are_blocked_too__open_any_website_to_see_the_difference_": {
+    "message": "トラッカーやCookieポップアップもブロックされます。ウェブサイトを開いて、違いを確かめてください。"
   },
   "trackers_blocked": {
     "message": "ブロックされたトラッカー"
