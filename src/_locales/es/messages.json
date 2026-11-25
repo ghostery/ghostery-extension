@@ -968,6 +968,9 @@
   "read_more_on_whotracks_me": {
     "message": "Leer más sobre WhoTracks.Me"
   },
+  "read_the_latest_edition": {
+    "message": "Lee la última edición"
+  },
   "redirect_alert": {
     "message": "Alerta de redirección"
   },

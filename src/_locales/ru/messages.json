@@ -968,6 +968,9 @@
   "read_more_on_whotracks_me": {
     "message": "Читайте больше на WhoTracks.Me"
   },
+  "read_the_latest_edition": {
+    "message": "Читать свежий выпуск"
+  },
   "redirect_alert": {
     "message": "Предупреждение о перенаправлении"
   },

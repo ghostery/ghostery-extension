@@ -968,6 +968,9 @@
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
   },
+  "read_the_latest_edition": {
+    "message": "최신호 읽기"
+  },
   "redirect_alert": {
     "message": "리디렉션 경고"
   },
