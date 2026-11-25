@@ -104,6 +104,7 @@ final class MainWindowController: NSObject {
 
   private weak var window: NSWindow?
   private var delegateProxy: WindowDelegateProxy?
+  private var delegateObservation: NSKeyValueObservation?
 
   /// Whether any part of the window is on the screen, not hidden or covered
   var isWindowVisible: Bool {
@@ -112,14 +113,13 @@ final class MainWindowController: NSObject {
 
   func attach(_ window: NSWindow) {
     self.window = window
-    // SwiftUI's delegate handles everything else of the window
-    let proxy = WindowDelegateProxy(original: window.delegate) { [weak self] in
-      guard AppSettings.shared.showsMenuBarIcon else { return true }
-      self?.hide()
-      return false
+    installDelegateProxy()
+    // On macOS 14 SwiftUI sets its delegate after the window is attached,
+    // and without the proxy closing the window destroys it, leaving nothing
+    // to show again
+    delegateObservation = window.observe(\.delegate) { [weak self] _, _ in
+      MainActor.assumeIsolated { self?.installDelegateProxy() }
     }
-    delegateProxy = proxy
-    window.delegate = proxy
 
     if startsHidden {
       startsHidden = false
@@ -178,6 +178,18 @@ final class MainWindowController: NSObject {
   private func hide() {
     window?.orderOut(nil)
     NSApp.setActivationPolicy(.accessory)
+  }
+
+  // SwiftUI's delegate handles everything else of the window
+  private func installDelegateProxy() {
+    guard let window, window.delegate !== delegateProxy else { return }
+    let proxy = WindowDelegateProxy(original: window.delegate) { [weak self] in
+      guard AppSettings.shared.showsMenuBarIcon else { return true }
+      self?.hide()
+      return false
+    }
+    delegateProxy = proxy
+    window.delegate = proxy
   }
 }
 
