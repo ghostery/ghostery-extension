@@ -53,15 +53,13 @@ if (isWebkit()) {
 }
 
 OptionsObserver.addListener('terms', async function reporting(terms) {
-  if (terms && (__CHROMIUM__ || (await store.resolve(ManagedConfig).disableOnboarding))) {
-    if (webRequestReporter) {
-      webRequestReporter.init().catch((e) => {
-        console.warn(
-          'Failed to initialize request reporting. Leaving the module disabled and continue.',
-          e,
-        );
-      });
-    }
+  if (terms && __CHROMIUM__ && !(await store.resolve(ManagedConfig)).disableOnboarding) {
+    webRequestReporter?.init().catch((e) => {
+      console.warn(
+        'Failed to initialize request reporting. Leaving the module disabled and continue.',
+        e,
+      );
+    });
     urlReporter.init().catch((e) => {
       console.warn(
         'Failed to initialize urlReporting. Leaving the module disabled and continue.',
@@ -71,10 +69,6 @@ OptionsObserver.addListener('terms', async function reporting(terms) {
   } else {
     try {
       urlReporter.unload();
-    } catch (e) {
-      console.error(e);
-    }
-    try {
       webRequestReporter?.unload();
     } catch (e) {
       console.error(e);
