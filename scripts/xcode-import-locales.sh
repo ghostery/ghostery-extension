@@ -21,9 +21,9 @@ for path in ./xcode/*.xcloc; do
 
   # Xcode imports the translations to the language set in the file, which
   # Transifex can set with its own codes, like pt_BR for pt-BR
-  sed -E -i '' \
-    -e 's/ target-language="[^"]*"//g' \
-    -e "s/<file([ >])/<file target-language=\"$language\"\1/g" \
+  perl -pi \
+    -e 's/ target-language="[^"]*"//g;' \
+    -e "s/<file([ >])/<file target-language=\"$language\"\$1/g" \
     "$file"
 
   # Transifex keeps the state of the translations from the source file,

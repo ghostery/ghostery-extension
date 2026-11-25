@@ -241,12 +241,19 @@ final class ExternalBrowserStates {
 actor ExternalBrowserDetector {
   static let shared = ExternalBrowserDetector()
 
+  // A file has the settings of all extensions, so the value parsed for
+  // the ID of one is cached apart from the ones of the others
+  private struct CacheKey: Hashable {
+    let url: URL
+    let extensionID: String?
+  }
+
   private struct CachedFile {
     let modificationDate: Date
     let value: Any?
   }
 
-  private var cachedFiles: [URL: CachedFile] = [:]
+  private var cachedFiles: [CacheKey: CachedFile] = [:]
 
   // The home folder of the app is in its container
   private let homeURL: URL = {
@@ -306,7 +313,7 @@ actor ExternalBrowserDetector {
     case .firefox:
       for profile in firefoxProfiles(in: profilesURL) where isFirefoxProfile(profile, lastOpenedBy: appURL) {
         let store = browser.extensionStores.first { store in
-          readJSON(profile.appending(path: "extensions.json")) { BrowserProfiles.isFirefoxExtensionEnabled($0, id: store.extensionID) } == true
+          readJSON(profile.appending(path: "extensions.json"), extensionID: store.extensionID) { BrowserProfiles.isFirefoxExtensionEnabled($0, id: store.extensionID) } == true
         }
         if let store { return store }
       }
@@ -363,7 +370,7 @@ actor ExternalBrowserDetector {
     // The settings of extensions are in the secure file, and older
     // versions of the browsers kept them in the other one
     for name in ["Secure Preferences", "Preferences"] {
-      if let isEnabled = readJSON(profile.appending(path: name), parse: { BrowserProfiles.isChromiumExtensionEnabled($0, id: id) }) {
+      if let isEnabled = readJSON(profile.appending(path: name), extensionID: id, parse: { BrowserProfiles.isChromiumExtensionEnabled($0, id: id) }) {
         return isEnabled
       }
     }
@@ -371,13 +378,15 @@ actor ExternalBrowserDetector {
   }
 
   /// The value parsed from the file, or the cached one when the file
-  /// didn't change, nil when it can't be read or parsed
-  private func readFile<Value>(_ url: URL, parse: (Data) -> Value?) -> Value? {
+  /// didn't change, nil when it can't be read or parsed. A value parsed
+  /// for an extension is cached for its ID.
+  private func readFile<Value>(_ url: URL, extensionID: String? = nil, parse: (Data) -> Value?) -> Value? {
+    let key = CacheKey(url: url, extensionID: extensionID)
     guard let modificationDate = try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate else {
-      cachedFiles[url] = nil
+      cachedFiles[key] = nil
       return nil
     }
-    if let cached = cachedFiles[url], cached.modificationDate == modificationDate {
+    if let cached = cachedFiles[key], cached.modificationDate == modificationDate {
       return cached.value as? Value
     }
 
@@ -388,12 +397,12 @@ actor ExternalBrowserDetector {
       logger.error("Reading \(url.lastPathComponent, privacy: .public) failed: \(error, privacy: .public)")
       value = nil
     }
-    cachedFiles[url] = CachedFile(modificationDate: modificationDate, value: value)
+    cachedFiles[key] = CachedFile(modificationDate: modificationDate, value: value)
     return value
   }
 
-  private func readJSON<Value>(_ url: URL, parse: ([String: Any]) -> Value?) -> Value? {
-    readFile(url) { data in
+  private func readJSON<Value>(_ url: URL, extensionID: String? = nil, parse: ([String: Any]) -> Value?) -> Value? {
+    readFile(url, extensionID: extensionID) { data in
       (try? JSONSerialization.jsonObject(with: data) as? [String: Any]).flatMap(parse)
     }
   }
