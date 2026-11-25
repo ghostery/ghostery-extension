@@ -331,7 +331,7 @@ describe('iPad', () => {
         isWebkit: true,
         name: 'safari',
         version: 26,
-        osVersion: '18.7',
+        osVersion: '26.6',
       },
     ));
 
@@ -389,7 +389,7 @@ describe('iOS', () => {
         isWebkit: true,
         name: 'safari',
         version: 26,
-        osVersion: '18.7',
+        osVersion: '26.4',
       },
     ));
 
