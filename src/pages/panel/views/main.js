@@ -209,7 +209,10 @@ export default {
     options.blockAnnoyances &&
     resources.autoconsent[stats.domain],
   whatsNewNotification: ({ config, options }) =>
-    store.ready(config, options) && config.hasFlag(FLAG_WHATS_NEW) && !options.whatsNew.shown,
+    store.ready(config, options) &&
+    config.hasFlag(FLAG_WHATS_NEW) &&
+    options.panel.notifications &&
+    !options.whatsNew.shown,
   render: ({
     options,
     stats,
