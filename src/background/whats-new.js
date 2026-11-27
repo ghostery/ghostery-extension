@@ -34,11 +34,14 @@ async function openPanel() {
 
   if (!options.terms || options.whatsNew.version === version) return;
 
-  const { notifications } = options.panel;
-  await store.set(options, { whatsNew: { version, popup: false, shown: !notifications } });
+  await store.set(options, { whatsNew: { version, popup: false, shown: false } });
 
+  // If notifications are disabled, we don't open the panel
   const managedConfig = await store.resolve(ManagedConfig);
-  if (managedConfig.disableUserControl || !notifications) return;
+  if (managedConfig.disableUserControl || !options.panel.notifications) {
+    console.log('[whats-new] Notifications are disabled, not opening the panel');
+    return;
+  }
 
   if (!chromeAction.openPopup) {
     console.warn('[whats-new] The panel cannot be opened automatically in this browser');
